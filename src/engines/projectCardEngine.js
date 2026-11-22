@@ -115,6 +115,14 @@ function incomeLimitsFor(il, fips) {
   const failed = il && il._source && Array.isArray(il._source.failed) ? il._source.failed.find(x => x.fips === fips) : null;
   return { row, failed, api: il && il._source ? il._source.api : null, year: il && il._source ? il._source.fiscal_year : null };
 }
+function mtspFor(m, fips) {
+  const list = m && Array.isArray(m.counties) ? m.counties : [];
+  const row = list.find(x => x && x.fips === fips && Array.isArray(x.il60) && Array.isArray(x.il50)) || null;
+  const failed = m && m._source && Array.isArray(m._source.failed) ? m._source.failed.find(x => x.fips === fips) : null;
+  return { loaded: !!(m && m.counties), row, failed, api: m && m._source ? m._source.api : null, year: m && m._source ? m._source.fiscal_year : null };
+}
+// Census Building Permits Survey rows (scripts/costs/add_bps_permit_values.py): declared value per new home, 5+ unit buildings
+const permitCostRows = (rows, fips) => displayRows(rows).filter(r => r.source_key === "census_bps_county" && r.county_fips === fips && r.measure === "cost_per_unit" && num(r.value) != null && num(r.homes) != null && r.homes > 0).sort((a, b) => a.year - b.year);
 const fundingRow = (rules, measure, extra) => ((rules && rules.rows) || []).find(r => r && r.measure === measure && r.display_allowed === true && (!extra || extra(r))) || null;
 const lawById = (laws, id) => (Array.isArray(laws) ? laws : []).find(l => l && l.id === id) || null;
 // A county home-value model that passed its back-test: app/data/county_valuation_models.json (one entry per passing
@@ -188,6 +196,98 @@ function legalFromStatute(s, laws) {
     unconfirmedFields: s.unconfirmed_fields || [], limitsNotChecked: s.exclusion_limits_not_checked || [], note: "a screen, not a permit: the city or county decides" };
 }
 
+// ---------------------------------------------------------------- place facts
+// Card rows that hold for the site's place whatever is built: whether its tract or ZIP area is one where the tax credit's
+// 130% basis applies, the tax-credit rent ceilings and HUD Fair Market Rents for its county, and what new homes in 5+
+// unit buildings were declared to cost on the county's building permits. They do not depend on the legal basis, so a
+// site whose courses cannot be assessed still shows them. Each row: { id, label, status, ..., source, why, cautions }.
+const QCT_YEARS = ["2026", "2027"];   // the columns of app/data/hud_qct_dda.json (tracts, zctas, nonmetro_counties)
+const PLACE_KINDS = { site: true, lot: true };
+function designationFor(S, q, placeCounty, rules) {
+  const P = S.place || {};
+  const row = { id: "qct_dda", label: "Tax-credit high-cost area (HUD qualified census tract or difficult development area)", status: "not on file", boost: null, years: [], rules: [], cautions: [], why: null, source: null };
+  if (!q || !q.tracts) { row.why = "HUD's QCT and DDA lists (app/data/hud_qct_dda.json) are not loaded"; return row; }
+  if (!P.tract) { row.why = S.kind === "site" ? "the census tract of this site is not on file (app/data/station_site_places has no point match for it)" : `the census tract of this ${S.kind} is not looked up`; return row; }
+  const t = q.tracts[P.tract];
+  if (!t) { row.why = `tract ${P.tract} is not in the QCT table on file (it holds the tracts of the station-area sites only)`; return row; }
+  const nm = q.nonmetro_counties ? q.nonmetro_counties[placeCounty] : null;
+  const z = P.zcta && q.zctas ? q.zctas[P.zcta] : null;
+  const src = q._source || {};
+  QCT_YEARS.forEach((y, i) => {
+    const qct = t[i] === 1 ? true : t[i] === 0 ? false : null;
+    let dda = null, ddaWhy = null, ddaBasis = null;
+    if (nm) { dda = nm[i] === 1 ? true : nm[i] === 0 ? false : null; ddaBasis = "nonmetropolitan county list"; }
+    else if (!P.zcta) ddaWhy = P.zctaHow === "u" ? "the ZIP Code Tabulation Area could not be determined (the point is near the edge of two areas with different flags and the exact outline service gave no single answer)" : "the ZIP Code Tabulation Area of this site is not on file";
+    else if (!z || z[i] == null) ddaWhy = `ZIP area ${P.zcta} is not on HUD's ${y} metropolitan DDA sheet`;
+    else { dda = z[i] === 1; ddaBasis = `metropolitan Small DDA list, ZIP area ${P.zcta}`; }
+    const f = (src.qct_files || {})[y] || {}, g = (src.dda_files || {})[y] || {};
+    row.years.push({ year: y, qct, dda, ddaBasis, ddaWhy, qctUrl: f.url || src.download_page || null, ddaUrl: g.url || src.download_page || null, fetched: f.fetched || src.built || null });
+  });
+  const cur = row.years[row.years.length - 1];
+  const anyYes = cur.qct === true || cur.dda === true, allNo = cur.qct === false && cur.dda === false;
+  row.status = anyYes || allNo ? "known" : "partly known";
+  row.boost = anyYes ? "applies" : allNo ? "does not apply by location" : null;
+  row.tract = P.tract; row.zcta = P.zcta || null; row.source = cur.qctUrl;
+  row.effective = src.effective && src.effective[cur.year] ? src.effective[cur.year] : null;
+  // what the statute says the designation changes, quoted from the funding-rules table
+  const rule = row.boost === "applies" ? fundingRow(rules, "basis_boost_clause") : row.boost ? fundingRow(rules, "state_designated_boost") : null;
+  if (rule) row.rules.push({ citation: rule.citation || null, text: rule.what_it_funds_or_limits, value: num(rule.value), quote: rule.quote, url: rule.source_url });
+  else if (row.boost) row.cautions.push("the statute's text for the 130% basis is not in the funding-rules table on file");
+  if (!anyYes && !allNo) row.why = cur.ddaWhy || "the DDA flag is not on file";
+  if (num(P.tractEdgeM) != null && P.tractEdgeM < 30) row.cautions.push(`the site's point is ${P.tractEdgeM} m from the edge of tract ${P.tract}; part of the lot may lie in the neighbouring tract, and HUD's test is where the building stands`);
+  if (P.zctaHow === "t") row.cautions.push(`ZIP area read from the Census full-resolution outline (TIGERweb), because areas with different DDA flags lie within 150 m of the point`);
+  if (placeCounty !== S.countyFips) row.cautions.push(`the site's point lies in county ${placeCounty}, not in county ${S.countyFips} whose file lists it (it is within range of a station there); the place figures use county ${placeCounty}`);
+  return row;
+}
+function rentLimitsFor(S, ctx, placeCounty) {
+  const m = mtspFor(ctx.mtspLimits, placeCounty);
+  const share = fundingRow(ctx.fundingRules, "max_rent_share"), hh = fundingRow(ctx.fundingRules, "imputed_household_size");
+  const row = { id: "rent_limits", label: "Tax-credit rent ceilings (gross rent, studio to 2-bedroom)", range: null, at50: null, inputs: [], why: null, cautions: [] };
+  if (!m.loaded) { row.why = "HUD's tax-credit (MTSP) income limits (app/data/hud_mtsp_income_limits.json) are not loaded"; return row; }
+  if (!m.row) { row.why = `HUD's tax-credit (MTSP) income limits are not on file for county ${placeCounty}${m.failed ? ": " + m.failed.reason : ""}`; return row; }
+  if (!share || !hh || !hh.value || num(hh.value.no_bedroom) == null || num(hh.value.per_bedroom) == null) { row.why = "the statute's rent rule (26 U.S.C. 42(g)(2)) is not on file"; return row; }
+  const k = num(share.value), p0 = hh.value.no_bedroom, p2 = 2 * hh.value.per_bedroom;   // studio: 1 person; 2 bedrooms: 3 persons
+  if (!Number.isInteger(p0) || !Number.isInteger(p2) || p2 > 8) { row.why = "the household size the statute gives is not a whole number of persons on HUD's table"; return row; }
+  const r = m.row, api = String(m.api || "").replace("<county FIPS>", r.fips);
+  const at = (il, pct) => range(il[p0 - 1] * k / 12, il[p2 - 1] * k / 12, `USD per home per month, gross rent ceiling at the ${pct}% income limit (studio, ${p0} person, to 2-bedroom, ${p2} persons)`, api, "modelled");
+  row.range = at(r.il60, 60); row.at50 = at(r.il50, 50);
+  row.formula = `rent ceiling = ${k} x the income limit for the unit's imputed household / 12; imputed household = ${p0} person with no separate bedroom, ${hh.value.per_bedroom} per bedroom (so ${p2} for 2 bedrooms)`;
+  row.year = r.year; row.area = r.area_name; row.source = api;
+  row.limits = { persons: [p0, p2], il60: [r.il60[p0 - 1], r.il60[p2 - 1]], il50: [r.il50[p0 - 1], r.il50[p2 - 1]] };
+  row.inputs.push(inputRow(`HUD tax-credit (MTSP) income limits ${r.year}, ${r.area_name}: 60% limit, ${p0} and ${p2} persons`, null, "USD per year", api, "measured", `$${r.il60[p0 - 1].toLocaleString("en-US")} and $${r.il60[p2 - 1].toLocaleString("en-US")}; 50% limit $${r.il50[p0 - 1].toLocaleString("en-US")} and $${r.il50[p2 - 1].toLocaleString("en-US")}`));
+  row.inputs.push(inputRow("Rent ceiling share of the income limit (26 U.S.C. 42(g)(2)(A))", k, "fraction", share.source_url, "measured", `"${share.quote}"`));
+  row.inputs.push(inputRow("Imputed household size (26 U.S.C. 42(g)(2)(C))", `${p0} person (no bedroom); ${hh.value.per_bedroom} per bedroom`, null, hh.source_url, "measured", `"${hh.quote}"`));
+  row.cautions.push("limits, not market rents: the ceiling is gross rent, so the tenant's utility allowance comes off it; a 1-bedroom (1.5 persons) needs HUD's interpolation and is not computed here");
+  return row;
+}
+function fmrPlace(ctx, placeCounty) {
+  const f = fmrFor(ctx.fmr, placeCounty);
+  const row = { id: "fmr", label: "HUD Fair Market Rents (studio to 3-bedroom)", range: null, why: null };
+  if (!f || f.br.slice(0, 4).some(v => num(v) == null)) { row.why = `HUD Fair Market Rent not on file for county ${placeCounty}`; return row; }
+  const src = f.url || "app/data/hud_fair_market_rents.json";
+  row.range = range(Math.min(...f.br.slice(0, 4)), Math.max(...f.br.slice(0, 4)), `USD per home per month, HUD Fair Market Rent FY${f.fy} (${f.area})`, src, "measured");
+  row.year = f.fy; row.area = f.area; row.source = src; row.detail = f.br.slice(0, 4).map((v, i) => `${i === 0 ? "studio" : i + " bed"} $${v.toLocaleString("en-US")}`).join(", ");
+  row.label2 = "payment standards for housing vouchers (40th-percentile gross rent including utilities), not market rents";
+  return row;
+}
+function permitCostPlace(costRows, placeCounty) {
+  const xs = permitCostRows(costRows, placeCounty);
+  const row = { id: "cost", label: "Declared construction value per new home, buildings with 5 or more units (county building permits)", range: null, rows: [], why: null, cautions: [] };
+  if (!xs.length) { row.why = `no displayable construction cost per home is on file for county ${placeCounty}`; return row; }
+  const vals = xs.map(r => r.value), y0 = xs[0].year, y1 = xs[xs.length - 1].year;
+  row.range = range(Math.min(...vals), Math.max(...vals), `USD per home, declared permit valuation of the structure, 5+ unit buildings, ${y0 === y1 ? y0 : y0 + " to " + y1} (lowest to highest year; each year is its own Census file)`, xs[xs.length - 1].source_url, "measured", xs.length === 1 ? "one year of permits on file" : null);
+  row.rows = xs.map(r => ({ year: r.year, value: r.value, homes: r.homes, url: r.source_url, place: r.place }));
+  row.source = xs[xs.length - 1].source_url; row.place = xs[0].place.replace(/; permits issued in \d{4}$/, ""); row.definition = xs[0].definition_quote; row.definitionUrl = xs[0].definition_url;
+  row.cautions.push("the value of the structure as written on the permit: no land, fees, financing, site work or developer costs; permit valuations often run below final cost");
+  if (xs.some(r => r.homes < 100)) row.cautions.push("some years rest on fewer than 100 homes, so one large building moves the figure");
+  return row;
+}
+function placeFactsFor(S, ctx, costRows) {
+  if (!PLACE_KINDS[S.kind]) return [];
+  const placeCounty = S.place && S.place.tract ? String(S.place.tract).slice(0, 5) : S.countyFips;
+  return [designationFor(S, ctx.qctDda, placeCounty, ctx.fundingRules),permitCostPlace(costRows, placeCounty), rentLimitsFor(S, ctx, placeCounty), fmrPlace(ctx, placeCounty)];
+}
+
 // ---------------------------------------------------------------- the card
 /**
  * buildProjectCard(subject, ctx)
@@ -196,8 +296,11 @@ function legalFromStatute(s, laws) {
  *             railStationMi?: measured distance to an existing rail station (any mode),
  *             nearStops?: [...] (stopsNear output; computed from point and ctx.corridors when absent),
  *             currentValue?: { value, source, method, tested: { mdape, p80 } } (lot: the page's back-tested estimate),
- *             blockGroups?: [{ id, hv, hvSource }] (neighborhood, stop_area), sitesNearby?: number }
- *  ctx: { laws, buildingCosts (rows; only display_allowed: true rows are used), internalBuildingCosts (optional rows from data/internal/, Node only; feeds internal_only), fundingRules, incomeLimits, fmr, valuationModels, transitEffects, corridors, zoningEngine? }
+ *             blockGroups?: [{ id, hv, hvSource }] (neighborhood, stop_area), sitesNearby?: number,
+ *             place?: { tract, tractEdgeM, zcta, zctaEdgeM, zctaHow } (site: from app/data/station_site_places) }
+ *  ctx: { laws, buildingCosts (rows; only display_allowed: true rows are used), internalBuildingCosts (optional rows from data/internal/, Node only; feeds internal_only), fundingRules, incomeLimits, fmr, valuationModels, transitEffects, corridors, zoningEngine?,
+ *         qctDda? (app/data/hud_qct_dda.json), mtspLimits? (app/data/hud_mtsp_income_limits.json) }
+ *  The card's placeFacts (site and lot only) hold the rows that do not depend on a course; see placeFactsFor.
  */
 function buildProjectCard(subject, ctx) {
   ctx = ctx || {};
@@ -219,6 +322,7 @@ function buildProjectCard(subject, ctx) {
   const acres = S.acres && num(S.acres.value) != null ? S.acres.value : (lotSqft != null ? lotSqft / SQFT_PER_ACRE : null);
   const acresSrc = S.acres && num(S.acres.value) != null ? S.acres.source : (lotSqft != null ? "lot area from the parcel record" : null);
 
+  const placeFacts = placeFactsFor(S, ctx, costRows);
   const courses = [], notAssessed = [], internal = [];
   const skip = (c, missing, kind) => notAssessed.push({ id: c.id, label: c.label + (c.affordable ? " (and with an affordable share)" : ""), kind: kind || "missing", missing: [].concat(missing).filter(Boolean) });
 
@@ -270,15 +374,15 @@ function buildProjectCard(subject, ctx) {
       }
     }
     const variants = c.affordable ? [false, true] : [false];
-    for (const aff of variants) courses.push(courseFigures(c, aff, { S, legal, sizing, costRows, iccRows, fmr, ilim, vm, uplift, ctx, state, fips, internal }));
+    for (const aff of variants) courses.push(courseFigures(c, aff, { S, legal, sizing, costRows, iccRows, fmr, ilim, vm, uplift, ctx, state, fips, internal, placeFacts }));
   }
   const order = courses.slice().sort(evidenceCompare);
-  const missing = [...new Set(courses.flatMap(x => x.missing).concat(notAssessed.flatMap(x => x.missing)))];
+  const missing = [...new Set(courses.flatMap(x => x.missing).concat(notAssessed.flatMap(x => x.missing)).concat(placeFacts.filter(p => p.why).map(p => `${p.label}: ${p.why}`)))];
   return {
     schema: "city-pretty/project-card@1", engineVersion: PROJECT_CARD_ENGINE_VERSION,
     subject: { kind: S.kind, id: S.id || null, name: S.name || null, countyFips: fips, stateCode: state, city: S.city || null,
       acres: acres != null ? fig(round(acres, 2), "acres", acresSrc, "measured") : null, nearStops },
-    courses: order, notAssessed, missing,
+    courses: order, notAssessed, placeFacts, missing,
     ordering: "courses with a measured cost first, then modelled, then those with no cost; then by the legal basis's own check (verified before partly verified); then the fixed menu order. No course is ranked by a return figure: none has a tested basis.",
     internal_only: { note: "INTERNAL USE ONLY. Estimates from rows marked display_allowed: false (ICC Building Valuation Data). Never rendered on the page and never sent to the advisor (cardsForAdvisor drops this branch).", estimates: internal },
   };
@@ -296,6 +400,7 @@ function evidenceCompare(a, b) {
 
 function courseFigures(c, aff, k) {
   const { S, legal, sizing, costRows, iccRows, fmr, ilim, vm, uplift, ctx, state, fips, internal } = k;
+  const place = id => (k.placeFacts || []).find(p => p.id === id) || null;
   const inputs = [], missing = [], risks = [];
   const out = { course: c.id, affordable: aff, label: c.label + (aff ? " with an affordable share" : ""), legal, size: null, cost: null, costWhy: null, publicMoney: [], income: null, incomeWhy: null, value: null, valueWhy: null, transitUplift: uplift, inputs, missing, risks };
   if (legal.basis === "statute") {
@@ -341,8 +446,19 @@ function courseFigures(c, aff, k) {
     }
     internalEstimate(internal, out, "R-3", ["VB", "VA"], S, state, costRows, iccRows, size != null ? size : null, size != null ? "median floor area of permitted Los Angeles ADUs" : null);
   } else {
-    out.costWhy = `cost not on file for this place: no displayable construction cost for ${/station/.test(c.id) || c.id === "small_multifamily" ? "multifamily buildings" : "added units"} in ${state || "this state"} (${PROMPT.build_cost})`;
-    if (c.id === "station_prefab") risks.push("Cost: no study on file gives a like-for-like prefabricated versus conventional cost for finished multifamily buildings; the schedule and cost findings on file (Terner Center) are not cleared for display");
+    const pc = (c.id === "small_multifamily" || /^station_/.test(c.id)) ? place("cost") : null;
+    const homes = out.size && out.size.units ? out.size.units.low.value : null;
+    if (pc && pc.range && homes != null && homes > 0) {
+      out.cost = range(pc.range.low.value * homes, pc.range.high.value * homes, "USD, declared permit valuation of the structure (homes sized above x the county's value per home on 5+ unit permits)", pc.source, "modelled");
+      out.cost.label = "declared permit valuations, structure only";
+      inputs.push(inputRow(`Declared value per new home, 5+ unit buildings, ${pc.place}`, null, "USD per home", pc.source, "measured", pc.rows.map(r => `${r.year}: $${r.value.toLocaleString("en-US")} (${r.homes.toLocaleString("en-US")} homes)`).join("; ")));
+      inputs[inputs.length - 1].range = pc.range;
+      for (const t of pc.cautions) risks.push("Cost: " + t);
+      if (c.id === "station_prefab") risks.push("Cost: permits do not say whether a building is prefabricated; the same county figure is used for both methods");
+    } else {
+      out.costWhy = pc && pc.range ? `cost not computed: the county's declared value per home is on file (see the place rows) but the number of homes is not sized for this ${S.kind}` : `cost not on file for this place: no displayable construction cost for ${/station/.test(c.id) || c.id === "small_multifamily" ? "multifamily buildings" : "added units"} in ${state || "this state"} (${PROMPT.build_cost})`;
+    }
+    if (c.id === "station_prefab" && !out.cost) risks.push("Cost: no study on file gives a like-for-like prefabricated versus conventional cost for finished multifamily buildings; the schedule and cost findings on file (Terner Center) are not cleared for display");
     const gross = out.size && out.size.sqft ? out.size.sqft.low.value : null;
     internalEstimate(internal, out, "R-2", ["VB", "VA", "IIIA", "IA"], S, state, costRows, iccRows, gross, gross != null ? "the law's floor-area limit times the site area" : null);
   }
@@ -358,7 +474,7 @@ function courseFigures(c, aff, k) {
     out.incomeWhy = `space rental income not on file: no sourced rate for parking, storage or roof space is in the data (${PROMPT.space_rent})`;
     missing.push("Income: " + out.incomeWhy);
   } else if (aff) {
-    affordableIncome(out, S, ilim, ctx, inputs, missing);
+    affordableIncome(out, S, ilim, ctx, inputs, missing, place("rent_limits"));
   } else if (fmr) {
     const lo = Math.min(...fmr.br.slice(brBand[0], brBand[1] + 1)), hi = Math.max(...fmr.br.slice(brBand[0], brBand[1] + 1));
     const src = fmr.url || "app/data/hud_fair_market_rents.json";
@@ -387,7 +503,7 @@ function courseFigures(c, aff, k) {
     for (const b of uplift.bands) if (b.caveat) { risks.push(`Transit study: ${b.caveat}`); break; }
   }
   // public money (affordable variants)
-  if (aff) publicMoney(out, S, legal, ctx, ilim, inputs, missing);
+  if (aff) publicMoney(out, S, legal, ctx, ilim, inputs, missing, place("qct_dda"));
   out.missing = [...new Set(missing)];
   out.risks = [...new Set(risks)];
   return out;
@@ -444,7 +560,7 @@ function holdCost(out, S, vm, inputs, missing) {
   out.costWhy = "no recorded sales or Census home value on file for these block groups";
 }
 
-function affordableIncome(out, S, ilim, ctx, inputs, missing) {
+function affordableIncome(out, S, ilim, ctx, inputs, missing, rl) {
   const share = fundingRow(ctx.fundingRules, "max_rent_share");
   if (!ilim.row) { out.incomeWhy = `HUD income limits not on file for county ${S.countyFips}${ilim.failed ? ": " + ilim.failed.reason : ""}`; missing.push("Income: " + out.incomeWhy); return; }
   if (!share) { out.incomeWhy = "the statute's rent rule (30 percent of the income limit) is not on file"; missing.push("Income: " + out.incomeWhy); return; }
@@ -454,17 +570,24 @@ function affordableIncome(out, S, ilim, ctx, inputs, missing) {
   out.income = { perUnitMonthly: l50, at80: l80, label: "rent ceilings from HUD income limits (gross rent; the utility allowance comes off): limits, not market rents" };
   inputs.push(inputRow(`HUD income limits FY${ilim.year}, ${r.area_name}: 50% limit, 1 to 4 people`, null, "USD per year", api || "app/data/hud_income_limits.json", "measured", `$${r.il50[0].toLocaleString("en-US")} to $${r.il50[3].toLocaleString("en-US")}; 80% limit $${r.il80[0].toLocaleString("en-US")} to $${r.il80[3].toLocaleString("en-US")}`));
   inputs.push(inputRow("Rent ceiling share of the income limit", k, "fraction", share.source_url, "measured", `"${share.quote}"`));
-  missing.push("Income: the 60% limit (the usual tax-credit limit) is not on file: HUD's API gives 30, 50 and 80 percent only");
+  if (rl && rl.range) {
+    out.income.at60 = rl.range;
+    inputs.push(...rl.inputs.slice(0, 1));
+  } else missing.push("Income: the 60% limit (the usual tax-credit limit) is not on file" + (rl && rl.why ? ": " + rl.why : ": HUD's income limits API gives 30, 50 and 80 percent only; the tax-credit (MTSP) limits are on file only for the counties of station-area sites"));
 }
 
-function publicMoney(out, S, legal, ctx, ilim, inputs, missing) {
+function publicMoney(out, S, legal, ctx, ilim, inputs, missing, qd) {
   const R = ctx.fundingRules;
   const floor9 = fundingRow(R, "applicable_percentage_floor", r => r.value === 0.09), floor4 = fundingRow(R, "applicable_percentage_floor", r => r.value === 0.04);
   const boost = fundingRow(R, "eligible_basis_multiplier"), aside = fundingRow(R, "min_set_aside");
   const list = out.publicMoney;
-  const lihtcWhy = [!out.cost ? "the development cost (the eligible basis the credit is a share of) is not on file for this place" : null, "whether the site is in a 2027 qualified census tract or difficult development area is not on file (HUD's list download was not read)", "the state's award (credits are competitive) is not known"].filter(Boolean);
+  const cur = qd && qd.years && qd.years.length ? qd.years[qd.years.length - 1] : null;
+  const qctLine = !qd ? `whether the ${S.kind} is in a qualified census tract or difficult development area is not looked up for this kind of subject` : qd.boost ? null : `whether the ${S.kind} is in a ${cur ? cur.year + " " : ""}qualified census tract or difficult development area is not on file: ${qd.why}`;
+  const lihtcWhy = [!out.cost ? "the development cost (the eligible basis the credit is a share of) is not on file for this place" : "the eligible basis (development cost less land and other excluded costs) is not the permit valuation", qctLine, "the state's award (credits are competitive) is not known"].filter(Boolean);
+  const boostRow = qd && qd.boost === "applies" ? fundingRow(R, "basis_boost_clause") : qd && qd.boost ? fundingRow(R, "state_designated_boost") : null;
   if (floor9 || floor4) {
     list.push({ programme: "Low-Income Housing Tax Credit (federal)", status: "could apply; not computed", why: lihtcWhy,
+      locationRule: qd && qd.boost ? { boost: qd.boost, year: cur.year, qct: cur.qct, dda: cur.dda, text: qd.boost === "applies" ? `the ${S.kind} is in a ${cur.year} ${[cur.qct ? "qualified census tract" : null, cur.dda ? "difficult development area" : null].filter(Boolean).join(" and ")}: a new building's eligible basis counts at 130%` : `the ${S.kind} is in neither a ${cur.year} qualified census tract nor a difficult development area: no 130% basis by location, though the state agency may designate the building`, quote: boostRow ? boostRow.quote : null, url: boostRow ? boostRow.source_url : null, listUrl: cur.qctUrl } : null,
       rules: [floor9, floor4, boost, aside].filter(Boolean).map(r => ({ text: r.what_it_funds_or_limits, value: typeof r.value === "number" ? r.value : null, valueText: typeof r.value === "object" && r.value ? JSON.stringify(r.value) : null, quote: r.quote, url: r.source_url })) });
     if (aside && out.size && out.size.units && out.size.units.low.value != null) {
       const u = out.size.units.low.value, shareU = aside.value.share_of_units;
@@ -528,6 +651,18 @@ function fitToBudget(cards, dollars) {
 }
 
 // ---------------------------------------------------------------- advisor form
+// The place rows in a few short fields: [low, high, source] per range (units in howToRead), the QCT/DDA answer in words.
+function placeForAdvisor(P, short) {
+  const o = {}, rr = x => x ? [round(x.low.value, 0), round(x.high.value, 0), urlOf(x.source) || x.source] : null;
+  for (const p of P || []) {
+    if (p.id === "qct_dda") {
+      const y = p.years && p.years.length ? p.years[p.years.length - 1] : null;
+      o.qctDda = y && p.status !== "not on file" ? `${y.year}: QCT ${y.qct === true ? "yes" : y.qct === false ? "no" : "?"}, DDA ${y.dda === true ? "yes" : y.dda === false ? "no" : "?"}; 130% basis ${p.boost || "not determined"}` : "not on file: " + short(p.why);
+    } else if (p.range) o[p.id === "cost" ? "permitValuePerHome" : p.id === "rent_limits" ? "taxCreditRent60" : "fairMarketRent"] = rr(p.range);
+    else o[p.id + "Why"] = short(p.why);
+  }
+  return o;
+}
 // Compact, no internal_only branch, capped in size. Every figure keeps its unit, basis and source.
 function cardsForAdvisor(cards, maxChars) {
   const cap = num(maxChars) || 6000;
@@ -542,17 +677,21 @@ function cardsForAdvisor(cards, maxChars) {
         cost: r(x.cost), costLabel: x.cost ? x.cost.label || null : null, costWhy: x.cost ? null : short(x.costWhy), incomePerHomeMonthly: x.income ? r(x.income.perUnitMonthly) : null, incomeLabel: x.income ? x.income.label : short(x.incomeWhy),
         value: x.value ? r(x.value) : null, valueWhy: x.value ? null : short(x.valueWhy), publicMoney: x.publicMoney.map(p => p.programme + ": " + p.status),
         transitUplift: x.transitUplift ? x.transitUplift.bands.map(b => ({ band: b.band, average: f(b.average), range: r(b.range) })) : null })),
-      notAssessed: (c.notAssessed || []).map(n => ({ course: n.label, why: short(n.missing[0]) })) });
+      notAssessed: (c.notAssessed || []).map(n => ({ course: n.label, why: short(n.missing[0]) })),
+      place: (c.placeFacts || []).length ? placeForAdvisor(c.placeFacts, short) : undefined });
   }
-  const res = { schema: "city-pretty/project-cards-for-advisor@1", howToRead: "Courses of action per subject from app/data tables; ranges are low-high; a course with no cost says why. Ordered by evidence, not by return.", cards: out.slice() };
-  while (JSON.stringify(res).length > cap && res.cards.length > 1) res.cards.pop();
-  if (JSON.stringify(res).length > cap && res.cards.length === 1) { res.cards[0].notAssessed = res.cards[0].notAssessed.slice(0, 2); res.cards[0].courses = res.cards[0].courses.slice(0, 4); }
-  if (JSON.stringify(res).length > cap) res.cards = [];   // the cap is a hard limit: the advisor brief must stay under the Worker's size limit
-  res.truncated = out.length - res.cards.length;
+  const res = { schema: "city-pretty/project-cards-for-advisor@1", howToRead: "Courses of action per subject from app/data tables; ranges are low-high; a course with no cost says why. Ordered by evidence, not by return. place (sites): permitValuePerHome = [low, high, source] USD per new home in 5+ unit buildings declared on the county's permits (structure only, measured); taxCreditRent60 = USD per month gross rent ceiling at the 60% tax-credit limit, studio to 2-bedroom (computed from HUD limits); fairMarketRent = USD per month HUD FMR studio to 3-bedroom (voucher payment standard, not market rent); qctDda = HUD designation and whether the 130% tax-credit basis applies by location.", cards: out.slice() };
+  // `truncated` is set before each size check so the cap holds for the object as returned (found 22 Nov 2026: setting it
+  // after the last check could take the result a few characters over the cap)
+  const fits = () => { res.truncated = out.length - res.cards.length; return JSON.stringify(res).length <= cap; };
+  while (!fits() && res.cards.length > 1) res.cards.pop();
+  if (!fits() && res.cards.length === 1) { res.cards[0].notAssessed = res.cards[0].notAssessed.slice(0, 2); res.cards[0].courses = res.cards[0].courses.slice(0, 4); }
+  if (!fits()) res.cards = [];   // the cap is a hard limit: the advisor brief must stay under the Worker's size limit
+  fits();
   return res;
 }
 
-const api = { buildProjectCard, fitToBudget, cardsForAdvisor, stopsNear, transitUplift, COURSES, PROJECT_CARD_ENGINE_VERSION, _internal: { laAduRow, dodStateFactor, fmrFor, incomeLimitsFor, effectModeFor, evidenceCompare } };
+const api = { buildProjectCard, fitToBudget, cardsForAdvisor, stopsNear, transitUplift, COURSES, PROJECT_CARD_ENGINE_VERSION, _internal: { laAduRow, dodStateFactor, fmrFor, incomeLimitsFor, effectModeFor, evidenceCompare, mtspFor, permitCostRows, placeFactsFor } };
 if (typeof module !== "undefined" && module.exports) module.exports = api;
 if (typeof window !== "undefined") window.ProjectCardEngine = api;
 })();

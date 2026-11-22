@@ -39,11 +39,13 @@ exact, and then the card says why (a statutory limit, a median of recorded sales
 | Size, multifamily by statute | at least `floor(acres x min_allowed_density_du_per_acre)` homes; at most `floor(max_far x acres x 43,560)` sq ft | statute record, measured site area |
 | Size, multifamily by zoning | not sized: no density limit for the zone in `zoning_standards.json` | |
 | Cost, ADU (City of Los Angeles only) | `[p25, p75] declared $/sq ft x median permitted floor area`, latest complete permit year | `building_costs.json` LA rows (`display_allowed: true`) |
-| Cost, ADU elsewhere, every multifamily course | "cost not on file for this place"; the DoD state area cost factor is listed as context only | |
+| Cost, ADU elsewhere | "cost not on file for this place"; the DoD state area cost factor is listed as context only | |
+| Cost, multifamily course (since 22 Nov 2026) | only where the homes are sized: `homes x [lowest, highest] county declared permit value per new home in 5+ unit buildings, 2023-2025`, tagged modelled, "structure only"; otherwise "cost not computed: ... not sized" (or not on file) | `building_costs.json` rows `source_key: census_bps_county` |
 | Cost, Hold: lot | recorded sale (exact), or back-tested estimate x (1 +/- the tested 80% error of its price band) | page valuation; `county_valuation_models.json` or `valuation_backtest_benchmarks.json` (gate passed) |
 | Cost, Hold: area / stop city | median recorded sale of each block group with 5+ sales (passed counties), else Census ACS median value, lowest to highest block group; Census top- and bottom-coded medians are left out and counted | model stats; county bundle |
 | Income, market | HUD Fair Market Rent, studio to 2 bedrooms (ADU) or studio to 3 (others) per home per month; ADU also x 12 a year. Bedroom band tagged assumed | `hud_fair_market_rents.json` |
-| Income, affordable share | rent ceiling = income limit x 0.30 / 12, at the 50% limit (households of 1 to 4) and the 80% limit | `hud_income_limits.json`, statute row `max_rent_share` |
+| Income, affordable share | rent ceiling = income limit x 0.30 / 12, at the 50% limit (households of 1 to 4) and the 80% limit; since 22 Nov 2026 also at the 60% tax-credit (MTSP) limit for a studio (1 person) to a 2-bedroom (3 persons), where the county's MTSP limits are on file | `hud_income_limits.json`, `hud_mtsp_income_limits.json`, statute rows `max_rent_share`, `imputed_household_size` |
+| Place rows (site and lot cards, since 22 Nov 2026) | shown whatever is built: (1) HUD 2026 and 2027 QCT (by the 2020 tract of the site's point) and metro Small DDA (by its 2020 ZCTA) or nonmetro DDA (by county), and whether the 130% basis of 26 U.S.C. 42(d)(5)(B) applies, quoted; (2) the county's declared permit value per new home in 5+ unit buildings, lowest to highest of 2023-2025; (3) tax-credit rent ceilings at 60% and 50%, studio to 2-bedroom, `MTSP limit(persons) x 0.30 / 12`, persons from 42(g)(2)(C); (4) HUD FMRs studio to 3-bedroom. The county is the one the site's point lies in | `hud_qct_dda.json`, `station_site_places/`, `building_costs.json`, `hud_mtsp_income_limits.json`, `hud_fair_market_rents.json` |
 | Affordable homes | `ceil(homes x 0.20)` at the 50% limit (the statute's 20-50 test), only where homes are sized | `min_set_aside` |
 | Public money | LIHTC, HOME, FHA multifamily insurance, Florida Live Local exemption: "could apply; not computed because ..." unless every condition is known. HOME shows its federal per-unit cap as a range | `housing_funding_rules.json`, `statutes.json` |
 | Value, Hold | today's value, as the cost | |
@@ -61,6 +63,8 @@ exact, and then the card says why (a statutory limit, a median of recorded sales
 | Los Angeles ADU permit medians | Yes | declared permit valuations, City of Los Angeles only |
 | Terner Center modular figures, Florida and Pennsylvania cost rows, LIHTC equity price | No | terms not checked |
 | HUD FMRs, income limits, FHA limits, HOME caps, LIHTC statute and IRS rates | Yes | federal |
+| HUD 2026/2027 QCT and DDA lists, HUD MTSP income limits | Yes | federal (HUD User downloads and API) |
+| Census Building Permits Survey county files (5+ unit valuation per home) | Yes | federal statistical release; declared value of the structure, not a development cost |
 | County valuation models and the LA back-test | Yes | with their tested error |
 | Transit value studies | Yes | meta-analysis ranges, not confidence intervals |
 
@@ -103,7 +107,8 @@ $1,192.50 to $1,702.50 a month; Travis $1,176.25 to $1,680.00. **Los Angeles Cou
 4. **A sourced capitalisation rate, or a valuation model tested on new ADUs and apartments**, per county. Blocks every
    finished value. No research prompt covers cap rates yet; paid comparables (CoStar) have no published price
    (docs/GAME-PLAN.md).
-5. **HUD's 2027 QCT/DDA list, the 60% (MTSP) income limits, and each county's FHA base
-   city.** (Los Angeles County's income limits were added 22 Nov 2026.) Needed before any LIHTC or FHA figure is computed. Research prompt 6 and HUD's own downloads.
+5. **Each county's FHA base city**, and the LIHTC credit itself (eligible basis, state award). The 2026/2027 QCT/DDA lists and
+   the 60% (MTSP) limits were added for the station-site counties on 22 Nov 2026 (`docs/audit/site-cards-2026-11-22.md`).
+   Research prompt 6.
 6. **Market rents for new homes** (FMRs are payment standards). Paid: RentCast "$74 / $199 / $449 per month" (docs/GAME-PLAN.md,
    checked 16 Nov 2026); research prompt 11 covers value effects, not rents.

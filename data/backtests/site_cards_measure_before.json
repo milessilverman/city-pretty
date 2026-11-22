@@ -1,0 +1,547 @@
+{
+ "label": "before",
+ "built": "2026-11-22",
+ "script": "scripts/measure_site_cards.mjs",
+ "inputs": "the page's displayable inputs only (pcSubjects / pcCtx in app/invest.js); no data/internal rows",
+ "sites": 7098,
+ "counties": 42,
+ "sitesWithCostRange": 0,
+ "sitesWithPublicMoneyThatApplies": 0,
+ "sitesWhereTheLocationRuleIsKnown": 0,
+ "sitesWithIncomeRange": 0,
+ "sitesWithNothing": 7098,
+ "nothingBy": [
+  {
+   "reason": "the zoning code is not on file for this site",
+   "sites": 7098,
+   "counties": 42,
+   "topCounties": "17031:800, 06037:800, 48113:756, 06073:753, 04013:611"
+  }
+ ],
+ "courses": {
+  "hold": {
+   "assessed": 7098,
+   "filled": {
+    "size": 7098,
+    "cost": 0,
+    "publicMoney": 0,
+    "income": 0,
+    "value": 0
+   },
+   "why": {
+    "size": [],
+    "cost": [
+     {
+      "reason": "the purchase price is not on file: the site record's market land value is an unverified model estimate, and its assessed value is a tax base, not a price",
+      "sites": 7098,
+      "counties": 42,
+      "topCounties": "17031:800, 06037:800, 48113:756, 06073:753, 04013:611"
+     }
+    ],
+    "publicMoney": [
+     {
+      "reason": "no programme listed",
+      "sites": 7098,
+      "counties": 42,
+      "topCounties": "17031:800, 06037:800, 48113:756, 06073:753, 04013:611"
+     }
+    ],
+    "income": [
+     {
+      "reason": "space rental income not on file: no sourced rate for parking, storage or roof space is in the data (research prompt # (renting out every space))",
+      "sites": 7098,
+      "counties": 42,
+      "topCounties": "17031:800, 06037:800, 48113:756, 06073:753, 04013:611"
+     }
+    ],
+    "value": [
+     {
+      "reason": "the purchase price is not on file: the site record's market land value is an unverified model estimate, and its assessed value is a tax base, not a price",
+      "sites": 7098,
+      "counties": 42,
+      "topCounties": "17031:800, 06037:800, 48113:756, 06073:753, 04013:611"
+     }
+    ]
+   }
+  }
+ },
+ "notAssessed": {
+  "adu": [
+   {
+    "reason": "the zoning code is not on file for this site",
+    "sites": 7098,
+    "counties": 42,
+    "topCounties": "17031:800, 06037:800, 48113:756, 06073:753, 04013:611"
+   }
+  ],
+  "state_law_units": [
+   {
+    "reason": "the zoning code is not on file for this site",
+    "sites": 7098,
+    "counties": 42,
+    "topCounties": "17031:800, 06037:800, 48113:756, 06073:753, 04013:611"
+   }
+  ],
+  "small_multifamily": [
+   {
+    "reason": "the zoning code is not on file for this site",
+    "sites": 7098,
+    "counties": 42,
+    "topCounties": "17031:800, 06037:800, 48113:756, 06073:753, 04013:611"
+   }
+  ],
+  "station_conventional": [
+   {
+    "reason": "the zoning code is not on file for this site",
+    "sites": 7098,
+    "counties": 42,
+    "topCounties": "17031:800, 06037:800, 48113:756, 06073:753, 04013:611"
+   }
+  ],
+  "station_prefab": [
+   {
+    "reason": "the zoning code is not on file for this site",
+    "sites": 7098,
+    "counties": 42,
+    "topCounties": "17031:800, 06037:800, 48113:756, 06073:753, 04013:611"
+   }
+  ]
+ },
+ "placeFacts": {},
+ "blockersRanked": [
+  {
+   "reason": "cost: the purchase price is not on file: the site record's market land value is an unverified model estimate, and its assessed value is a tax base, not a price",
+   "sites": 7098,
+   "counties": 42,
+   "topCounties": "17031:800, 06037:800, 48113:756, 06073:753, 04013:611"
+  },
+  {
+   "reason": "publicMoney: no programme listed",
+   "sites": 7098,
+   "counties": 42,
+   "topCounties": "17031:800, 06037:800, 48113:756, 06073:753, 04013:611"
+  },
+  {
+   "reason": "income: space rental income not on file: no sourced rate for parking, storage or roof space is in the data (research prompt # (renting out every space))",
+   "sites": 7098,
+   "counties": 42,
+   "topCounties": "17031:800, 06037:800, 48113:756, 06073:753, 04013:611"
+  },
+  {
+   "reason": "value: the purchase price is not on file: the site record's market land value is an unverified model estimate, and its assessed value is a tax base, not a price",
+   "sites": 7098,
+   "counties": 42,
+   "topCounties": "17031:800, 06037:800, 48113:756, 06073:753, 04013:611"
+  },
+  {
+   "reason": "course not assessed (adu): the zoning code is not on file for this site",
+   "sites": 7098,
+   "counties": 42,
+   "topCounties": "17031:800, 06037:800, 48113:756, 06073:753, 04013:611"
+  },
+  {
+   "reason": "course not assessed (state_law_units): the zoning code is not on file for this site",
+   "sites": 7098,
+   "counties": 42,
+   "topCounties": "17031:800, 06037:800, 48113:756, 06073:753, 04013:611"
+  },
+  {
+   "reason": "course not assessed (small_multifamily): the zoning code is not on file for this site",
+   "sites": 7098,
+   "counties": 42,
+   "topCounties": "17031:800, 06037:800, 48113:756, 06073:753, 04013:611"
+  },
+  {
+   "reason": "course not assessed (station_conventional): the zoning code is not on file for this site",
+   "sites": 7098,
+   "counties": 42,
+   "topCounties": "17031:800, 06037:800, 48113:756, 06073:753, 04013:611"
+  },
+  {
+   "reason": "course not assessed (station_prefab): the zoning code is not on file for this site",
+   "sites": 7098,
+   "counties": 42,
+   "topCounties": "17031:800, 06037:800, 48113:756, 06073:753, 04013:611"
+  }
+ ],
+ "byCounty": {
+  "11001": {
+   "name": "District of Columbia",
+   "sites": 29,
+   "cost": 0,
+   "moneyApplies": 0,
+   "moneyKnown": 0,
+   "income": 0,
+   "nothing": 29
+  },
+  "12031": {
+   "name": "Duval County",
+   "sites": 73,
+   "cost": 0,
+   "moneyApplies": 0,
+   "moneyKnown": 0,
+   "income": 0,
+   "nothing": 73
+  },
+  "12057": {
+   "name": "Hillsborough County",
+   "sites": 22,
+   "cost": 0,
+   "moneyApplies": 0,
+   "moneyKnown": 0,
+   "income": 0,
+   "nothing": 22
+  },
+  "12086": {
+   "name": "Miami-Dade County",
+   "sites": 147,
+   "cost": 0,
+   "moneyApplies": 0,
+   "moneyKnown": 0,
+   "income": 0,
+   "nothing": 147
+  },
+  "13121": {
+   "name": "Fulton County",
+   "sites": 13,
+   "cost": 0,
+   "moneyApplies": 0,
+   "moneyKnown": 0,
+   "income": 0,
+   "nothing": 13
+  },
+  "17031": {
+   "name": "Cook County",
+   "sites": 800,
+   "cost": 0,
+   "moneyApplies": 0,
+   "moneyKnown": 0,
+   "income": 0,
+   "nothing": 800
+  },
+  "18097": {
+   "name": "Marion County",
+   "sites": 144,
+   "cost": 0,
+   "moneyApplies": 0,
+   "moneyKnown": 0,
+   "income": 0,
+   "nothing": 144
+  },
+  "22071": {
+   "name": "Orleans Parish",
+   "sites": 5,
+   "cost": 0,
+   "moneyApplies": 0,
+   "moneyKnown": 0,
+   "income": 0,
+   "nothing": 5
+  },
+  "24510": {
+   "name": "Baltimore city",
+   "sites": 75,
+   "cost": 0,
+   "moneyApplies": 0,
+   "moneyKnown": 0,
+   "income": 0,
+   "nothing": 75
+  },
+  "25025": {
+   "name": "Suffolk County",
+   "sites": 3,
+   "cost": 0,
+   "moneyApplies": 0,
+   "moneyKnown": 0,
+   "income": 0,
+   "nothing": 3
+  },
+  "26163": {
+   "name": "Wayne County",
+   "sites": 30,
+   "cost": 0,
+   "moneyApplies": 0,
+   "moneyKnown": 0,
+   "income": 0,
+   "nothing": 30
+  },
+  "27053": {
+   "name": "Hennepin County",
+   "sites": 58,
+   "cost": 0,
+   "moneyApplies": 0,
+   "moneyKnown": 0,
+   "income": 0,
+   "nothing": 58
+  },
+  "27123": {
+   "name": "Ramsey County",
+   "sites": 97,
+   "cost": 0,
+   "moneyApplies": 0,
+   "moneyKnown": 0,
+   "income": 0,
+   "nothing": 97
+  },
+  "29095": {
+   "name": "Jackson County",
+   "sites": 3,
+   "cost": 0,
+   "moneyApplies": 0,
+   "moneyKnown": 0,
+   "income": 0,
+   "nothing": 3
+  },
+  "32003": {
+   "name": "Clark County",
+   "sites": 78,
+   "cost": 0,
+   "moneyApplies": 0,
+   "moneyKnown": 0,
+   "income": 0,
+   "nothing": 78
+  },
+  "34013": {
+   "name": "Essex County",
+   "sites": 49,
+   "cost": 0,
+   "moneyApplies": 0,
+   "moneyKnown": 0,
+   "income": 0,
+   "nothing": 49
+  },
+  "36047": {
+   "name": "Kings County",
+   "sites": 406,
+   "cost": 0,
+   "moneyApplies": 0,
+   "moneyKnown": 0,
+   "income": 0,
+   "nothing": 406
+  },
+  "36081": {
+   "name": "Queens County",
+   "sites": 164,
+   "cost": 0,
+   "moneyApplies": 0,
+   "moneyKnown": 0,
+   "income": 0,
+   "nothing": 164
+  },
+  "37119": {
+   "name": "Mecklenburg County",
+   "sites": 88,
+   "cost": 0,
+   "moneyApplies": 0,
+   "moneyKnown": 0,
+   "income": 0,
+   "nothing": 88
+  },
+  "37183": {
+   "name": "Wake County",
+   "sites": 67,
+   "cost": 0,
+   "moneyApplies": 0,
+   "moneyKnown": 0,
+   "income": 0,
+   "nothing": 67
+  },
+  "39035": {
+   "name": "Cuyahoga County",
+   "sites": 20,
+   "cost": 0,
+   "moneyApplies": 0,
+   "moneyKnown": 0,
+   "income": 0,
+   "nothing": 20
+  },
+  "39049": {
+   "name": "Franklin County",
+   "sites": 35,
+   "cost": 0,
+   "moneyApplies": 0,
+   "moneyKnown": 0,
+   "income": 0,
+   "nothing": 35
+  },
+  "41051": {
+   "name": "Multnomah County",
+   "sites": 49,
+   "cost": 0,
+   "moneyApplies": 0,
+   "moneyKnown": 0,
+   "income": 0,
+   "nothing": 49
+  },
+  "42101": {
+   "name": "Philadelphia County",
+   "sites": 13,
+   "cost": 0,
+   "moneyApplies": 0,
+   "moneyKnown": 0,
+   "income": 0,
+   "nothing": 13
+  },
+  "47037": {
+   "name": "Davidson County",
+   "sites": 85,
+   "cost": 0,
+   "moneyApplies": 0,
+   "moneyKnown": 0,
+   "income": 0,
+   "nothing": 85
+  },
+  "47157": {
+   "name": "Shelby County",
+   "sites": 11,
+   "cost": 0,
+   "moneyApplies": 0,
+   "moneyKnown": 0,
+   "income": 0,
+   "nothing": 11
+  },
+  "48029": {
+   "name": "Bexar County",
+   "sites": 8,
+   "cost": 0,
+   "moneyApplies": 0,
+   "moneyKnown": 0,
+   "income": 0,
+   "nothing": 8
+  },
+  "48113": {
+   "name": "Dallas County",
+   "sites": 756,
+   "cost": 0,
+   "moneyApplies": 0,
+   "moneyKnown": 0,
+   "income": 0,
+   "nothing": 756
+  },
+  "48201": {
+   "name": "Harris County",
+   "sites": 395,
+   "cost": 0,
+   "moneyApplies": 0,
+   "moneyKnown": 0,
+   "income": 0,
+   "nothing": 395
+  },
+  "48439": {
+   "name": "Tarrant County",
+   "sites": 102,
+   "cost": 0,
+   "moneyApplies": 0,
+   "moneyKnown": 0,
+   "income": 0,
+   "nothing": 102
+  },
+  "48453": {
+   "name": "Travis County",
+   "sites": 41,
+   "cost": 0,
+   "moneyApplies": 0,
+   "moneyKnown": 0,
+   "income": 0,
+   "nothing": 41
+  },
+  "53033": {
+   "name": "King County",
+   "sites": 476,
+   "cost": 0,
+   "moneyApplies": 0,
+   "moneyKnown": 0,
+   "income": 0,
+   "nothing": 476
+  },
+  "55079": {
+   "name": "Milwaukee County",
+   "sites": 35,
+   "cost": 0,
+   "moneyApplies": 0,
+   "moneyKnown": 0,
+   "income": 0,
+   "nothing": 35
+  },
+  "04013": {
+   "name": "Maricopa County",
+   "sites": 611,
+   "cost": 0,
+   "moneyApplies": 0,
+   "moneyKnown": 0,
+   "income": 0,
+   "nothing": 611
+  },
+  "04019": {
+   "name": "Pima County",
+   "sites": 10,
+   "cost": 0,
+   "moneyApplies": 0,
+   "moneyKnown": 0,
+   "income": 0,
+   "nothing": 10
+  },
+  "06037": {
+   "name": "Los Angeles County",
+   "sites": 800,
+   "cost": 0,
+   "moneyApplies": 0,
+   "moneyKnown": 0,
+   "income": 0,
+   "nothing": 800
+  },
+  "06059": {
+   "name": "Orange County",
+   "sites": 151,
+   "cost": 0,
+   "moneyApplies": 0,
+   "moneyKnown": 0,
+   "income": 0,
+   "nothing": 151
+  },
+  "06065": {
+   "name": "Riverside County",
+   "sites": 85,
+   "cost": 0,
+   "moneyApplies": 0,
+   "moneyKnown": 0,
+   "income": 0,
+   "nothing": 85
+  },
+  "06071": {
+   "name": "San Bernardino County",
+   "sites": 166,
+   "cost": 0,
+   "moneyApplies": 0,
+   "moneyKnown": 0,
+   "income": 0,
+   "nothing": 166
+  },
+  "06073": {
+   "name": "San Diego County",
+   "sites": 753,
+   "cost": 0,
+   "moneyApplies": 0,
+   "moneyKnown": 0,
+   "income": 0,
+   "nothing": 753
+  },
+  "08031": {
+   "name": "Denver County",
+   "sites": 92,
+   "cost": 0,
+   "moneyApplies": 0,
+   "moneyKnown": 0,
+   "income": 0,
+   "nothing": 92
+  },
+  "08041": {
+   "name": "El Paso County",
+   "sites": 53,
+   "cost": 0,
+   "moneyApplies": 0,
+   "moneyKnown": 0,
+   "income": 0,
+   "nothing": 53
+  }
+ }
+}

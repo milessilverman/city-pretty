@@ -790,7 +790,7 @@ function render() {
   loadData().then(d => {
     if (iv.view !== "invest") return;
     const r2 = ready(); if (r2.state !== "ok") { render(); return; }
-    if (window.StationSites && !window.StationSites.cached(r2.fips)) window.StationSites.load(r2.fips).then(() => { if (iv.view === "invest") { iv.key = null; render(); } });
+    if (window.StationSites && !window.StationSites.cached(r2.fips)) window.StationSites.load(r2.fips).then(() => window.StationSites.loadPlaces ? window.StationSites.loadPlaces(r2.fips) : null).then(() => { if (iv.view === "invest") { iv.key = null; pc.key = null; render(); } });
     const p = parcelFacts();
     const key = [r2.fips, iv.hood, p && p.facts.parcel_id, p && p.facts.base_zoning_code, p && p.facts.exclusions && JSON.stringify(p.facts.exclusions), d.laws ? d.laws.length : -1, d.verification ? 1 : 0, typeof SITES !== "undefined" && SITES ? 1 : 0].join("|");
     if (key !== iv.key || !iv.model) { iv.model = build(r2.fips, r2.B, d); iv.key = key; }
@@ -900,8 +900,8 @@ function loadPcData() {
   if (pc.p) return pc.p;
   const get = f => fetch("app/data/" + f).then(r => r.ok ? r.json() : null).catch(() => null);
   const j = id => (typeof cpJson === "function" ? cpJson(id) : Promise.resolve(null)).catch(() => null);
-  pc.p = Promise.all([get("building_costs.json"), get("housing_funding_rules.json"), get("hud_income_limits.json"), j("hud-fmr"), j("valuation-benchmarks")])
-    .then(([bc, fr, il, fmr, vb]) => (pc.data = { buildingCosts: (bc && bc.rows) || [], fundingRules: fr, incomeLimits: il, fmr, valuationBenchmarks: vb }));
+  pc.p = Promise.all([get("building_costs.json"), get("housing_funding_rules.json"), get("hud_income_limits.json"), j("hud-fmr"), j("valuation-benchmarks"), get("hud_qct_dda.json"), get("hud_mtsp_income_limits.json")])
+    .then(([bc, fr, il, fmr, vb, qd, mt]) => (pc.data = { buildingCosts: (bc && bc.rows) || [], fundingRules: fr, incomeLimits: il, fmr, valuationBenchmarks: vb, qctDda: qd, mtspLimits: mt }));
   return pc.p;
 }
 function pcStop(corr, stop, miles) {
@@ -938,7 +938,7 @@ function pcSubjects(m) {
       acres: acresOk ? { value: s.acres, source: s.sourceUrl || "app/data/underused_sites.json" } : null,
       railStationMi: railOk ? s.distanceToRailMeters / 1609.344 : null,
       railNote: railOk && s.nearestRailStation ? `the site record names its nearest rail station (${s.nearestRailStation}, ${Math.round(s.distanceToRailMeters)} m away) but not that station's mode, which the SB 79 tiers depend on` : null,
-      nearStops: s.blockGroupId ? nearBg(s.blockGroupId) : [],
+      nearStops: s.blockGroupId ? nearBg(s.blockGroupId) : [], place: s.place || null,
       parcel: { parcel_id: s.id, state_code: st, county_fips: fips, base_zoning_code: s.baseZoning || null, municipality_name: s.cityName || null, is_commercial_or_mixed_use: /commercial/.test(s.zoningCategory || ""), is_single_family_residential: s.zoningCategory === "single-family", is_multifamily_residential: s.zoningCategory === "multifamily", exclusions: {}, lot_sqft: acresOk ? s.acres * 43560 : null } });
   }
   for (const a of areas) out.push({ kind: "stop_area", id: a.stop.id, name: `Around the ${a.stop.city} stop city (${a.corr.name})`, countyFips: fips, stateCode: st, city: a.stop.city,
@@ -947,7 +947,7 @@ function pcSubjects(m) {
 }
 function pcCtx() {
   const d = iv.data, P = pc.data;
-  return { laws: d.laws || undefined, buildingCosts: P.buildingCosts, fundingRules: P.fundingRules, incomeLimits: P.incomeLimits, fmr: P.fmr, valuationModels: d.valuationModels, valuationBenchmarks: P.valuationBenchmarks, transitEffects: { rows: d.effects }, corridors: d.corridors };
+  return { laws: d.laws || undefined, buildingCosts: P.buildingCosts, fundingRules: P.fundingRules, incomeLimits: P.incomeLimits, fmr: P.fmr, valuationModels: d.valuationModels, valuationBenchmarks: P.valuationBenchmarks, transitEffects: { rows: d.effects }, corridors: d.corridors, qctDda: P.qctDda || undefined, mtspLimits: P.mtspLimits || undefined };
 }
 function pcCards(m) {
   const h = (typeof activeHouse !== "undefined") ? activeHouse : null;
@@ -1001,12 +1001,12 @@ function pcSize(x) {
 }
 function pcMoneyHTML(x) {
   if (!x.publicMoney.length) return `<span class="iv-muted">${x.course === "hold" ? "No programme on file pays for holding a property" : x.course === "adu" ? "No programme on file applied to one market-rate ADU" : "None applied: a market-rate course (see the course with an affordable share)"}</span>`;
-  return `<ul class="pc-pm">${x.publicMoney.map(p => `<li><b>${esc2(p.programme)}</b>: ${esc2(p.status)}${p.cap ? `; federal cap ${pcRange(p.cap)}` : ""}${p.why && p.why.length ? `<span class="iv-muted"> (because ${esc2(p.why.join("; "))})</span>` : ""}${(p.rules || []).length ? `<ul class="pc-rules">${p.rules.map(r => `<li class="iv-muted">${esc2(r.text)}${r.quote ? `: "${esc2(r.quote)}"` : ""} ${srcMark(r.url)}</li>`).join("")}</ul>` : ""}</li>`).join("")}</ul>${x.affordableUnits ? `<p class="iv-muted">Affordable share: ${pcRange(x.affordableUnits)}</p>` : ""}`;
+  return `<ul class="pc-pm">${x.publicMoney.map(p => `<li><b>${esc2(p.programme)}</b>: ${esc2(p.status)}${p.cap ? `; federal cap ${pcRange(p.cap)}` : ""}${p.locationRule ? `<br><span data-pc-boost="${esc2(p.locationRule.boost)}">${esc2(p.locationRule.text)}</span>${p.locationRule.quote ? ` <span class="iv-muted">"${esc2(p.locationRule.quote)}"</span>` : ""} ${srcMark(p.locationRule.url)} ${srcMark(p.locationRule.listUrl)}` : ""}${p.why && p.why.length ? `<span class="iv-muted"> (because ${esc2(p.why.join("; "))})</span>` : ""}${(p.rules || []).length ? `<ul class="pc-rules">${p.rules.map(r => `<li class="iv-muted">${esc2(r.text)}${r.quote ? `: "${esc2(r.quote)}"` : ""} ${srcMark(r.url)}</li>`).join("")}</ul>` : ""}</li>`).join("")}</ul>${x.affordableUnits ? `<p class="iv-muted">Affordable share: ${pcRange(x.affordableUnits)}</p>` : ""}`;
 }
 function pcIncome(x) {
   if (!x.income) return nof(x.incomeWhy);
   const i = x.income;
-  return `${pcRange(i.perUnitMonthly)} per home per month${i.yearly ? `; ${pcRange(i.yearly)} a year` : ""}${i.at80 ? `; at the 80% limit ${pcRange(i.at80)}` : ""}<br><span class="iv-muted">${esc2(i.label)}</span>`;
+  return `${pcRange(i.perUnitMonthly)} per home per month${i.yearly ? `; ${pcRange(i.yearly)} a year` : ""}${i.at60 ? `; at the 60% limit ${pcRange(i.at60)}` : ""}${i.at80 ? `; at the 80% limit ${pcRange(i.at80)}` : ""}<br><span class="iv-muted">${esc2(i.label)}</span>`;
 }
 function pcUplift(t) {
   if (!t) return "";
@@ -1035,13 +1035,35 @@ function pcCourse(x, open, key) {
       ${x.risks.length ? `<p class="iv-k">What could break it</p><ul class="iv-caveats">${x.risks.map(t => `<li>${esc2(t)}</li>`).join("")}</ul>` : ""}
       ${x.missing.length ? `<p class="iv-k">What is missing</p><ul class="iv-caveats">${x.missing.map(t => `<li>${esc2(t)}</li>`).join("")}</ul>` : ""}`)}</li>`;
 }
+// The card's place rows (engine placeFacts): what holds for the site's place whatever is built.
+function pcPlace(card) {
+  const P = card.placeFacts || [];
+  if (!P.length) return "";
+  const yn = v => v === true ? "yes" : v === false ? "no" : "not determined";
+  const cau = p => (p.cautions || []).length ? `<ul class="iv-caveats">${p.cautions.map(t => `<li>${esc2(t)}</li>`).join("")}</ul>` : "";
+  const row = p => {
+    if (p.id === "qct_dda") {
+      if (p.status === "not on file") return `<div class="pc-wide"><dt>${esc2(p.label)}</dt><dd>${nof(p.why)}</dd></div>`;
+      const yrs = p.years.slice().reverse().map(y => `<li>${esc2(y.year)} lists: qualified census tract (tract ${esc2(p.tract)}): <b>${yn(y.qct)}</b> ${srcMark(y.qctUrl)}; difficult development area${y.ddaBasis ? ` (${esc2(y.ddaBasis)})` : ""}: <b>${yn(y.dda)}</b>${y.ddaWhy ? ` <span class="iv-muted">(${esc2(y.ddaWhy)})</span>` : ""} ${srcMark(y.ddaUrl)}</li>`).join("");
+      const eff = p.boost === "applies" ? "A new tax-credit building here counts 130% of its eligible basis" : p.boost ? "No 130% basis by location; the state housing credit agency may still designate the building" : `Not determined: ${p.why || ""}`;
+      return `<div class="pc-wide" data-pc-place="qct_dda" data-pc-boost="${esc2(p.boost || "unknown")}"><dt>${esc2(p.label)}</dt><dd><b>${esc2(eff)}</b><ul class="pc-up">${yrs}</ul>${(p.rules || []).map(r => `<p class="iv-muted">${esc2(r.citation || r.text)}: "${esc2(r.quote)}" ${srcMark(r.url)}</p>`).join("")}${p.effective && p.effective.quote ? `<p class="iv-muted">"${esc2(p.effective.quote)}" ${srcMark(p.effective.url)}</p>` : ""}${cau(p)}</dd></div>`;
+    }
+    if (!p.range) return `<div class="pc-wide" data-pc-place="${esc2(p.id)}"><dt>${esc2(p.label)}</dt><dd>${nof(p.why)}</dd></div>`;
+    let body = pcRange(p.range);
+    if (p.id === "cost") body += ` per home<br><span class="iv-muted">${esc2(p.place || "")}: ${p.rows.map(r => `${r.year} $${r.value.toLocaleString("en-US")} (${r.homes.toLocaleString("en-US")} homes) ${srcMark(r.url)}`).join("; ")}. Census: "${esc2(p.definition || "")}"</span> ${srcMark(p.definitionUrl)}`;
+    if (p.id === "rent_limits") body += ` per home per month at the 60% limit${p.at50 ? `; at the 50% limit ${pcRange(p.at50)}` : ""}<br><span class="iv-muted">${esc2(p.area || "")}, HUD ${esc2(p.year || "")} tax-credit income limits${p.limits ? `: 60% limit $${p.limits.il60[0].toLocaleString("en-US")} (${p.limits.persons[0]} person) and $${p.limits.il60[1].toLocaleString("en-US")} (${p.limits.persons[1]} persons) a year; 50% limit $${p.limits.il50[0].toLocaleString("en-US")} and $${p.limits.il50[1].toLocaleString("en-US")}` : ""}. ${esc2(p.formula || "")}</span>`;
+    if (p.id === "fmr") body += ` per home per month<br><span class="iv-muted">${esc2(p.detail || "")}; ${esc2(p.label2 || "")}</span>`;
+    return `<div class="pc-wide" data-pc-place="${esc2(p.id)}"><dt>${esc2(p.label)}</dt><dd>${body}${cau(p)}</dd></div>`;
+  };
+  return `<div class="pc-place"><p class="iv-k">This place, whatever is built</p><dl class="iv-dl pc-dl">${P.map(row).join("")}</dl></div>`;
+}
 function pcCard(card, open) {
   const s = card.subject, k = "pc-" + s.kind + "-" + String(s.id || s.name);
   const costed = card.courses.filter(x => x.cost).length;
   const st0 = s.kind === "stop_area" && s.nearStops && s.nearStops[0] ? s.nearStops[0].corridorStatus : null;
   const summary = `<span class="pc-kind">${esc2(PC_KIND[s.kind] || s.kind)}</span> <b>${esc2(s.name || "")}</b>${st0 && st0 !== "verified" ? ` <span class="iv-chip iv-unconf">corridor record: ${esc2(String(st0).replace(/_/g, " "))}</span>` : ""} <span class="iv-muted">${card.courses.length} ${card.courses.length === 1 ? "course" : "courses"}, ${costed} with a cost on file, ${card.notAssessed.length} could not be assessed</span>`;
   const na = card.notAssessed.length ? `<div class="pc-na"><p class="iv-k">Could not be assessed (${card.notAssessed.length})</p><ul>${card.notAssessed.map(n => `<li><b>${esc2(n.label)}</b><ul class="iv-caveats">${n.missing.map(t => `<li>${esc2(t)}</li>`).join("")}</ul></li>`).join("")}</ul></div>` : "";
-  return `<details class="pc-card" data-pc-subject="${esc2(s.kind)}" ${dk(open, k)}><summary>${summary}</summary>
+  return `<details class="pc-card" data-pc-subject="${esc2(s.kind)}" ${dk(open, k)}><summary>${summary}</summary>${pcPlace(card)}
     <ul class="pc-courses">${card.courses.map((x, i) => pcCourse(x, open, k + "-" + x.course + (x.affordable ? "-aff" : ""))).join("")}</ul>${na}</details>`;
 }
 function pcFitHTML(cards) {

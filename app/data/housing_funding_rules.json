@@ -20,10 +20,16 @@
    "hud_fha_statutory_limits": 51,
    "hud_high_cost_percentages": 97,
    "home_per_unit_limits": 5,
-   "total": 173,
-   "rows_not_displayable_kept_outside_the_published_site": 62
+   "total": 177,
+   "rows_not_displayable_kept_outside_the_published_site": 62,
+   "site_cards_2026_11_22": 4
   },
-  "internal_rows_note": "Rows marked display_allowed: false (publisher terms forbid display, or terms not checked) are not in this file. They are kept in a separate folder that the page never requests and the site build never copies."
+  "internal_rows_note": "Rows marked display_allowed: false (publisher terms forbid display, or terms not checked) are not in this file. They are kept in a separate folder that the page never requests and the site build never copies.",
+  "site_cards_2026_11_22": {
+   "added_by": "scripts/costs/add_site_card_rules.py (run after build_housing_funding_rules.py)",
+   "added": "2026-11-22",
+   "rows": 4
+  }
  },
  "rows": [
   {
@@ -4264,6 +4270,108 @@
    "display_terms": "U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
    "bedrooms": "4",
    "methodology": "HUD is establishing the maximum per-unit subsidy limit for the HOME program as 240 percent of the basic mortgage limitations for section 234 of the National Housing Act’s condominium housing limit for elevator-type projects."
+  },
+  {
+   "programme": "Low-Income Housing Tax Credit (federal)",
+   "jurisdiction": "United States",
+   "year": "current",
+   "source_url": "https://www.law.cornell.edu/uscode/text/26/42",
+   "publisher": "U.S. Code, Title 26 section 42 (text as shown by Cornell Legal Information Institute; includes Pub. L. 119-21 amendments)",
+   "edition": "26 U.S.C. 42 as fetched 2026-11-22",
+   "display_allowed": true,
+   "display_terms": "Federal statute. Page copy is Cornell LII's; LII's own reuse terms were not fetched.",
+   "source_key": "site_cards_2026_11_22",
+   "section": "lihtc_basis_boost",
+   "what_it_funds_or_limits": "26 U.S.C. 42(d)(5)(B)(i): a new building in a QCT or DDA counts 130 percent of its eligible basis",
+   "measure": "basis_boost_clause",
+   "value": 1.3,
+   "unit": "x eligible basis (new building)",
+   "citation": "26 U.S.C. 42(d)(5)(B)(i)(I)",
+   "quote": "In the case of any building located in a qualified census tract or difficult development area which is designated for purposes of this subparagraph— (I) in the case of a new building, the eligible basis of such building shall be 130 percent of such basis",
+   "verification": {
+    "status": "quote_matched_in_fetched_text",
+    "method": "scripts/costs/add_site_card_rules.py: tags removed, whitespace collapsed, spaces before punctuation removed, then the quote must occur",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "26ec83c69bd1580cf5690f598c6f822a6dbca1350103cd260b00187f45920b33"
+   }
+  },
+  {
+   "programme": "Low-Income Housing Tax Credit (federal)",
+   "jurisdiction": "United States",
+   "year": "current",
+   "source_url": "https://www.law.cornell.edu/uscode/text/26/42",
+   "publisher": "U.S. Code, Title 26 section 42 (text as shown by Cornell Legal Information Institute; includes Pub. L. 119-21 amendments)",
+   "edition": "26 U.S.C. 42 as fetched 2026-11-22",
+   "display_allowed": true,
+   "display_terms": "Federal statute. Page copy is Cornell LII's; LII's own reuse terms were not fetched.",
+   "source_key": "site_cards_2026_11_22",
+   "section": "lihtc_basis_boost",
+   "what_it_funds_or_limits": "26 U.S.C. 42(d)(5)(B)(v): the state housing credit agency may designate any building as needing the increase",
+   "measure": "state_designated_boost",
+   "value": "a building the state agency designates is treated as in a DDA",
+   "unit": "text",
+   "citation": "26 U.S.C. 42(d)(5)(B)(v)",
+   "quote": "designated by the State housing credit agency as requiring the increase in credit under this subparagraph in order for such building to be financially feasible",
+   "verification": {
+    "status": "quote_matched_in_fetched_text",
+    "method": "scripts/costs/add_site_card_rules.py: tags removed, whitespace collapsed, spaces before punctuation removed, then the quote must occur",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "26ec83c69bd1580cf5690f598c6f822a6dbca1350103cd260b00187f45920b33"
+   }
+  },
+  {
+   "programme": "Low-Income Housing Tax Credit (federal)",
+   "jurisdiction": "United States",
+   "year": "current",
+   "source_url": "https://www.law.cornell.edu/uscode/text/26/42",
+   "publisher": "U.S. Code, Title 26 section 42 (text as shown by Cornell Legal Information Institute; includes Pub. L. 119-21 amendments)",
+   "edition": "26 U.S.C. 42 as fetched 2026-11-22",
+   "display_allowed": true,
+   "display_terms": "Federal statute. Page copy is Cornell LII's; LII's own reuse terms were not fetched.",
+   "source_key": "site_cards_2026_11_22",
+   "section": "lihtc_set_aside",
+   "what_it_funds_or_limits": "26 U.S.C. 42(g)(2)(C): household size used for a unit's rent limit: 1 person with no separate bedroom, 1.5 per bedroom",
+   "measure": "imputed_household_size",
+   "value": {
+    "no_bedroom": 1,
+    "per_bedroom": 1.5
+   },
+   "unit": "persons",
+   "citation": "26 U.S.C. 42(g)(2)(C)",
+   "quote": "(i) In the case of a unit which does not have a separate bedroom, 1 individual. (ii) In the case of a unit which has 1 or more separate bedrooms, 1.5 individuals for each separate bedroom.",
+   "verification": {
+    "status": "quote_matched_in_fetched_text",
+    "method": "scripts/costs/add_site_card_rules.py: tags removed, whitespace collapsed, spaces before punctuation removed, then the quote must occur",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "26ec83c69bd1580cf5690f598c6f822a6dbca1350103cd260b00187f45920b33"
+   }
+  },
+  {
+   "section": "lihtc_set_aside",
+   "programme": "Low-Income Housing Tax Credit (federal)",
+   "jurisdiction": "United States",
+   "what_it_funds_or_limits": "HUD's LIHTC maximum rent formula: 1/12 of 30 percent of 120 percent of the very low-income (50 percent) limit, i.e. a rent at the 60 percent limit",
+   "measure": "hud_lihtc_rent_formula",
+   "value": {
+    "months": 12,
+    "rent_share": 0.3,
+    "vlil_multiple": 1.2
+   },
+   "unit": "monthly rent = VLIL x 1.2 x 0.30 / 12",
+   "year": 2027,
+   "source_url": "https://www.huduser.gov/portal/datasets/qct/2027-DDAs-Data-Used-to-Designate.xlsx",
+   "publisher": "HUD Office of Policy Development and Research (HUD User)",
+   "edition": "2027 Difficult Development Areas - Data Used to Designate, sheet '2027 MDDA', column heading",
+   "quote": "LIHTC Maximum Rent (1/12 of 30% of 120% of VLIL)",
+   "verification": {
+    "status": "quote_matched_in_fetched_text",
+    "method": "column heading read from the fetched workbook",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "4b126ca161b468de95f8b5cdda4b9d599d7e20420335dd492543f862d964875c"
+   },
+   "display_allowed": true,
+   "display_terms": "U.S. federal government publication; no reuse restriction appears in the fetched file. Separate licence text not fetched.",
+   "source_key": "site_cards_2026_11_22"
   }
  ]
 }
