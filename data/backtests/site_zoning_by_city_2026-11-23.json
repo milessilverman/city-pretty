@@ -1,0 +1,4650 @@
+{
+ "built": "2026-11-23",
+ "script": "pipeline/site_zoning_measure.py",
+ "sites": 7098,
+ "method": "site interior point in Census TIGER/Line 2024 place outlines; FUNCSTAT A (active government) zones the site, otherwise the county (unincorporated land)",
+ "place_files": {
+  "04": {
+   "url": "https://www2.census.gov/geo/tiger/TIGER2024/PLACE/tl_2024_04_place.zip",
+   "sha256": "8f4971b0a3f6e025229befbc2ad9bdb55346463a1067d0cc610072b72860aca1"
+  },
+  "06": {
+   "url": "https://www2.census.gov/geo/tiger/TIGER2024/PLACE/tl_2024_06_place.zip",
+   "sha256": "81b827124043164a93d442f6dc4c088fd56c319da14195e4a14ab0fb39656a42"
+  },
+  "08": {
+   "url": "https://www2.census.gov/geo/tiger/TIGER2024/PLACE/tl_2024_08_place.zip",
+   "sha256": "0f8e5e4fd4462f26038b926d44be1eb1b24e494695edf2187751f735e68b34ce"
+  },
+  "11": {
+   "url": "https://www2.census.gov/geo/tiger/TIGER2024/PLACE/tl_2024_11_place.zip",
+   "sha256": "edb5f856da4c9f0e24da70f875948a9a4b008476adbf85a8c29ab50e2b64a5ed"
+  },
+  "12": {
+   "url": "https://www2.census.gov/geo/tiger/TIGER2024/PLACE/tl_2024_12_place.zip",
+   "sha256": "30d57de7fd40faaf3208bef7bc00f706f70a038aacd2feb1ff1681f68216869e"
+  },
+  "13": {
+   "url": "https://www2.census.gov/geo/tiger/TIGER2024/PLACE/tl_2024_13_place.zip",
+   "sha256": "f56648317615c8063854086ea5112156009a146b433b7e1f442c7ef6e132763c"
+  },
+  "17": {
+   "url": "https://www2.census.gov/geo/tiger/TIGER2024/PLACE/tl_2024_17_place.zip",
+   "sha256": "237f9f4b492e67414699fe6ceeb2175b6db4f2dd84d3ed67bd88f38458da7524"
+  },
+  "18": {
+   "url": "https://www2.census.gov/geo/tiger/TIGER2024/PLACE/tl_2024_18_place.zip",
+   "sha256": "e96afe64d8774101295f532c94e129cf571a21e9615c134dbdf87618286fcfb0"
+  },
+  "22": {
+   "url": "https://www2.census.gov/geo/tiger/TIGER2024/PLACE/tl_2024_22_place.zip",
+   "sha256": "c339b9c1a1df6d45e1ceaff4888a16c6062745b3d6292fd63fda3158b8bcf30f"
+  },
+  "24": {
+   "url": "https://www2.census.gov/geo/tiger/TIGER2024/PLACE/tl_2024_24_place.zip",
+   "sha256": "5622093f62dbb5b3b6433ff9680dab796bfb9d473cdd33d60fb4af7bb5fe564c"
+  },
+  "25": {
+   "url": "https://www2.census.gov/geo/tiger/TIGER2024/PLACE/tl_2024_25_place.zip",
+   "sha256": "79c5b9084a3e5cd123331ec76529a21735e74f9e89b72f3413e1857f21eb6ca3"
+  },
+  "26": {
+   "url": "https://www2.census.gov/geo/tiger/TIGER2024/PLACE/tl_2024_26_place.zip",
+   "sha256": "29f7ff510b4b7f6dc5df5d9578ddecf3def12abaad83d8e4277b16d4272fbbfd"
+  },
+  "27": {
+   "url": "https://www2.census.gov/geo/tiger/TIGER2024/PLACE/tl_2024_27_place.zip",
+   "sha256": "b0771030d6cce3a975c45e212116e6f31cc86f460ba156b7edf9b1079fc15c97"
+  },
+  "29": {
+   "url": "https://www2.census.gov/geo/tiger/TIGER2024/PLACE/tl_2024_29_place.zip",
+   "sha256": "bdc8fbeba0e52adc4e84f27ec7c93fc6e7f7ad63439ecb8e8e5f7c2dbc6f5270"
+  },
+  "32": {
+   "url": "https://www2.census.gov/geo/tiger/TIGER2024/PLACE/tl_2024_32_place.zip",
+   "sha256": "def5ba249c9d3e0697a66205ac822fb9b7de557818f69a749222a9100bdc21bf"
+  },
+  "34": {
+   "url": "https://www2.census.gov/geo/tiger/TIGER2024/PLACE/tl_2024_34_place.zip",
+   "sha256": "5995bae3e4a4eaae958e31064d1de84f575b5ca94fc1e5435b161684eea2369a"
+  },
+  "36": {
+   "url": "https://www2.census.gov/geo/tiger/TIGER2024/PLACE/tl_2024_36_place.zip",
+   "sha256": "2dbe5718443425dc454034ada84cec7ef936beed286289a5110c99c31d634424"
+  },
+  "37": {
+   "url": "https://www2.census.gov/geo/tiger/TIGER2024/PLACE/tl_2024_37_place.zip",
+   "sha256": "9d05aca18240e55db0d8ecc382e73bafca95bc296c02f8647a58145532e706cc"
+  },
+  "39": {
+   "url": "https://www2.census.gov/geo/tiger/TIGER2024/PLACE/tl_2024_39_place.zip",
+   "sha256": "b0d66206f3ad10ee6432ce8b3167f5e86d862db508a5d7053cb9de71fe4b3d24"
+  },
+  "41": {
+   "url": "https://www2.census.gov/geo/tiger/TIGER2024/PLACE/tl_2024_41_place.zip",
+   "sha256": "c60dc879c61791e830d38dc7e5269352b174c802429dfe6268d45773cfcf18c2"
+  },
+  "42": {
+   "url": "https://www2.census.gov/geo/tiger/TIGER2024/PLACE/tl_2024_42_place.zip",
+   "sha256": "d6312bfcbffadeb20ac1843cf3ca3246a4e106a8e0fa9b3ac992a07beebf8350"
+  },
+  "47": {
+   "url": "https://www2.census.gov/geo/tiger/TIGER2024/PLACE/tl_2024_47_place.zip",
+   "sha256": "4aefbd5932e826d83770e8b605a2a2116fcf747d3c04694cc158d03481cb8ec0"
+  },
+  "48": {
+   "url": "https://www2.census.gov/geo/tiger/TIGER2024/PLACE/tl_2024_48_place.zip",
+   "sha256": "0388b08a708a1a3ada0ab594b0a574e9ab65654d00cb0c56369f55661cf8439d"
+  },
+  "53": {
+   "url": "https://www2.census.gov/geo/tiger/TIGER2024/PLACE/tl_2024_53_place.zip",
+   "sha256": "7da61ba276bfdd886ffeb36bf9af37a99a42f8c446e47c684ae48087d86657c6"
+  },
+  "55": {
+   "url": "https://www2.census.gov/geo/tiger/TIGER2024/PLACE/tl_2024_55_place.zip",
+   "sha256": "062202ffa5ed57ea2499aac856e694e6407cf8f40de1163b91f67d2a6dcac976"
+  }
+ },
+ "registered_zoning_services": {
+  "06029": [
+   {
+    "url": "https://gis.bakersfieldcity.us/webmaps/rest/services/General/LandUse/MapServer/7",
+    "juris": "Bakersfield",
+    "from": "app/app.js ZONING_SERVICES"
+   }
+  ],
+  "12086": [
+   {
+    "url": "https://gisweb.miamidade.gov/arcgis/rest/services/MD_MDCZoning/MapServer/6",
+    "juris": "Miami-Dade",
+    "from": "app/app.js ZONING_SERVICES"
+   }
+  ],
+  "12057": [
+   {
+    "url": "https://arcgis.tampagov.net/arcgis/rest/services/OpenData/Planning/MapServer/28",
+    "juris": "Tampa",
+    "from": "app/app.js ZONING_SERVICES"
+   }
+  ],
+  "53033": [
+   {
+    "url": "https://services.arcgis.com/ZOyb2t4B0UYuYNYH/arcgis/rest/services/Current_Land_Use_Zoning_Detail_2/FeatureServer/0",
+    "juris": "Seattle",
+    "from": "app/app.js ZONING_SERVICES"
+   }
+  ],
+  "17031": [
+   {
+    "url": "https://gis.cookcountyil.gov/traditional/rest/services/cookVwrDynmc/MapServer/65",
+    "juris": "Cook County",
+    "from": "app/app.js ZONING_SERVICES"
+   }
+  ],
+  "04013": [
+   {
+    "url": "https://services1.arcgis.com/MdyCMZnX1raZ7TS3/arcgis/rest/services/EXLU_2026/FeatureServer/0",
+    "juris": "Phoenix Metro",
+    "from": "app/app.js ZONING_SERVICES"
+   }
+  ],
+  "04019": [
+   {
+    "url": "https://gis.tucsonaz.gov/arcgis/rest/services/PDSD/PRO_Overlays/MapServer/1",
+    "juris": "Tucson",
+    "from": "app/app.js ZONING_SERVICES"
+   }
+  ],
+  "48453": [
+   {
+    "url": "https://maps.austintexas.gov/gis/rest/Shared/Zoning_1/MapServer/0",
+    "juris": "Austin",
+    "from": "app/app.js ZONING_SERVICES"
+   }
+  ],
+  "48113": [
+   {
+    "url": "https://gis.dallascityhall.com/arcgis/rest/services/sdc_public/Zoning/MapServer/15",
+    "juris": "Dallas",
+    "from": "app/app.js ZONING_SERVICES"
+   }
+  ],
+  "48439": [
+   {
+    "url": "https://mapit.fortworthtexas.gov/ags/rest/services/CIVIC/OpenData_Boundaries/MapServer/54",
+    "juris": "Fort Worth",
+    "from": "app/app.js ZONING_SERVICES"
+   }
+  ],
+  "48029": [
+   {
+    "url": "https://services.arcgis.com/g1fRTDLeMgspWrYp/ArcGIS/rest/services/COSA_Zoning/FeatureServer/12",
+    "juris": "San Antonio",
+    "from": "app/app.js ZONING_SERVICES"
+   }
+  ],
+  "42101": [
+   {
+    "url": "https://services.arcgis.com/fLeGjb7u4uXqeF9q/arcgis/rest/services/Zoning_BaseDistricts/FeatureServer/0",
+    "juris": "Philadelphia",
+    "from": "app/app.js ZONING_SERVICES"
+   }
+  ],
+  "06073": [
+   {
+    "url": "https://services1.arcgis.com/eGSDp8lpKe5izqVc/arcgis/rest/services/San_Diego_Zoning/FeatureServer/0",
+    "juris": "San Diego",
+    "from": "app/app.js ZONING_SERVICES"
+   },
+   {
+    "url": "https://webmaps.sandiego.gov/arcgis/rest/services/DSD/Zoning_Base/MapServer/0",
+    "juris": "City of San Diego",
+    "from": "app/data/zoning_standards.json sd"
+   }
+  ],
+  "06075": [
+   {
+    "url": "https://sfplanninggis.org/arcgiswa/rest/services/PlanningData/MapServer/3",
+    "juris": "San Francisco",
+    "from": "app/app.js ZONING_SERVICES"
+   }
+  ],
+  "06085": [
+   {
+    "url": "https://geo.sanjoseca.gov/server/rest/services/OPN/OPN_OpenDataService/MapServer/401",
+    "juris": "San Jose",
+    "from": "app/app.js ZONING_SERVICES"
+   }
+  ],
+  "06001": [
+   {
+    "url": "https://gisapps1.mapoakland.com/oakgis/rest/services/Prod/CEDA_App_PRODGIS/MapServer/2",
+    "juris": "Oakland",
+    "from": "app/app.js ZONING_SERVICES"
+   }
+  ],
+  "06067": [
+   {
+    "url": "https://services5.arcgis.com/54falWtcpty3V47Z/arcgis/rest/services/Zoning/FeatureServer/0",
+    "juris": "Sacramento",
+    "from": "app/app.js ZONING_SERVICES"
+   }
+  ],
+  "22071": [
+   {
+    "url": "https://gis.nola.gov/arcgis/rest/services/dev/zone_test/MapServer/0",
+    "juris": "New Orleans",
+    "from": "app/app.js ZONING_SERVICES"
+   }
+  ],
+  "25025": [
+   {
+    "url": "https://gis.bostonplans.org/hosting/rest/services/Zoning_Districts/FeatureServer/0",
+    "juris": "Boston",
+    "from": "app/app.js ZONING_SERVICES"
+   }
+  ],
+  "13121": [
+   {
+    "url": "https://gis.atlantaga.gov/dpcd/rest/services/OpenDataService1/MapServer/22",
+    "juris": "Atlanta",
+    "from": "app/app.js ZONING_SERVICES"
+   }
+  ],
+  "08031": [
+   {
+    "url": "https://services1.arcgis.com/zdB7qR0BtYrg0Xpl/ArcGIS/rest/services/ODC_ZONE_ZONING_A/FeatureServer/209",
+    "juris": "Denver",
+    "from": "app/app.js ZONING_SERVICES"
+   }
+  ],
+  "26163": [
+   {
+    "url": "https://services2.arcgis.com/qvkbeam7Wirps6zC/ArcGIS/rest/services/Zoning_1/FeatureServer/0",
+    "juris": "Detroit",
+    "from": "app/app.js ZONING_SERVICES"
+   }
+  ],
+  "41051": [
+   {
+    "url": "https://www.portlandmaps.com/od/rest/services/COP_OpenData_ZoningCode/MapServer/16",
+    "juris": "Portland",
+    "from": "app/app.js ZONING_SERVICES"
+   },
+   {
+    "url": "https://www.portlandmaps.com/arcgis/rest/services/Public/Zoning/MapServer/0",
+    "juris": "City of Portland",
+    "from": "app/data/zoning_standards.json pdx"
+   }
+  ],
+  "11001": [
+   {
+    "url": "https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Planning_Landuse_and_Zoning_WebMercator/MapServer/32",
+    "juris": "Washington DC",
+    "from": "app/app.js ZONING_SERVICES"
+   },
+   {
+    "url": "https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Planning_Landuse_and_Zoning_WebMercator/MapServer/32",
+    "juris": "Washington, DC",
+    "from": "app/data/zoning_standards.json dc"
+   }
+  ],
+  "24510": [
+   {
+    "url": "https://baltegis.baltimorecity.gov/mapping/rest/services/CityView/Zoning_New/FeatureServer/0",
+    "juris": "Baltimore",
+    "from": "app/app.js ZONING_SERVICES"
+   }
+  ],
+  "37119": [
+   {
+    "url": "https://gis.charlottenc.gov/arcgis/rest/services/PLN/Zoning/MapServer/0",
+    "juris": "Charlotte",
+    "from": "app/app.js ZONING_SERVICES"
+   },
+   {
+    "url": "https://gis.charlottenc.gov/arcgis/rest/services/PLN/Zoning/MapServer/0",
+    "juris": "City of Charlotte",
+    "from": "app/data/zoning_standards.json clt"
+   }
+  ],
+  "39049": [
+   {
+    "url": "https://maps2.columbus.gov/arcgis/rest/services/Applications/Zoning/MapServer/31",
+    "juris": "Columbus",
+    "from": "app/app.js ZONING_SERVICES"
+   }
+  ],
+  "32003": [
+   {
+    "url": "https://mapdata.lasvegasnevada.gov/clvgis/rest/services/DevelopmentServices/Zoning/MapServer/0",
+    "juris": "Las Vegas",
+    "from": "app/app.js ZONING_SERVICES"
+   }
+  ],
+  "31055": [
+   {
+    "url": "https://dcgis.org/server/rest/services/Hosted/Zoning_Omaha_view/FeatureServer/0",
+    "juris": "Omaha",
+    "from": "app/app.js ZONING_SERVICES"
+   }
+  ],
+  "40143": [
+   {
+    "url": "https://map11.incog.org/arcgis11wa/rest/services/Zoning_TulsaCo/MapServer/0",
+    "juris": "Tulsa",
+    "from": "app/app.js ZONING_SERVICES"
+   }
+  ],
+  "51810": [
+   {
+    "url": "https://geo.vbgov.com/mapservices/rest/services/Planning_and_Development/Planning_and_Development/MapServer/37",
+    "juris": "Virginia Beach",
+    "from": "app/app.js ZONING_SERVICES"
+   }
+  ]
+ },
+ "jurisdictions": [
+  {
+   "id": "place:3651000",
+   "name": "New York city",
+   "kind": "incorporated place",
+   "county": "36047",
+   "listed_in": {
+    "36047": 406,
+    "36081": 155
+   },
+   "sites": 561,
+   "with_parcel": 548,
+   "with_code": 548,
+   "distinct_codes": 78,
+   "codes": [
+    [
+     "R6",
+     88
+    ],
+    [
+     "M1-1",
+     50
+    ],
+    [
+     "PARK",
+     35
+    ],
+    [
+     "R5",
+     26
+    ],
+    [
+     "R7-2",
+     25
+    ],
+    [
+     "M3-1",
+     24
+    ],
+    [
+     "R4",
+     24
+    ],
+    [
+     "C8-1",
+     20
+    ],
+    [
+     "M1-4",
+     20
+    ],
+    [
+     "M1-2",
+     18
+    ],
+    [
+     "R7-1",
+     15
+    ],
+    [
+     "M2-1",
+     14
+    ],
+    [
+     "R8",
+     11
+    ],
+    [
+     "C4-4",
+     10
+    ],
+    [
+     "R6B",
+     10
+    ],
+    [
+     "M3-2",
+     9
+    ],
+    [
+     "C4-2",
+     9
+    ],
+    [
+     "C6-4",
+     8
+    ],
+    [
+     "C8-2",
+     7
+    ],
+    [
+     "R3-2",
+     7
+    ],
+    [
+     "R7A",
+     7
+    ],
+    [
+     "R6A",
+     6
+    ],
+    [
+     "M1-5",
+     5
+    ],
+    [
+     "R3X",
+     5
+    ],
+    [
+     "R5B",
+     5
+    ],
+    [
+     "C6-2",
+     4
+    ],
+    [
+     "R5D",
+     4
+    ],
+    [
+     "M1-6A/R9",
+     4
+    ],
+    [
+     "C4-2A",
+     3
+    ],
+    [
+     "M1-3",
+     3
+    ],
+    [
+     "M2-3",
+     3
+    ],
+    [
+     "R7D",
+     3
+    ],
+    [
+     "R10",
+     3
+    ],
+    [
+     "R4-1",
+     3
+    ],
+    [
+     "C4-4D",
+     3
+    ],
+    [
+     "R2A",
+     3
+    ],
+    [
+     "C8-4",
+     2
+    ],
+    [
+     "M1-5/R10",
+     2
+    ],
+    [
+     "C4-3",
+     2
+    ],
+    [
+     "C4-5D",
+     2
+    ],
+    [
+     "M1-4/R9",
+     2
+    ],
+    [
+     "M1-4A",
+     2
+    ],
+    [
+     "R7X",
+     2
+    ],
+    [
+     "M1-6A",
+     2
+    ],
+    [
+     "C6-1",
+     2
+    ],
+    [
+     "M1-6/R10",
+     2
+    ],
+    [
+     "C6-3",
+     2
+    ],
+    [
+     "R1-2",
+     2
+    ],
+    [
+     "M1-4/R7-2",
+     1
+    ],
+    [
+     "C5-2",
+     1
+    ],
+    [
+     "M1-6A/R10",
+     1
+    ],
+    [
+     "M1-4/R8A",
+     1
+    ],
+    [
+     "C7",
+     1
+    ],
+    [
+     "M2-4",
+     1
+    ],
+    [
+     "M1-5/R7X",
+     1
+    ],
+    [
+     "R8B",
+     1
+    ],
+    [
+     "M1-2A/R6A",
+     1
+    ],
+    [
+     "M1-5/R9",
+     1
+    ],
+    [
+     "C4-4L",
+     1
+    ],
+    [
+     "M1-4/R7X",
+     1
+    ],
+    [
+     "M1-5/R7-3",
+     1
+    ],
+    [
+     "M1-6",
+     1
+    ],
+    [
+     "M1-5A/R8",
+     1
+    ],
+    [
+     "C6-9",
+     1
+    ],
+    [
+     "R3A",
+     1
+    ],
+    [
+     "C1-7A",
+     1
+    ],
+    [
+     "C8-3",
+     1
+    ],
+    [
+     "M1-2A/R7-2",
+     1
+    ],
+    [
+     "M1-2A",
+     1
+    ],
+    [
+     "R3-1",
+     1
+    ],
+    [
+     "C4-7",
+     1
+    ],
+    [
+     "R8X",
+     1
+    ],
+    [
+     "M1-5/R8A",
+     1
+    ],
+    [
+     "R9A",
+     1
+    ],
+    [
+     "M1-2/R7-2",
+     1
+    ],
+    [
+     "R8A",
+     1
+    ],
+    [
+     "M1-4/R7A",
+     1
+    ],
+    [
+     "R2",
+     1
+    ]
+   ]
+  },
+  {
+   "id": "place:1714000",
+   "name": "Chicago city",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 520
+   },
+   "sites": 520,
+   "with_parcel": 488,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0455000",
+   "name": "Phoenix city",
+   "kind": "incorporated place",
+   "county": "04013",
+   "listed_in": {
+    "04013": 461
+   },
+   "sites": 461,
+   "with_parcel": 445,
+   "with_code": 441,
+   "distinct_codes": 1,
+   "codes": [
+    [
+     "CONTACT LOCAL JURISDICTION",
+     441
+    ]
+   ]
+  },
+  {
+   "id": "place:0666000",
+   "name": "San Diego city",
+   "kind": "incorporated place",
+   "county": "06073",
+   "listed_in": {
+    "06073": 442
+   },
+   "sites": 442,
+   "with_parcel": 436,
+   "with_code": 303,
+   "distinct_codes": 9,
+   "codes": [
+    [
+     "6",
+     181
+    ],
+    [
+     "7",
+     86
+    ],
+    [
+     "1",
+     17
+    ],
+    [
+     "2",
+     6
+    ],
+    [
+     "3",
+     4
+    ],
+    [
+     "4",
+     4
+    ],
+    [
+     "9",
+     3
+    ],
+    [
+     "5",
+     1
+    ],
+    [
+     "8",
+     1
+    ]
+   ]
+  },
+  {
+   "id": "place:4819000",
+   "name": "Dallas city",
+   "kind": "incorporated place",
+   "county": "48113",
+   "listed_in": {
+    "48113": 440
+   },
+   "sites": 440,
+   "with_parcel": 430,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:4835000",
+   "name": "Houston city",
+   "kind": "incorporated place",
+   "county": "48201",
+   "listed_in": {
+    "48201": 395
+   },
+   "sites": 395,
+   "with_parcel": 378,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0644000",
+   "name": "Los Angeles city",
+   "kind": "incorporated place",
+   "county": "06037",
+   "listed_in": {
+    "06037": 337
+   },
+   "sites": 337,
+   "with_parcel": 328,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1836003",
+   "name": "Indianapolis city (balance)",
+   "kind": "consolidated city-county (balance)",
+   "county": "18097",
+   "listed_in": {
+    "18097": 144
+   },
+   "sites": 144,
+   "with_parcel": 137,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:5363000",
+   "name": "Seattle city",
+   "kind": "incorporated place",
+   "county": "53033",
+   "listed_in": {
+    "53033": 140
+   },
+   "sites": 140,
+   "with_parcel": 81,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:2758000",
+   "name": "St. Paul city",
+   "kind": "incorporated place",
+   "county": "27123",
+   "listed_in": {
+    "27123": 97
+   },
+   "sites": 97,
+   "with_parcel": 97,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:3712000",
+   "name": "Charlotte city",
+   "kind": "incorporated place",
+   "county": "37119",
+   "listed_in": {
+    "37119": 88
+   },
+   "sites": 88,
+   "with_parcel": 88,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0820000",
+   "name": "Denver city",
+   "kind": "incorporated place",
+   "county": "08031",
+   "listed_in": {
+    "08031": 85
+   },
+   "sites": 85,
+   "with_parcel": 84,
+   "with_code": 84,
+   "distinct_codes": 17,
+   "codes": [
+    [
+     "CMX",
+     23
+    ],
+    [
+     "CBD",
+     15
+    ],
+    [
+     "CMP",
+     8
+    ],
+    [
+     "GTR",
+     8
+    ],
+    [
+     "OSA",
+     6
+    ],
+    [
+     "CMS",
+     6
+    ],
+    [
+     "OSB",
+     4
+    ],
+    [
+     "CRX",
+     3
+    ],
+    [
+     "MMX",
+     2
+    ],
+    [
+     "GMS",
+     2
+    ],
+    [
+     "IB",
+     1
+    ],
+    [
+     "EMX",
+     1
+    ],
+    [
+     "GMU",
+     1
+    ],
+    [
+     "UMS",
+     1
+    ],
+    [
+     "USU",
+     1
+    ],
+    [
+     "GRO",
+     1
+    ],
+    [
+     "ESU",
+     1
+    ]
+   ]
+  },
+  {
+   "id": "place:1245000",
+   "name": "Miami city",
+   "kind": "incorporated place",
+   "county": "12086",
+   "listed_in": {
+    "12086": 85
+   },
+   "sites": 85,
+   "with_parcel": 77,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:4752006",
+   "name": "Nashville-Davidson metropolitan government (balance)",
+   "kind": "consolidated city-county (balance)",
+   "county": "47037",
+   "listed_in": {
+    "47037": 85
+   },
+   "sites": 85,
+   "with_parcel": 85,
+   "with_code": 85,
+   "distinct_codes": 11,
+   "codes": [
+    [
+     "DTC",
+     48
+    ],
+    [
+     "MUI",
+     8
+    ],
+    [
+     "SP",
+     7
+    ],
+    [
+     "IR",
+     5
+    ],
+    [
+     "CS",
+     5
+    ],
+    [
+     "IG",
+     3
+    ],
+    [
+     "CF",
+     3
+    ],
+    [
+     "RM20",
+     3
+    ],
+    [
+     "CS,IR",
+     1
+    ],
+    [
+     "MUI-A",
+     1
+    ],
+    [
+     "R6",
+     1
+    ]
+   ]
+  },
+  {
+   "id": "place:4837000",
+   "name": "Irving city",
+   "kind": "incorporated place",
+   "county": "48113",
+   "listed_in": {
+    "48113": 83,
+    "48439": 1
+   },
+   "sites": 84,
+   "with_parcel": 13,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:4861796",
+   "name": "Richardson city",
+   "kind": "incorporated place",
+   "county": "48085",
+   "listed_in": {
+    "48113": 83
+   },
+   "sites": 83,
+   "with_parcel": 31,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0446000",
+   "name": "Mesa city",
+   "kind": "incorporated place",
+   "county": "04013",
+   "listed_in": {
+    "04013": 77
+   },
+   "sites": 77,
+   "with_parcel": 75,
+   "with_code": 75,
+   "distinct_codes": 1,
+   "codes": [
+    [
+     "CONTACT LOCAL JURISDICTION",
+     75
+    ]
+   ]
+  },
+  {
+   "id": "place:2404000",
+   "name": "Baltimore city",
+   "kind": "incorporated place",
+   "county": "24510",
+   "listed_in": {
+    "24510": 75
+   },
+   "sites": 75,
+   "with_parcel": 75,
+   "with_code": 64,
+   "distinct_codes": 14,
+   "codes": [
+    [
+     "C-2",
+     18
+    ],
+    [
+     "C-5DC",
+     12
+    ],
+    [
+     "TOD-4",
+     8
+    ],
+    [
+     "R-8",
+     8
+    ],
+    [
+     "I-1",
+     3
+    ],
+    [
+     "C-1",
+     3
+    ],
+    [
+     "BSC",
+     3
+    ],
+    [
+     "I-MU",
+     2
+    ],
+    [
+     "OR-2",
+     2
+    ],
+    [
+     "C-5HS",
+     1
+    ],
+    [
+     "C-3",
+     1
+    ],
+    [
+     "IMU-1",
+     1
+    ],
+    [
+     "TOD-2",
+     1
+    ],
+    [
+     "R-10",
+     1
+    ]
+   ]
+  },
+  {
+   "id": "place:1235000",
+   "name": "Jacksonville city",
+   "kind": "incorporated place",
+   "county": "12031",
+   "listed_in": {
+    "12031": 73
+   },
+   "sites": 73,
+   "with_parcel": 73,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:4827000",
+   "name": "Fort Worth city",
+   "kind": "incorporated place",
+   "county": "48439",
+   "listed_in": {
+    "48113": 3,
+    "48439": 70
+   },
+   "sites": 73,
+   "with_parcel": 68,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:3755000",
+   "name": "Raleigh city",
+   "kind": "incorporated place",
+   "county": "37183",
+   "listed_in": {
+    "37183": 67
+   },
+   "sites": 67,
+   "with_parcel": 67,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0473000",
+   "name": "Tempe city",
+   "kind": "incorporated place",
+   "county": "04013",
+   "listed_in": {
+    "04013": 65
+   },
+   "sites": 65,
+   "with_parcel": 65,
+   "with_code": 65,
+   "distinct_codes": 1,
+   "codes": [
+    [
+     "CONTACT LOCAL JURISDICTION",
+     65
+    ]
+   ]
+  },
+  {
+   "id": "county:32003",
+   "name": "Clark County (unincorporated)",
+   "kind": "unincorporated",
+   "county": "32003",
+   "listed_in": {
+    "32003": 65
+   },
+   "sites": 65,
+   "with_parcel": 60,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0659962",
+   "name": "Redlands city",
+   "kind": "incorporated place",
+   "county": "06071",
+   "listed_in": {
+    "06071": 62
+   },
+   "sites": 62,
+   "with_parcel": 62,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0662000",
+   "name": "Riverside city",
+   "kind": "incorporated place",
+   "county": "06065",
+   "listed_in": {
+    "06065": 61
+   },
+   "sites": 61,
+   "with_parcel": 61,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:5323515",
+   "name": "Federal Way city",
+   "kind": "incorporated place",
+   "county": "53033",
+   "listed_in": {
+    "53033": 61
+   },
+   "sites": 61,
+   "with_parcel": 46,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:5357535",
+   "name": "Redmond city",
+   "kind": "incorporated place",
+   "county": "53033",
+   "listed_in": {
+    "53033": 59
+   },
+   "sites": 59,
+   "with_parcel": 44,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:5305210",
+   "name": "Bellevue city",
+   "kind": "incorporated place",
+   "county": "53033",
+   "listed_in": {
+    "53033": 59
+   },
+   "sites": 59,
+   "with_parcel": 43,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:2743000",
+   "name": "Minneapolis city",
+   "kind": "incorporated place",
+   "county": "27053",
+   "listed_in": {
+    "27053": 58
+   },
+   "sites": 58,
+   "with_parcel": 58,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0816000",
+   "name": "Colorado Springs city",
+   "kind": "incorporated place",
+   "county": "08041",
+   "listed_in": {
+    "08041": 53
+   },
+   "sites": 53,
+   "with_parcel": 53,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:3451000",
+   "name": "Newark city",
+   "kind": "incorporated place",
+   "county": "34013",
+   "listed_in": {
+    "34013": 49
+   },
+   "sites": 49,
+   "with_parcel": 49,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:4159000",
+   "name": "Portland city",
+   "kind": "incorporated place",
+   "county": "41051",
+   "listed_in": {
+    "41051": 49
+   },
+   "sites": 49,
+   "with_parcel": 49,
+   "with_code": 48,
+   "distinct_codes": 12,
+   "codes": [
+    [
+     "CX",
+     25
+    ],
+    [
+     "CM3",
+     9
+    ],
+    [
+     "IG1",
+     5
+    ],
+    [
+     "IH",
+     1
+    ],
+    [
+     "RM1",
+     1
+    ],
+    [
+     "EG1",
+     1
+    ],
+    [
+     "CM1",
+     1
+    ],
+    [
+     "CI2",
+     1
+    ],
+    [
+     "EX",
+     1
+    ],
+    [
+     "RM2",
+     1
+    ],
+    [
+     "OS",
+     1
+    ],
+    [
+     "CM2",
+     1
+    ]
+   ]
+  },
+  {
+   "id": "place:4801240",
+   "name": "Addison town",
+   "kind": "incorporated place",
+   "county": "48113",
+   "listed_in": {
+    "48113": 48
+   },
+   "sites": 48,
+   "with_parcel": 48,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0621712",
+   "name": "El Cajon city",
+   "kind": "incorporated place",
+   "county": "06073",
+   "listed_in": {
+    "06073": 47
+   },
+   "sites": 47,
+   "with_parcel": 47,
+   "with_code": 39,
+   "distinct_codes": 5,
+   "codes": [
+    [
+     "6",
+     16
+    ],
+    [
+     "7",
+     12
+    ],
+    [
+     "3",
+     6
+    ],
+    [
+     "4",
+     3
+    ],
+    [
+     "1",
+     2
+    ]
+   ]
+  },
+  {
+   "id": "place:0650398",
+   "name": "National City city",
+   "kind": "incorporated place",
+   "county": "06073",
+   "listed_in": {
+    "06073": 45
+   },
+   "sites": 45,
+   "with_parcel": 44,
+   "with_code": 13,
+   "distinct_codes": 2,
+   "codes": [
+    [
+     "6",
+     8
+    ],
+    [
+     "7",
+     5
+    ]
+   ]
+  },
+  {
+   "id": "place:0643000",
+   "name": "Long Beach city",
+   "kind": "incorporated place",
+   "county": "06037",
+   "listed_in": {
+    "06037": 44
+   },
+   "sites": 44,
+   "with_parcel": 43,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0613392",
+   "name": "Chula Vista city",
+   "kind": "incorporated place",
+   "county": "06073",
+   "listed_in": {
+    "06073": 42
+   },
+   "sites": 42,
+   "with_parcel": 42,
+   "with_code": 38,
+   "distinct_codes": 4,
+   "codes": [
+    [
+     "6",
+     21
+    ],
+    [
+     "7",
+     10
+    ],
+    [
+     "3",
+     6
+    ],
+    [
+     "9",
+     1
+    ]
+   ]
+  },
+  {
+   "id": "place:4805000",
+   "name": "Austin city",
+   "kind": "incorporated place",
+   "county": "48453",
+   "listed_in": {
+    "48453": 41
+   },
+   "sites": 41,
+   "with_parcel": 39,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "county:06037",
+   "name": "Los Angeles County (unincorporated)",
+   "kind": "unincorporated",
+   "county": "06037",
+   "listed_in": {
+    "06037": 40
+   },
+   "sites": 40,
+   "with_parcel": 37,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0656000",
+   "name": "Pasadena city",
+   "kind": "incorporated place",
+   "county": "06037",
+   "listed_in": {
+    "06037": 40
+   },
+   "sites": 40,
+   "with_parcel": 40,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0653322",
+   "name": "Oceanside city",
+   "kind": "incorporated place",
+   "county": "06073",
+   "listed_in": {
+    "06073": 40
+   },
+   "sites": 40,
+   "with_parcel": 39,
+   "with_code": 26,
+   "distinct_codes": 4,
+   "codes": [
+    [
+     "6",
+     20
+    ],
+    [
+     "7",
+     3
+    ],
+    [
+     "9",
+     2
+    ],
+    [
+     "4",
+     1
+    ]
+   ]
+  },
+  {
+   "id": "place:0622412",
+   "name": "El Segundo city",
+   "kind": "incorporated place",
+   "county": "06037",
+   "listed_in": {
+    "06037": 38
+   },
+   "sites": 38,
+   "with_parcel": 38,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0669000",
+   "name": "Santa Ana city",
+   "kind": "incorporated place",
+   "county": "06059",
+   "listed_in": {
+    "06059": 37
+   },
+   "sites": 37,
+   "with_parcel": 37,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0640004",
+   "name": "La Mesa city",
+   "kind": "incorporated place",
+   "county": "06073",
+   "listed_in": {
+    "06073": 35
+   },
+   "sites": 35,
+   "with_parcel": 34,
+   "with_code": 23,
+   "distinct_codes": 4,
+   "codes": [
+    [
+     "6",
+     20
+    ],
+    [
+     "0",
+     1
+    ],
+    [
+     "4",
+     1
+    ],
+    [
+     "1",
+     1
+    ]
+   ]
+  },
+  {
+   "id": "place:3918000",
+   "name": "Columbus city",
+   "kind": "incorporated place",
+   "county": "39049",
+   "listed_in": {
+    "39049": 35
+   },
+   "sites": 35,
+   "with_parcel": 34,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:5553000",
+   "name": "Milwaukee city",
+   "kind": "incorporated place",
+   "county": "55079",
+   "listed_in": {
+    "55079": 35
+   },
+   "sites": 35,
+   "with_parcel": 31,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0648788",
+   "name": "Montclair city",
+   "kind": "incorporated place",
+   "county": "06071",
+   "listed_in": {
+    "06037": 15,
+    "06071": 17
+   },
+   "sites": 32,
+   "with_parcel": 17,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0670000",
+   "name": "Santa Monica city",
+   "kind": "incorporated place",
+   "county": "06037",
+   "listed_in": {
+    "06037": 30
+   },
+   "sites": 30,
+   "with_parcel": 30,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:5362288",
+   "name": "SeaTac city",
+   "kind": "incorporated place",
+   "county": "53033",
+   "listed_in": {
+    "53033": 30
+   },
+   "sites": 30,
+   "with_parcel": 20,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0602000",
+   "name": "Anaheim city",
+   "kind": "incorporated place",
+   "county": "06059",
+   "listed_in": {
+    "06059": 29
+   },
+   "sites": 29,
+   "with_parcel": 29,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0668196",
+   "name": "San Marcos city",
+   "kind": "incorporated place",
+   "county": "06073",
+   "listed_in": {
+    "06073": 29
+   },
+   "sites": 29,
+   "with_parcel": 29,
+   "with_code": 16,
+   "distinct_codes": 3,
+   "codes": [
+    [
+     "6",
+     7
+    ],
+    [
+     "9",
+     5
+    ],
+    [
+     "7",
+     4
+    ]
+   ]
+  },
+  {
+   "id": "county:11001",
+   "name": "District of Columbia",
+   "kind": "the District (one government",
+   "county": "11001",
+   "listed_in": {
+    "11001": 29
+   },
+   "sites": 29,
+   "with_parcel": 28,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0608954",
+   "name": "Burbank city",
+   "kind": "incorporated place",
+   "county": "06037",
+   "listed_in": {
+    "06037": 26
+   },
+   "sites": 26,
+   "with_parcel": 25,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:2622000",
+   "name": "Detroit city",
+   "kind": "incorporated place",
+   "county": "26163",
+   "listed_in": {
+    "26163": 25
+   },
+   "sites": 25,
+   "with_parcel": 25,
+   "with_code": 25,
+   "distinct_codes": 8,
+   "codes": [
+    [
+     "SD2",
+     6
+    ],
+    [
+     "B4",
+     5
+    ],
+    [
+     "R6",
+     4
+    ],
+    [
+     "R3",
+     3
+    ],
+    [
+     "R5",
+     3
+    ],
+    [
+     "B3",
+     2
+    ],
+    [
+     "PD",
+     1
+    ],
+    [
+     "R1",
+     1
+    ]
+   ]
+  },
+  {
+   "id": "place:0658072",
+   "name": "Pomona city",
+   "kind": "incorporated place",
+   "county": "06037",
+   "listed_in": {
+    "06037": 24
+   },
+   "sites": 24,
+   "with_parcel": 21,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "county:12086",
+   "name": "Miami-Dade County (unincorporated)",
+   "kind": "unincorporated",
+   "county": "12086",
+   "listed_in": {
+    "12086": 23
+   },
+   "sites": 23,
+   "with_parcel": 23,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:4858016",
+   "name": "Plano city",
+   "kind": "incorporated place",
+   "county": "48085",
+   "listed_in": {
+    "48113": 23
+   },
+   "sites": 23,
+   "with_parcel": 0,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1271000",
+   "name": "Tampa city",
+   "kind": "incorporated place",
+   "county": "12057",
+   "listed_in": {
+    "12057": 22
+   },
+   "sites": 22,
+   "with_parcel": 21,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0653980",
+   "name": "Orange city",
+   "kind": "incorporated place",
+   "county": "06059",
+   "listed_in": {
+    "06059": 21
+   },
+   "sites": 21,
+   "with_parcel": 21,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:4830644",
+   "name": "Grapevine city",
+   "kind": "incorporated place",
+   "county": "48439",
+   "listed_in": {
+    "48113": 7,
+    "48439": 14
+   },
+   "sites": 21,
+   "with_parcel": 14,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0636770",
+   "name": "Irvine city",
+   "kind": "incorporated place",
+   "county": "06059",
+   "listed_in": {
+    "06059": 20
+   },
+   "sites": 20,
+   "with_parcel": 20,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:3916000",
+   "name": "Cleveland city",
+   "kind": "incorporated place",
+   "county": "39035",
+   "listed_in": {
+    "39035": 20
+   },
+   "sites": 20,
+   "with_parcel": 20,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:5335415",
+   "name": "Kent city",
+   "kind": "incorporated place",
+   "county": "53033",
+   "listed_in": {
+    "53033": 19
+   },
+   "sites": 19,
+   "with_parcel": 14,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0652526",
+   "name": "Norwalk city",
+   "kind": "incorporated place",
+   "county": "06037",
+   "listed_in": {
+    "06037": 18
+   },
+   "sites": 18,
+   "with_parcel": 16,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0681344",
+   "name": "Upland city",
+   "kind": "incorporated place",
+   "county": "06071",
+   "listed_in": {
+    "06037": 3,
+    "06071": 15
+   },
+   "sites": 18,
+   "with_parcel": 15,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0665000",
+   "name": "San Bernardino city",
+   "kind": "incorporated place",
+   "county": "06071",
+   "listed_in": {
+    "06071": 18
+   },
+   "sites": 18,
+   "with_parcel": 18,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0622804",
+   "name": "Escondido city",
+   "kind": "incorporated place",
+   "county": "06073",
+   "listed_in": {
+    "06073": 18
+   },
+   "sites": 18,
+   "with_parcel": 18,
+   "with_code": 14,
+   "distinct_codes": 3,
+   "codes": [
+    [
+     "6",
+     8
+    ],
+    [
+     "7",
+     4
+    ],
+    [
+     "1",
+     2
+    ]
+   ]
+  },
+  {
+   "id": "place:0670224",
+   "name": "Santee city",
+   "kind": "incorporated place",
+   "county": "06073",
+   "listed_in": {
+    "06073": 18
+   },
+   "sites": 18,
+   "with_parcel": 18,
+   "with_code": 16,
+   "distinct_codes": 2,
+   "codes": [
+    [
+     "6",
+     15
+    ],
+    [
+     "7",
+     1
+    ]
+   ]
+  },
+  {
+   "id": "place:5356695",
+   "name": "Puyallup city",
+   "kind": "incorporated place",
+   "county": "53053",
+   "listed_in": {
+    "53033": 18
+   },
+   "sites": 18,
+   "with_parcel": 0,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0632548",
+   "name": "Hawthorne city",
+   "kind": "incorporated place",
+   "county": "06037",
+   "listed_in": {
+    "06037": 17
+   },
+   "sites": 17,
+   "with_parcel": 16,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1702154",
+   "name": "Arlington Heights village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 17
+   },
+   "sites": 17,
+   "with_parcel": 17,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:4825452",
+   "name": "Farmers Branch city",
+   "kind": "incorporated place",
+   "county": "48113",
+   "listed_in": {
+    "48113": 17
+   },
+   "sites": 17,
+   "with_parcel": 17,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:5370000",
+   "name": "Tacoma city",
+   "kind": "incorporated place",
+   "county": "53053",
+   "listed_in": {
+    "53033": 15
+   },
+   "sites": 15,
+   "with_parcel": 0,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0628000",
+   "name": "Fullerton city",
+   "kind": "incorporated place",
+   "county": "06059",
+   "listed_in": {
+    "06059": 14
+   },
+   "sites": 14,
+   "with_parcel": 14,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1202681",
+   "name": "Aventura city",
+   "kind": "incorporated place",
+   "county": "12086",
+   "listed_in": {
+    "12086": 14
+   },
+   "sites": 14,
+   "with_parcel": 14,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:4813024",
+   "name": "Carrollton city",
+   "kind": "incorporated place",
+   "county": "48121",
+   "listed_in": {
+    "48113": 14
+   },
+   "sites": 14,
+   "with_parcel": 0,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0669088",
+   "name": "Santa Clarita city",
+   "kind": "incorporated place",
+   "county": "06037",
+   "listed_in": {
+    "06037": 13
+   },
+   "sites": 13,
+   "with_parcel": 13,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0640130",
+   "name": "Lancaster city",
+   "kind": "incorporated place",
+   "county": "06037",
+   "listed_in": {
+    "06037": 13
+   },
+   "sites": 13,
+   "with_parcel": 13,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1304000",
+   "name": "Atlanta city",
+   "kind": "incorporated place",
+   "county": "13121",
+   "listed_in": {
+    "13121": 13
+   },
+   "sites": 13,
+   "with_parcel": 13,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:3240000",
+   "name": "Las Vegas city",
+   "kind": "incorporated place",
+   "county": "32003",
+   "listed_in": {
+    "32003": 13
+   },
+   "sites": 13,
+   "with_parcel": 13,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:4260000",
+   "name": "Philadelphia city",
+   "kind": "incorporated place",
+   "county": "42101",
+   "listed_in": {
+    "42101": 13
+   },
+   "sites": 13,
+   "with_parcel": 11,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:4829000",
+   "name": "Garland city",
+   "kind": "incorporated place",
+   "county": "48113",
+   "listed_in": {
+    "48113": 13
+   },
+   "sites": 13,
+   "with_parcel": 2,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0660018",
+   "name": "Redondo Beach city",
+   "kind": "incorporated place",
+   "county": "06037",
+   "listed_in": {
+    "06037": 12
+   },
+   "sites": 12,
+   "with_parcel": 12,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0630014",
+   "name": "Glendora city",
+   "kind": "incorporated place",
+   "county": "06037",
+   "listed_in": {
+    "06037": 12
+   },
+   "sites": 12,
+   "with_parcel": 12,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0624680",
+   "name": "Fontana city",
+   "kind": "incorporated place",
+   "county": "06071",
+   "listed_in": {
+    "06071": 12
+   },
+   "sites": 12,
+   "with_parcel": 12,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1214250",
+   "name": "Coral Gables city",
+   "kind": "incorporated place",
+   "county": "12086",
+   "listed_in": {
+    "12086": 12
+   },
+   "sites": 12,
+   "with_parcel": 11,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1765819",
+   "name": "Rosemont village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 12
+   },
+   "sites": 12,
+   "with_parcel": 12,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0615044",
+   "name": "Compton city",
+   "kind": "incorporated place",
+   "county": "06037",
+   "listed_in": {
+    "06037": 11
+   },
+   "sites": 11,
+   "with_parcel": 10,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0617568",
+   "name": "Culver City city",
+   "kind": "incorporated place",
+   "county": "06037",
+   "listed_in": {
+    "06037": 11
+   },
+   "sites": 11,
+   "with_parcel": 11,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1756640",
+   "name": "Orland Park village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 11
+   },
+   "sites": 11,
+   "with_parcel": 11,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1718992",
+   "name": "Deerfield village",
+   "kind": "incorporated place",
+   "county": "17097",
+   "listed_in": {
+    "17031": 11
+   },
+   "sites": 11,
+   "with_parcel": 7,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1775484",
+   "name": "Tinley Park village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 11
+   },
+   "sites": 11,
+   "with_parcel": 9,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:4748000",
+   "name": "Memphis city",
+   "kind": "incorporated place",
+   "county": "47157",
+   "listed_in": {
+    "47157": 11
+   },
+   "sites": 11,
+   "with_parcel": 11,
+   "with_code": 11,
+   "distinct_codes": 4,
+   "codes": [
+    [
+     "RU-1",
+     7
+    ],
+    [
+     "EMP",
+     2
+    ],
+    [
+     "RU-6",
+     1
+    ],
+    [
+     "CMU-2",
+     1
+    ]
+   ]
+  },
+  {
+   "id": "place:5347490",
+   "name": "Mountlake Terrace city",
+   "kind": "incorporated place",
+   "county": "53061",
+   "listed_in": {
+    "53033": 11
+   },
+   "sites": 11,
+   "with_parcel": 0,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0608786",
+   "name": "Buena Park city",
+   "kind": "incorporated place",
+   "county": "06059",
+   "listed_in": {
+    "06037": 5,
+    "06059": 5
+   },
+   "sites": 10,
+   "with_parcel": 5,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0636546",
+   "name": "Inglewood city",
+   "kind": "incorporated place",
+   "county": "06037",
+   "listed_in": {
+    "06037": 10
+   },
+   "sites": 10,
+   "with_parcel": 10,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0682590",
+   "name": "Victorville city",
+   "kind": "incorporated place",
+   "county": "06071",
+   "listed_in": {
+    "06071": 10
+   },
+   "sites": 10,
+   "with_parcel": 9,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0622678",
+   "name": "Encinitas city",
+   "kind": "incorporated place",
+   "county": "06073",
+   "listed_in": {
+    "06073": 10
+   },
+   "sites": 10,
+   "with_parcel": 10,
+   "with_code": 5,
+   "distinct_codes": 2,
+   "codes": [
+    [
+     "6",
+     3
+    ],
+    [
+     "8",
+     2
+    ]
+   ]
+  },
+  {
+   "id": "place:1770122",
+   "name": "Skokie village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 10
+   },
+   "sites": 10,
+   "with_parcel": 10,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1757875",
+   "name": "Park Ridge city",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 10
+   },
+   "sites": 10,
+   "with_parcel": 10,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1781087",
+   "name": "Wheeling village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 10
+   },
+   "sites": 10,
+   "with_parcel": 10,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:4842508",
+   "name": "Lewisville city",
+   "kind": "incorporated place",
+   "county": "48121",
+   "listed_in": {
+    "48113": 10
+   },
+   "sites": 10,
+   "with_parcel": 0,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:4852356",
+   "name": "North Richland Hills city",
+   "kind": "incorporated place",
+   "county": "48439",
+   "listed_in": {
+    "48439": 10
+   },
+   "sites": 10,
+   "with_parcel": 9,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:5372625",
+   "name": "Tukwila city",
+   "kind": "incorporated place",
+   "county": "53033",
+   "listed_in": {
+    "53033": 10
+   },
+   "sites": 10,
+   "with_parcel": 6,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0668028",
+   "name": "San Juan Capistrano city",
+   "kind": "incorporated place",
+   "county": "06059",
+   "listed_in": {
+    "06059": 9
+   },
+   "sites": 9,
+   "with_parcel": 9,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1729938",
+   "name": "Glenview village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 9
+   },
+   "sites": 9,
+   "with_parcel": 9,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:5317635",
+   "name": "Des Moines city",
+   "kind": "incorporated place",
+   "county": "53033",
+   "listed_in": {
+    "53033": 9
+   },
+   "sites": 9,
+   "with_parcel": 5,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:5363960",
+   "name": "Shoreline city",
+   "kind": "incorporated place",
+   "county": "53033",
+   "listed_in": {
+    "53033": 9
+   },
+   "sites": 9,
+   "with_parcel": 7,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0444410",
+   "name": "Maricopa city",
+   "kind": "incorporated place",
+   "county": "04021",
+   "listed_in": {
+    "04013": 8
+   },
+   "sites": 8,
+   "with_parcel": 0,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0477000",
+   "name": "Tucson city",
+   "kind": "incorporated place",
+   "county": "04019",
+   "listed_in": {
+    "04019": 8
+   },
+   "sites": 8,
+   "with_parcel": 8,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0645400",
+   "name": "Manhattan Beach city",
+   "kind": "incorporated place",
+   "county": "06037",
+   "listed_in": {
+    "06037": 8
+   },
+   "sites": 8,
+   "with_parcel": 8,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0613756",
+   "name": "Claremont city",
+   "kind": "incorporated place",
+   "county": "06037",
+   "listed_in": {
+    "06037": 3,
+    "06071": 5
+   },
+   "sites": 8,
+   "with_parcel": 3,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0653896",
+   "name": "Ontario city",
+   "kind": "incorporated place",
+   "county": "06071",
+   "listed_in": {
+    "06065": 1,
+    "06071": 7
+   },
+   "sites": 8,
+   "with_parcel": 7,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0616350",
+   "name": "Corona city",
+   "kind": "incorporated place",
+   "county": "06065",
+   "listed_in": {
+    "06065": 8
+   },
+   "sites": 8,
+   "with_parcel": 7,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0656700",
+   "name": "Perris city",
+   "kind": "incorporated place",
+   "county": "06065",
+   "listed_in": {
+    "06065": 8
+   },
+   "sites": 8,
+   "with_parcel": 8,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0611194",
+   "name": "Carlsbad city",
+   "kind": "incorporated place",
+   "county": "06073",
+   "listed_in": {
+    "06073": 8
+   },
+   "sites": 8,
+   "with_parcel": 6,
+   "with_code": 1,
+   "distinct_codes": 1,
+   "codes": [
+    [
+     "6",
+     1
+    ]
+   ]
+  },
+  {
+   "id": "place:1714351",
+   "name": "Cicero town",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 8
+   },
+   "sites": 8,
+   "with_parcel": 8,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:4865000",
+   "name": "San Antonio city",
+   "kind": "incorporated place",
+   "county": "48029",
+   "listed_in": {
+    "48029": 8
+   },
+   "sites": 8,
+   "with_parcel": 8,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:4863572",
+   "name": "Rowlett city",
+   "kind": "incorporated place",
+   "county": "48113",
+   "listed_in": {
+    "48113": 8
+   },
+   "sites": 8,
+   "with_parcel": 8,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:5345005",
+   "name": "Mercer Island city",
+   "kind": "incorporated place",
+   "county": "53033",
+   "listed_in": {
+    "53033": 8
+   },
+   "sites": 8,
+   "with_parcel": 4,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0673220",
+   "name": "South Pasadena city",
+   "kind": "incorporated place",
+   "county": "06037",
+   "listed_in": {
+    "06037": 7
+   },
+   "sites": 7,
+   "with_parcel": 7,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0648256",
+   "name": "Mission Viejo city",
+   "kind": "incorporated place",
+   "county": "06059",
+   "listed_in": {
+    "06059": 7
+   },
+   "sites": 7,
+   "with_parcel": 7,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0650734",
+   "name": "Needles city",
+   "kind": "incorporated place",
+   "county": "06071",
+   "listed_in": {
+    "06071": 7
+   },
+   "sites": 7,
+   "with_parcel": 7,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0682996",
+   "name": "Vista city",
+   "kind": "incorporated place",
+   "county": "06073",
+   "listed_in": {
+    "06073": 7
+   },
+   "sites": 7,
+   "with_parcel": 7,
+   "with_code": 2,
+   "distinct_codes": 2,
+   "codes": [
+    [
+     "6",
+     1
+    ],
+    [
+     "1",
+     1
+    ]
+   ]
+  },
+  {
+   "id": "place:0804000",
+   "name": "Aurora city",
+   "kind": "incorporated place",
+   "county": "08005",
+   "listed_in": {
+    "08031": 7
+   },
+   "sites": 7,
+   "with_parcel": 6,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1753481",
+   "name": "Northbrook village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 7
+   },
+   "sites": 7,
+   "with_parcel": 7,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1704013",
+   "name": "Bartlett village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 7
+   },
+   "sites": 7,
+   "with_parcel": 5,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1723074",
+   "name": "Elgin city",
+   "kind": "incorporated place",
+   "county": "17089",
+   "listed_in": {
+    "17031": 7
+   },
+   "sites": 7,
+   "with_parcel": 0,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "county:53033",
+   "name": "King County (unincorporated)",
+   "kind": "unincorporated",
+   "county": "53033",
+   "listed_in": {
+    "53033": 7
+   },
+   "sites": 7,
+   "with_parcel": 5,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:5303180",
+   "name": "Auburn city",
+   "kind": "incorporated place",
+   "county": "53033",
+   "listed_in": {
+    "53033": 7
+   },
+   "sites": 7,
+   "with_parcel": 5,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:5368435",
+   "name": "Sumner city",
+   "kind": "incorporated place",
+   "county": "53053",
+   "listed_in": {
+    "53033": 7
+   },
+   "sites": 7,
+   "with_parcel": 0,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0619766",
+   "name": "Downey city",
+   "kind": "incorporated place",
+   "county": "06037",
+   "listed_in": {
+    "06037": 6
+   },
+   "sites": 6,
+   "with_parcel": 5,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0660466",
+   "name": "Rialto city",
+   "kind": "incorporated place",
+   "county": "06071",
+   "listed_in": {
+    "06071": 6
+   },
+   "sites": 6,
+   "with_parcel": 5,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "county:17031",
+   "name": "Cook County (unincorporated)",
+   "kind": "unincorporated",
+   "county": "17031",
+   "listed_in": {
+    "17031": 6
+   },
+   "sites": 6,
+   "with_parcel": 5,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1719642",
+   "name": "Des Plaines city",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 6
+   },
+   "sites": 6,
+   "with_parcel": 6,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1703844",
+   "name": "Barrington village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 6
+   },
+   "sites": 6,
+   "with_parcel": 4,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1709447",
+   "name": "Buffalo Grove village",
+   "kind": "incorporated place",
+   "county": "17097",
+   "listed_in": {
+    "17031": 6
+   },
+   "sites": 6,
+   "with_parcel": 0,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0603386",
+   "name": "Azusa city",
+   "kind": "incorporated place",
+   "county": "06037",
+   "listed_in": {
+    "06037": 5
+   },
+   "sites": 5,
+   "with_parcel": 5,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0614974",
+   "name": "Commerce city",
+   "kind": "incorporated place",
+   "county": "06037",
+   "listed_in": {
+    "06037": 5
+   },
+   "sites": 5,
+   "with_parcel": 5,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0604030",
+   "name": "Barstow city",
+   "kind": "incorporated place",
+   "county": "06071",
+   "listed_in": {
+    "06071": 5
+   },
+   "sites": 5,
+   "with_parcel": 5,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0672506",
+   "name": "Solana Beach city",
+   "kind": "incorporated place",
+   "county": "06073",
+   "listed_in": {
+    "06073": 5
+   },
+   "sites": 5,
+   "with_parcel": 5,
+   "with_code": 3,
+   "distinct_codes": 1,
+   "codes": [
+    [
+     "6",
+     3
+    ]
+   ]
+  },
+  {
+   "id": "place:0641124",
+   "name": "Lemon Grove city",
+   "kind": "incorporated place",
+   "county": "06073",
+   "listed_in": {
+    "06073": 5
+   },
+   "sites": 5,
+   "with_parcel": 5,
+   "with_code": 4,
+   "distinct_codes": 3,
+   "codes": [
+    [
+     "9",
+     2
+    ],
+    [
+     "6",
+     1
+    ],
+    [
+     "3",
+     1
+    ]
+   ]
+  },
+  {
+   "id": "place:1706704",
+   "name": "Blue Island city",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 5
+   },
+   "sites": 5,
+   "with_parcel": 5,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1749854",
+   "name": "Mokena village",
+   "kind": "incorporated place",
+   "county": "17197",
+   "listed_in": {
+    "17031": 5
+   },
+   "sites": 5,
+   "with_parcel": 0,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1732746",
+   "name": "Hanover Park village",
+   "kind": "incorporated place",
+   "county": "17043",
+   "listed_in": {
+    "17031": 5
+   },
+   "sites": 5,
+   "with_parcel": 3,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1765806",
+   "name": "Roselle village",
+   "kind": "incorporated place",
+   "county": "17043",
+   "listed_in": {
+    "17031": 5
+   },
+   "sites": 5,
+   "with_parcel": 0,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1735307",
+   "name": "Hinsdale village",
+   "kind": "incorporated place",
+   "county": "17043",
+   "listed_in": {
+    "17031": 5
+   },
+   "sites": 5,
+   "with_parcel": 0,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:2255000",
+   "name": "New Orleans city",
+   "kind": "incorporated place",
+   "county": "22071",
+   "listed_in": {
+    "22071": 5
+   },
+   "sites": 5,
+   "with_parcel": 5,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:2638180",
+   "name": "Highland Park city",
+   "kind": "incorporated place",
+   "county": "26163",
+   "listed_in": {
+    "26163": 5
+   },
+   "sites": 5,
+   "with_parcel": 0,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "county:36059",
+   "name": "county 36059 (unincorporated)",
+   "kind": "unincorporated",
+   "county": "36059",
+   "listed_in": {
+    "36081": 5
+   },
+   "sites": 5,
+   "with_parcel": 0,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:4874492",
+   "name": "University Park city",
+   "kind": "incorporated place",
+   "county": "48113",
+   "listed_in": {
+    "48113": 5
+   },
+   "sites": 5,
+   "with_parcel": 5,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:5357745",
+   "name": "Renton city",
+   "kind": "incorporated place",
+   "county": "53033",
+   "listed_in": {
+    "53033": 5
+   },
+   "sites": 5,
+   "with_parcel": 3,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0666070",
+   "name": "San Dimas city",
+   "kind": "incorporated place",
+   "county": "06037",
+   "listed_in": {
+    "06037": 4
+   },
+   "sites": 4,
+   "with_parcel": 4,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0644574",
+   "name": "Lynwood city",
+   "kind": "incorporated place",
+   "county": "06037",
+   "listed_in": {
+    "06037": 4
+   },
+   "sites": 4,
+   "with_parcel": 2,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0655156",
+   "name": "Palmdale city",
+   "kind": "incorporated place",
+   "county": "06037",
+   "listed_in": {
+    "06037": 4
+   },
+   "sites": 4,
+   "with_parcel": 4,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0619990",
+   "name": "Duarte city",
+   "kind": "incorporated place",
+   "county": "06037",
+   "listed_in": {
+    "06037": 4
+   },
+   "sites": 4,
+   "with_parcel": 4,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0640830",
+   "name": "La Verne city",
+   "kind": "incorporated place",
+   "county": "06037",
+   "listed_in": {
+    "06037": 4
+   },
+   "sites": 4,
+   "with_parcel": 4,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0616742",
+   "name": "Covina city",
+   "kind": "incorporated place",
+   "county": "06037",
+   "listed_in": {
+    "06037": 4
+   },
+   "sites": 4,
+   "with_parcel": 3,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0630000",
+   "name": "Glendale city",
+   "kind": "incorporated place",
+   "county": "06037",
+   "listed_in": {
+    "06037": 4
+   },
+   "sites": 4,
+   "with_parcel": 4,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1230000",
+   "name": "Hialeah city",
+   "kind": "incorporated place",
+   "county": "12086",
+   "listed_in": {
+    "12086": 4
+   },
+   "sites": 4,
+   "with_parcel": 4,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1267550",
+   "name": "South Miami city",
+   "kind": "incorporated place",
+   "county": "12086",
+   "listed_in": {
+    "12086": 4
+   },
+   "sites": 4,
+   "with_parcel": 4,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1783518",
+   "name": "Worth village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 4
+   },
+   "sites": 4,
+   "with_parcel": 4,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1776935",
+   "name": "University Park village",
+   "kind": "incorporated place",
+   "county": "17197",
+   "listed_in": {
+    "17031": 4
+   },
+   "sites": 4,
+   "with_parcel": 0,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1714065",
+   "name": "Chicago Ridge village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 4
+   },
+   "sites": 4,
+   "with_parcel": 4,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1724582",
+   "name": "Evanston city",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 4
+   },
+   "sites": 4,
+   "with_parcel": 4,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1726935",
+   "name": "Forest Park village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 4
+   },
+   "sites": 4,
+   "with_parcel": 4,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0602462",
+   "name": "Arcadia city",
+   "kind": "incorporated place",
+   "county": "06037",
+   "listed_in": {
+    "06037": 3
+   },
+   "sites": 3,
+   "with_parcel": 3,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0639248",
+   "name": "Laguna Niguel city",
+   "kind": "incorporated place",
+   "county": "06059",
+   "listed_in": {
+    "06059": 3
+   },
+   "sites": 3,
+   "with_parcel": 3,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "county:06065",
+   "name": "Riverside County (unincorporated)",
+   "kind": "unincorporated",
+   "county": "06065",
+   "listed_in": {
+    "06065": 3
+   },
+   "sites": 3,
+   "with_parcel": 3,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "county:17043",
+   "name": "county 17043 (unincorporated)",
+   "kind": "unincorporated",
+   "county": "17043",
+   "listed_in": {
+    "17031": 3
+   },
+   "sites": 3,
+   "with_parcel": 0,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1735879",
+   "name": "Homewood village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 3
+   },
+   "sites": 3,
+   "with_parcel": 2,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1729652",
+   "name": "Glencoe village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 3
+   },
+   "sites": 3,
+   "with_parcel": 3,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1782075",
+   "name": "Wilmette village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 3
+   },
+   "sites": 3,
+   "with_parcel": 2,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1721904",
+   "name": "East Hazel Crest village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 3
+   },
+   "sites": 3,
+   "with_parcel": 1,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1740767",
+   "name": "La Grange village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 3
+   },
+   "sites": 3,
+   "with_parcel": 3,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1763706",
+   "name": "Richton Park village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 3
+   },
+   "sites": 3,
+   "with_parcel": 3,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1764304",
+   "name": "River Forest village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 3
+   },
+   "sites": 3,
+   "with_parcel": 3,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1750647",
+   "name": "Morton Grove village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 3
+   },
+   "sites": 3,
+   "with_parcel": 3,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1727702",
+   "name": "Franklin Park village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 3
+   },
+   "sites": 3,
+   "with_parcel": 3,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1757225",
+   "name": "Palatine village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 3
+   },
+   "sites": 3,
+   "with_parcel": 3,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:2507000",
+   "name": "Boston city",
+   "kind": "incorporated place",
+   "county": "25025",
+   "listed_in": {
+    "25025": 3
+   },
+   "sites": 3,
+   "with_parcel": 3,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:3626264",
+   "name": "Floral Park village",
+   "kind": "incorporated place",
+   "county": "36059",
+   "listed_in": {
+    "36081": 3
+   },
+   "sites": 3,
+   "with_parcel": 0,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:4804000",
+   "name": "Arlington city",
+   "kind": "incorporated place",
+   "county": "48439",
+   "listed_in": {
+    "48439": 3
+   },
+   "sites": 3,
+   "with_parcel": 3,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "county:04019",
+   "name": "Pima County (unincorporated)",
+   "kind": "unincorporated",
+   "county": "04019",
+   "listed_in": {
+    "04019": 2
+   },
+   "sites": 2,
+   "with_parcel": 2,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0669154",
+   "name": "Santa Fe Springs city",
+   "kind": "incorporated place",
+   "county": "06037",
+   "listed_in": {
+    "06037": 2
+   },
+   "sites": 2,
+   "with_parcel": 2,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0648816",
+   "name": "Montebello city",
+   "kind": "incorporated place",
+   "county": "06037",
+   "listed_in": {
+    "06037": 2
+   },
+   "sites": 2,
+   "with_parcel": 2,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0603666",
+   "name": "Baldwin Park city",
+   "kind": "incorporated place",
+   "county": "06037",
+   "listed_in": {
+    "06037": 2
+   },
+   "sites": 2,
+   "with_parcel": 2,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0622230",
+   "name": "El Monte city",
+   "kind": "incorporated place",
+   "county": "06037",
+   "listed_in": {
+    "06037": 2
+   },
+   "sites": 2,
+   "with_parcel": 2,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0611530",
+   "name": "Carson city",
+   "kind": "incorporated place",
+   "county": "06037",
+   "listed_in": {
+    "06037": 2
+   },
+   "sites": 2,
+   "with_parcel": 2,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0680854",
+   "name": "Tustin city",
+   "kind": "incorporated place",
+   "county": "06059",
+   "listed_in": {
+    "06059": 2
+   },
+   "sites": 2,
+   "with_parcel": 2,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0629000",
+   "name": "Garden Grove city",
+   "kind": "incorporated place",
+   "county": "06059",
+   "listed_in": {
+    "06059": 2
+   },
+   "sites": 2,
+   "with_parcel": 2,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0665084",
+   "name": "San Clemente city",
+   "kind": "incorporated place",
+   "county": "06059",
+   "listed_in": {
+    "06059": 2
+   },
+   "sites": 2,
+   "with_parcel": 2,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0655254",
+   "name": "Palm Springs city",
+   "kind": "incorporated place",
+   "county": "06065",
+   "listed_in": {
+    "06065": 2
+   },
+   "sites": 2,
+   "with_parcel": 2,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0637692",
+   "name": "Jurupa Valley city",
+   "kind": "incorporated place",
+   "county": "06065",
+   "listed_in": {
+    "06065": 2
+   },
+   "sites": 2,
+   "with_parcel": 2,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0659451",
+   "name": "Rancho Cucamonga city",
+   "kind": "incorporated place",
+   "county": "06071",
+   "listed_in": {
+    "06071": 2
+   },
+   "sites": 2,
+   "with_parcel": 2,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "county:06073",
+   "name": "San Diego County (unincorporated)",
+   "kind": "unincorporated",
+   "county": "06073",
+   "listed_in": {
+    "06073": 2
+   },
+   "sites": 2,
+   "with_parcel": 0,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1245200",
+   "name": "Miami Springs city",
+   "kind": "incorporated place",
+   "county": "12086",
+   "listed_in": {
+    "12086": 2
+   },
+   "sites": 2,
+   "with_parcel": 2,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1734722",
+   "name": "Highland Park city",
+   "kind": "incorporated place",
+   "county": "17097",
+   "listed_in": {
+    "17031": 2
+   },
+   "sites": 2,
+   "with_parcel": 0,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1764343",
+   "name": "River Grove village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 2
+   },
+   "sites": 2,
+   "with_parcel": 2,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1762016",
+   "name": "Prospect Heights city",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 2
+   },
+   "sites": 2,
+   "with_parcel": 2,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1768003",
+   "name": "Schaumburg village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 2
+   },
+   "sites": 2,
+   "with_parcel": 2,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1733383",
+   "name": "Harvey city",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 2
+   },
+   "sites": 2,
+   "with_parcel": 1,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1708576",
+   "name": "Brookfield village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 2
+   },
+   "sites": 2,
+   "with_parcel": 2,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1747540",
+   "name": "Matteson village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 2
+   },
+   "sites": 2,
+   "with_parcel": 2,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1747774",
+   "name": "Maywood village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 2
+   },
+   "sites": 2,
+   "with_parcel": 2,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1782049",
+   "name": "Willow Springs village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 2
+   },
+   "sites": 2,
+   "with_parcel": 2,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1764421",
+   "name": "Riverside village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 2
+   },
+   "sites": 2,
+   "with_parcel": 2,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1705573",
+   "name": "Berwyn city",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 2
+   },
+   "sites": 2,
+   "with_parcel": 2,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1740793",
+   "name": "La Grange Park village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 2
+   },
+   "sites": 2,
+   "with_parcel": 2,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1754885",
+   "name": "Oak Park village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 2
+   },
+   "sites": 2,
+   "with_parcel": 2,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:2938000",
+   "name": "Kansas City city",
+   "kind": "incorporated place",
+   "county": "29095",
+   "listed_in": {
+    "29095": 2
+   },
+   "sites": 2,
+   "with_parcel": 2,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:4835576",
+   "name": "Hurst city",
+   "kind": "incorporated place",
+   "county": "48439",
+   "listed_in": {
+    "48439": 2
+   },
+   "sites": 2,
+   "with_parcel": 2,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:4861844",
+   "name": "Richland Hills city",
+   "kind": "incorporated place",
+   "county": "48439",
+   "listed_in": {
+    "48439": 2
+   },
+   "sites": 2,
+   "with_parcel": 2,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0648914",
+   "name": "Monterey Park city",
+   "kind": "incorporated place",
+   "county": "06037",
+   "listed_in": {
+    "06037": 1
+   },
+   "sites": 1,
+   "with_parcel": 1,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0636490",
+   "name": "Industry city",
+   "kind": "incorporated place",
+   "county": "06037",
+   "listed_in": {
+    "06037": 1
+   },
+   "sites": 1,
+   "with_parcel": 1,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0671876",
+   "name": "Signal Hill city",
+   "kind": "incorporated place",
+   "county": "06037",
+   "listed_in": {
+    "06037": 1
+   },
+   "sites": 1,
+   "with_parcel": 1,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0636826",
+   "name": "Irwindale city",
+   "kind": "incorporated place",
+   "county": "06037",
+   "listed_in": {
+    "06037": 1
+   },
+   "sites": 1,
+   "with_parcel": 1,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0606308",
+   "name": "Beverly Hills city",
+   "kind": "incorporated place",
+   "county": "06037",
+   "listed_in": {
+    "06037": 1
+   },
+   "sites": 1,
+   "with_parcel": 1,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:0666140",
+   "name": "San Fernando city",
+   "kind": "incorporated place",
+   "county": "06037",
+   "listed_in": {
+    "06037": 1
+   },
+   "sites": 1,
+   "with_parcel": 1,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1245060",
+   "name": "Miami Gardens city",
+   "kind": "incorporated place",
+   "county": "12086",
+   "listed_in": {
+    "12086": 1
+   },
+   "sites": 1,
+   "with_parcel": 1,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1243900",
+   "name": "Medley town",
+   "kind": "incorporated place",
+   "county": "12086",
+   "listed_in": {
+    "12086": 1
+   },
+   "sites": 1,
+   "with_parcel": 1,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1251650",
+   "name": "Opa-locka city",
+   "kind": "incorporated place",
+   "county": "12086",
+   "listed_in": {
+    "12086": 1
+   },
+   "sites": 1,
+   "with_parcel": 1,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1730328",
+   "name": "Golf village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 1
+   },
+   "sites": 1,
+   "with_parcel": 1,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1709798",
+   "name": "Burnham village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 1
+   },
+   "sites": 1,
+   "with_parcel": 1,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1737907",
+   "name": "Itasca village",
+   "kind": "incorporated place",
+   "county": "17043",
+   "listed_in": {
+    "17031": 1
+   },
+   "sites": 1,
+   "with_parcel": 0,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1705248",
+   "name": "Bensenville village",
+   "kind": "incorporated place",
+   "county": "17043",
+   "listed_in": {
+    "17031": 1
+   },
+   "sites": 1,
+   "with_parcel": 0,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1770850",
+   "name": "South Holland village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 1
+   },
+   "sites": 1,
+   "with_parcel": 1,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1754820",
+   "name": "Oak Lawn village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 1
+   },
+   "sites": 1,
+   "with_parcel": 1,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1768081",
+   "name": "Schiller Park village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 1
+   },
+   "sites": 1,
+   "with_parcel": 1,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1757732",
+   "name": "Park Forest village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 1
+   },
+   "sites": 1,
+   "with_parcel": 1,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1754638",
+   "name": "Oak Forest city",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 1
+   },
+   "sites": 1,
+   "with_parcel": 1,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1748892",
+   "name": "Midlothian village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 1
+   },
+   "sites": 1,
+   "with_parcel": 1,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1755938",
+   "name": "Olympia Fields village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 1
+   },
+   "sites": 1,
+   "with_parcel": 1,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1757407",
+   "name": "Palos Park village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 1
+   },
+   "sites": 1,
+   "with_parcel": 1,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1757381",
+   "name": "Palos Heights city",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 1
+   },
+   "sites": 1,
+   "with_parcel": 1,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1723620",
+   "name": "Elmhurst city",
+   "kind": "incorporated place",
+   "county": "17043",
+   "listed_in": {
+    "17031": 1
+   },
+   "sites": 1,
+   "with_parcel": 0,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1751089",
+   "name": "Mount Prospect village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 1
+   },
+   "sites": 1,
+   "with_parcel": 1,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "county:17097",
+   "name": "county 17097 (unincorporated)",
+   "kind": "unincorporated",
+   "county": "17097",
+   "listed_in": {
+    "17031": 1
+   },
+   "sites": 1,
+   "with_parcel": 0,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1726571",
+   "name": "Flossmoor village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 1
+   },
+   "sites": 1,
+   "with_parcel": 1,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1710513",
+   "name": "Calumet Park village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 1
+   },
+   "sites": 1,
+   "with_parcel": 1,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1742795",
+   "name": "Lemont village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 1
+   },
+   "sites": 1,
+   "with_parcel": 1,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1765442",
+   "name": "Romeoville village",
+   "kind": "incorporated place",
+   "county": "17197",
+   "listed_in": {
+    "17031": 1
+   },
+   "sites": 1,
+   "with_parcel": 0,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1705404",
+   "name": "Berkeley village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 1
+   },
+   "sites": 1,
+   "with_parcel": 1,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:1733695",
+   "name": "Hazel Crest village",
+   "kind": "incorporated place",
+   "county": "17031",
+   "listed_in": {
+    "17031": 1
+   },
+   "sites": 1,
+   "with_parcel": 1,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:2953102",
+   "name": "North Kansas City city",
+   "kind": "incorporated place",
+   "county": "29047",
+   "listed_in": {
+    "29095": 1
+   },
+   "sites": 1,
+   "with_parcel": 0,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:3641553",
+   "name": "Lawrence village",
+   "kind": "incorporated place",
+   "county": "36059",
+   "listed_in": {
+    "36081": 1
+   },
+   "sites": 1,
+   "with_parcel": 0,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:4830464",
+   "name": "Grand Prairie city",
+   "kind": "incorporated place",
+   "county": "48439",
+   "listed_in": {
+    "48113": 1
+   },
+   "sites": 1,
+   "with_parcel": 0,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:4816612",
+   "name": "Coppell city",
+   "kind": "incorporated place",
+   "county": "48113",
+   "listed_in": {
+    "48113": 1
+   },
+   "sites": 1,
+   "with_parcel": 1,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "county:53053",
+   "name": "county 53053 (unincorporated)",
+   "kind": "unincorporated",
+   "county": "53053",
+   "listed_in": {
+    "53033": 1
+   },
+   "sites": 1,
+   "with_parcel": 0,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  },
+  {
+   "id": "place:5338038",
+   "name": "Lakewood city",
+   "kind": "incorporated place",
+   "county": "53053",
+   "listed_in": {
+    "53033": 1
+   },
+   "sites": 1,
+   "with_parcel": 0,
+   "with_code": 0,
+   "distinct_codes": 0,
+   "codes": []
+  }
+ ]
+}
