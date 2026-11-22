@@ -298,3 +298,31 @@ lists. For school sites: where districts publish closed or under-enrolled school
 Columns: jurisdiction, dataset, url, format, key_fields, last_updated, licence.
 [ANSWER RULES]
 ```
+
+## 13. Zoning code text this build machine cannot fetch (document download, not research)
+
+Added 22 Nov 2026. The site cards size New York and San Diego sites from code text; the cities below are blocked
+(American Legal Publishing, Municode and municipal.codes refuse automated reads). Record:
+`docs/audit/site-zoning-2026-11-23.md`.
+
+```
+Download official zoning code text and give me the files. Do not summarise or paraphrase; I need the code's own
+words. For each city, save the listed chapters as PDF or as plain text copied in full, one file per chapter, named
+<city>_<chapter>.pdf, and give me the exact URL each came from and the date shown as "current through".
+
+1. Los Angeles Municipal Code, Chapter 1 (Planning and Zoning Code): Sections 12.03 through 12.22 and 12.32
+   (zone definitions, uses, lot area per dwelling unit, height districts, Q and D conditions).
+2. Austin Land Development Code, Title 25, Chapter 25-2 (Zoning): district purposes, the permitted-use table, and
+   the site development regulations tables (25-2-491, 25-2-492 and the multifamily sections).
+3. Chicago Zoning Ordinance, Title 17: Chapters 17-2, 17-3 and 17-4 (residential, business/commercial, downtown),
+   including the bulk and density tables (minimum lot area per unit, floor area ratio).
+4. Dallas Development Code, Chapter 51A, Article IV (zoning district regulations).
+5. Phoenix Zoning Ordinance, Chapter 6 (zoning districts), and the Walkable Urban Code (Chapter 13).
+6. Seattle Municipal Code, Title 23, Subtitle III, Division 2 (zones).
+7. Nashville (Metro) Code, Title 17: Chapters 17.08 and 17.12 (district land use table, bulk regulations).
+8. Houston: the official city page stating that Houston has no zoning ordinance, and Chapter 42 (minimum lot size).
+
+If a chapter is too long for one file, split it by article and say so. If a site refuses the download, say which
+and give the URL; do not substitute another source.
+```
+Put the files in the shared Drive folder.
