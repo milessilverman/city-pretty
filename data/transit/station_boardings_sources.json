@@ -1,0 +1,100 @@
+{
+ "generated_by": "scripts/transit/fetch_station_boardings.py",
+ "generated": "2026-11-22",
+ "sources": [
+  {
+   "system": "NYCT",
+   "dataset": {
+    "dataset_id": "5wq4-mkjj",
+    "name": "MTA Subway Hourly Ridership: Beginning 2025",
+    "rows_updated_at_utc": "2026-11-18 15:51:42",
+    "licence": null,
+    "licence_terms_link": null,
+    "attribution": "Metropolitan Transportation Authority",
+    "landing_url": "https://data.ny.gov/d/5wq4-mkjj",
+    "api_url": "https://data.ny.gov/resource/5wq4-mkjj.json",
+    "description": "This dataset provides subway ridership estimates on an hourly basis by subway station complex and class of fare payment."
+   },
+   "note": "weekdays with data in 2025: 261; stations: 428"
+  },
+  {
+   "system": "CTA",
+   "dataset": {
+    "dataset_id": "t2rn-p8d7",
+    "name": "CTA - Ridership - 'L' Station Entries - Monthly Day-Type Averages & Totals",
+    "rows_updated_at_utc": "2026-11-20 20:42:11",
+    "licence": "See Terms of Use",
+    "licence_terms_link": null,
+    "attribution": "Chicago Transit Authority",
+    "landing_url": "https://data.cityofchicago.org/d/t2rn-p8d7",
+    "api_url": "https://data.cityofchicago.org/resource/t2rn-p8d7.json",
+    "description": "This dataset lists monthly station entry averages, by day type (Weekday, Saturday or Sunday/Holiday), as well as monthly totals, beginning in 2001. Note that some stations (such as on the Cermak Branch--now Pink Line) and Skokie did not have Saturday and/or Sunday/holiday service until more recent years, although, in cases where weekday service ran past midnight, late evening fares may appear as part of Saturday tallies."
+   },
+   "coordinates_dataset": {
+    "dataset_id": "8pix-ypme",
+    "name": "CTA - System Information - List of 'L' Stops",
+    "rows_updated_at_utc": "2025-11-19 18:14:37",
+    "licence": null,
+    "licence_terms_link": null,
+    "attribution": "Chicago Transit Authority",
+    "landing_url": "https://data.cityofchicago.org/d/8pix-ypme",
+    "api_url": "https://data.cityofchicago.org/resource/8pix-ypme.json",
+    "description": "This list of 'L' stops provides location and basic service availability information for each place on the CTA system where a train stops, along with formal station names and stop descriptions."
+   },
+   "note": "stations: 144; months per station: [12]"
+  },
+  {
+   "system": "BART",
+   "files": [
+    "https://www.bart.gov/sites/default/files/2026-02/Ridership_202601.xlsx",
+    "https://www.bart.gov/sites/default/files/2026-03/Ridership_202602.xlsx",
+    "https://www.bart.gov/sites/default/files/2026-04/Ridership_202603.xlsx",
+    "https://www.bart.gov/sites/default/files/2026-05/Ridership_202604.xlsx",
+    "https://www.bart.gov/sites/default/files/2026-06/Ridership_202605.xlsx",
+    "https://www.bart.gov/sites/default/files/2026-07/Ridership_202606.xlsx",
+    "https://www.bart.gov/sites/default/files/2026-08/Ridership_202607.xlsx",
+    "https://www.bart.gov/sites/default/files/2026-09/Ridership_202608.xlsx",
+    "https://www.bart.gov/sites/default/files/2026-10/Ridership_202609.xlsx",
+    "https://www.bart.gov/sites/default/files/2026-11/Ridership_202610.xlsx"
+   ],
+   "station_names_file": "https://www.bart.gov/sites/default/files/docs/station-names.xls",
+   "gtfs": "https://www.bart.gov/dev/schedules/google_transit.zip",
+   "note": "stations: 50; months: ['202601', '202602', '202603', '202604', '202605', '202606', '202607', '202608', '202609', '202610']; low-similarity name pairs to review: [('PH', 'Pleasant Hill', 'Pleasant Hill / Contra Costa Centre', 0.57)]"
+  },
+  {
+   "system": "MBTA",
+   "service": "https://services1.arcgis.com/ceiitspzDAHrdGO1/arcgis/rest/services/Fall_2024_MBTA_Rail_Ridership_by_SDP_Time_Period_Route_Line_and_Stop/FeatureServer/0",
+   "gtfs": "https://cdn.mbta.com/MBTA_GTFS.zip",
+   "note": "stations: 118; modes ['Heavy Rail', 'Light Rail']; service-day counts seen [49, 60, 62, 74, 75]"
+  },
+  {
+   "system": "UTA",
+   "service": "https://maps.rideuta.com/server/rest/services/Hosted/RAIL_STOP_RIDERSHIP_TABLE_SINCE_2017/FeatureServer/0",
+   "coordinate_layers": {
+    "TRAX": "https://maps.rideuta.com/server/rest/services/Hosted/TRAX_Light_Rail_Stations/FeatureServer/0",
+    "FR": "https://maps.rideuta.com/server/rest/services/Hosted/FrontRunnerStations/FeatureServer/0"
+   },
+   "note": "stations: 77; no coordinates after name join: ['2700 W. Sugar Factory Rd Station', '4800 W. Old Bingham Hwy Station', '5600 W. Old Bingham Hwy Station', 'North Temple Bridge/Guadalupe']"
+  },
+  {
+   "system": "Maryland MTA",
+   "dataset": {
+    "dataset_id": "cqt2-ypem",
+    "name": "MTA Transit Oriented Development (TOD) Data",
+    "rows_updated_at_utc": "2019-08-26 14:17:07",
+    "licence": "Public Domain",
+    "licence_terms_link": null,
+    "attribution": "MTA",
+    "landing_url": "https://opendata.maryland.gov/d/cqt2-ypem",
+    "api_url": "https://opendata.maryland.gov/resource/cqt2-ypem.json",
+    "description": "*** DISCLAIMER - This web page is a public resource of general information. The Maryland Mass Transit Administration (MTA) makes no warranty, representation, or guarantee as to the content, sequence, accuracy, timeliness, or completeness of any of the spatial data or database information provided herein. MTA and partner state, local, and other agencies shall assume no liability for errors, omissions, or inaccuracies in the information provided regardless of how caused; or any decision made or action taken or not taken by any person relying on any information or data furnished within. ***\r\n\r\nTh"
+   },
+   "note": "station-measure rows: 85; the dataset gives no reference year for the counts"
+  },
+  {
+   "system": "Valley Metro",
+   "service": "https://services2.arcgis.com/2t1927381mhTgWNC/arcgis/rest/services/RidershipDataPortal/FeatureServer/0",
+   "note": "layer description: 'Average daily ridership by quarter for bus and light rail on the Valley Metro transit system.'; stations with a July-Sept 2018 boardings value: 41"
+  }
+ ]
+}
