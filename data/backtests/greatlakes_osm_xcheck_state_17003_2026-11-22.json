@@ -1,0 +1,23 @@
+{
+ "fips": "17003",
+ "state_area": "US-IL",
+ "box_s_w_n_e": "36.95029799973748,-89.53847699973615,37.35557799994531,-89.11291499981913",
+ "direct_in_state": 1575,
+ "extract": 1584,
+ "missing_from_extract": [],
+ "extra_in_extract": [
+  18380504,
+  18381471,
+  18385796,
+  18385799,
+  18587221,
+  18589529,
+  18720108,
+  671385136,
+  671385200
+ ],
+ "n_missing": 0,
+ "n_extra": 9,
+ "match": false,
+ "note": "roads in the box that lie in another state are not in a state extract and are left out of this comparison"
+}

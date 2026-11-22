@@ -150,10 +150,22 @@ No pipeline code was changed.
 - Tests: `app/data/intercity_transit_corridors.json`: Wyanet IL (Bureau, 17011), Quincy IL (Adams, 17001) and Carbondale IL
   (Jackson, 17077) now say `county_on_page: true` (3 lines).
 - Tests run: `npm test` 1,620 of 1,620 (45 files), `npm run typecheck` clean.
-- OpenStreetMap ID for ID vs live Overpass (maps.mail.ru): **not complete at this commit.** Adams (17001): bus stops 2 = 2
-  (0 missing, 0 extra); its roads query got no answer (504 on all 8 tries). Alexander (17003): neither query was answered. The
-  mirror answered 504 to a small test query each time it was tried over about half an hour, and the other Overpass servers are refused from this
-  machine. The check keeps retrying; its result is added to this section when it answers.
+- OpenStreetMap ID for ID vs live Overpass (maps.mail.ru; it answered 504 to every query for about two hours first, so the
+  checks were run when it came back). Run as the script is, both counties differ, because their boxes (block groups plus
+  0.02 degree) reach into other states and counties that the Illinois sub-region file does not hold. Adams (17001): bus
+  stops 2 = 2; roads 4,550 on Overpass, 3,729 in the extract (821 only on Overpass, 0 only in the extract). Alexander
+  (17003): roads 2,880 on Overpass, 1,584 in the extract (1,296 only on Overpass, 0 only in the extract); bus stops 2 on
+  Overpass, 0 in the extract. Looked at where the differing objects are, with the same box, the same highway classes and
+  the same extract, and the Overpass query limited to the state's area (`area["ISO3166-2"="US-IL"]`, a check written for
+  this and kept in the result files): **Adams, roads in Illinois 3,834 on Overpass, 3,729 in the extract: 110 only on
+  Overpass, all 110 in Pike County (17149, beyond the edge of the sub-region file, in the margin outside Adams County), and
+  5 only in the extract, all Missouri-centred ways that cross the Mississippi and are kept whole. Alexander, roads in
+  Illinois 1,575 on Overpass, 1,584 in the extract: 0 only on Overpass, 9 only in the extract, all Missouri-centred ways
+  that cross the river (Cape Girardeau 6, Mississippi 2, Scott 1); its 2 bus stops are both in Cape Girardeau County,
+  Missouri (SEMO Transit Nexus; Normal & West End Blvd).** The first 50 of Adams's 821 Overpass-only roads, as the result
+  file lists them, are all in Lewis and Marion counties, Missouri; the other Overpass-only roads outside Illinois (about
+  700) were not located one by one. So: inside the two counties every road and bus stop matches; what is missing is the
+  neighbouring state's roads, and 110 roads of the neighbouring county at the file's edge, in the box's margin.
 - Live check from R2 (`LIVE_PORT=9211`): Jackson (17077) and Fulton (17057), 3 points each. Neither county has a parcel
   service on the page, so the house-panel rows (Census area, HUD rent, FEMA, USGS) are not checkable; neighborhood, canopy,
   canopy goal, crash text, state laws and console pass at all 6 points (30 pass, 0 fail, 24 not checkable). The crash rows
@@ -163,7 +175,8 @@ No pipeline code was changed.
   1,594,978,998 bytes (2,454 objects): 21,928,053 bytes added (the 82 data files, 21,904,642, plus the larger
   `manifest.json`).
 
-Files: `data/backtests/greatlakes_il_census_spot_2026-11-22.json`, `data/backtests/live_check_panels_2026-11-22_greatlakes_il.json`,
+Files: `data/backtests/greatlakes_il_census_spot_2026-11-22.json`, `data/backtests/greatlakes_osm_xcheck_17001_2026-11-22.json`,
+`..._17003_...`, `data/backtests/greatlakes_osm_xcheck_state_17001_2026-11-22.json`, `..._17003_...`, `data/backtests/live_check_panels_2026-11-22_greatlakes_il.json`,
 `data/backtests/acs_fallback_mismatches_2026-11-22.json`.
 
 ## Indiana (75 of 75 built, none withheld)
@@ -263,10 +276,9 @@ Files: `data/backtests/greatlakes_il_census_spot_2026-11-22.json`, `data/backtes
   projects are not proposed". No crash counts were built.
 - Tests run: `npm test` 1,620 of 1,620 (45 files), `npm run typecheck` clean. No corridor stop's flag changed (none of the
   Indiana stops is in a new county).
-- OpenStreetMap ID for ID vs live Overpass (maps.mail.ru): **not complete at this commit.** The
-  mirror answered 504 to every query again (Overpass servers other than maps.mail.ru are refused from this machine); the
-  check is queued for Adair-first counties Adams (18001) and Blackford (18005) and its result is added to this section when
-  it answers.
+- OpenStreetMap ID for ID vs live Overpass (maps.mail.ru; it answered 504 for about two hours first): Adams (18001) 1,686
+  = 1,686 roads, 2 = 2 bus stops; Bartholomew (18005) 5,297 = 5,297 roads, 0 = 0 bus stops (0 missing, 0 extra). The
+  extract's snapshot is 2026-11-21T01:07:35Z.
 - Live check from R2 (`LIVE_PORT=9211`): Putnam (18133) and Henry (18065), 3 points each (Indiana's parcel service is on
   the page): all six points had the house panel on live parcel records and pass every check (neighborhood, canopy, canopy
   goal, crash text, state laws, Census area, HUD rent, FEMA, USGS, console): 54 pass, 0 fail. Each data file came from the
@@ -275,5 +287,6 @@ Files: `data/backtests/greatlakes_il_census_spot_2026-11-22.json`, `data/backtes
   1,610,889,441 bytes (2,529 objects): 15,910,443 bytes added (the 75 data files, 15,891,586, plus the larger
   `manifest.json`).
 
-Files: `data/backtests/greatlakes_in_census_spot_2026-11-22.json`, `data/backtests/live_check_panels_2026-11-22_greatlakes_in.json`,
+Files: `data/backtests/greatlakes_in_census_spot_2026-11-22.json`, `data/backtests/greatlakes_osm_xcheck_18001_2026-11-22.json`,
+`..._18005_...`, `data/backtests/live_check_panels_2026-11-22_greatlakes_in.json`,
 `data/backtests/acs_fallback_mismatches_2026-11-22.json`.
