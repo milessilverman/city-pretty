@@ -672,7 +672,7 @@ Files: `data/backtests/greatlakes_ky_census_spot_2026-11-22.json`, `data/backtes
 ## Tests and housekeeping
 
 - `npm test`: run in full after each state (1,620 of 1,620 in 45 files each time; Illinois grew the count with its crash
-  files); `npm run typecheck` clean after each. The full browser suite on the final tree: run once after the Kentucky commit (result added to this page in the last commit). `python3
+  files); `npm run typecheck` clean after each. The full browser suite on the final tree: `PW_PORT=9212 npm run test:e2e -- --trace off`, run once on the Kentucky commit (all five states in): 93 of 93 passed (8.5 min). `python3
   scripts/r2_only.py --check` passes. No test was skipped or loosened. One test pin was changed, as the Utah batch did:
   `tests/unit/crashCountsInvariant.test.ts` (Illinois 20 -> 102 crash-count files, 245 -> 327 outside California). No
   pipeline code was changed.
