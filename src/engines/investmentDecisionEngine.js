@@ -643,6 +643,9 @@ function rateCostPerTrip(v) { if (v == null) return null; for (const r of TRANSI
  *     annualTrips, annualizedCapitalCostUsd, annualOperatingCostUsd, capitalCostUsd, intercityDistanceMiles, mode? }
  *   ctx.costBenchmarks: rows { mode, cost_per_mile, year, source_url } (app/data/transit_cost_benchmarks.json)
  *   ctx.valueEffects: rows { mode, distance_band, effect_pct, source_url } (app/data/transit_value_effects.json)
+ *   optional riders and money: corridorOrArea.demand (a line for TransitDemandEngine.compareModes: lengthMiles, stops, ...),
+ *     ctx.demandEngine (window.TransitDemandEngine or require("./transitDemandEngine")), ctx.demandTables (its tables);
+ *     the result's modeFit is then the mode that fits, the runner-up and why (null when not asked)
  */
 function evaluateTransit(corridorOrArea, ctx) {
   ctx = ctx || {};
@@ -743,6 +746,14 @@ function evaluateTransit(corridorOrArea, ctx) {
     if (!hsr) missing.push("intercityDistanceMiles");
   }
   if (hsr) why.push(hsr.inBand ? `Trip of ${dist} miles is inside FRA's 100-500 mile high-speed rail market.` : `Trip of ${dist} miles is outside FRA's 100-500 mile high-speed rail market.`);
+  // riders and money by mode (src/engines/transitDemandEngine.js), when the caller passes the engine, its tables and the line
+  let modeFit = null;
+  if (ctx.demandEngine && a.demand) {
+    modeFit = ctx.demandEngine.compareModes(a.demand, ctx.demandTables || {}, duNet == null ? null : supports.map(s => s.mode).concat(supports.some(s => s.mode === "bus_frequency" && s.buses_per_hour >= 6) ? ["brt"] : []));
+    if (modeFit.fit) why.push(`On predicted riders and operating cost per trip, ${modeFit.fit.replace(/_/g, " ")} fits${modeFit.runnerUp ? `; runner-up ${modeFit.runnerUp.replace(/_/g, " ")}` : ""}.`);
+    else if (modeFit.verdict === "not_enough_data") missing.push(...modeFit.missing.map(m => `for riders and money: ${m}`));
+    else why.push("On predicted riders and operating cost per trip, no mode passes.");
+  } else if (a.demand) missing.push("ctx.demandEngine and ctx.demandTables (riders and money by mode)");
   const effects = (ctx.valueEffects || []).filter(r => scale && normMode(r.mode) === scale).map(r => ({ mode: r.mode, distanceBand: r.distance_band, effect: tv(num(r.effect_pct), "% home value", r.source_url || "ctx.valueEffects", "measured") }));
   return {
     name: a.name || null,
@@ -752,7 +763,7 @@ function evaluateTransit(corridorOrArea, ctx) {
     ftaLandUse: { populationDensityRating: popRating, employmentRating: jobRating, source: T.fta_cig.source.url },
     costEffectiveness: { costPerTrip: tv(cpt == null ? null : round(cpt, 2), "USD per trip", "caller's annualised cost / annual trips", "modelled"), rating: ceRating, breakpoints: T.fta_cig.source.quote_cost_effectiveness },
     capitalCost: tv(cap, "USD", num(a.capitalCostUsd) != null ? "caller" : (mode0 && costByMode[mode0] ? costByMode[mode0].capital.source : null), num(a.capitalCostUsd) != null ? "measured" : "modelled"),
-    costByMode, warrant, hsr, valueEffects: effects,
+    costByMode, warrant, hsr, valueEffects: effects, modeFit,
     reasons: why,
     sources: [T.tcqsm_density.source.url, T.fta_cig.source.url, T.fra_hsr.source.url],
     missing,

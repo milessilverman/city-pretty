@@ -107,6 +107,14 @@ still rate Medium or better (operating cost per trip, at the midpoint of its ran
 next mode down that passes; if none passes, "none fits" with the reason. A mode whose riders or costs are not on file
 is listed with what is missing and is not chosen.
 
+**Change on 22 Nov 2026, after the first run (the station model and its test were not changed):** the rule above
+ignores capital, so on the first run (Austin light rail, Chicago Red Line extension) every mode passed the operating
+floor and the largest mode always won. The rule used now: of the modes that pass (a) and (b), the one with the
+**lowest capital cost per annual rider** (middle of its range) fits and the next lowest is the runner-up. A mode with
+no capital benchmark (ordinary bus service) is listed as passing but is not ranked on capital. Known bias: bus and BRT
+riders come from NTD trips per route mile of operating systems, not from the land around the stops, so the comparison
+of BRT with rail mixes two kinds of rider estimate; the page says so beside it.
+
 ## 8. Where a line would run
 
 Corridor stop cities are Census place points, and pipeline stations in `transit_pipelines.json` are marked as unverified
@@ -115,4 +123,75 @@ only.
 
 ## Results
 
-(Written by the fitting script after this method was committed.)
+<!-- RESULTS:BEGIN (written by scripts/transit/fit_station_ridership.py; do not edit by hand) -->
+
+Dropped station rows: {'no_coordinates': 4, 'outside_block_groups_on_file': 35, 'zero_count': 0}.
+
+### heavy rail (HR): 651 stations in 5 systems
+
+| Held-out system | Stations | Model rank corr. | Model error* | People+jobs rank corr. | People+jobs error* | System-average error* | Level factor |
+|---|---|---|---|---|---|---|---|
+| Chicago Transit Authority | 143 | 0.58 | 41% | 0.58 | 51% | 58% | 0.49 |
+| MTA New York City Transit | 399 | 0.64 | 50% | 0.66 | 45% | 56% | 1.27 |
+| Maryland Transit Administration | 14 | 0.64 | 29% | 0.38 | 52% | 33% | 1.04 |
+| Massachusetts Bay Transportation Authority | 48 | 0.47 | 46% | 0.46 | 50% | 41% | 1.47 |
+| San Francisco Bay Area Rapid Transit District | 47 | 0.62 | 27% | 0.63 | 33% | 40% | 1.34 |
+
+Median over held-out systems: model rank correlation 0.62, error 41%; people+jobs baseline 0.58, 50%; system average error 41%. Beats the people+jobs baseline on both: True. Lower error than the system average: False. Level factors (training systems' average level vs the held-out system's own) ranged 0.49 to 1.47.
+
+Coefficients (all systems of the mode): ln_pop_half +0.090 (s.e. 0.074); ln_jobs_half +0.300 (s.e. 0.046); ln_pop_ring +0.166 (s.e. 0.090); ln_jobs_ring +0.054 (s.e. 0.054); terminal +0.367 (s.e. 0.076); transfer +0.145 (s.e. 0.123). Within-system R2 in sample 0.43.
+
+### light rail (LR): 183 stations in 4 systems
+
+| Held-out system | Stations | Model rank corr. | Model error* | People+jobs rank corr. | People+jobs error* | System-average error* | Level factor |
+|---|---|---|---|---|---|---|---|
+| Maryland Transit Administration | 33 | 0.24 | 45% | 0.31 | 65% | 41% | 1.13 |
+| Massachusetts Bay Transportation Authority | 65 | 0.32 | 50% | 0.43 | 56% | 38% | 0.74 |
+| Utah Transit Authority | 44 | 0.43 | 49% | 0.52 | 55% | 52% | 0.94 |
+| Valley Metro Rail | 41 | -0.07 | 45% | 0.03 | 56% | 33% | 1.51 |
+
+Median over held-out systems: model rank correlation 0.28, error 47%; people+jobs baseline 0.37, 56%; system average error 39%. Beats the people+jobs baseline on both: False. Lower error than the system average: False. Level factors (training systems' average level vs the held-out system's own) ranged 0.74 to 1.51.
+
+Coefficients (all systems of the mode): ln_pop_half -0.038 (s.e. 0.118); ln_jobs_half +0.181 (s.e. 0.086); ln_pop_ring +0.109 (s.e. 0.144); ln_jobs_ring +0.083 (s.e. 0.111); terminal +0.342 (s.e. 0.181); transfer -0.171 (s.e. 0.158). Within-system R2 in sample 0.17.
+
+### commuter rail (CR): 53 stations in 2 systems
+
+| Held-out system | Stations | Model rank corr. | Model error* | People+jobs rank corr. | People+jobs error* | System-average error* | Level factor |
+|---|---|---|---|---|---|---|---|
+| Maryland Transit Administration | 37 | 0.36 | 73% | 0.33 | 86% | 65% | 0.57 |
+| Utah Transit Authority | 16 | 0.79 | 34% | 0.80 | 25% | 41% | 3.05 |
+
+Median over held-out systems: model rank correlation 0.57, error 53%; people+jobs baseline 0.57, 56%; system average error 53%. Beats the people+jobs baseline on both: True. Lower error than the system average: False. Level factors (training systems' average level vs the held-out system's own) ranged 0.57 to 3.05.
+
+Coefficients (all systems of the mode): ln_pop_half +0.804 (s.e. 0.669); ln_jobs_half +0.387 (s.e. 0.425); ln_pop_ring -0.687 (s.e. 0.772); ln_jobs_ring -0.189 (s.e. 0.499); terminal +0.900 (s.e. 0.637); transfer +0.349 (s.e. 0.538). Within-system R2 in sample 0.17.
+
+\* median absolute percentage error after one system-level scaling factor.
+
+**What this can say for a new line:** the order of its stops, and the level only as a bracket: the range of the fitted systems' own levels, which is the spread of the level factors above. It cannot say which end of that bracket a new system will land on.
+
+Annual NTD trips per weekday station count (used to annualise): Chicago Transit Authority HR: 387; MTA New York City Transit HR: 578; Maryland Transit Administration CR: none (station counts are not weekday counts of 2020 or later, so no NTD year matches); Maryland Transit Administration HR: none (station counts are not weekday counts of 2020 or later, so no NTD year matches); Maryland Transit Administration LR: none (station counts are not weekday counts of 2020 or later, so no NTD year matches); Massachusetts Bay Transportation Authority HR: 299; Massachusetts Bay Transportation Authority LR: 498; San Francisco Bay Area Rapid Transit District HR: 275; Utah Transit Authority CR: 285; Utah Transit Authority LR: 344; Valley Metro Rail LR: none (station counts are not weekday counts of 2020 or later, so no NTD year matches).
+
+<!-- RESULTS:END -->
+
+## Reading the results (written 22 Nov 2026 after the run above)
+
+- **Heavy rail:** the model orders stations a little better than "people + jobs in the half mile" (median rank
+  correlation 0.62 against 0.58) and its error after one scaling factor is lower than that baseline's (41% against 50%),
+  but **no lower than calling every station the system median (41%)**. So it ranks stations; it does not size them
+  better than the system average does.
+- **Light rail:** the model is **worse** than the people + jobs baseline at ordering stations (0.28 against 0.37) and
+  worse than the system average on error (47% against 39%). Light-rail station boardings in these four systems are not
+  explained by people and jobs around the stop as measured here. The page shows light-rail riders with that warning.
+- **Commuter rail:** two systems only (MARC, FrontRunner); each test trains on one system. Treat as untested.
+- **Level for a new system:** the held-out systems' levels sat 0.49 to 1.47 times (heavy rail), 0.74 to 1.51 times
+  (light rail) and 0.57 to 3.05 times (commuter rail) the training systems' average. That is the honest bracket.
+- **The transfer flag** as fixed in the method is 1 for nearly every station in New York, Boston and BART (the
+  OpenStreetMap layer has several points per station, and dense networks have a station within 0.25 mi), so it carries
+  little information there. It was kept as committed, not tuned after the fact.
+- **Jobs:** Maryland counties are not in the 50-county block-group LODES table, so their jobs are tract totals spread by
+  area; this blurs the half-mile ring for MARC, Baltimore Metro and Light RailLink.
+- **35 station rows** fall outside the block groups on file (mostly points on piers, in water or at county edges whose
+  bundle polygon does not contain them) and 4 have no coordinates; they are left out, not imputed.
+- **Published direct-ridership-model coefficients were not obtained** (TCRP Report 153: onlinepubs.trb.org gave an empty
+  reply, the archive copy reset the connection, nap.edu wants a sign-in to download; FTA STOPS documentation is on
+  transit.dot.gov, which refuses this machine). None were typed from memory, so none are tested here.
