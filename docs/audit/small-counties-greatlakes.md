@@ -165,3 +165,115 @@ No pipeline code was changed.
 
 Files: `data/backtests/greatlakes_il_census_spot_2026-11-22.json`, `data/backtests/live_check_panels_2026-11-22_greatlakes_il.json`,
 `data/backtests/acs_fallback_mismatches_2026-11-22.json`.
+
+## Indiana (75 of 75 built, none withheld)
+
+| County | People (ACS 2020-24) | Block groups | Data file (gzip, bytes) | Completeness tier | Canopy block groups (2025 release) |
+|---|---|---|---|---|---|
+| Adams County (18001) | 36,227 | 30 | 126,042 | D | 13 |
+| Bartholomew County (18005) | 83,536 | 59 | 386,519 | D | 43 |
+| Benton County (18007) | 8,735 | 11 | 97,397 | D | 0 |
+| Blackford County (18009) | 11,950 | 11 | 64,993 | D | 6 |
+| Boone County (18011) | 74,718 | 41 | 278,845 | C | 31 |
+| Brown County (18013) | 15,606 | 15 | 247,369 | D | 0 |
+| Carroll County (18015) | 20,535 | 19 | 201,089 | D | 3 |
+| Cass County (18017) | 37,680 | 39 | 199,436 | C | 27 |
+| Clay County (18021) | 26,409 | 26 | 159,745 | D | 15 |
+| Clinton County (18023) | 32,944 | 29 | 130,221 | D | 15 |
+| Crawford County (18025) | 10,499 | 10 | 248,865 | D | 0 |
+| Daviess County (18027) | 33,658 | 30 | 228,760 | D | 17 |
+| Dearborn County (18029) | 51,094 | 38 | 289,041 | C | 18 |
+| Decatur County (18031) | 26,422 | 21 | 187,681 | D | 12 |
+| DeKalb County (18033) | 43,807 | 35 | 162,275 | C | 19 |
+| Dubois County (18037) | 43,614 | 31 | 312,072 | D | 22 |
+| Fayette County (18041) | 23,334 | 25 | 133,278 | C | 20 |
+| Floyd County (18043) | 80,918 | 55 | 361,319 | C | 43 |
+| Fountain County (18045) | 16,617 | 19 | 161,502 | D | 0 |
+| Franklin County (18047) | 23,020 | 17 | 241,028 | C | 2 |
+| Fulton County (18049) | 20,312 | 22 | 152,453 | D | 11 |
+| Gibson County (18051) | 33,000 | 31 | 351,438 | D | 13 |
+| Grant County (18053) | 66,295 | 57 | 188,727 | D | 40 |
+| Greene County (18055) | 31,021 | 32 | 236,293 | D | 10 |
+| Hancock County (18059) | 84,037 | 43 | 407,336 | D | 36 |
+| Harrison County (18061) | 39,859 | 24 | 356,447 | C | 6 |
+| Henry County (18065) | 48,970 | 45 | 225,107 | D | 22 |
+| Howard County (18067) | 83,752 | 66 | 198,709 | C | 55 |
+| Huntington County (18069) | 36,798 | 33 | 179,654 | D | 21 |
+| Jackson County (18071) | 46,660 | 36 | 338,060 | D | 20 |
+| Jasper County (18073) | 33,234 | 27 | 175,524 | C | 8 |
+| Jay County (18075) | 20,229 | 23 | 102,899 | D | 10 |
+| Jefferson County (18077) | 32,998 | 25 | 220,046 | D | 16 |
+| Jennings County (18079) | 27,562 | 20 | 210,752 | D | 7 |
+| Knox County (18083) | 36,007 | 43 | 404,585 | D | 26 |
+| Kosciusko County (18085) | 80,442 | 66 | 274,432 | C | 44 |
+| LaGrange County (18087) | 40,805 | 27 | 149,523 | D | 0 |
+| Lawrence County (18093) | 45,102 | 40 | 283,840 | D | 22 |
+| Marshall County (18099) | 46,284 | 38 | 198,532 | D | 13 |
+| Martin County (18101) | 9,830 | 10 | 250,646 | D | 0 |
+| Miami County (18103) | 35,712 | 36 | 210,308 | D | 23 |
+| Montgomery County (18107) | 38,312 | 34 | 180,217 | C | 18 |
+| Morgan County (18109) | 72,659 | 52 | 327,291 | D | 33 |
+| Newton County (18111) | 13,922 | 13 | 129,387 | D | 0 |
+| Noble County (18113) | 47,495 | 36 | 195,176 | D | 11 |
+| Ohio County (18115) | 5,999 | 6 | 98,080 | D | 0 |
+| Orange County (18117) | 19,767 | 20 | 227,006 | D | 0 |
+| Owen County (18119) | 21,604 | 19 | 203,517 | D | 0 |
+| Parke County (18121) | 16,406 | 19 | 225,375 | D | 1 |
+| Perry County (18123) | 19,270 | 17 | 243,121 | D | 10 |
+| Pike County (18125) | 12,154 | 13 | 169,652 | D | 0 |
+| Posey County (18129) | 25,116 | 24 | 237,411 | D | 11 |
+| Pulaski County (18131) | 12,441 | 13 | 98,943 | D | 0 |
+| Putnam County (18133) | 37,280 | 30 | 199,210 | D | 12 |
+| Randolph County (18135) | 24,387 | 30 | 146,344 | D | 10 |
+| Ripley County (18137) | 29,095 | 23 | 219,925 | D | 5 |
+| Rush County (18139) | 16,739 | 17 | 187,365 | D | 10 |
+| Scott County (18143) | 24,526 | 20 | 151,446 | D | 9 |
+| Shelby County (18145) | 45,265 | 37 | 293,190 | D | 21 |
+| Spencer County (18147) | 19,955 | 19 | 277,146 | D | 0 |
+| Starke County (18149) | 23,365 | 22 | 114,517 | D | 0 |
+| Steuben County (18151) | 34,726 | 33 | 164,356 | D | 17 |
+| Sullivan County (18153) | 20,780 | 22 | 149,871 | D | 9 |
+| Switzerland County (18155) | 9,909 | 8 | 158,929 | D | 0 |
+| Tipton County (18159) | 15,346 | 17 | 92,419 | C | 11 |
+| Union County (18161) | 6,985 | 7 | 74,830 | D | 0 |
+| Vermillion County (18165) | 15,421 | 18 | 243,664 | D | 10 |
+| Wabash County (18169) | 30,844 | 33 | 181,859 | D | 21 |
+| Warren County (18171) | 8,464 | 9 | 154,490 | D | 0 |
+| Warrick County (18173) | 65,261 | 51 | 299,152 | D | 41 |
+| Washington County (18175) | 28,212 | 25 | 307,844 | D | 9 |
+| Wayne County (18177) | 66,397 | 56 | 253,363 | D | 32 |
+| Wells County (18179) | 28,420 | 26 | 149,998 | D | 11 |
+| White County (18181) | 24,717 | 29 | 226,545 | D | 15 |
+| Whitley County (18183) | 34,618 | 30 | 177,159 | D | 14 |
+| **75 counties** | **2,516,089** | **2,133** | **15,891,586** | 13 C, 62 D | 1050 |
+
+- OpenStreetMap: `us-midwest-latest.osm.pbf` from download.openstreetmap.fr (2,816,740,006 bytes, md5
+  `e549a1125cf9e2b88b1cf3a44813b0a8`, equal to the published `us-midwest.osm.pbf.md5`; data timestamp 2026-11-21T01:07:35Z
+  from `us-midwest.state.txt`). Indiana and Ohio were cut from it with `national/osm_split.py us-midwest --states OH,IN
+  --per-pass 1` (osmium `extract -s smart`, union of the state's county boxes plus 0.05 degrees): Indiana 138 s, peak
+  osmium memory 4.15 GB, 241 MB; Ohio 150 s, peak 4.16 GB, 374 MB. The regional file was deleted once both were cut.
+  Build: fetch 9-25 s, build 124-157 s per county, three at a time (the Illinois checks and the Ohio builds ran alongside),
+  about 65 min from the first county to the last.
+- Bus frequency: 67 counties have no value in any block group (no feed that is read has a stop with 7-9 am departures in or
+  near the county); 8 have values. Rail distance: 71 counties have none; 4 have values.
+- Census spot check: 75 counties, 1,800 of 1,800 values equal (0% mismatch). Tract-median flags: 75 counties added, no
+  existing county changed, 0 values matching neither the block group nor the tract.
+- Crash counts: Indiana has no state crash source connected (`pipeline/region.py` STATE_DEFAULTS holds IL, ME, PA, TN, UT
+  and VA only, checked, not IN); all 75 files say "Not connected for Indiana yet: crash gaps are not scored and crash-based
+  projects are not proposed". No crash counts were built.
+- Tests run: `npm test` 1,620 of 1,620 (45 files), `npm run typecheck` clean. No corridor stop's flag changed (none of the
+  Indiana stops is in a new county).
+- OpenStreetMap ID for ID vs live Overpass (maps.mail.ru): **not complete at this commit.** The
+  mirror answered 504 to every query again (Overpass servers other than maps.mail.ru are refused from this machine); the
+  check is queued for Adair-first counties Adams (18001) and Blackford (18005) and its result is added to this section when
+  it answers.
+- Live check from R2 (`LIVE_PORT=9211`): Putnam (18133) and Henry (18065), 3 points each (Indiana's parcel service is on
+  the page): all six points had the house panel on live parcel records and pass every check (neighborhood, canopy, canopy
+  goal, crash text, state laws, Census area, HUD rent, FEMA, USGS, console): 54 pass, 0 fail. Each data file came from the
+  r2.dev address (HEAD 200, GET 200).
+- R2: before 1,594,978,998 bytes (2,454 objects); dry run "76 files, net +0.016 GB, projected 1.611 GB"; after
+  1,610,889,441 bytes (2,529 objects): 15,910,443 bytes added (the 75 data files, 15,891,586, plus the larger
+  `manifest.json`).
+
+Files: `data/backtests/greatlakes_in_census_spot_2026-11-22.json`, `data/backtests/live_check_panels_2026-11-22_greatlakes_in.json`,
+`data/backtests/acs_fallback_mismatches_2026-11-22.json`.
