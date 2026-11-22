@@ -353,7 +353,7 @@ function buildLists(m) {
   out.hiddenN = rec.ideas.length - aff.length; out.ideasAll = aff.length;
   for (const x of aff) {
     const key = hasFig(x.valuePerDollar) ? keyFig("Back per $1", fig(x.valuePerDollar)) : hasFig(x.cost) ? keyFig("Cost", fig(x.cost)) : null;
-    const item = { kind: "idea", name: x.name, chip: x.kind || "improvement", x, key };
+    const item = { kind: "idea", name: x.name, chip: KIND_TXT[x.kind] || x.kind || "improvement", x, key };
     (key ? out.on : out.off).push(item);
   }
   return out;
@@ -408,7 +408,9 @@ function plainMissing(t) {
   if (/^[a-z]+[A-Z]\w*/.test(x) && par) return par[1].replace(/^for /, "");
   return x.replace(/\s*\([^)]*\)/g, "");
 }
-const NAV = [["iv-where", "Where"], ["iv-build", "Build"], ["iv-sites", "Properties"], ["iv-house", "This house"], ["iv-transit", "Transit"]];
+// The catalog's kind codes in plain words (the rows used to show "qol", "value", "owner")
+const KIND_TXT = { qol: "quality of life", value: "raises home values", owner: "homeowner project", policy: "policy change", regional: "regional project" };
+const NAV = [["iv-where", "Where"], ["iv-build", "Build"], ["iv-sites", "Properties"], ["iv-house", "This house"], ["iv-transit", "Transit"], ["iv-courses", "Courses of action"]];
 const navHTML = () => `<nav class="iv-nav" aria-label="Sections">${NAV.map(([id, l]) => `<button type="button" data-iv-jump="${id}">${l}</button>`).join("")}</nav>`;
 
 // ---------------------------------------------------------------- card: where

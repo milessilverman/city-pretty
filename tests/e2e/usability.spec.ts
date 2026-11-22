@@ -7,6 +7,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 const root = path.resolve(__dirname, "../..");
+test.use({ viewport: { width: 1440, height: 900 } });   // the laptop size the journeys were measured at
 const ARC = /geocode\.arcgis\.com\/.*findAddressCandidates/;
 
 type Cand = { address: string; location: { x: number; y: number }; score: number; attributes: Record<string, unknown> };
@@ -357,7 +358,10 @@ test("journey f: ask the advisor about the open neighborhood in 2 steps", async 
   await expect(page.locator("#ai-advisor-modal")).toContainText("Echo Park");   // the advisor names the area it will answer about
   await page.fill("#ai-user-input", "What is the median rent here?");
   s.n++; await page.press("#ai-user-input", "Enter");
-  await expect(page.locator("#ai-chat-history")).toContainText("Stub reply for the test.");
+  // A plain data question is answered from the page's own figures (app/advisor-scripts.js), naming the area and its source
+  const rent = await page.evaluate(() => (0, eval)("D").details[(0, eval)("selected")].m.rent);
+  await expect(page.locator("#ai-chat-history")).toContainText("Median rent, Echo Park");
+  await expect(page.locator("#ai-chat-history")).toContainText("$" + Math.round(rent).toLocaleString("en-US"));
   expect(s.n).toBe(2);
 });
 
@@ -374,4 +378,17 @@ test("journey g: switch counties mid-task in 2 steps and land on that county's n
   await expect(page.locator("#glance .tile").first()).toBeInViewport();
   await expect(page.locator("#match-note")).toHaveCount(0);
   expect(s.n).toBe(2);
+});
+
+test("Invest: rows use plain words for the kind of project, and every card is in the jump row", async ({ page }) => {
+  await openPage(page);
+  await new Steps(page).search("Echo Park");
+  await page.locator("#btn-build-here").click();
+  await expect(page.locator("#iv-build .iv-lede")).toContainText("Echo Park", { timeout: 30_000 });
+  const chips = (await page.locator("#iv-build .iv-chip").allTextContents()).map((x) => x.trim());
+  expect(chips.length).toBeGreaterThan(0);
+  for (const c of chips) expect(["qol", "value", "owner", "policy", "regional"]).not.toContain(c);   // catalog codes, not words
+  expect(await page.locator(".iv-nav button").allTextContents()).toEqual(["Where", "Build", "Properties", "This house", "Transit", "Courses of action"]);
+  await page.locator('.iv-nav [data-iv-jump="iv-courses"]').click();
+  await expect(page.locator("#iv-courses")).toBeInViewport();
 });

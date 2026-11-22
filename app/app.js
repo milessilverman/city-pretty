@@ -8394,7 +8394,7 @@ function fillCrashTile(id, tries) {
   if (cc === undefined && (tries || 0) < 40) { setTimeout(() => fillCrashTile(id, (tries || 0) + 1), 250); return; }
   const m = (D.details[id] || {}).m || {}, row = cc ? cc[id] : null, yrs = cc && cc._meta && Array.isArray(cc._meta.years) ? cc._meta.years.join("–") : "";
   let v = "–", s = NOF("no located crash records for this county");
-  if (Array.isArray(row)) { v = crashN(row[1]); s = `killed or seriously injured${yrs ? ", " + yrs : ""}; inside or on its boundary streets`; }
+  if (Array.isArray(row)) { v = crashN(row[1]); s = `killed or seriously injured${yrs ? ", " + yrs : ""}; inside or on its boundary streets` + (Number.isInteger(+row[1]) ? "" : " (a crash on a shared boundary is split between the areas, so the count can be a fraction)"); }
   else if (m.ksi != null) { v = fmtN(m.ksi); s = "fatal or severe crashes, older count (boundary crashes on one side only)"; }
   el.querySelector(".v").textContent = v; el.querySelector(".s").innerHTML = s;
 }

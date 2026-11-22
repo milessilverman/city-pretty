@@ -1695,3 +1695,18 @@ the report). Owner names are stored only for public agencies and companies; a te
 no earlier record of this kind existed outside Los Angeles. One e2e test (`tests/e2e/invest.spec.ts`, budget test) expected Travis County's Properties card to say no sites
 have been measured; that stopped being true when its station-area sites were added, so it now expects the card to say they are measured from
 OpenStreetMap and the county parcel record and to show no homes, margin or market-value rows for them.
+
+### Ease-of-use pass (20-22 Nov 2026, `audit/usability-2026-11-20.md`)
+
+Layout and wording only; no figure, source or calculation changed. Mistakes found on the page while doing it:
+
+- **Corrected:** the header named the previous county after switching between two counties other than Los Angeles (seen: "Travis County, TX"
+  over Kent County MD's data; the same going Cook to Travis). The county was read from a block group still selected from the county just left.
+- **Corrected:** in Los Angeles County the search suggestions were matched against Orange County's neighborhood names once that county had
+  loaded in the background, and clicking a suggestion ran the half-typed text through the address lookup instead (seen: "Echo P" opened Echo, Oregon).
+- **Corrected:** a ZIP code was treated as a street address and opened whichever lot lay at the ZIP's center as if it were the place searched for.
+- **Found, not changed:** the neighborhood panel's Zoning section, for an area with no zoning shares in its county file, summarises whatever
+  zones are loaded in the current map view and labels them "Predominant zoning in <city>"; after viewing Austin, a Kent County MD area showed
+  "SF-3-NP". These are counts of map features in view, not shares of the area. The new summary tile shows "not on file" instead. Owner to decide
+  whether the section should do the same.
+- **Found, not changed:** 1200 Getty Center Dr, Los Angeles: the lot table shows zoning "A1-1-H" while the owner playbook under it says zoning is not on file.
