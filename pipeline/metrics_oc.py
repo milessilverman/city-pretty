@@ -14,9 +14,9 @@ ld = lambda n: json.load(open(os.path.join(DATA, n), encoding="utf-8")) if os.pa
 def osm_geom(el):
     """OSM element (with geometry from `out geom` or `center`) -> shapely lon/lat geometry or None"""
     if el["type"] == "node":
-        return Point(el["lon"], el["lat"])
+        return Point(geo.wl(el["lon"]), el["lat"])
     if el["type"] == "way" and el.get("geometry"):
-        pts = [(g["lon"], g["lat"]) for g in el["geometry"]]
+        pts = [(geo.wl(g["lon"]), g["lat"]) for g in el["geometry"]]
         if len(pts) >= 4 and pts[0] == pts[-1]:
             return Polygon(pts)
         return LineString(pts) if len(pts) >= 2 else None
@@ -24,13 +24,13 @@ def osm_geom(el):
         polys = []
         for mbr in el["members"]:
             if mbr.get("role") == "outer" and mbr.get("geometry"):
-                pts = [(g["lon"], g["lat"]) for g in mbr["geometry"]]
+                pts = [(geo.wl(g["lon"]), g["lat"]) for g in mbr["geometry"]]
                 if len(pts) >= 4:
                     polys.append(Polygon(pts))
         if polys:
             return unary_union(polys)
     if el.get("center"):
-        return Point(el["center"]["lon"], el["center"]["lat"])
+        return Point(geo.wl(el["center"]["lon"]), el["center"]["lat"])
     return None
 
 
@@ -157,6 +157,8 @@ def confirm_rail_stations(rail, R_CONFIRM=400.0, R_SAME=150.0):
     gp = ld("transit_rail_stops.json")
     if gp is None:
         return rail
+    if gp and geo.CROSS:
+        gp = [[geo.wl(p[0]), *p[1:]] for p in gp]
     idx = geo.PointIndex([(p[0], p[1], p[2]) for p in gp]) if gp else None
     # Is each rail agency's feed current? From the transit step's record (transit_stops_7_9.meta.json): a feed used for buses has its
     # calendar; a skipped one says why ("schedule ended over a year ago", or "no bus routes" for a rail-only feed, whose calendar is not
@@ -282,7 +284,7 @@ def land_shapes(polys):
     if not wa or not wa.get("features"):
         return dict(polys), 0
     from shapely.strtree import STRtree
-    wp = [shape(f["geometry"]).buffer(0) for f in wa["features"] if f.get("geometry") and (f.get("properties") or {}).get("MTFCC") in WATER_MTFCC]
+    wp = [geo.shape_ll(f["geometry"]).buffer(0) for f in wa["features"] if f.get("geometry") and (f.get("properties") or {}).get("MTFCC") in WATER_MTFCC]
     wp = [g for g in wp if not g.is_empty]
     if not wp:
         return dict(polys), 0
@@ -307,7 +309,7 @@ def main():
     bg = ld("bg.geojson"); acs = ld("acs_bg.json") or {}; acs_tract = ld("acs_tract.json") or {}
     assert bg, "run fetch_oc.py first (data/bg.geojson missing)"
     feats = [f for f in bg["features"] if f["properties"].get("GEOID")]
-    polys = {f["properties"]["GEOID"]: shape(f["geometry"]) for f in feats}
+    polys = {f["properties"]["GEOID"]: geo.shape_ll(f["geometry"]) for f in feats}
     land, n_land = land_shapes(polys)
     print("land shapes: mapped water (5% or more of the shape) removed from", n_land, "block groups")
     # reference point for distances: the shape's usual point, unless it lies in mapped water (then a point on the land part)
@@ -362,14 +364,14 @@ def main():
                 except Exception:
                     pass
     if not cde_pts and ld("nces_schools.geojson"):   # outside California: NCES EDGE public school locations
-        cde_pts = [(f["properties"]["LON"], f["properties"]["LAT"], f["properties"].get("NAME")) for f in ld("nces_schools.geojson")["features"]
+        cde_pts = [(geo.wl(f["properties"]["LON"]), f["properties"]["LAT"], f["properties"].get("NAME")) for f in ld("nces_schools.geojson")["features"]
                    if f["properties"].get("LAT") is not None]
     if cde_pts:
         idx["school"] = geo.PointIndex(cde_pts)
     # AFDC DC fast chargers if present
     afdc = ld("afdc_dcfc.json")
     if afdc and afdc.get("fuel_stations"):
-        idx["ev"] = geo.PointIndex([(s["longitude"], s["latitude"], s.get("station_name")) for s in afdc["fuel_stations"] if s.get("ev_dc_fast_num")])
+        idx["ev"] = geo.PointIndex([(geo.wl(s["longitude"]), s["latitude"], s.get("station_name")) for s in afdc["fuel_stations"] if s.get("ev_dc_fast_num")])
     # parks: polygons with acreage, kinds
     park_polys = []
     for t, g, _ in parks:
@@ -385,14 +387,14 @@ def main():
     st_idx = geo.PointIndex(stations)
     # bus frequency (OCTA)
     stops = ld("octa_stops_7_9.json") or ld("transit_stops_7_9.json") or []   # Orange County: OCTA feed; elsewhere: MobilityData feeds
-    stop_idx = geo.PointIndex([(s[0], s[1], s[2]) for s in stops])
+    stop_idx = geo.PointIndex([(geo.wl(s[0]), s[1], s[2]) for s in stops])
     # coverage guard for the MobilityData feeds: OpenStreetMap bus stops show where buses run; if a block group has 3+ OSM bus stops
     # within 400 m but the feeds have under 30% as many stops there, an operator is missing from the feeds and bt is unknown, not 0
     mdb = not ld("octa_stops_7_9.json") and bool(stops)
     osm_bus = (ld("osm_bus_stops.json") or {}).get("elements", []) if mdb else []
-    osm_bus_idx = geo.PointIndex([(e["lon"], e["lat"], 1) for e in osm_bus]) if osm_bus else None
+    osm_bus_idx = geo.PointIndex([(geo.wl(e["lon"]), e["lat"], 1) for e in osm_bus]) if osm_bus else None
     gap_stops = (ld("transit_gap_stops.json") or []) if mdb else []   # stops of operators whose schedule is stale or has no mirror
-    gap_idx = geo.PointIndex([(g_[0], g_[1], 1) for g_ in gap_stops]) if gap_stops else None
+    gap_idx = geo.PointIndex([(geo.wl(g_[0]), g_[1], 1) for g_ in gap_stops]) if gap_stops else None
     bt_unknown = 0
     # v10 (round 8.6): no listed stop inside the county while OpenStreetMap maps 3+ bus stops in it: an operator is missing from the feeds,
     # so bus frequency is unknown in every block group, not 0 (a neighbour's stops in the search box made it 0 wherever none was near)
@@ -412,7 +414,7 @@ def main():
                 pr = f.get("properties", {}); hz = str(pr.get("FHSZ_Description") or pr.get("FHSZ") or pr.get("HAZ_CLASS") or "")
                 if "very high" in hz.lower() or hz.strip() == "3":
                     try:
-                        fire_polys.append(geo.proj(shape(f["geometry"])))
+                        fire_polys.append(geo.proj(geo.shape_ll(f["geometry"])))
                     except Exception:
                         pass
     fire_union = unary_union(fire_polys) if fire_polys else None

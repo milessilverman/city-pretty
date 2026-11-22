@@ -3469,13 +3469,22 @@ function modelBlockGroup(fips, a, ll) {
   }
   return houseBlockGroup(ll) || (typeof selected !== "undefined" ? selected : null);
 }
+const _e180 = new WeakMap();
 function pointInFeature(f, lon, lat) {
-  const inRing = ring => { let c = false;
-    for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) { const [xi, yi] = ring[i], [xj, yj] = ring[j];
-      if ((yi > lat) !== (yj > lat) && lon < (xj - xi) * (lat - yi) / (yj - yi) + xi) c = !c; }
-    return c; };
   const polys = f.geometry.type === "Polygon" ? [f.geometry.coordinates] : f.geometry.coordinates;
-  return polys.some(([outer, ...holes]) => inRing(outer) && !holes.some(inRing));
+  const test = lon => {
+    const inRing = ring => { let c = false;
+      for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) { const [xi, yi] = ring[i], [xj, yj] = ring[j];
+        if ((yi > lat) !== (yj > lat) && lon < (xj - xi) * (lat - yi) / (yj - yi) + xi) c = !c; }
+      return c; };
+    return polys.some(([outer, ...holes]) => inRing(outer) && !holes.some(inRing));
+  };
+  if (test(lon)) return true;
+  // A county that crosses the 180th meridian (Aleutians West) is stored with west-hemisphere longitudes above 180 (166 W = 194); a point
+  // read as -166 (a click or a search result) is tried there too. Other counties never have a longitude above 180.
+  if (lon >= 0) return false;
+  if (!_e180.has(f)) _e180.set(f, polys.some(([outer]) => outer.some(c => c[0] > 180)));
+  return _e180.get(f) && test(lon + 360);
 }
 let youMarker = null;
 function selectAt(ll) {
@@ -5616,6 +5625,7 @@ function showOutlines(F) {
 }
 
 async function houseAt(ll, fOverride = null) {
+  if (ll && ll.lng > 180) ll = L.latLng(ll.lat, ll.lng - 360);   // longitudes above 180 (Aleutians West's west half) back to -180..180 for the services
   clearTimeout(hoverTimer);
   if (hoverLayer) { map.removeLayer(hoverLayer); hoverLayer = null; }
   const el0 = $("#house"); if (el0) el0.remove();
@@ -6841,6 +6851,7 @@ function jsonpGet(url, ms = 15000) {   // the Census Bureau geocoder answers JSO
 }
 const CENSUS_GEOCODER = "https://geocoding.geo.census.gov/geocoder/geographies/";
 async function fipsFromLatLng(lat, lon) {
+  if (lon > 180) lon -= 360;   // a county across the 180th meridian is drawn with longitudes above 180; services want -180..180
   try {
     const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 1200);
     const r = await fetch(`https://geo.fcc.gov/api/census/block/find?latitude=${lat}&longitude=${lon}&format=json`, { signal: ctl.signal });
@@ -8251,16 +8262,23 @@ function p3Section(p, m) {
 }
 
 
+// Bounds to fit for a block group. A block group of islands on both sides of the 180th meridian (Aleutians West) is stored on the
+// continuous longitude scale (166 W = 194), so its own bounds are 20+ degrees wide, mostly ocean; its largest part is fitted instead.
+// Every other block group: its bounds, as before.
+function fitBoundsOf(f) {
+  const b = L.geoJSON(f).getBounds();
+  if (!b.isValid() || b.getEast() <= 180 || f.geometry.type !== "MultiPolygon") return b;
+  let best = null, area = -1;
+  for (const poly of f.geometry.coordinates) {
+    const pb = L.latLngBounds(poly[0].map(c => [c[1], c[0]])), a = (pb.getEast() - pb.getWest()) * (pb.getNorth() - pb.getSouth());
+    if (a > area) { area = a; best = pb; }
+  }
+  return best || b;
+}
 function select(id, fly) {
   selected = id; highlight(); syncHash(id); updateCompareUI();
   const f = byId.get(id); if (!f) return;
-  if (fly) {
-    const b = L.geoJSON(f).getBounds();
-    if (b && b.isValid()) {
-      if (Math.abs(b.getEast() - b.getWest()) > 180) map.setView(b.getCenter(), 8);
-      else map.fitBounds(b, { maxZoom: 15, padding: [60, 60] });
-    }
-  }
+  if (fly) { const b = fitBoundsOf(f); if (b && b.isValid()) map.fitBounds(b, { maxZoom: 15, padding: [60, 60] }); }
   const p = f.properties, d = D.details[id] || {}, m = d.m || {};
   // Verification gate: only verified / partly verified interventions carry numbers below; the rest are listed by name.
   const { recs, other: otherIdeas } = gateRecs(recsOf(d), m);
@@ -10800,7 +10818,7 @@ function switchCounty(c, wantBgId) {
           l.bindTooltip(() => {
             const k = $("#metric").value;
             const m = METRICS[k];
-            const mv = m ? m.unit(m.f(p)) : "";
+            const mv0 = m ? m.f(p) : null, mv = m ? (mv0 == null ? "not scored" : m.unit(mv0)) : "";   // a block group with no best bet has no value: the tooltip threw, and a click there selected nothing
             const catName = p.t && D.catalog[p.t] ? D.catalog[p.t].name : p.t;
             return `<b>${esc(p.n)}</b> · ${esc(p.c)}<br>${m ? m.label.split("(")[0] + ": " + mv + "<br>" : ""}${p.t && p.v >= 1 ? "Best bet: " + esc(catName) + " (" + fvpd(p.v) + " / $1)" : "Nothing returns $1 per $1"}`;
           }, { sticky: true });
@@ -10843,9 +10861,9 @@ function switchCounty(c, wantBgId) {
         } else {
           const bounds = (ocLayer && ocLayer.getBounds && ocLayer.getBounds().isValid()) ? ocLayer.getBounds() : (D_OC && D_OC.features && D_OC.features.length ? L.geoJSON(D_OC).getBounds() : null);
           if (bounds && bounds.isValid && bounds.isValid()) {
-            if (Math.abs(bounds.getEast() - bounds.getWest()) > 180) {
-              const c = (D_OC && D_OC.features && D_OC.features[0]) ? L.geoJSON(D_OC.features[0]).getBounds().getCenter() : bounds.getCenter();
-              map.setView(c, 7);
+            if (bounds.getEast() > 180) {   // a county across the 180th meridian: the map would hold mostly ocean, so fit the selected block group's largest part
+              const sf = (targetId && byId.get(targetId)) || (D_OC && D_OC.features && D_OC.features[0]);
+              map.fitBounds(sf ? fitBoundsOf(sf) : bounds, { maxZoom: 11.5, padding: [25, 25] });
             } else {
               map.fitBounds(bounds, { maxZoom: 11.5, padding: [25, 25] });
             }

@@ -56,34 +56,28 @@ def is_infra(t):
 
 
 def county_boxes(margin=0.02):
-    """List of (w, s, e, n) boxes. If the county crosses the 180th meridian (e.g. Aleutians West 02016),
-    returns two disjoint boxes split at the antimeridian rather than one box spanning 360 degrees."""
-    xs, ys = [], []
+    """List of (w, s, e, n) boxes of the county's block groups plus a margin: used to clip state or regional extracts (registry clip=True)
+    and as the Overpass download boxes. One box, except for a county that crosses the 180th meridian (Aleutians West, 02016): two
+    boxes, one each side of 180, cut at 180 (east box ends at 180, west box starts at -180)."""
+    xs, ys = region.bg_lons(), []
     def walk(c):
-        if isinstance(c[0], (int, float)): xs.append(c[0]); ys.append(c[1])
+        if isinstance(c[0], (int, float)): ys.append(c[1])
         else:
             for q in c: walk(q)
     for f in json.load(open(os.path.join(DATA, "bg.geojson")))["features"]:
         walk(f["geometry"]["coordinates"])
-    min_x, max_x = min(xs), max(xs)
-    min_y, max_y = min(ys) - margin, max(ys) + margin
-    if min_x < -160 and max_x > 160:
-        pos_xs = [x for x in xs if x > 0]
-        neg_xs = [x for x in xs if x < 0]
-        return [
-            (max(170.0, min(pos_xs) - margin), min_y, 180.0, max_y),
-            (-180.0, min_y, min(-160.0, max(neg_xs) + margin), max_y)
-        ]
-    return [(min_x - margin, min_y, max_x + margin, max_y)]
+    w, e = region.lon_extent(xs)
+    return region.split_box((w - margin, min(ys) - margin, e + margin, max(ys) + margin))
 
 
 def county_box(margin=0.02):
-    """(w, s, e, n) of the county's block groups plus a margin: used to clip state or regional extracts (registry clip=True)"""
+    """(w, s, e, n) of the county's block groups plus a margin (the first box when the county crosses 180)"""
     return county_boxes(margin)[0]
 
 
 def main():
     t0 = time.time()
+    CROSS = region.crosses_180()
     BOXES = county_boxes() if region.OSM.get("clip") else None
     inb = (lambda lon, lat: any(b[0] <= lon <= b[2] and b[1] <= lat <= b[3] for b in BOXES)) if BOXES else (lambda lon, lat: True)
     if BOXES: print("clipping", os.path.basename(PBF), "to", [[round(v, 3) for v in b] for b in BOXES])
@@ -137,6 +131,9 @@ def main():
                 continue
             r0 = members[0]["geometry"]
             cx = sum(p["lon"] for p in r0) / len(r0); cy = sum(p["lat"] for p in r0) / len(r0)
+            if region.crosses_180():   # a ring over 180: average on the continuous scale, then back to -180..180
+                cx = sum(p["lon"] + 360 if p["lon"] < 0 else p["lon"] for p in r0) / len(r0)
+                cx = cx - 360 if cx > 180 else cx
             el = {"type": "relation" if not o.from_way() else "way_area", "id": o.orig_id(), "tags": t, "members": members, "center": {"lon": cx, "lat": cy}}
             if is_park(t):
                 out["parks"].append(el)
@@ -148,7 +145,9 @@ def main():
             if is_amenity(t):
                 out["amenities"].append(dict(el, type="relation"))
     def close(a, b, R):
-        return ((a["lon"] - b["lon"]) * math.cos(math.radians(a["lat"])) * 111320) ** 2 + ((a["lat"] - b["lat"]) * 110540) ** 2 <= R * R
+        dl = a["lon"] - b["lon"]
+        if CROSS: dl = (dl + 180) % 360 - 180   # a county across the 180th meridian: two stations either side of it are close
+        return (dl * math.cos(math.radians(a["lat"])) * 111320) ** 2 + ((a["lat"] - b["lat"]) * 110540) ** 2 <= R * R
     pts = [e for e in out["rail"] if e["type"] == "node"]
     kept = [e for e in pts if not e.get("from_area") and not e.get("stop_position")]
     n_nodes = len(kept)

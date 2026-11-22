@@ -10,6 +10,28 @@ KX = 111320.0 * math.cos(math.radians(LAT0))
 KY = 110540.0
 
 
+CROSS = region.crosses_180()   # the county crosses the 180th meridian: read longitudes on a continuous scale (see region.py)
+
+
+def wl(x):
+    """longitude on the county's scale: unchanged, except that west-hemisphere longitudes of a county crossing 180 get +360"""
+    return x + 360.0 if CROSS and x < 0 else x
+
+
+def wgeom(g):
+    """GeoJSON geometry dict with every longitude put through wl(); the same object when the county does not cross 180"""
+    if not CROSS:
+        return g
+    def w(c):
+        return [wl(c[0]), *c[1:]] if isinstance(c[0], (int, float)) else [w(q) for q in c]
+    return {**g, "coordinates": w(g["coordinates"])}
+
+
+def shape_ll(g):
+    """shapely geometry from a GeoJSON geometry dict, on the county's longitude scale"""
+    return shape(wgeom(g))
+
+
 def to_xy(lon, lat):
     return lon * KX, lat * KY
 
@@ -46,7 +68,8 @@ def enc_ring_lonlat(ring):
 
 
 def cell_key(lon, lat, cell=0.05):
-    return f"{math.floor((lon + 180) / cell)},{math.floor((lat + 90) / cell)}"
+    # the page wraps a cell's column around the globe (360 / cell columns), so a longitude above 180 lands in the column of its -180..180 twin
+    return f"{math.floor(((lon + 180) % 360 if lon > 180 else lon + 180) / cell)},{math.floor((lat + 90) / cell)}"
 
 
 def acres(geom_ll):
