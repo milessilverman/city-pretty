@@ -128,8 +128,12 @@ def main():
     rows = [r for res in results for r in res]
     rows.sort(key=lambda r: (r[0], r[1]))
     name = "hmda_tract_year_50counties.csv.gz" if a.scope == "counties" else "hmda_tract_year_national.csv.gz"
-    n = write_gz_csv(os.path.join(OUT, name), FIELDS, rows)
-    print("rows", len(rows), "bytes", n)
+    dest = os.path.join(OUT if a.scope == "counties" else SCRATCH, name)
+    n = write_gz_csv(dest, FIELDS, rows)
+    print("rows", len(rows), "bytes", n, "->", dest)
+    if a.scope == "states" and n < 20 * 1024 * 1024:
+        os.replace(dest, os.path.join(OUT, name))
+        print("national table small enough: moved into", OUT)
 
 
 if __name__ == "__main__":

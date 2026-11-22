@@ -28,14 +28,15 @@ class Fhfa(unittest.TestCase):
 
 
 class Hmda(unittest.TestCase):
-    def test_dc_2022_tract(self):
-        # data-browser CSV for DC 2022 (originations only), tract 11001000101: 44 rows, median loan 445000, median income 268, 4 investor
-        d = loaders.hmda()[("11001000101", 2022)]
-        self.assertEqual(d["orig"], 44)
-        self.assertEqual(d["median_loan"], 445000.0)
-        self.assertEqual(d["median_income_k"], 268.0)
-        self.assertEqual(d["orig_investor"], 4)
-        self.assertEqual(d["tract_vintage"], "2020")
+    def test_manhattan_2022_tract(self):
+        # data-browser CSV counties=36061&years=2022&loan_purposes=1, tract 36061001501, total_units 1-4, read from the raw rows:
+        # actions 1:65 2:1 3:8 4:14 5:9 (6:3 not counted); originations by occupancy 1:59 2:6; median loan 705000; median income 267
+        d = loaders.hmda()[("36061001501", 2022)]
+        self.assertEqual((d["apps"], d["orig"], d["denied"], d["withdrawn"], d["incomplete"], d["approved_not_accepted"]), (97, 65, 8, 14, 9, 1))
+        self.assertEqual((d["orig_owner_occ"], d["orig_second_home"], d["orig_investor"]), (59, 6, 0))
+        self.assertEqual((d["median_loan"], d["median_income_k"]), (705000.0, 267.0))
+        self.assertAlmostEqual(d["denial_rate"], 8 / (65 + 1 + 8), places=3)
+        self.assertEqual(loaders.hmda()[("36061001501", 2022)]["tract_vintage"], "2020")
 
     def test_rates_are_consistent(self):
         for (t, y), d in list(loaders.hmda().items())[:5000]:
