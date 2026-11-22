@@ -174,11 +174,60 @@ function gradeFromEvidence(model, ev) {
   return { grade: g, reasons };
 }
 
+// ---------------------------------------------------------------- 1a. the walk-forward prediction test (app/data/neighborhood_prediction.json)
+// docs/PREDICTION-MODEL.md: a leading-signal model is used for a county only where it beat both baselines in the
+// walk-forward test (decision rule written before the test). Elsewhere the screen below stays, with the screen's own
+// tested 5-year ranges by home-value fifth and its measured hit rate. Ranges are stored in points (100 x log change).
+const PRED_FILE = "app/data/neighborhood_prediction.json";
+const ptsToPct = p => p == null ? null : round(100 * (Math.exp(p / 100) - 1), 1);
+function predictionEvidence(prediction, fips) {
+  if (!prediction || !prediction.counties || !prediction.decision) return null;
+  const c = prediction.counties[fips] || null;
+  const res = prediction.results_5y || {};
+  const pooledHit = res.hit_rate_top_third && res.hit_rate_top_third.cheapest ? res.hit_rate_top_third.cheapest.pooled : null;
+  return {
+    inSample: !!c, county: c, applies: c ? c.applies : null, overallPass: !!prediction.decision.overall_pass,
+    testedOn: prediction.tested_on || null, headline: Array.isArray(prediction.headline) ? prediction.headline : [],
+    pooledFifths: res.baseline_fifth_ranges ? res.baseline_fifth_ranges.pooled : null,
+    pooledHitCheapest: pooledHit, modelHitPooled: res.hit_rate_top_third && res.hit_rate_top_third.ridge ? res.hit_rate_top_third.ridge.pooled : null,
+  };
+}
+function screenPrediction(pe, fifth, fips) { // the baseline's tested range for a block group in home-value fifth `fifth` (1 = cheapest)
+  if (!pe || !pe.inSample || fifth == null) return null;
+  const own = pe.county.baseline_fifth_ranges_5y && pe.county.baseline_fifth_ranges_5y[String(fifth)];
+  const pooled = pe.pooledFifths && pe.pooledFifths[String(fifth)];
+  const q = own || pooled; if (!q) return null;
+  const src = `${PRED_FILE} ${own ? `counties.${fips}.baseline_fifth_ranges_5y` : "results_5y.baseline_fifth_ranges.pooled"}`;
+  const ch = pe.county.hit_rate_top_third_5y ? num(pe.county.hit_rate_top_third_5y.cheapest) : null;
+  return {
+    model: "relative-value screen (cheap for its county)",
+    newModelTested: true, newModelResult: pe.overallPass ? "beat the screen overall but not in this county's own test" : "did not beat this screen in the walk-forward test",
+    level: "tract-level test, applied to this block group",
+    homeValueFifth: fifth,
+    relative5y: {
+      low: tv(ptsToPct(q[0]), "% vs county median tract, 5 years (10th percentile)", src, "measured"),
+      median: tv(ptsToPct(q[1]), "% vs county median tract, 5 years (median)", src, "measured"),
+      high: tv(ptsToPct(q[2]), "% vs county median tract, 5 years (90th percentile)", src, "measured"),
+      tracts: q[3], basis: own ? "this county's tracts, 5-year windows starting 2014-2020" : "all 50 test counties, 5-year windows starting 2014-2020",
+    },
+    hitRateTopThird: tv(ch, "share of the county's cheapest third of tracts that ended in its top third for 5-year gain (no skill 0.333)", `${PRED_FILE} counties.${fips}.hit_rate_top_third_5y.cheapest`, "measured"),
+    hitRateTopThirdAllCounties: pe.pooledHitCheapest ? tv(num(pe.pooledHitCheapest.mean), "share, all test counties", `${PRED_FILE} results_5y.hit_rate_top_third.cheapest`, "measured") : null,
+    testedOn: pe.testedOn,
+  };
+}
+function modelGrade(pe) {
+  const h = pe.county && pe.county.hit_rate_top_third_5y ? num(pe.county.hit_rate_top_third_5y.ridge) : null;
+  const g = h != null && h >= 0.45 ? "A" : "B";
+  return { grade: g, reasons: [`the leading-signal model beat both baselines in the walk-forward test and in this county's own test windows; its top-third call was right ${h == null ? "an unknown share" : Math.round(h * 100) + "%"} of the time here (no skill 33%)${g === "B" ? ", under the 45% needed for grade A" : ""}`] };
+}
+
 // ---------------------------------------------------------------- 1. neighborhoods
 /**
  * rankNeighborhoods(countyBundle, opts)
  *   countyBundle: a decoded counties/bundle_<fips>.json.gz (needs .details and .meta)
  *   opts.backtest: the parsed app/data/neighborhood_score_backtest.json (required)
+ *   opts.prediction: the parsed app/data/neighborhood_prediction.json (optional; adds the tested ranges and hit rate)
+ *   opts.predictionTracts: the parsed app/data/prediction/<fips>.json (used only where the county's entry says "model")
  *   opts.limit (default all), opts.minHomes (default 0)
  */
 function rankNeighborhoods(countyBundle, opts) {
@@ -201,12 +250,26 @@ function rankNeighborhoods(countyBundle, opts) {
     if (miss.length) unscored.push({ id, name: m.n || null, city: m.c || null, score: null, missing: miss });
     else rows.push({ id, m, vals });
   }
+  // the walk-forward prediction test: the model only where this county passed it, and only with its tract file
+  const pe = predictionEvidence(opts.prediction, fips);
+  const pt = opts.predictionTracts;
+  const useModel = !!(pe && pe.applies === "model" && pt && pt.county === fips && Array.isArray(pt.tracts));
+  const tractPred = useModel ? Object.fromEntries(pt.tracts.map(t => [t.tract, t])) : null;
+  if (useModel) {
+    for (let i = rows.length - 1; i >= 0; i--) {
+      if (!tractPred[rows[i].id.slice(0, 11)]) { const x = rows.splice(i, 1)[0]; unscored.push({ id: x.id, name: x.m.n || null, city: x.m.c || null, score: null, missing: [`tract prediction for ${x.id.slice(0, 11)} (app/data/prediction/${fips}.json)`] }); }
+    }
+  }
   const pct = {};
   for (const s of feats) { const p = percentileRanks(rows.map(r => r.vals[s])); rows.forEach((r, i) => { (pct[r.id] = pct[r.id] || {})[s] = p[i]; }); }
+  const hvRows = rows.filter(r => num(r.m.hv) != null && r.m.hv > 0), hvP = percentileRanks(hvRows.map(r => r.m.hv)), hvPct = {};
+  hvRows.forEach((r, i) => { hvPct[r.id] = hvP[i]; });
   const ev = countyEvidence(model.backtest, fips);
-  const gradeBase = gradeFromEvidence(model, ev);
+  const gradeBase = useModel ? modelGrade(pe) : gradeFromEvidence(model, ev);
+  if (!useModel && pe && pe.inSample) gradeBase.reasons.push(pe.overallPass ? "the leading-signal model was not used here: it did worse than a baseline in this county's own test windows" : "the leading-signal model (mortgage, permit, job and migration signals) was tested and did not beat this screen, so the screen stays");
   for (const r of rows) {
-    r.raw = model.weights.reduce((a, w) => a + w.weight * (pct[r.id][w.signal] - 0.5), 0);
+    r.raw = useModel ? -tractPred[r.id.slice(0, 11)].rank_in_county / tractPred[r.id.slice(0, 11)].of
+      : model.weights.reduce((a, w) => a + w.weight * (pct[r.id][w.signal] - 0.5), 0);
   }
   const scorePct = percentileRanks(rows.map(r => r.raw));
   rows.forEach((r, i) => { r.scorePct = scorePct[i]; });
@@ -232,12 +295,33 @@ function rankNeighborhoods(countyBundle, opts) {
     if (ip != null) reasons.push(`Median household income ${fmtUsd(m.inc)} (${Math.round(ip * 100)}th percentile in the county).`);
     const hist = quintileHistory(model.backtest, q);
     if (hist && hist["2020_2025"].value != null) reasons.push(`In the back-test, tracts in this score fifth (${q} of 5) went on to gain ${fmtPct(hist["2020_2025"].value)} vs their county's median tract over 2020-25 and ${fmtPct(hist["2015_2020"].value)} over 2015-20 (averages; individual tracts varied widely).`);
-    reasons.push(model.role === "screen" ? "This is a relative-value screen (cheap for its county, high rent for its price), not a forecast; it did no better than simply picking the cheapest tracts." : "Score beat simple baselines in the back-test.");
+    let prediction = null;
+    if (useModel) {
+      const tp = tractPred[r.id.slice(0, 11)], rg = tp.relative_5y_range_pct || [];
+      prediction = {
+        model: "leading-signal model", level: `tract-level: this block group inherits tract ${tp.tract}'s prediction`, tract: tp.tract,
+        relative5y: { low: tv(num(rg[0]), "% vs county median tract, 5 years (10th percentile of the model's past errors)", `app/data/prediction/${fips}.json`, "modelled"),
+          high: tv(num(rg[1]), "% vs county median tract, 5 years (90th percentile of the model's past errors)", `app/data/prediction/${fips}.json`, "modelled") },
+        rankInCounty: tp.rank_in_county, of: tp.of, drivers: (tp.drivers || []).map(d => d.text),
+        hitRateTopThird: tv(num(pt.hit_rate_top_third), "share of top-third calls that ended in the county's top third (no skill 0.333)", `app/data/prediction/${fips}.json`, "measured"),
+        testedOn: pt.tested_on || (pe && pe.testedOn) || null,
+      };
+      reasons.unshift(`Prediction (tract level): ${fmtPct(prediction.relative5y.low.value)} to ${fmtPct(prediction.relative5y.high.value)} vs the county's median tract over 5 years (80% range), tract ranked ${tp.rank_in_county} of ${tp.of} in the county${prediction.drivers.length ? "; main drivers: " + prediction.drivers.join("; ") : ""}.`);
+    } else {
+      const hp = hvPct[r.id];
+      prediction = screenPrediction(pe, hp == null ? null : Math.min(5, Math.floor(hp * 5) + 1), fips);
+      if (prediction && prediction.relative5y.low.value != null) {
+        const h = prediction.hitRateTopThird.value;
+        reasons.push(`Tested (on tracts): areas in this home-value fifth (${prediction.homeValueFifth} of 5, 1 = cheapest) ended between ${fmtPct(prediction.relative5y.low.value)} and ${fmtPct(prediction.relative5y.high.value)} vs their county's median tract over 5 years in 80% of cases (median ${fmtPct(prediction.relative5y.median.value)}; ${prediction.relative5y.basis}).${h != null ? ` In this county's test windows (starting 2019 and 2020), ${Math.round(h * 100)}% of the cheapest third of tracts ended in the top third for gain (no skill 33%).` : ""}`);
+      }
+    }
+    reasons.push(useModel ? "The leading-signal model beat both simple baselines in this county's walk-forward test." : model.role === "screen" ? "This is a relative-value screen (cheap for its county, high rent for its price), not a forecast; it did no better than simply picking the cheapest tracts." : "Score beat simple baselines in the back-test.");
     return {
       rank: i + 1, id: r.id, name: m.n || null, city: m.c || null,
       score: tv(round(r.scorePct * 100, 1), "percentile within county (100 = strongest relative-value signal)", "investmentDecisionEngine.rankNeighborhoods", "modelled"),
       scoreQuintile: q,
       historicalRelativeChange: hist,
+      prediction,
       components,
       confidence: { grade, reasons: gradeReasons },
       dataFlags: flags,
@@ -247,10 +331,16 @@ function rankNeighborhoods(countyBundle, opts) {
   });
   const limit = opts.limit ? Math.max(0, opts.limit | 0) : ranked.length;
   return {
-    role: model.role,
+    role: useModel ? "predictor" : model.role,
     county: { fips, name: (countyBundle.meta && countyBundle.meta.county) || null, acs },
-    method: "Within-county percentile of each back-test-supported bundle field, weighted by app/data/neighborhood_score_backtest.json engine_model.weights; score = percentile of the weighted sum.",
+    method: useModel ? `Rank of the tract's predicted 5-year change relative to the county (app/data/prediction/${fips}.json); block groups inherit their tract's prediction.`
+      : "Within-county percentile of each back-test-supported bundle field, weighted by app/data/neighborhood_score_backtest.json engine_model.weights; score = percentile of the weighted sum.",
     countyEvidence: ev.row,
+    prediction: pe ? {
+      applies: useModel ? "model" : (pe.inSample ? "baseline" : "not tested"), overallPass: pe.overallPass, inSample: pe.inSample,
+      testedOn: pe.inSample ? pe.testedOn : null, headline: pe.headline.slice(0, 2), source: PRED_FILE,
+      note: !pe.inSample ? "this county was not in the 50-county walk-forward test" : useModel ? "leading-signal model, tract level" : "the leading-signal model did not beat the screen here, so the screen is shown with its tested ranges",
+    } : null,
     ranked: ranked.slice(0, limit),
     rankedCount: ranked.length,
     unscored,
@@ -684,21 +774,22 @@ function areaFromBlockGroup(id, m) {
  * buildDecisionBrief(county, selection, ctx)
  *   county: decoded county bundle
  *   selection: { blockGroupId?, parcel?, corridor?, top? (default 10) }
- *   ctx: { backtest, catalog, verification, underusedSites, sites, costBenchmarks, valueEffects, laws, unitCosts, valueCoefficients,
- *          valuationModels, sizes, overCapRatio }
+ *   ctx: { backtest, prediction?, predictionTracts?, catalog, verification, underusedSites, sites, costBenchmarks, valueEffects, laws, unitCosts,
+ *          valueCoefficients, valuationModels, sizes, overCapRatio }
  */
 function buildDecisionBrief(county, selection, ctx) {
   selection = selection || {}; ctx = ctx || {};
   const top = selection.top || 10;
-  const rank = rankNeighborhoods(county, { backtest: ctx.backtest });
+  const rank = rankNeighborhoods(county, { backtest: ctx.backtest, prediction: ctx.prediction, predictionTracts: ctx.predictionTracts });
   const fips = rank.county ? rank.county.fips : (county && county.meta && county.meta.fips) || null;
-  const compact = r => ({ rank: r.rank, id: r.id, name: r.name, city: r.city, score: r.score.value, quintile: r.scoreQuintile, confidence: r.confidence.grade, reason: r.reasons[0] || null, history2020_25: r.historicalRelativeChange ? r.historicalRelativeChange["2020_2025"].value : null });
+  const compact = r => ({ rank: r.rank, id: r.id, name: r.name, city: r.city, score: r.score.value, quintile: r.scoreQuintile, confidence: r.confidence.grade, reason: r.reasons[0] || null, history2020_25: r.historicalRelativeChange ? r.historicalRelativeChange["2020_2025"].value : null, tested5yRangePct: r.prediction && r.prediction.relative5y ? [r.prediction.relative5y.low.value, r.prediction.relative5y.high.value] : null });
   const brief = {
     schema: "city-pretty/decision-brief@1", engineVersion: DECISION_ENGINE_VERSION,
     county: rank.county || { fips },
     role: rank.role,
     howToRead: "Every number is {value, unit, source, basis}. basis: measured = read from a cited table; modelled = computed from measured inputs; assumed = no evidence. null means not known.",
     backtest: ctx.backtest ? { headline: ctx.backtest.headline || null, verdict: ctx.backtest.verdict || null, retrieved: ctx.backtest.retrieved || null } : null,
+    prediction: rank.prediction || null,
     topNeighborhoods: (rank.ranked || []).filter(r => !r.dataFlags.length).slice(0, top).map(compact),
     topNeighborhoodsNote: "block groups failing a data check (dataFlags) are left out of this list; rankNeighborhoods still returns them, graded D",
     flaggedInTopN: (rank.ranked || []).slice(0, top).filter(r => r.dataFlags.length).length,
@@ -759,6 +850,7 @@ function briefForAdvisor(brief) {
   return {
     schema: brief.schema, engineVersion: brief.engineVersion, county: brief.county, role: brief.role, howToRead: brief.howToRead,
     backtest: brief.backtest ? { headline: brief.backtest.headline, engine_role: brief.backtest.verdict ? brief.backtest.verdict.engine_role || null : null, retrieved: brief.backtest.retrieved } : null,
+    prediction: brief.prediction || null,
     topNeighborhoods: brief.topNeighborhoods, topNeighborhoodsNote: brief.topNeighborhoodsNote, flaggedInTopN: brief.flaggedInTopN,
     neighborhood: n ? {
       id: n.ranking ? n.ranking.id : null, name: n.ranking ? n.ranking.name : null,

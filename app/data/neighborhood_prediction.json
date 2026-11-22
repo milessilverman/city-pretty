@@ -1,0 +1,5981 @@
+{
+ "schema": 1,
+ "title": "Neighborhood price prediction: walk-forward test of leading signals against simple baselines",
+ "generated_by": "scripts/predict/walkforward.py and scripts/predict/write_outputs.py",
+ "generated": "2026-11-22",
+ "method_doc": "docs/PREDICTION-MODEL.md (method fixed and committed before any evaluation)",
+ "question": "Within a county, which tracts will see more house-price growth than the county's median tract over the next 5 (and 3) years?",
+ "decision": {
+  "rule": "The model is used for a county only if, pooled over test windows, its top-minus-bottom-fifth spread beats both the cheapest-tracts and the prior-trend baselines with 90% county-bootstrap intervals above zero, and in that county's own test cells it is not below either baseline.",
+  "overall_pass": false,
+  "counties_using_model": 0,
+  "paired_spread_points_vs_cheapest": {
+   "mean": 0.18,
+   "ci90": [
+    -0.26,
+    0.57
+   ],
+   "cells": 95,
+   "counties": 48
+  },
+  "paired_spread_points_vs_prior_trend": {
+   "mean": 5.65,
+   "ci90": [
+    4.11,
+    7.24
+   ],
+   "cells": 95,
+   "counties": 48
+  },
+  "what_ships": "the relative-value screen (cheap for its county) in every county, with its tested 5-year ranges by home-value fifth and its hit rate"
+ },
+ "headline": [
+  "The leading-signal model did not beat the plain 'cheapest tracts' screen: over the next 5 years its top fifth of tracts beat its bottom fifth by 6.6 points (90% 5.23 to 7.92), against 6.42 for the cheapest-tracts screen; the difference, 0.18 points (90% -0.26 to 0.57), is not distinguishable from zero.",
+  "It did beat the prior-trend baseline, by 5.65 points (90% 4.11 to 7.24).",
+  "Without the price-level inputs the model's spread falls to 2.73 points: most of the edge is cheap tracts catching up.",
+  "The cheapest fifth's median 5-year gain over its county's median tract shrank from 10.56 points (windows starting 2015) to 2.44 (starting 2020).",
+  "So every county keeps the relative-value screen, now with its tested ranges and hit rate."
+ ],
+ "tested_on": "tested on 48 counties, 5-year windows starting 2019 and 2020 (fitted only on earlier, non-overlapping windows); 3-year windows starting 2017-2022",
+ "units": "points = 100 x log change relative to the county's median tract (close to percentage points for these sizes); hit rate = share of the tracts called 'top third' that ended in the county's top third (no skill = 0.333)",
+ "results_5y": {
+  "test_origins": [
+   2019,
+   2020
+  ],
+  "cells_per_origin": {
+   "2014": 49,
+   "2015": 49,
+   "2016": 49,
+   "2017": 49,
+   "2018": 47,
+   "2019": 48,
+   "2020": 47
+  },
+  "tracts_per_origin": {
+   "2014": 12383,
+   "2015": 12876,
+   "2016": 12987,
+   "2017": 11642,
+   "2018": 9700,
+   "2019": 9776,
+   "2020": 9674
+  },
+  "spread_points": {
+   "noskill": {
+    "pooled": {
+     "mean": 0.0,
+     "ci90": [
+      0.0,
+      0.0
+     ],
+     "cells": 95,
+     "counties": 48
+    },
+    "by_origin": {
+     "2019": {
+      "mean": 0.0,
+      "ci90": [
+       0.0,
+       0.0
+      ],
+      "cells": 48,
+      "counties": 48
+     },
+     "2020": {
+      "mean": 0.0,
+      "ci90": [
+       0.0,
+       0.0
+      ],
+      "cells": 47,
+      "counties": 47
+     }
+    }
+   },
+   "cheapest": {
+    "pooled": {
+     "mean": 6.42,
+     "ci90": [
+      4.96,
+      7.87
+     ],
+     "cells": 95,
+     "counties": 48
+    },
+    "by_origin": {
+     "2019": {
+      "mean": 8.47,
+      "ci90": [
+       6.99,
+       9.97
+      ],
+      "cells": 48,
+      "counties": 48
+     },
+     "2020": {
+      "mean": 4.33,
+      "ci90": [
+       2.83,
+       5.86
+      ],
+      "cells": 47,
+      "counties": 47
+     }
+    }
+   },
+   "trend": {
+    "pooled": {
+     "mean": 0.94,
+     "ci90": [
+      -0.25,
+      2.12
+     ],
+     "cells": 95,
+     "counties": 48
+    },
+    "by_origin": {
+     "2019": {
+      "mean": 1.52,
+      "ci90": [
+       0.22,
+       2.78
+      ],
+      "cells": 48,
+      "counties": 48
+     },
+     "2020": {
+      "mean": 0.35,
+      "ci90": [
+       -0.98,
+       1.63
+      ],
+      "cells": 47,
+      "counties": 47
+     }
+    }
+   },
+   "ridge": {
+    "pooled": {
+     "mean": 6.6,
+     "ci90": [
+      5.23,
+      7.92
+     ],
+     "cells": 95,
+     "counties": 48
+    },
+    "by_origin": {
+     "2019": {
+      "mean": 8.55,
+      "ci90": [
+       7.16,
+       9.99
+      ],
+      "cells": 48,
+      "counties": 48
+     },
+     "2020": {
+      "mean": 4.6,
+      "ci90": [
+       3.15,
+       6.04
+      ],
+      "cells": 47,
+      "counties": 47
+     }
+    }
+   },
+   "ridge_noprice": {
+    "pooled": {
+     "mean": 2.73,
+     "ci90": [
+      1.58,
+      3.82
+     ],
+     "cells": 95,
+     "counties": 48
+    },
+    "by_origin": {
+     "2019": {
+      "mean": 2.71,
+      "ci90": [
+       1.44,
+       3.99
+      ],
+      "cells": 48,
+      "counties": 48
+     },
+     "2020": {
+      "mean": 2.74,
+      "ci90": [
+       1.69,
+       3.85
+      ],
+      "cells": 47,
+      "counties": 47
+     }
+    }
+   },
+   "gbm": {
+    "pooled": {
+     "mean": 6.57,
+     "ci90": [
+      5.22,
+      7.87
+     ],
+     "cells": 95,
+     "counties": 48
+    },
+    "by_origin": {
+     "2019": {
+      "mean": 8.62,
+      "ci90": [
+       7.19,
+       10.04
+      ],
+      "cells": 48,
+      "counties": 48
+     },
+     "2020": {
+      "mean": 4.48,
+      "ci90": [
+       3.05,
+       5.86
+      ],
+      "cells": 47,
+      "counties": 47
+     }
+    }
+   }
+  },
+  "spearman": {
+   "noskill": {
+    "pooled": {
+     "mean": 0.0,
+     "ci90": [
+      0.0,
+      0.0
+     ],
+     "cells": 95,
+     "counties": 48
+    },
+    "by_origin": {
+     "2019": {
+      "mean": 0.0,
+      "ci90": [
+       0.0,
+       0.0
+      ],
+      "cells": 48,
+      "counties": 48
+     },
+     "2020": {
+      "mean": 0.0,
+      "ci90": [
+       0.0,
+       0.0
+      ],
+      "cells": 47,
+      "counties": 47
+     }
+    }
+   },
+   "cheapest": {
+    "pooled": {
+     "mean": 0.261,
+     "ci90": [
+      0.209,
+      0.312
+     ],
+     "cells": 95,
+     "counties": 48
+    },
+    "by_origin": {
+     "2019": {
+      "mean": 0.331,
+      "ci90": [
+       0.277,
+       0.384
+      ],
+      "cells": 48,
+      "counties": 48
+     },
+     "2020": {
+      "mean": 0.189,
+      "ci90": [
+       0.133,
+       0.242
+      ],
+      "cells": 47,
+      "counties": 47
+     }
+    }
+   },
+   "trend": {
+    "pooled": {
+     "mean": 0.068,
+     "ci90": [
+      0.02,
+      0.116
+     ],
+     "cells": 95,
+     "counties": 48
+    },
+    "by_origin": {
+     "2019": {
+      "mean": 0.091,
+      "ci90": [
+       0.037,
+       0.146
+      ],
+      "cells": 48,
+      "counties": 48
+     },
+     "2020": {
+      "mean": 0.044,
+      "ci90": [
+       -0.008,
+       0.094
+      ],
+      "cells": 47,
+      "counties": 47
+     }
+    }
+   },
+   "ridge": {
+    "pooled": {
+     "mean": 0.265,
+     "ci90": [
+      0.213,
+      0.313
+     ],
+     "cells": 95,
+     "counties": 48
+    },
+    "by_origin": {
+     "2019": {
+      "mean": 0.338,
+      "ci90": [
+       0.284,
+       0.39
+      ],
+      "cells": 48,
+      "counties": 48
+     },
+     "2020": {
+      "mean": 0.189,
+      "ci90": [
+       0.135,
+       0.242
+      ],
+      "cells": 47,
+      "counties": 47
+     }
+    }
+   },
+   "ridge_noprice": {
+    "pooled": {
+     "mean": 0.101,
+     "ci90": [
+      0.061,
+      0.14
+     ],
+     "cells": 95,
+     "counties": 48
+    },
+    "by_origin": {
+     "2019": {
+      "mean": 0.083,
+      "ci90": [
+       0.038,
+       0.126
+      ],
+      "cells": 48,
+      "counties": 48
+     },
+     "2020": {
+      "mean": 0.119,
+      "ci90": [
+       0.08,
+       0.161
+      ],
+      "cells": 47,
+      "counties": 47
+     }
+    }
+   },
+   "gbm": {
+    "pooled": {
+     "mean": 0.258,
+     "ci90": [
+      0.206,
+      0.307
+     ],
+     "cells": 95,
+     "counties": 48
+    },
+    "by_origin": {
+     "2019": {
+      "mean": 0.33,
+      "ci90": [
+       0.274,
+       0.381
+      ],
+      "cells": 48,
+      "counties": 48
+     },
+     "2020": {
+      "mean": 0.184,
+      "ci90": [
+       0.129,
+       0.237
+      ],
+      "cells": 47,
+      "counties": 47
+     }
+    }
+   }
+  },
+  "hit_rate_top_third": {
+   "noskill": {
+    "pooled": {
+     "mean": 0.333,
+     "ci90": [
+      0.333,
+      0.333
+     ],
+     "cells": 95,
+     "counties": 48
+    },
+    "by_origin": {
+     "2019": {
+      "mean": 0.333,
+      "ci90": [
+       0.333,
+       0.333
+      ],
+      "cells": 48,
+      "counties": 48
+     },
+     "2020": {
+      "mean": 0.333,
+      "ci90": [
+       0.333,
+       0.333
+      ],
+      "cells": 47,
+      "counties": 47
+     }
+    }
+   },
+   "cheapest": {
+    "pooled": {
+     "mean": 0.469,
+     "ci90": [
+      0.442,
+      0.496
+     ],
+     "cells": 95,
+     "counties": 48
+    },
+    "by_origin": {
+     "2019": {
+      "mean": 0.505,
+      "ci90": [
+       0.475,
+       0.534
+      ],
+      "cells": 48,
+      "counties": 48
+     },
+     "2020": {
+      "mean": 0.433,
+      "ci90": [
+       0.404,
+       0.462
+      ],
+      "cells": 47,
+      "counties": 47
+     }
+    }
+   },
+   "trend": {
+    "pooled": {
+     "mean": 0.374,
+     "ci90": [
+      0.35,
+      0.399
+     ],
+     "cells": 95,
+     "counties": 48
+    },
+    "by_origin": {
+     "2019": {
+      "mean": 0.4,
+      "ci90": [
+       0.373,
+       0.425
+      ],
+      "cells": 48,
+      "counties": 48
+     },
+     "2020": {
+      "mean": 0.348,
+      "ci90": [
+       0.321,
+       0.375
+      ],
+      "cells": 47,
+      "counties": 47
+     }
+    }
+   },
+   "ridge": {
+    "pooled": {
+     "mean": 0.464,
+     "ci90": [
+      0.436,
+      0.491
+     ],
+     "cells": 95,
+     "counties": 48
+    },
+    "by_origin": {
+     "2019": {
+      "mean": 0.503,
+      "ci90": [
+       0.473,
+       0.53
+      ],
+      "cells": 48,
+      "counties": 48
+     },
+     "2020": {
+      "mean": 0.425,
+      "ci90": [
+       0.393,
+       0.458
+      ],
+      "cells": 47,
+      "counties": 47
+     }
+    }
+   },
+   "ridge_noprice": {
+    "pooled": {
+     "mean": 0.388,
+     "ci90": [
+      0.37,
+      0.406
+     ],
+     "cells": 95,
+     "counties": 48
+    },
+    "by_origin": {
+     "2019": {
+      "mean": 0.382,
+      "ci90": [
+       0.359,
+       0.405
+      ],
+      "cells": 48,
+      "counties": 48
+     },
+     "2020": {
+      "mean": 0.395,
+      "ci90": [
+       0.374,
+       0.418
+      ],
+      "cells": 47,
+      "counties": 47
+     }
+    }
+   },
+   "gbm": {
+    "pooled": {
+     "mean": 0.466,
+     "ci90": [
+      0.437,
+      0.492
+     ],
+     "cells": 95,
+     "counties": 48
+    },
+    "by_origin": {
+     "2019": {
+      "mean": 0.505,
+      "ci90": [
+       0.474,
+       0.532
+      ],
+      "cells": 48,
+      "counties": 48
+     },
+     "2020": {
+      "mean": 0.426,
+      "ci90": [
+       0.393,
+       0.458
+      ],
+      "cells": 47,
+      "counties": 47
+     }
+    }
+   }
+  },
+  "paired_spread_points": {
+   "ridge_minus_cheapest": {
+    "mean": 0.18,
+    "ci90": [
+     -0.26,
+     0.57
+    ],
+    "cells": 95,
+    "counties": 48
+   },
+   "ridge_minus_trend": {
+    "mean": 5.65,
+    "ci90": [
+     4.11,
+     7.24
+    ],
+    "cells": 95,
+    "counties": 48
+   },
+   "ridge_noprice_minus_cheapest": {
+    "mean": -3.69,
+    "ci90": [
+     -5.02,
+     -2.43
+    ],
+    "cells": 95,
+    "counties": 48
+   },
+   "ridge_noprice_minus_trend": {
+    "mean": 1.78,
+    "ci90": [
+     -0.1,
+     3.67
+    ],
+    "cells": 95,
+    "counties": 48
+   },
+   "gbm_minus_cheapest": {
+    "mean": 0.15,
+    "ci90": [
+     -0.25,
+     0.52
+    ],
+    "cells": 95,
+    "counties": 48
+   },
+   "gbm_minus_trend": {
+    "mean": 5.63,
+    "ci90": [
+     4.14,
+     7.14
+    ],
+    "cells": 95,
+    "counties": 48
+   }
+  },
+  "paired_spread_points_by_origin": {
+   "ridge_minus_cheapest": {
+    "2019": {
+     "mean": 0.09,
+     "ci90": [
+      -0.48,
+      0.62
+     ],
+     "cells": 48,
+     "counties": 48
+    },
+    "2020": {
+     "mean": 0.27,
+     "ci90": [
+      -0.16,
+      0.67
+     ],
+     "cells": 47,
+     "counties": 47
+    }
+   },
+   "ridge_minus_trend": {
+    "2019": {
+     "mean": 7.04,
+     "ci90": [
+      5.1,
+      9.01
+     ],
+     "cells": 48,
+     "counties": 48
+    },
+    "2020": {
+     "mean": 4.24,
+     "ci90": [
+      2.98,
+      5.56
+     ],
+     "cells": 47,
+     "counties": 47
+    }
+   },
+   "ridge_noprice_minus_cheapest": {
+    "2019": {
+     "mean": -5.76,
+     "ci90": [
+      -7.27,
+      -4.39
+     ],
+     "cells": 48,
+     "counties": 48
+    },
+    "2020": {
+     "mean": -1.58,
+     "ci90": [
+      -2.94,
+      -0.25
+     ],
+     "cells": 47,
+     "counties": 47
+    }
+   },
+   "ridge_noprice_minus_trend": {
+    "2019": {
+     "mean": 1.19,
+     "ci90": [
+      -1.05,
+      3.42
+     ],
+     "cells": 48,
+     "counties": 48
+    },
+    "2020": {
+     "mean": 2.39,
+     "ci90": [
+      0.72,
+      4.13
+     ],
+     "cells": 47,
+     "counties": 47
+    }
+   },
+   "gbm_minus_cheapest": {
+    "2019": {
+     "mean": 0.15,
+     "ci90": [
+      -0.39,
+      0.65
+     ],
+     "cells": 48,
+     "counties": 48
+    },
+    "2020": {
+     "mean": 0.15,
+     "ci90": [
+      -0.23,
+      0.51
+     ],
+     "cells": 47,
+     "counties": 47
+    }
+   },
+   "gbm_minus_trend": {
+    "2019": {
+     "mean": 7.1,
+     "ci90": [
+      5.26,
+      8.96
+     ],
+     "cells": 48,
+     "counties": 48
+    },
+    "2020": {
+     "mean": 4.13,
+     "ci90": [
+      2.88,
+      5.39
+     ],
+     "cells": 47,
+     "counties": 47
+    }
+   }
+  },
+  "paired_hit_rate": {
+   "ridge_minus_cheapest": {
+    "mean": -0.005,
+    "ci90": [
+     -0.017,
+     0.005
+    ],
+    "cells": 95,
+    "counties": 48
+   },
+   "ridge_minus_trend": {
+    "mean": 0.09,
+    "ci90": [
+     0.065,
+     0.117
+    ],
+    "cells": 95,
+    "counties": 48
+   },
+   "ridge_noprice_minus_cheapest": {
+    "mean": -0.081,
+    "ci90": [
+     -0.107,
+     -0.057
+    ],
+    "cells": 95,
+    "counties": 48
+   },
+   "ridge_noprice_minus_trend": {
+    "mean": 0.014,
+    "ci90": [
+     -0.018,
+     0.047
+    ],
+    "cells": 95,
+    "counties": 48
+   },
+   "gbm_minus_cheapest": {
+    "mean": -0.004,
+    "ci90": [
+     -0.014,
+     0.006
+    ],
+    "cells": 95,
+    "counties": 48
+   },
+   "gbm_minus_trend": {
+    "mean": 0.091,
+    "ci90": [
+     0.066,
+     0.119
+    ],
+    "cells": 95,
+    "counties": 48
+   }
+  },
+  "baselines_all_origins_spread_points": {
+   "cheapest": {
+    "2014": 17.49,
+    "2015": 21.2,
+    "2016": 23.42,
+    "2017": 18.15,
+    "2018": 11.69,
+    "2019": 8.47,
+    "2020": 4.33
+   },
+   "trend": {
+    "2014": -9.36,
+    "2015": -2.43,
+    "2016": -1.65,
+    "2017": 0.87,
+    "2018": 1.08,
+    "2019": 1.52,
+    "2020": 0.35
+   }
+  },
+  "calibration_80pct_range": {
+   "model": {
+    "coverage": {
+     "mean": 0.728,
+     "ci90": [
+      0.707,
+      0.749
+     ],
+     "cells": 95,
+     "counties": 48
+    },
+    "by_origin": {
+     "2019": {
+      "mean": 0.777,
+      "ci90": [
+       0.754,
+       0.799
+      ],
+      "cells": 48,
+      "counties": 48
+     },
+     "2020": {
+      "mean": 0.678,
+      "ci90": [
+       0.656,
+       0.7
+      ],
+      "cells": 47,
+      "counties": 47
+     }
+    },
+    "mean_width_points": 18.81,
+    "errors_from": [
+     "training fit's own errors (no inner walk-forward fold)"
+    ]
+   },
+   "no_skill": {
+    "coverage": {
+     "mean": 0.882,
+     "ci90": [
+      0.863,
+      0.901
+     ],
+     "cells": 95,
+     "counties": 48
+    },
+    "mean_width_points": 25.65
+   }
+  },
+  "baseline_fifth_ranges": {
+   "pooled": {
+    "1": [
+     -3.77,
+     7.86,
+     22.64,
+     15796
+    ],
+    "2": [
+     -5.17,
+     3.42,
+     12.99,
+     15801
+    ],
+    "3": [
+     -7.54,
+     0.11,
+     8.06,
+     15809
+    ],
+    "4": [
+     -10.77,
+     -3.04,
+     4.89,
+     15810
+    ],
+    "5": [
+     -17.81,
+     -6.89,
+     2.99,
+     15812
+    ]
+   },
+   "by_origin": {
+    "2014": {
+     "1": [
+      -2.88,
+      9.39,
+      25.43,
+      2471
+     ],
+     "2": [
+      -4.11,
+      4.29,
+      14.84,
+      2478
+     ],
+     "3": [
+      -7.71,
+      0.08,
+      8.9,
+      2473
+     ],
+     "4": [
+      -11.63,
+      -3.7,
+      5.06,
+      2485
+     ],
+     "5": [
+      -17.88,
+      -7.86,
+      1.67,
+      2475
+     ]
+    },
+    "2015": {
+     "1": [
+      -0.61,
+      10.56,
+      24.88,
+      2577
+     ],
+     "2": [
+      -2.77,
+      4.98,
+      14.61,
+      2567
+     ],
+     "3": [
+      -6.52,
+      0.22,
+      7.78,
+      2582
+     ],
+     "4": [
+      -10.88,
+      -4.03,
+      3.29,
+      2569
+     ],
+     "5": [
+      -19.35,
+      -8.95,
+      -1.23,
+      2579
+     ]
+    },
+    "2016": {
+     "1": [
+      0.02,
+      10.79,
+      24.46,
+      2599
+     ],
+     "2": [
+      -2.75,
+      4.9,
+      14.07,
+      2596
+     ],
+     "3": [
+      -6.46,
+      0.39,
+      7.64,
+      2594
+     ],
+     "4": [
+      -11.42,
+      -4.25,
+      2.34,
+      2598
+     ],
+     "5": [
+      -22.84,
+      -10.18,
+      -2.27,
+      2598
+     ]
+    },
+    "2017": {
+     "1": [
+      -2.34,
+      8.37,
+      23.64,
+      2325
+     ],
+     "2": [
+      -4.48,
+      3.72,
+      13.0,
+      2327
+     ],
+     "3": [
+      -7.62,
+      0.34,
+      8.37,
+      2330
+     ],
+     "4": [
+      -11.16,
+      -3.24,
+      4.51,
+      2329
+     ],
+     "5": [
+      -18.93,
+      -7.65,
+      1.05,
+      2329
+     ]
+    },
+    "2018": {
+     "1": [
+      -5.28,
+      6.26,
+      21.23,
+      1938
+     ],
+     "2": [
+      -6.69,
+      2.45,
+      11.83,
+      1941
+     ],
+     "3": [
+      -8.86,
+      0.02,
+      8.09,
+      1941
+     ],
+     "4": [
+      -10.56,
+      -2.1,
+      5.88,
+      1939
+     ],
+     "5": [
+      -14.78,
+      -4.63,
+      4.55,
+      1940
+     ]
+    },
+    "2019": {
+     "1": [
+      -6.41,
+      4.59,
+      16.98,
+      1955
+     ],
+     "2": [
+      -6.99,
+      1.78,
+      10.6,
+      1957
+     ],
+     "3": [
+      -8.26,
+      -0.05,
+      7.89,
+      1951
+     ],
+     "4": [
+      -9.56,
+      -1.66,
+      5.98,
+      1958
+     ],
+     "5": [
+      -13.58,
+      -3.31,
+      5.64,
+      1955
+     ]
+    },
+    "2020": {
+     "1": [
+      -8.3,
+      2.44,
+      15.24,
+      1931
+     ],
+     "2": [
+      -7.35,
+      0.46,
+      8.33,
+      1935
+     ],
+     "3": [
+      -7.76,
+      -0.21,
+      7.34,
+      1938
+     ],
+     "4": [
+      -8.73,
+      -0.87,
+      7.2,
+      1932
+     ],
+     "5": [
+      -11.01,
+      -1.5,
+      7.22,
+      1936
+     ]
+    }
+   },
+   "note": "points = 100 x log change vs the county median tract; [p10, median, p90, tracts]; fifth 1 = cheapest fifth by Census home value; added after the pre-registration (doc A.10)",
+   "out_of_time_coverage_of_80pct_range": {
+    "mean": 0.734,
+    "ci90": [
+     0.711,
+     0.756
+    ],
+    "cells": 95,
+    "counties": 48
+   }
+  },
+  "robustness": {
+   "excluding_2020_2022_origins": {
+    "origins": [
+     2019
+    ],
+    "spread_points": {
+     "noskill": {
+      "mean": 0.0,
+      "ci90": [
+       0.0,
+       0.0
+      ],
+      "cells": 48,
+      "counties": 48
+     },
+     "cheapest": {
+      "mean": 8.47,
+      "ci90": [
+       6.99,
+       9.97
+      ],
+      "cells": 48,
+      "counties": 48
+     },
+     "trend": {
+      "mean": 1.52,
+      "ci90": [
+       0.22,
+       2.78
+      ],
+      "cells": 48,
+      "counties": 48
+     },
+     "ridge": {
+      "mean": 8.55,
+      "ci90": [
+       7.16,
+       9.99
+      ],
+      "cells": 48,
+      "counties": 48
+     },
+     "ridge_noprice": {
+      "mean": 2.71,
+      "ci90": [
+       1.44,
+       3.99
+      ],
+      "cells": 48,
+      "counties": 48
+     },
+     "gbm": {
+      "mean": 8.62,
+      "ci90": [
+       7.19,
+       10.04
+      ],
+      "cells": 48,
+      "counties": 48
+     }
+    },
+    "paired_spread_points": {
+     "ridge_minus_cheapest": {
+      "mean": 0.09,
+      "ci90": [
+       -0.48,
+       0.62
+      ],
+      "cells": 48,
+      "counties": 48
+     },
+     "ridge_minus_trend": {
+      "mean": 7.04,
+      "ci90": [
+       5.1,
+       9.01
+      ],
+      "cells": 48,
+      "counties": 48
+     }
+    }
+   },
+   "fhfa_thinning": {
+    "origins": [
+     2014,
+     2015,
+     2016
+    ],
+    "survivors": {
+     "cheapest": {
+      "mean": 18.89,
+      "ci90": [
+       17.32,
+       20.49
+      ],
+      "cells": 141,
+      "counties": 47
+     },
+     "trend": {
+      "mean": -4.3,
+      "ci90": [
+       -6.12,
+       -2.47
+      ],
+      "cells": 141,
+      "counties": 47
+     }
+    },
+    "all": {
+     "cheapest": {
+      "mean": 20.7,
+      "ci90": [
+       18.68,
+       22.78
+      ],
+      "cells": 147,
+      "counties": 49
+     },
+     "trend": {
+      "mean": -4.48,
+      "ci90": [
+       -6.25,
+       -2.61
+      ],
+      "cells": 147,
+      "counties": 49
+     }
+    }
+   },
+   "tract_vintage": {
+    "stable_2010_2020": {
+     "noskill": {
+      "mean": 0.0,
+      "ci90": [
+       0.0,
+       0.0
+      ],
+      "cells": 95,
+      "counties": 48
+     },
+     "cheapest": {
+      "mean": 6.4,
+      "ci90": [
+       4.95,
+       7.87
+      ],
+      "cells": 95,
+      "counties": 48
+     },
+     "trend": {
+      "mean": 0.78,
+      "ci90": [
+       -0.47,
+       2.03
+      ],
+      "cells": 95,
+      "counties": 48
+     },
+     "ridge": {
+      "mean": 6.42,
+      "ci90": [
+       5.0,
+       7.85
+      ],
+      "cells": 95,
+      "counties": 48
+     },
+     "ridge_noprice": {
+      "mean": 2.74,
+      "ci90": [
+       1.53,
+       3.91
+      ],
+      "cells": 95,
+      "counties": 48
+     },
+     "gbm": {
+      "mean": 6.33,
+      "ci90": [
+       4.88,
+       7.78
+      ],
+      "cells": 95,
+      "counties": 48
+     },
+     "paired_ridge_minus_cheapest": {
+      "mean": 0.03,
+      "ci90": [
+       -0.5,
+       0.5
+      ],
+      "cells": 95,
+      "counties": 48
+     }
+    },
+    "converted": {
+     "noskill": {
+      "mean": 0.0,
+      "ci90": [
+       0.0,
+       0.0
+      ],
+      "cells": 62,
+      "counties": 31
+     },
+     "cheapest": {
+      "mean": 7.17,
+      "ci90": [
+       5.25,
+       9.14
+      ],
+      "cells": 62,
+      "counties": 31
+     },
+     "trend": {
+      "mean": 1.46,
+      "ci90": [
+       -0.09,
+       2.98
+      ],
+      "cells": 62,
+      "counties": 31
+     },
+     "ridge": {
+      "mean": 6.79,
+      "ci90": [
+       4.86,
+       8.78
+      ],
+      "cells": 62,
+      "counties": 31
+     },
+     "ridge_noprice": {
+      "mean": 2.13,
+      "ci90": [
+       0.63,
+       3.74
+      ],
+      "cells": 62,
+      "counties": 31
+     },
+     "gbm": {
+      "mean": 6.89,
+      "ci90": [
+       5.05,
+       8.77
+      ],
+      "cells": 62,
+      "counties": 31
+     },
+     "paired_ridge_minus_cheapest": {
+      "mean": -0.38,
+      "ci90": [
+       -0.88,
+       0.13
+      ],
+      "cells": 62,
+      "counties": 31
+     }
+    }
+   },
+   "metro_relative": {
+    "cells_per_origin": {
+     "2014": 33,
+     "2015": 33,
+     "2016": 33,
+     "2017": 33,
+     "2018": 33,
+     "2019": 33,
+     "2020": 33
+    },
+    "spread_points": {
+     "cheapest": {
+      "mean": 7.41,
+      "ci90": [
+       5.8,
+       8.99
+      ],
+      "cells": 66,
+      "counties": 33
+     },
+     "trend": {
+      "mean": 0.32,
+      "ci90": [
+       -1.08,
+       1.62
+      ],
+      "cells": 66,
+      "counties": 33
+     },
+     "ridge_metro": {
+      "mean": 7.55,
+      "ci90": [
+       5.96,
+       9.12
+      ],
+      "cells": 66,
+      "counties": 33
+     }
+    },
+    "paired_spread_points": {
+     "cheapest": {
+      "mean": 0.14,
+      "ci90": [
+       -0.38,
+       0.65
+      ],
+      "cells": 66,
+      "counties": 33
+     },
+     "trend": {
+      "mean": 7.24,
+      "ci90": [
+       5.29,
+       9.32
+      ],
+      "cells": 66,
+      "counties": 33
+     }
+    }
+   }
+  },
+  "single_signals": {
+   "value_acs": {
+    "spearman": {
+     "mean": -0.506,
+     "ci90": [
+      -0.533,
+      -0.479
+     ],
+     "cells": 289,
+     "counties": 49
+    },
+    "spread_points": {
+     "mean": -14.65,
+     "ci90": [
+      -15.87,
+      -13.45
+     ],
+     "cells": 289,
+     "counties": 49
+    },
+    "origins": 6,
+    "share_origins_same_sign": 1.0
+   },
+   "loan_level": {
+    "spearman": {
+     "mean": -0.501,
+     "ci90": [
+      -0.531,
+      -0.47
+     ],
+     "cells": 338,
+     "counties": 49
+    },
+    "spread_points": {
+     "mean": -14.52,
+     "ci90": [
+      -15.8,
+      -13.31
+     ],
+     "cells": 338,
+     "counties": 49
+    },
+    "origins": 7,
+    "share_origins_same_sign": 1.0
+   },
+   "trend_1y": {
+    "spearman": {
+     "mean": 0.116,
+     "ci90": [
+      0.096,
+      0.138
+     ],
+     "cells": 338,
+     "counties": 49
+    },
+    "spread_points": {
+     "mean": 3.03,
+     "ci90": [
+      2.45,
+      3.65
+     ],
+     "cells": 338,
+     "counties": 49
+    },
+    "origins": 7,
+    "share_origins_same_sign": 1.0
+   },
+   "trend_3y": {
+    "spearman": {
+     "mean": 0.098,
+     "ci90": [
+      0.06,
+      0.138
+     ],
+     "cells": 338,
+     "counties": 49
+    },
+    "spread_points": {
+     "mean": 2.39,
+     "ci90": [
+      1.35,
+      3.5
+     ],
+     "cells": 338,
+     "counties": 49
+    },
+    "origins": 7,
+    "share_origins_same_sign": 0.857
+   },
+   "trend_5y": {
+    "spearman": {
+     "mean": -0.027,
+     "ci90": [
+      -0.066,
+      0.015
+     ],
+     "cells": 338,
+     "counties": 49
+    },
+    "spread_points": {
+     "mean": -1.41,
+     "ci90": [
+      -2.47,
+      -0.33
+     ],
+     "cells": 338,
+     "counties": 49
+    },
+    "origins": 7,
+    "share_origins_same_sign": 0.429
+   },
+   "app_growth": {
+    "spearman": {
+     "mean": 0.071,
+     "ci90": [
+      0.06,
+      0.083
+     ],
+     "cells": 338,
+     "counties": 49
+    },
+    "spread_points": {
+     "mean": 2.37,
+     "ci90": [
+      1.88,
+      2.95
+     ],
+     "cells": 338,
+     "counties": 49
+    },
+    "origins": 7,
+    "share_origins_same_sign": 0.857
+   },
+   "loan_growth": {
+    "spearman": {
+     "mean": 0.075,
+     "ci90": [
+      0.061,
+      0.091
+     ],
+     "cells": 338,
+     "counties": 49
+    },
+    "spread_points": {
+     "mean": 2.14,
+     "ci90": [
+      1.72,
+      2.56
+     ],
+     "cells": 338,
+     "counties": 49
+    },
+    "origins": 7,
+    "share_origins_same_sign": 1.0
+   },
+   "nonowner_share": {
+    "spearman": {
+     "mean": 0.077,
+     "ci90": [
+      0.045,
+      0.11
+     ],
+     "cells": 338,
+     "counties": 49
+    },
+    "spread_points": {
+     "mean": 2.68,
+     "ci90": [
+      1.68,
+      3.74
+     ],
+     "cells": 338,
+     "counties": 49
+    },
+    "origins": 7,
+    "share_origins_same_sign": 0.857
+   },
+   "nonowner_change": {
+    "spearman": {
+     "mean": -0.004,
+     "ci90": [
+      -0.012,
+      0.004
+     ],
+     "cells": 338,
+     "counties": 49
+    },
+    "spread_points": {
+     "mean": -0.25,
+     "ci90": [
+      -0.54,
+      0.05
+     ],
+     "cells": 338,
+     "counties": 49
+    },
+    "origins": 7,
+    "share_origins_same_sign": 0.429
+   },
+   "denial_rate": {
+    "spearman": {
+     "mean": 0.237,
+     "ci90": [
+      0.212,
+      0.261
+     ],
+     "cells": 338,
+     "counties": 49
+    },
+    "spread_points": {
+     "mean": 6.82,
+     "ci90": [
+      5.91,
+      7.8
+     ],
+     "cells": 338,
+     "counties": 49
+    },
+    "origins": 7,
+    "share_origins_same_sign": 1.0
+   },
+   "buyer_income_ratio": {
+    "spearman": {
+     "mean": -0.149,
+     "ci90": [
+      -0.179,
+      -0.12
+     ],
+     "cells": 289,
+     "counties": 49
+    },
+    "spread_points": {
+     "mean": -4.03,
+     "ci90": [
+      -4.9,
+      -3.23
+     ],
+     "cells": 289,
+     "counties": 49
+    },
+    "origins": 6,
+    "share_origins_same_sign": 1.0
+   },
+   "permits_place": {
+    "spearman": {
+     "mean": -0.13,
+     "ci90": [
+      -0.17,
+      -0.091
+     ],
+     "cells": 264,
+     "counties": 44
+    },
+    "spread_points": {
+     "mean": -2.8,
+     "ci90": [
+      -4.06,
+      -1.48
+     ],
+     "cells": 289,
+     "counties": 49
+    },
+    "origins": 6,
+    "share_origins_same_sign": 1.0
+   },
+   "jobs_tract": {
+    "spearman": {
+     "mean": -0.027,
+     "ci90": [
+      -0.037,
+      -0.017
+     ],
+     "cells": 338,
+     "counties": 49
+    },
+    "spread_points": {
+     "mean": -0.75,
+     "ci90": [
+      -1.04,
+      -0.46
+     ],
+     "cells": 338,
+     "counties": 49
+    },
+    "origins": 7,
+    "share_origins_same_sign": 0.857
+   },
+   "jobs_5km": {
+    "spearman": {
+     "mean": -0.03,
+     "ci90": [
+      -0.056,
+      -0.003
+     ],
+     "cells": 338,
+     "counties": 49
+    },
+    "spread_points": {
+     "mean": -0.69,
+     "ci90": [
+      -1.54,
+      0.2
+     ],
+     "cells": 338,
+     "counties": 49
+    },
+    "origins": 7,
+    "share_origins_same_sign": 1.0
+   },
+   "rent_to_value": {
+    "spearman": {
+     "mean": 0.409,
+     "ci90": [
+      0.379,
+      0.437
+     ],
+     "cells": 289,
+     "counties": 49
+    },
+    "spread_points": {
+     "mean": 12.13,
+     "ci90": [
+      10.87,
+      13.44
+     ],
+     "cells": 289,
+     "counties": 49
+    },
+    "origins": 6,
+    "share_origins_same_sign": 1.0
+   },
+   "vacancy": {
+    "spearman": {
+     "mean": 0.09,
+     "ci90": [
+      0.062,
+      0.121
+     ],
+     "cells": 289,
+     "counties": 49
+    },
+    "spread_points": {
+     "mean": 2.97,
+     "ci90": [
+      2.05,
+      3.94
+     ],
+     "cells": 289,
+     "counties": 49
+    },
+    "origins": 6,
+    "share_origins_same_sign": 0.833
+   }
+  },
+  "model_weights_last_origin": {
+   "origin": 2020,
+   "weights": {
+    "value_acs": -0.0657,
+    "loan_level": -0.1646,
+    "trend_1y": 0.0151,
+    "trend_3y": 0.029,
+    "trend_5y": -0.0253,
+    "app_growth": 0.0071,
+    "loan_growth": 0.0305,
+    "nonowner_share": 0.0108,
+    "nonowner_change": -0.0002,
+    "denial_rate": 0.0227,
+    "buyer_income_ratio": 0.0072,
+    "permits_place": 0.0076,
+    "jobs_tract": -0.005,
+    "jobs_5km": 0.0026,
+    "rent_to_value": 0.0195,
+    "vacancy": 0.0066
+   }
+  }
+ },
+ "results_3y": {
+  "test_origins": [
+   2017,
+   2018,
+   2019,
+   2020,
+   2021,
+   2022
+  ],
+  "spread_points": {
+   "noskill": {
+    "pooled": {
+     "mean": 0.0,
+     "ci90": [
+      0.0,
+      0.0
+     ],
+     "cells": 289,
+     "counties": 49
+    },
+    "by_origin": {
+     "2017": {
+      "mean": 0.0,
+      "ci90": [
+       0.0,
+       0.0
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2018": {
+      "mean": 0.0,
+      "ci90": [
+       0.0,
+       0.0
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2019": {
+      "mean": 0.0,
+      "ci90": [
+       0.0,
+       0.0
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2020": {
+      "mean": 0.0,
+      "ci90": [
+       0.0,
+       0.0
+      ],
+      "cells": 47,
+      "counties": 47
+     },
+     "2021": {
+      "mean": 0.0,
+      "ci90": [
+       0.0,
+       0.0
+      ],
+      "cells": 48,
+      "counties": 48
+     },
+     "2022": {
+      "mean": 0.0,
+      "ci90": [
+       0.0,
+       0.0
+      ],
+      "cells": 47,
+      "counties": 47
+     }
+    }
+   },
+   "cheapest": {
+    "pooled": {
+     "mean": 6.73,
+     "ci90": [
+      6.02,
+      7.47
+     ],
+     "cells": 289,
+     "counties": 49
+    },
+    "by_origin": {
+     "2017": {
+      "mean": 13.29,
+      "ci90": [
+       11.83,
+       14.89
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2018": {
+      "mean": 12.78,
+      "ci90": [
+       11.58,
+       14.11
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2019": {
+      "mean": 9.7,
+      "ci90": [
+       8.62,
+       10.85
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2020": {
+      "mean": 4.68,
+      "ci90": [
+       3.42,
+       5.99
+      ],
+      "cells": 47,
+      "counties": 47
+     },
+     "2021": {
+      "mean": 0.83,
+      "ci90": [
+       -0.39,
+       2.06
+      ],
+      "cells": 48,
+      "counties": 48
+     },
+     "2022": {
+      "mean": -1.44,
+      "ci90": [
+       -2.64,
+       -0.28
+      ],
+      "cells": 47,
+      "counties": 47
+     }
+    }
+   },
+   "trend": {
+    "pooled": {
+     "mean": 1.41,
+     "ci90": [
+      0.83,
+      2.0
+     ],
+     "cells": 289,
+     "counties": 49
+    },
+    "by_origin": {
+     "2017": {
+      "mean": 2.68,
+      "ci90": [
+       1.08,
+       4.32
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2018": {
+      "mean": 3.2,
+      "ci90": [
+       1.7,
+       4.71
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2019": {
+      "mean": 2.78,
+      "ci90": [
+       1.55,
+       3.97
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2020": {
+      "mean": 1.49,
+      "ci90": [
+       0.31,
+       2.63
+      ],
+      "cells": 47,
+      "counties": 47
+     },
+     "2021": {
+      "mean": -0.61,
+      "ci90": [
+       -1.8,
+       0.5
+      ],
+      "cells": 48,
+      "counties": 48
+     },
+     "2022": {
+      "mean": -1.2,
+      "ci90": [
+       -2.32,
+       -0.09
+      ],
+      "cells": 47,
+      "counties": 47
+     }
+    }
+   },
+   "ridge": {
+    "pooled": {
+     "mean": 6.65,
+     "ci90": [
+      5.97,
+      7.35
+     ],
+     "cells": 289,
+     "counties": 49
+    },
+    "by_origin": {
+     "2017": {
+      "mean": 12.25,
+      "ci90": [
+       10.78,
+       13.85
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2018": {
+      "mean": 12.66,
+      "ci90": [
+       11.51,
+       13.86
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2019": {
+      "mean": 9.65,
+      "ci90": [
+       8.55,
+       10.82
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2020": {
+      "mean": 4.96,
+      "ci90": [
+       3.71,
+       6.22
+      ],
+      "cells": 47,
+      "counties": 47
+     },
+     "2021": {
+      "mean": 1.11,
+      "ci90": [
+       -0.08,
+       2.27
+      ],
+      "cells": 48,
+      "counties": 48
+     },
+     "2022": {
+      "mean": -1.22,
+      "ci90": [
+       -2.43,
+       -0.05
+      ],
+      "cells": 47,
+      "counties": 47
+     }
+    }
+   },
+   "ridge_noprice": {
+    "pooled": {
+     "mean": 3.5,
+     "ci90": [
+      2.77,
+      4.23
+     ],
+     "cells": 289,
+     "counties": 49
+    },
+    "by_origin": {
+     "2017": {
+      "mean": 4.3,
+      "ci90": [
+       3.09,
+       5.55
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2018": {
+      "mean": 6.74,
+      "ci90": [
+       5.7,
+       7.84
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2019": {
+      "mean": 6.03,
+      "ci90": [
+       5.07,
+       7.06
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2020": {
+      "mean": 3.35,
+      "ci90": [
+       2.28,
+       4.45
+      ],
+      "cells": 47,
+      "counties": 47
+     },
+     "2021": {
+      "mean": 1.17,
+      "ci90": [
+       0.21,
+       2.12
+      ],
+      "cells": 48,
+      "counties": 48
+     },
+     "2022": {
+      "mean": -0.8,
+      "ci90": [
+       -1.57,
+       -0.01
+      ],
+      "cells": 47,
+      "counties": 47
+     }
+    }
+   },
+   "gbm": {
+    "pooled": {
+     "mean": 6.66,
+     "ci90": [
+      5.99,
+      7.36
+     ],
+     "cells": 289,
+     "counties": 49
+    },
+    "by_origin": {
+     "2017": {
+      "mean": 12.13,
+      "ci90": [
+       10.74,
+       13.6
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2018": {
+      "mean": 12.62,
+      "ci90": [
+       11.47,
+       13.82
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2019": {
+      "mean": 9.76,
+      "ci90": [
+       8.73,
+       10.86
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2020": {
+      "mean": 5.1,
+      "ci90": [
+       3.85,
+       6.41
+      ],
+      "cells": 47,
+      "counties": 47
+     },
+     "2021": {
+      "mean": 1.1,
+      "ci90": [
+       -0.11,
+       2.32
+      ],
+      "cells": 48,
+      "counties": 48
+     },
+     "2022": {
+      "mean": -1.23,
+      "ci90": [
+       -2.39,
+       -0.06
+      ],
+      "cells": 47,
+      "counties": 47
+     }
+    }
+   }
+  },
+  "spearman": {
+   "noskill": {
+    "pooled": {
+     "mean": 0.0,
+     "ci90": [
+      0.0,
+      0.0
+     ],
+     "cells": 289,
+     "counties": 49
+    },
+    "by_origin": {
+     "2017": {
+      "mean": 0.0,
+      "ci90": [
+       0.0,
+       0.0
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2018": {
+      "mean": 0.0,
+      "ci90": [
+       0.0,
+       0.0
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2019": {
+      "mean": 0.0,
+      "ci90": [
+       0.0,
+       0.0
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2020": {
+      "mean": 0.0,
+      "ci90": [
+       0.0,
+       0.0
+      ],
+      "cells": 47,
+      "counties": 47
+     },
+     "2021": {
+      "mean": 0.0,
+      "ci90": [
+       0.0,
+       0.0
+      ],
+      "cells": 48,
+      "counties": 48
+     },
+     "2022": {
+      "mean": 0.0,
+      "ci90": [
+       0.0,
+       0.0
+      ],
+      "cells": 47,
+      "counties": 47
+     }
+    }
+   },
+   "cheapest": {
+    "pooled": {
+     "mean": 0.315,
+     "ci90": [
+      0.29,
+      0.34
+     ],
+     "cells": 289,
+     "counties": 49
+    },
+    "by_origin": {
+     "2017": {
+      "mean": 0.626,
+      "ci90": [
+       0.593,
+       0.657
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2018": {
+      "mean": 0.609,
+      "ci90": [
+       0.577,
+       0.639
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2019": {
+      "mean": 0.414,
+      "ci90": [
+       0.376,
+       0.451
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2020": {
+      "mean": 0.222,
+      "ci90": [
+       0.172,
+       0.273
+      ],
+      "cells": 47,
+      "counties": 47
+     },
+     "2021": {
+      "mean": 0.042,
+      "ci90": [
+       -0.008,
+       0.092
+      ],
+      "cells": 48,
+      "counties": 48
+     },
+     "2022": {
+      "mean": -0.048,
+      "ci90": [
+       -0.093,
+       -0.004
+      ],
+      "cells": 47,
+      "counties": 47
+     }
+    }
+   },
+   "trend": {
+    "pooled": {
+     "mean": 0.086,
+     "ci90": [
+      0.054,
+      0.118
+     ],
+     "cells": 289,
+     "counties": 49
+    },
+    "by_origin": {
+     "2017": {
+      "mean": 0.143,
+      "ci90": [
+       0.07,
+       0.217
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2018": {
+      "mean": 0.191,
+      "ci90": [
+       0.124,
+       0.26
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2019": {
+      "mean": 0.147,
+      "ci90": [
+       0.092,
+       0.203
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2020": {
+      "mean": 0.089,
+      "ci90": [
+       0.037,
+       0.141
+      ],
+      "cells": 47,
+      "counties": 47
+     },
+     "2021": {
+      "mean": -0.015,
+      "ci90": [
+       -0.059,
+       0.028
+      ],
+      "cells": 48,
+      "counties": 48
+     },
+     "2022": {
+      "mean": -0.047,
+      "ci90": [
+       -0.089,
+       -0.006
+      ],
+      "cells": 47,
+      "counties": 47
+     }
+    }
+   },
+   "ridge": {
+    "pooled": {
+     "mean": 0.311,
+     "ci90": [
+      0.286,
+      0.336
+     ],
+     "cells": 289,
+     "counties": 49
+    },
+    "by_origin": {
+     "2017": {
+      "mean": 0.586,
+      "ci90": [
+       0.543,
+       0.623
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2018": {
+      "mean": 0.606,
+      "ci90": [
+       0.573,
+       0.638
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2019": {
+      "mean": 0.416,
+      "ci90": [
+       0.377,
+       0.454
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2020": {
+      "mean": 0.231,
+      "ci90": [
+       0.18,
+       0.282
+      ],
+      "cells": 47,
+      "counties": 47
+     },
+     "2021": {
+      "mean": 0.052,
+      "ci90": [
+       0.001,
+       0.103
+      ],
+      "cells": 48,
+      "counties": 48
+     },
+     "2022": {
+      "mean": -0.046,
+      "ci90": [
+       -0.089,
+       -0.002
+      ],
+      "cells": 47,
+      "counties": 47
+     }
+    }
+   },
+   "ridge_noprice": {
+    "pooled": {
+     "mean": 0.164,
+     "ci90": [
+      0.136,
+      0.192
+     ],
+     "cells": 289,
+     "counties": 49
+    },
+    "by_origin": {
+     "2017": {
+      "mean": 0.197,
+      "ci90": [
+       0.152,
+       0.242
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2018": {
+      "mean": 0.331,
+      "ci90": [
+       0.292,
+       0.369
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2019": {
+      "mean": 0.265,
+      "ci90": [
+       0.228,
+       0.301
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2020": {
+      "mean": 0.163,
+      "ci90": [
+       0.119,
+       0.207
+      ],
+      "cells": 47,
+      "counties": 47
+     },
+     "2021": {
+      "mean": 0.048,
+      "ci90": [
+       0.007,
+       0.086
+      ],
+      "cells": 48,
+      "counties": 48
+     },
+     "2022": {
+      "mean": -0.028,
+      "ci90": [
+       -0.063,
+       0.007
+      ],
+      "cells": 47,
+      "counties": 47
+     }
+    }
+   },
+   "gbm": {
+    "pooled": {
+     "mean": 0.311,
+     "ci90": [
+      0.286,
+      0.335
+     ],
+     "cells": 289,
+     "counties": 49
+    },
+    "by_origin": {
+     "2017": {
+      "mean": 0.583,
+      "ci90": [
+       0.54,
+       0.621
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2018": {
+      "mean": 0.605,
+      "ci90": [
+       0.573,
+       0.636
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2019": {
+      "mean": 0.415,
+      "ci90": [
+       0.376,
+       0.453
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2020": {
+      "mean": 0.234,
+      "ci90": [
+       0.182,
+       0.285
+      ],
+      "cells": 47,
+      "counties": 47
+     },
+     "2021": {
+      "mean": 0.055,
+      "ci90": [
+       0.003,
+       0.105
+      ],
+      "cells": 48,
+      "counties": 48
+     },
+     "2022": {
+      "mean": -0.047,
+      "ci90": [
+       -0.091,
+       -0.003
+      ],
+      "cells": 47,
+      "counties": 47
+     }
+    }
+   }
+  },
+  "hit_rate_top_third": {
+   "noskill": {
+    "pooled": {
+     "mean": 0.333,
+     "ci90": [
+      0.333,
+      0.333
+     ],
+     "cells": 289,
+     "counties": 49
+    },
+    "by_origin": {
+     "2017": {
+      "mean": 0.333,
+      "ci90": [
+       0.333,
+       0.333
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2018": {
+      "mean": 0.333,
+      "ci90": [
+       0.333,
+       0.333
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2019": {
+      "mean": 0.333,
+      "ci90": [
+       0.333,
+       0.333
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2020": {
+      "mean": 0.333,
+      "ci90": [
+       0.333,
+       0.333
+      ],
+      "cells": 47,
+      "counties": 47
+     },
+     "2021": {
+      "mean": 0.333,
+      "ci90": [
+       0.333,
+       0.333
+      ],
+      "cells": 48,
+      "counties": 48
+     },
+     "2022": {
+      "mean": 0.333,
+      "ci90": [
+       0.333,
+       0.333
+      ],
+      "cells": 47,
+      "counties": 47
+     }
+    }
+   },
+   "cheapest": {
+    "pooled": {
+     "mean": 0.496,
+     "ci90": [
+      0.481,
+      0.511
+     ],
+     "cells": 289,
+     "counties": 49
+    },
+    "by_origin": {
+     "2017": {
+      "mean": 0.654,
+      "ci90": [
+       0.631,
+       0.676
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2018": {
+      "mean": 0.638,
+      "ci90": [
+       0.617,
+       0.66
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2019": {
+      "mean": 0.519,
+      "ci90": [
+       0.496,
+       0.542
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2020": {
+      "mean": 0.448,
+      "ci90": [
+       0.42,
+       0.474
+      ],
+      "cells": 47,
+      "counties": 47
+     },
+     "2021": {
+      "mean": 0.375,
+      "ci90": [
+       0.35,
+       0.4
+      ],
+      "cells": 48,
+      "counties": 48
+     },
+     "2022": {
+      "mean": 0.331,
+      "ci90": [
+       0.306,
+       0.355
+      ],
+      "cells": 47,
+      "counties": 47
+     }
+    }
+   },
+   "trend": {
+    "pooled": {
+     "mean": 0.383,
+     "ci90": [
+      0.368,
+      0.4
+     ],
+     "cells": 289,
+     "counties": 49
+    },
+    "by_origin": {
+     "2017": {
+      "mean": 0.402,
+      "ci90": [
+       0.367,
+       0.438
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2018": {
+      "mean": 0.431,
+      "ci90": [
+       0.402,
+       0.461
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2019": {
+      "mean": 0.407,
+      "ci90": [
+       0.383,
+       0.433
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2020": {
+      "mean": 0.379,
+      "ci90": [
+       0.35,
+       0.407
+      ],
+      "cells": 47,
+      "counties": 47
+     },
+     "2021": {
+      "mean": 0.353,
+      "ci90": [
+       0.332,
+       0.375
+      ],
+      "cells": 48,
+      "counties": 48
+     },
+     "2022": {
+      "mean": 0.325,
+      "ci90": [
+       0.304,
+       0.345
+      ],
+      "cells": 47,
+      "counties": 47
+     }
+    }
+   },
+   "ridge": {
+    "pooled": {
+     "mean": 0.497,
+     "ci90": [
+      0.483,
+      0.511
+     ],
+     "cells": 289,
+     "counties": 49
+    },
+    "by_origin": {
+     "2017": {
+      "mean": 0.632,
+      "ci90": [
+       0.605,
+       0.656
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2018": {
+      "mean": 0.63,
+      "ci90": [
+       0.608,
+       0.653
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2019": {
+      "mean": 0.523,
+      "ci90": [
+       0.5,
+       0.546
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2020": {
+      "mean": 0.454,
+      "ci90": [
+       0.428,
+       0.479
+      ],
+      "cells": 47,
+      "counties": 47
+     },
+     "2021": {
+      "mean": 0.391,
+      "ci90": [
+       0.366,
+       0.413
+      ],
+      "cells": 48,
+      "counties": 48
+     },
+     "2022": {
+      "mean": 0.343,
+      "ci90": [
+       0.323,
+       0.364
+      ],
+      "cells": 47,
+      "counties": 47
+     }
+    }
+   },
+   "ridge_noprice": {
+    "pooled": {
+     "mean": 0.43,
+     "ci90": [
+      0.416,
+      0.444
+     ],
+     "cells": 289,
+     "counties": 49
+    },
+    "by_origin": {
+     "2017": {
+      "mean": 0.449,
+      "ci90": [
+       0.426,
+       0.472
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2018": {
+      "mean": 0.514,
+      "ci90": [
+       0.493,
+       0.534
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2019": {
+      "mean": 0.466,
+      "ci90": [
+       0.446,
+       0.486
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2020": {
+      "mean": 0.427,
+      "ci90": [
+       0.403,
+       0.451
+      ],
+      "cells": 47,
+      "counties": 47
+     },
+     "2021": {
+      "mean": 0.374,
+      "ci90": [
+       0.353,
+       0.395
+      ],
+      "cells": 48,
+      "counties": 48
+     },
+     "2022": {
+      "mean": 0.344,
+      "ci90": [
+       0.325,
+       0.364
+      ],
+      "cells": 47,
+      "counties": 47
+     }
+    }
+   },
+   "gbm": {
+    "pooled": {
+     "mean": 0.495,
+     "ci90": [
+      0.479,
+      0.51
+     ],
+     "cells": 289,
+     "counties": 49
+    },
+    "by_origin": {
+     "2017": {
+      "mean": 0.628,
+      "ci90": [
+       0.601,
+       0.652
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2018": {
+      "mean": 0.628,
+      "ci90": [
+       0.604,
+       0.652
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2019": {
+      "mean": 0.522,
+      "ci90": [
+       0.498,
+       0.545
+      ],
+      "cells": 49,
+      "counties": 49
+     },
+     "2020": {
+      "mean": 0.451,
+      "ci90": [
+       0.425,
+       0.477
+      ],
+      "cells": 47,
+      "counties": 47
+     },
+     "2021": {
+      "mean": 0.391,
+      "ci90": [
+       0.364,
+       0.416
+      ],
+      "cells": 48,
+      "counties": 48
+     },
+     "2022": {
+      "mean": 0.338,
+      "ci90": [
+       0.315,
+       0.361
+      ],
+      "cells": 47,
+      "counties": 47
+     }
+    }
+   }
+  },
+  "paired_spread_points": {
+   "ridge_minus_cheapest": {
+    "mean": -0.08,
+    "ci90": [
+     -0.27,
+     0.1
+    ],
+    "cells": 289,
+    "counties": 49
+   },
+   "ridge_minus_trend": {
+    "mean": 5.24,
+    "ci90": [
+     4.3,
+     6.17
+    ],
+    "cells": 289,
+    "counties": 49
+   },
+   "ridge_noprice_minus_cheapest": {
+    "mean": -3.23,
+    "ci90": [
+     -3.76,
+     -2.7
+    ],
+    "cells": 289,
+    "counties": 49
+   },
+   "ridge_noprice_minus_trend": {
+    "mean": 2.09,
+    "ci90": [
+     1.03,
+     3.13
+    ],
+    "cells": 289,
+    "counties": 49
+   },
+   "gbm_minus_cheapest": {
+    "mean": -0.07,
+    "ci90": [
+     -0.22,
+     0.08
+    ],
+    "cells": 289,
+    "counties": 49
+   },
+   "gbm_minus_trend": {
+    "mean": 5.25,
+    "ci90": [
+     4.34,
+     6.17
+    ],
+    "cells": 289,
+    "counties": 49
+   }
+  },
+  "calibration_80pct_range": {
+   "model": {
+    "mean": 0.723,
+    "ci90": [
+     0.706,
+     0.741
+    ],
+    "cells": 289,
+    "counties": 49
+   },
+   "no_skill": {
+    "mean": 0.823,
+    "ci90": [
+     0.805,
+     0.842
+    ],
+    "cells": 289,
+    "counties": 49
+   }
+  },
+  "excluding_2020_2022_origins": {
+   "ridge_minus_cheapest": {
+    "mean": -0.4,
+    "ci90": [
+     -0.73,
+     -0.13
+    ],
+    "cells": 147,
+    "counties": 49
+   },
+   "ridge_minus_trend": {
+    "mean": 8.63,
+    "ci90": [
+     7.22,
+     10.11
+    ],
+    "cells": 147,
+    "counties": 49
+   }
+  }
+ },
+ "features": [
+  {
+   "feature": "value_acs",
+   "label": "home value (Census)",
+   "as_of_rule": "ACS 5-year median home value, latest vintage ending E with E+1 <= T",
+   "source": "data/signals/acs_tract_50counties.csv.gz (ACS 5-year, Census bulk files)",
+   "why_it_should_lead": "cheap-for-the-county catch-up",
+   "price_level": true
+  },
+  {
+   "feature": "loan_level",
+   "label": "size of this year's purchase loans",
+   "as_of_rule": "HMDA home-purchase median loan amount, year T-1",
+   "source": "data/signals/hmda_*tract_year_50counties.csv.gz (HMDA public data)",
+   "why_it_should_lead": "the same, from this year's buyers",
+   "price_level": true
+  },
+  {
+   "feature": "trend_1y",
+   "label": "last year's price change",
+   "as_of_rule": "FHFA tract index, years T-2 to T-1",
+   "source": "data/signals/fhfa_tract_annual.csv.gz (FHFA tract HPI)",
+   "why_it_should_lead": "short momentum",
+   "price_level": false
+  },
+  {
+   "feature": "trend_3y",
+   "label": "3-year price change",
+   "as_of_rule": "FHFA tract index, years T-4 to T-1",
+   "source": "data/signals/fhfa_tract_annual.csv.gz",
+   "why_it_should_lead": "medium momentum or reversal",
+   "price_level": false
+  },
+  {
+   "feature": "trend_5y",
+   "label": "5-year price change",
+   "as_of_rule": "FHFA tract index, years T-6 to T-1",
+   "source": "data/signals/fhfa_tract_annual.csv.gz",
+   "why_it_should_lead": "long momentum or reversal",
+   "price_level": false
+  },
+  {
+   "feature": "app_growth",
+   "label": "growth in mortgage applications",
+   "as_of_rule": "HMDA home-purchase applications, year T-2 to T-1",
+   "source": "HMDA",
+   "why_it_should_lead": "buyers arriving before prices show it",
+   "price_level": false
+  },
+  {
+   "feature": "loan_growth",
+   "label": "growth in loan sizes",
+   "as_of_rule": "HMDA median loan amount, year T-2 to T-1",
+   "source": "HMDA",
+   "why_it_should_lead": "buyers paying more, ahead of the repeat-sales index",
+   "price_level": false
+  },
+  {
+   "feature": "nonowner_share",
+   "label": "share of purchases by investors and second-home buyers",
+   "as_of_rule": "HMDA originations not owner-occupied, year T-1",
+   "source": "HMDA",
+   "why_it_should_lead": "investor and second-home demand",
+   "price_level": false
+  },
+  {
+   "feature": "nonowner_change",
+   "label": "change in investor and second-home buying",
+   "as_of_rule": "the same, T-2 to T-1",
+   "source": "HMDA",
+   "why_it_should_lead": "investors moving in or out",
+   "price_level": false
+  },
+  {
+   "feature": "denial_rate",
+   "label": "mortgage denial rate",
+   "as_of_rule": "HMDA home-purchase denial rate, year T-1",
+   "source": "HMDA",
+   "why_it_should_lead": "weaker applicant credit, weaker demand",
+   "price_level": false
+  },
+  {
+   "feature": "buyer_income_ratio",
+   "label": "buyers' income compared with residents' income",
+   "as_of_rule": "HMDA median applicant income T-1 / ACS median household income (vintage as value_acs)",
+   "source": "HMDA and ACS",
+   "why_it_should_lead": "richer buyers than residents: neighbourhood change",
+   "price_level": false
+  },
+  {
+   "feature": "permits_place",
+   "label": "building permits in its city or town per existing home",
+   "as_of_rule": "BPS annual units authorised, years T-3..T-1, in the tract's permit jurisdiction / ACS homes there (vintage as value_acs)",
+   "source": "data/signals/bps_place_annual.csv.gz (Census Building Permits Survey) and data/predict/tract_jurisdiction_50counties.csv.gz (2020 block assignment files)",
+   "why_it_should_lead": "supply coming, and builders' bets",
+   "price_level": false
+  },
+  {
+   "feature": "jobs_tract",
+   "label": "job growth in the tract",
+   "as_of_rule": "LODES jobs in the tract, years T-4 to T-2",
+   "source": "data/signals/lodes_wac_tract_*.csv.gz (LEHD LODES8)",
+   "why_it_should_lead": "job growth on the spot",
+   "price_level": false
+  },
+  {
+   "feature": "jobs_5km",
+   "label": "job growth within 5 km",
+   "as_of_rule": "LODES jobs within 5 km, years T-4 to T-2",
+   "source": "LODES8 and data/predict/tract_centroids_2020.csv.gz (2020 Gazetteer)",
+   "why_it_should_lead": "job growth within reach",
+   "price_level": false
+  },
+  {
+   "feature": "rent_to_value",
+   "label": "rent compared with home value",
+   "as_of_rule": "12 x ACS median rent / ACS median value (vintage as value_acs)",
+   "source": "ACS",
+   "why_it_should_lead": "high yield for the price",
+   "price_level": true
+  },
+  {
+   "feature": "vacancy",
+   "label": "vacant homes share",
+   "as_of_rule": "ACS vacant / housing units (vintage as value_acs)",
+   "source": "ACS",
+   "why_it_should_lead": "emptying or filling up",
+   "price_level": false
+  }
+ ],
+ "metro_variant_county_features": [
+  {
+   "feature": "permits_county",
+   "as_of_rule": "BPS annual county units authorised T-3..T-1 / ACS homes in the sample tracts of the county"
+  },
+  {
+   "feature": "net_migration",
+   "as_of_rule": "IRS county returns, (in - out) / non-migrant returns, year_end T-2"
+  },
+  {
+   "feature": "county_trend_vs_metro",
+   "as_of_rule": "FHFA county index T-6 to T-1 minus the median of the CBSA's counties"
+  }
+ ],
+ "data_vintages": {
+  "fhfa": {
+   "retrieved": "2026-11-22",
+   "note": "Last updated: March 31, 2026.",
+   "years": [
+    1975,
+    2025
+   ],
+   "revised": "one current vintage; every year re-estimated on each release"
+  },
+  "hmda": "home-purchase applications 2012-2025 (2012-2021 on 2010 tract codes, moved to 2020 tracts by land area)",
+  "lodes": {
+   "years": "2010-2024",
+   "not_published": [
+    "ak2017",
+    "ak2018",
+    "ak2019",
+    "ak2020",
+    "ak2021",
+    "ak2022",
+    "ak2023",
+    "ak2024",
+    "mi2022",
+    "mi2023",
+    "mi2024"
+   ],
+   "note": "2010-2021 re-created in 2023"
+  },
+  "acs": "5-year 2010-2014 and 2015-2019 (the newest vintages on file; 2020-2024 is published but not in data/signals)",
+  "bps": "annual place and county files 2010-2025",
+  "irs_migration": "pairs 2011-12 to 2023-24",
+  "geography": [
+   {
+    "url": "https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2020_Gazetteer/2020_Gaz_tracts_national.zip",
+    "last_modified": "Fri, 22 Jan 2021 14:24:01 GMT"
+   },
+   {
+    "url": "https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2020_Gazetteer/2020_Gaz_cousubs_national.zip",
+    "last_modified": "Fri, 22 Jan 2021 14:23:58 GMT"
+   },
+   {
+    "url": "https://www2.census.gov/programs-surveys/metro-micro/geographies/reference-files/2023/delineation-files/list1_2023.xlsx",
+    "last_modified": "Fri, 04 Aug 2023 14:36:17 GMT"
+   },
+   {
+    "block_assignment_files": 21,
+    "retrieved": "2026-11-22"
+   }
+  ],
+  "details": "docs/audit/prediction-signals-2026-11-22.md"
+ },
+ "counties": {
+  "04013": {
+   "name": "Maricopa County, AZ",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": 1.18,
+    "cheapest": 2.1,
+    "prior_trend": 2.35
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.428,
+    "cheapest": 0.454,
+    "trend": 0.4
+   },
+   "spearman_5y": {
+    "ridge": 0.089,
+    "cheapest": 0.102,
+    "trend": 0.088
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -2.6,
+     9.71,
+     24.52,
+     768
+    ],
+    "2": [
+     -5.07,
+     3.45,
+     11.23,
+     769
+    ],
+    "3": [
+     -6.75,
+     -0.48,
+     7.12,
+     768
+    ],
+    "4": [
+     -11.24,
+     -2.81,
+     4.31,
+     769
+    ],
+    "5": [
+     -18.62,
+     -7.16,
+     2.99,
+     768
+    ]
+   }
+  },
+  "04019": {
+   "name": "Pima County, AZ",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": 6.61,
+    "cheapest": 5.42,
+    "prior_trend": 6.73
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.471,
+    "cheapest": 0.482,
+    "trend": 0.438
+   },
+   "spearman_5y": {
+    "ridge": 0.256,
+    "cheapest": 0.2,
+    "trend": 0.182
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -3.18,
+     7.71,
+     20.67,
+     222
+    ],
+    "2": [
+     -5.95,
+     3.46,
+     12.09,
+     223
+    ],
+    "3": [
+     -6.61,
+     0.19,
+     6.55,
+     224
+    ],
+    "4": [
+     -10.93,
+     -3.08,
+     5.71,
+     224
+    ],
+    "5": [
+     -13.64,
+     -6.22,
+     2.95,
+     222
+    ]
+   }
+  },
+  "06001": {
+   "name": "Alameda County, CA",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": -5.43,
+    "cheapest": -9.37,
+    "prior_trend": -18.08
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.174,
+    "cheapest": 0.148,
+    "trend": 0.166
+   },
+   "spearman_5y": {
+    "ridge": -0.165,
+    "cheapest": -0.252,
+    "trend": -0.396
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -13.03,
+     6.98,
+     23.36,
+     344
+    ],
+    "2": [
+     -8.36,
+     4.07,
+     11.08,
+     341
+    ],
+    "3": [
+     -8.68,
+     1.23,
+     11.63,
+     345
+    ],
+    "4": [
+     -16.16,
+     -3.81,
+     10.67,
+     342
+    ],
+    "5": [
+     -39.4,
+     -12.96,
+     5.64,
+     344
+    ]
+   }
+  },
+  "06013": {
+   "name": "Contra Costa County, CA",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": -1.34,
+    "cheapest": -1.36,
+    "prior_trend": -6.18
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.365,
+    "cheapest": 0.356,
+    "trend": 0.278
+   },
+   "spearman_5y": {
+    "ridge": -0.023,
+    "cheapest": -0.051,
+    "trend": -0.257
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -3.15,
+     8.3,
+     20.53,
+     260
+    ],
+    "2": [
+     -3.77,
+     2.8,
+     9.46,
+     259
+    ],
+    "3": [
+     -5.76,
+     0.06,
+     6.63,
+     260
+    ],
+    "4": [
+     -12.26,
+     -4.62,
+     2.69,
+     259
+    ],
+    "5": [
+     -36.86,
+     -13.36,
+     4.55,
+     260
+    ]
+   }
+  },
+  "06065": {
+   "name": "Riverside County, CA",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": 4.39,
+    "cheapest": 5.15,
+    "prior_trend": 3.9
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.495,
+    "cheapest": 0.505,
+    "trend": 0.524
+   },
+   "spearman_5y": {
+    "ridge": 0.237,
+    "cheapest": 0.259,
+    "trend": 0.222
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -2.48,
+     6.85,
+     16.2,
+     538
+    ],
+    "2": [
+     -4.87,
+     2.56,
+     10.36,
+     538
+    ],
+    "3": [
+     -6.51,
+     0.25,
+     7.82,
+     535
+    ],
+    "4": [
+     -8.44,
+     -2.83,
+     4.57,
+     540
+    ],
+    "5": [
+     -12.12,
+     -5.99,
+     2.59,
+     538
+    ]
+   }
+  },
+  "06067": {
+   "name": "Sacramento County, CA",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": 8.79,
+    "cheapest": 8.05,
+    "prior_trend": 7.81
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.514,
+    "cheapest": 0.519,
+    "trend": 0.524
+   },
+   "spearman_5y": {
+    "ridge": 0.409,
+    "cheapest": 0.408,
+    "trend": 0.364
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -0.73,
+     9.49,
+     22.59,
+     438
+    ],
+    "2": [
+     -3.01,
+     4.45,
+     11.63,
+     439
+    ],
+    "3": [
+     -4.53,
+     0.0,
+     4.55,
+     437
+    ],
+    "4": [
+     -8.84,
+     -3.65,
+     2.06,
+     438
+    ],
+    "5": [
+     -13.77,
+     -6.75,
+     0.58,
+     439
+    ]
+   }
+  },
+  "06071": {
+   "name": "San Bernardino County, CA",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": 9.37,
+    "cheapest": 10.72,
+    "prior_trend": 9.68
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.598,
+    "cheapest": 0.64,
+    "trend": 0.608
+   },
+   "spearman_5y": {
+    "ridge": 0.515,
+    "cheapest": 0.56,
+    "trend": 0.513
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -0.09,
+     9.58,
+     22.88,
+     516
+    ],
+    "2": [
+     -2.26,
+     4.77,
+     12.98,
+     518
+    ],
+    "3": [
+     -6.29,
+     0.05,
+     7.39,
+     518
+    ],
+    "4": [
+     -9.84,
+     -3.93,
+     2.51,
+     515
+    ],
+    "5": [
+     -16.25,
+     -9.14,
+     -0.5,
+     520
+    ]
+   }
+  },
+  "06073": {
+   "name": "San Diego County, CA",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": -0.56,
+    "cheapest": -0.25,
+    "prior_trend": -0.46
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.318,
+    "cheapest": 0.328,
+    "trend": 0.348
+   },
+   "spearman_5y": {
+    "ridge": -0.064,
+    "cheapest": -0.038,
+    "trend": 0.016
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -4.03,
+     3.84,
+     12.98,
+     623
+    ],
+    "2": [
+     -4.41,
+     2.44,
+     9.07,
+     627
+    ],
+    "3": [
+     -5.05,
+     0.03,
+     6.37,
+     624
+    ],
+    "4": [
+     -7.13,
+     -1.4,
+     5.03,
+     619
+    ],
+    "5": [
+     -19.29,
+     -5.14,
+     4.32,
+     628
+    ]
+   }
+  },
+  "06075": {
+   "name": "San Francisco County, CA",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": -4.58,
+    "cheapest": -5.1,
+    "prior_trend": -1.7
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.192,
+    "cheapest": 0.258,
+    "trend": 0.293
+   },
+   "spearman_5y": {
+    "ridge": -0.166,
+    "cheapest": -0.169,
+    "trend": -0.054
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -2.38,
+     15.01,
+     25.04,
+     73
+    ],
+    "2": [
+     -2.38,
+     8.64,
+     19.7,
+     74
+    ],
+    "3": [
+     -12.94,
+     0.0,
+     8.95,
+     78
+    ],
+    "4": [
+     -24.91,
+     -9.08,
+     3.02,
+     73
+    ],
+    "5": [
+     -32.87,
+     -20.42,
+     -0.19,
+     73
+    ]
+   }
+  },
+  "06085": {
+   "name": "Santa Clara County, CA",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": 4.26,
+    "cheapest": 4.05,
+    "prior_trend": -1.67
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.291,
+    "cheapest": 0.37,
+    "trend": 0.269
+   },
+   "spearman_5y": {
+    "ridge": 0.078,
+    "cheapest": 0.131,
+    "trend": -0.129
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -2.92,
+     7.62,
+     17.08,
+     264
+    ],
+    "2": [
+     -4.13,
+     5.68,
+     13.77,
+     255
+    ],
+    "3": [
+     -11.59,
+     0.21,
+     8.37,
+     268
+    ],
+    "4": [
+     -26.16,
+     -5.61,
+     5.91,
+     259
+    ],
+    "5": [
+     -65.87,
+     -23.08,
+     0.58,
+     264
+    ]
+   }
+  },
+  "12011": {
+   "name": "Broward County, FL",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": 2.82,
+    "cheapest": 2.44,
+    "prior_trend": 4.71
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.409,
+    "cheapest": 0.427,
+    "trend": 0.418
+   },
+   "spearman_5y": {
+    "ridge": 0.179,
+    "cheapest": 0.186,
+    "trend": 0.265
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -5.88,
+     7.67,
+     25.99,
+     287
+    ],
+    "2": [
+     -5.98,
+     4.76,
+     18.66,
+     289
+    ],
+    "3": [
+     -7.33,
+     0.72,
+     9.65,
+     286
+    ],
+    "4": [
+     -10.89,
+     -3.43,
+     4.53,
+     289
+    ],
+    "5": [
+     -15.89,
+     -5.51,
+     3.54,
+     288
+    ]
+   }
+  },
+  "12057": {
+   "name": "Hillsborough County, FL",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": 7.57,
+    "cheapest": 7.86,
+    "prior_trend": 5.5
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.485,
+    "cheapest": 0.505,
+    "trend": 0.456
+   },
+   "spearman_5y": {
+    "ridge": 0.303,
+    "cheapest": 0.356,
+    "trend": 0.306
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -5.92,
+     9.49,
+     28.62,
+     247
+    ],
+    "2": [
+     -4.98,
+     4.34,
+     15.79,
+     246
+    ],
+    "3": [
+     -9.24,
+     0.3,
+     11.7,
+     245
+    ],
+    "4": [
+     -10.39,
+     -2.96,
+     6.12,
+     246
+    ],
+    "5": [
+     -15.98,
+     -7.06,
+     2.3,
+     247
+    ]
+   }
+  },
+  "12086": {
+   "name": "Miami-Dade County, FL",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": 3.53,
+    "cheapest": 4.2,
+    "prior_trend": 4.05
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.454,
+    "cheapest": 0.48,
+    "trend": 0.493
+   },
+   "spearman_5y": {
+    "ridge": 0.14,
+    "cheapest": 0.148,
+    "trend": 0.164
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -2.35,
+     13.39,
+     29.71,
+     416
+    ],
+    "2": [
+     -8.57,
+     5.07,
+     19.28,
+     414
+    ],
+    "3": [
+     -10.13,
+     -0.76,
+     9.15,
+     416
+    ],
+    "4": [
+     -12.24,
+     -3.55,
+     5.34,
+     421
+    ],
+    "5": [
+     -20.29,
+     -6.96,
+     5.58,
+     415
+    ]
+   }
+  },
+  "12099": {
+   "name": "Palm Beach County, FL",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": 2.82,
+    "cheapest": -1.02,
+    "prior_trend": 3.41
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.469,
+    "cheapest": 0.442,
+    "trend": 0.458
+   },
+   "spearman_5y": {
+    "ridge": 0.154,
+    "cheapest": 0.109,
+    "trend": 0.171
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -7.26,
+     7.13,
+     23.69,
+     193
+    ],
+    "2": [
+     -5.11,
+     4.86,
+     17.12,
+     194
+    ],
+    "3": [
+     -9.78,
+     -0.47,
+     8.98,
+     193
+    ],
+    "4": [
+     -12.39,
+     -3.38,
+     7.33,
+     194
+    ],
+    "5": [
+     -14.82,
+     -3.72,
+     6.69,
+     193
+    ]
+   }
+  },
+  "12103": {
+   "name": "Pinellas County, FL",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": 5.86,
+    "cheapest": 7.03,
+    "prior_trend": 7.03
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.473,
+    "cheapest": 0.447,
+    "trend": 0.465
+   },
+   "spearman_5y": {
+    "ridge": 0.246,
+    "cheapest": 0.242,
+    "trend": 0.34
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -5.33,
+     6.28,
+     22.52,
+     276
+    ],
+    "2": [
+     -4.4,
+     2.48,
+     11.99,
+     275
+    ],
+    "3": [
+     -8.33,
+     1.05,
+     10.24,
+     274
+    ],
+    "4": [
+     -9.12,
+     -1.74,
+     8.54,
+     276
+    ],
+    "5": [
+     -14.45,
+     -5.48,
+     4.26,
+     277
+    ]
+   }
+  },
+  "13121": {
+   "name": "Fulton County, GA",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": 10.67,
+    "cheapest": 9.36,
+    "prior_trend": 0.64
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.461,
+    "cheapest": 0.45,
+    "trend": 0.332
+   },
+   "spearman_5y": {
+    "ridge": 0.263,
+    "cheapest": 0.228,
+    "trend": 0.051
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -1.48,
+     22.73,
+     50.88,
+     218
+    ],
+    "2": [
+     -9.2,
+     7.28,
+     24.29,
+     221
+    ],
+    "3": [
+     -15.53,
+     -1.45,
+     9.89,
+     219
+    ],
+    "4": [
+     -18.24,
+     -4.64,
+     7.31,
+     220
+    ],
+    "5": [
+     -21.59,
+     -11.49,
+     0.73,
+     219
+    ]
+   }
+  },
+  "17031": {
+   "name": "Cook County, IL",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": 11.0,
+    "cheapest": 10.96,
+    "prior_trend": 0.1
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.578,
+    "cheapest": 0.563,
+    "trend": 0.346
+   },
+   "spearman_5y": {
+    "ridge": 0.436,
+    "cheapest": 0.41,
+    "trend": 0.018
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -4.88,
+     10.64,
+     29.29,
+     1020
+    ],
+    "2": [
+     -4.9,
+     5.06,
+     17.03,
+     1019
+    ],
+    "3": [
+     -8.58,
+     0.03,
+     8.47,
+     1019
+    ],
+    "4": [
+     -10.65,
+     -3.77,
+     4.29,
+     1020
+    ],
+    "5": [
+     -15.23,
+     -7.38,
+     3.01,
+     1018
+    ]
+   }
+  },
+  "18097": {
+   "name": "Marion County, IN",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": 19.1,
+    "cheapest": 16.47,
+    "prior_trend": -7.41
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.622,
+    "cheapest": 0.541,
+    "trend": 0.204
+   },
+   "spearman_5y": {
+    "ridge": 0.599,
+    "cheapest": 0.472,
+    "trend": -0.216
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -6.83,
+     9.23,
+     26.98,
+     247
+    ],
+    "2": [
+     -5.71,
+     3.87,
+     13.19,
+     247
+    ],
+    "3": [
+     -8.08,
+     1.21,
+     9.94,
+     244
+    ],
+    "4": [
+     -9.95,
+     -2.18,
+     5.86,
+     246
+    ],
+    "5": [
+     -17.78,
+     -8.07,
+     1.81,
+     247
+    ]
+   }
+  },
+  "25017": {
+   "name": "Middlesex County, MA",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": 10.02,
+    "cheapest": 8.79,
+    "prior_trend": -6.08
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.599,
+    "cheapest": 0.613,
+    "trend": 0.168
+   },
+   "spearman_5y": {
+    "ridge": 0.49,
+    "cheapest": 0.444,
+    "trend": -0.376
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -1.61,
+     4.85,
+     13.47,
+     341
+    ],
+    "2": [
+     -3.6,
+     1.94,
+     11.76,
+     339
+    ],
+    "3": [
+     -6.0,
+     -0.33,
+     6.45,
+     340
+    ],
+    "4": [
+     -8.72,
+     -1.88,
+     6.01,
+     337
+    ],
+    "5": [
+     -17.36,
+     -6.7,
+     2.73,
+     341
+    ]
+   }
+  },
+  "25025": {
+   "name": "Suffolk County, MA",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": 5.75,
+    "cheapest": 4.83,
+    "prior_trend": -0.17
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.292,
+    "cheapest": 0.333,
+    "trend": 0.25
+   },
+   "spearman_5y": {
+    "ridge": 0.251,
+    "cheapest": 0.196,
+    "trend": 0.048
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -5.42,
+     3.95,
+     11.75,
+     77
+    ],
+    "2": [
+     -6.59,
+     1.44,
+     9.26,
+     77
+    ],
+    "3": [
+     -8.78,
+     1.38,
+     10.47,
+     76
+    ],
+    "4": [
+     -8.95,
+     -2.68,
+     4.15,
+     75
+    ],
+    "5": [
+     -16.77,
+     -5.27,
+     3.81,
+     77
+    ]
+   }
+  },
+  "26099": {
+   "name": "Macomb County, MI",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": 10.98,
+    "cheapest": 11.25,
+    "prior_trend": 9.4
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.636,
+    "cheapest": 0.629,
+    "trend": 0.593
+   },
+   "spearman_5y": {
+    "ridge": 0.515,
+    "cheapest": 0.542,
+    "trend": 0.46
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -1.84,
+     14.6,
+     29.67,
+     301
+    ],
+    "2": [
+     -3.29,
+     3.78,
+     12.72,
+     303
+    ],
+    "3": [
+     -4.5,
+     0.56,
+     6.21,
+     304
+    ],
+    "4": [
+     -8.2,
+     -2.86,
+     1.64,
+     302
+    ],
+    "5": [
+     -11.15,
+     -6.0,
+     -0.34,
+     302
+    ]
+   }
+  },
+  "26125": {
+   "name": "Oakland County, MI",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": 4.88,
+    "cheapest": 5.44,
+    "prior_trend": 1.43
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.485,
+    "cheapest": 0.46,
+    "trend": 0.365
+   },
+   "spearman_5y": {
+    "ridge": 0.264,
+    "cheapest": 0.224,
+    "trend": 0.087
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -1.24,
+     9.28,
+     25.15,
+     429
+    ],
+    "2": [
+     -4.08,
+     2.14,
+     8.6,
+     432
+    ],
+    "3": [
+     -6.82,
+     -0.33,
+     5.23,
+     428
+    ],
+    "4": [
+     -7.86,
+     -2.44,
+     3.15,
+     432
+    ],
+    "5": [
+     -11.53,
+     -5.27,
+     2.35,
+     429
+    ]
+   }
+  },
+  "26163": {
+   "name": "Wayne County, MI",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": 13.03,
+    "cheapest": 13.3,
+    "prior_trend": 5.82
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.528,
+    "cheapest": 0.548,
+    "trend": 0.455
+   },
+   "spearman_5y": {
+    "ridge": 0.515,
+    "cheapest": 0.526,
+    "trend": 0.339
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -1.06,
+     11.55,
+     27.88,
+     410
+    ],
+    "2": [
+     -4.57,
+     5.11,
+     15.39,
+     409
+    ],
+    "3": [
+     -7.15,
+     1.04,
+     9.35,
+     410
+    ],
+    "4": [
+     -9.95,
+     -4.61,
+     3.24,
+     410
+    ],
+    "5": [
+     -16.68,
+     -8.32,
+     0.11,
+     409
+    ]
+   }
+  },
+  "27053": {
+   "name": "Hennepin County, MN",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": -0.96,
+    "cheapest": -0.11,
+    "prior_trend": -0.71
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.306,
+    "cheapest": 0.285,
+    "trend": 0.301
+   },
+   "spearman_5y": {
+    "ridge": -0.096,
+    "cheapest": -0.102,
+    "trend": -0.128
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -4.16,
+     6.78,
+     17.19,
+     398
+    ],
+    "2": [
+     -7.75,
+     1.86,
+     8.21,
+     401
+    ],
+    "3": [
+     -6.55,
+     -0.36,
+     4.83,
+     398
+    ],
+    "4": [
+     -8.82,
+     -2.15,
+     4.24,
+     397
+    ],
+    "5": [
+     -12.65,
+     -4.36,
+     5.35,
+     401
+    ]
+   }
+  },
+  "29189": {
+   "name": "St. Louis County, MO",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": 11.72,
+    "cheapest": 11.45,
+    "prior_trend": 0.38
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.63,
+    "cheapest": 0.613,
+    "trend": 0.379
+   },
+   "spearman_5y": {
+    "ridge": 0.472,
+    "cheapest": 0.481,
+    "trend": 0.051
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -7.17,
+     7.48,
+     22.14,
+     263
+    ],
+    "2": [
+     -3.27,
+     3.64,
+     11.44,
+     269
+    ],
+    "3": [
+     -6.19,
+     -0.84,
+     5.11,
+     264
+    ],
+    "4": [
+     -8.98,
+     -1.9,
+     3.82,
+     269
+    ],
+    "5": [
+     -14.89,
+     -5.87,
+     4.52,
+     266
+    ]
+   }
+  },
+  "32003": {
+   "name": "Clark County, NV",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": 5.21,
+    "cheapest": 5.08,
+    "prior_trend": 4.98
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.508,
+    "cheapest": 0.554,
+    "trend": 0.469
+   },
+   "spearman_5y": {
+    "ridge": 0.305,
+    "cheapest": 0.337,
+    "trend": 0.298
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -0.45,
+     9.2,
+     20.91,
+     345
+    ],
+    "2": [
+     -4.83,
+     4.27,
+     12.66,
+     347
+    ],
+    "3": [
+     -7.61,
+     -0.02,
+     7.75,
+     347
+    ],
+    "4": [
+     -11.64,
+     -4.55,
+     3.27,
+     346
+    ],
+    "5": [
+     -15.21,
+     -6.82,
+     2.69,
+     346
+    ]
+   }
+  },
+  "34003": {
+   "name": "Bergen County, NJ",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": 5.16,
+    "cheapest": 5.04,
+    "prior_trend": 3.79
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.549,
+    "cheapest": 0.573,
+    "trend": 0.439
+   },
+   "spearman_5y": {
+    "ridge": 0.362,
+    "cheapest": 0.377,
+    "trend": 0.209
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     0.07,
+     5.74,
+     14.11,
+     215
+    ],
+    "2": [
+     -3.96,
+     2.59,
+     9.54,
+     216
+    ],
+    "3": [
+     -5.91,
+     -0.21,
+     4.98,
+     215
+    ],
+    "4": [
+     -8.87,
+     -3.29,
+     3.35,
+     215
+    ],
+    "5": [
+     -13.92,
+     -6.86,
+     2.42,
+     215
+    ]
+   }
+  },
+  "36029": {
+   "name": "Erie County, NY",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": 5.75,
+    "cheapest": 5.3,
+    "prior_trend": 2.29
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.468,
+    "cheapest": 0.486,
+    "trend": 0.343
+   },
+   "spearman_5y": {
+    "ridge": 0.289,
+    "cheapest": 0.254,
+    "trend": 0.093
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -5.16,
+     6.34,
+     19.01,
+     224
+    ],
+    "2": [
+     -4.54,
+     2.26,
+     10.18,
+     225
+    ],
+    "3": [
+     -6.11,
+     -0.5,
+     6.82,
+     225
+    ],
+    "4": [
+     -7.55,
+     -1.43,
+     5.93,
+     226
+    ],
+    "5": [
+     -10.25,
+     -3.74,
+     3.09,
+     225
+    ]
+   }
+  },
+  "36047": {
+   "name": "Kings County, NY",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 1,
+   "spread_points_5y": {
+    "model": 5.13,
+    "cheapest": 8.03,
+    "prior_trend": 2.79
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.286,
+    "cheapest": 0.429,
+    "trend": 0.429
+   },
+   "spearman_5y": {
+    "ridge": -0.019,
+    "cheapest": 0.184,
+    "trend": 0.062
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -2.37,
+     7.47,
+     16.51,
+     65
+    ],
+    "2": [
+     -9.41,
+     3.52,
+     14.71,
+     67
+    ],
+    "3": [
+     -11.78,
+     -1.04,
+     9.49,
+     66
+    ],
+    "4": [
+     -12.89,
+     -3.58,
+     6.0,
+     66
+    ],
+    "5": [
+     -20.54,
+     -6.68,
+     6.53,
+     66
+    ]
+   }
+  },
+  "36059": {
+   "name": "Nassau County, NY",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": 8.56,
+    "cheapest": 8.44,
+    "prior_trend": 4.74
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.523,
+    "cheapest": 0.536,
+    "trend": 0.411
+   },
+   "spearman_5y": {
+    "ridge": 0.37,
+    "cheapest": 0.398,
+    "trend": 0.187
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -1.13,
+     7.47,
+     19.32,
+     344
+    ],
+    "2": [
+     -3.78,
+     1.85,
+     8.51,
+     346
+    ],
+    "3": [
+     -5.49,
+     -0.05,
+     5.67,
+     343
+    ],
+    "4": [
+     -9.59,
+     -2.35,
+     4.78,
+     347
+    ],
+    "5": [
+     -17.67,
+     -6.43,
+     3.17,
+     345
+    ]
+   }
+  },
+  "36081": {
+   "name": "Queens County, NY",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": 7.09,
+    "cheapest": 13.58,
+    "prior_trend": -0.97
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.339,
+    "cheapest": 0.52,
+    "trend": 0.289
+   },
+   "spearman_5y": {
+    "ridge": 0.208,
+    "cheapest": 0.522,
+    "trend": -0.063
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -10.41,
+     5.11,
+     15.59,
+     220
+    ],
+    "2": [
+     -4.12,
+     4.9,
+     14.34,
+     220
+    ],
+    "3": [
+     -7.25,
+     2.33,
+     12.08,
+     219
+    ],
+    "4": [
+     -13.6,
+     -4.51,
+     6.43,
+     221
+    ],
+    "5": [
+     -18.17,
+     -8.09,
+     1.1,
+     221
+    ]
+   }
+  },
+  "36103": {
+   "name": "Suffolk County, NY",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": 10.71,
+    "cheapest": 11.7,
+    "prior_trend": 7.88
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.565,
+    "cheapest": 0.623,
+    "trend": 0.556
+   },
+   "spearman_5y": {
+    "ridge": 0.501,
+    "cheapest": 0.541,
+    "trend": 0.41
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -1.33,
+     8.78,
+     21.37,
+     476
+    ],
+    "2": [
+     -3.56,
+     2.58,
+     9.62,
+     473
+    ],
+    "3": [
+     -6.71,
+     -0.31,
+     6.21,
+     478
+    ],
+    "4": [
+     -9.59,
+     -4.0,
+     4.09,
+     475
+    ],
+    "5": [
+     -14.57,
+     -5.99,
+     4.98,
+     475
+    ]
+   }
+  },
+  "36119": {
+   "name": "Westchester County, NY",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": 3.68,
+    "cheapest": 3.18,
+    "prior_trend": -2.99
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.458,
+    "cheapest": 0.458,
+    "trend": 0.321
+   },
+   "spearman_5y": {
+    "ridge": 0.162,
+    "cheapest": 0.148,
+    "trend": -0.129
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -4.68,
+     4.81,
+     14.47,
+     196
+    ],
+    "2": [
+     -6.98,
+     3.21,
+     11.86,
+     196
+    ],
+    "3": [
+     -7.34,
+     0.07,
+     7.52,
+     195
+    ],
+    "4": [
+     -8.3,
+     -1.92,
+     4.66,
+     196
+    ],
+    "5": [
+     -13.97,
+     -5.03,
+     5.32,
+     196
+    ]
+   }
+  },
+  "39035": {
+   "name": "Cuyahoga County, OH",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": 11.17,
+    "cheapest": 10.39,
+    "prior_trend": -0.44
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.536,
+    "cheapest": 0.512,
+    "trend": 0.327
+   },
+   "spearman_5y": {
+    "ridge": 0.38,
+    "cheapest": 0.372,
+    "trend": 0.007
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -5.53,
+     7.85,
+     23.77,
+     352
+    ],
+    "2": [
+     -6.23,
+     3.05,
+     12.63,
+     354
+    ],
+    "3": [
+     -7.32,
+     0.4,
+     11.26,
+     356
+    ],
+    "4": [
+     -9.68,
+     -2.37,
+     4.86,
+     355
+    ],
+    "5": [
+     -15.32,
+     -6.56,
+     2.48,
+     352
+    ]
+   }
+  },
+  "39049": {
+   "name": "Franklin County, OH",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": 15.77,
+    "cheapest": 14.59,
+    "prior_trend": 3.73
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.632,
+    "cheapest": 0.626,
+    "trend": 0.506
+   },
+   "spearman_5y": {
+    "ridge": 0.567,
+    "cheapest": 0.54,
+    "trend": 0.206
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -1.11,
+     13.2,
+     31.59,
+     352
+    ],
+    "2": [
+     -3.11,
+     5.99,
+     13.35,
+     352
+    ],
+    "3": [
+     -6.92,
+     0.32,
+     6.79,
+     353
+    ],
+    "4": [
+     -12.29,
+     -4.48,
+     2.37,
+     353
+    ],
+    "5": [
+     -18.36,
+     -9.42,
+     -1.18,
+     351
+    ]
+   }
+  },
+  "39061": {
+   "name": "Hamilton County, OH",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": 12.71,
+    "cheapest": 11.64,
+    "prior_trend": 1.38
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.514,
+    "cheapest": 0.542,
+    "trend": 0.361
+   },
+   "spearman_5y": {
+    "ridge": 0.51,
+    "cheapest": 0.484,
+    "trend": 0.051
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -4.28,
+     8.93,
+     20.65,
+     242
+    ],
+    "2": [
+     -5.3,
+     4.3,
+     15.2,
+     241
+    ],
+    "3": [
+     -7.36,
+     0.58,
+     9.84,
+     242
+    ],
+    "4": [
+     -10.92,
+     -4.28,
+     5.21,
+     240
+    ],
+    "5": [
+     -16.17,
+     -7.76,
+     1.19,
+     242
+    ]
+   }
+  },
+  "40109": {
+   "name": "Oklahoma County, OK",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": 3.89,
+    "cheapest": 2.9,
+    "prior_trend": -5.09
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.365,
+    "cheapest": 0.326,
+    "trend": 0.247
+   },
+   "spearman_5y": {
+    "ridge": 0.113,
+    "cheapest": 0.047,
+    "trend": -0.232
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -7.95,
+     5.09,
+     17.91,
+     186
+    ],
+    "2": [
+     -8.39,
+     1.0,
+     11.93,
+     185
+    ],
+    "3": [
+     -9.03,
+     0.09,
+     10.04,
+     188
+    ],
+    "4": [
+     -8.96,
+     -1.61,
+     7.31,
+     184
+    ],
+    "5": [
+     -11.08,
+     -3.09,
+     6.92,
+     187
+    ]
+   }
+  },
+  "42003": {
+   "name": "Allegheny County, PA",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": 7.29,
+    "cheapest": 8.36,
+    "prior_trend": -3.56
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.538,
+    "cheapest": 0.513,
+    "trend": 0.333
+   },
+   "spearman_5y": {
+    "ridge": 0.251,
+    "cheapest": 0.262,
+    "trend": -0.105
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -7.2,
+     7.74,
+     22.59,
+     350
+    ],
+    "2": [
+     -8.23,
+     3.15,
+     15.9,
+     349
+    ],
+    "3": [
+     -8.1,
+     -0.68,
+     8.2,
+     351
+    ],
+    "4": [
+     -8.16,
+     -1.53,
+     6.73,
+     350
+    ],
+    "5": [
+     -9.81,
+     -3.21,
+     4.22,
+     350
+    ]
+   }
+  },
+  "42101": {
+   "name": "Philadelphia County, PA",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": 16.39,
+    "cheapest": 12.08,
+    "prior_trend": -7.36
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.499,
+    "cheapest": 0.442,
+    "trend": 0.229
+   },
+   "spearman_5y": {
+    "ridge": 0.475,
+    "cheapest": 0.273,
+    "trend": -0.269
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -6.2,
+     9.69,
+     23.77,
+     306
+    ],
+    "2": [
+     -13.41,
+     3.84,
+     17.95,
+     304
+    ],
+    "3": [
+     -12.99,
+     1.23,
+     11.47,
+     308
+    ],
+    "4": [
+     -11.85,
+     -2.01,
+     8.55,
+     306
+    ],
+    "5": [
+     -20.09,
+     -10.32,
+     1.68,
+     305
+    ]
+   }
+  },
+  "47157": {
+   "name": "Shelby County, TN",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": 18.45,
+    "cheapest": 22.15,
+    "prior_trend": 0.58
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.66,
+    "cheapest": 0.698,
+    "trend": 0.428
+   },
+   "spearman_5y": {
+    "ridge": 0.583,
+    "cheapest": 0.618,
+    "trend": 0.078
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -3.83,
+     9.36,
+     23.22,
+     177
+    ],
+    "2": [
+     -4.48,
+     4.96,
+     14.42,
+     177
+    ],
+    "3": [
+     -10.99,
+     1.95,
+     9.11,
+     178
+    ],
+    "4": [
+     -12.89,
+     -2.57,
+     4.07,
+     176
+    ],
+    "5": [
+     -15.81,
+     -6.99,
+     -1.16,
+     177
+    ]
+   }
+  },
+  "48029": {
+   "name": "Bexar County, TX",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": -0.51,
+    "cheapest": -0.81,
+    "prior_trend": -0.56
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.366,
+    "cheapest": 0.366,
+    "trend": 0.346
+   },
+   "spearman_5y": {
+    "ridge": 0.007,
+    "cheapest": 0.021,
+    "trend": 0.027
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -7.35,
+     5.89,
+     15.97,
+     154
+    ],
+    "2": [
+     -6.86,
+     0.78,
+     9.04,
+     157
+    ],
+    "3": [
+     -5.88,
+     1.33,
+     9.05,
+     154
+    ],
+    "4": [
+     -12.08,
+     -2.2,
+     4.56,
+     157
+    ],
+    "5": [
+     -14.74,
+     -5.73,
+     4.91,
+     154
+    ]
+   }
+  },
+  "48113": {
+   "name": "Dallas County, TX",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": 1.19,
+    "cheapest": 0.94,
+    "prior_trend": -0.81
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.404,
+    "cheapest": 0.409,
+    "trend": 0.323
+   },
+   "spearman_5y": {
+    "ridge": 0.044,
+    "cheapest": 0.032,
+    "trend": -0.061
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -5.08,
+     6.15,
+     16.95,
+     450
+    ],
+    "2": [
+     -4.47,
+     3.36,
+     12.6,
+     446
+    ],
+    "3": [
+     -6.68,
+     0.54,
+     8.65,
+     449
+    ],
+    "4": [
+     -10.73,
+     -2.89,
+     5.29,
+     446
+    ],
+    "5": [
+     -20.53,
+     -8.78,
+     3.59,
+     450
+    ]
+   }
+  },
+  "48201": {
+   "name": "Harris County, TX",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": 11.63,
+    "cheapest": 12.88,
+    "prior_trend": 7.16
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.567,
+    "cheapest": 0.537,
+    "trend": 0.465
+   },
+   "spearman_5y": {
+    "ridge": 0.417,
+    "cheapest": 0.426,
+    "trend": 0.313
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -1.18,
+     10.78,
+     23.71,
+     235
+    ],
+    "2": [
+     -5.93,
+     5.89,
+     19.03,
+     234
+    ],
+    "3": [
+     -14.1,
+     1.69,
+     15.87,
+     238
+    ],
+    "4": [
+     -19.06,
+     -5.64,
+     4.71,
+     237
+    ],
+    "5": [
+     -23.36,
+     -9.67,
+     0.55,
+     235
+    ]
+   }
+  },
+  "48439": {
+   "name": "Tarrant County, TX",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": -0.97,
+    "cheapest": -0.57,
+    "prior_trend": -0.43
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.366,
+    "cheapest": 0.327,
+    "trend": 0.344
+   },
+   "spearman_5y": {
+    "ridge": -0.029,
+    "cheapest": -0.007,
+    "trend": 0.047
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -3.12,
+     6.91,
+     17.24,
+     394
+    ],
+    "2": [
+     -4.97,
+     2.19,
+     9.21,
+     392
+    ],
+    "3": [
+     -5.77,
+     0.2,
+     7.07,
+     393
+    ],
+    "4": [
+     -9.98,
+     -2.94,
+     3.13,
+     395
+    ],
+    "5": [
+     -17.68,
+     -7.32,
+     4.67,
+     392
+    ]
+   }
+  },
+  "48453": {
+   "name": "Travis County, TX",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": 0.93,
+    "cheapest": -1.94,
+    "prior_trend": -2.6
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.358,
+    "cheapest": 0.276,
+    "trend": 0.287
+   },
+   "spearman_5y": {
+    "ridge": 0.045,
+    "cheapest": -0.031,
+    "trend": -0.072
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -5.56,
+     6.09,
+     19.67,
+     213
+    ],
+    "2": [
+     -6.84,
+     3.13,
+     11.56,
+     212
+    ],
+    "3": [
+     -8.09,
+     -0.12,
+     9.03,
+     212
+    ],
+    "4": [
+     -11.6,
+     -3.34,
+     6.03,
+     213
+    ],
+    "5": [
+     -16.03,
+     -6.08,
+     5.48,
+     213
+    ]
+   }
+  },
+  "49035": {
+   "name": "Salt Lake County, UT",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": 1.07,
+    "cheapest": 1.23,
+    "prior_trend": -0.08
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.362,
+    "cheapest": 0.348,
+    "trend": 0.356
+   },
+   "spearman_5y": {
+    "ridge": 0.131,
+    "cheapest": 0.115,
+    "trend": 0.031
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -2.84,
+     5.98,
+     14.72,
+     316
+    ],
+    "2": [
+     -3.24,
+     2.89,
+     8.0,
+     316
+    ],
+    "3": [
+     -4.96,
+     0.0,
+     4.85,
+     313
+    ],
+    "4": [
+     -7.96,
+     -2.47,
+     3.31,
+     316
+    ],
+    "5": [
+     -10.44,
+     -4.83,
+     3.13,
+     316
+    ]
+   }
+  },
+  "53033": {
+   "name": "King County, WA",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": 11.86,
+    "cheapest": 10.61,
+    "prior_trend": -2.98
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.492,
+    "cheapest": 0.442,
+    "trend": 0.241
+   },
+   "spearman_5y": {
+    "ridge": 0.425,
+    "cheapest": 0.371,
+    "trend": -0.103
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -1.42,
+     5.35,
+     11.55,
+     538
+    ],
+    "2": [
+     -7.33,
+     2.74,
+     9.2,
+     537
+    ],
+    "3": [
+     -11.85,
+     0.17,
+     7.28,
+     537
+    ],
+    "4": [
+     -15.88,
+     -3.89,
+     5.98,
+     538
+    ],
+    "5": [
+     -23.43,
+     -9.25,
+     2.47,
+     537
+    ]
+   }
+  },
+  "55079": {
+   "name": "Milwaukee County, WI",
+   "applies": "baseline",
+   "why": "the model failed the overall test, so no county uses it",
+   "test_cells": 2,
+   "spread_points_5y": {
+    "model": 12.26,
+    "cheapest": 12.42,
+    "prior_trend": 4.18
+   },
+   "hit_rate_top_third_5y": {
+    "ridge": 0.56,
+    "cheapest": 0.569,
+    "trend": 0.405
+   },
+   "spearman_5y": {
+    "ridge": 0.56,
+    "cheapest": 0.571,
+    "trend": 0.145
+   },
+   "baseline_fifth_ranges_5y": {
+    "1": [
+     -3.97,
+     7.1,
+     22.43,
+     250
+    ],
+    "2": [
+     -4.49,
+     2.48,
+     8.7,
+     251
+    ],
+    "3": [
+     -4.84,
+     1.76,
+     8.21,
+     247
+    ],
+    "4": [
+     -8.08,
+     -2.03,
+     4.13,
+     253
+    ],
+    "5": [
+     -11.5,
+     -5.84,
+     -0.97,
+     250
+    ]
+   }
+  },
+  "36061": {
+   "name": "New York County, NY",
+   "applies": "baseline",
+   "why": "fewer than 20 tracts with a price index at both ends of a test window",
+   "test_cells": 0
+  },
+  "36005": {
+   "name": "Bronx County, NY",
+   "applies": "baseline",
+   "why": "fewer than 20 tracts with a price index at both ends of a test window",
+   "test_cells": 0
+  }
+ },
+ "tract_files": [],
+ "caveats": [
+  "Relative to the county: a county-wide rise or fall is not predicted.",
+  "FHFA's tract index is re-estimated every release, so the past values used here are today's revised figures, not what was known then; the same holds for LODES 2010-2021.",
+  "Only two 5-year test windows (starting 2019 and 2020) could be scored without overlapping the fitting windows; both contain the 2020-2022 boom.",
+  "After 2020 FHFA publishes fewer tracts (thin sales), so recent outcomes rest on the better-traded tracts.",
+  "The cheap-tracts edge shrank in recent windows: its 3-year top-minus-bottom spread was 13.29 points for windows starting 2017 and -1.44 for windows starting 2022; past catch-up may not repeat.",
+  "Tested on tracts; block groups get their tract's figures, labelled as tract-level.",
+  "The stated 80% ranges were too narrow in the test: the model's held 73% of 5-year outcomes and the screen's fifth ranges 73%, so outcomes spread wider than the range says.",
+  "Nothing here covers rents, cash flow or a price fall across the whole county."
+ ]
+}

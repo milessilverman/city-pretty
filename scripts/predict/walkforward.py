@@ -248,6 +248,43 @@ def single_signals(cells_by_T, feats):
     return out
 
 
+def baseline_fifths(cells_by_T, feats, h):
+    """Added after the pre-registration (doc A.10): realised relative change by the cheapest baseline's fifth.
+    Fifth 1 = cheapest fifth of the cell's tracts by home value (loan amount where no ACS vintage is published).
+    Returns 10th/50th/90th percentiles pooled over origins and counties, by origin, by county, and an out-of-time
+    coverage test (ranges from origins S <= T - h applied at T)."""
+    fi = {f: j for j, f in enumerate(feats)}
+    recs = []  # (T, county, fifth, y)
+    for T, cells in cells_by_T.items():
+        for c in cells:
+            col = fi["value_acs"] if not np.all(np.isnan(c["raw"][:, fi["value_acs"]])) else fi["loan_level"]
+            ok = ~np.isnan(c["raw"][:, col])
+            r = M.rank01(np.where(ok, c["raw"][:, col], np.nan))
+            fifth = np.minimum(5, np.floor(r * 5).astype(int) + 1)
+            for k, y, o in zip(fifth, c["y"], ok):
+                if o:
+                    recs.append((T, c["county"], int(k), float(y)))
+    def q(ys):
+        return None if len(ys) < 30 else [round(100 * float(x), 2) for x in np.quantile(ys, [0.1, 0.5, 0.9])] + [len(ys)]
+    out = {"note": "points = 100 x log change vs the county median tract; [p10, median, p90, tracts]",
+           "pooled": {str(k): q([y for T, c, f, y in recs if f == k]) for k in range(1, 6)},
+           "by_origin": {str(T): {str(k): q([y for t, c, f, y in recs if t == T and f == k]) for k in range(1, 6)} for T in sorted(cells_by_T)},
+           "by_county": {}}
+    for cty in sorted({r[1] for r in recs}):
+        out["by_county"][cty] = {str(k): q([y for T, c, f, y in recs if c == cty and f == k]) for k in range(1, 6)}
+    cov = []
+    for T in sorted(cells_by_T):
+        past = [r for r in recs if r[0] + h <= T]
+        if not past:
+            continue
+        rng = {k: np.quantile([y for _, _, f, y in past if f == k], [0.1, 0.9]) for k in range(1, 6)}
+        for cty in sorted({r[1] for r in recs if r[0] == T}):
+            ys = [(f, y) for t, c, f, y in recs if t == T and c == cty]
+            cov.append({"T": T, "county": cty, "coverage": float(np.mean([rng[f][0] <= y <= rng[f][1] for f, y in ys]))})
+    out["out_of_time_coverage_of_80pct_range"] = summarise(cov, "coverage") if cov else None
+    return out
+
+
 def r4(x):
     return None if x is None else round(float(x), 4)
 
@@ -333,6 +370,7 @@ def main():
                                  "paired": {b: paired(rm, "ridge_metro", b) for b in ("cheapest", "trend")}}
         H["robustness"] = rob
         H["single_signals"] = single_signals(cells, feats)
+        H["baseline_fifths"] = baseline_fifths(cells, feats, h)
         # weights of the last walk-forward ridge
         lastT = max(wf["ridge"])
         H["ridge_weights_last_origin"] = {"origin": lastT, "weights": {f: r4(w) for f, w in zip(feats, wf["ridge"][lastT]["model"]["w"])}}
