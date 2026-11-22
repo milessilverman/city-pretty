@@ -570,7 +570,11 @@ function onDblCapture(e) {
   if (st.mode === "idle") return;
   if (e.target.closest && e.target.closest(".leaflet-control")) return;
   e.stopPropagation(); e.stopImmediatePropagation(); e.preventDefault();
-  if (st.mode === "polygon") finishPolygon();
+  if (st.mode !== "polygon") return;
+  // Only a double-click on the corner just added finishes the shape. Touch screens also report two quick taps at
+  // different places as a double-click; those are two corners, not "finish".
+  const last = st.corners[st.corners.length - 1];
+  if (last && map.latLngToContainerPoint(last).distanceTo(containerPt(e)) <= 16) finishPolygon();
 }
 function onMove(e) {
   if (st.mode !== "polygon" || !st.corners.length || !st.band) return;

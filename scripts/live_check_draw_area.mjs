@@ -68,6 +68,19 @@ async function toScreen(page, lonlats) {
   const box = await page.locator("#map").boundingBox();
   return pts.map(p => [box.x + p[0], box.y + p[1]]);
 }
+// Fit the map so that every corner can be clicked: not under the map's own bar, legend, strip or zoom buttons.
+async function fitClear(page, bb, corners) {
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.evaluate(b => void map.fitBounds([[b[1], b[0]], [b[3], b[2]]], { animate: false, padding: [60, 110] }), bb);
+  for (let i = 0; i < 6; i++) {
+    await page.waitForTimeout(350);
+    const scr = await toScreen(page, corners);
+    const clear = await page.evaluate(pts => pts.every(([x, y]) => { const el = document.elementFromPoint(x, y); return !!el && !!el.closest("#map") && !el.closest(".leaflet-control"); }), scr);
+    if (clear) return scr;
+    await page.evaluate(() => void map.setZoom(map.getZoom() - 0.5, { animate: false }));
+  }
+  return toScreen(page, corners);
+}
 async function clickAt(page, view, x, y) { if (view.touch) await page.touchscreen.tap(x, y); else await page.mouse.click(x, y); }
 async function panelReady(page) {
   await page.waitForSelector("#da-panel[data-da-status]:not([data-da-status=working])", { timeout: 60000 });
@@ -131,25 +144,26 @@ async function runCounty(browser, fips, view) {
     const padX = (bb[2] - bb[0]) * 0.02, padY = (bb[3] - bb[1]) * 0.02;
     // five corners around the three block groups (a house shape, so the polygon is not just a box)
     const corners = [[bb[0] - padX, bb[1] - padY], [bb[2] + padX, bb[1] - padY], [bb[2] + padX, bb[3] + padY], [(bb[0] + bb[2]) / 2, bb[3] + padY * 6], [bb[0] - padX, bb[3] + padY]];
-    await page.evaluate(b => void map.fitBounds([[b[1], b[0]], [b[3], b[2]]], { animate: false, padding: [90, 150] }), bb);
-    await page.waitForTimeout(600);
-
     // ---- polygon: open the control, start, click the corners, close on the first corner (desktop) or Finish (phone)
+    await page.evaluate(b => void map.fitBounds([[b[1], b[0]], [b[3], b[2]]], { animate: false, padding: [60, 110] }), bb);
     await page.locator("#btn-draw-area").click();
     await shot("1-control");
     await page.locator("[data-da-start=polygon]").click();
     const before = await page.evaluate(() => (0, eval)("selected"));
-    let scr = await toScreen(page, corners);
+    let scr = await fitClear(page, bb, corners);
     for (const [x, y] of scr) { await clickAt(page, view, x, y); await page.waitForTimeout(120); }
     out.checks.push({ check: "polygon: clicks while drawing do not select a neighborhood", ok: before === await page.evaluate(() => (0, eval)("selected")) });
     out.checks.push({ check: "polygon: the strip counts the corners", ok: /5 corners/.test(await page.locator("#da-strip").innerText()) });
     // Undo removes the last corner; adding it again restores it
     await page.locator("[data-da-strip=undo]").click();
     const after4 = /4 corners/.test(await page.locator("#da-strip").innerText());
-    await clickAt(page, view, scr[4][0], scr[4][1]);
+    await page.evaluate(() => window.scrollTo(0, 0));
+    scr = await toScreen(page, corners);
+    await page.waitForTimeout(700);   // a second tap on the very same spot right away would be a double-tap, which finishes the shape
+    await clickAt(page, view, scr[4][0], scr[4][1] - 22);
     out.checks.push({ check: "polygon: Undo removes a corner", ok: after4 && /5 corners/.test(await page.locator("#da-strip").innerText()) });
     await shot("2-drawing");
-    if (view.touch) await page.locator("[data-da-strip=finish]").click(); else await page.mouse.click(scr[0][0], scr[0][1]);
+    if (view.touch) await page.locator("[data-da-strip=finish]").click(); else { await page.evaluate(() => window.scrollTo(0, 0)); scr = await toScreen(page, corners); await page.mouse.click(scr[0][0], scr[0][1]); }
     const st1 = await panelReady(page);
     await page.waitForTimeout(400);
     await shot("3-polygon");
@@ -172,9 +186,7 @@ async function runCounty(browser, fips, view) {
     await page.evaluate(() => window.scrollTo(0, 0));
 
     // ---- drag a corner (the top one, pulled a little higher): the shape and the figures follow
-    await page.evaluate(b => void map.fitBounds([[b[1], b[0]], [b[3], b[2]]], { animate: false, padding: [90, 150] }), bb);
-    await page.waitForTimeout(500);
-    scr = await toScreen(page, corners);
+    scr = await fitClear(page, bb, corners);
     const acres0 = +panel.figs.landAcres.raw;
     await page.mouse.move(scr[3][0], scr[3][1]); await page.mouse.down(); await page.mouse.move(scr[3][0] + 6, scr[3][1] - 14, { steps: 4 }); await page.mouse.move(scr[3][0] + 10, scr[3][1] - 34, { steps: 6 }); await page.mouse.up();
     await page.waitForFunction(a => { const c = window.DrawArea.current(); return c && c.figures && Math.abs(c.figures.landAcres.value - a) > 1e-6; }, acres0, { timeout: 20000 }).catch(() => {});

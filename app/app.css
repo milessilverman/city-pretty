@@ -1741,8 +1741,11 @@ body.invest-mode .main, body.invest-mode #report, body.invest-mode #explore { di
 .da-share { margin-left: auto; font-size: 12px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
 @media (max-width: 640px) {
   .da-pop { position: fixed; left: 8px; right: 8px; top: auto; bottom: 8px; width: auto; z-index: 1500; }
-  .da-strip { bottom: 10px; width: calc(100% - 16px); border-radius: 12px; }
+  /* phones: the strip sits under the map bar and the legend steps aside while drawing, so the lower map stays free for corners */
+  .da-strip { top: 50px; bottom: auto; width: calc(100% - 16px); border-radius: 12px; padding: 6px 10px; gap: 6px; font-size: 12px; }
   .da-strip > span { flex: 1 1 100%; text-align: center; }
+  .da-strip .tool-btn { min-height: 30px; }
+  .mapwrap:has(#map.da-drawing) .legend { display: none; }
   .da-handle { width: 24px; height: 24px; margin: -3px 0 0 -3px; }
 }
 @media print { .da-pop, .da-strip, .da-handle { display: none !important; } }

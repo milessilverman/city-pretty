@@ -250,7 +250,7 @@ test.describe("phone width, by touch", () => {
   test("taps add corners, Finish closes the shape, and the panel has no null, NaN or undefined text", async ({ page }) => {
     const errors = await openTravis(page);
     const { three, box } = await threeAndBox(page);
-    await page.evaluate((b) => { (window as any).map.fitBounds([[b[1], b[0]], [b[3], b[2]]], { animate: false, padding: [70, 70] }); }, box);
+    await page.evaluate((b) => { (window as any).map.fitBounds([[b[1], b[0]], [b[3], b[2]]], { animate: false, padding: [60, 150] }); }, box);
     await page.waitForTimeout(400);
     await page.locator("#btn-draw-area").click();
     await page.locator("[data-da-start=polygon]").click();
