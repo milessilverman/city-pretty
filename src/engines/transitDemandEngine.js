@@ -253,10 +253,16 @@ function compareModes(line, tables, densitySupports) {
   const ranked = okL.filter(m => isNum(capMid(m))).sort((a, b) => capMid(a) - capMid(b) || LADDER.indexOf(a) - LADDER.indexOf(b));
   const fit = ranked[0] || null, runnerUp = ranked[1] || null;
   for (const m of okL.filter(m => !isNum(capMid(m)))) why.push(`${MODE_LABEL[m]}: passes on operating cost but has no capital cost per mile on file, so it is not ranked on capital.`);
-  if (fit) why.push(`${MODE_LABEL[fit]} has the lowest capital cost per annual rider of the modes that pass (about $${r0(capMid(fit))})${runnerUp ? `; next is ${MODE_LABEL[runnerUp]} (about $${r0(capMid(runnerUp))})` : ""}.`);
+  if (fit) why.push(`${MODE_LABEL[fit]} has the lowest capital cost per annual rider of the modes that pass (about $${r0(capMid(fit)).toLocaleString("en-US")})${runnerUp ? `; next is ${MODE_LABEL[runnerUp]} (about $${r0(capMid(runnerUp)).toLocaleString("en-US")})` : ""}.`);
   const cr = checks.find(c => c.mode === "commuter_rail");
   const missingAll = rows.every(r => !r.operatingCostPerTrip);
+  const unranked = okL.filter(m => !isNum(capMid(m)));
+  const summary = fit ? `${MODE_LABEL[fit]} fits${runnerUp ? `; runner-up ${MODE_LABEL[runnerUp]}` : ""}`
+    : missingAll ? "not enough data"
+    : unranked.length ? `no mode chosen: only ${unranked.map(m => MODE_LABEL[m].toLowerCase()).join(" and ")} passes, and it has no capital cost on file to rank`
+    : "no mode passes the density and operating-cost tests";
   return {
+    summary,
     version: TRANSIT_DEMAND_VERSION,
     verdict: fit ? "fits" : missingAll ? "not_enough_data" : "none_fits",
     fit, runnerUp, alsoPasses: cr && cr.ok ? ["commuter_rail"] : [], notRankedOnCapital: okL.filter(m => !isNum(capMid(m))),
@@ -422,18 +428,20 @@ function evaluateLine(line, tables, densitySupports) {
 /** Compact form for the advisor (keeps units, ranges and bases; per-stop rows trimmed to 12). */
 function lineForAdvisor(L) {
   if (!L) return null;
-  const R = x => x ? { low: r0(x.low), high: r0(x.high), unit: x.unit, basis: x.basis } : null;
-  const p = L.proposed;
+  // kept small: the whole advisor brief is capped (DECISION_BRIEF_MAX_CHARS); units are stated once in `units`
+  const R = x => x ? [r0(x.low), r0(x.high), x.basis] : null;
+  const p = L.proposed, c = L.comparison;
   return {
     kind: L.kind, name: L.name, proposedMode: L.mode, lengthMiles: L.lengthMiles,
-    modeFit: L.comparison ? { verdict: L.comparison.verdict, fit: L.comparison.fit, runnerUp: L.comparison.runnerUp, rule: L.comparison.rule, why: L.comparison.why } : null,
+    units: "ranges are [low, high, basis]; riders per weekday and per year (NTD trips); money in USD per year, capital in USD",
+    modeFit: c ? { verdict: c.verdict, summary: c.summary, fit: c.fit, runnerUp: c.runnerUp, rule: "lowest capital cost per annual rider among modes meeting their density guideline whose operating cost per trip still allows FTA Medium (docs/TRANSIT-DEMAND-MODEL.md section 7)" } : null,
     riders: p ? { weekday: R(p.riders.weekday), annual: R(p.riders.annual), basis: p.riders.basis, tested: testedLine(p) } : null,
     fareRevenue: p ? R(p.fareRevenue) : null, operatingCost: p ? R(p.operatingCost) : null, operatingGap: p ? R(p.operatingGap) : null, capitalCost: p ? R(p.capitalCost) : null,
-    bestPossibleFtaRating: p ? p.bestPossibleFtaRating : null,
-    stops: p ? p.perStop.slice(0, 12).map(s => ({ name: s.name, pop_half: s.ring ? s.ring.pop_half : null, jobs_half: s.ring ? s.ring.jobs_half : null, weekday: R(s.weekday) })) : [],
-    funding: L.funding ? L.funding.programs.map(f => ({ program: f.program, share: f.share })) : [],
+    stops: p ? p.perStop.slice(0, 8).map(s => [s.name, s.ring ? s.ring.pop_half : null, s.ring ? s.ring.jobs_half : null, s.weekday ? r0(s.weekday.low) : null, s.weekday ? r0(s.weekday.high) : null]) : [],
+    stopColumns: ["stop", "people within 0.5 mi", "jobs within 0.5 mi", "boardings a day low", "high"],
+    funding: L.funding ? L.funding.programs.map(f => `${f.program}: ${f.share}`) : [],
     projectCost: L.projectCost ? { musd: L.projectCost.musd, cigShareMusd: L.projectCost.cigShareMusd, source: L.projectCost.url } : null,
-    notOnFile: [...new Set([...(p ? p.missing : L.missing || []), ...(L.moneyWhy ? [L.moneyWhy] : []), ...L.stopsNotOnFile.map(s => `${s.name}: ${s.why}`)])].slice(0, 8),
+    notOnFile: [...new Set([...(p ? p.missing : L.missing || []), ...(L.moneyWhy ? [L.moneyWhy] : []), ...L.stopsNotOnFile.map(s => `${s.name}: ${s.why}`)])].slice(0, 5),
     siteNote: L.siteNote,
   };
 }

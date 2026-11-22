@@ -51,6 +51,17 @@ const ctx = {
   unitCosts: data("unit_costs.json"),
   valuationModels: data("county_valuation_models.json"),
 };
+// Riders, fares and the gap for this county's local projects and corridor stops (src/engines/transitDemandEngine.js),
+// built the same way as the Invest view (demandLines in app/invest.js): a corridor's length only when its record confirms it.
+const TD = require("../src/engines/transitDemandEngine.js");
+const dTables = { model: data("transit_demand_model.json"), operating: data("transit_operating_benchmarks.json"), costRows: data("transit_cost_benchmarks.json").rows || [], funding: data("funding_programs.json"), thresholds: E.TRANSIT_THRESHOLDS };
+const lengthOk = (c) => (typeof c.route_length_miles === "number" && !/^(unverified|could_not_check|corridor_not_confirmed)$/.test((c.verification || {}).status || "unverified") && !(c.verification.unverified_fields || []).some((u) => String(u).split(/[\s(]/)[0] === "route_length_miles")) ? c.route_length_miles : null;
+ctx.transitLines = TD.linesForCounty(fips, { pipelines: data("transit_pipelines.json"), corridors: data("intercity_transit_corridors.json"), stops: data("transit_demand_stops.json") }, lengthOk).map((L) => {
+  const area = TD.lineArea(L.stops) || {};
+  const ev = L.kind === "pipeline" ? E.evaluateTransit(Object.assign({ name: L.name, lengthMiles: L.lengthMiles, mode: L.mode === "streetcar" ? "light_rail" : L.mode, demand: L }, area), { demandEngine: TD, demandTables: dTables }) : null;
+  const sup = ev && ev.density.homesPerNetAcre.value != null ? ev.density.supports.map((s) => s.mode).concat(ev.density.supports.some((s) => s.buses_per_hour >= 6) ? ["brt"] : []) : null;
+  return TD.evaluateLine(L, dTables, sup);
+});
 let brief = E.buildDecisionBrief(bundle, { top: 5 }, ctx);
 const area = areaArg || brief.topNeighborhoods?.[0]?.id;
 if (area) brief = E.buildDecisionBrief(bundle, { top: 5, blockGroupId: area }, ctx);
@@ -84,6 +95,23 @@ if (t) {
   out.push("", `TRANSIT for ${t.name || "this area"}: ${t.verdict}${t.scale ? ", scale: " + t.scale : ""}`);
   if (t.verdictMeaning) out.push("  " + t.verdictMeaning);
   for (const r of t.reasons || []) out.push("  - " + r);
+}
+const rng = (r, f, per = "") => (r ? `${f(r.low)} to ${f(r.high)}${per}` : "not on file");
+const cnt = (v) => Math.round(v).toLocaleString("en-US");
+for (const L of brief.transitLines || []) {
+  const a = TD.lineForAdvisor(L), p = L.proposed;
+  out.push("", `RIDERS, FARES AND THE GAP: ${L.name} (${L.kind}${L.lengthMiles != null ? ", " + L.lengthMiles + " mi" : ""})`);
+  if (a.modeFit) out.push(`  Mode that fits: ${a.modeFit.summary}`);
+  if (p) {
+    out.push(`  Riders: ${rng(p.riders.weekday, cnt, " boardings a day")}; ${rng(p.riders.annual, cnt, " trips a year")} [${p.riders.basis || "not on file"}]`);
+    if (a.riders && a.riders.tested) out.push(`    (${a.riders.tested})`);
+    out.push(`  Fare revenue: ${rng(p.fareRevenue, money, " a year")}; operating cost: ${rng(p.operatingCost, money, " a year")}; gap: ${rng(p.operatingGap, money, " a year")}`);
+    out.push(`  Capital cost: ${rng(p.capitalCost, money)}`);
+    for (const s of p.perStop) out.push(`    - ${s.name}: ${s.ring ? cnt(s.ring.pop_half) + " people, " + cnt(s.ring.jobs_half) + " jobs within 0.5 mi" : "ring not on file"}; ${s.weekday ? cnt(s.weekday.low) + " to " + cnt(s.weekday.high) + " boardings a day" : "not on file"}`);
+  }
+  for (const f of (L.funding && L.funding.programs) || []) out.push(`  Could apply: ${f.program} (${f.share})`);
+  for (const n of a.notOnFile) out.push(`  Not on file: ${n}`);
+  out.push(`  ${L.siteNote}`);
 }
 if ((brief.missing || []).length) { out.push("", "MISSING DATA"); for (const m of brief.missing) out.push("  - " + m); }
 console.log(out.join("\n"));

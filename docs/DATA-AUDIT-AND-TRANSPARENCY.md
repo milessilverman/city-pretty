@@ -1614,3 +1614,17 @@ pattern `data/signals/zillow_*` is read relative to `data/signals/`, so it match
 `data/signals/zillow_*.csv.gz` tables (terms not confirmed: internal testing only). Fixed on this branch: the pattern is now `zillow_*` and the
 four files are removed from the index (they stay on disk for internal tests). **They remain in the history of a245b7b and every branch
 built on it**; removing them from history needs the owner's decision (a history rewrite of shared branches).
+
+### Transit riders, fares and the gap: station model tested; heavy rail ranks, light rail does not (22 Nov 2026)
+`docs/TRANSIT-DEMAND-MODEL.md` (method committed in f2320ba before the fit), `scripts/transit/fit_station_ridership.py`,
+`app/data/transit_demand_model.json`, `src/engines/transitDemandEngine.js`. Station boardings of 7 systems (937 with
+coordinates; 902 used) were modelled from people and jobs within 0.5 and 1 mile, terminal and transfer flags, and tested by
+leaving each system out. Heavy rail: median rank correlation 0.62 against 0.58 for "people + jobs in the half mile", error
+41% after one scaling factor, the same as calling every station the system median. Light rail: worse than both baselines.
+Commuter rail: 2 systems only. The level for a new system is only bracketed. Two things a reader should know:
+- **The mode-choice rule was changed after the first run.** As committed it ignored capital cost (FTA's annualisation
+  factors could not be fetched), so the largest mode always won. It now picks the lowest capital cost per annual rider
+  among modes that pass the density guideline and the operating-cost floor. The change is dated in the method doc.
+- Pipeline station points are the project table's illustrative locations (Austin: 6 of the 15 stations the FTA profile
+  states); the riders for the missing stations are assumed to average like the 6, and the page says so.
+No published coefficients from TCRP or FTA STOPS could be fetched, so none are used or tested.

@@ -83,11 +83,14 @@ function loadData() {
   if (iv.dataP) return iv.dataP;
   const j = id => (typeof cpJson === "function" ? cpJson(id) : Promise.resolve(null)).catch(() => null);
   iv.dataP = Promise.all([j("neighborhood-score-backtest"), j("transit-cost-benchmarks"), j("transit-value-effects"), j("underused-sites"), j("intercity-corridors"), j("transit-pipelines"),
-    j("intervention-verification"), j("statutes"), j("unit-costs"), j("county-valuation-models"), fetch("app/data/neighborhood_prediction.json").then(r => r.ok ? r.json() : null).catch(() => null)])
-    .then(([bt, cost, eff, sites, corr, pipe, ver, laws, uc, vm, pred]) => {
+    j("intervention-verification"), j("statutes"), j("unit-costs"), j("county-valuation-models"), fetch("app/data/neighborhood_prediction.json").then(r => r.ok ? r.json() : null).catch(() => null),
+    // riders, fares and the gap (src/engines/transitDemandEngine.js)
+    ...["transit_demand_model.json", "transit_demand_stops.json", "transit_operating_benchmarks.json"].map(f => fetch("app/data/" + f).then(r => r.ok ? r.json() : null).catch(() => null)), j("funding-programs")])
+    .then(([bt, cost, eff, sites, corr, pipe, ver, laws, uc, vm, pred, dModel, dStops, dOper, fund]) => {
       const verOk = ver && typeof ver === "object" && !Array.isArray(ver);
       iv.data = { backtest: bt, cost: cost && cost.rows || [], effects: eff && eff.rows || [], sites: Array.isArray(sites) ? sites : [], corridors: Array.isArray(corr) ? corr : [], pipelines: Array.isArray(pipe) ? pipe : [],
-        verification: verOk ? ver : null, laws: Array.isArray(laws) ? laws : null, unitCosts: Array.isArray(uc) ? uc : [], valuationModels: vm && vm.counties ? vm : null, prediction: pred && pred.counties ? pred : null };
+        verification: verOk ? ver : null, laws: Array.isArray(laws) ? laws : null, unitCosts: Array.isArray(uc) ? uc : [], valuationModels: vm && vm.counties ? vm : null, prediction: pred && pred.counties ? pred : null,
+        demand: dModel && dModel.modes && dStops && dOper ? { model: dModel, stops: dStops, operating: dOper, funding: Array.isArray(fund) ? fund : [] } : null };
       return iv.data;
     });
   return iv.dataP;
@@ -223,7 +226,8 @@ function build(fips, B, d) {
   iv.hood = hood;
   const pf = parcelFacts();
   let brief = null;
-  try { brief = eng.buildDecisionBrief(B, { blockGroupId: hood, parcel: pf ? pf.facts : null, top: 10 }, ctx); } catch (e) { brief = null; }
+  const lines = demandLines(fips, d, eng);
+  try { brief = eng.buildDecisionBrief(B, { blockGroupId: hood, parcel: pf ? pf.facts : null, top: 10 }, Object.assign({}, ctx, { transitLines: lines.map(x => x.line) })); } catch (e) { brief = null; }
   const d0 = hood ? B.details[hood] : null;
   let rec = null;
   if (d0) { try { rec = eng.recommendForNeighborhood({ id: hood, m: d0.m, r: d0.r }, { catalog: D.catalog, verification: d.verification, countyFips: fips, underusedSites: d.sites, sites: (SITES_FOR(hood)) }); } catch (e) { rec = null; } }
@@ -239,7 +243,24 @@ function build(fips, B, d) {
     const stops = window.CorridorStopAreas ? window.CorridorStopAreas.stopAreasForCounty(c, B, fips, 1) : [];
     return { row: c, len, cost, stops, ev: eng.evaluateTransit({ name: c.name, lengthMiles: len.value, intercityDistanceMiles: len.value, capitalCostUsd: cost.value != null ? cost.value * 1e9 : null, mode: /high_speed/.test(c.corridor_type || "") ? "hsr" : null }, tCtx) };
   });
-  return { fips, B, rk, ranked, clean, hood, brief, rec, pf, pipeEval, corrEval, countySites: d.sites.filter(s => s && s.countyFips === fips) };
+  return { fips, B, rk, ranked, clean, hood, brief, rec, pf, pipeEval, corrEval, lines, countySites: d.sites.filter(s => s && s.countyFips === fips) };
+}
+// Riders, fares and the gap for this county's local projects and the corridors with a stop here
+// (src/engines/transitDemandEngine.js). A corridor's length is used only when its own verification confirms it.
+function demandLines(fips, d, eng) {
+  const T = window.TransitDemandEngine;
+  if (!T || !d.demand) return [];
+  const tables = { model: d.demand.model, operating: d.demand.operating, costRows: d.cost, funding: d.demand.funding, thresholds: eng.TRANSIT_THRESHOLDS };
+  let ls = [];
+  try { ls = T.linesForCounty(fips, { pipelines: d.pipelines, corridors: d.corridors, stops: d.demand.stops }, c => checkedNum(c, "route_length_miles").value); } catch (e) { return []; }
+  return ls.map(L => {
+    try {
+      const area = T.lineArea(L.stops) || {};
+      const ev = L.kind === "pipeline" ? eng.evaluateTransit(Object.assign({ name: L.name, lengthMiles: L.lengthMiles, mode: L.mode === "streetcar" ? "light_rail" : L.mode, demand: L }, area), { demandEngine: T, demandTables: tables }) : null;
+      const sup = ev && ev.density && ev.density.homesPerNetAcre && ev.density.homesPerNetAcre.value != null ? ev.density.supports.map(s => s.mode).concat(ev.density.supports.some(s => s.buses_per_hour >= 6) ? ["brt"] : []) : null;
+      return { L, ev, line: T.evaluateLine(L, tables, sup) };
+    } catch (e) { return null; }
+  }).filter(Boolean);
 }
 function SITES_FOR(id) {
   try { return (typeof SITES !== "undefined" && SITES && SITES.sites && SITES.sites[id]) ? SITES.sites[id] : []; } catch (e) { return []; }
@@ -617,6 +638,44 @@ function stopAreasHTML(stops, open, id) {
     return `<div class="iv-stopareas"><p>${lead}.${note}</p>${det(open, "sa-" + esc2(id) + "-" + esc2(stop.id), "Show these neighborhoods", list)}</div>`;
   }).join("");
 }
+// ---- riders, fares and the gap for one line (TransitDemandEngine.evaluateLine output)
+const usd = v => !isNum(v) ? "" : Math.abs(v) >= 1e9 ? "$" + (v / 1e9).toFixed(1) + "B" : Math.abs(v) >= 1e6 ? "$" + (v / 1e6).toFixed(1) + "M" : "$" + Math.round(v).toLocaleString("en-US");
+const cnt = v => isNum(v) ? Math.round(v).toLocaleString("en-US") : "";
+function rangeTxt(r, f, why, per) { return r ? `${esc2(f(r.low))} to ${esc2(f(r.high))}${per ? " " + esc2(per) : ""} ${basisTag(r.basis)}` : nof(why); }
+function demandHTML(x, open, key) {
+  if (!x || !x.line) return "";
+  const L = x.line, p = L.proposed, T = window.TransitDemandEngine;
+  const fit = x.ev && x.ev.modeFit;
+  const lbl = k => (T && T.MODE_LABEL[k]) || SCALE_TXT[k] || String(k || "").replace(/_/g, " ");
+  const notes = [];
+  if (p) for (const mm of p.missing || []) notes.push(mm);
+  if (L.moneyWhy) notes.push(L.moneyWhy);
+  if (L.missing) notes.push(...L.missing);
+  for (const st of L.stopsNotOnFile || []) notes.push(`${st.name}: ${st.why}`);
+  const sc = p && p.riders.weekday && p.riders.weekday.inputs.scaledForStationsNotOnFile;
+  if (sc) notes.push(sc.note + " (an assumption).");
+  if (fit && fit.modes) { const b = fit.modes.find(r => r.mode === "brt"); if (b && b.riders.basis === "NTD trips per route mile") notes.push("Bus and BRT riders come from NTD trips per route mile of operating systems, not from the land around these stops, so comparing them with rail mixes two kinds of estimate."); }
+  const t = p && p.riders && p.riders.test;
+  const warn = t && t.beatsBaseline === false ? `<p class="iv-honest t-bad">In its test this model did not order ${esc2(lbl(p.mode).toLowerCase())} stations better than simply counting people and jobs within half a mile.</p>` : "";
+  const fitLine = L.kind === "pipeline"
+    ? (fit ? (fit.fit ? `<p><span class="iv-k">Mode that fits</span> <b>${esc2(lbl(fit.fit))}</b>${fit.runnerUp ? `; runner-up ${esc2(lbl(fit.runnerUp))}` : ""}. <span class="iv-muted">Proposed: ${esc2(lbl(L.mode))}.</span></p>` : `<p><span class="iv-k">Mode that fits</span> ${fit.verdict === "not_enough_data" ? nof((fit.missing || []).join("; ")) : esc2(fit.summary)}${fit.alsoPasses && fit.alsoPasses.length ? `<span class="iv-muted"> Commuter rail, reported beside the urban modes, also passes.</span>` : ""}</p>`) : "")
+    : `<p class="iv-muted">The commuter-rail station model is used to rank this corridor's stops; there is no intercity station model.</p>`;
+  const why = fit && fit.why && fit.why.length ? det(open, key + "-why", "Why this mode", `<p class="iv-muted">${esc2(fit.rule)}</p><ul class="iv-reasons">${fit.why.map(w => `<li>${esc2(w)}</li>`).join("")}</ul>`) : "";
+  const stops = p && p.perStop && p.perStop.length ? det(open, key + "-stops", `Stops (${p.perStop.length})`, `<div class="iv-tablewrap"><table class="iv-table iv-stoptable"><caption class="iv-muted">${esc2(L.siteNote)}</caption>
+    <thead><tr><th>Stop</th><th>People within 0.5 mi</th><th>Homes</th><th>Jobs within 0.5 mi</th><th>Boardings a day (range)</th></tr></thead><tbody>${p.perStop.map(st => `<tr><td>${esc2(st.name)}</td><td>${cnt(st.ring && st.ring.pop_half)}</td><td>${cnt(st.ring && st.ring.homes_half)}</td><td>${cnt(st.ring && st.ring.jobs_half)}</td><td>${st.weekday ? esc2(cnt(st.weekday.low) + " to " + cnt(st.weekday.high)) : nof((st.missing || []).join("; "))}</td></tr>`).join("")}</tbody></table></div>`) : "";
+  const fund = L.funding && L.funding.programs.length ? det(open, key + "-fund", `Who could pay (${L.funding.programs.length} programmes on file)`, `<ul class="iv-nofl">${L.funding.programs.map(f => `<li><b>${esc2(f.program)}</b>: ${f.share === "share not on file" ? nof("share not on file") : esc2(f.share)}${f.rule ? `<span class="iv-muted"> Rule as quoted: "${esc2(f.rule)}"</span>` : ""}${f.ruleStatus && f.ruleStatus !== "verified" ? ` <span class="iv-chip iv-unconf">${esc2(f.ruleStatus.replace(/_/g, " "))}</span>` : ""}${f.source ? " " + srcMark(f.source) : ""}</li>`).join("")}</ul>${L.projectCost && L.projectCost.cigShareMusd != null ? `<p class="iv-muted">The project's own FTA profile: total $${esc2(L.projectCost.musd.toLocaleString("en-US"))}M, federal CIG share $${esc2(L.projectCost.cigShareMusd.toLocaleString("en-US"))}M. ${srcMark(L.projectCost.url)}</p>` : ""}<p class="iv-muted">${esc2(L.funding.note)}</p>`) : "";
+  const tested = T && p ? T.testedLine(p) : null;
+  return `<div class="iv-demand" data-line="${esc2(L.id)}"><p class="iv-k">Riders, fares and the gap</p>${fitLine}${warn}
+    ${p ? `<dl class="iv-dl">
+      <div><dt>Riders</dt><dd>${rangeTxt(p.riders.weekday, cnt, "riders not on file", "boardings a day")}${p.riders.annual ? `; ${rangeTxt(p.riders.annual, cnt, "", "trips a year")}` : ""}${tested ? `<span class="iv-muted"> (${esc2(tested)})</span>` : ""}</dd></div>
+      <div><dt>Fare revenue</dt><dd>${rangeTxt(p.fareRevenue, usd, L.moneyWhy ? "not on file for this kind of service" : "needs riders a year", "a year")}</dd></div>
+      <div><dt>Operating cost</dt><dd>${rangeTxt(p.operatingCost, usd, L.moneyWhy ? "not on file for this kind of service" : "needs the line length", "a year")}</dd></div>
+      <div><dt>Gap (cost minus fares)</dt><dd>${rangeTxt(p.operatingGap, usd, "needs fares and operating cost", "a year")}</dd></div>
+      <div><dt>Capital cost</dt><dd>${rangeTxt(p.capitalCost, usd, L.moneyWhy ? "not on file for this kind of service" : "needs the line length")}${p.capitalCost ? `<span class="iv-muted"> (line length x the middle half of ${p.capitalCost.inputs.costPerMileMusd.n} projects' cost per mile)</span>` : ""}</dd></div>
+    </dl>` : `<p class="iv-muted">${nof((L.missing || []).join("; "))}</p>`}
+    ${why}${stops}${fund}
+    ${notes.length ? `<p class="iv-k">Not on file</p><ul class="iv-nofl">${[...new Set(notes)].map(n => `<li class="iv-muted">${esc2(n)}</li>`).join("")}</ul>` : ""}</div>`;
+}
 function transitCard(m, open) {
   const d = iv.data, T = E().TRANSIT_THRESHOLDS, bud = BUDGET_OK();
   const area = m.brief && m.brief.transit;
@@ -631,7 +690,8 @@ function transitCard(m, open) {
     pipeRows.push(rowHTML({ name: row.title, chip: "local project", fig: keyFig("Capital cost", nof("not in the project table")), ev: `<span class="iv-chip">${esc2(String((row.verification && row.verification.status) || "unverified").replace(/_/g, " "))}</span>`, sub: esc2(row.agency || ""), key: "tp-" + esc2(row.title),
       detail: `${row.status ? `<p class="iv-muted">Status on file: ${esc2(row.status)}</p>` : ""}${verLine(row)}
         ${row.rtp_document_url ? `<p class="iv-muted"><a href="${esc2(row.rtp_document_url)}" target="_blank" rel="noopener">Project page</a></p>` : ""}
-        <p class="iv-muted">No build verdict: the project table gives no length, cost or ridership, and the density test needs a station-area density that is not on file.</p>` }, open));
+        ${(m.lines || []).some(x => x.L.kind === "pipeline" && x.L.id === row.title && x.L.lengthMiles != null) ? `<p class="iv-muted">The project table itself gives no length or cost; the riders and money below use the length in the project's FTA profile and the people and jobs around its stop points.</p>` : `<p class="iv-muted">No build verdict: the project table gives no length, cost or ridership, and the density test needs a station-area density that is not on file.</p>`}
+        ${demandHTML((m.lines || []).find(x => x.L.kind === "pipeline" && x.L.id === row.title), open, "dm-" + esc2(row.title))}` }, open));
   });
   m.corrEval.forEach(({ row, ev, len, cost, stops }) => {
     const st = (row.verification && row.verification.status) || "unverified";
@@ -643,6 +703,7 @@ function transitCard(m, open) {
         <div><dt>Capital cost</dt><dd>${cost.value != null ? "$" + esc2(cost.value) + "B" : nof(cost.why)}</dd></div></dl>
         ${row.status_stated && row.status_stated.text ? `<p class="iv-muted">Status as stated: ${esc2(row.status_stated.text)}${row.status_stated.as_of ? ` (${esc2(row.status_stated.as_of)})` : ""}</p>` : ""}
         ${stopAreasHTML(stops, open, row.id)}
+        ${demandHTML((m.lines || []).find(x => x.L.kind === "corridor" && x.L.id === row.id), open, "dm-" + esc2(row.id))}
         ${verLine(row)}
         <p class="iv-muted">${(row.official_study_url || row.source_url) ? `<a href="${esc2(row.official_study_url || row.source_url)}" target="_blank" rel="noopener">Source document</a>` : ""}</p>
         ${noFig ? `<p class="iv-muted">No build verdict: the source documents give no length or cost for this corridor.</p>` : verdictBox(ev, "", open, "tcv-" + esc2(row.name))}` }, open));

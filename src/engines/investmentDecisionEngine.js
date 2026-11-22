@@ -24,7 +24,13 @@ const _ideEvalHousing = (typeof evaluateByRightHousing !== "undefined")
   ? evaluateByRightHousing
   : ((typeof require !== "undefined") ? require("./statutoryZoningEngine").evaluateByRightHousing : null);
 
+// riders and money for transit lines (src/engines/transitDemandEngine.js, loaded before this file by index.html)
+const _ideDemand = (typeof window !== "undefined" && window.TransitDemandEngine)
+  ? window.TransitDemandEngine
+  : ((typeof require !== "undefined") ? require("./transitDemandEngine") : null);
+
 const DECISION_ENGINE_VERSION = "1.0.0";
+const TRANSIT_LINES_MAX_CHARS = 4000; // share of the advisor brief (DECISION_BRIEF_MAX_CHARS 20,000) given to riders-and-money lines
 
 // ---------------------------------------------------------------- cited thresholds (fetched 2026-11-18)
 const TRANSIT_THRESHOLDS = {
@@ -788,7 +794,7 @@ function areaFromBlockGroup(id, m) {
  *   county: decoded county bundle
  *   selection: { blockGroupId?, parcel?, corridor?, top? (default 10) }
  *   ctx: { backtest, prediction?, predictionTracts?, catalog, verification, underusedSites, sites, costBenchmarks, valueEffects, laws, unitCosts,
- *          valueCoefficients, valuationModels, sizes, overCapRatio }
+ *          valueCoefficients, valuationModels, sizes, overCapRatio, transitLines? (TransitDemandEngine.evaluateLine results) }
  */
 function buildDecisionBrief(county, selection, ctx) {
   selection = selection || {}; ctx = ctx || {};
@@ -806,7 +812,7 @@ function buildDecisionBrief(county, selection, ctx) {
     topNeighborhoods: (rank.ranked || []).filter(r => !r.dataFlags.length).slice(0, top).map(compact),
     topNeighborhoodsNote: "block groups failing a data check (dataFlags) are left out of this list; rankNeighborhoods still returns them, graded D",
     flaggedInTopN: (rank.ranked || []).slice(0, top).filter(r => r.dataFlags.length).length,
-    neighborhood: null, parcel: null, transit: null,
+    neighborhood: null, parcel: null, transit: null, transitLines: Array.isArray(ctx.transitLines) ? ctx.transitLines : [],
     caveats: [],
     missing: rank.missing.slice(),
   };
@@ -844,6 +850,7 @@ function buildDecisionBrief(county, selection, ctx) {
     "Back-tested on tracts whose boundaries did not change 2010-2020; fast-growing new-build areas are under-represented.",
     "Improvement costs and value gains are pipeline estimates, shown only for ideas whose effect size or cost the data audit confirmed against a source; effect sizes come from studies in other places.",
     "Transit verdicts use planning rules of thumb (TCQSM density guidelines, FTA CIG breakpoints); they are not a ridership forecast.",
+    ...((brief.transitLines || []).length ? ["Riders for the lines below come from a station model tested by leaving each of 7 systems out (docs/TRANSIT-DEMAND-MODEL.md): it ranks stops; the level for a new system is only bracketed, and light-rail stations were not predicted better than simple baselines."] : []),
   ];
   brief.sources = [
     ...((ctx.backtest && ctx.backtest.sources) || []).map(x => ({ name: x.name, url: x.url })),
@@ -876,6 +883,14 @@ function briefForAdvisor(brief) {
       missing: n.missing,
     } : null,
     parcel: p ? { parcelId: p.parcelId, zoning: p.zoning, expansions: (p.expansions || []).map(e => ({ expansion: e.expansion, label: e.label, legal: e.legal, costLow: f(e.cost.low), costHigh: f(e.cost.high), valueAdded: f(e.valueAdded), netValue: f(e.netValue), missing: e.missing })), missing: p.missing } : null,
+    // local projects first, then corridors, while the lines stay within TRANSIT_LINES_MAX_CHARS; the rest are named only
+    ...(() => {
+      const all = _ideDemand ? (brief.transitLines || []).slice().sort((a, b) => (a.kind === "pipeline" ? 0 : 1) - (b.kind === "pipeline" ? 0 : 1)) : [];
+      const kept = [], omitted = [];
+      let used = 0;
+      for (const L of all) { const x = _ideDemand.lineForAdvisor(L), n = JSON.stringify(x).length; if (used + n <= TRANSIT_LINES_MAX_CHARS) { kept.push(x); used += n; } else omitted.push(L.name); }
+      return { transitLines: kept, transitLinesOmitted: omitted };
+    })(),
     transit: t ? { name: t.name || null, verdict: t.verdict, scale: t.scale, verdictMeaning: t.verdictMeaning || null, homesPerNetAcre: t.density ? f(t.density.homesPerNetAcre) : null, reasons: t.reasons || [], missing: t.missing || [] } : null,
     caveats: brief.caveats, missing: brief.missing, sources: brief.sources,
   };

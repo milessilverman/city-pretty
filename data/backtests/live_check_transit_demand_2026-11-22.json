@@ -1,0 +1,245 @@
+{
+ "ran": "2026-11-22T02:29:11.588Z",
+ "results": [
+  {
+   "fips": "48453",
+   "lines": [
+    {
+     "line": "Austin Light Rail Phase 1 (Project Connect)",
+     "kind": "pipeline",
+     "onPage": true,
+     "expected": [
+      "9,974 to 15,985 boardings a day",
+      "$2.5M to $4.9M",
+      "$21.1M to $65.1M",
+      "$16.2M to $62.6M",
+      "$2.6B to $12.9B",
+      "Light rail"
+     ],
+     "missingOnPage": [],
+     "fit": "light_rail",
+     "ok": true
+    },
+    {
+     "line": "Austin–San Antonio Passenger Rail (Lone Star Corridor)",
+     "kind": "corridor",
+     "onPage": true,
+     "expected": [
+      "3,239 to 9,671 boardings a day",
+      "$8.3M to $19.2M"
+     ],
+     "missingOnPage": [],
+     "fit": null,
+     "ok": true
+    }
+   ],
+   "errors": [],
+   "ok": true
+  },
+  {
+   "fips": "17031",
+   "lines": [
+    {
+     "line": "CTA Red Line Extension to 130th St & Far South Side Equitable TOD",
+     "kind": "pipeline",
+     "onPage": true,
+     "expected": [
+      "2,438 to 5,160 boardings a day",
+      "$1.1M to $2.7M",
+      "$12.0M to $34.4M",
+      "$9.3M to $33.2M",
+      "$2.7B to $11.2B"
+     ],
+     "missingOnPage": [],
+     "fit": null,
+     "ok": true
+    },
+    {
+     "line": "Chicago to Quad Cities Service Extension Program",
+     "kind": "corridor",
+     "onPage": true,
+     "expected": [
+      "921 to 2,748 boardings a day"
+     ],
+     "missingOnPage": [],
+     "fit": null,
+     "ok": true
+    },
+    {
+     "line": "Chicago, Fort Wayne, Columbus, and Pittsburgh",
+     "kind": "corridor",
+     "onPage": true,
+     "expected": [
+      "1,232 to 3,679 boardings a day"
+     ],
+     "missingOnPage": [],
+     "fit": null,
+     "ok": true
+    },
+    {
+     "line": "Big Sky North Coast Corridor",
+     "kind": "corridor",
+     "onPage": true,
+     "expected": [
+      "4,593 to 13,714 boardings a day"
+     ],
+     "missingOnPage": [],
+     "fit": null,
+     "ok": true
+    },
+    {
+     "line": "Peoria to Chicago Passenger Rail Service",
+     "kind": "corridor",
+     "onPage": true,
+     "expected": [
+      "988 to 2,948 boardings a day"
+     ],
+     "missingOnPage": [],
+     "fit": null,
+     "ok": true
+    },
+    {
+     "line": "TCMC Service Expansion via La Crosse",
+     "kind": "corridor",
+     "onPage": true,
+     "expected": [
+      "1,518 to 4,531 boardings a day"
+     ],
+     "missingOnPage": [],
+     "fit": null,
+     "ok": true
+    },
+    {
+     "line": "Hannibal Extension of Existing Chicago-Quincy Corridor",
+     "kind": "corridor",
+     "onPage": true,
+     "expected": [
+      "455 to 1,357 boardings a day"
+     ],
+     "missingOnPage": [],
+     "fit": null,
+     "ok": true
+    },
+    {
+     "line": "Milwaukee to Green Bay (Hiawatha Service Extension)",
+     "kind": "corridor",
+     "onPage": true,
+     "expected": [
+      "1,145 to 3,418 boardings a day"
+     ],
+     "missingOnPage": [],
+     "fit": null,
+     "ok": true
+    },
+    {
+     "line": "Wolverine Corridor",
+     "kind": "corridor",
+     "onPage": true,
+     "expected": [
+      "665 to 1,984 boardings a day"
+     ],
+     "missingOnPage": [],
+     "fit": null,
+     "ok": true
+    },
+    {
+     "line": "Chicago to Carbondale Corridor",
+     "kind": "corridor",
+     "onPage": true,
+     "expected": [
+      "455 to 1,357 boardings a day"
+     ],
+     "missingOnPage": [],
+     "fit": null,
+     "ok": true
+    },
+    {
+     "line": "Chicago to Grand Rapids Corridor",
+     "kind": "corridor",
+     "onPage": true,
+     "expected": [
+      "623 to 1,861 boardings a day"
+     ],
+     "missingOnPage": [],
+     "fit": null,
+     "ok": true
+    },
+    {
+     "line": "Chicago to Port Huron Corridor",
+     "kind": "corridor",
+     "onPage": true,
+     "expected": [
+      "598 to 1,785 boardings a day"
+     ],
+     "missingOnPage": [],
+     "fit": null,
+     "ok": true
+    },
+    {
+     "line": "Chicago to St. Louis Higher-Speed Rail Corridor",
+     "kind": "corridor",
+     "onPage": true,
+     "expected": [
+      "1,569 to 4,684 boardings a day"
+     ],
+     "missingOnPage": [],
+     "fit": null,
+     "ok": true
+    },
+    {
+     "line": "Daily Cardinal Service",
+     "kind": "corridor",
+     "onPage": true,
+     "expected": [
+      "3,476 to 10,380 boardings a day"
+     ],
+     "missingOnPage": [],
+     "fit": null,
+     "ok": true
+    },
+    {
+     "line": "Indianapolis-Chicago Corridor",
+     "kind": "corridor",
+     "onPage": true,
+     "expected": [
+      "1,240 to 3,703 boardings a day"
+     ],
+     "missingOnPage": [],
+     "fit": null,
+     "ok": true
+    },
+    {
+     "line": "Milwaukee to Chicago Hiawatha Service Expansion",
+     "kind": "corridor",
+     "onPage": true,
+     "expected": [
+      "1,011 to 3,018 boardings a day"
+     ],
+     "missingOnPage": [],
+     "fit": null,
+     "ok": true
+    }
+   ],
+   "errors": [],
+   "ok": true
+  },
+  {
+   "fips": "48187",
+   "lines": [
+    {
+     "line": "Houston to San Antonio Corridor",
+     "kind": "corridor",
+     "onPage": true,
+     "expected": [
+      "1,716 to 5,125 boardings a day"
+     ],
+     "missingOnPage": [],
+     "fit": null,
+     "ok": true
+    }
+   ],
+   "errors": [],
+   "ok": true
+  }
+ ]
+}

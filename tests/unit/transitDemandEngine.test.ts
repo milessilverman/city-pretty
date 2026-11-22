@@ -160,6 +160,42 @@ describe("mode comparison and evaluateTransit", () => {
   });
 });
 
+describe("lines on file, the brief and the advisor's size cap", () => {
+  const tables = { model: data("app/data/transit_demand_model.json"), operating: data("app/data/transit_operating_benchmarks.json"), costRows: data("app/data/transit_cost_benchmarks.json").rows, funding: data("app/data/funding_programs.json"), thresholds: IDE.TRANSIT_THRESHOLDS };
+  const files = { pipelines: data("app/data/transit_pipelines.json"), corridors: data("app/data/intercity_transit_corridors.json"), stops: data("app/data/transit_demand_stops.json") };
+  it("Austin light rail: length from the FTA profile, 6 of 15 stations with points, money ranges ordered", () => {
+    const L = T.linesForCounty("48453", files, () => null).find((x: any) => x.kind === "pipeline");
+    expect(L.lengthMiles).toBe(9.8);
+    expect(L.stationCount).toBe(15);
+    expect(L.state).toBe("TX");
+    const e = T.evaluateLine(L, tables, null);
+    const p = e.proposed;
+    expect(p.riders.basis).toBe("station model");
+    expect(p.riders.weekday.inputs.scaledForStationsNotOnFile.factor).toBeCloseTo(15 / 6, 12);
+    for (const k of ["fareRevenue", "operatingCost", "operatingGap", "capitalCost"]) { expect(p[k].low).toBeLessThanOrEqual(p[k].high); expect(p[k].basis).toBe("modelled"); }
+    expect(e.funding.programs.every((f: any) => f.share === "share not on file")).toBe(true);
+  });
+  it("intercity corridors: commuter-rail model ranks stops; money withheld unless the corridor is commuter/regional", () => {
+    const ls = T.linesForCounty("17031", files, () => null).filter((x: any) => x.kind === "corridor");
+    const conv = ls.find((x: any) => x.corridorType !== "intercity_commuter_regional" && x.mode === "commuter_rail");
+    const e = T.evaluateLine(conv, tables, null);
+    expect(e.proposed.fareRevenue).toBeNull();
+    expect(e.moneyWhy).toMatch(/NTD does not cover Amtrak/);
+    expect(e.proposed.perStop.length).toBeGreaterThan(0);
+  });
+  it("the advisor brief with transit lines stays under the Worker's cap for Cook County (16 corridors and a pipeline)", () => {
+    const { DECISION_BRIEF_MAX_CHARS } = require("../../src/ai/advisorGroundingContract.ts");
+    const lines = T.linesForCounty("17031", files, () => null).map((L: any) => T.evaluateLine(L, tables, null));
+    const brief = { schema: "x", transitLines: lines, caveats: [], missing: [], sources: [], topNeighborhoods: [] };
+    const a = IDE.briefForAdvisor(brief);
+    expect(a.transitLines.length).toBeGreaterThan(0);
+    expect(a.transitLines[0].kind).toBe("pipeline");
+    expect(JSON.stringify(a.transitLines).length).toBeLessThanOrEqual(4000);
+    expect(a.transitLines.length + a.transitLinesOmitted.length).toBe(lines.length);
+    expect(JSON.stringify(a.transitLines).length).toBeLessThan(DECISION_BRIEF_MAX_CHARS / 4);
+  });
+});
+
 describe("the committed model file is reproduced from the committed station features", () => {
   const m = data("app/data/transit_demand_model.json");
   const lines = fs.readFileSync(path.join(root, "data/transit/station_ring_features.csv"), "utf8").trim().split("\n");

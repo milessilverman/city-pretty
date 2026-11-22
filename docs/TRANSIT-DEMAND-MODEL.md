@@ -190,8 +190,11 @@ Annual NTD trips per weekday station count (used to annualise): Chicago Transit 
   little information there. It was kept as committed, not tuned after the fact.
 - **Jobs:** Maryland counties are not in the 50-county block-group LODES table, so their jobs are tract totals spread by
   area; this blurs the half-mile ring for MARC, Baltimore Metro and Light RailLink.
-- **35 station rows** fall outside the block groups on file (mostly points on piers, in water or at county edges whose
-  bundle polygon does not contain them) and 4 have no coordinates; they are left out, not imputed.
+- **35 station rows** were left out because the station point is not inside any block-group polygon on file (25 of
+  them in New York, e.g. Wall St (2,3), Grand Central-42 St; 4 BART/CTA, 4 UTA, 1 MBTA, MARC's Harpers Ferry in West
+  Virginia, whose county has no bundle). Their one-mile rings are otherwise fully covered (coverage about 1.0), so the
+  point most likely sits in a sliver between the simplified block-group outlines, not outside the data. The rule was
+  fixed before the fit and is kept; a later run could keep them. 4 rows have no coordinates.
 - **Published direct-ridership-model coefficients were not obtained** (TCRP Report 153: onlinepubs.trb.org gave an empty
   reply, the archive copy reset the connection, nap.edu wants a sign-in to download; FTA STOPS documentation is on
   transit.dot.gov, which refuses this machine). None were typed from memory, so none are tested here.
