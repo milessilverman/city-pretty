@@ -1,7 +1,44 @@
 # Small counties: the Midwest (22 Nov 2026), served from R2 only
 
-**Status: in progress.** The states listed below were built, checked, uploaded and committed one at a time; a state that
-is not listed below is not done. See the end of this page for what is left.
+**Result: all 630 counties of the eight states are built, checked and on the page, served from R2 only; none was
+withheld.** Each state was built, checked, uploaded, live-checked and committed on its own.
+
+| State | Counties built / missing | People (ACS 2020-24) | Block groups | Data files (bytes) | Tiers | Census values checked | R2 bytes added |
+|---|---|---|---|---|---|---|---|
+| IA | 91 / 91 | 1,700,351 | 1,650 | 22,372,507 | 19 C, 72 D | 2,176 | 22,485,343 |
+| NE | 90 / 90 | 863,886 | 787 | 12,532,297 | 11 C, 79 D | 1,608 | 12,554,848 |
+| KS | 100 / 100 | 1,332,359 | 1,214 | 14,776,609 | 10 C, 90 D | 1,972 | 14,801,692 |
+| MN | 75 / 75 | 1,795,733 | 1,569 | 28,730,377 | 25 C, 50 D | 1,772 | 28,749,271 |
+| SD | 64 / 64 | 590,627 | 482 | 10,760,889 | 1 C, 63 D | 1,140 | 10,776,933 |
+| ND | 51 / 51 | 490,841 | 437 | 12,638,962 | 10 C, 41 D | 864 | 12,651,754 |
+| WI | 56 / 56 | 2,006,627 | 1,678 | 31,594,961 | 15 C, 41 D | 1,336 | 31,609,050 |
+| MO | 103 / 103 | 2,342,773 | 2,056 | 29,078,889 | 25 C, 78 D | 2,444 | 29,104,788 |
+| **All** | **630 / 630** | **11,123,197** | **9,873** | **162,485,491** | 116 C, 514 D | **13,312** | **162,733,679** |
+
+| Check | Sample | Result | Mismatch rate |
+|---|---|---|---|
+| Census: population, median home value, median gross rent, median household income vs the ACS 2020-24 table files (`scripts/census_spot_check.py`, seed 20261119) | 6 block groups in each of the 630 counties (all of them where a county has fewer), 13,312 values | 13,312 of 13,312 equal | 0% |
+| Tract-median flags (`build_acs_fallback_flags.py`, every county file) | all county files, after each state | 630 counties added, no existing county changed, 0 values matching neither the block group nor the tract | 0% |
+| OpenStreetMap ID for ID vs live Overpass (`scripts/check_osm_extract_vs_overpass.py`) | 2 counties per state, 16 | 15 counties exact (roads and bus stops); Adams ND 699 roads on Overpass, 698 in the extract: 1 road on the edge of the box margin (see North Dakota) | 0% inside the counties; 1 road of 699 in one box |
+| Live, real page loading from R2 (`scripts/live_check_panels.mjs`, `LIVE_PORT=9191`, 3 points per county) | 16 counties, 48 points | 325 pass, 105 not checkable (no parcel service or no parcel at the point, so the house-panel rows do not apply); North Dakota: 4 USGS elevation rows first showed "did not answer in time" (the page's 6 s limit), 2 passed when re-opened alone and 2 still showed it; no wrong value was shown anywhere | 0 wrong values |
+
+Counties still without a data file after this batch, counted from the registry the same way (not in
+`counties/bundle_*.json.gz` or `counties/.r2-only.txt`, Puerto Rico left out): **1,415** (2,045 before), of which Los
+Angeles and Orange (built by their own pipeline, loaded from `app/data/`) are 2 and Hawaii's 5 have no OpenStreetMap
+extract in the registry. Remaining by state: TX 211, GA 132, VA 116, KY 113, IL 82, MS 76, IN 75, OK 72, NC 71, AR 67,
+MI 63, OH 61, AL 53, CO 53, WV 52, LA 50, FL 31, SC 30, HI 5, CA 2.
+
+**R2 storage:** before 1,410,317,266 bytes (1,742 objects), after 1,573,050,945 bytes (2,372 objects): 162,733,679 bytes
+added (the 630 data files, 162,485,491, plus the larger `manifest.json`). 1.573 GB of the 8 GB ceiling and the 10 GB
+allowance. Every upload went through `scripts/r2_sync_counties.py` after a `--dry-run`; the per-state figures are in
+each state's section.
+
+**Measured projection for the rest:** this batch stored 16,458 bytes per block group (state range 12,172 for Kansas to
+28,922 for North Dakota; 257,913 bytes per county). The 1,410 remaining counties under 100,000 people have 33,340 block
+groups (ACS 2020-24 B01003 rows). At this batch's rate that is 0.55 GB (0.41 GB at the lowest state's rate, 0.96 GB at
+the highest), which would take R2 from 1.573 GB to about 2.1 GB (range 2.0 to 2.5 GB). The southern states'
+files may be larger per block group than these rural states' (the handoff estimated 0.5-0.85 MB per county, against 0.26
+MB here), so this is a projection from rural Midwest counties, not a measurement of them.
 
 The batch is every county with no data file (not in `counties/bundle_*.json.gz`, not in `counties/.r2-only.txt`) in
 Iowa, Nebraska, Kansas, Minnesota, South Dakota, North Dakota, Wisconsin and Missouri. Counted from the registry
@@ -918,3 +955,32 @@ Files: `data/backtests/midwest_wi_census_spot_2026-11-22.json`, `data/backtests/
 
 Files: `data/backtests/midwest_mo_census_spot_2026-11-22.json`, `data/backtests/midwest_osm_xcheck_29001_2026-11-22.json`,
 `..._29003_...`, `data/backtests/live_check_panels_2026-11-22_midwest_mo.json`.
+
+## Tests and housekeeping
+
+- `npm test`: run in full after Iowa (1 failure, the HUD income-limit rows; fixed, that file re-run), after Nebraska
+  (1,374 of 1,374), after Minnesota (1 failure, the corridor flags, which also covered two Kansas stops: the Kansas
+  commit itself was not tested; fixed, then 1,374 of 1,374) and after South Dakota, North Dakota, Wisconsin and
+  Missouri (1,374 of 1,374 each). `npm run typecheck` clean after each of those runs. `PW_PORT=9192 npm run test:e2e`
+  93 of 93 passed (8.3 min), once, on the Missouri commit (all eight states in). `python3 scripts/r2_only.py --check`
+  passes. No test was skipped or loosened and no pipeline code was changed.
+- `app/data/hud_income_limits.json`: 630 rows added from HUD's API (none failed; the test lets only New England counties
+  fail). Rows already in the file were not changed; `_source.added_for_new_counties` records each state's addition.
+  Anyone adding counties to `counties/manifest.json` will need to do the same before `npm test` passes.
+- `app/data/intercity_transit_corridors.json`: six stops' `county_on_page` flags (Cambridge and Hinckley MN, Newton and
+  Arkansas City KS, Hannibal and St. Joseph MO) now say true, as the test requires.
+- The 357 earlier R2-only files were downloaded from the bucket's public address into this worktree's `counties/`
+  (gitignored) so that `build_tree_equity_2025.py`, `build_acs_fallback_flags.py` and `build_county_completeness.py`
+  could run; the 630 new files are in `counties/` here too and not committed.
+- No `sites_` files were built (as for every small-county batch: `w5/tools/sites.py` needs the old build machine's
+  paths).
+- Scratch use: the scratch folder measured 4.7 GB at its largest check (limit 5 GB) (the regional file
+  2.8 GB, the national ACS tables 0.5 GB, one or two state files, up to 100 finished build folders at about 19 MB each);
+  from Kansas on, finished counties were exported while the rest built.
+
+## What is left
+
+Counties still without a data file nationally: 1,415 (see the top of this page for the list by state). Not done here:
+the other regions' small counties (South, the rest of the West: Colorado cut from the larger region file as the handoff
+asks, Hawaii and Alaska have no extract in the registry), the 100,000-plus counties, and crash counts for these eight
+states (no state source is wired into the pipeline for any of them).
