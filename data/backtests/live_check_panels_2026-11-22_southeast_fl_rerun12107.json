@@ -1,0 +1,201 @@
+{
+ "ran_on": "2026-11-22T19:43:04.395Z",
+ "script": "scripts/live_check_panels.mjs",
+ "results": {
+  "12107": {
+   "state": "FL",
+   "points": [
+    {
+     "bg": "121079514023",
+     "lat": 29.414057,
+     "lng": -81.630585,
+     "service": "Florida Statewide Parcels (FGIO / Dept. of Revenue Property Tax Oversight)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $152k, rent $1,031/mo, homes 730"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for FL"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Putnam County · 121079514023; page \"Census area: Putnam County · block group 121079514023(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1040 for 12107; page \"HUD Fair Market Rent (FY2027): 1 bed $792 · 2 bed $1,040 · 3 bed $1,307/moPutnam County, FL. HUD's voucher benchmark (rent plus utilities), not a market asking \""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 31 ft; page \"Ground elevation: 31 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Detached ADU (backyard home) — Building footprint is not on file, so open yard space cannot be verified without a site plan or survey.",
+      "? Duplex, middle housing or lot split — 3,643,851 sq ft parcel: allowed only where local zoning or a state law permits it; no state middle-housing or lot-split law for FL is on file here.",
+      "✓ Second story — One story (inferred (assumption: single-story layout)). Check the zone's height limit. Foundation inspection required to carry upper-floor loads.",
+      "? Rooftop deck — Requires a flat roof or flat garage roof section."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "121079510002",
+     "lat": 29.685087,
+     "lng": -81.606929,
+     "service": "Florida Statewide Parcels (FGIO / Dept. of Revenue Property Tax Oversight)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $276k, rent $1,603/mo, homes 797"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for FL"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Putnam County · 121079510002; page \"Census area: Putnam County · block group 121079510002(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1040 for 12107; page \"HUD Fair Market Rent (FY2027): 1 bed $792 · 2 bed $1,040 · 3 bed $1,307/moPutnam County, FL. HUD's voucher benchmark (rent plus utilities), not a market asking \""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 14 ft; page \"Ground elevation: 14 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Detached ADU (backyard home) — Building footprint is not on file, so open yard space cannot be verified without a site plan or survey.",
+      "? Duplex, middle housing or lot split — 231,971 sq ft parcel: allowed only where local zoning or a state law permits it; no state middle-housing or lot-split law for FL is on file here.",
+      "✓ Second story — One story (inferred (assumption: single-story layout)). Check the zone's height limit. Foundation inspection required to carry upper-floor loads.",
+      "? Rooftop deck — Requires a flat roof or flat garage roof section."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "121079510001",
+     "lat": 29.69388,
+     "lng": -81.5537,
+     "service": "Florida Statewide Parcels (FGIO / Dept. of Revenue Property Tax Oversight)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $161k, rent $1,191/mo, homes 395"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for FL"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Putnam County · 121079510001; page \"Census area: Putnam County · block group 121079510001(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1040 for 12107; page \"HUD Fair Market Rent (FY2027): 1 bed $792 · 2 bed $1,040 · 3 bed $1,307/moPutnam County, FL. HUD's voucher benchmark (rent plus utilities), not a market asking \""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: A; page \"FEMA flood zone: Zone A · special flood hazard areaFederally backed mortgages here require flood insurance.(FEMA Nationa\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 9 ft; page \"Ground elevation: 9 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Detached ADU (backyard home) — Building footprint is not on file, so open yard space cannot be verified without a site plan or survey.",
+      "? Duplex, middle housing or lot split — 118,976 sq ft parcel: allowed only where local zoning or a state law permits it; no state middle-housing or lot-split law for FL is on file here.",
+      "✓ Second story — One story (inferred (assumption: single-story layout)). Check the zone's height limit. Foundation inspection required to carry upper-floor loads.",
+      "? Rooftop deck — Requires a flat roof or flat garage roof section."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9221' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9221' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9221' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)"
+   ],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_12107.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_12107.json.gz"
+   ]
+  }
+ }
+}

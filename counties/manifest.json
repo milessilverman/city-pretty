@@ -2445,6 +2445,18 @@
    "crash_years": null
   },
   {
+   "fips": "12003",
+   "name": "Baker County",
+   "state": "FL",
+   "block_groups": 13,
+   "bundle_mb": 0.1,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:04\\:36Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "12005",
    "name": "Bay County",
    "state": "FL",
@@ -2454,6 +2466,18 @@
    "osm": "2026-11-07T00:45:52Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "12007",
+   "name": "Bradford County",
+   "state": "FL",
+   "block_groups": 19,
+   "bundle_mb": 0.1,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:04\\:36Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "12009",
@@ -2476,6 +2500,18 @@
    "osm": "2026-11-07T00:42:54Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "12013",
+   "name": "Calhoun County",
+   "state": "FL",
+   "block_groups": 11,
+   "bundle_mb": 0.2,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:03\\:32Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "12015",
@@ -2522,6 +2558,42 @@
    "crash_years": null
   },
   {
+   "fips": "12023",
+   "name": "Columbia County",
+   "state": "FL",
+   "block_groups": 43,
+   "bundle_mb": 0.3,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:04\\:36Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "12027",
+   "name": "DeSoto County",
+   "state": "FL",
+   "block_groups": 26,
+   "bundle_mb": 0.2,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:03\\:32Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "12029",
+   "name": "Dixie County",
+   "state": "FL",
+   "block_groups": 13,
+   "bundle_mb": 0.4,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:05\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "12031",
    "name": "Duval County",
    "state": "FL",
@@ -2553,6 +2625,102 @@
    "osm": "2026-11-07T00:44:05Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "12037",
+   "name": "Franklin County",
+   "state": "FL",
+   "block_groups": 13,
+   "bundle_mb": 0.3,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:05\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "12039",
+   "name": "Gadsden County",
+   "state": "FL",
+   "block_groups": 37,
+   "bundle_mb": 0.6,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:03\\:32Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "12041",
+   "name": "Gilchrist County",
+   "state": "FL",
+   "block_groups": 13,
+   "bundle_mb": 0.1,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:02\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "12043",
+   "name": "Glades County",
+   "state": "FL",
+   "block_groups": 12,
+   "bundle_mb": 0.2,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:03\\:32Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "12045",
+   "name": "Gulf County",
+   "state": "FL",
+   "block_groups": 14,
+   "bundle_mb": 0.2,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:05\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "12047",
+   "name": "Hamilton County",
+   "state": "FL",
+   "block_groups": 13,
+   "bundle_mb": 0.2,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:03\\:32Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "12049",
+   "name": "Hardee County",
+   "state": "FL",
+   "block_groups": 21,
+   "bundle_mb": 0.1,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:03\\:32Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "12051",
+   "name": "Hendry County",
+   "state": "FL",
+   "block_groups": 26,
+   "bundle_mb": 0.3,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:03\\:32Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "12053",
@@ -2588,6 +2756,18 @@
    "crash_years": null
   },
   {
+   "fips": "12059",
+   "name": "Holmes County",
+   "state": "FL",
+   "block_groups": 17,
+   "bundle_mb": 0.2,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:03\\:32Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "12061",
    "name": "Indian River County",
    "state": "FL",
@@ -2597,6 +2777,42 @@
    "osm": "2026-11-07T00:42:54Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "12063",
+   "name": "Jackson County",
+   "state": "FL",
+   "block_groups": 40,
+   "bundle_mb": 0.4,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:03\\:32Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "12065",
+   "name": "Jefferson County",
+   "state": "FL",
+   "block_groups": 14,
+   "bundle_mb": 0.4,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:05\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "12067",
+   "name": "Lafayette County",
+   "state": "FL",
+   "block_groups": 7,
+   "bundle_mb": 0.1,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:03\\:32Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "12069",
@@ -2630,6 +2846,42 @@
    "osm": "2026-11-07T00:42:54Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "12075",
+   "name": "Levy County",
+   "state": "FL",
+   "block_groups": 35,
+   "bundle_mb": 0.8,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:05\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "12077",
+   "name": "Liberty County",
+   "state": "FL",
+   "block_groups": 8,
+   "bundle_mb": 0.3,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:03\\:32Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "12079",
+   "name": "Madison County",
+   "state": "FL",
+   "block_groups": 16,
+   "bundle_mb": 0.2,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:03\\:32Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "12081",
@@ -2676,6 +2928,30 @@
    "crash_years": null
   },
   {
+   "fips": "12087",
+   "name": "Monroe County",
+   "state": "FL",
+   "block_groups": 71,
+   "bundle_mb": 2.6,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:05\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "12089",
+   "name": "Nassau County",
+   "state": "FL",
+   "block_groups": 62,
+   "bundle_mb": 1.5,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:04\\:36Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "12091",
    "name": "Okaloosa County",
    "state": "FL",
@@ -2685,6 +2961,18 @@
    "osm": "2026-11-07T00:45:52Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "12093",
+   "name": "Okeechobee County",
+   "state": "FL",
+   "block_groups": 31,
+   "bundle_mb": 0.2,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:03\\:32Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "12095",
@@ -2753,6 +3041,18 @@
    "crash_years": null
   },
   {
+   "fips": "12107",
+   "name": "Putnam County",
+   "state": "FL",
+   "block_groups": 57,
+   "bundle_mb": 0.4,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:02\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "12109",
    "name": "St. Johns County",
    "state": "FL",
@@ -2819,6 +3119,42 @@
    "crash_years": null
   },
   {
+   "fips": "12121",
+   "name": "Suwannee County",
+   "state": "FL",
+   "block_groups": 31,
+   "bundle_mb": 0.2,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:03\\:32Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "12123",
+   "name": "Taylor County",
+   "state": "FL",
+   "block_groups": 21,
+   "bundle_mb": 0.4,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:05\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "12125",
+   "name": "Union County",
+   "state": "FL",
+   "block_groups": 10,
+   "bundle_mb": 0.1,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:04\\:36Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "12127",
    "name": "Volusia County",
    "state": "FL",
@@ -2828,6 +3164,42 @@
    "osm": "2026-11-07T00:44:05Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "12129",
+   "name": "Wakulla County",
+   "state": "FL",
+   "block_groups": 23,
+   "bundle_mb": 0.3,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:05\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "12131",
+   "name": "Walton County",
+   "state": "FL",
+   "block_groups": 54,
+   "bundle_mb": 0.5,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:05\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "12133",
+   "name": "Washington County",
+   "state": "FL",
+   "block_groups": 17,
+   "bundle_mb": 0.3,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:03\\:32Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "13001",

@@ -443,3 +443,84 @@ Files: `data/backtests/southeast_ms_census_spot_2026-11-22.json`, `data/backtest
 Files: `data/backtests/southeast_sc_census_spot_2026-11-22.json`, `data/backtests/southeast_osm_xcheck_45055_2026-11-22.json`,
 `..._45049_...`, `data/backtests/live_check_panels_2026-11-22_southeast_sc.json`,
 `data/backtests/acs_fallback_mismatches_2026-11-22.json`.
+
+## Florida (31 of 31 built, none withheld)
+
+| County | People (ACS 2020-24) | Block groups | Data file (gzip, bytes) | Completeness tier | Canopy block groups (2025 release) |
+|---|---|---|---|---|---|
+| Baker County (12003) | 28,430 | 13 | 121,937 | D | 8 |
+| Bradford County (12007) | 27,885 | 19 | 143,991 | C | 11 |
+| Calhoun County (12013) | 13,492 | 11 | 152,360 | D | 0 |
+| Columbia County (12023) | 71,789 | 43 | 270,861 | D | 28 |
+| DeSoto County (12027) | 35,386 | 26 | 174,152 | D | 20 |
+| Dixie County (12029) | 17,058 | 13 | 446,406 | D | 0 |
+| Franklin County (12037) | 12,553 | 13 | 267,177 | D | 0 |
+| Gadsden County (12039) | 43,710 | 37 | 558,110 | D | 10 |
+| Gilchrist County (12041) | 19,040 | 13 | 96,550 | D | 0 |
+| Glades County (12043) | 12,563 | 12 | 152,836 | C | 4 |
+| Gulf County (12045) | 15,131 | 14 | 191,922 | D | 0 |
+| Hamilton County (12047) | 13,616 | 13 | 158,976 | D | 0 |
+| Hardee County (12049) | 25,675 | 21 | 114,011 | D | 11 |
+| Hendry County (12051) | 42,382 | 26 | 296,301 | C | 21 |
+| Holmes County (12059) | 19,513 | 17 | 218,790 | D | 0 |
+| Jackson County (12063) | 48,250 | 40 | 368,308 | D | 8 |
+| Jefferson County (12065) | 15,091 | 14 | 442,616 | D | 0 |
+| Lafayette County (12067) | 8,161 | 7 | 97,407 | D | 0 |
+| Levy County (12075) | 45,391 | 35 | 807,151 | D | 0 |
+| Liberty County (12077) | 7,687 | 8 | 300,533 | C | 0 |
+| Madison County (12079) | 18,089 | 16 | 157,523 | D | 0 |
+| Monroe County (12087) | 81,860 | 71 | 2,644,116 | C | 60 |
+| Nassau County (12089) | 97,859 | 62 | 1,456,335 | C | 38 |
+| Okeechobee County (12093) | 40,816 | 31 | 156,882 | C | 24 |
+| Putnam County (12107) | 75,164 | 57 | 419,130 | C | 23 |
+| Suwannee County (12121) | 45,342 | 31 | 197,395 | D | 10 |
+| Taylor County (12123) | 21,503 | 21 | 411,812 | C | 13 |
+| Union County (12125) | 15,701 | 10 | 115,732 | D | 0 |
+| Wakulla County (12129) | 35,387 | 23 | 307,322 | D | 9 |
+| Walton County (12131) | 82,948 | 54 | 534,204 | C | 33 |
+| Washington County (12133) | 25,529 | 17 | 315,219 | D | 0 |
+| **31 counties** | **1,063,001** | **788** | **12,096,065** | 10 C, 21 D | 331 |
+
+- OpenStreetMap: Florida counties read the file the registry names for each county, from openstreetmap.fr, each downloaded
+  once and shared: `florida-latest.osm.pbf` (9 counties; 714,596,697 bytes; data timestamp 2026-11-21T01:05:35Z) or a
+  sub-region file (northwest 6 counties, northeast 5, panhandle 4, gatorland 2, southwest 2, suncoast 2, treasure_coast 1;
+  timestamps 21 Nov 2026 between 01:02:35Z and 01:04:36Z); each county's sources list names its own. Build: fetch 20-81 s,
+  build 25-1,153 s per county, three at a time (the Mississippi and South Carolina checks, tests and the North Carolina
+  builds ran alongside); the 9 counties that clip the whole-state file took 446-1,153 s each, the
+  others 25-331 s; about 52 min from the first county to the last.
+- Bus frequency: 24 counties have no value in any block group (no feed that is read has a stop with 7-9 am departures in or
+  near the county); 7 have values. Rail distance: 27 counties have none; 4 have values.
+- Census spot check: 31 counties, 744 of 744 values equal (0% mismatch). Tract-median flags: 31 counties added, no
+  existing county changed, 0 values matching neither the block group nor the tract.
+- Crash counts: Florida has no state crash source connected (`pipeline/region.py` STATE_DEFAULTS has no FL); all 31 files say
+  "Not connected for Florida yet: crash gaps are not scored and crash-based projects are not proposed". No crash counts were
+  built.
+- Tests run: `npm test` 1,632 of 1,632 (46 files), `npm run typecheck` clean. No corridor stop's flag needed changing.
+- OpenStreetMap ID for ID vs live Overpass (maps.mail.ru; two counties picked with seed 20261122 from the state's sorted
+  list): it answered 504 to some tries first. Levy (12075) 8,573 = 8,573 roads, 23 = 23 bus stops (0 missing, 0 extra). Jefferson
+  (12065): bus stops 0 = 0; **roads 2,670 on Overpass, 2,642 in the extract (28 only on Overpass, 0 only in the extract)**:
+  Jefferson County lies on the Georgia line and its box reaches into Georgia. With the Overpass query limited to Florida's
+  area (same box, classes and extract; `area["ISO3166-2"="US-FL"]`, result in `southeast_osm_xcheck_state_12065_...json`):
+  2,631 on Overpass, 2,642 in the extract, 0 only on Overpass, 11 only in the extract. Located with TIGERweb (centre point of
+  each way): all 28 Overpass-only ways are in Georgia (Thomas County 21, Brooks County 7), and the 11 extract-only ways
+  are Georgia-centred ways that cross the line and are kept whole (Thomas 9, Brooks 2). Inside Florida every road matches
+  and the only bus-stop count is 0 = 0. The extract's snapshot is 2026-11-21T01:05:35Z.
+- Live check from R2 (`LIVE_PORT=9221`): Putnam (12107) and Levy (12075), 3 points each (picked with seed 20261123 from the
+  state's sorted list). Florida's parcel service is on the page: 5 of the 6 points had the house panel on live parcel
+  records (Census area, HUD rent, FEMA and USGS rows checked against the sources); at Levy 120759707002 the parcel service
+  did not answer, so that point's house rows are not checkable. **Two USGS elevation rows first showed "Not available (the
+  service did not answer in time)" (Levy 120759706004, Putnam 121079514023); the page's USGS call has a 6 s limit.** Re-opened
+  alone, Levy's row then showed 74 ft (USGS now 74 ft) and passed (its first try is kept in the result file as
+  `usgs_first`); Putnam's re-open found no row ("row missing"), so the whole county was run again as a separate check
+  (`..._southeast_fl_rerun12107.json`): all 3 points, 27 of 27 checks pass, with the elevation rows equal to USGS's. In the
+  main result file: 49 pass, 3 recorded failures (those two rows' first tries and Putnam's failed re-open, listed above),
+  4 not checkable. No wrong value was shown anywhere: where the service did not answer the page said "Not available".
+  Each data file came from the r2.dev address (HEAD 200, GET 200).
+- R2: before 1,815,197,167 bytes (3,057 objects); dry run "32 files, net +0.012 GB, projected 1.827 GB"; after
+  1,827,301,037 bytes (3,088 objects): 12,103,870 bytes added (the 31 data files, 12,096,065, plus the larger
+  `manifest.json`).
+
+Files: `data/backtests/southeast_fl_census_spot_2026-11-22.json`, `data/backtests/southeast_osm_xcheck_12075_2026-11-22.json`,
+`..._12065_...`, `data/backtests/southeast_osm_xcheck_state_12065_2026-11-22.json`,
+`data/backtests/live_check_panels_2026-11-22_southeast_fl.json`, `..._southeast_fl_rerun12107.json`,
+`data/backtests/acs_fallback_mismatches_2026-11-22.json`.

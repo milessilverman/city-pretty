@@ -1,0 +1,25 @@
+{
+ "fips": "12065",
+ "state_area": "US-FL",
+ "box_s_w_n_e": "29.878948000075365,-84.09632799974624,30.69212699996238,-83.5841209996476",
+ "direct_in_state": 2631,
+ "extract": 2642,
+ "missing_from_extract": [],
+ "extra_in_extract": [
+  9040924,
+  9042279,
+  9485466,
+  9487396,
+  9487486,
+  9488295,
+  9488366,
+  9489144,
+  9489261,
+  9489385,
+  9491052
+ ],
+ "n_missing": 0,
+ "n_extra": 11,
+ "match": false,
+ "note": "roads in the box that lie in another state are not in a state extract and are left out of this comparison"
+}
