@@ -386,3 +386,99 @@ Files: `data/backtests/greatlakes_in_census_spot_2026-11-22.json`, `data/backtes
 Files: `data/backtests/greatlakes_oh_census_spot_2026-11-22.json`, `data/backtests/greatlakes_osm_xcheck_39001_2026-11-22.json`,
 `..._39005_...`, `data/backtests/greatlakes_osm_xcheck_state_39001_2026-11-22.json`,
 `data/backtests/live_check_panels_2026-11-22_greatlakes_oh.json`, `data/backtests/acs_fallback_mismatches_2026-11-22.json`.
+
+## Michigan (63 of 63 built, none withheld)
+
+| County | People (ACS 2020-24) | Block groups | Data file (gzip, bytes) | Completeness tier | Canopy block groups (2025 release) |
+|---|---|---|---|---|---|
+| Alcona County (26001) | 10,397 | 12 | 264,005 | D | 3 |
+| Alger County (26003) | 8,762 | 8 | 750,336 | D | 0 |
+| Alpena County (26007) | 28,880 | 35 | 288,628 | D | 21 |
+| Antrim County (26009) | 24,127 | 29 | 452,681 | D | 0 |
+| Arenac County (26011) | 15,077 | 19 | 268,844 | C | 4 |
+| Baraga County (26013) | 8,191 | 9 | 667,066 | D | 0 |
+| Barry County (26015) | 63,409 | 42 | 281,851 | D | 9 |
+| Benzie County (26019) | 18,310 | 18 | 262,040 | C | 7 |
+| Branch County (26023) | 45,300 | 42 | 183,741 | D | 14 |
+| Cass County (26027) | 51,520 | 44 | 247,369 | C | 20 |
+| Charlevoix County (26029) | 26,108 | 29 | 655,823 | D | 16 |
+| Cheboygan County (26031) | 25,865 | 31 | 468,566 | D | 10 |
+| Chippewa County (26033) | 36,295 | 39 | 924,044 | D | 19 |
+| Clare County (26035) | 31,218 | 33 | 250,837 | D | 7 |
+| Clinton County (26037) | 79,626 | 58 | 332,951 | C | 37 |
+| Crawford County (26039) | 13,369 | 16 | 284,187 | D | 1 |
+| Delta County (26041) | 36,813 | 30 | 564,954 | D | 18 |
+| Dickinson County (26043) | 25,954 | 20 | 421,569 | C | 17 |
+| Emmet County (26047) | 34,125 | 33 | 415,038 | D | 20 |
+| Gladwin County (26051) | 25,693 | 26 | 216,410 | D | 0 |
+| Gogebic County (26053) | 14,319 | 21 | 1,538,850 | D | 10 |
+| Grand Traverse County (26055) | 96,166 | 66 | 697,746 | C | 50 |
+| Gratiot County (26057) | 41,385 | 38 | 182,571 | D | 18 |
+| Hillsdale County (26059) | 45,654 | 44 | 224,701 | D | 15 |
+| Houghton County (26061) | 37,693 | 36 | 1,356,163 | C | 24 |
+| Huron County (26063) | 31,113 | 37 | 293,466 | D | 0 |
+| Ionia County (26067) | 66,574 | 47 | 279,641 | D | 25 |
+| Iosco County (26069) | 25,347 | 33 | 290,517 | D | 22 |
+| Iron County (26071) | 11,667 | 12 | 516,262 | D | 0 |
+| Isabella County (26073) | 64,565 | 51 | 267,302 | D | 30 |
+| Kalkaska County (26079) | 18,239 | 16 | 231,516 | D | 0 |
+| Keweenaw County (26083) | 2,133 | 5 | 434,398 | D | 0 |
+| Lake County (26085) | 12,563 | 12 | 230,301 | D | 0 |
+| Lapeer County (26087) | 88,837 | 65 | 315,179 | C | 17 |
+| Leelanau County (26089) | 22,734 | 20 | 408,088 | C | 6 |
+| Lenawee County (26091) | 98,415 | 83 | 344,588 | C | 41 |
+| Luce County (26095) | 6,271 | 8 | 364,877 | D | 0 |
+| Mackinac County (26097) | 10,957 | 16 | 754,643 | D | 5 |
+| Manistee County (26101) | 25,350 | 28 | 332,602 | D | 13 |
+| Marquette County (26103) | 67,112 | 64 | 1,211,246 | C | 41 |
+| Mason County (26105) | 29,207 | 31 | 275,850 | D | 15 |
+| Mecosta County (26107) | 41,242 | 37 | 298,038 | D | 18 |
+| Menominee County (26109) | 23,247 | 22 | 631,395 | D | 8 |
+| Midland County (26111) | 83,757 | 66 | 308,917 | D | 45 |
+| Missaukee County (26113) | 15,207 | 13 | 205,638 | D | 0 |
+| Montcalm County (26117) | 67,816 | 49 | 420,261 | C | 9 |
+| Montmorency County (26119) | 9,516 | 12 | 237,992 | D | 0 |
+| Newaygo County (26123) | 50,792 | 34 | 385,462 | D | 7 |
+| Oceana County (26127) | 26,915 | 21 | 311,368 | D | 0 |
+| Ogemaw County (26129) | 20,885 | 22 | 214,942 | D | 0 |
+| Ontonagon County (26131) | 5,850 | 7 | 1,442,824 | D | 0 |
+| Osceola County (26133) | 23,227 | 25 | 213,708 | D | 0 |
+| Oscoda County (26135) | 8,425 | 11 | 141,668 | D | 0 |
+| Otsego County (26137) | 25,584 | 20 | 301,943 | D | 11 |
+| Presque Isle County (26141) | 13,209 | 17 | 272,166 | D | 0 |
+| Roscommon County (26143) | 23,737 | 28 | 252,495 | D | 23 |
+| St. Joseph County (26149) | 60,969 | 56 | 255,117 | D | 25 |
+| Sanilac County (26151) | 40,462 | 41 | 289,072 | D | 7 |
+| Schoolcraft County (26153) | 8,128 | 10 | 618,906 | D | 0 |
+| Shiawassee County (26155) | 67,991 | 56 | 237,728 | C | 30 |
+| Tuscola County (26157) | 52,980 | 50 | 319,104 | D | 8 |
+| Van Buren County (26159) | 75,795 | 66 | 455,964 | C | 21 |
+| Wexford County (26165) | 34,077 | 24 | 264,198 | D | 15 |
+| **63 counties** | **2,205,151** | **1,993** | **26,830,353** | 14 C, 49 D | 782 |
+
+- OpenStreetMap: Michigan counties read the file the registry names for each county, from openstreetmap.fr:
+  `michigan-latest.osm.pbf` (32 counties; data timestamp 2026-11-21T01:17:47Z) or a sub-region file (west 8 counties,
+  northern_lower 7, southeast 5, central 5, southwest 4, upper_peninsula 2; timestamps 21 Nov 2026 for west, central and
+  southwest, 19 Nov for northern_lower and upper_peninsula, 17 Nov for southeast), each downloaded once and shared; each
+  county's sources list names its own date. Build: fetch 10-67 s, build 21-301 s per county, three at a time (the Ohio checks
+  and the Kentucky download, cut and builds ran alongside), about 53 min from the first county to the last.
+- Bus frequency: 55 counties have no value in any block group (no feed that is read has a stop with 7-9 am departures in or
+  near the county); 8 have values. Rail distance: 59 counties have none; 4 have values.
+- Census spot check: 63 counties, 1,508 of 1,508 values equal (0% mismatch). Tract-median flags: 63 counties added, no
+  existing county changed, 0 values matching neither the block group nor the tract.
+- Crash counts: Michigan has no state crash source connected (`pipeline/region.py` STATE_DEFAULTS has no MI); all 63 files
+  say "Not connected for Michigan yet: crash gaps are not scored and crash-based projects are not proposed".
+- Tests run: `npm test` 1,620 of 1,620 (45 files), `npm run typecheck` clean. No corridor stop's flag changed.
+- OpenStreetMap ID for ID vs live Overpass (maps.mail.ru; it answered 504 for a while first): Alcona (26001) 1,510 = 1,510
+  roads, 0 = 0 bus stops; Alger (26003) 2,049 = 2,049 roads, 0 = 0 bus stops (0 missing, 0 extra).
+- Live check from R2 (`LIVE_PORT=9211`): Cass (26027) and Marquette (26103), 3 points each. Neither county has a parcel
+  service on the page, so the house-panel rows (Census area, HUD rent, FEMA, USGS) are not checkable; neighborhood, canopy,
+  canopy goal, crash text, state laws and console pass at all 6 points (30 pass, 0 fail, 24 not checkable). Each data file
+  came from the r2.dev address (HEAD 200, GET 200).
+- R2: before 1,630,658,373 bytes (2,590 objects); dry run "64 files, net +0.027 GB, projected 1.658 GB"; after
+  1,657,504,612 bytes (2,653 objects): 26,846,239 bytes added (the 63 data files, 26,830,353, plus the larger
+  `manifest.json`).
+
+Files: `data/backtests/greatlakes_mi_census_spot_2026-11-22.json`, `data/backtests/greatlakes_osm_xcheck_26001_2026-11-22.json`,
+`..._26003_...`, `data/backtests/live_check_panels_2026-11-22_greatlakes_mi.json`,
+`data/backtests/acs_fallback_mismatches_2026-11-22.json`.
