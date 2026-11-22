@@ -2,8 +2,8 @@
  "checked": "2026-11-22",
  "tool": "scripts/live_check_draw_area.mjs",
  "method": "the page's panel against a grid count made in this script (420 x 420 cell centres per block group), people / homes / land acres = share x the block group's own figure; tolerance 1% or 1.5",
- "passed": 87,
- "total": 93,
+ "passed": 162,
+ "total": 162,
  "screenshots": "not kept in the repository",
  "results": [
   {
@@ -34,25 +34,25 @@
     {
      "check": "polygon: pop equals the independent grid computation",
      "ok": true,
-     "panel": "about 8,339 Estimated by area",
-     "panel_raw": 8338.850418324282,
-     "independent": 8340.02,
+     "panel": "about 8,381 Estimated by area",
+     "panel_raw": 8380.582259639688,
+     "independent": 8381.89,
      "basis": "apportioned"
     },
     {
      "check": "polygon: homes equals the independent grid computation",
      "ok": true,
-     "panel": "about 4,508 Estimated by area",
-     "panel_raw": 4508.449577874327,
-     "independent": 4509.42,
+     "panel": "about 4,532 Estimated by area",
+     "panel_raw": 4532.1639160352925,
+     "independent": 4533.21,
      "basis": "apportioned"
     },
     {
      "check": "polygon: landAcres equals the independent grid computation",
      "ok": true,
-     "panel": "about 140 acres Estimated by area",
-     "panel_raw": 139.6687871928773,
-     "independent": 139.7,
+     "panel": "about 143 acres Estimated by area",
+     "panel_raw": 142.73510888291798,
+     "independent": 142.77,
      "basis": "apportioned"
     },
     {
@@ -74,31 +74,31 @@
     {
      "check": "dragging a corner changes the shape and the figures",
      "ok": true,
-     "acres_before": 139.6687871928773,
-     "acres_after": 152.84991027833007
+     "acres_before": 142.73510888291798,
+     "acres_after": 156.22207672689345
     },
     {
      "check": "after dragging: pop equals the independent grid computation",
      "ok": true,
-     "panel": "about 8,485 Estimated by area",
-     "panel_raw": 8485.138473291276,
-     "independent": 8486.26,
+     "panel": "about 8,530 Estimated by area",
+     "panel_raw": 8530.324590851802,
+     "independent": 8531.77,
      "basis": "apportioned"
     },
     {
      "check": "after dragging: homes equals the independent grid computation",
      "ok": true,
-     "panel": "about 4,583 Estimated by area",
-     "panel_raw": 4583.32869230606,
-     "independent": 4584.28,
+     "panel": "about 4,609 Estimated by area",
+     "panel_raw": 4608.927794737531,
+     "independent": 4610.05,
      "basis": "apportioned"
     },
     {
      "check": "after dragging: landAcres equals the independent grid computation",
      "ok": true,
-     "panel": "about 153 acres Estimated by area",
-     "panel_raw": 152.84991027833007,
-     "independent": 152.87,
+     "panel": "about 156 acres Estimated by area",
+     "panel_raw": 156.22207672689345,
+     "independent": 156.27,
      "basis": "apportioned"
     },
     {
@@ -116,7 +116,7 @@
     {
      "check": "the link reproduces the area",
      "ok": true,
-     "url": "#bg=060372145031&area=p_34.06475_-118.35583_34.06475_-118.34706_34.07076_-118.34706_34.07253_-118.35099_34.07076_-118.35583"
+     "url": "#bg=060372145031&area=p_34.06475_-118.35583_34.06475_-118.34706_34.07076_-118.34706_34.07253_-118.35099_34.07131_-118.35583"
     },
     {
      "check": "Escape cancels and keeps the area that was there",
@@ -138,12 +138,7 @@
      "check": "circle: the station it was centred on is counted",
      "ok": true,
      "stations": [
-      "Wilshire/La Brea",
-      "Wilshire/La Brea",
-      "Wilshire/La Brea",
-      "Wilshire/La Brea",
-      "Wilshire/La Brea",
-      "Wilshire / La Brea (Anchor Hub)"
+      "Wilshire/La Brea"
      ]
     },
     {
@@ -185,7 +180,7 @@
     {
      "check": "Ask the advisor puts the area on the context, under 6,000 characters",
      "ok": true,
-     "chars": 5917
+     "chars": 5807
     },
     {
      "check": "Clear removes the shape, the link entry and the advisor field",
@@ -200,12 +195,12 @@
    "notes": {
     "polygon": {
      "status": "ok",
-     "summary": "The shape you drew covers 140 acres (0.22 square miles) in Los Angeles County. It touches 13 Census block groups in 2 named neighborhoods (Mid-Wilshire, Fairfax). It holds about 8,339 people and about 4,508 homes. Typical home values (block-group medians) run from $1,957,576 to $2,080,800; the median for the area itself cannot be worked out from block-group data. 9 of the 13 block groups are cut by the shape, so the counts are estimates by area.",
-     "hash": "#bg=060372695003&area=p_34.06475_-118.35583_34.06475_-118.34706_34.07076_-118.34706_34.07134_-118.35143_34.07076_-118.35583",
+     "summary": "The shape you drew covers 143 acres (0.22 square miles) in Los Angeles County. It touches 13 Census block groups in 2 named neighborhoods (Mid-Wilshire, Fairfax). It holds about 8,381 people and about 4,532 homes. Typical home values (block-group medians) run from $1,957,576 to $2,080,800; the median for the area itself cannot be worked out from block-group data. 9 of the 13 block groups are cut by the shape, so the counts are estimates by area.",
+     "hash": "#bg=060372695003&area=p_34.06475_-118.35583_34.06475_-118.34706_34.07076_-118.34706_34.07134_-118.35143_34.07131_-118.35583",
      "ideas": [
       {
        "name": "School modernization (bond-funded)",
-       "avg": 1.5,
+       "avg": 1.4999999999999996,
        "range": [
         1.5,
         1.5
@@ -214,7 +209,7 @@
       },
       {
        "name": "Add a backyard home (ADU), owner-level",
-       "avg": 1.1137138441283279,
+       "avg": 1.11407864783808,
        "range": [
         1.077,
         1.13
@@ -223,7 +218,7 @@
       },
       {
        "name": "EV fast-charging hub",
-       "avg": 16.58342005319412,
+       "avg": 16.6194176083905,
        "range": [
         5.302,
         26.088
@@ -247,13 +242,13 @@
      "transit": {
       "verdict": "screen_only",
       "scale": "brt",
-      "net": 48.42
+      "net": 47.63
      },
      "figs": {
-      "pop": "about 8,339 Estimated by area [apportioned]",
-      "homes": "about 4,508 Estimated by area [apportioned]",
-      "landAcres": "about 140 acres Estimated by area [apportioned]",
-      "homesPerAcre": "32.3 per acre Modelled [modelled]",
+      "pop": "about 8,381 Estimated by area [apportioned]",
+      "homes": "about 4,532 Estimated by area [apportioned]",
+      "landAcres": "about 143 acres Estimated by area [apportioned]",
+      "homesPerAcre": "31.8 per acre Modelled [modelled]",
       "hv": "$2.0M to $2.1M Range [range]",
       "rent": "$1,807/mo to $3,500 or more/mo Range [range]",
       "inc": "$69k to $180k Range [range]",
@@ -264,8 +259,8 @@
       "crashAll": "about 0.7 Estimated by area [apportioned]",
       "crashKsi": "about 0 Estimated by area [apportioned]",
       "crashPedBike": "about 0 Estimated by area [apportioned]",
-      "vc": "about 5.9 per 1,000 Estimated by area [apportioned]",
-      "pcr": "about 162.2 Estimated by area [apportioned]",
+      "vc": "about 6.0 per 1,000 Estimated by area [apportioned]",
+      "pcr": "about 172.2 Estimated by area [apportioned]",
       "ht": "-5.3°F to -0.6°F Range [range]",
       "tg": "0 points to 17 points Range [range]",
       "bt": "1 an hour to 16 an hour Range [range]",
@@ -275,7 +270,7 @@
       "stations": "0 Exact [measured]",
       "plannedStations": "0 Exact [measured]",
       "stops": "0 Exact [measured]",
-      "netDensity": "48.4 Modelled [modelled]"
+      "netDensity": "47.6 Modelled [modelled]"
      }
     },
     "circle": {
@@ -283,12 +278,7 @@
      "summary": "A circle of half a mile around the point you chose covers 502 acres (0.78 square miles) in Los Angeles County. It touches 23 Census block groups in 3 named neighborhoods (Hancock Park, Mid-Wilshire, Fairfax). It holds about 14,514 people and about 9,037 homes. Typical home values (block-group medians) run from $1,781,561 to $6,223,983; the median for the area itself cannot be worked out from block-group data. 16 of the 23 block groups are cut by the shape, so the counts are estimates by area.",
      "hash": "#bg=060372145031&area=c_34.06254_-118.34438_0.5",
      "stations": [
-      "Wilshire/La Brea",
-      "Wilshire/La Brea",
-      "Wilshire/La Brea",
-      "Wilshire/La Brea",
-      "Wilshire/La Brea",
-      "Wilshire / La Brea (Anchor Hub)"
+      "Wilshire/La Brea"
      ],
      "stops": 2,
      "sites": 9,
@@ -360,7 +350,7 @@
       "pa": "0.0 acres to 49.0 acres Range [range]",
       "places": "2 Exact [measured]",
       "sites": "9 Exact [measured]",
-      "stations": "6 Exact [measured]",
+      "stations": "1 Exact [measured]",
       "plannedStations": "0 Exact [measured]",
       "stops": "2 Exact [measured]",
       "netDensity": "27.0 Modelled [modelled]"
@@ -382,15 +372,343 @@
     },
     {
      "check": "polygon: Undo removes a corner",
-     "ok": false
+     "ok": true
     },
     {
-     "check": "run completed",
-     "ok": false,
-     "error": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-da-strip=finish]')\u001b[22m\n"
+     "check": "polygon: three block groups are wholly inside",
+     "ok": true,
+     "three": [
+      "060372145042",
+      "060372145051",
+      "060372145031"
+     ]
+    },
+    {
+     "check": "polygon: pop equals the independent grid computation",
+     "ok": true,
+     "panel": "about 8,462 Estimated by area",
+     "panel_raw": 8462.440214406633,
+     "independent": 8464.98,
+     "basis": "apportioned"
+    },
+    {
+     "check": "polygon: homes equals the independent grid computation",
+     "ok": true,
+     "panel": "about 4,576 Estimated by area",
+     "panel_raw": 4575.976849556637,
+     "independent": 4577.87,
+     "basis": "apportioned"
+    },
+    {
+     "check": "polygon: landAcres equals the independent grid computation",
+     "ok": true,
+     "panel": "about 151 acres Estimated by area",
+     "panel_raw": 151.00716953349396,
+     "independent": 151.1,
+     "basis": "apportioned"
+    },
+    {
+     "check": "polygon: block-group shares match the grid count",
+     "ok": true,
+     "worst_share_difference": 0.0009,
+     "block_groups": 13,
+     "missed": []
+    },
+    {
+     "check": "polygon: no null / NaN / undefined text",
+     "ok": true,
+     "found": []
+    },
+    {
+     "check": "neighborhood list selects a block group and the area panel comes back",
+     "ok": true
+    },
+    {
+     "check": "dragging a corner changes the shape and the figures",
+     "ok": true,
+     "acres_before": 151.00716953349396,
+     "acres_after": 192.13240280658917
+    },
+    {
+     "check": "after dragging: pop equals the independent grid computation",
+     "ok": true,
+     "panel": "about 8,920 Estimated by area",
+     "panel_raw": 8919.993488428365,
+     "independent": 8922.48,
+     "basis": "apportioned"
+    },
+    {
+     "check": "after dragging: homes equals the independent grid computation",
+     "ok": true,
+     "panel": "about 4,808 Estimated by area",
+     "panel_raw": 4808.390540057209,
+     "independent": 4810.27,
+     "basis": "apportioned"
+    },
+    {
+     "check": "after dragging: landAcres equals the independent grid computation",
+     "ok": true,
+     "panel": "about 192 acres Estimated by area",
+     "panel_raw": 192.13240280658917,
+     "independent": 192.21,
+     "basis": "apportioned"
+    },
+    {
+     "check": "after dragging: block-group shares match the grid count",
+     "ok": true,
+     "worst_share_difference": 0.0009,
+     "block_groups": 13,
+     "missed": []
+    },
+    {
+     "check": "after dragging: no null / NaN / undefined text",
+     "ok": true,
+     "found": []
+    },
+    {
+     "check": "the link reproduces the area",
+     "ok": true,
+     "url": "#bg=060372145031&area=p_34.06478_-118.35580_34.06478_-118.34706_34.07081_-118.34706_34.07473_-118.35022_34.07302_-118.35580"
+    },
+    {
+     "check": "Escape cancels and keeps the area that was there",
+     "ok": true
+    },
+    {
+     "check": "circle: placed where clicked with the chosen radius",
+     "ok": true,
+     "spec": {
+      "type": "circle",
+      "center": [
+       -118.34438,
+       34.06254
+      ],
+      "radiusMiles": 0.5
+     }
+    },
+    {
+     "check": "circle: the station it was centred on is counted",
+     "ok": true,
+     "stations": [
+      "Wilshire/La Brea"
+     ]
+    },
+    {
+     "check": "circle: pop equals the independent grid computation",
+     "ok": true,
+     "panel": "about 14,514 Estimated by area",
+     "panel_raw": 14513.500411633458,
+     "independent": 14514.96,
+     "basis": "apportioned"
+    },
+    {
+     "check": "circle: homes equals the independent grid computation",
+     "ok": true,
+     "panel": "about 9,037 Estimated by area",
+     "panel_raw": 9036.84380585565,
+     "independent": 9037.69,
+     "basis": "apportioned"
+    },
+    {
+     "check": "circle: landAcres equals the independent grid computation",
+     "ok": true,
+     "panel": "about 502 acres Estimated by area",
+     "panel_raw": 502.1926162386398,
+     "independent": 502.27,
+     "basis": "apportioned"
+    },
+    {
+     "check": "circle: block-group shares match the grid count",
+     "ok": true,
+     "worst_share_difference": 0.0005,
+     "block_groups": 23,
+     "missed": []
+    },
+    {
+     "check": "circle: no null / NaN / undefined text",
+     "ok": true,
+     "found": []
+    },
+    {
+     "check": "Ask the advisor puts the area on the context, under 6,000 characters",
+     "ok": true,
+     "chars": 5807
+    },
+    {
+     "check": "Clear removes the shape, the link entry and the advisor field",
+     "ok": true
+    },
+    {
+     "check": "no page errors",
+     "ok": true,
+     "errors": []
     }
    ],
-   "notes": {}
+   "notes": {
+    "polygon": {
+     "status": "ok",
+     "summary": "The shape you drew covers 151 acres (0.24 square miles) in Los Angeles County. It touches 13 Census block groups in 2 named neighborhoods (Mid-Wilshire, Fairfax). It holds about 8,462 people and about 4,576 homes. Typical home values (block-group medians) run from $1,957,576 to $2,080,800; the median for the area itself cannot be worked out from block-group data. 9 of the 13 block groups are cut by the shape, so the counts are estimates by area.",
+     "hash": "#bg=060372695003&area=p_34.06478_-118.35580_34.06478_-118.34706_34.07081_-118.34706_34.07131_-118.35143_34.07302_-118.35580",
+     "ideas": [
+      {
+       "name": "School modernization (bond-funded)",
+       "avg": 1.4999999999999998,
+       "range": [
+        1.5,
+        1.5
+       ],
+       "in": 10
+      },
+      {
+       "name": "Add a backyard home (ADU), owner-level",
+       "avg": 1.1147926986503733,
+       "range": [
+        1.077,
+        1.13
+       ],
+       "in": 2
+      },
+      {
+       "name": "EV fast-charging hub",
+       "avg": 16.740742008257286,
+       "range": [
+        5.302,
+        26.088
+       ],
+       "in": 8
+      }
+     ],
+     "withheld": 23,
+     "sites": 4,
+     "site0": {
+      "kind": "parking lot",
+      "zoning": {
+       "code": "R4-2-O",
+       "category": "multifamily",
+       "status": "on file"
+      },
+      "law": "not determined",
+      "station": "not within walk distance of a station on file",
+      "ver": "not individually checked"
+     },
+     "transit": {
+      "verdict": "screen_only",
+      "scale": "brt",
+      "net": 45.45
+     },
+     "figs": {
+      "pop": "about 8,462 Estimated by area [apportioned]",
+      "homes": "about 4,576 Estimated by area [apportioned]",
+      "landAcres": "about 151 acres Estimated by area [apportioned]",
+      "homesPerAcre": "30.3 per acre Modelled [modelled]",
+      "hv": "$2.0M to $2.1M Range [range]",
+      "rent": "$1,807/mo to $3,500 or more/mo Range [range]",
+      "inc": "$69k to $180k Range [range]",
+      "yb": "1938 to 1997 Range [range]",
+      "sf": "about 6% Estimated by area [apportioned]",
+      "own": "0% to 76% Range [range]",
+      "nocar": "0% to 27% Range [range]",
+      "crashAll": "about 0.9 Estimated by area [apportioned]",
+      "crashKsi": "about 0 Estimated by area [apportioned]",
+      "crashPedBike": "about 0 Estimated by area [apportioned]",
+      "vc": "about 6.5 per 1,000 Estimated by area [apportioned]",
+      "pcr": "about 201.4 Estimated by area [apportioned]",
+      "ht": "-5.3°F to -0.6°F Range [range]",
+      "tg": "0 points to 17 points Range [range]",
+      "bt": "1 an hour to 16 an hour Range [range]",
+      "pa": "7.4 acres to 49.0 acres Range [range]",
+      "places": "0 Exact [measured]",
+      "sites": "4 Exact [measured]",
+      "stations": "0 Exact [measured]",
+      "plannedStations": "0 Exact [measured]",
+      "stops": "0 Exact [measured]",
+      "netDensity": "45.5 Modelled [modelled]"
+     }
+    },
+    "circle": {
+     "status": "ok",
+     "summary": "A circle of half a mile around the point you chose covers 502 acres (0.78 square miles) in Los Angeles County. It touches 23 Census block groups in 3 named neighborhoods (Hancock Park, Mid-Wilshire, Fairfax). It holds about 14,514 people and about 9,037 homes. Typical home values (block-group medians) run from $1,781,561 to $6,223,983; the median for the area itself cannot be worked out from block-group data. 16 of the 23 block groups are cut by the shape, so the counts are estimates by area.",
+     "hash": "#bg=060372145031&area=c_34.06254_-118.34438_0.5",
+     "stations": [
+      "Wilshire/La Brea"
+     ],
+     "stops": 2,
+     "sites": 9,
+     "site0": {
+      "kind": "parking lot",
+      "zoning": {
+       "code": "[Q]C2-1",
+       "category": "commercial / mixed use",
+       "status": "on file"
+      },
+      "law": "a state law on file applies",
+      "station": "within walk distance of an existing station",
+      "ver": "not individually checked"
+     },
+     "transit": {
+      "verdict": "screen_only",
+      "scale": "brt",
+      "net": 26.99
+     },
+     "ideas": [
+      {
+       "name": "School modernization (bond-funded)",
+       "avg": 1.5000000000000002,
+       "range": [
+        1.5,
+        1.5
+       ],
+       "in": 16
+      },
+      {
+       "name": "Add a backyard home (ADU), owner-level",
+       "avg": 1.2475841248408965,
+       "range": [
+        0.743,
+        2.64
+       ],
+       "in": 7
+      },
+      {
+       "name": "Underground the overhead power lines",
+       "avg": 1.1620735040756573,
+       "range": [
+        1.056,
+        1.422
+       ],
+       "in": 2
+      }
+     ],
+     "figs": {
+      "pop": "about 14,514 Estimated by area [apportioned]",
+      "homes": "about 9,037 Estimated by area [apportioned]",
+      "landAcres": "about 502 acres Estimated by area [apportioned]",
+      "homesPerAcre": "18.0 per acre Modelled [modelled]",
+      "hv": "$1.8M to $6.2M Range [range]",
+      "rent": "$1,807/mo to $3,500 or more/mo Range [range]",
+      "inc": "$69k to $250,000 or more Range [range]",
+      "yb": "1938 to 2010 Range [range]",
+      "sf": "about 12% Estimated by area [apportioned]",
+      "own": "0% to 100% Range [range]",
+      "nocar": "0% to 27% Range [range]",
+      "crashAll": "about 3.2 Estimated by area [apportioned]",
+      "crashKsi": "about 0 Estimated by area [apportioned]",
+      "crashPedBike": "about 0 Estimated by area [apportioned]",
+      "vc": "about 7.5 per 1,000 Estimated by area [apportioned]",
+      "pcr": "about 424.1 Estimated by area [apportioned]",
+      "ht": "-8.1°F to -0.6°F Range [range]",
+      "tg": "1 points to 20 points Range [range]",
+      "bt": "3 an hour to 16 an hour Range [range]",
+      "pa": "0.0 acres to 49.0 acres Range [range]",
+      "places": "2 Exact [measured]",
+      "sites": "9 Exact [measured]",
+      "stations": "1 Exact [measured]",
+      "plannedStations": "0 Exact [measured]",
+      "stops": "2 Exact [measured]",
+      "netDensity": "27.0 Modelled [modelled]"
+     }
+    }
+   }
   },
   {
    "fips": "48453",
@@ -420,25 +738,25 @@
     {
      "check": "polygon: pop equals the independent grid computation",
      "ok": true,
-     "panel": "about 6,902 Estimated by area",
-     "panel_raw": 6901.924709446464,
-     "independent": 6903.7,
+     "panel": "about 7,091 Estimated by area",
+     "panel_raw": 7090.984285811087,
+     "independent": 7092.46,
      "basis": "apportioned"
     },
     {
      "check": "polygon: homes equals the independent grid computation",
      "ok": true,
-     "panel": "about 5,323 Estimated by area",
-     "panel_raw": 5322.668687942626,
-     "independent": 5323.56,
+     "panel": "about 5,467 Estimated by area",
+     "panel_raw": 5467.049692234078,
+     "independent": 5467.72,
      "basis": "apportioned"
     },
     {
      "check": "polygon: landAcres equals the independent grid computation",
      "ok": true,
-     "panel": "about 373 acres Estimated by area",
-     "panel_raw": 373.4766298854367,
-     "independent": 373.76,
+     "panel": "about 378 acres Estimated by area",
+     "panel_raw": 378.174944545672,
+     "independent": 378.46,
      "basis": "apportioned"
     },
     {
@@ -460,31 +778,31 @@
     {
      "check": "dragging a corner changes the shape and the figures",
      "ok": true,
-     "acres_before": 373.4766298854367,
-     "acres_after": 388.3661306276194
+     "acres_before": 378.174944545672,
+     "acres_after": 408.2640016431541
     },
     {
      "check": "after dragging: pop equals the independent grid computation",
      "ok": true,
-     "panel": "about 7,056 Estimated by area",
-     "panel_raw": 7055.813402546508,
-     "independent": 7057.58,
+     "panel": "about 7,347 Estimated by area",
+     "panel_raw": 7346.660613278316,
+     "independent": 7348.21,
      "basis": "apportioned"
     },
     {
      "check": "after dragging: homes equals the independent grid computation",
      "ok": true,
-     "panel": "about 5,430 Estimated by area",
-     "panel_raw": 5430.372373886454,
-     "independent": 5431.25,
+     "panel": "about 5,644 Estimated by area",
+     "panel_raw": 5644.130951397664,
+     "independent": 5644.84,
      "basis": "apportioned"
     },
     {
      "check": "after dragging: landAcres equals the independent grid computation",
      "ok": true,
-     "panel": "about 388 acres Estimated by area",
-     "panel_raw": 388.3661306276194,
-     "independent": 388.65,
+     "panel": "about 408 acres Estimated by area",
+     "panel_raw": 408.2640016431541,
+     "independent": 408.55,
      "basis": "apportioned"
     },
     {
@@ -502,7 +820,7 @@
     {
      "check": "the link reproduces the area",
      "ok": true,
-     "url": "#county=48453&bg=484530011022&area=p_30.26105_-97.75238_30.26105_-97.73438_30.26917_-97.73438_30.27059_-97.74317_30.26917_-97.75238"
+     "url": "#county=48453&bg=484530011022&area=p_30.26105_-97.75238_30.26105_-97.73438_30.26917_-97.73438_30.27122_-97.74296_30.26958_-97.75238"
     },
     {
      "check": "Escape cancels and keeps the area that was there",
@@ -593,12 +911,12 @@
    "notes": {
     "polygon": {
      "status": "ok",
-     "summary": "The shape you drew covers 404 acres (0.63 square miles) in Travis County. It touches 11 Census block groups in 10 named neighborhoods (Warehouse District, Near Warehouse District, Near Downtown, Near West Sixth and 6 more). It holds about 6,902 people and about 5,323 homes. Typical home values (block-group medians) run from $389,700 to $1,278,900; the median for the area itself cannot be worked out from block-group data. 8 of the 11 block groups are cut by the shape, so the counts are estimates by area.",
-     "hash": "#county=48453&bg=484530015032&area=p_30.26105_-97.75238_30.26105_-97.73438_30.26917_-97.73438_30.26996_-97.74339_30.26917_-97.75238",
+     "summary": "The shape you drew covers 409 acres (0.64 square miles) in Travis County. It touches 11 Census block groups in 10 named neighborhoods (Warehouse District, Near Warehouse District, Near Downtown, Near West Sixth and 6 more). It holds about 7,091 people and about 5,467 homes. Typical home values (block-group medians) run from $389,700 to $1,278,900; the median for the area itself cannot be worked out from block-group data. 8 of the 11 block groups are cut by the shape, so the counts are estimates by area.",
+     "hash": "#county=48453&bg=484530015032&area=p_30.26105_-97.75238_30.26105_-97.73438_30.26917_-97.73438_30.26996_-97.74339_30.26958_-97.75238",
      "ideas": [
       {
        "name": "Rehab or replace blighted homes",
-       "avg": 3.308910558980964,
+       "avg": 3.3096044155056523,
        "range": [
         1.205,
         12.929
@@ -630,13 +948,13 @@
      "transit": {
       "verdict": "screen_only",
       "scale": "brt",
-      "net": 21.38
+      "net": 21.68
      },
      "figs": {
-      "pop": "about 6,902 Estimated by area [apportioned]",
-      "homes": "about 5,323 Estimated by area [apportioned]",
-      "landAcres": "about 373 acres Estimated by area [apportioned]",
-      "homesPerAcre": "14.3 per acre Modelled [modelled]",
+      "pop": "about 7,091 Estimated by area [apportioned]",
+      "homes": "about 5,467 Estimated by area [apportioned]",
+      "landAcres": "about 378 acres Estimated by area [apportioned]",
+      "homesPerAcre": "14.5 per acre Modelled [modelled]",
       "hv": "$390k to $1.3M Range [range]",
       "rent": "$1,744/mo to $3,500 or more/mo Range [range]",
       "inc": "$124k to $220k Range [range]",
@@ -653,7 +971,7 @@
       "stations": "1 Exact [measured]",
       "plannedStations": "0 Exact [measured]",
       "stops": "11 Exact [measured]",
-      "netDensity": "21.4 Modelled [modelled]"
+      "netDensity": "21.7 Modelled [modelled]"
      }
     },
     "circle": {
@@ -780,7 +1098,7 @@
        "notAssessed": 5,
        "sites": 0
       },
-      "text": "Land to redevelop\n\n41 sites near stations or planned stops are on file for this county (surface parking, vacant or brownfield land, golf courses), measured from OpenStreetMap and matched to the county parcel record where a service is on file. Land away from stations is not inventoried here: the full underused-land inventory covers Los Angeles County only. Parking lots that the county's site suggestions list as possible pocket parks are included.\n\nCandidates inside the shape\n9 Exact\n1 golf course · 8 surface parking lot · exact: a site counts when the centre of its outline is inside\nGolf course\n· 152 acres\nExact\nmeasured; parcel record matched\nShow on map\nRiverside Golf Course\nZoning\nNot on file the parcel record has no zoning code\nState law\nNot determined no zoning code in the parcel record\nStation\nNot within walk distance of a station on file (Plaza Saltillo, 2.11 mi in a straight line)\nOwner\nNot on file the record names no owner: it is not on the county's public-agency parcel list as carried here, and private owners are not on file\nNo recommendation: zoning, owner, cost not on file.\nWhat is missing, and where this comes from\nZoning: the parcel record has no zoning code\nOwner: the record names no owner: it is not on the county's public-agency parcel list as carried here, and private owners are not on file\nCost: no sourced construction cost per square foot and no recorded land price are on file\nOverlays: flood, fire-hazard, historic and easement checks were not run for this s"
+      "text": "Land to redevelop\n\n41 sites near stations or planned stops are on file for this county (surface parking, vacant or brownfield land, golf courses), measured from OpenStreetMap and matched to the county parcel record where a service is on file. Land away from stations is not inventoried here: the full underused-land inventory covers Los Angeles County only. Parking lots that the county's site suggestions list as possible pocket parks are included.\n\nCandidates inside the shape\n9 Exact\n1 golf course · 8 surface parking lot · exact: a site counts when the centre of its outline is inside\nGolf course\n· 152 acres\nExact\nmeasured; parcel record matched\nShow on map\nRiverside Golf Course\nZoning\nNot on file the parcel record has no zoning code\nState law\nNot determined no zoning code in the parcel record\nStation\nNot within walk distance of a station on file (Plaza Saltillo, 2.11 mi in a straight line) 6 planned stop positions on file for this county are marked unverified by the project's own record and not used for this answer.\nOwner\nNot on file the record names no owner: it is not on the county's public-agency parcel list as carried here, and private owners are not on file\nNo recommendation: zoning, owner, cost not on file.\nWhat is missing, and where this comes from\nZoning: the parcel record has no zoning code\nOwner: the record names no owner: it is not on the county's public-agency parcel list as carried here, and private owners are not on file\nCost: no sourced construction cost per squa"
      },
      "transit": {
       "verdict": "screen_only",
@@ -827,15 +1145,412 @@
     },
     {
      "check": "polygon: Undo removes a corner",
-     "ok": false
+     "ok": true
     },
     {
-     "check": "run completed",
-     "ok": false,
-     "error": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-da-strip=finish]')\u001b[22m\n"
+     "check": "polygon: three block groups are wholly inside",
+     "ok": true,
+     "three": [
+      "484530011022",
+      "484530011023",
+      "484530011032"
+     ]
+    },
+    {
+     "check": "polygon: pop equals the independent grid computation",
+     "ok": true,
+     "panel": "about 7,463 Estimated by area",
+     "panel_raw": 7462.714063838663,
+     "independent": 7465.7,
+     "basis": "apportioned"
+    },
+    {
+     "check": "polygon: homes equals the independent grid computation",
+     "ok": true,
+     "panel": "about 5,755 Estimated by area",
+     "panel_raw": 5755.285642590284,
+     "independent": 5757.15,
+     "basis": "apportioned"
+    },
+    {
+     "check": "polygon: landAcres equals the independent grid computation",
+     "ok": true,
+     "panel": "about 391 acres Estimated by area",
+     "panel_raw": 391.4110384829984,
+     "independent": 391.48,
+     "basis": "apportioned"
+    },
+    {
+     "check": "polygon: block-group shares match the grid count",
+     "ok": true,
+     "worst_share_difference": 0.0008,
+     "block_groups": 11,
+     "missed": []
+    },
+    {
+     "check": "polygon: no null / NaN / undefined text",
+     "ok": true,
+     "found": []
+    },
+    {
+     "check": "neighborhood list selects a block group and the area panel comes back",
+     "ok": true
+    },
+    {
+     "check": "dragging a corner changes the shape and the figures",
+     "ok": true,
+     "acres_before": 391.4110384829984,
+     "acres_after": 453.63132878366383
+    },
+    {
+     "check": "after dragging: pop equals the independent grid computation",
+     "ok": true,
+     "panel": "about 7,813 Estimated by area",
+     "panel_raw": 7813.341065367873,
+     "independent": 7815.45,
+     "basis": "apportioned"
+    },
+    {
+     "check": "after dragging: homes equals the independent grid computation",
+     "ok": true,
+     "panel": "about 5,991 Estimated by area",
+     "panel_raw": 5991.479072536406,
+     "independent": 5992.65,
+     "basis": "apportioned"
+    },
+    {
+     "check": "after dragging: landAcres equals the independent grid computation",
+     "ok": true,
+     "panel": "about 454 acres Estimated by area",
+     "panel_raw": 453.63132878366383,
+     "independent": 453.59,
+     "basis": "apportioned"
+    },
+    {
+     "check": "after dragging: block-group shares match the grid count",
+     "ok": true,
+     "worst_share_difference": 0.0008,
+     "block_groups": 12,
+     "missed": []
+    },
+    {
+     "check": "after dragging: no null / NaN / undefined text",
+     "ok": true,
+     "found": []
+    },
+    {
+     "check": "the link reproduces the area",
+     "ok": true,
+     "url": "#county=48453&bg=484530011022&area=p_30.26107_-97.75240_30.26107_-97.73438_30.26915_-97.73438_30.27249_-97.74253_30.27078_-97.75240"
+    },
+    {
+     "check": "Escape cancels and keeps the area that was there",
+     "ok": true
+    },
+    {
+     "check": "circle: placed where clicked with the chosen radius",
+     "ok": true,
+     "spec": {
+      "type": "circle",
+      "center": [
+       -97.73841,
+       30.26478
+      ],
+      "radiusMiles": 0.5
+     }
+    },
+    {
+     "check": "circle: the station it was centred on is counted",
+     "ok": true,
+     "stations": [
+      "Downtown"
+     ]
+    },
+    {
+     "check": "circle: pop equals the independent grid computation",
+     "ok": true,
+     "panel": "about 6,140 Estimated by area",
+     "panel_raw": 6140.038430039112,
+     "independent": 6145.59,
+     "basis": "apportioned"
+    },
+    {
+     "check": "circle: homes equals the independent grid computation",
+     "ok": true,
+     "panel": "about 4,494 Estimated by area",
+     "panel_raw": 4493.603999266996,
+     "independent": 4498.92,
+     "basis": "apportioned"
+    },
+    {
+     "check": "circle: landAcres equals the independent grid computation",
+     "ok": true,
+     "panel": "about 471 acres Estimated by area",
+     "panel_raw": 470.8469798958216,
+     "independent": 472.03,
+     "basis": "apportioned"
+    },
+    {
+     "check": "circle: block-group shares match the grid count",
+     "ok": true,
+     "worst_share_difference": 0.0001,
+     "block_groups": 10,
+     "missed": []
+    },
+    {
+     "check": "circle: no null / NaN / undefined text",
+     "ok": true,
+     "found": []
+    },
+    {
+     "check": "planned stop as centre: station-area sites inside are listed, each with a record or 'not on file'",
+     "ok": true,
+     "sites": 9
+    },
+    {
+     "check": "planned stop as centre: the area gets a courses-of-action card",
+     "ok": true,
+     "courses": [
+      "Hold and rent the spaces"
+     ]
+    },
+    {
+     "check": "Ask the advisor puts the area on the context, under 6,000 characters",
+     "ok": true,
+     "chars": 5661
+    },
+    {
+     "check": "Clear removes the shape, the link entry and the advisor field",
+     "ok": true
+    },
+    {
+     "check": "no page errors",
+     "ok": true,
+     "errors": []
     }
    ],
-   "notes": {}
+   "notes": {
+    "polygon": {
+     "status": "ok",
+     "summary": "The shape you drew covers 423 acres (0.66 square miles) in Travis County. It touches 11 Census block groups in 10 named neighborhoods (Warehouse District, Near Warehouse District, Near Downtown, Near West Sixth and 6 more). It holds about 7,463 people and about 5,755 homes. Typical home values (block-group medians) run from $389,700 to $1,278,900; the median for the area itself cannot be worked out from block-group data. 8 of the 11 block groups are cut by the shape, so the counts are estimates by area.",
+     "hash": "#county=48453&bg=484530015032&area=p_30.26107_-97.75240_30.26107_-97.73438_30.26915_-97.73438_30.26996_-97.74339_30.27078_-97.75240",
+     "ideas": [
+      {
+       "name": "Rehab or replace blighted homes",
+       "avg": 3.4295084119137935,
+       "range": [
+        1.205,
+        12.929
+       ],
+       "in": 6
+      },
+      {
+       "name": "Bus shelters with shade at busy stops",
+       "in": 5
+      },
+      {
+       "name": "Cool pavement coating on hot streets",
+       "in": 5
+      }
+     ],
+     "withheld": 19,
+     "sites": 9,
+     "site0": {
+      "kind": "surface parking lot",
+      "zoning": {
+       "code": null,
+       "category": null,
+       "status": "not determined"
+      },
+      "law": "not determined",
+      "station": "within walk distance of an existing station",
+      "ver": "measured; parcel record matched"
+     },
+     "transit": {
+      "verdict": "screen_only",
+      "scale": "brt",
+      "net": 22.06
+     },
+     "figs": {
+      "pop": "about 7,463 Estimated by area [apportioned]",
+      "homes": "about 5,755 Estimated by area [apportioned]",
+      "landAcres": "about 391 acres Estimated by area [apportioned]",
+      "homesPerAcre": "14.7 per acre Modelled [modelled]",
+      "hv": "$390k to $1.3M Range [range]",
+      "rent": "$1,744/mo to $3,500 or more/mo Range [range]",
+      "inc": "$124k to $220k Range [range]",
+      "yb": "1981 to 2014 Range [range]",
+      "sf": "about 4% Estimated by area [apportioned]",
+      "own": "4% to 54% Range [range]",
+      "nocar": "5% to 35% Range [range]",
+      "ht": "-3.4°F to +2.6°F Range [range]",
+      "tg": "17 points to 39 points Range [range]",
+      "bt": "0 an hour to 24 an hour Range [range]",
+      "pa": "22.4 acres to 138 acres Range [range]",
+      "places": "0 Exact [measured]",
+      "sites": "9 Exact [measured]",
+      "stations": "1 Exact [measured]",
+      "plannedStations": "0 Exact [measured]",
+      "stops": "12 Exact [measured]",
+      "netDensity": "22.1 Modelled [modelled]"
+     }
+    },
+    "circle": {
+     "status": "ok",
+     "summary": "A circle of half a mile around the point you chose covers 502 acres (0.78 square miles) in Travis County. It touches 10 Census block groups in 9 named neighborhoods (Near Downtown, Warehouse District, Rainey Street Historic District, East Sixth and 5 more). It holds about 6,140 people and about 4,494 homes. Typical home values (block-group medians) run from $389,700 to $1,195,800; the median for the area itself cannot be worked out from block-group data. 9 of the 10 block groups are cut by the shape, so the counts are estimates by area.",
+     "hash": "#county=48453&bg=484530011022&area=c_30.26478_-97.73841_0.5",
+     "stations": [
+      "Downtown"
+     ],
+     "stops": 8,
+     "sites": 9,
+     "site0": {
+      "kind": "surface parking lot",
+      "zoning": {
+       "code": null,
+       "category": null,
+       "status": "not determined"
+      },
+      "law": "not determined",
+      "station": "within walk distance of an existing station",
+      "ver": "measured; parcel record matched"
+     },
+     "transit": {
+      "verdict": "screen_only",
+      "scale": "bus_frequency",
+      "net": 14.32
+     },
+     "ideas": [
+      {
+       "name": "Rehab or replace blighted homes",
+       "avg": 3.049676518892808,
+       "range": [
+        1.205,
+        9.348
+       ],
+       "in": 6
+      },
+      {
+       "name": "Underground the overhead power lines",
+       "avg": 0.414,
+       "range": [
+        0.414,
+        0.414
+       ],
+       "in": 1
+      },
+      {
+       "name": "Add a backyard home (ADU), owner-level",
+       "avg": 0.254,
+       "range": [
+        0.254,
+        0.254
+       ],
+       "in": 1
+      }
+     ],
+     "figs": {
+      "pop": "about 6,140 Estimated by area [apportioned]",
+      "homes": "about 4,494 Estimated by area [apportioned]",
+      "landAcres": "about 471 acres Estimated by area [apportioned]",
+      "homesPerAcre": "9.5 per acre Modelled [modelled]",
+      "hv": "$390k to $1.2M Range [range]",
+      "rent": "$1,744/mo to $3,500 or more/mo Range [range]",
+      "inc": "$110k to $220k Range [range]",
+      "yb": "1938 to 2014 Range [range]",
+      "sf": "about 5% Estimated by area [apportioned]",
+      "own": "4% to 72% Range [range]",
+      "nocar": "5% to 35% Range [range]",
+      "ht": "-3.4°F to +2.6°F Range [range]",
+      "tg": "12 points to 39 points Range [range]",
+      "bt": "0 an hour to 24 an hour Range [range]",
+      "pa": "20.0 acres to 86.3 acres Range [range]",
+      "places": "0 Exact [measured]",
+      "sites": "9 Exact [measured]",
+      "stations": "1 Exact [measured]",
+      "plannedStations": "0 Exact [measured]",
+      "stops": "8 Exact [measured]",
+      "netDensity": "14.3 Modelled [modelled]"
+     }
+    },
+    "plannedStop": {
+     "summary": "A circle of half a mile around the point you chose covers 502 acres (0.78 square miles) in Travis County. It touches 7 Census block groups in 4 named neighborhoods (Country Club Gardens, Near The Crossing, Near Country Club Gardens, Near Montopolis). It holds about 4,625 people and about 2,087 homes. Typical home values (block-group medians) run from $168,600 to $411,800; the median for the area itself cannot be worked out from block-group data. 7 of the 7 block groups are cut by the shape, so the counts are estimates by area.",
+     "land": {
+      "n": 9,
+      "first": [
+       {
+        "kind": "golf course",
+        "name": "Riverside Golf Course",
+        "acres": 151.73,
+        "origin": "station",
+        "zoning": null,
+        "law": "not determined",
+        "station": "not within walk distance of a station on file",
+        "ver": "measured; parcel record matched",
+        "facts": 8
+       },
+       {
+        "kind": "surface parking lot",
+        "name": "Lot D",
+        "acres": 2.08,
+        "origin": "station",
+        "zoning": null,
+        "law": "not determined",
+        "station": "not within walk distance of a station on file",
+        "ver": "measured; parcel record found, larger or smaller than the map outline",
+        "facts": 7
+       },
+       {
+        "kind": "surface parking lot",
+        "name": "Lot B",
+        "acres": 1.47,
+        "origin": "station",
+        "zoning": null,
+        "law": "not determined",
+        "station": "not within walk distance of a station on file",
+        "ver": "measured; parcel record found, larger or smaller than the map outline",
+        "facts": 8
+       }
+      ],
+      "cards": {
+       "area": [
+        "Hold and rent the spaces"
+       ],
+       "notAssessed": 5,
+       "sites": 0
+      },
+      "text": "Land to redevelop\n\n41 sites near stations or planned stops are on file for this county (surface parking, vacant or brownfield land, golf courses), measured from OpenStreetMap and matched to the county parcel record where a service is on file. Land away from stations is not inventoried here: the full underused-land inventory covers Los Angeles County only. Parking lots that the county's site suggestions list as possible pocket parks are included.\n\nCandidates inside the shape\n9 Exact\n1 golf course · 8 surface parking lot · exact: a site counts when the centre of its outline is inside\nGolf course\n· 152 acres\nExact\nmeasured; parcel record matched\nShow on map\nRiverside Golf Course\nZoning\nNot on file the parcel record has no zoning code\nState law\nNot determined no zoning code in the parcel record\nStation\nNot within walk distance of a station on file (Plaza Saltillo, 2.11 mi in a straight line) 6 planned stop positions on file for this county are marked unverified by the project's own record and not used for this answer.\nOwner\nNot on file the record names no owner: it is not on the county's public-agency parcel list as carried here, and private owners are not on file\nNo recommendation: zoning, owner, cost not on file.\nWhat is missing, and where this comes from\nZoning: the parcel record has no zoning code\nOwner: the record names no owner: it is not on the county's public-agency parcel list as carried here, and private owners are not on file\nCost: no sourced construction cost per squa"
+     },
+     "transit": {
+      "verdict": "screen_only",
+      "scale": "bus_frequency",
+      "net": 6.32
+     },
+     "figs": {
+      "pop": "about 4,625 Estimated by area [apportioned]",
+      "homes": "about 2,087 Estimated by area [apportioned]",
+      "landAcres": "about 495 acres Estimated by area [apportioned]",
+      "homesPerAcre": "4.2 per acre Modelled [modelled]",
+      "hv": "$169k to $412k Range [range]",
+      "rent": "$1,303/mo to $1,796/mo Range [range]",
+      "inc": "$25k to $74k Range [range]",
+      "yb": "1979 to 2004 Range [range]",
+      "sf": "about 21% Estimated by area [apportioned]",
+      "own": "0% to 86% Range [range]",
+      "nocar": "0% to 17% Range [range]",
+      "ht": "-3.0°F to +1.9°F Range [range]",
+      "tg": "0 points to 25 points Range [range]",
+      "bt": "0 an hour to 10 an hour Range [range]",
+      "pa": "5.6 acres to 315 acres Range [range]",
+      "places": "0 Exact [measured]",
+      "sites": "9 Exact [measured]",
+      "stations": "0 Exact [measured]",
+      "plannedStations": "0 Exact [measured]",
+      "stops": "4 Exact [measured]",
+      "netDensity": "6.3 Modelled [modelled]"
+     }
+    }
+   }
   },
   {
    "fips": "47095",
@@ -866,24 +1581,24 @@
      "check": "polygon: pop equals the independent grid computation",
      "ok": true,
      "panel": "about 3,512 Estimated by area",
-     "panel_raw": 3512.183996450561,
-     "independent": 3511.51,
+     "panel_raw": 3512.466341566248,
+     "independent": 3511.78,
      "basis": "apportioned"
     },
     {
      "check": "polygon: homes equals the independent grid computation",
      "ok": true,
      "panel": "about 1,896 Estimated by area",
-     "panel_raw": 1896.1954904814374,
-     "independent": 1895.91,
+     "panel_raw": 1896.3784246962634,
+     "independent": 1896.09,
      "basis": "apportioned"
     },
     {
      "check": "polygon: landAcres equals the independent grid computation",
      "ok": true,
-     "panel": "about 56,194 acres Estimated by area",
-     "panel_raw": 56194.25212278068,
-     "independent": 56175.38,
+     "panel": "about 56,211 acres Estimated by area",
+     "panel_raw": 56210.82750600953,
+     "independent": 56191.46,
      "basis": "apportioned"
     },
     {
@@ -905,31 +1620,31 @@
     {
      "check": "dragging a corner changes the shape and the figures",
      "ok": true,
-     "acres_before": 56194.25212278068,
-     "acres_after": 59207.897417284184
+     "acres_before": 56210.82750600953,
+     "acres_after": 59278.483888206945
     },
     {
      "check": "after dragging: pop equals the independent grid computation",
      "ok": true,
-     "panel": "about 3,564 Estimated by area",
-     "panel_raw": 3563.518437263734,
-     "independent": 3562.8,
+     "panel": "about 3,565 Estimated by area",
+     "panel_raw": 3564.7208073702636,
+     "independent": 3563.98,
      "basis": "apportioned"
     },
     {
      "check": "after dragging: homes equals the independent grid computation",
      "ok": true,
-     "panel": "about 1,929 Estimated by area",
-     "panel_raw": 1929.4555863780752,
-     "independent": 1929.14,
+     "panel": "about 1,930 Estimated by area",
+     "panel_raw": 1930.2346139551355,
+     "independent": 1929.91,
      "basis": "apportioned"
     },
     {
      "check": "after dragging: landAcres equals the independent grid computation",
      "ok": true,
-     "panel": "about 59,208 acres Estimated by area",
-     "panel_raw": 59207.897417284184,
-     "independent": 59186.29,
+     "panel": "about 59,278 acres Estimated by area",
+     "panel_raw": 59278.483888206945,
+     "independent": 59255.96,
      "basis": "apportioned"
     },
     {
@@ -947,7 +1662,7 @@
     {
      "check": "the link reproduces the area",
      "ok": true,
-     "url": "#county=47095&bg=470959601001&area=p_36.21844_-89.62459_36.21844_-89.38862_36.38161_-89.38862_36.41631_-89.49944_36.38161_-89.62459"
+     "url": "#county=47095&bg=470959601001&area=p_36.21844_-89.62459_36.21844_-89.38862_36.38161_-89.38862_36.41631_-89.49944_36.39021_-89.62459"
     },
     {
      "check": "Escape cancels and keeps the area that was there",
@@ -988,12 +1703,12 @@
    "notes": {
     "polygon": {
      "status": "ok",
-     "summary": "The shape you drew covers 99,349 acres (155.23 square miles) in Lake County. It touches 6 Census block groups in 2 named neighborhoods (Unincorporated Lake County, Ridgely). It holds about 3,512 people and about 1,896 homes. Typical home values (block-group medians) run from $60,000 to $186,100; the median for the area itself cannot be worked out from block-group data. 2 of the 6 block groups are cut by the shape, so the counts are estimates by area.",
-     "hash": "#county=47095&bg=470959601001&area=p_36.21844_-89.62459_36.21844_-89.38862_36.38161_-89.38862_36.39725_-89.50660_36.38161_-89.62459",
+     "summary": "The shape you drew covers 100,597 acres (157.18 square miles) in Lake County. It touches 6 Census block groups in 2 named neighborhoods (Unincorporated Lake County, Ridgely). It holds about 3,512 people and about 1,896 homes. Typical home values (block-group medians) run from $60,000 to $186,100; the median for the area itself cannot be worked out from block-group data. 2 of the 6 block groups are cut by the shape, so the counts are estimates by area.",
+     "hash": "#county=47095&bg=470959601001&area=p_36.21844_-89.62459_36.21844_-89.38862_36.38161_-89.38862_36.39725_-89.50660_36.39021_-89.62459",
      "ideas": [
       {
        "name": "Rehab or replace blighted homes",
-       "avg": 0.354031926193716,
+       "avg": 0.35403192619371593,
        "range": [
         0.251,
         0.602
@@ -1002,7 +1717,7 @@
       },
       {
        "name": "Add a backyard home (ADU), owner-level",
-       "avg": 0.06343628122509286,
+       "avg": 0.06343553219404935,
        "range": [
         0.032,
         0.1
@@ -1030,7 +1745,7 @@
      "figs": {
       "pop": "about 3,512 Estimated by area [apportioned]",
       "homes": "about 1,896 Estimated by area [apportioned]",
-      "landAcres": "about 56,194 acres Estimated by area [apportioned]",
+      "landAcres": "about 56,211 acres Estimated by area [apportioned]",
       "homesPerAcre": "0.0 per acre Modelled [modelled]",
       "hv": "$60k to $186k Range [range]",
       "rent": "$433/mo to $627/mo Range [range]",
@@ -1087,15 +1802,227 @@
     },
     {
      "check": "polygon: Undo removes a corner",
-     "ok": false
+     "ok": true
     },
     {
-     "check": "run completed",
-     "ok": false,
-     "error": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-da-strip=finish]')\u001b[22m\n"
+     "check": "polygon: three block groups are wholly inside",
+     "ok": true,
+     "three": [
+      "470959601001",
+      "470959601002",
+      "470959602001"
+     ]
+    },
+    {
+     "check": "polygon: pop equals the independent grid computation",
+     "ok": true,
+     "panel": "about 3,509 Estimated by area",
+     "panel_raw": 3509.2076935653404,
+     "independent": 3510.11,
+     "basis": "apportioned"
+    },
+    {
+     "check": "polygon: homes equals the independent grid computation",
+     "ok": true,
+     "panel": "about 1,895 Estimated by area",
+     "panel_raw": 1894.800303899824,
+     "independent": 1895.2,
+     "basis": "apportioned"
+    },
+    {
+     "check": "polygon: landAcres equals the independent grid computation",
+     "ok": true,
+     "panel": "about 56,092 acres Estimated by area",
+     "panel_raw": 56092.42818268541,
+     "independent": 56119.48,
+     "basis": "apportioned"
+    },
+    {
+     "check": "polygon: block-group shares match the grid count",
+     "ok": true,
+     "worst_share_difference": 0.0011,
+     "block_groups": 6,
+     "missed": []
+    },
+    {
+     "check": "polygon: no null / NaN / undefined text",
+     "ok": true,
+     "found": []
+    },
+    {
+     "check": "neighborhood list selects a block group and the area panel comes back",
+     "ok": true
+    },
+    {
+     "check": "dragging a corner changes the shape and the figures",
+     "ok": true,
+     "acres_before": 56092.42818268541,
+     "acres_after": 69790.11909696426
+    },
+    {
+     "check": "after dragging: pop equals the independent grid computation",
+     "ok": true,
+     "panel": "about 5,713 Estimated by area",
+     "panel_raw": 5712.749340569368,
+     "independent": 5713.63,
+     "basis": "apportioned"
+    },
+    {
+     "check": "after dragging: homes equals the independent grid computation",
+     "ok": true,
+     "panel": "about 2,043 Estimated by area",
+     "panel_raw": 2042.874715061597,
+     "independent": 2043.26,
+     "basis": "apportioned"
+    },
+    {
+     "check": "after dragging: landAcres equals the independent grid computation",
+     "ok": true,
+     "panel": "about 69,790 acres Estimated by area",
+     "panel_raw": 69790.11909696426,
+     "independent": 69815.97,
+     "basis": "apportioned"
+    },
+    {
+     "check": "after dragging: block-group shares match the grid count",
+     "ok": true,
+     "worst_share_difference": 0.0011,
+     "block_groups": 7,
+     "missed": []
+    },
+    {
+     "check": "after dragging: no null / NaN / undefined text",
+     "ok": true,
+     "found": []
+    },
+    {
+     "check": "the link reproduces the area",
+     "ok": true,
+     "url": "#county=47095&bg=470959601001&area=p_36.21880_-89.62509_36.21880_-89.38889_36.38149_-89.38889_36.47216_-89.48090_36.40581_-89.62509"
+    },
+    {
+     "check": "Escape cancels and keeps the area that was there",
+     "ok": true
+    },
+    {
+     "check": "circle: placed where clicked with the chosen radius",
+     "ok": true,
+     "spec": {
+      "type": "circle",
+      "center": [
+       -89.47154,
+       36.3497
+      ],
+      "radiusMiles": 1
+     }
+    },
+    {
+     "check": "circle: a too-small or too-large shape says so and shows no block-group figure",
+     "ok": true,
+     "status": "too_coarse"
+    },
+    {
+     "check": "Ask the advisor puts the area on the context, under 6,000 characters",
+     "ok": true,
+     "chars": 2510
+    },
+    {
+     "check": "Clear removes the shape, the link entry and the advisor field",
+     "ok": true
+    },
+    {
+     "check": "no page errors",
+     "ok": true,
+     "errors": []
     }
    ],
-   "notes": {}
+   "notes": {
+    "polygon": {
+     "status": "ok",
+     "summary": "The shape you drew covers 102,652 acres (160.39 square miles) in Lake County. It touches 6 Census block groups in 2 named neighborhoods (Unincorporated Lake County, Ridgely). It holds about 3,509 people and about 1,895 homes. Typical home values (block-group medians) run from $60,000 to $186,100; the median for the area itself cannot be worked out from block-group data. 2 of the 6 block groups are cut by the shape, so the counts are estimates by area.",
+     "hash": "#county=47095&bg=470959601001&area=p_36.21880_-89.62509_36.21880_-89.38889_36.38149_-89.38889_36.39697_-89.50699_36.40581_-89.62509",
+     "ideas": [
+      {
+       "name": "Rehab or replace blighted homes",
+       "avg": 0.35372710028454746,
+       "range": [
+        0.251,
+        0.602
+       ],
+       "in": 3
+      },
+      {
+       "name": "Add a backyard home (ADU), owner-level",
+       "avg": 0.06345776020596965,
+       "range": [
+        0.032,
+        0.1
+       ],
+       "in": 6
+      },
+      {
+       "name": "Underground the overhead power lines",
+       "avg": 0.04496084877460328,
+       "range": [
+        0.004,
+        0.06
+       ],
+       "in": 3
+      }
+     ],
+     "withheld": 9,
+     "sites": 0,
+     "site0": null,
+     "transit": {
+      "verdict": "do_not_build",
+      "scale": null,
+      "net": 0.05
+     },
+     "figs": {
+      "pop": "about 3,509 Estimated by area [apportioned]",
+      "homes": "about 1,895 Estimated by area [apportioned]",
+      "landAcres": "about 56,092 acres Estimated by area [apportioned]",
+      "homesPerAcre": "0.0 per acre Modelled [modelled]",
+      "hv": "$60k to $186k Range [range]",
+      "rent": "$433/mo to $627/mo Range [range]",
+      "inc": "$23k to $73k Range [range]",
+      "yb": "1968 to 1983 Range [range]",
+      "sf": "about 68% Estimated by area [apportioned]",
+      "own": "28% to 76% Range [range]",
+      "nocar": "2% to 32% Range [range]",
+      "crashAll": "about 46.0 Estimated by area [apportioned]",
+      "crashKsi": "about 13.2 Estimated by area [apportioned]",
+      "crashPedBike": "about 1.7 Estimated by area [apportioned]",
+      "ht": "Not on file no block group here has a value [none]",
+      "tg": "Not on file no block group here has a value [none]",
+      "bt": "Not on file no block group here has a value [none]",
+      "pa": "0.0 acres to 9.6 acres Range [range]",
+      "places": "0 Exact [measured]",
+      "sites": "0 Exact [measured]",
+      "stations": "0 Exact [measured]",
+      "plannedStations": "0 Exact [measured]",
+      "stops": "0 Exact [measured]",
+      "netDensity": "0.1 Modelled [modelled]"
+     }
+    },
+    "circle": {
+     "status": "too_coarse",
+     "summary": "A circle of one mile around the point you chose covers 2,008 acres (3.14 square miles) in Lake County. It touches 1 Census block group in 1 named neighborhood (Unincorporated Lake County). The shape covers at most 18% of any block group it touches (under 25%). Block groups are the smallest unit the data has, so figures for a slice this small would be too coarse to trust. Only what is mapped as its own point is shown.",
+     "hash": "#county=47095&bg=470959601001&area=c_36.34970_-89.47154_1",
+     "stations": [],
+     "stops": 0,
+     "sites": 0,
+     "site0": null,
+     "transit": null,
+     "ideas": [],
+     "figs": {
+      "sites": "0 Exact [measured]",
+      "stations": "0 Exact [measured]",
+      "plannedStations": "0 Exact [measured]",
+      "stops": "0 Exact [measured]"
+     }
+    }
+   }
   }
  ]
 }

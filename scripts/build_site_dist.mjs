@@ -21,6 +21,7 @@ const RULES = [
   ["counties/manifest.json", () => true],
   ["counties", (f) => /^sites_\d{5}\.json\.gz$/.test(f)], // top level only; bundle_*.json.gz stay in R2
   ["docs/DECISION-ENGINE.md", () => true], // linked from the Invest view
+  ["docs/DRAW-AREA.md", () => true], // linked from the area panel
 ];
 
 // Files the page requests at runtime (recorded by loading it for LA, Cook, Travis and Roane TN; Map, Explore, Invest).

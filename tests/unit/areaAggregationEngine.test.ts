@@ -503,6 +503,11 @@ describe("land to redevelop: what the record can and cannot say", () => {
     expect(c.station.existing.meters).toBeLessThan(410);
     expect(c.station.answer).toBe("within walk distance of an existing station");
     expect(c.verification).toBe("not individually checked");
+    // a station-area site keeps its own record's rows and where it came from
+    const ss = describeCandidate({ id: "ss:1", origin: "station", facts: [["Near", "Central, 400 m"]], kind: "surface parking lot", acres: 2, parcelRecord: true, verification: { status: "measured; parcel record matched" }, ...near }, { stations, unplaced: 3 });
+    expect(ss).toMatchObject({ origin: "station", facts: [["Near", "Central, 400 m"]], verification: "measured; parcel record matched" });
+    expect(ss.station.plannedUnplaced).toBe(3);
+    expect(ss.stateLaw).toMatchObject({ status: "not determined", why: "no zoning code in the parcel record" });
   });
   it("walk distance is half a mile in a straight line", () => {
     expect(LIMITS.walkMeters).toBeCloseTo(804.672, 3);

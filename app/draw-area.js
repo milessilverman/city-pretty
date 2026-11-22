@@ -156,6 +156,12 @@ function stationPoints(env, tables, fips) {
     }
   }
   const stops = ((L_.stops && L_.stops.features) || []).filter(f => f && f.geometry && Array.isArray(f.geometry.coordinates)).map(f => ({ lon: f.geometry.coordinates[0], lat: f.geometry.coordinates[1] }));
+  // A station mapped as several points (platforms, entrances) or listed in two files is one station: points whose
+  // names match and that lie within 500 m of each other are counted once.
+  const key = n => String(n || "").toLowerCase().replace(/\(.*?\)/g, "").replace(/[^a-z0-9]/g, "");
+  const once = list => { const out = []; for (const x of list) { const k = key(x.name); if (k && out.some(y => key(y.name) === k && AE().distanceMeters([x.lon, x.lat], [y.lon, y.lat]) <= 500)) continue; out.push(x); } return out; };
+  const stationsOnce = once(stations), plannedOnce = once(planned);
+  stations.length = 0; stations.push(...stationsOnce); planned.length = 0; planned.push(...plannedOnce);
   const ts = ((L_.stops && L_.stops.features) || []).map(f => f && f.properties ? +f.properties.t : NaN).filter(isNum);
   return { stations, planned, plannedUnplaced: unplaced, stops, stopsFloor: ts.length ? Math.min(...ts) : null, stopsOnLayer: stops.length };
 }
@@ -285,7 +291,7 @@ function hereHtml(a) {
 }
 function vpdLine(x, a) {
   const v = x.valuePerDollar;
-  if (!v || v.basis == null) return `<span class="da-k">Back per $1</span> ${nof("no figure in these block groups")}`;
+  if (!v || v.basis == null) return `<span class="da-k">Back per $1</span> ${x.kind && !/^(value|owner|regional)$/.test(x.kind) ? `<span class="da-sub">not estimated: listed for quality of life, with a cost but no home-value figure claimed</span>` : nof("no figure in these block groups")}`;
   const wa = v.weightedAverage, [lo, hi] = v.range;
   return `<span class="da-k">Back per $1</span> <span class="da-num">${wa ? "$" + wa.value.toFixed(2) : ""}</span> ${basisTag("range")}
     <span class="da-sub">${h(wa ? wa.label : "")}; ${lo === hi ? `the block-group estimate is $${lo.toFixed(2)}` : `block-group estimates run from $${lo.toFixed(2)} to $${hi.toFixed(2)}`} in ${x.appliesIn != null ? x.appliesIn : v.blockGroups - v.noValue} of ${x.blockGroups != null ? x.blockGroups : v.blockGroups} block groups</span>`;
@@ -343,7 +349,7 @@ function candHtml(c) {
     <div class="da-kv">
       <span>Zoning</span><span>${c.zoning.code ? h(c.zoning.code) + (c.zoning.category ? ` (${h(c.zoning.category)})` : "") : nof(c.blockers.find(b => b.fact === "zoning") ? c.blockers.find(b => b.fact === "zoning").why : "")}</span>
       <span>State law</span><span>${law.statutes && law.statutes.length ? h(law.status) + ": " + h(law.statutes.join("; ")) : `<span class="iv-nof">Not determined</span>`}<span class="da-why"> ${h(law.why || "")}</span></span>
-      <span>Station</span><span>${h(s.answer[0].toUpperCase() + s.answer.slice(1))}${near ? ` (${h(near.name || "station")}, ${meters(near.meters)} in a straight line${near.status ? "; " + h(near.status) : ""})` : ""}</span>
+      <span>Station</span><span>${h(s.answer[0].toUpperCase() + s.answer.slice(1))}${near ? ` (${h(near.name || "station")}, ${meters(near.meters)} in a straight line${near.status ? "; " + h(near.status) : ""})` : ""}${s.plannedUnplaced ? `<span class="da-why"> ${s.plannedUnplaced} planned stop position${s.plannedUnplaced > 1 ? "s" : ""} on file for this county ${s.plannedUnplaced > 1 ? "are" : "is"} marked unverified by the project's own record and not used for this answer.</span>` : ""}</span>
       <span>Owner</span><span>${c.publicOwner ? h(c.publicOwner) : nof(c.blockers.find(b => b.fact === "owner").why)}</span>
       ${c.assessedLandValue.value != null ? `<span>Assessed land value</span><span>${h(money(c.assessedLandValue.value))}${c.assessedLandValue.baseYear ? ` (base year ${h(c.assessedLandValue.baseYear)})` : ""}; a tax-roll figure, not a price</span>` : ""}
       ${c.housingElement != null ? `<span>Housing Element</span><span>Listed in the city's Housing Element inventory${c.housingElement ? ` for about ${n0(c.housingElement)} homes` : ""}</span>` : ""}
