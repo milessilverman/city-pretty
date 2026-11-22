@@ -157,7 +157,16 @@ Carolina); the totals and the summary of the whole batch are written in the last
 - Tests run: `npm test` 1,632 of 1,632 (46 files), `npm run typecheck` clean. No corridor stop's flag needed changing (the
   script that compares each stop's `county_on_page` with the manifest found 0).
 - OpenStreetMap ID for ID vs live Overpass (maps.mail.ru; two counties picked with seed 20261122 from the state's sorted
-  list): **still open at the time of this commit**: the Overpass mirror answered 504 to every try so far; the check is being retried and its result will be added (see "What is left open").
+  list): it answered 504 to several tries first, so the checks ran when it came back. Jefferson (13163): 2,231 = 2,231 roads, 0 = 0
+  bus stops (0 missing, 0 extra). Wilkes (13317): bus stops 0 = 0, **roads 1,657 on Overpass, 1,521 in the extract (136 only on
+  Overpass, 0 only in the extract)**: Wilkes County lies on the Savannah River and its box reaches into South Carolina and
+  into the next Georgia counties, which the `northeast` sub-region file does not hold. With the Overpass query limited to
+  Georgia's area (same box, classes and extract; `area["ISO3166-2"="US-GA"]`, result in `southeast_osm_xcheck_state_13317_...json`):
+  1,597 on Overpass, 1,521 in the extract, 0 only in the extract, 76 only on Overpass; all 76 lie in the box's margin
+  outside Wilkes, in McDuffie County (74) and Warren County (2) (13189 and 13301, located with TIGERweb), beyond the edge
+  of the sub-region file. The other 60 of the 136 are the difference between 1,657 and 1,597, that is, roads outside Georgia;
+  they were not located one by one. So: inside Wilkes every road and bus stop matches; what is missing is the roads of the
+  neighbouring state and counties in the box's margin. The extract's snapshot is 2026-11-21T01:02:35Z.
 - Live check from R2 (`LIVE_PORT=9221`): Wheeler (13309) and Emanuel (13107), 3 points each (picked with seed 20261123 from
   the state's sorted list). Neither county has a parcel service on the page, so the house-panel rows (Census area, HUD
   rent, FEMA, USGS) are not checkable; neighborhood, canopy, canopy goal, crash text, state laws and console pass at all 6
