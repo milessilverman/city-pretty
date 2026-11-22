@@ -268,3 +268,115 @@ Files: `data/backtests/southeast_ga_census_spot_2026-11-22.json`, `data/backtest
 Files: `data/backtests/southeast_al_census_spot_2026-11-22.json`, `data/backtests/southeast_osm_xcheck_01087_2026-11-22.json`,
 `..._01075_...`, `data/backtests/live_check_panels_2026-11-22_southeast_al.json`,
 `data/backtests/acs_fallback_mismatches_2026-11-22.json`.
+
+## Mississippi (76 of 76 built, none withheld)
+
+| County | People (ACS 2020-24) | Block groups | Data file (gzip, bytes) | Completeness tier | Canopy block groups (2025 release) |
+|---|---|---|---|---|---|
+| Adams County (28001) | 28,803 | 32 | 315,479 | D | 27 |
+| Alcorn County (28003) | 34,289 | 29 | 163,453 | D | 17 |
+| Amite County (28005) | 12,565 | 13 | 151,665 | D | 0 |
+| Attala County (28007) | 17,526 | 17 | 210,553 | D | 9 |
+| Benton County (28009) | 7,589 | 7 | 166,778 | D | 0 |
+| Bolivar County (28011) | 29,534 | 28 | 230,589 | D | 13 |
+| Calhoun County (28013) | 12,922 | 14 | 103,754 | D | 0 |
+| Carroll County (28015) | 9,686 | 9 | 218,055 | C | 0 |
+| Chickasaw County (28017) | 16,915 | 16 | 116,652 | D | 0 |
+| Choctaw County (28019) | 8,118 | 9 | 159,057 | D | 0 |
+| Claiborne County (28021) | 8,582 | 9 | 200,939 | D | 0 |
+| Clarke County (28023) | 15,314 | 17 | 184,770 | D | 0 |
+| Clay County (28025) | 18,383 | 17 | 163,603 | D | 11 |
+| Coahoma County (28027) | 20,540 | 24 | 213,614 | D | 19 |
+| Copiah County (28029) | 27,855 | 24 | 366,289 | C | 8 |
+| Covington County (28031) | 18,148 | 16 | 259,179 | D | 0 |
+| Forrest County (28035) | 78,272 | 57 | 505,302 | C | 48 |
+| Franklin County (28037) | 7,622 | 10 | 145,604 | D | 0 |
+| George County (28039) | 25,170 | 15 | 176,618 | D | 0 |
+| Greene County (28041) | 13,615 | 10 | 161,193 | D | 0 |
+| Grenada County (28043) | 21,217 | 21 | 154,944 | D | 16 |
+| Hancock County (28045) | 46,167 | 44 | 493,611 | C | 29 |
+| Holmes County (28051) | 16,191 | 19 | 238,196 | D | 0 |
+| Humphreys County (28053) | 7,395 | 9 | 109,470 | D | 0 |
+| Issaquena County (28055) | 928 | 2 | 161,060 | D | 0 |
+| Itawamba County (28057) | 24,036 | 18 | 174,507 | D | 0 |
+| Jasper County (28061) | 16,059 | 16 | 212,720 | D | 0 |
+| Jefferson County (28063) | 7,068 | 8 | 160,748 | D | 0 |
+| Jefferson Davis County (28065) | 11,117 | 12 | 395,540 | D | 0 |
+| Jones County (28067) | 66,472 | 54 | 428,384 | C | 27 |
+| Kemper County (28069) | 8,729 | 9 | 199,663 | D | 0 |
+| Lafayette County (28071) | 58,327 | 41 | 326,420 | D | 30 |
+| Lamar County (28073) | 65,713 | 45 | 428,642 | C | 23 |
+| Lauderdale County (28075) | 71,504 | 70 | 362,424 | C | 47 |
+| Lawrence County (28077) | 11,786 | 11 | 407,838 | D | 0 |
+| Leake County (28079) | 21,319 | 18 | 167,075 | D | 0 |
+| Lee County (28081) | 83,034 | 62 | 280,916 | D | 40 |
+| Leflore County (28083) | 27,141 | 29 | 186,170 | C | 23 |
+| Lincoln County (28085) | 34,877 | 29 | 443,104 | C | 17 |
+| Lowndes County (28087) | 57,838 | 49 | 297,500 | C | 31 |
+| Marion County (28091) | 24,193 | 23 | 537,771 | D | 10 |
+| Marshall County (28093) | 33,979 | 27 | 290,888 | D | 5 |
+| Monroe County (28095) | 33,747 | 30 | 262,804 | C | 8 |
+| Montgomery County (28097) | 9,602 | 11 | 141,507 | D | 0 |
+| Neshoba County (28099) | 28,932 | 28 | 166,628 | D | 11 |
+| Newton County (28101) | 21,093 | 20 | 193,378 | D | 0 |
+| Noxubee County (28103) | 10,025 | 10 | 141,473 | D | 0 |
+| Oktibbeha County (28105) | 51,771 | 33 | 166,192 | D | 25 |
+| Panola County (28107) | 32,808 | 30 | 182,907 | D | 10 |
+| Pearl River County (28109) | 57,458 | 42 | 722,871 | C | 18 |
+| Perry County (28111) | 11,449 | 11 | 171,183 | D | 0 |
+| Pike County (28113) | 39,602 | 33 | 263,099 | C | 20 |
+| Pontotoc County (28115) | 31,550 | 22 | 182,346 | D | 0 |
+| Prentiss County (28117) | 25,184 | 22 | 152,561 | D | 10 |
+| Quitman County (28119) | 5,774 | 9 | 128,450 | C | 0 |
+| Scott County (28123) | 27,718 | 25 | 212,733 | D | 0 |
+| Sharkey County (28125) | 3,872 | 6 | 84,939 | D | 0 |
+| Simpson County (28127) | 25,691 | 24 | 325,652 | D | 0 |
+| Smith County (28129) | 14,132 | 15 | 321,049 | D | 0 |
+| Stone County (28131) | 18,894 | 12 | 152,915 | D | 0 |
+| Sunflower County (28133) | 24,333 | 24 | 217,589 | D | 9 |
+| Tallahatchie County (28135) | 11,764 | 12 | 156,642 | D | 0 |
+| Tate County (28137) | 28,321 | 18 | 146,166 | D | 5 |
+| Tippah County (28139) | 21,523 | 20 | 175,877 | D | 0 |
+| Tishomingo County (28141) | 18,660 | 19 | 198,022 | D | 0 |
+| Tunica County (28143) | 9,475 | 9 | 206,103 | D | 0 |
+| Union County (28145) | 28,122 | 21 | 178,147 | D | 8 |
+| Walthall County (28147) | 13,839 | 13 | 474,864 | D | 0 |
+| Warren County (28149) | 43,020 | 36 | 324,655 | D | 29 |
+| Washington County (28151) | 42,765 | 53 | 254,660 | D | 37 |
+| Wayne County (28153) | 19,718 | 17 | 215,513 | D | 0 |
+| Webster County (28155) | 9,972 | 8 | 117,152 | D | 0 |
+| Wilkinson County (28157) | 8,162 | 8 | 185,832 | D | 0 |
+| Winston County (28159) | 17,536 | 19 | 167,956 | D | 0 |
+| Yalobusha County (28161) | 12,419 | 12 | 137,398 | D | 0 |
+| Yazoo County (28163) | 24,835 | 22 | 354,565 | C | 12 |
+| **76 counties** | **1,910,304** | **1,683** | **18,154,565** | 15 C, 61 D | 652 |
+
+- OpenStreetMap: the Mississippi cut of the 21 Nov 2026 `us-south-latest.osm.pbf` (see Alabama: 174 s, peak osmium memory
+  4.09 GB, 117 MB; data timestamp 2026-11-21T01:28:06Z). Build: fetch 11-29 s, build 51-216 s per county, three at a time (the
+  Alabama checks and the South Carolina builds ran alongside), about 40 min from the first county to the last.
+- Bus frequency: 74 counties have no value in any block group (no feed that is read has a stop with 7-9 am departures in or
+  near the county); 2 have values. Rail distance: 64 counties have none; 12 have values.
+- Census spot check: 76 counties, 1,808 of 1,808 values equal (0% mismatch). Tract-median flags: 76 counties added, no
+  existing county changed, 0 values matching neither the block group nor the tract.
+- Crash counts: Mississippi has no state crash source connected (`pipeline/region.py` STATE_DEFAULTS has no MS); all 76 files
+  say "Not connected for Mississippi yet: crash gaps are not scored and crash-based projects are not proposed". No crash
+  counts were built.
+- Tests run: `npm test` 1,632 of 1,632 (46 files), `npm run typecheck` clean. `app/data/intercity_transit_corridors.json`:
+  Bay St. Louis MS (Hancock, 28045), Meridian MS (Lauderdale, 28075) and Vicksburg MS (Warren, 28149) now say
+  `county_on_page: true` (3 lines), as `tests/unit/transitCorridors.test.ts` requires.
+- OpenStreetMap ID for ID vs live Overpass (maps.mail.ru; two counties picked with seed 20261122 from the state's sorted
+  list): it answered 504 to some tries first. Wilkinson (28157, on the Mississippi River; its box reaches into Louisiana) 1,609 =
+  1,609 roads, 0 = 0 bus stops; Tishomingo (28141, on the Alabama and Tennessee lines) 2,622 = 2,622 roads, 0 = 0 bus stops
+  (0 missing, 0 extra in both, so no comparison limited to the state was needed). The extract's snapshot is
+  2026-11-21T01:28:06Z.
+- Live check from R2 (`LIVE_PORT=9221`): Winston (28159) and Tippah (28139), 3 points each (picked with seed 20261123 from
+  the state's sorted list). Neither county has a parcel service on the page, so the house-panel rows (Census area, HUD
+  rent, FEMA, USGS) are not checkable; neighborhood, canopy, canopy goal, crash text, state laws and console pass at all 6
+  points (30 pass, 0 fail, 24 not checkable). Each data file came from the r2.dev address (HEAD 200, GET 200).
+- R2: before 1,773,775,025 bytes (2,951 objects); dry run "77 files, net +0.018 GB, projected 1.792 GB"; after
+  1,791,948,733 bytes (3,027 objects): 18,173,708 bytes added (the 76 data files, 18,154,565, plus the larger
+  `manifest.json`).
+
+Files: `data/backtests/southeast_ms_census_spot_2026-11-22.json`, `data/backtests/southeast_osm_xcheck_28157_2026-11-22.json`,
+`..._28141_...`, `data/backtests/live_check_panels_2026-11-22_southeast_ms.json`,
+`data/backtests/acs_fallback_mismatches_2026-11-22.json`.

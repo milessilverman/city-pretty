@@ -1,0 +1,25 @@
+{
+ "fips": "28141",
+ "box_s_w_n_e": "34.44319699988184,-88.38588300037738,35.01566899971298,-88.07788799979477",
+ "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+ "extract_snapshot": "2026-11-21T01:28:06Z",
+ "checked_at": "2026-11-22T18:20:02Z",
+ "roads": {
+  "direct": 2622,
+  "extract": 2622,
+  "missing_from_extract": [],
+  "extra_in_extract": [],
+  "n_missing": 0,
+  "n_extra": 0,
+  "match": true
+ },
+ "bus_stops": {
+  "direct": 0,
+  "extract": 0,
+  "missing_from_extract": [],
+  "extra_in_extract": [],
+  "n_missing": 0,
+  "n_extra": 0,
+  "match": true
+ }
+}
