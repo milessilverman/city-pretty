@@ -1,7 +1,46 @@
 # Small counties: the Great Lakes states (22 Nov 2026), served from R2 only
 
-**In progress: this page grows one state at a time (Illinois, Indiana, Ohio, Michigan, Kentucky); the totals at the top are
-written when the last state is done.**
+**Result: all 394 counties of the five states are built, checked and on the page, served from R2 only; none was
+withheld.** Each state was built, checked, uploaded, live-checked and committed on its own.
+
+| State | Counties built / missing | People (ACS 2020-24) | Block groups | Data files (bytes) | Tiers | Census values checked | R2 bytes added |
+|---|---|---|---|---|---|---|---|
+| IL | 82 / 82 | 1,952,417 | 1,998 | 21,904,642 | 31 C, 51 D | 1,948 | 21,928,053 |
+| IN | 75 / 75 | 2,516,089 | 2,133 | 15,891,586 | 13 C, 62 D | 1,800 | 15,910,443 |
+| OH | 61 / 61 | 2,785,392 | 2,373 | 19,753,582 | 20 C, 41 D | 1,464 | 19,768,932 |
+| MI | 63 / 63 | 2,205,151 | 1,993 | 26,830,353 | 14 C, 49 D | 1,508 | 26,846,239 |
+| KY | 113 / 113 | 2,760,440 | 2,284 | 47,127,356 | 21 C, 92 D | 2,688 | 47,155,763 |
+| **All** | **394 / 394** | **12,219,489** | **10,781** | **131,507,519** | 99 C, 295 D | **9,408** | **131,609,430** |
+
+| Check | Sample | Result | Mismatch rate |
+|---|---|---|---|
+| Census: population, median home value, median gross rent, median household income vs the ACS 2020-24 table files (`scripts/census_spot_check.py`, seed 20261119) | 6 block groups in each of the 394 counties (all of them where a county has fewer), 9,408 values | 9,408 of 9,408 equal | 0% |
+| Tract-median flags (`build_acs_fallback_flags.py`, every county file) | all county files, after each state | 394 counties added, no existing county changed, 0 values matching neither the block group nor the tract | 0% |
+| OpenStreetMap ID for ID vs live Overpass (`scripts/check_osm_extract_vs_overpass.py`) | 2 counties per state, 10 | 7 counties exact (roads and bus stops). Adams IL, Alexander IL and Adams OH differ in the raw result only because their boxes reach into other states (and, for Adams IL, 110 roads of the next county at the edge of the sub-region file): limited to the extract's own state, every road and bus stop inside the three counties matches (see Illinois and Ohio) | 0% inside the counties; 110 roads of Pike County IL outside Adams County |
+| Live, real page loading from R2 (`scripts/live_check_panels.mjs`, `LIVE_PORT=9211`, 3 points per county) | 10 counties, 30 points | 198 pass, 72 not checkable (no parcel service on the page for the IL, MI and KY counties, so the house-panel rows do not apply); no wrong value was shown anywhere | 0 wrong values |
+
+**Crash counts:** Illinois is the one state of the five that `pipeline/region.py` STATE_DEFAULTS holds a crash source for;
+all 82 Illinois files loaded the Illinois DOT records, and crash counts and gaps were built for them (255 gaps, 183
+strengths). Indiana, Ohio, Michigan and Kentucky have none wired in: their files say "Not connected for <state> yet: crash
+gaps are not scored and crash-based projects are not proposed".
+
+Counties still without a data file after this batch, counted from the registry the same way (not in
+`counties/bundle_*.json.gz` or `counties/.r2-only.txt`, Puerto Rico left out): **1,021** (1,415 before), of which Los
+Angeles and Orange (built by their own pipeline, loaded from `app/data/`) are 2 and Hawaii's 5 have no OpenStreetMap
+extract in the registry. Remaining by state: TX 211, GA 132, VA 116, MS 76, OK 72, NC 71, AR 67, AL 53, CO 53, WV 52,
+LA 50, FL 31, SC 30, HI 5, CA 2.
+
+**R2 storage:** before 1,573,050,945 bytes (2,372 objects), after 1,704,660,375 bytes (2,766 objects): 131,609,430 bytes
+added (the 394 data files, 131,507,519, plus the larger `manifest.json`). 1.705 GB of the 8 GB ceiling and the 10 GB
+allowance. Every upload went through `scripts/r2_sync_counties.py` after a `--dry-run`; the largest projection was 1.705 GB
+(the brief's stop was 4 GB); the per-state figures are in each state's section.
+
+**Measured projection for the rest:** this batch stored 12,198 bytes per block group (state range 7,450 for Indiana to
+20,634 for Kentucky; 333,775 bytes per county). The 1,021 remaining counties have 32,227 block groups (ACS 2020-24 B01003
+rows), of which 8,640 are Los Angeles's and Orange's and 1,083 are Hawaii's, which this route does not build: 22,504
+block groups are left for it. At this batch's rate that is 0.275 GB (0.168 GB at Indiana's rate, 0.464 GB at Kentucky's),
+which would take R2 from 1.705 GB to about 1.98 GB (range 1.87 to 2.17 GB). Kentucky's files are the largest per block
+group; the Southern states may be more like Kentucky than like Indiana, so the high end is the one to plan on.
 
 The batch is every county under 100,000 people with no data file (not in `counties/bundle_*.json.gz`, not in
 `counties/.r2-only.txt`), counted from the registry (`national/data/counties.json`) before starting: IL 82, IN 75, OH 61,
@@ -482,3 +521,183 @@ Files: `data/backtests/greatlakes_oh_census_spot_2026-11-22.json`, `data/backtes
 Files: `data/backtests/greatlakes_mi_census_spot_2026-11-22.json`, `data/backtests/greatlakes_osm_xcheck_26001_2026-11-22.json`,
 `..._26003_...`, `data/backtests/live_check_panels_2026-11-22_greatlakes_mi.json`,
 `data/backtests/acs_fallback_mismatches_2026-11-22.json`.
+
+## Kentucky (113 of 113 built, none withheld)
+
+| County | People (ACS 2020-24) | Block groups | Data file (gzip, bytes) | Completeness tier | Canopy block groups (2025 release) |
+|---|---|---|---|---|---|
+| Adair County (21001) | 19,089 | 15 | 432,704 | D | 6 |
+| Allen County (21003) | 21,293 | 16 | 324,584 | C | 7 |
+| Anderson County (21005) | 24,353 | 16 | 260,003 | D | 13 |
+| Ballard County (21007) | 7,654 | 8 | 120,702 | D | 0 |
+| Barren County (21009) | 44,938 | 38 | 412,375 | C | 22 |
+| Bath County (21011) | 12,851 | 9 | 691,247 | D | 0 |
+| Bell County (21013) | 23,509 | 25 | 812,783 | D | 12 |
+| Bourbon County (21017) | 20,240 | 20 | 263,134 | C | 15 |
+| Boyd County (21019) | 47,911 | 42 | 279,790 | C | 40 |
+| Boyle County (21021) | 30,941 | 23 | 210,358 | D | 19 |
+| Bracken County (21023) | 8,444 | 8 | 175,992 | D | 0 |
+| Breathitt County (21025) | 13,276 | 13 | 771,332 | D | 0 |
+| Breckinridge County (21027) | 20,881 | 18 | 415,208 | D | 0 |
+| Bullitt County (21029) | 84,027 | 51 | 593,990 | C | 42 |
+| Butler County (21031) | 12,393 | 8 | 366,810 | C | 0 |
+| Caldwell County (21033) | 12,618 | 12 | 320,232 | D | 7 |
+| Calloway County (21035) | 38,224 | 34 | 260,992 | D | 20 |
+| Campbell County (21037) | 93,426 | 71 | 505,502 | C | 64 |
+| Carlisle County (21039) | 4,762 | 5 | 80,414 | D | 0 |
+| Carroll County (21041) | 10,954 | 10 | 153,993 | D | 6 |
+| Carter County (21043) | 26,341 | 20 | 794,204 | D | 7 |
+| Casey County (21045) | 15,914 | 14 | 328,677 | D | 0 |
+| Christian County (21047) | 72,069 | 56 | 457,624 | C | 41 |
+| Clark County (21049) | 37,192 | 26 | 264,549 | D | 19 |
+| Clay County (21051) | 19,921 | 19 | 723,507 | D | 0 |
+| Clinton County (21053) | 9,202 | 8 | 150,244 | D | 0 |
+| Crittenden County (21055) | 8,979 | 10 | 303,055 | D | 0 |
+| Cumberland County (21057) | 5,948 | 8 | 209,710 | D | 0 |
+| Edmonson County (21061) | 12,355 | 11 | 316,944 | D | 0 |
+| Elliott County (21063) | 7,307 | 9 | 313,813 | D | 0 |
+| Estill County (21065) | 14,035 | 14 | 691,436 | D | 8 |
+| Fleming County (21069) | 15,323 | 11 | 697,269 | D | 0 |
+| Floyd County (21071) | 35,224 | 40 | 421,978 | D | 18 |
+| Franklin County (21073) | 51,842 | 46 | 280,492 | D | 38 |
+| Fulton County (21075) | 6,409 | 9 | 107,101 | C | 4 |
+| Gallatin County (21077) | 8,769 | 7 | 151,701 | D | 0 |
+| Garrard County (21079) | 17,568 | 15 | 305,183 | D | 0 |
+| Grant County (21081) | 25,418 | 17 | 263,740 | D | 0 |
+| Graves County (21083) | 36,630 | 29 | 196,766 | D | 14 |
+| Grayson County (21085) | 26,707 | 24 | 450,291 | D | 11 |
+| Green County (21087) | 11,369 | 11 | 293,647 | D | 0 |
+| Greenup County (21089) | 35,501 | 30 | 425,968 | C | 24 |
+| Hancock County (21091) | 9,034 | 9 | 177,279 | D | 2 |
+| Harlan County (21095) | 25,772 | 33 | 946,105 | D | 11 |
+| Harrison County (21097) | 19,140 | 15 | 283,365 | C | 9 |
+| Hart County (21099) | 19,603 | 17 | 372,509 | D | 3 |
+| Henderson County (21101) | 44,280 | 34 | 289,058 | D | 25 |
+| Henry County (21103) | 15,856 | 14 | 257,314 | D | 0 |
+| Hickman County (21105) | 4,439 | 6 | 123,834 | C | 0 |
+| Hopkins County (21107) | 45,119 | 40 | 417,320 | D | 23 |
+| Jackson County (21109) | 13,086 | 11 | 621,952 | D | 0 |
+| Jessamine County (21113) | 54,588 | 32 | 426,809 | C | 29 |
+| Johnson County (21115) | 22,334 | 20 | 284,408 | D | 10 |
+| Knott County (21119) | 13,830 | 15 | 339,116 | D | 0 |
+| Knox County (21121) | 29,865 | 27 | 841,005 | D | 17 |
+| Larue County (21123) | 15,107 | 13 | 342,014 | D | 0 |
+| Laurel County (21125) | 62,983 | 44 | 927,688 | D | 31 |
+| Lawrence County (21127) | 16,077 | 14 | 405,148 | D | 5 |
+| Lee County (21129) | 7,339 | 6 | 604,211 | D | 0 |
+| Leslie County (21131) | 10,079 | 11 | 763,271 | D | 0 |
+| Letcher County (21133) | 20,808 | 25 | 597,259 | C | 0 |
+| Lewis County (21135) | 12,965 | 11 | 732,559 | D | 0 |
+| Lincoln County (21137) | 24,504 | 18 | 301,257 | D | 1 |
+| Livingston County (21139) | 8,903 | 9 | 321,809 | D | 1 |
+| Logan County (21141) | 27,986 | 21 | 316,118 | D | 10 |
+| Lyon County (21143) | 8,900 | 8 | 292,231 | D | 0 |
+| McCracken County (21145) | 67,564 | 55 | 283,533 | D | 46 |
+| McCreary County (21147) | 16,867 | 15 | 779,869 | C | 0 |
+| McLean County (21149) | 9,114 | 9 | 196,144 | D | 0 |
+| Madison County (21151) | 95,769 | 71 | 814,849 | D | 57 |
+| Magoffin County (21153) | 11,348 | 12 | 290,838 | D | 0 |
+| Marion County (21155) | 19,749 | 16 | 262,243 | D | 8 |
+| Marshall County (21157) | 31,743 | 24 | 340,673 | D | 3 |
+| Martin County (21159) | 11,027 | 10 | 194,804 | D | 0 |
+| Mason County (21161) | 16,956 | 16 | 203,430 | C | 11 |
+| Meade County (21163) | 30,158 | 23 | 326,076 | D | 6 |
+| Menifee County (21165) | 6,230 | 6 | 603,386 | D | 0 |
+| Mercer County (21167) | 23,028 | 16 | 259,772 | D | 8 |
+| Metcalfe County (21169) | 10,425 | 10 | 284,012 | D | 0 |
+| Monroe County (21171) | 11,269 | 13 | 226,918 | D | 0 |
+| Montgomery County (21173) | 28,395 | 20 | 569,113 | D | 12 |
+| Morgan County (21175) | 14,053 | 12 | 830,021 | D | 0 |
+| Muhlenberg County (21177) | 30,591 | 29 | 347,641 | D | 16 |
+| Nelson County (21179) | 47,606 | 27 | 555,552 | D | 16 |
+| Nicholas County (21181) | 7,708 | 6 | 178,666 | D | 0 |
+| Ohio County (21183) | 23,735 | 21 | 484,474 | D | 7 |
+| Oldham County (21185) | 69,257 | 42 | 417,354 | C | 38 |
+| Owen County (21187) | 11,330 | 11 | 382,174 | D | 0 |
+| Owsley County (21189) | 3,971 | 5 | 562,866 | D | 0 |
+| Pendleton County (21191) | 14,723 | 11 | 353,393 | D | 0 |
+| Perry County (21193) | 27,499 | 24 | 916,417 | D | 14 |
+| Pike County (21195) | 56,727 | 63 | 897,879 | C | 22 |
+| Powell County (21197) | 13,038 | 11 | 649,050 | D | 0 |
+| Pulaski County (21199) | 65,897 | 51 | 1,019,649 | D | 35 |
+| Robertson County (21201) | 2,283 | 2 | 108,845 | D | 0 |
+| Rockcastle County (21203) | 16,163 | 14 | 682,430 | D | 0 |
+| Rowan County (21205) | 24,578 | 19 | 734,959 | D | 12 |
+| Russell County (21207) | 18,221 | 17 | 359,330 | D | 0 |
+| Scott County (21209) | 59,536 | 47 | 380,980 | C | 33 |
+| Shelby County (21211) | 49,096 | 35 | 466,042 | D | 20 |
+| Simpson County (21213) | 19,972 | 14 | 212,866 | D | 10 |
+| Spencer County (21215) | 20,193 | 10 | 245,651 | D | 0 |
+| Taylor County (21217) | 26,397 | 22 | 297,304 | D | 15 |
+| Todd County (21219) | 12,469 | 9 | 176,326 | C | 0 |
+| Trigg County (21221) | 14,315 | 14 | 321,360 | D | 0 |
+| Trimble County (21223) | 8,550 | 6 | 141,434 | D | 0 |
+| Union County (21225) | 13,260 | 17 | 172,726 | D | 0 |
+| Washington County (21229) | 12,140 | 10 | 223,968 | D | 0 |
+| Wayne County (21231) | 19,602 | 17 | 726,169 | D | 7 |
+| Webster County (21233) | 12,842 | 13 | 235,026 | D | 0 |
+| Whitley County (21235) | 36,920 | 30 | 825,516 | D | 18 |
+| Wolfe County (21237) | 6,443 | 7 | 690,465 | D | 0 |
+| Woodford County (21239) | 27,279 | 23 | 311,480 | C | 14 |
+| **113 counties** | **2,760,440** | **2,284** | **47,127,356** | 21 C, 92 D | 1062 |
+
+- OpenStreetMap: `us-south-latest.osm.pbf` from download.openstreetmap.fr (4,623,607,998 bytes, md5
+  `aaee92b7cea7116859b6f51c768d7830`, equal to the published `us-south.osm.pbf.md5`; data timestamp 2026-11-21T01:28:06Z
+  from `us-south.state.txt`). Kentucky was cut from it with `national/osm_split.py us-south --states KY --per-pass 1`
+  (osmium `extract -s smart`, union of the state's county boxes plus 0.05 degrees): 170 s, peak osmium memory 4.18 GB,
+  180 MB; the regional file was deleted after the cut. Build: fetch 11-65 s, build 72-130 s per county, three at a time (the
+  Michigan checks ran alongside), about 67 min from the first county to the last.
+- Bus frequency: 97 counties have no value in any block group (no feed that is read has a stop with 7-9 am departures in or
+  near the county); 16 have values. Rail distance: 108 counties have none; 5 have values.
+- Census spot check: 113 counties, 2,688 of 2,688 values equal (0% mismatch). Tract-median flags: 113 counties added, no
+  existing county changed, 0 values matching neither the block group nor the tract.
+- Crash counts: Kentucky has no state crash source connected (`pipeline/region.py` STATE_DEFAULTS has no KY); all 113 files
+  say "Not connected for Kentucky yet: crash gaps are not scored and crash-based projects are not proposed".
+- Tests run: `npm test` 1,620 of 1,620 (45 files), `npm run typecheck` clean. No corridor stop's flag changed.
+- OpenStreetMap ID for ID vs live Overpass (maps.mail.ru; it answered 504 for a while first): Adair (21001) 4,220 = 4,220
+  roads, 0 = 0 bus stops; Allen (21003) 3,099 = 3,099 roads, 0 = 0 bus stops (0 missing, 0 extra). The extract's snapshot
+  is 2026-11-21T01:28:06Z.
+- Live check from R2 (`LIVE_PORT=9211`): Elliott (21063) and Monroe (21171), 3 points each. Neither county has a parcel
+  service on the page, so the house-panel rows (Census area, HUD rent, FEMA, USGS) are not checkable; neighborhood, canopy,
+  canopy goal, crash text, state laws and console pass at all 6 points (30 pass, 0 fail, 24 not checkable). Each data file
+  came from the r2.dev address (HEAD 200, GET 200).
+- R2: before 1,657,504,612 bytes (2,653 objects); dry run "114 files, net +0.047 GB, projected 1.705 GB"; after
+  1,704,660,375 bytes (2,766 objects): 47,155,763 bytes added (the 113 data files, 47,127,356, plus the larger
+  `manifest.json`).
+
+Files: `data/backtests/greatlakes_ky_census_spot_2026-11-22.json`, `data/backtests/greatlakes_osm_xcheck_21001_2026-11-22.json`,
+`..._21003_...`, `data/backtests/live_check_panels_2026-11-22_greatlakes_ky.json`,
+`data/backtests/acs_fallback_mismatches_2026-11-22.json`.
+
+## Tests and housekeeping
+
+- `npm test`: run in full after each state (1,620 of 1,620 in 45 files each time; Illinois grew the count with its crash
+  files); `npm run typecheck` clean after each. The full browser suite on the final tree: run once after the Kentucky commit (result added to this page in the last commit). `python3
+  scripts/r2_only.py --check` passes. No test was skipped or loosened. One test pin was changed, as the Utah batch did:
+  `tests/unit/crashCountsInvariant.test.ts` (Illinois 20 -> 102 crash-count files, 245 -> 327 outside California). No
+  pipeline code was changed.
+- `app/data/hud_income_limits.json`: 394 rows added from HUD's API (none failed; the test lets only New England counties
+  fail). Rows already in the file were not changed; `_source.added_for_new_counties` records each state's addition.
+- `app/data/intercity_transit_corridors.json`: three stops' `county_on_page` flags (Wyanet IL in Bureau, Quincy IL in
+  Adams, Carbondale IL in Jackson) now say true, in the Illinois commit. No Indiana, Ohio, Michigan or Kentucky stop needed
+  a change.
+- The 987 earlier R2-only files were downloaded from the bucket's public address into this worktree's `counties/` (ignored
+  by version control) so that `build_tree_equity_2025.py`, `build_acs_fallback_flags.py` and `build_county_completeness.py`
+  could run; the 394 new files are in `counties/` here too and not committed.
+- No `sites_` files were built (as for every small-county batch: `w5/tools/sites.py` needs the old build machine's paths).
+- The Overpass mirror (maps.mail.ru, the only one reachable from here) answered 504 for hours at a time, so the
+  OpenStreetMap checks for Illinois and Indiana were still open when those two states were committed; their results were
+  added in the commit after Indiana's (`greatlakes_osm_xcheck_*` result files). Ohio, Michigan and Kentucky were checked
+  before their commits.
+- Scratch use: **the 5 GB limit was passed once, for the Kentucky download.** The scratch folder measured 2.5 GB (Michigan's
+  and Kentucky's build folders at about 19 MB each, the shared ACS tables 0.5 GB) when the 4.6 GB `us-south` file was
+  downloaded into it, so it held about 7 GB until the Kentucky cut was made and the regional file deleted (disk free never
+  fell below 8.8 GB). Elsewhere it stayed under 5 GB; each state's build folders and state file were deleted after its
+  checks.
+
+## What is left
+
+Counties still without a data file nationally: 1,021 (see the top of this page for the list by state). Not done here: the
+South (Texas, Georgia, Virginia, Mississippi, Oklahoma, North Carolina, Arkansas, Alabama, West Virginia, Louisiana,
+Florida, South Carolina) and Colorado's remaining small counties, Hawaii (no extract in the registry), the 100,000-plus
+counties, and crash counts for Indiana, Ohio, Michigan and Kentucky (no state source is wired into the pipeline for them).
