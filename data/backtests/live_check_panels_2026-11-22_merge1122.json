@@ -1,0 +1,527 @@
+{
+ "ran_on": "2026-11-22T01:06:41.957Z",
+ "script": "scripts/live_check_panels.mjs",
+ "results": {
+  "12086": {
+   "state": "FL",
+   "points": [
+    {
+     "bg": "120860090312",
+     "lat": 25.77754,
+     "lng": -80.323685,
+     "service": "Florida Statewide Parcels (FGIO / Dept. of Revenue Property Tax Oversight)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $266k, rent $2,300/mo, homes 1,209"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 37 pts (current release); page: 37 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 37 pts below its 50% goal; box: \"37 pts below its 50% goal\" / \"+3.8°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for FL"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Miami-Dade County · 120860090312; page \"Census area: Miami-Dade County · block group 120860090312(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2564 for 12086; page \"HUD Fair Market Rent (FY2027): 1 bed $2,121 · 2 bed $2,564 · 3 bed $3,277/moMiami-Miami Beach-Kendall, FL HUD Metro FMR Area. HUD's voucher benchmark (rent plus\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: AH; page \"FEMA flood zone: Zone AH · special flood hazard areaFederally backed mortgages here require flood insurance.(FEMA Nation\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 6 ft; page \"Ground elevation: 6 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file here. Miami: The City of Miami's zoning code (Miami 21) is published on Gridics CodeHub, a page that builds the code text in the browser; no copy of the text could be read from the build machine (the CodeHub page's HTML carries no code text, and the Article 5 PDF formerly on miami21.org answers HTTP 404), so no standard could be read from the code itself.",
+      "• Detached ADU (backyard home) — Building footprint is not on file, so open yard space cannot be verified without a site plan or survey.",
+      "? Duplex, middle housing or lot split — 109,248 sq ft parcel: allowed only where local zoning or a state law permits it; no state middle-housing or lot-split law for FL is on file here.",
+      "✓ Second story — One story (inferred (assumption: single-story layout)). Check the zone's height limit. Foundation inspection required to carry upper-floor loads.",
+      "? Rooftop deck — Requires a flat roof or flat garage roof section."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "120860012091",
+     "lat": 25.875959,
+     "lng": -80.173068,
+     "service": "Florida Statewide Parcels (FGIO / Dept. of Revenue Property Tax Oversight)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $536k, rent $1,887/mo, homes 506"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 30 pts (current release); page: 30 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 29.7 pts below its 50% goal; box: \"29.7 pts below its 50% goal\" / \"+0.4°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for FL"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Miami-Dade County · 120860012091; page \"Census area: Miami-Dade County · block group 120860012091(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2564 for 12086; page \"HUD Fair Market Rent (FY2027): 1 bed $2,121 · 2 bed $2,564 · 3 bed $3,277/moMiami-Miami Beach-Kendall, FL HUD Metro FMR Area. HUD's voucher benchmark (rent plus\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: AE; page \"FEMA flood zone: Zone AE · special flood hazard areaFederally backed mortgages here require flood insurance.(FEMA Nation\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 6 ft; page \"Ground elevation: 6 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file here. Miami: The City of Miami's zoning code (Miami 21) is published on Gridics CodeHub, a page that builds the code text in the browser; no copy of the text could be read from the build machine (the CodeHub page's HTML carries no code text, and the Article 5 PDF formerly on miami21.org answers HTTP 404), so no standard could be read from the code itself.",
+      "• Detached ADU (backyard home) — Building footprint is not on file, so open yard space cannot be verified without a site plan or survey.",
+      "? Duplex, middle housing or lot split — 11,529 sq ft parcel: allowed only where local zoning or a state law permits it; no state middle-housing or lot-split law for FL is on file here.",
+      "✓ Second story — One story (inferred (assumption: single-story layout)). Check the zone's height limit. Foundation inspection required to carry upper-floor loads.",
+      "? Rooftop deck — Requires a flat roof or flat garage roof section."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9111' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass.private.coffee/api/interpreter' from origin 'http://127.0.0.1:9111' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requ",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9111' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED"
+   ],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_12086.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_12086.json.gz"
+   ]
+  },
+  "30013": {
+   "state": "MT",
+   "points": [
+    {
+     "bg": "300130016003",
+     "lat": 47.509462,
+     "lng": -111.334497,
+     "service": "Montana Cadastral Framework (Montana State Library / Dept. of Revenue ORION)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $156k, rent $942/mo, homes 458"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 19 pts (current release); page: 19 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 19.1 pts below its 30% goal; box: \"19.1 pts below its 30% goal\" / \"+2.1°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 3 record(s) for MT"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Cascade County · 300130016003; page \"Census area: Cascade County · block group 300130016003(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1308 for 30013; page \"HUD Fair Market Rent (FY2027): 1 bed $1,000 · 2 bed $1,308 · 3 bed $1,811/moGreat Falls, MT MSA. HUD's voucher benchmark (rent plus utilities), not a market ask\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": false,
+       "detail": "USGS now: 3358 ft; page \"Ground elevation: Not available (the service did not answer in time)(U.S. Geolog\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "300130017001",
+     "lat": 47.51689,
+     "lng": -111.387117,
+     "service": "Montana Cadastral Framework (Montana State Library / Dept. of Revenue ORION)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $247k, rent $438/mo, homes 239"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 21 pts (current release); page: 21 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 21.2 pts below its 30% goal; box: \"21.2 pts below its 30% goal\" / \"+2.2°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 3 record(s) for MT"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Cascade County · 300130017001; page \"Census area: Cascade County · block group 300130017001(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1308 for 30013; page \"HUD Fair Market Rent (FY2027): 1 bed $1,000 · 2 bed $1,308 · 3 bed $1,811/moGreat Falls, MT MSA. HUD's voucher benchmark (rent plus utilities), not a market ask\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area with reduced flood risk due to levee)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": false,
+       "detail": "USGS now: 3325 ft; page \"Ground elevation: Not available (the service did not answer in time)(U.S. Geolog\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "fail",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9111' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9111' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED"
+   ],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_30013.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_30013.json.gz"
+   ]
+  },
+  "42003": {
+   "county": "Allegheny PA (Middle Atlantic)",
+   "state": "PA",
+   "points": [
+    {
+     "bg": "420031609001",
+     "lat": 40.429458,
+     "lng": -79.969127,
+     "service": "Allegheny County OPENDATA Parcels (geometry)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $233k, rent $1,988/mo, homes 870"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 24 pts (current release); page: 24 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 24.1 pts below its 40% goal; box: \"24.1 pts below its 40% goal\" / \"+4.0°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [3.8333,1.5,55]; comparison [3.8,1,0.84,\"g\"]"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for PA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Allegheny County · 420031609001; page \"Census area: Allegheny County · block group 420031609001(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1389 for 42003; page \"HUD Fair Market Rent (FY2027): 1 bed $1,146 · 2 bed $1,389 · 3 bed $1,773/moPittsburgh, PA HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities), no\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 745 ft; page \"Ground elevation: 745 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "420034687002",
+     "lat": 40.414144,
+     "lng": -80.08898,
+     "service": "Allegheny County OPENDATA Parcels (geometry)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $168k, rent $1,185/mo, homes 295"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 20 pts (current release); page: 20 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 20.1 pts below its 50% goal; box: \"20.1 pts below its 50% goal\" / \"+3.1°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [0,0.5,2]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for PA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Allegheny County · 420034687002; page \"Census area: Allegheny County · block group 420034687002(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1389 for 42003; page \"HUD Fair Market Rent (FY2027): 1 bed $1,146 · 2 bed $1,389 · 3 bed $1,773/moPittsburgh, PA HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities), no\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": false,
+       "detail": "USGS now: 925 ft; page \"Ground elevation: Not available (the service did not answer in time)(U.S. Geolog\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "fail",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9111' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9111' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED"
+   ],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_42003.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_42003.json.gz"
+   ]
+  },
+  "06001": {
+   "state": "CA",
+   "points": [
+    {
+     "bg": "060014283021",
+     "lat": 37.741932,
+     "lng": -122.254013,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $1.7M, rent $3,500 or more/mo (page shows the top-code: $3,500 or more/mo), homes 782"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 9 pts (current release); page: 9 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 9.3 pts below its 30% goal; box: \"9.3 pts below its 30% goal\" / \"-5.5°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [2,0,8]; comparison [2,0,0.8,\"g\"]"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 8 record(s) for CA"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel service for this county"
+    },
+    {
+     "bg": "060014027002",
+     "lat": 37.810846,
+     "lng": -122.278452,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $954k, rent $2,641/mo, homes 481"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 17 pts (current release); page: 17 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 16.6 pts below its 30% goal; box: \"16.6 pts below its 30% goal\" / \"+0.5°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [0,0,1.5]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 8 record(s) for CA"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel service for this county"
+    }
+   ],
+   "checks": {
+    "census_area": "n/a",
+    "hud": "n/a",
+    "fema": "n/a",
+    "usgs": "n/a",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_06001.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_06001.json.gz"
+   ]
+  }
+ }
+}

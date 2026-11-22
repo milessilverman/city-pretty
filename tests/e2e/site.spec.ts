@@ -1395,10 +1395,15 @@ test("an LA lot in a mapped single-family variation zone reaches the state-law s
     const ev = (s: string) => (0, eval)(s), ah = ev("activeHouse");
     const R = { hpoz: { ok: true, v: [] }, hcm: { ok: true, v: [] }, hc: { ok: true, v: [] }, fema: { sfha: false }, fire: { vh: false } };
     const out = ev("computePropertyPlaybook")(ah.a, 6000, {}, ev("zoneRules")(ev("zoneAt")(ah.ll).zone, "Los Angeles"), ah.ll, { R });
-    return { onFile: out.zoningOnFile, ids: out.all.map((x: any) => x.id), text: out.all.map((x: any) => x.rationale).join(" | ") };
+    return { onFile: out.zoningOnFile, ids: out.all.map((x: any) => x.id), text: out.all.map((x: any) => x.rationale).join(" | "), held: String(out.notConfirmed || "") + " " + String(out.note || "") };
   });
   expect(scr.onFile).toBe(true);
-  expect(scr.ids).toEqual(expect.arrayContaining(["lot_split_duplex", "adu"]));
+  // 22 Nov 2026 merge: SB 9 reaches this lot's zone but is "not determined" until its site list is confirmed (it also
+  // excludes wetlands, fault zones, habitat and other sites the page never checks; docs/audit/merge-2026-11-22.md), so the
+  // playbook names it as not confirmed instead of offering the lot split. This test used to expect the lot-split strategy.
+  expect(scr.ids).toContain("adu");
+  expect(scr.ids).not.toContain("lot_split_duplex");
+  expect(scr.held).toMatch(/CA SB 9[^;]*?\(Not determined: the list of sites this law excludes has not been confirmed/);
   expect(scr.text).toContain(`recorded zoning (${zone})`);
   // Single-family needs the jurisdiction's published SB 9 list as well as the layer's category (docs/audit/la_sb9_zone_scope.md):
   // the County lists "Zone R-1 or R-A" only, so a County A-1 lot the layer calls single-family is screened for no single-family law.
@@ -1413,15 +1418,19 @@ test("an LA lot in a mapped single-family variation zone reaches the state-law s
       const r = z.rings[0], c = { lat: r.reduce((s: number, q: number[]) => s + q[0], 0) / r.length, lng: r.reduce((s: number, q: number[]) => s + q[1], 0) / r.length };
       const hit = ev("zoneAt")(c);
       if (!hit || hit.zone !== z.zone) continue;
-      out[key] = { cls: f(z), ids: pb({ AIN: "1", UseDescription: "Single" }, 8000, {}, null, c, { R }).all.map((x: any) => x.id) };
+      const o = pb({ AIN: "1", UseDescription: "Single" }, 8000, {}, null, c, { R });
+      // sb9: SB 9 reached the lot's zone (offered, or named as not determined after the zone test)
+      out[key] = { cls: f(z), ids: o.all.map((x: any) => x.id), sb9: o.all.some((x: any) => x.id === "lot_split_duplex") || /CA SB 9/.test(String(o.notConfirmed || "") + " " + String(o.note || "")) };
     }
     return out;
   });
   expect(cls.countyR1.cls).toBe("single-family");
-  expect(cls.countyR1.ids).toContain("lot_split_duplex");
+  expect(cls.countyR1.sb9).toBe(true);
   expect(cls.countyA1.cls).toBe("none");
+  expect(cls.countyA1.sb9).toBe(false);
   expect(cls.countyA1.ids).not.toContain("lot_split_duplex");
   expect(cls.cityR3.cls).toBe("multifamily");
+  expect(cls.cityR3.sb9).toBe(false);
   expect(cls.cityR3.ids).not.toContain("lot_split_duplex");
   expect(cls.cityR1P.cls).toBe("none");   // parking variants are not on the City's list
   // The Invest view's "This house" reads the same lot the same way.
