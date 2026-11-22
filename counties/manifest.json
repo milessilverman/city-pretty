@@ -18099,6 +18099,54 @@
    "crash_years": null
   },
   {
+   "fips": "55001",
+   "name": "Adams County",
+   "state": "WI",
+   "block_groups": 23,
+   "bundle_mb": 0.3,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "55003",
+   "name": "Ashland County",
+   "state": "WI",
+   "block_groups": 18,
+   "bundle_mb": 1.1,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "55005",
+   "name": "Barron County",
+   "state": "WI",
+   "block_groups": 43,
+   "bundle_mb": 0.4,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "55007",
+   "name": "Bayfield County",
+   "state": "WI",
+   "block_groups": 15,
+   "bundle_mb": 0.8,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "55009",
    "name": "Brown County",
    "state": "WI",
@@ -18108,6 +18156,90 @@
    "osm": "2026-11-07T00:47:05Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "55011",
+   "name": "Buffalo County",
+   "state": "WI",
+   "block_groups": 13,
+   "bundle_mb": 1.0,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "55013",
+   "name": "Burnett County",
+   "state": "WI",
+   "block_groups": 15,
+   "bundle_mb": 0.7,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "55015",
+   "name": "Calumet County",
+   "state": "WI",
+   "block_groups": 36,
+   "bundle_mb": 0.3,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "55017",
+   "name": "Chippewa County",
+   "state": "WI",
+   "block_groups": 47,
+   "bundle_mb": 0.7,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "55019",
+   "name": "Clark County",
+   "state": "WI",
+   "block_groups": 30,
+   "bundle_mb": 0.7,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "55021",
+   "name": "Columbia County",
+   "state": "WI",
+   "block_groups": 44,
+   "bundle_mb": 0.6,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "55023",
+   "name": "Crawford County",
+   "state": "WI",
+   "block_groups": 18,
+   "bundle_mb": 0.6,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "55025",
@@ -18121,6 +18253,54 @@
    "crash_years": null
   },
   {
+   "fips": "55027",
+   "name": "Dodge County",
+   "state": "WI",
+   "block_groups": 67,
+   "bundle_mb": 0.4,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "55029",
+   "name": "Door County",
+   "state": "WI",
+   "block_groups": 27,
+   "bundle_mb": 0.4,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "55031",
+   "name": "Douglas County",
+   "state": "WI",
+   "block_groups": 43,
+   "bundle_mb": 0.9,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "55033",
+   "name": "Dunn County",
+   "state": "WI",
+   "block_groups": 32,
+   "bundle_mb": 0.6,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "55035",
    "name": "Eau Claire County",
    "state": "WI",
@@ -18130,6 +18310,18 @@
    "osm": "2026-11-07T00:47:05Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "55037",
+   "name": "Florence County",
+   "state": "WI",
+   "block_groups": 6,
+   "bundle_mb": 0.3,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "55039",
@@ -18143,6 +18335,114 @@
    "crash_years": null
   },
   {
+   "fips": "55041",
+   "name": "Forest County",
+   "state": "WI",
+   "block_groups": 11,
+   "bundle_mb": 0.5,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "55043",
+   "name": "Grant County",
+   "state": "WI",
+   "block_groups": 46,
+   "bundle_mb": 1.1,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "55045",
+   "name": "Green County",
+   "state": "WI",
+   "block_groups": 31,
+   "bundle_mb": 0.4,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "55047",
+   "name": "Green Lake County",
+   "state": "WI",
+   "block_groups": 19,
+   "bundle_mb": 0.2,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "55049",
+   "name": "Iowa County",
+   "state": "WI",
+   "block_groups": 20,
+   "bundle_mb": 0.5,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "55051",
+   "name": "Iron County",
+   "state": "WI",
+   "block_groups": 9,
+   "bundle_mb": 0.7,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "55053",
+   "name": "Jackson County",
+   "state": "WI",
+   "block_groups": 17,
+   "bundle_mb": 0.8,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "55055",
+   "name": "Jefferson County",
+   "state": "WI",
+   "block_groups": 65,
+   "bundle_mb": 0.4,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "55057",
+   "name": "Juneau County",
+   "state": "WI",
+   "block_groups": 25,
+   "bundle_mb": 0.4,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "55059",
    "name": "Kenosha County",
    "state": "WI",
@@ -18152,6 +18452,18 @@
    "osm": "2026-11-07T00:47:05Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "55061",
+   "name": "Kewaunee County",
+   "state": "WI",
+   "block_groups": 18,
+   "bundle_mb": 0.1,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "55063",
@@ -18165,6 +18477,54 @@
    "crash_years": null
   },
   {
+   "fips": "55065",
+   "name": "Lafayette County",
+   "state": "WI",
+   "block_groups": 16,
+   "bundle_mb": 0.5,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "55067",
+   "name": "Langlade County",
+   "state": "WI",
+   "block_groups": 21,
+   "bundle_mb": 0.4,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "55069",
+   "name": "Lincoln County",
+   "state": "WI",
+   "block_groups": 28,
+   "bundle_mb": 0.5,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "55071",
+   "name": "Manitowoc County",
+   "state": "WI",
+   "block_groups": 75,
+   "bundle_mb": 0.3,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "55073",
    "name": "Marathon County",
    "state": "WI",
@@ -18174,6 +18534,42 @@
    "osm": "2026-11-07T00:47:05Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "55075",
+   "name": "Marinette County",
+   "state": "WI",
+   "block_groups": 44,
+   "bundle_mb": 1.1,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "55077",
+   "name": "Marquette County",
+   "state": "WI",
+   "block_groups": 15,
+   "bundle_mb": 0.2,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "55078",
+   "name": "Menominee County",
+   "state": "WI",
+   "block_groups": 4,
+   "bundle_mb": 0.2,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "55079",
@@ -18187,6 +18583,42 @@
    "crash_years": null
   },
   {
+   "fips": "55081",
+   "name": "Monroe County",
+   "state": "WI",
+   "block_groups": 37,
+   "bundle_mb": 0.5,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "55083",
+   "name": "Oconto County",
+   "state": "WI",
+   "block_groups": 30,
+   "bundle_mb": 0.7,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "55085",
+   "name": "Oneida County",
+   "state": "WI",
+   "block_groups": 40,
+   "bundle_mb": 1.0,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "55087",
    "name": "Outagamie County",
    "state": "WI",
@@ -18196,6 +18628,78 @@
    "osm": "2026-11-07T00:47:05Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "55089",
+   "name": "Ozaukee County",
+   "state": "WI",
+   "block_groups": 64,
+   "bundle_mb": 0.3,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "55091",
+   "name": "Pepin County",
+   "state": "WI",
+   "block_groups": 7,
+   "bundle_mb": 0.7,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "55093",
+   "name": "Pierce County",
+   "state": "WI",
+   "block_groups": 28,
+   "bundle_mb": 0.8,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "55095",
+   "name": "Polk County",
+   "state": "WI",
+   "block_groups": 35,
+   "bundle_mb": 0.7,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "55097",
+   "name": "Portage County",
+   "state": "WI",
+   "block_groups": 52,
+   "bundle_mb": 0.4,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "55099",
+   "name": "Price County",
+   "state": "WI",
+   "block_groups": 17,
+   "bundle_mb": 0.6,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "55101",
@@ -18209,6 +18713,18 @@
    "crash_years": null
   },
   {
+   "fips": "55103",
+   "name": "Richland County",
+   "state": "WI",
+   "block_groups": 16,
+   "bundle_mb": 0.4,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "55105",
    "name": "Rock County",
    "state": "WI",
@@ -18218,6 +18734,66 @@
    "osm": "2026-11-07T00:47:05Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "55107",
+   "name": "Rusk County",
+   "state": "WI",
+   "block_groups": 17,
+   "bundle_mb": 0.4,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "55109",
+   "name": "St. Croix County",
+   "state": "WI",
+   "block_groups": 53,
+   "bundle_mb": 0.7,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "55111",
+   "name": "Sauk County",
+   "state": "WI",
+   "block_groups": 46,
+   "bundle_mb": 0.7,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "55113",
+   "name": "Sawyer County",
+   "state": "WI",
+   "block_groups": 20,
+   "bundle_mb": 0.6,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "55115",
+   "name": "Shawano County",
+   "state": "WI",
+   "block_groups": 32,
+   "bundle_mb": 0.5,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "55117",
@@ -18231,6 +18807,54 @@
    "crash_years": null
   },
   {
+   "fips": "55119",
+   "name": "Taylor County",
+   "state": "WI",
+   "block_groups": 18,
+   "bundle_mb": 0.5,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "55121",
+   "name": "Trempealeau County",
+   "state": "WI",
+   "block_groups": 22,
+   "bundle_mb": 0.9,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "55123",
+   "name": "Vernon County",
+   "state": "WI",
+   "block_groups": 26,
+   "bundle_mb": 0.7,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "55125",
+   "name": "Vilas County",
+   "state": "WI",
+   "block_groups": 21,
+   "bundle_mb": 1.0,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "55127",
    "name": "Walworth County",
    "state": "WI",
@@ -18240,6 +18864,18 @@
    "osm": "2026-11-07T00:47:05Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "55129",
+   "name": "Washburn County",
+   "state": "WI",
+   "block_groups": 18,
+   "bundle_mb": 0.5,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "55131",
@@ -18264,6 +18900,30 @@
    "crash_years": null
   },
   {
+   "fips": "55135",
+   "name": "Waupaca County",
+   "state": "WI",
+   "block_groups": 42,
+   "bundle_mb": 0.4,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "55137",
+   "name": "Waushara County",
+   "state": "WI",
+   "block_groups": 24,
+   "bundle_mb": 0.3,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "55139",
    "name": "Winnebago County",
    "state": "WI",
@@ -18273,6 +18933,18 @@
    "osm": "2026-11-07T00:47:05Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "55141",
+   "name": "Wood County",
+   "state": "WI",
+   "block_groups": 72,
+   "bundle_mb": 0.4,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "56001",

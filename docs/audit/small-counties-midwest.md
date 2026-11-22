@@ -700,3 +700,88 @@ Files: `data/backtests/midwest_sd_census_spot_2026-11-22.json`, `data/backtests/
 
 Files: `data/backtests/midwest_nd_census_spot_2026-11-22.json`, `data/backtests/midwest_osm_xcheck_38001_2026-11-22.json`,
 `..._38003_...`, `data/backtests/live_check_panels_2026-11-22_midwest_nd.json`.
+
+## Wisconsin (56 of 56 built, none withheld)
+
+| County | People (ACS 2020-24) | Block groups | Data file (gzip, bytes) | Completeness tier | Canopy block groups (2025 release) |
+|---|---|---|---|---|---|
+| Adams County (55001) | 21,123 | 23 | 282,940 | C | 0 |
+| Ashland County (55003) | 16,080 | 18 | 1,072,901 | D | 8 |
+| Barron County (55005) | 46,797 | 43 | 398,529 | D | 11 |
+| Bayfield County (55007) | 16,575 | 15 | 822,942 | D | 0 |
+| Buffalo County (55011) | 13,393 | 13 | 1,025,036 | C | 0 |
+| Burnett County (55013) | 16,916 | 15 | 665,764 | D | 0 |
+| Calumet County (55015) | 52,942 | 36 | 268,377 | C | 15 |
+| Chippewa County (55017) | 66,799 | 47 | 662,902 | C | 20 |
+| Clark County (55019) | 34,739 | 30 | 722,195 | D | 0 |
+| Columbia County (55021) | 58,272 | 44 | 550,282 | C | 21 |
+| Crawford County (55023) | 16,042 | 18 | 576,266 | D | 8 |
+| Dodge County (55027) | 88,742 | 67 | 442,146 | C | 39 |
+| Door County (55029) | 30,445 | 27 | 434,446 | D | 13 |
+| Douglas County (55031) | 44,229 | 43 | 927,301 | C | 27 |
+| Dunn County (55033) | 45,527 | 32 | 629,813 | D | 14 |
+| Florence County (55037) | 4,646 | 6 | 303,660 | D | 0 |
+| Forest County (55041) | 9,369 | 11 | 523,146 | C | 0 |
+| Grant County (55043) | 51,770 | 46 | 1,112,268 | C | 8 |
+| Green County (55045) | 37,017 | 31 | 394,194 | D | 12 |
+| Green Lake County (55047) | 19,263 | 19 | 165,739 | D | 6 |
+| Iowa County (55049) | 23,867 | 20 | 491,931 | D | 5 |
+| Iron County (55051) | 6,210 | 9 | 682,186 | D | 4 |
+| Jackson County (55053) | 20,981 | 17 | 800,524 | D | 6 |
+| Jefferson County (55055) | 86,003 | 65 | 410,260 | D | 45 |
+| Juneau County (55057) | 26,689 | 25 | 405,380 | C | 0 |
+| Kewaunee County (55061) | 20,664 | 18 | 112,572 | D | 0 |
+| Lafayette County (55065) | 16,942 | 16 | 453,993 | D | 0 |
+| Langlade County (55067) | 19,490 | 21 | 439,808 | D | 12 |
+| Lincoln County (55069) | 28,426 | 28 | 546,288 | D | 12 |
+| Manitowoc County (55071) | 81,406 | 75 | 300,620 | D | 50 |
+| Marinette County (55075) | 42,046 | 44 | 1,053,134 | D | 21 |
+| Marquette County (55077) | 15,746 | 15 | 184,666 | D | 0 |
+| Menominee County (55078) | 4,252 | 4 | 179,262 | D | 0 |
+| Monroe County (55081) | 46,208 | 37 | 524,866 | C | 24 |
+| Oconto County (55083) | 39,589 | 30 | 659,846 | D | 0 |
+| Oneida County (55085) | 38,167 | 40 | 992,553 | D | 15 |
+| Ozaukee County (55089) | 92,966 | 64 | 312,256 | D | 57 |
+| Pepin County (55091) | 7,431 | 7 | 666,657 | D | 0 |
+| Pierce County (55093) | 42,584 | 28 | 793,805 | C | 8 |
+| Polk County (55095) | 45,555 | 35 | 716,513 | D | 0 |
+| Portage County (55097) | 70,832 | 52 | 426,213 | C | 36 |
+| Price County (55099) | 14,092 | 17 | 590,819 | D | 0 |
+| Richland County (55103) | 17,205 | 16 | 378,749 | D | 5 |
+| Rusk County (55107) | 14,179 | 17 | 352,396 | D | 0 |
+| St. Croix County (55109) | 96,033 | 53 | 748,132 | D | 23 |
+| Sauk County (55111) | 66,009 | 46 | 681,774 | C | 29 |
+| Sawyer County (55113) | 18,476 | 20 | 564,936 | D | 0 |
+| Shawano County (55115) | 41,039 | 32 | 494,472 | D | 14 |
+| Taylor County (55119) | 20,024 | 18 | 499,555 | D | 6 |
+| Trempealeau County (55121) | 30,839 | 22 | 899,532 | C | 0 |
+| Vernon County (55123) | 31,049 | 26 | 673,774 | D | 5 |
+| Vilas County (55125) | 23,647 | 21 | 969,754 | D | 0 |
+| Washburn County (55129) | 16,854 | 18 | 537,807 | D | 0 |
+| Waupaca County (55135) | 51,569 | 42 | 436,373 | D | 21 |
+| Waushara County (55137) | 24,868 | 24 | 256,470 | D | 1 |
+| Wood County (55141) | 74,004 | 72 | 376,238 | D | 55 |
+| **56 counties** | **2,006,627** | **1,678** | **31,594,961** | 15 C, 41 D | 656 |
+
+- Wisconsin cut alone: 118 s, peak osmium memory 4.12 GB, 352 MB (cut while North Dakota was building). Build: fetch
+  10-47 s, build 165-237 s per county, four at a time (the largest state file after Minnesota's; the North Dakota
+  checks and the Missouri cut ran alongside), 50.5 min from the first county to the last.
+- Bus frequency: 47 counties have none (no feed that is read has a stop with 7-9 am departures in or near the county);
+  8 have feeds; 1 (Ozaukee) has a feed read around it with no stop with 7-9 am departures inside the county, where
+  OpenStreetMap maps 9 bus stops, so bus frequency is left unknown in all its 64 block groups. Rail distance: 45
+  counties have no station in or near them.
+- Census spot check: 56 counties, 1,336 of 1,336 values equal (0% mismatch). Tract-median flags: 56 counties added, no
+  existing county changed, 0 values matching neither the block group nor the tract.
+- OpenStreetMap ID for ID vs live Overpass (maps.mail.ru): Adams 3,727 = 3,727 roads, 0 = 0 bus stops; Ashland 5,254 =
+  5,254 roads (0 missing, 0 extra), 14 = 14 bus stops (0 missing, 0 extra; the mirror answered 504 on Ashland's bus stops in the first run, so the check was run again and the second run's result is kept).
+- Crash counts: Wisconsin has no state crash source connected.
+- Live check from R2 (`LIVE_PORT=9191`): Manitowoc and Wood, 3 points each (Wisconsin's statewide parcel service is on
+  the page), all six with the house panel on live parcel records: every check passes at all 6 points (neighborhood,
+  canopy, canopy goal, crash text, state laws, Census area, HUD rent, FEMA, USGS, console): 54 pass, 0 fail. Each data
+  file came from the r2.dev address (GET 200).
+- R2: before 1,512,337,107 bytes (2,213 objects); dry run "57 files, net +0.032 GB, projected 1.544 GB"; after
+  1,543,946,157 bytes (2,269 objects): 31,609,050 bytes added (the 56 data files, 31,594,961, plus the larger
+  `manifest.json`).
+
+Files: `data/backtests/midwest_wi_census_spot_2026-11-22.json`, `data/backtests/midwest_osm_xcheck_55001_2026-11-22.json`,
+`..._55003_...`, `data/backtests/live_check_panels_2026-11-22_midwest_wi.json`.
