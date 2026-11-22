@@ -126,6 +126,8 @@ def level_to_tract20(values_by_tract10, xwalk=None):
         if v is None:
             continue
         for t20, _w10, w20 in xwalk.get(t10, []):
+            if not w20:  # blank weight: water-only tract with no land (e.g. 01003990000)
+                continue
             num[t20] += v * w20
             den[t20] += w20
     return {t: num[t] / den[t] for t in num if den[t] > 0}
@@ -139,5 +141,7 @@ def count_to_tract20(counts_by_tract10, xwalk=None):
         if v is None:
             continue
         for t20, w10, _ in xwalk.get(t10, []):
+            if not w10:  # blank weight: water-only tract with no land
+                continue
             out[t20] += v * w10
     return dict(out)
