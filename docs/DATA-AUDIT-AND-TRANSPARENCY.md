@@ -1618,7 +1618,7 @@ built on it**; removing them from history needs the owner's decision (a history 
 ### Transit riders, fares and the gap: station model tested; heavy rail ranks, light rail does not (22 Nov 2026)
 `docs/TRANSIT-DEMAND-MODEL.md` (method committed in f2320ba before the fit), `scripts/transit/fit_station_ridership.py`,
 `app/data/transit_demand_model.json`, `src/engines/transitDemandEngine.js`. Station boardings of 7 systems (937 with
-coordinates; 902 used) were modelled from people and jobs within 0.5 and 1 mile, terminal and transfer flags, and tested by
+coordinates; 887 used: 651 heavy rail, 183 light rail, 53 commuter rail) were modelled from people and jobs within 0.5 and 1 mile, terminal and transfer flags, and tested by
 leaving each system out. Heavy rail: median rank correlation 0.62 against 0.58 for "people + jobs in the half mile", error
 41% after one scaling factor, the same as calling every station the system median. Light rail: worse than both baselines.
 Commuter rail: 2 systems only. The level for a new system is only bracketed. Two things a reader should know:
