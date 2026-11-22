@@ -1,0 +1,385 @@
+{
+ "ran_on": "2026-11-22T20:09:53.995Z",
+ "script": "scripts/live_check_panels.mjs",
+ "results": {
+  "37059": {
+   "state": "NC",
+   "points": [
+    {
+     "bg": "370590801011",
+     "lat": 36.006734,
+     "lng": -80.660206,
+     "service": "NC OneMap - NC1Map_Parcels (Integrated Cadastral Data Exchange)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $164k, rent $597/mo, homes 1,253"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for NC"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Davie County · 370590801011; page \"Census area: Davie County · block group 370590801011(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1332 for 37059; page \"HUD Fair Market Rent (FY2027): 1 bed $1,224 · 2 bed $1,332 · 3 bed $1,754/moWinston-Salem, NC HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities),\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 835 ft; page \"Ground elevation: 835 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "370590803022",
+     "lat": 35.962338,
+     "lng": -80.496051,
+     "service": "NC OneMap - NC1Map_Parcels (Integrated Cadastral Data Exchange)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $248k, rent $525/mo, homes 561"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: 1 pts, Tree Equity Score 2021, 2010 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"0.9 pts below its goal\" / \"+0.2°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for NC"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Davie County · 370590803022; page \"Census area: Davie County · block group 370590803022(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1332 for 37059; page \"HUD Fair Market Rent (FY2027): 1 bed $1,224 · 2 bed $1,332 · 3 bed $1,754/moWinston-Salem, NC HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities),\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 772 ft; page \"Ground elevation: 772 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "370590807011",
+     "lat": 35.844909,
+     "lng": -80.559568,
+     "service": "NC OneMap - NC1Map_Parcels (Integrated Cadastral Data Exchange)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $169k, rent $822/mo, homes 481"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 6 pts (current release); page: 6 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 6.4 pts below its 50% goal; box: \"6.4 pts below its 50% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for NC"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Davie County · 370590807011; page \"Census area: Davie County · block group 370590807011(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1332 for 37059; page \"HUD Fair Market Rent (FY2027): 1 bed $1,224 · 2 bed $1,332 · 3 bed $1,754/moWinston-Salem, NC HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities),\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "re-checked alone: USGS now 778 ft; page \"Ground elevation: 778 ft(U.S. Geological Survey 3DEP)\""
+      },
+      "usgs_first": {
+       "pass": false,
+       "detail": "USGS now: 778 ft; page \"Ground elevation: Not available (the service did not answer in time)(U.S. Geolog\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9221' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9221' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9221' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)"
+   ],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_37059.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_37059.json.gz"
+   ]
+  },
+  "37181": {
+   "state": "NC",
+   "points": [
+    {
+     "bg": "371819607001",
+     "lat": 36.324876,
+     "lng": -78.396015,
+     "service": "NC OneMap - NC1Map_Parcels (Integrated Cadastral Data Exchange)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $78k, rent $913/mo, homes 226"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 10 pts (current release); page: 10 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 9.8 pts below its 50% goal; box: \"9.8 pts below its 50% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for NC"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Vance County · 371819607001; page \"Census area: Vance County · block group 371819607001(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1012 for 37181; page \"HUD Fair Market Rent (FY2027): 1 bed $774 · 2 bed $1,012 · 3 bed $1,261/moVance County, NC. HUD's voucher benchmark (rent plus utilities), not a market asking r\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 499 ft; page \"Ground elevation: 499 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "371819610003",
+     "lat": 36.260429,
+     "lng": -78.444137,
+     "service": "NC OneMap - NC1Map_Parcels (Integrated Cadastral Data Exchange)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $189k, rent $971/mo, homes 489"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected At or above its 50% goal; box: \"At or above its 50% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for NC"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Vance County · 371819610003; page \"Census area: Vance County · block group 371819610003(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1012 for 37181; page \"HUD Fair Market Rent (FY2027): 1 bed $774 · 2 bed $1,012 · 3 bed $1,261/moVance County, NC. HUD's voucher benchmark (rent plus utilities), not a market asking r\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 376 ft; page \"Ground elevation: 376 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "371819608002",
+     "lat": 36.292652,
+     "lng": -78.400326,
+     "service": "NC OneMap - NC1Map_Parcels (Integrated Cadastral Data Exchange)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $103k, rent $931/mo, homes 334"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 2 pts (current release); page: 2 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 1.8 pts below its 50% goal; box: \"1.8 pts below its 50% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for NC"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Vance County · 371819608002; page \"Census area: Vance County · block group 371819608002(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1012 for 37181; page \"HUD Fair Market Rent (FY2027): 1 bed $774 · 2 bed $1,012 · 3 bed $1,261/moVance County, NC. HUD's voucher benchmark (rent plus utilities), not a market asking r\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 507 ft; page \"Ground elevation: 507 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9221' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9221' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9221' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)"
+   ],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_37181.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_37181.json.gz"
+   ]
+  }
+ },
+ "fema_rechecked_on": "2026-11-22T20:10:19.515Z"
+}
