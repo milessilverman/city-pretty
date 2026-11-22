@@ -249,6 +249,8 @@ function auditSingleHouseParcel(input) {
       lotSplitFeasible,
       aduFeasible,
       statutoryNotes,
+      zoningOnFile: hasZoning,
+      baseZoningCode: rawZone,
     },
     roofCadastre: roofCalc,
     solarMicrogrid: {

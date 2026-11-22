@@ -1441,6 +1441,42 @@ test("an LA lot in a mapped single-family variation zone reaches the state-law s
   expect(ih).not.toContain("not classed here as single-family");
 });
 
+// 22 Nov 2026 (docs/audit/usability-2026-11-20.md): 1200 Getty Center Dr showed zoning "A1-1-H" and, below it, that zoning
+// was not on file. A lot whose zone is on file but whose rules are not must say exactly that, and no part of the lot view
+// may say the zoning is missing.
+test("an LA lot whose zone is on file but whose rules are not says so, and nothing on the lot says zoning is missing", async ({ page }) => {
+  let ring: number[][] = [];
+  await page.route(/LACounty_Parcel\/MapServer\/0\/query/, (route: any) => route.fulfill({ status: 200, contentType: "application/json", headers: { "access-control-allow-origin": "*" },
+    body: JSON.stringify({ features: [{ attributes: { AIN: "5000000003", SitusFullAddress: "3 TEST ST LOS ANGELES CA", UseCode: "0100", UseType: "Residential", UseDescription: "Single",
+      Roll_LandValue: 400000, Roll_ImpValue: 150000, Roll_LandBaseYear: "2012", YearBuilt1: "1952", SQFTmain1: 1500, Bedrooms1: 4, Bathrooms1: 1, Units1: 1 }, geometry: { rings: [ring] } }] }) }));
+  await openPage(page);
+  // A point inside a mapped zone of the page's own LA layer that has no zone_rules row (A1-1-H was one).
+  const found = await page.evaluate(() => {
+    const ev = (s: string) => (0, eval)(s), Z = ev("D").layers.zoning, zCell = ev("zCell"), zoneAt = ev("zoneAt"), zoneRules = ev("zoneRules");
+    for (const k of Object.keys(Z.cells)) for (const z of zCell(k)) {
+      if (!/^A1/.test(z.zone) || z.juris !== "Los Angeles" || !z.rings || !z.rings[0] || zoneRules(z.zone, z.juris)) continue;
+      const r = z.rings[0], c = { lat: r.reduce((s: number, q: number[]) => s + q[0], 0) / r.length, lng: r.reduce((s: number, q: number[]) => s + q[1], 0) / r.length };
+      const hit = zoneAt(c);
+      if (hit && hit.zone === z.zone) return { ll: c, zone: z.zone as string };
+    }
+    return null;
+  });
+  expect(found).toBeTruthy();
+  const { ll, zone } = found as { ll: { lat: number; lng: number }; zone: string };
+  ring = [[ll.lng - 0.0002, ll.lat - 0.00012], [ll.lng + 0.0002, ll.lat - 0.00012], [ll.lng + 0.0002, ll.lat + 0.00012], [ll.lng - 0.0002, ll.lat + 0.00012], [ll.lng - 0.0002, ll.lat - 0.00012]];
+  await page.evaluate((p) => (0, eval)("houseAt")(p), ll);
+  await page.waitForFunction(() => { const b = document.querySelector("#house"); const ah = (0, eval)("typeof activeHouse !== 'undefined' ? activeHouse : null");
+    return !!b && !b.querySelector(".house-loading") && !!b.querySelector(".owner-playbook-card") && !!ah && !!ah.st && ah.st.rDone && ah.st.osmDone; }, null, { timeout: 60_000 });
+  const rows = await page.evaluate(() => Object.fromEntries([...document.querySelectorAll("#house tr")].filter((tr) => tr.children.length === 2).map((tr) => [(tr.children[0] as HTMLElement).textContent!.trim(), (tr.children[1] as HTMLElement).textContent!.replace(/\s+/g, " ").trim()])));
+  expect(rows["Zoning"]).toContain(zone);
+  expect(rows["Zoning rules"]).toContain(`zone ${zone} is on file; its rules are not on file`);
+  const text = await page.evaluate(() => (document.querySelector("#house") as HTMLElement).textContent!.replace(/\s+/g, " "));
+  expect(text).not.toMatch(/zoning is not on file|zoning not on file/i);
+  // the same lot, asked for by a caller that passes no point, still finds its zone
+  const out = await page.evaluate(() => { const ev = (s: string) => (0, eval)(s), ah = ev("activeHouse"); return ev("computePropertyPlaybook")(ah.a, 6000, {}, null, undefined, ah.st).zoningOnFile; });
+  expect(out).toBe(true);
+});
+
 test("California house checks state SB 9, ADU sale and fee rules only as the statutes say (live click path, LA)", async ({ page }) => {
   let ll = { lat: 0, lng: 0 }, ring: number[][] = [];
   await page.route(/LACounty_Parcel\/MapServer\/0\/query/, (route: any) => route.fulfill({ status: 200, contentType: "application/json", headers: { "access-control-allow-origin": "*" },
