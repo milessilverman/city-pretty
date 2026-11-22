@@ -1710,3 +1710,27 @@ Layout and wording only; no figure, source or calculation changed. Mistakes foun
   "SF-3-NP". These are counts of map features in view, not shares of the area. The new summary tile shows "not on file" instead. Owner to decide
   whether the section should do the same.
 - **Found, not changed:** 1200 Getty Center Dr, Los Angeles: the lot table shows zoning "A1-1-H" while the owner playbook under it says zoning is not on file.
+
+### Correction: two "not on file" displays that disagreed with the data (22 Nov 2026)
+
+Both were logged above as "Found, not changed" on 22 Nov 2026 and are now fixed. Seen on the real page (local server, live outside services).
+
+- **Corrected: Zoning section showed the map view's zones as an area's own.** `getActiveZoningSummary` (`app/app.js`) fell back to the zones drawn in the
+  current map view (`_dynZoneFeats`, one entry per zoning polygon in view, not shares of the area) when the area had no zoning shares in its county file, and
+  `zoningSection` labelled them "Predominant zoning in <city>". The list was also not cleared when the county changed. Reproduced: open Travis County
+  (48453), zoom to Austin (400 zone polygons loaded), switch to Kent County MD (24029): the area in Rock Hall read "Predominant zoning in Rock Hall:
+  SF-3-NP 10%; CBD 9%; P 7%; CS 6%" with "SF-3-NP: Special zone" beneath it. Those are Austin's zones. Now the fallback is gone, `switchCounty` empties the
+  list, and the section reads "Zoning for this area is not on file: the county file has no zoning shares for this area. The zones drawn on the map are
+  for the map view and are not used as this area's zoning." The headline tile already said "not on file" and is unchanged.
+- **Corrected: a lot's zone could be reported as "not on file" while its zone code was shown.** In the lot view of 1200 Getty Center Dr, Los Angeles,
+  the Zoning row reads "A1-1-H" (the parcel zoning layer). LA's rules table has no row for A1, so nothing was said about the zone's rules, and two lines
+  of wording could read as "no zoning": the ADU line ("Cannot be screened (zoning not on file or historic district)", shown whenever the zone is not a
+  single-family or commercial one the screen covers, zone on file or not) and the owner playbook, which looked the zone up from a point and reported "Zoning is
+  not on file for this parcel" for any caller that passed no point (reproduced in the page: the same lot gave `zoningOnFile: true` with its point and
+  `false` without it; the advisor's lot facts read only the parcel record's zone field, which LA's assessor service does not carry). Now: the ADU line says either
+  "zoning is not on file for this parcel" or "zone A1-1-H is on file, but it is not a single-family or commercial zone the screen covers, or the lot is in
+  a historic district"; the lot table gains a "Zoning rules" row reading "zone A1-1-H is on file; its rules are not on file"; the playbook falls back to the
+  open lot's point; the advisor's lot payload reads the zone at the lot as the table does. Not reproduced: on the day of this fix the playbook text on the real
+  page already read the zone correctly for this lot in every path tried (address search, click, Invest, print memo), so the exact state the audit saw
+  was not recovered; the changes above close the paths that can disagree. No zone, rule, figure or source was added.
+  Tests: `tests/unit/zoningNotOnFileDisplay.test.ts`, one e2e each in `tests/e2e/usability.spec.ts` and `tests/e2e/site.spec.ts`.

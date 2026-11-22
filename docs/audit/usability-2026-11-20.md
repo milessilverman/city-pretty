@@ -89,6 +89,8 @@ The same counts were measured at phone width. Each journey has a test in `tests/
 
 ## Found, not changed (needs the owner's decision)
 
+Both items below were fixed on 22 Nov 2026; see the correction in `docs/DATA-AUDIT-AND-TRANSPARENCY.md` ("two 'not on file' displays").
+
 - The "Zoning" section falls back to whatever zones are loaded in the current map view when an area has no zoning
   shares of its own, and labels them "Predominant zoning in <city>". After visiting Austin, Kent County MD showed
   "SF-3-NP". The new Zoning tile does not use that fallback. Logged in `docs/DATA-AUDIT-AND-TRANSPARENCY.md`.

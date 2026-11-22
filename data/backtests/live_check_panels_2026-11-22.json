@@ -1,0 +1,395 @@
+{
+ "ran_on": "2026-11-22T18:06:34.939Z",
+ "script": "scripts/live_check_panels.mjs",
+ "results": {
+  "48453": {
+   "county": "Travis TX (West South Central)",
+   "state": "TX",
+   "points": [
+    {
+     "bg": "484530301001",
+     "lat": 30.381998,
+     "lng": -97.756404,
+     "service": "Travis Central Appraisal District parcels (City of Austin copy)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $769k, rent $1,672/mo, homes 475"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2026 release (file dated 2026-03-13), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected At or above its 50% goal; box: \"At or above its 50% goal\" / \"-2.6°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 3 record(s) for TX"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Travis County · 484530301001; page \"Census area: Travis County · block group 484530301001(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1817 for 48453; page \"HUD Fair Market Rent (FY2027): 1 bed $1,530 · 2 bed $1,817 · 3 bed $2,292/moAustin-Round Rock-San Marcos, TX MSA. HUD's voucher benchmark (rent plus utilities),\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 826 ft; page \"Ground elevation: 826 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file here. Austin: Austin's Land Development Code is published on Municode, which answered the build machine with a bot check (HTTP 403) on 16 Nov 2026, so no standard could be read from the code itself.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "484530413001",
+     "lat": 30.421934,
+     "lng": -97.720369,
+     "service": "Travis Central Appraisal District parcels (City of Austin copy)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $563k, rent $2,293/mo, homes 628"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 5 pts (current release); page: 5 pts, Tree Equity Score 2026 release (file dated 2026-03-13), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 4.7 pts below its 50% goal; box: \"4.7 pts below its 50% goal\" / \"+1.6°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 3 record(s) for TX"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Travis County · 484530413001; page \"Census area: Travis County · block group 484530413001(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1817 for 48453; page \"HUD Fair Market Rent (FY2027): 1 bed $1,530 · 2 bed $1,817 · 3 bed $2,292/moAustin-Round Rock-San Marcos, TX MSA. HUD's voucher benchmark (rent plus utilities),\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 792 ft; page \"Ground elevation: 792 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file here. Austin: Austin's Land Development Code is published on Municode, which answered the build machine with a bot check (HTTP 403) on 16 Nov 2026, so no standard could be read from the code itself.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "484530408001",
+     "lat": 30.373956,
+     "lng": -97.707929,
+     "service": "Travis Central Appraisal District parcels (City of Austin copy)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $470k, rent $1,488/mo, homes 688"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 10 pts (current release); page: 10 pts, Tree Equity Score 2026 release (file dated 2026-03-13), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 10.2 pts below its 50% goal; box: \"10.2 pts below its 50% goal\" / \"+2.3°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 3 record(s) for TX"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Travis County · 484530408001; page \"Census area: Travis County · block group 484530408001(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1817 for 48453; page \"HUD Fair Market Rent (FY2027): 1 bed $1,530 · 2 bed $1,817 · 3 bed $2,292/moAustin-Round Rock-San Marcos, TX MSA. HUD's voucher benchmark (rent plus utilities),\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 728 ft; page \"Ground elevation: 728 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file here. Austin: Austin's Land Development Code is published on Municode, which answered the build machine with a bot check (HTTP 403) on 16 Nov 2026, so no standard could be read from the code itself.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9231' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9231' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9231' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED"
+   ],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_48453.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_48453.json.gz"
+   ]
+  },
+  "06037": {
+   "county": "Los Angeles CA",
+   "state": "CA",
+   "points": [
+    {
+     "bg": "060379200472",
+     "lat": 34.410886,
+     "lng": -118.451681,
+     "service": "Los Angeles County Assessor parcels (LA County GIS)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "home value expected none (la_neighborhood_values.json); rent/homes not independently checked for LA"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 13 pts (current release); page: 13 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 12.6 pts below its 25% goal; box: \"12.6 pts below its 25% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [1,1,10]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 8 record(s) for CA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Los Angeles County · 060379200472; page \"Census area: Los Angeles County · block group 060379200472(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2964 for 06037; page \"HUD Fair Market Rent (FY2027): 1 bed $2,402 · 2 bed $2,964 · 3 bed $3,760/moLos Angeles-Long Beach-Glendale, CA HUD Metro FMR Area. HUD's voucher benchmark (ren\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 1444 ft; page \"Ground elevation: 1,444 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Geologic hazard zone — In state liquefaction hazard zone: new additions or ADUs require a site-specific geotechnical/soils investigation.",
+      "• Second building on the lot — The Assessor lists 5 structures (11,516 sq ft, 11,516 sq ft, 11,516 sq ft, 11,516 sq ft, 189,362 sq ft): an existing ADU or guest house may already be present.",
+      "• Detached ADU (backyard home) — Building footprint is not on file, so open yard space cannot be verified without a site plan or survey.",
+      "• Second story — Already 3 stories (inferred (assumption: GLA >= 3,800 sq ft suggests 3 stories)).",
+      "? Rooftop deck — Requires a flat roof or flat garage roof section."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "060372077121",
+     "lat": 34.04518,
+     "lng": -118.258052,
+     "service": "Los Angeles County Assessor parcels (LA County GIS)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "home value expected none (la_neighborhood_values.json); rent/homes not independently checked for LA"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 14 pts (current release); page: 14 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 14 pts below its 20% goal; box: \"14 pts below its 20% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [0,0,0.5]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 8 record(s) for CA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Los Angeles County · 060372077121; page \"Census area: Los Angeles County · block group 060372077121(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2964 for 06037; page \"HUD Fair Market Rent (FY2027): 1 bed $2,402 · 2 bed $2,964 · 3 bed $3,760/moLos Angeles-Long Beach-Glendale, CA HUD Metro FMR Area. HUD's voucher benchmark (ren\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 261 ft; page \"Ground elevation: 261 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Historic district or landmark — This lot is in a historic district or is a designated resource: exterior alterations require HPOZ design review, and SB 9 does not apply.",
+      "• Detached ADU (backyard home) — Building footprint is not on file, so open yard space cannot be verified without a site plan or survey.",
+      "• Second story — Already 3 stories (inferred (assumption: GLA >= 3,800 sq ft suggests 3 stories)).",
+      "? Rooftop deck — Requires a flat roof or flat garage roof section.",
+      "? Whole-house repiping — Built in 1924: galvanized steel supply piping common in pre-1975 homes.",
+      "✓ Add a bathroom — 98 bedrooms but only 70 baths: would fix the bedroom-to-bath imbalance. What an added bathroom is worth at resale is not on file (the survey figure used before could not be checked, and it was for Los Angeles only)."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "060375342023",
+     "lat": 33.956785,
+     "lng": -118.162212,
+     "service": "Los Angeles County Assessor parcels (LA County GIS)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "home value expected $650k (la_neighborhood_values.json); rent/homes not independently checked for LA"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 21 pts (current release); page: 21 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 21 pts below its 30% goal; box: \"21 pts below its 30% goal\" / \"+3.4°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [3.5,0.8333,37.3333]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 8 record(s) for CA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Los Angeles County · 060375342023; page \"Census area: Los Angeles County · block group 060375342023(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2964 for 06037; page \"HUD Fair Market Rent (FY2027): 1 bed $2,402 · 2 bed $2,964 · 3 bed $3,760/moLos Angeles-Long Beach-Glendale, CA HUD Metro FMR Area. HUD's voucher benchmark (ren\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area with reduced flood risk due to levee)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 112 ft; page \"Ground elevation: 112 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Geologic hazard zone — In state liquefaction hazard zone: new additions or ADUs require a site-specific geotechnical/soils investigation.",
+      "• Second building on the lot — The Assessor lists 2 structures (1,619 sq ft, 490 sq ft): an existing ADU or guest house may already be present.",
+      "• Detached ADU (backyard home) — Building footprint is not on file, so open yard space cannot be verified without a site plan or survey.",
+      "✓ Second story — One story (inferred (assumption: single-story layout)). Check the zone's height limit. Foundation inspection required to carry upper-floor loads.",
+      "? Rooftop deck — Requires a flat roof or flat garage roof section.",
+      "? Whole-house repiping — Built in 1937: galvanized steel supply piping common in pre-1975 homes.",
+      "✓ Add a bathroom — 4 bedrooms but only 2 baths: would fix the bedroom-to-bath imbalance. What an added bathroom is worth at resale is not on file (the survey figure used before could not be checked, and it was for Los Angeles only)."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://egispais.gis.lacounty.gov/pais/rest/services/PAIS/pais_sales_parcels/MapServer/0/query?f=json&where=AIN%3D%272844037012%27&outFields=*&returnGeometry=false' from origin 'ht",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9231' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://egispais.gis.lacounty.gov/pais/rest/services/PAIS/pais_sales_parcels/MapServer/0/query?f=json&where=AIN%3D%275144019023%27&outFields=*&returnGeometry=false' from origin 'ht",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9231' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9231' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://egispais.gis.lacounty.gov/pais/rest/services/PAIS/pais_sales_parcels/MapServer/0/query?f=json&where=AIN%3D%276230003017%27&outFields=*&returnGeometry=false' from origin 'ht",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)"
+   ],
+   "bundle_requests": []
+  }
+ }
+}

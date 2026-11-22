@@ -1501,6 +1501,8 @@ function auditSingleHouseParcel(input) {
       lotSplitFeasible,
       aduFeasible,
       statutoryNotes,
+      zoningOnFile: hasZoning,
+      baseZoningCode: rawZone,
     },
     roofCadastre: roofCalc,
     solarMicrogrid: {
@@ -1857,7 +1859,7 @@ function renderHouseAuditAside(audit) {
           ${top.unconfirmed_fields && top.unconfirmed_fields.length ? `• <span style="color:#b45309">Not confirmed: ${esc(top.unconfirmed_fields.join("; "))}</span><br>` : ""}
         ` : `<div style="color:#334155;">${z.statutoryNotes}</div>`}
         • <b>Lot split:</b> ${z.lotSplitFeasible ? "A state lot-split law may apply (zoning and lot size on file)." : "Not indicated by the records on file."}<br>
-        • <b>ADU:</b> ${z.aduFeasible ? "Zoning on file allows the screening engine to consider an ADU." : "Cannot be screened (zoning not on file or historic district)."}
+        • <b>ADU:</b> ${z.aduFeasible ? "Zoning on file allows the screening engine to consider an ADU." : (z.zoningOnFile ? `Not screened: zone ${esc(z.baseZoningCode)} is on file, but it is not a single-family or commercial zone the screen covers, or the lot is in a historic district.` : "Cannot be screened: zoning is not on file for this parcel.")}
       </div>
       <div style="font-size:10.5px;color:#64748b;background:#ffffff;padding:6px;border-radius:4px;border:1px solid #e2e8f0;">${z.privateCovenantsDisclaimer}</div>
     </div>
@@ -3393,22 +3395,9 @@ const p_city = m => (byId.get(selected) || { properties: {} }).properties.c || "
 function getActiveZoningSummary(m) {
   if (m.z && m.z.sh) return m.z;
   const city = m.c || m.city || countyOf() || "Local Jurisdiction";
-  if (typeof _dynZoneFeats !== "undefined" && _dynZoneFeats && _dynZoneFeats.length) {
-    const catCounts = {}, zoneCounts = {};
-    let total = 0;
-    for (const f of _dynZoneFeats) {
-      catCounts[f.cat] = (catCounts[f.cat] || 0) + 1;
-      zoneCounts[f.zone] = (zoneCounts[f.zone] || 0) + 1;
-      total++;
-    }
-    if (total > 0) {
-      const sh = {};
-      for (const [c, n] of Object.entries(catCounts)) sh[c] = +(n / total).toFixed(2);
-      const topZones = Object.entries(zoneCounts).sort((a, b) => b[1] - a[1]).slice(0, 4).map(([z, n]) => `${z} ${Math.round(n/total*100)}%`).join("; ");
-      return { sh, top: topZones, j: city };
-    }
-  }
-  // No zoning data loaded for this area: return nothing rather than a made-up state-typical zoning mix.
+  // The zones loaded for the map view (_dynZoneFeats) are the view's, not this area's, and can be left over from another
+  // county, so they are never used as the area's zoning (corrected 22 Nov 2026).
+  // No zoning shares for this area in the county file: return nothing rather than a made-up state-typical zoning mix.
   return null;
 }
 
@@ -3458,7 +3447,7 @@ function zoningSection(m) {
   const st = (typeof activeState === "function" ? activeState() : "") || "";
   const L_ = statuteBulletsForState(st);
   if (!L_.length) L_.push("No statewide housing law for this state is on file. The city's or county's zoning code decides what can be built.");
-  if (!z) h += `<p class="small muted">Zoning for this area is not on file.</p>`;
+  if (!z) h += `<p class="small muted">Zoning for this area is not on file: the county file has no zoning shares for this area. The zones drawn on the map are for the map view and are not used as this area's zoning.</p>`;
   h += `<div class="small" style="margin-top:8px"><b>Housing laws & rights:</b><ul style="margin:4px 0 0;padding-left:16px">${L_.map(x => `<li>${x}</li>`).join("")}</ul></div></div>`;
   return h;
 }
@@ -5903,6 +5892,7 @@ function playbookNotConfirmed(list) {
 }
 function computePropertyPlaybook(a, lot, F, zRule, ll, st) {
   a = a || {};
+  if (!ll && typeof activeHouse !== "undefined" && activeHouse && activeHouse.ll) ll = activeHouse.ll;   // the open lot's point, so a caller without one cannot lose the zone
   const hasLoc = !!(ll && Number.isFinite(ll.lat) && Number.isFinite(ll.lng));
   const nearestStn = (hasLoc && typeof findNearestTransitStation === "function") ? findNearestTransitStation(ll.lat, ll.lng) : null;
   const lotSqft = lot || null;
@@ -6408,6 +6398,7 @@ function renderHouse(box, a, lot, ll, st) {
       ${fact("Lot", lot ? `${fmtN(lot)} sq ft` : null, "parcel outline (County Assessor GIS)")}
       ${fact("Open yard (est.)", F.yard != null ? `${fmtN(Math.round(F.yard))} sq ft` : "Not on file (no building outline)", F.yard != null ? "lot minus buildings, less ~20% for setbacks" : null)}
       ${fact("Zoning", z ? `${esc(z.zone)}` : zs && zs.district ? esc(zs.district) : (m.z ? esc(m.z.top) : null), z ? `parcel zoning layer (${esc(z.juris || "city")})` : zs && zs.district ? (zs.juris.zone_source.kind === "point_layer" ? `${esc(zs.juris.name)} zoning map at this point` : `parcel record (${esc(zs.juris.zone_source.field)})`) : isOCArea(m) ? "neighborhood summary (preliminary)" : "block-group summary")}
+      ${z && !rule && !(zs && zs.std) ? fact("Zoning rules", `zone ${esc(z.zone)} is on file; its rules are not on file`, "no height, density or setback rules for this zone are in this page's data") : ""}
       ${fact("Height limit", hTxt, rule ? `${esc(rule.code_section)} (round-6 research, not yet checked against the code)` : ocH ? "city code summary (preliminary)" : zsH ? `${esc(zs.juris.cite_prefix || zs.juris.code)} ${esc(zsH.section)}` : null)}
       ${fact("Selling an ADU separately", (m.c || p.c || "").toLowerCase().trim() === "santa monica" ? "<span style='color:var(--ok-ink);font-weight:600'>Santa Monica allows an ADU to be sold separately as a condominium under SMMC § 9.31.026 (city ADU guide, Nov 2025)</span>" : (activeState() === "CA" ? "<span style='color:var(--ink-2)'>Only if the city has adopted an ADU condominium ordinance (Gov. Code § 66342, AB 1033) or a qualified nonprofit built the unit (§ 66341); otherwise an ADU can be rented but not sold apart from the main home (§ 66314(d)(1)). Whether this city has such an ordinance is not on file</span>" : "<span style='color:var(--ink-2)'>Not on file for this state: whether an ADU can be sold apart from the main home is set by local subdivision and condominium rules</span>"), activeState() === "CA" ? "California Gov. Code §§ 66314, 66341–66342" : "local code (no state rule on file)")}
       ${fact("Fire zone", rOff ? "Not checked for this lot" : !R ? "checking…" : (R.fire ? (R.fire.vh ? "Very High Fire Hazard Severity Zone" : "Not in Very High zone") : "Not checked for this lot"), (R && R.fire) ? (activeState() === "CA" ? "CAL FIRE Fire Hazard Severity Zones (SRA 2024 / LRA 2025)" : "USFS Wildfire Risk to Communities") : null)}
@@ -9507,7 +9498,7 @@ function serializeLiveAdvisorContext() {
     payload.parcel = {
       parcelId: a.AIN || null, address: a.SitusFullAddress || null,
       useType: a.UseType || null, useDescription: a.UseDescription || null,
-      zoningCode: (a.ZoneCode && !/^unzoned$/i.test(a.ZoneCode)) ? a.ZoneCode : null,
+      zoningCode: (() => { let zl = null; try { zl = ah.ll && typeof zoneAt === "function" ? zoneAt(ah.ll) : null; } catch (e) {} return (zl && zl.zone) || ((a.ZoneCode && !/^unzoned$/i.test(a.ZoneCode)) ? a.ZoneCode : null); })(),   // the zone at the lot, as the house panel shows it
       lotSqft: num(ah.lot || a.LotSqft), livingSqft: num(F.bldg), yearBuilt: num(F.yb), bedrooms: num(F.beds), bathrooms: num(F.baths),
       stories: num(F.stories), units: num(a.Units),
       assessorValue: num(((+a.Roll_LandValue || 0) + (+a.Roll_ImpValue || 0)) || a.Roll_TotalValue),
@@ -10952,6 +10943,7 @@ function buildStamp(override) {
 }
 function switchCounty(c, wantBgId) {
   performance.mark("sw:start"); activeCounty = c;
+  _dynZoneFeats = [];   // zones loaded for the other county's map view
   // A block group still selected from another county made activeFips() answer with that county, so the header kept its name.
   if (c === "oc" && typeof selected !== "undefined" && selected && D_OC && D_OC.details && !D_OC.details[selected]) selected = null;
   { const qEl = $("#q"); if (qEl && !(wantBgId || "")) qEl.value = ""; }

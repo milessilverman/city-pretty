@@ -201,6 +201,29 @@ test("a missing figure says 'not on file' and why; zoning never borrows the zone
   expect(html).toContain("no zoning shares for this area in the county file");
 });
 
+// 22 Nov 2026 (docs/audit/usability-2026-11-20.md): after viewing Austin, a Kent County MD area's Zoning section listed the
+// zones loaded for the map view as that area's "Predominant zoning" (SF-3-NP).
+test("the Zoning section never shows zones from the map view as the area's own, and a county switch drops them", async ({ page }) => {
+  await openPage(page);
+  await new Steps(page).search("Silver Lake");
+  const html = await page.evaluate(() => {
+    (0, eval)("_dynZoneFeats = [{ cat: 'single-family', zone: 'SF-3-NP' }, { cat: 'single-family', zone: 'SF-3-NP' }]");
+    const out = (0, eval)("zoningSection")({ c: "Rock Hall" });
+    (0, eval)("_dynZoneFeats = []");
+    return out as string;
+  });
+  expect(html).not.toContain("SF-3-NP");
+  expect(html).not.toContain("Predominant zoning");
+  expect(html).toContain("Zoning for this area is not on file: the county file has no zoning shares for this area");
+  // the same panel in the open page: zones left in the view when the county changes are gone afterwards
+  const left = await page.evaluate(() => {
+    (0, eval)("_dynZoneFeats = [{ cat: 'single-family', zone: 'SF-3-NP' }]");
+    (0, eval)("switchCounty")("la");
+    return (0, eval)("_dynZoneFeats.length") as number;
+  });
+  expect(left).toBe(0);
+});
+
 test("the jump row opens a section in one click and names the open area", async ({ page }) => {
   await openPage(page);
   await new Steps(page).search("Echo Park");
