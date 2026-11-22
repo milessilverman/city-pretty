@@ -785,3 +785,136 @@ Files: `data/backtests/midwest_nd_census_spot_2026-11-22.json`, `data/backtests/
 
 Files: `data/backtests/midwest_wi_census_spot_2026-11-22.json`, `data/backtests/midwest_osm_xcheck_55001_2026-11-22.json`,
 `..._55003_...`, `data/backtests/live_check_panels_2026-11-22_midwest_wi.json`.
+
+## Missouri (103 of 103 built, none withheld)
+
+| County | People (ACS 2020-24) | Block groups | Data file (gzip, bytes) | Completeness tier | Canopy block groups (2025 release) |
+|---|---|---|---|---|---|
+| Adair County (29001) | 25,301 | 23 | 191,178 | C | 17 |
+| Andrew County (29003) | 18,065 | 14 | 188,111 | D | 8 |
+| Atchison County (29005) | 5,187 | 7 | 141,910 | D | 0 |
+| Audrain County (29007) | 24,548 | 24 | 326,092 | D | 15 |
+| Barry County (29009) | 35,033 | 28 | 326,487 | D | 7 |
+| Barton County (29011) | 11,690 | 12 | 136,300 | D | 0 |
+| Bates County (29013) | 16,186 | 14 | 249,536 | D | 0 |
+| Benton County (29015) | 20,151 | 19 | 370,171 | D | 0 |
+| Bollinger County (29017) | 10,559 | 11 | 223,300 | D | 0 |
+| Buchanan County (29021) | 83,568 | 75 | 341,762 | D | 67 |
+| Butler County (29023) | 42,020 | 39 | 333,096 | C | 25 |
+| Caldwell County (29025) | 8,927 | 10 | 160,444 | D | 0 |
+| Callaway County (29027) | 44,741 | 33 | 522,285 | C | 19 |
+| Camden County (29029) | 43,667 | 40 | 708,000 | D | 18 |
+| Cape Girardeau County (29031) | 82,735 | 59 | 387,594 | C | 47 |
+| Carroll County (29033) | 8,411 | 11 | 188,514 | D | 0 |
+| Carter County (29035) | 5,297 | 6 | 194,541 | D | 0 |
+| Cedar County (29039) | 14,615 | 14 | 177,199 | D | 0 |
+| Chariton County (29041) | 7,390 | 9 | 295,020 | C | 0 |
+| Christian County (29043) | 92,915 | 52 | 471,918 | C | 32 |
+| Clark County (29045) | 6,675 | 7 | 267,731 | D | 0 |
+| Clinton County (29049) | 21,414 | 17 | 167,058 | D | 5 |
+| Cole County (29051) | 77,032 | 60 | 469,256 | C | 49 |
+| Cooper County (29053) | 16,824 | 14 | 269,010 | C | 9 |
+| Crawford County (29055) | 22,797 | 21 | 426,378 | D | 2 |
+| Dade County (29057) | 7,641 | 9 | 161,346 | D | 0 |
+| Dallas County (29059) | 17,551 | 15 | 266,355 | D | 0 |
+| Daviess County (29061) | 8,477 | 8 | 168,139 | C | 0 |
+| DeKalb County (29063) | 10,876 | 9 | 179,991 | D | 2 |
+| Dent County (29065) | 14,539 | 14 | 403,964 | D | 9 |
+| Douglas County (29067) | 11,965 | 11 | 437,061 | D | 0 |
+| Dunklin County (29069) | 27,493 | 33 | 206,612 | D | 13 |
+| Gasconade County (29073) | 14,746 | 14 | 251,098 | C | 0 |
+| Gentry County (29075) | 6,245 | 7 | 143,057 | D | 0 |
+| Grundy County (29079) | 9,787 | 12 | 152,686 | D | 8 |
+| Harrison County (29081) | 8,190 | 11 | 201,758 | D | 0 |
+| Henry County (29083) | 22,328 | 21 | 277,376 | D | 9 |
+| Hickory County (29085) | 8,585 | 9 | 250,560 | D | 0 |
+| Holt County (29087) | 4,240 | 6 | 178,028 | D | 0 |
+| Howard County (29089) | 10,147 | 10 | 276,923 | D | 0 |
+| Howell County (29091) | 40,383 | 33 | 435,562 | D | 17 |
+| Iron County (29093) | 9,446 | 9 | 387,308 | C | 0 |
+| Johnson County (29101) | 54,732 | 40 | 347,478 | C | 22 |
+| Knox County (29103) | 3,756 | 5 | 125,186 | D | 0 |
+| Laclede County (29105) | 36,390 | 31 | 322,325 | D | 18 |
+| Lafayette County (29107) | 33,115 | 30 | 336,600 | D | 11 |
+| Lawrence County (29109) | 38,593 | 34 | 173,127 | D | 12 |
+| Lewis County (29111) | 9,924 | 11 | 133,056 | D | 0 |
+| Lincoln County (29113) | 63,057 | 37 | 460,348 | D | 17 |
+| Linn County (29115) | 11,852 | 16 | 295,660 | C | 7 |
+| Livingston County (29117) | 14,364 | 14 | 186,166 | D | 11 |
+| McDonald County (29119) | 23,701 | 17 | 189,471 | D | 0 |
+| Macon County (29121) | 15,163 | 17 | 276,239 | C | 7 |
+| Madison County (29123) | 12,729 | 12 | 187,021 | D | 7 |
+| Maries County (29125) | 8,450 | 7 | 191,207 | D | 0 |
+| Marion County (29127) | 28,457 | 29 | 276,337 | C | 19 |
+| Mercer County (29129) | 3,482 | 4 | 122,223 | D | 0 |
+| Miller County (29131) | 25,269 | 23 | 340,017 | D | 11 |
+| Mississippi County (29133) | 11,902 | 13 | 145,917 | C | 0 |
+| Moniteau County (29135) | 15,262 | 12 | 341,714 | C | 0 |
+| Monroe County (29137) | 8,734 | 11 | 240,863 | D | 0 |
+| Montgomery County (29139) | 11,426 | 14 | 255,991 | C | 0 |
+| Morgan County (29141) | 21,717 | 21 | 431,015 | D | 0 |
+| New Madrid County (29143) | 15,731 | 21 | 242,185 | D | 2 |
+| Newton County (29145) | 60,118 | 46 | 300,679 | D | 26 |
+| Nodaway County (29147) | 20,774 | 19 | 204,856 | D | 13 |
+| Oregon County (29149) | 8,673 | 10 | 272,735 | D | 0 |
+| Osage County (29151) | 13,402 | 11 | 391,754 | C | 0 |
+| Ozark County (29153) | 8,873 | 10 | 316,492 | D | 0 |
+| Pemiscot County (29155) | 14,958 | 19 | 132,729 | D | 7 |
+| Perry County (29157) | 18,976 | 16 | 290,161 | D | 9 |
+| Pettis County (29159) | 43,397 | 39 | 298,217 | C | 31 |
+| Phelps County (29161) | 45,194 | 42 | 471,154 | D | 24 |
+| Pike County (29163) | 17,711 | 17 | 410,689 | D | 0 |
+| Polk County (29167) | 32,444 | 23 | 401,738 | D | 9 |
+| Pulaski County (29169) | 53,894 | 32 | 322,485 | D | 20 |
+| Putnam County (29171) | 4,642 | 7 | 172,617 | D | 0 |
+| Ralls County (29173) | 10,428 | 10 | 228,158 | D | 1 |
+| Randolph County (29175) | 24,365 | 23 | 198,994 | C | 15 |
+| Ray County (29177) | 23,145 | 21 | 245,964 | D | 9 |
+| Reynolds County (29179) | 6,010 | 6 | 485,271 | D | 0 |
+| Ripley County (29181) | 10,708 | 14 | 156,515 | D | 0 |
+| St. Clair County (29185) | 9,587 | 10 | 188,019 | D | 0 |
+| Ste. Genevieve County (29186) | 18,571 | 17 | 348,225 | D | 5 |
+| St. Francois County (29187) | 66,999 | 48 | 401,467 | D | 35 |
+| Saline County (29195) | 23,231 | 24 | 375,933 | C | 14 |
+| Schuyler County (29197) | 4,038 | 5 | 99,682 | D | 0 |
+| Scotland County (29199) | 4,686 | 6 | 115,289 | D | 0 |
+| Scott County (29201) | 37,933 | 36 | 226,885 | D | 28 |
+| Shannon County (29203) | 7,177 | 8 | 543,637 | D | 0 |
+| Shelby County (29205) | 5,986 | 7 | 162,069 | D | 0 |
+| Stoddard County (29207) | 28,470 | 27 | 269,170 | D | 12 |
+| Stone County (29209) | 32,048 | 33 | 423,317 | C | 13 |
+| Sullivan County (29211) | 5,857 | 8 | 194,495 | D | 0 |
+| Taney County (29213) | 56,529 | 47 | 426,254 | C | 35 |
+| Texas County (29215) | 25,161 | 22 | 494,292 | D | 1 |
+| Vernon County (29217) | 19,687 | 18 | 208,379 | D | 11 |
+| Warren County (29219) | 37,177 | 25 | 435,789 | C | 10 |
+| Washington County (29221) | 23,470 | 19 | 374,946 | D | 0 |
+| Wayne County (29223) | 10,862 | 16 | 288,074 | D | 0 |
+| Webster County (29225) | 40,500 | 24 | 325,442 | D | 8 |
+| Worth County (29227) | 1,934 | 3 | 107,338 | D | 0 |
+| Wright County (29229) | 18,965 | 19 | 238,118 | D | 8 |
+| **103 counties** | **2,342,773** | **2,056** | **29,078,889** | 25 C, 78 D | 866 |
+
+- Missouri cut alone: 112 s, peak osmium memory 4.15 GB, 248 MB (cut while Wisconsin was building; it was the last
+  state, so the regional file was deleted after it). Build: fetch 9-45 s, build 141-194 s per county, four at a time,
+  74 min from the first county to the last.
+- Bus frequency: 99 counties have none (no feed that is read has a stop with 7-9 am departures in or near the county);
+  4 have feeds. Rail distance: 79 counties have no station in or near them.
+- Census spot check: 103 counties, 2,444 of 2,444 values equal (0% mismatch). Tract-median flags: 103 counties added,
+  no existing county changed, 0 values matching neither the block group nor the tract.
+- OpenStreetMap ID for ID vs live Overpass (maps.mail.ru): Adair 2,101 = 2,101 roads, 1 = 1 bus stop; Andrew 2,531 =
+  2,531 roads, 0 = 0 bus stops (0 missing, 0 extra).
+- Crash counts: Missouri has no state crash source connected.
+- Live check from R2 (`LIVE_PORT=9191`): Buchanan and Cole, 3 points each. None of the 103 counties has a parcel
+  service on the page, so the house-panel rows (Census area, HUD rent, FEMA, USGS) are not checkable; neighborhood,
+  canopy, canopy goal, crash text, state laws and console pass at all 6 points (30 pass, 0 fail, 24 not checkable). Each
+  data file came from the r2.dev address (GET 200).
+- Tests: `app/data/intercity_transit_corridors.json`: the stops Hannibal MO (Marion, 29127) and St. Joseph MO (Buchanan,
+  29021) now say `county_on_page: true` (2 lines; `tests/unit/transitCorridors.test.ts` checks the flag against the
+  manifest).
+- R2: before 1,543,946,157 bytes (2,269 objects); dry run "104 files, net +0.029 GB, projected 1.573 GB"; after
+  1,573,050,945 bytes (2,372 objects): 29,104,788 bytes added (the 103 data files, 29,078,889, plus the larger
+  `manifest.json`).
+
+Files: `data/backtests/midwest_mo_census_spot_2026-11-22.json`, `data/backtests/midwest_osm_xcheck_29001_2026-11-22.json`,
+`..._29003_...`, `data/backtests/live_check_panels_2026-11-22_midwest_mo.json`.
