@@ -790,7 +790,7 @@ function render() {
   loadData().then(d => {
     if (iv.view !== "invest") return;
     const r2 = ready(); if (r2.state !== "ok") { render(); return; }
-    if (window.StationSites && !window.StationSites.cached(r2.fips)) window.StationSites.load(r2.fips).then(() => window.StationSites.loadPlaces ? window.StationSites.loadPlaces(r2.fips) : null).then(() => window.StationSites.loadZoning ? window.StationSites.loadZoning(r2.fips) : null).then(() => { if (iv.view === "invest") { iv.key = null; pc.key = null; render(); } });
+    if (window.StationSites && !window.StationSites.cached(r2.fips)) window.StationSites.load(r2.fips).then(() => Promise.all([window.StationSites.loadPlaces ? window.StationSites.loadPlaces(r2.fips) : null, window.StationSites.loadZoning ? window.StationSites.loadZoning(r2.fips) : null])).then(() => { if (iv.view === "invest") { iv.key = null; pc.key = null; render(); } });
     const p = parcelFacts();
     const key = [r2.fips, iv.hood, p && p.facts.parcel_id, p && p.facts.base_zoning_code, p && p.facts.exclusions && JSON.stringify(p.facts.exclusions), d.laws ? d.laws.length : -1, d.verification ? 1 : 0, typeof SITES !== "undefined" && SITES ? 1 : 0].join("|");
     if (key !== iv.key || !iv.model) { iv.model = build(r2.fips, r2.B, d); iv.key = key; }
@@ -800,6 +800,8 @@ function render() {
     el.innerHTML = `<div class="iv-wrap">${headerHTML(m, open)}<div class="iv-cards">${whereCard(m, open)}${buildCard(m, open)}${sitesCard(m, open)}${houseCard(m, open)}${transitCard(m, open)}</div>${coursesSection(m, open)}
       <p class="iv-foot">Everything here comes from public data and the tests described above. It is a starting point for due diligence, not advice. A figure marked Not on file is missing from our data, and we do not fill gaps with guesses.</p></div>`;
     if (!fresh) window.scrollTo(0, y);
+    // a re-render that lands while a section jump is scrolling (late site files) would stop the jump half way
+    if (iv.jumpTo) { const c = document.getElementById(iv.jumpTo); if (c && c.scrollIntoView) c.scrollIntoView({ block: "start" }); }
     window.__cpDecisionBrief = m.brief;
     if (iv.want) {   // opened from a neighborhood panel: land on Build for that area, or say why it is another one
       const w = iv.want; iv.want = null;
@@ -849,7 +851,7 @@ function onClick(e) {
   const d = t.dataset;
   if (d.view) { if (d.view === "invest") setInvest(true); else if (iv.view === "invest") setInvest(false); return; }
   if (!host() || !host().contains(t)) return;
-  if (d.ivJump) { const c = document.getElementById(d.ivJump); if (c && c.scrollIntoView) c.scrollIntoView({ block: "start", behavior: "smooth" }); }
+  if (d.ivJump) { const c = document.getElementById(d.ivJump); if (c && c.scrollIntoView) c.scrollIntoView({ block: "start", behavior: "smooth" }); iv.jumpTo = d.ivJump; clearTimeout(iv.jumpT); iv.jumpT = setTimeout(() => { iv.jumpTo = null; }, 2500); }
   else if (d.ivBudget != null) { iv.budget = +d.ivBudget; render(); }
   else if (d.ivHood) { iv.hood = d.ivHood; iv.moreIdeas = false; render(); const c = document.getElementById("iv-build"); if (c && c.scrollIntoView) c.scrollIntoView({ block: "start" }); }
   else if (d.ivMap) leaveToMap(d.ivMap);

@@ -108,8 +108,10 @@ site asks for bulk download instead of page reads).
   `attachZoning` sets `site.zoning`, `baseZoning`, `zoningCategory`, `cityName`, `zoningLimits` (`limitsOf`: only what the
   row states, each with section, quote, URL; a zone with no row gets `notDetermined` with the reason and first URL tried).
   The site's fact list gains a "Zoning" row (zone, where read, who zones it, category or why not).
-- `app/invest.js` (3 small edits): loads the zoning after the places file; passes `zoning_limits` in the parcel facts and
-  the parcel-to-outline ratio. `app/app.js` untouched.
+- `app/invest.js` (small edits): loads the zoning file together with the places file; passes `zoning_limits` in the
+  parcel facts and the parcel-to-outline ratio; a section jump is re-applied if a late re-render lands while it scrolls
+  (the first full browser run showed a bare URL in a fact row widening the phone layout, and the second a jump stopped
+  half way by the later render 1 time in 4; both fixed, the jump test passed 10 of 10 after). `app/app.js` untouched.
 - `src/engines/projectCardEngine.js`: the statute engine still runs first and decides wherever a state law applies. With no
   applicable law, a multifamily or mixed-use code row whose text permits housing makes the multifamily courses' legal
   basis "zoning on file" with the code quote; homes = the code's density x the mapped lot's area (modelled), floor area =
