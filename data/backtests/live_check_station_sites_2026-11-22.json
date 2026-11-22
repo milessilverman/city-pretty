@@ -1,0 +1,212 @@
+{
+ "run_on": "2026-11-22T09:59:53.602Z",
+ "port": 9181,
+ "places": {
+  "pipeline_austin": {
+   "fips": "48453",
+   "county": "Travis County",
+   "loaded": 41,
+   "total": 41,
+   "leftOut": 0,
+   "listedRows": 4,
+   "firstRows": [
+    "Golf course near Montopolis / Crossing Place Golf course",
+    "Surface parking lot near Waterfront / Lady Bird Lake Surface parking lot",
+    "Surface parking lot near East Riverside & Pleasant Valley (Hub) Surface parking lot",
+    "Surface parking lot near Waterfront / Lady Bird Lake Surface parking lot"
+   ],
+   "note": "Includes 41 of 41 sites near stations and stop cities (largest first), measured from OpenStreetMap and the county parcel record.",
+   "cardsOnPage": 8,
+   "stationSiteCards": 6,
+   "cardSubjects": [
+    {
+     "id": "ss:48453:way/30769048",
+     "name": "Golf course near Montopolis / Crossing Place",
+     "acres": 151.73,
+     "railStationMi": null,
+     "courses": [
+      "Hold and rent the spaces"
+     ],
+     "notAssessed": [
+      "Add a backyard home (ADU): the zoning code is not on file for this site",
+      "Split or add units under state law (and with an affordable share): the zoning code is not on file for this site",
+      "Small multifamily (and with an affordable share): the zoning code is not on file for this site"
+     ]
+    },
+    {
+     "id": "ss:48453:way/187669417",
+     "name": "Surface parking lot near Waterfront / Lady Bird Lake",
+     "acres": 3.44,
+     "railStationMi": null,
+     "courses": [
+      "Hold and rent the spaces"
+     ],
+     "notAssessed": [
+      "Add a backyard home (ADU): the zoning code is not on file for this site",
+      "Split or add units under state law (and with an affordable share): the zoning code is not on file for this site",
+      "Small multifamily (and with an affordable share): the zoning code is not on file for this site"
+     ]
+    },
+    {
+     "id": "ss:48453:way/701662566",
+     "name": "Surface parking lot near East Riverside & Pleasant Valley (Hub)",
+     "acres": 3.37,
+     "railStationMi": null,
+     "courses": [
+      "Hold and rent the spaces"
+     ],
+     "notAssessed": [
+      "Add a backyard home (ADU): the zoning code is not on file for this site",
+      "Split or add units under state law (and with an affordable share): the zoning code is not on file for this site",
+      "Small multifamily (and with an affordable share): the zoning code is not on file for this site"
+     ]
+    }
+   ],
+   "homesOrMarginOnStationSite": false,
+   "text": "Properties\n\nGolf courses, parking lots and vacant land to redevelop. The facts (size, place) carry a verification status. The record's model estimates (homes it could hold, margin, land value) are listed as unverified, so no figure is shown for them.\n\nIncludes 41 of 41 sites near stations and stop cities (largest first), measured from OpenStreetMap and the county parcel record.\n\nGolf course near Montopolis / Crossing Place\nGolf course\nSIZE 151.7 acres Measured source\nFacts: measured; parcel record matched\n\nmeasured from OpenStreetMap and the county parcel record; the project's stop location is unverified\n\nDetails and sources\n\nNear Montopolis / Crossing Place, measured from OpenStreetMap and the county parcel record. No home count, value if built or margin is estimated for it.\n\nFacts verification: measured; parcel record matched, checked 2026-11-22 OpenStreetMap element\n\nNEAR\nMontopolis / Crossing Place (station of a local project on file; Austin Light Rail Phase 1 (Project Connect)), 323 m from the middle of the site. The project's own record marks this stop location as unverified\nALSO WITHIN RANGE\nYellow Jacket / Riverside Terminus (pipeline_station, 1187 m)\nFROM OPENSTREETMAP\nway/30769048, tagged leisure=golf_course. Area measured from the outline: 151.73 acres; buildings cover 0% of it. Data dated 2026-11-21 (openstreetmap.fr extract)\nCOUNTY PARCEL RECORD\nparcel 287816; parcel area 136.93 acres (0.9 times the outline); retrieved 2026-11-22\nLAND USE ON THE RECORD\nNot on file (the service gives no use field, or it was blank)\nOWNER ON THE RECORD\nNot on file (the service gives no owner field, or it was blank)\nZONING CODE ON THE RECORD\nNot on file (the service gives no zoning field, or it was blank)\nASSESSED LAND VALUE\nNot on file (the service gives no land value field, or it was blank)\nSurface parking lot near Waterfront / Lady Bird Lake\nSurface parking lot\nSIZE 3.4 acres Measured source\nFacts: measured; parcel record matched\n\nmeasured from OpenStreetMap and the county parcel record; the project's stop location is unverified\n\nDetails and sources\nSurface parking lot near East Riverside & Pleasant Valley (Hub)\nSurface parking lot\nSIZE 3.4 acres Measured source\nFacts: measured; parcel record matched\n\nmeasured from OpenStreetMap and the county parcel record; the project's stop location is unverified\n\nDetails and sources\nSurface parking lot near Waterfront / Lady Bird Lake\nSurface parking lot\nSIZE 3.2 acres Measured source\nFacts: measured; parcel record found, larger or smaller than the map outline\n\nmeasured from OpenStreetMap and the county parcel record; the",
+   "badText": 0,
+   "screenshot": "data/backtests/station_sites_pipeline_austin.png",
+   "cardScreenshot": "data/backtests/station_sites_pipeline_austin_card.png",
+   "errors": [],
+   "shown": true
+  },
+  "corridor_nashville": {
+   "fips": "47037",
+   "county": "Davidson County",
+   "loaded": 85,
+   "total": 85,
+   "leftOut": 0,
+   "listedRows": 4,
+   "firstRows": [
+    "Surface parking lot near Nashville stop city centre Surface parking lot",
+    "Surface parking lot near Nashville stop city centre Surface parking lot",
+    "Surface parking lot near Nashville stop city centre Surface parking lot",
+    "Surface parking lot near Nashville stop city centre Surface parking lot"
+   ],
+   "note": "Includes 85 of 85 sites near stations and stop cities (largest first), measured from OpenStreetMap and the county parcel record.",
+   "cardsOnPage": 8,
+   "stationSiteCards": 6,
+   "cardSubjects": [
+    {
+     "id": "ss:47037:way/208763625",
+     "name": "Surface parking lot near Nashville stop city centre",
+     "acres": 4.95,
+     "railStationMi": null,
+     "courses": [
+      "Hold and rent the spaces"
+     ],
+     "notAssessed": [
+      "Add a backyard home (ADU): the zoning code is not on file for this site",
+      "Split or add units under state law (and with an affordable share): the zoning code is not on file for this site",
+      "Small multifamily (and with an affordable share): the zoning code is not on file for this site"
+     ]
+    },
+    {
+     "id": "ss:47037:way/352843854",
+     "name": "Surface parking lot near Nashville stop city centre",
+     "acres": 4.17,
+     "railStationMi": null,
+     "courses": [
+      "Hold and rent the spaces"
+     ],
+     "notAssessed": [
+      "Add a backyard home (ADU): the zoning code is not on file for this site",
+      "Split or add units under state law (and with an affordable share): the zoning code is not on file for this site",
+      "Small multifamily (and with an affordable share): the zoning code is not on file for this site"
+     ]
+    },
+    {
+     "id": "ss:47037:way/1360168236",
+     "name": "Surface parking lot near Nashville stop city centre",
+     "acres": 3.92,
+     "railStationMi": null,
+     "courses": [
+      "Hold and rent the spaces"
+     ],
+     "notAssessed": [
+      "Add a backyard home (ADU): the zoning code is not on file for this site",
+      "Split or add units under state law (and with an affordable share): the zoning code is not on file for this site",
+      "Small multifamily (and with an affordable share): the zoning code is not on file for this site"
+     ]
+    }
+   ],
+   "homesOrMarginOnStationSite": false,
+   "text": "Properties\n\nGolf courses, parking lots and vacant land to redevelop. The facts (size, place) carry a verification status. The record's model estimates (homes it could hold, margin, land value) are listed as unverified, so no figure is shown for them.\n\nIncludes 85 of 85 sites near stations and stop cities (largest first), measured from OpenStreetMap and the county parcel record.\n\nSurface parking lot near Nashville stop city centre\nSurface parking lot\nSIZE 5.0 acres Measured source\nFacts: measured; parcel record matched\n\nmeasured from OpenStreetMap and the county parcel record\n\nDetails and sources\n\nNear Nashville stop city centre, measured from OpenStreetMap and the county parcel record. No home count, value if built or margin is estimated for it.\n\nFacts verification: measured; parcel record matched, checked 2026-11-22 OpenStreetMap element\n\nNEAR\nNashville stop city centre (stop city centre, not a station site; Atlanta-Chattanooga-Nashville-Memphis Corridor), 1,471 m from the middle of the site\nFROM OPENSTREETMAP\nway/208763625, tagged amenity=parking (no parking tag). Area measured from the outline: 4.95 acres; buildings cover 0% of it. Data dated 2026-11-22 (Overpass mirror maps.mail.ru)\nCOUNTY PARCEL RECORD\nparcel 100627; parcel area 7 acres (1.41 times the outline); retrieved 2026-11-22\nLAND USE ON THE RECORD\nPARKING LOT, code 048\nOWNER ON THE RECORD\ntrust, estate or co-owners (name not stored)\nZONING CODE ON THE RECORD\nIR\nASSESSED LAND VALUE\n$4,719,200 (the county's figure for the parcel)\nSurface parking lot near Nashville stop city centre\nSurface parking lot\nSIZE 4.2 acres Measured source\nFacts: measured; parcel record found, larger or smaller than the map outline\n\nmeasured from OpenStreetMap and the county parcel record\n\nDetails and sources\nSurface parking lot near Nashville stop city centre\nSurface parking lot\nSIZE 3.9 acres Measured source\nFacts: measured; parcel record matched\n\nmeasured from OpenStreetMap and the county parcel record\n\nDetails and sources\nSurface parking lot near Nashville stop city centre\nSurface parking lot\nSIZE 3.7 acres Measured source\nFacts: measured; parcel record found, larger or smaller than the map outline\n\nmeasured from OpenStreetMap and the county parcel record\n\nDetails and sources\nShow all 85 sites\nNot on file yet (2) - what data is missing",
+   "badText": 0,
+   "screenshot": "data/backtests/station_sites_corridor_nashville.png",
+   "cardScreenshot": "data/backtests/station_sites_corridor_nashville_card.png",
+   "errors": [],
+   "shown": true
+  },
+  "existing_dallas": {
+   "fips": "48113",
+   "county": "Dallas County",
+   "loaded": 756,
+   "total": 796,
+   "leftOut": 40,
+   "listedRows": 6,
+   "firstRows": [
+    "Golf course near North Carrollton/Frankford Golf course",
+    "Golf course near CentrePort/DFW Airport Golf course",
+    "Golf course near Urban Towers Golf course",
+    "Golf course near Dallas College North Lake Campus Golf course",
+    "Audelia Branch creek",
+    "Woodbridge Branch creek"
+   ],
+   "note": "Includes 150 of 796 sites near stations and stop cities (largest first), measured from OpenStreetMap and the county parcel record.",
+   "cardsOnPage": 11,
+   "stationSiteCards": 6,
+   "cardSubjects": [
+    {
+     "id": "ss:48113:way/475716356",
+     "name": "Golf course near North Carrollton/Frankford",
+     "acres": 356.27,
+     "railStationMi": null,
+     "courses": [
+      "Hold and rent the spaces"
+     ],
+     "notAssessed": [
+      "Add a backyard home (ADU): the zoning code is not on file for this site",
+      "Split or add units under state law (and with an affordable share): the zoning code is not on file for this site",
+      "Small multifamily (and with an affordable share): the zoning code is not on file for this site"
+     ]
+    },
+    {
+     "id": "ss:48113:way/28541360",
+     "name": "Golf course near CentrePort/DFW Airport",
+     "acres": 206.3,
+     "railStationMi": null,
+     "courses": [
+      "Hold and rent the spaces"
+     ],
+     "notAssessed": [
+      "Add a backyard home (ADU): the zoning code is not on file for this site",
+      "Split or add units under state law (and with an affordable share): the zoning code is not on file for this site",
+      "Small multifamily (and with an affordable share): the zoning code is not on file for this site"
+     ]
+    },
+    {
+     "id": "ss:48113:relation/5281830",
+     "name": "Golf course near Urban Towers",
+     "acres": 178.35,
+     "railStationMi": null,
+     "courses": [
+      "Hold and rent the spaces"
+     ],
+     "notAssessed": [
+      "Add a backyard home (ADU): the zoning code is not on file for this site",
+      "Split or add units under state law (and with an affordable share): the zoning code is not on file for this site",
+      "Small multifamily (and with an affordable share): the zoning code is not on file for this site"
+     ]
+    }
+   ],
+   "homesOrMarginOnStationSite": false,
+   "text": "Properties\n\nGolf courses, parking lots and vacant land to redevelop. The facts (size, place) carry a verification status. The record's model estimates (homes it could hold, margin, land value) are listed as unverified, so no figure is shown for them.\n\nIncludes 150 of 796 sites near stations and stop cities (largest first), measured from OpenStreetMap and the county parcel record. 40 smaller ones are not in the data file (size limit).\n\nGolf course near North Carrollton/Frankford\nGolf course\nSIZE 356.3 acres Measured source\nFacts: measured from OpenStreetMap; no parcel record matched\n\nmeasured from OpenStreetMap and the county parcel record\n\nDetails and sources\n\nNear North Carrollton/Frankford, measured from OpenStreetMap and the county parcel record. No home count, value if built or margin is estimated for it.\n\nFacts verification: measured from OpenStreetMap; no parcel record matched, checked 2026-11-21 OpenStreetMap element\n\nNEAR\nNorth Carrollton/Frankford (existing rail station), 1,329 m from the middle of the site\nFROM OPENSTREETMAP\nway/475716356, tagged leisure=golf_course. Area measured from the outline: 356.27 acres; buildings cover 0% of it. Data dated 2026-11-21 (openstreetmap.fr extract)\nCOUNTY PARCEL RECORD\nNot on file (the service has no parcel at the polygon's interior point (road, water, or outside the service's area))\nGolf course near CentrePort/DFW Airport\nGolf course\nSIZE 206.3 acres Measured source\nFacts: measured from OpenStreetMap; no parcel record matched\n\nmeasured from OpenStreetMap and the county parcel record\n\nDetails and sources\nGolf course near Urban Towers\nGolf course\nSIZE 178.3 acres Measured source\nFacts: measured from OpenStreetMap; no parcel record matched\n\nmeasured from OpenStreetMap and the county parcel record\n\nDetails and sources\nGolf course near Dallas College North Lake Campus\nGolf course\nSIZE 177.9 acres Measured source\nFacts: measured from OpenStreetMap; no parcel record matched\n\nmeasured from OpenStreetMap and the county parcel record\n\nDetails and sources\nShow all 150 sites\nSmall public sites near the selected area\nAudelia Branch\ncreek\nCOST $1.5M Modelled source to $2.8M Modelled source\nDetails and sources\nWoodbridge Branch\ncreek\nCOST $840k Modelled source to $1.5M Modelled source\nDetails and sources",
+   "badText": 0,
+   "screenshot": "data/backtests/station_sites_existing_dallas.png",
+   "cardScreenshot": "data/backtests/station_sites_existing_dallas_card.png",
+   "errors": [],
+   "shown": true
+  }
+ }
+}

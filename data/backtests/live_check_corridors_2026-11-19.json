@@ -1,0 +1,107 @@
+{
+ "ran": "2026-11-19T23:21:47.076Z",
+ "results": [
+  {
+   "fips": "48187",
+   "rows": [
+    "Houston to San Antonio Corridor"
+   ],
+   "expectedNames": [
+    "Houston to San Antonio Corridor"
+   ],
+   "rowsOk": true,
+   "sentences": [
+    {
+     "n": 10,
+     "city": "Seguin"
+    }
+   ],
+   "checks": [
+    {
+     "corridor": "corridor_cid_houston_san_antonio",
+     "city": "Seguin",
+     "page_n": 10,
+     "tiger_n": 10,
+     "tiger_all_counties": 10,
+     "same": true,
+     "tiger_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Current/MapServer/10/query?geometry=-97.9686%2C29.5902&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&distance=1609.344&units=esriSRUnit_Meter&outFields=GEOID&returnGeometry=false&f=json"
+    }
+   ],
+   "errors": [],
+   "ok": true
+  },
+  {
+   "fips": "08069",
+   "rows": [
+    "Colorado Front Range Corridor"
+   ],
+   "expectedNames": [
+    "Colorado Front Range Corridor"
+   ],
+   "rowsOk": true,
+   "sentences": [
+    {
+     "n": 21,
+     "city": "Fort Collins"
+    }
+   ],
+   "checks": [
+    {
+     "corridor": "corridor_front_range",
+     "city": "Fort Collins",
+     "page_n": 21,
+     "tiger_n": 21,
+     "tiger_all_counties": 21,
+     "same": true,
+     "tiger_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Current/MapServer/10/query?geometry=-105.065%2C40.5484&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&distance=1609.344&units=esriSRUnit_Meter&outFields=GEOID&returnGeometry=false&f=json"
+    }
+   ],
+   "errors": [],
+   "ok": true
+  },
+  {
+   "fips": "37159",
+   "rows": [
+    "Asheville to Salisbury, North Carolina, Corridor",
+    "Charlotte, North Carolina, to Washington, D.C., Corridor"
+   ],
+   "expectedNames": [
+    "Asheville to Salisbury, North Carolina, Corridor",
+    "Charlotte, North Carolina, to Washington, D.C., Corridor"
+   ],
+   "rowsOk": true,
+   "sentences": [
+    {
+     "n": 11,
+     "city": "Salisbury"
+    },
+    {
+     "n": 11,
+     "city": "Salisbury"
+    }
+   ],
+   "checks": [
+    {
+     "corridor": "corridor_cid_asheville_salisbury",
+     "city": "Salisbury",
+     "page_n": 11,
+     "tiger_n": 11,
+     "tiger_all_counties": 11,
+     "same": true,
+     "tiger_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Current/MapServer/10/query?geometry=-80.4919%2C35.6651&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&distance=1609.344&units=esriSRUnit_Meter&outFields=GEOID&returnGeometry=false&f=json"
+    },
+    {
+     "corridor": "corridor_cid_charlotte_washington",
+     "city": "Salisbury",
+     "page_n": 11,
+     "tiger_n": 11,
+     "tiger_all_counties": 11,
+     "same": true,
+     "tiger_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Current/MapServer/10/query?geometry=-80.4919%2C35.6651&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&distance=1609.344&units=esriSRUnit_Meter&outFields=GEOID&returnGeometry=false&f=json"
+    }
+   ],
+   "errors": [],
+   "ok": true
+  }
+ ]
+}

@@ -31,7 +31,12 @@ def main():
     for f in json.load(open(d + "bg.geojson"))["features"]:
         walk(f["geometry"]["coordinates"])
     w, s, e, n = min(xs) - .02, min(ys) - .02, max(xs) + .02, max(ys) + .02
-    box = f"{s},{w},{n},{e}"
+    boxes = [(s, w, n, e)]
+    if min(xs) < 0 < max(xs):   # a county that crosses the 180th meridian (Aleutians West): two boxes, one each side of 180
+        sh = [x + 360 if x < 0 else x for x in xs]
+        if max(sh) - min(sh) < max(xs) - min(xs):
+            boxes = [(s, min(x for x in xs if x >= 0) - .02, n, 180.0), (s, -180.0, n, max(x for x in xs if x < 0) + .02)]
+    box = ";".join(f"{b[0]},{b[1]},{b[2]},{b[3]}" for b in boxes)
     snap = ""
     try:
         import glob
@@ -42,17 +47,21 @@ def main():
         pass
     out = {"fips": fips, "box_s_w_n_e": box, "endpoint": URL, "extract_snapshot": snap, "checked_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())}
     for k, (sel, fn) in SEL.items():
-        j = None
-        for i in range(8):
-            try:
-                q = f"[out:json][timeout:600];{sel}({box});out ids;"
-                j = json.loads(urllib.request.urlopen(urllib.request.Request(URL, data=("data=" + urllib.parse.quote(q)).encode()), timeout=650).read())
-                break
-            except Exception as ex:
-                print(k, "try", i + 1, str(ex)[:80], file=sys.stderr); time.sleep(15 * (i + 1))
-        if j is None:
+        direct, failed = set(), False
+        for b in boxes:
+            j = None
+            for i in range(8):
+                try:
+                    q = f"[out:json][timeout:600];{sel}({b[0]},{b[1]},{b[2]},{b[3]});out ids;"
+                    j = json.loads(urllib.request.urlopen(urllib.request.Request(URL, data=("data=" + urllib.parse.quote(q)).encode()), timeout=650).read())
+                    break
+                except Exception as ex:
+                    print(k, "try", i + 1, str(ex)[:80], file=sys.stderr); time.sleep(15 * (i + 1))
+            if j is None:
+                failed = True; break
+            direct |= {x["id"] for x in j["elements"]}
+        if failed:
             out[k] = {"error": "Overpass did not answer"}; continue
-        direct = {x["id"] for x in j["elements"]}
         ext = {x["id"] for x in json.load(open(d + fn))["elements"] if (k != "roads" or x.get("type") == "way")}
         out[k] = {"direct": len(direct), "extract": len(ext), "missing_from_extract": sorted(direct - ext)[:50], "extra_in_extract": sorted(ext - direct)[:50],
                   "n_missing": len(direct - ext), "n_extra": len(ext - direct), "match": direct == ext}

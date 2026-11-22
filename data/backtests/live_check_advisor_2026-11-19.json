@@ -1,0 +1,260 @@
+{
+ "date": "2026-11-19T23:23:05.262Z",
+ "counties": {
+  "48453": {
+   "questions": [
+    {
+     "q": "What is the median rent here?",
+     "answered": true,
+     "intent": "figure",
+     "sent_to_worker": false,
+     "text": "From this page's data (no AI)\nMedian rent, Near Highland, Austin: $2,356 a month [measured]. Source: Census 2020-2024 ACS 5-year\nCensus estimates have a margin of error; the page shows the published median.\nTags: [measured] read from a cited table or record; [modelled] computed from measured inputs; [assumed] no evidence behind it.\nAnswered from this page's data without the AI. Ask the AI for a deeper answer"
+    },
+    {
+     "q": "What is the 2-bedroom fair market rent?",
+     "answered": true,
+     "intent": "figure",
+     "sent_to_worker": false,
+     "text": "From this page's data (no AI)\nHUD Fair Market Rent for Austin-Round Rock-San Marcos, TX MSA\n• 2 bedrooms: $1,817 a month [measured]\nSource: HUD Fair Market Rents FY2027 (HUD FMR API, pulled 2026-11-16). HUD sets these as the 40th-percentile gross rent (rent plus utilities) for housing vouchers; they are not asking rents.\nTags: [measured] read from a cited table or record; [modelled] computed from measured inputs; [assumed] no evidence behind it.\nAnswered from this page's data without the AI.\nSources consulted (1)\nAsk the AI for a deeper answer"
+    },
+    {
+     "q": "Where should I invest?",
+     "answered": true,
+     "intent": "where",
+     "sent_to_worker": false,
+     "text": "From this page's data (no AI)\nAreas in Travis County that look cheapest for what they have (Census block groups; a relative-value screen, not a price forecast):\n• 3. Near Country Club Gardens, Austin (confidence D): Typical home value $168,600: cheaper than 99% of block groups in the county.\n• 5. Near Georgian Acres, Austin (confidence D): Typical home value $193,800: cheaper than 99% of block groups in the county.\n• 6. St. Johns, Austin (confidence D): Typical home value $219,200: cheaper than 98% of block groups in the county.\n• 7. Near North Lamar, Austin (confidence D): Typical home value $225,900: cheaper than 98% of block groups in the county.\n• 8. Near Elmhurst Heights, Austin (confidence D): Typical home value $229,700: cheaper than 98% of block groups in the county.\nIn 2020-25 this ranking pointed the wrong way in Travis County (rank correlation -0.082; 0.743 in 2015-20). Treat it as a list to investigate, not a forecast.\nThe score is [modelled] from measured Census figures with weights fitted on FHFA price history; the Invest view shows each area's reasons and back-test.\nTags: [measured] read from a cited table or record; [modelled] computed from measured inputs; [assumed] no evidence behind it.\nAnswered from this page's data without the AI.\nSources consulted (4)\nAsk the AI for a deeper answer"
+    },
+    {
+     "q": "What should I build here?",
+     "answered": true,
+     "intent": "build",
+     "sent_to_worker": false,
+     "text": "From this page's data (no AI)\nWhat to build in Near Highland, Austin (the Invest view's list, strongest evidence first):\n• Add a backyard home (ADU), owner-level: cost $130,000 [modelled]; $0.36 back per $1 [modelled] of nearby home value (evidence: borrowed study, partially verified)\n• Bus shelters with shade at busy stops: cost $808,000 [modelled]; value per $1 Not on file (evidence: borrowed study, partially verified)\n• Outdoor dining and parklets: cost $168,000 [modelled]; value per $1 Not on file (evidence: borrowed study, partially verified)\n• Park restroom and drinking fountains: cost $1,500,000 [modelled]; value per $1 Not on file (evidence: borrowed study, partially verified)\n• Repair broken sidewalks: cost $328,000 [modelled]; value per $1 Not on file (evidence: borrowed study, partially verified)\n• Splash pad: cost $1,190,000 [modelled]; value per $1 Not on file (evidence: borrowed study, partially verified)\nHousing plays\n• Backyard home (ADU) on a typical lot here: cost $130,000 [modelled]. Legal: not determined at block-group level: depends on each parcel's zoning (open a lot on the map).\n• Split a lot into two parcels: cost Not on file (parcel zoning; lot-split sale comps). Legal: not determined at block-group level: needs the parcel's zoning code and state law (open a lot on the map).\n• Small apartment building (2-19 homes): cost Not on file (construction cost per sq ft for the region (app/data/unit_costs.json lists public-works items only); rents or sale price"
+    },
+    {
+     "q": "What properties could be redeveloped?",
+     "answered": true,
+     "intent": "sites",
+     "sent_to_worker": false,
+     "text": "From this page's data (no AI)\nNo underused sites have been measured for Travis County yet, so none are listed. Only sites whose size was measured from a parcel or map record are shown; none are inferred.\nAnswered from this page's data without the AI. Ask the AI for a deeper answer"
+    },
+    {
+     "q": "Should transit be built here?",
+     "answered": true,
+     "intent": "transit",
+     "sent_to_worker": false,
+     "text": "From this page's data (no AI)\nTransit for Near Highland, Austin: Screen only, no build decision; the density supports more frequent buses. (density supports this scale; no proposal or no cost per trip, so no build decision.)\nDensity: 4.9 homes per net acre [modelled]\n• Density 4.9 homes per net acre supports \"Local bus, 1 bus/h\" (needs 4.5).\n• Commuter rail (1-2 homes/net acre) also needs over 100 million sq ft downtown; not given.\n• Current service (8 buses/hr) already meets what this density supports.\nMissing for a firmer answer: cbdMillionSqft (downtown office/commercial floor area) for rail modes; annualizedCapitalCostUsd + annualOperatingCostUsd + annualTrips (for FTA cost per trip).\nThresholds used (TCRP Report 165, Exhibit 3-8; bundle densities are per gross acre, multiplied by 1.5 to compare):\n• Local bus, 1 bus/h: 4.5 homes per net acre, downtown 5-8M sq ft\n• Local bus, 2 bus/h: 7 homes per net acre, downtown 8-20M sq ft\n• Local bus, 6 bus/h: 15 homes per net acre, downtown 20-50M sq ft\n• Light rail, 5-min peak headway: 9 homes per net acre, downtown 35-50M sq ft\n• Rapid transit, 5-min peak headway: 12 homes per net acre, downtown over 50M sq ft\n• Commuter rail, 20 trains/day: 1-2 homes per net acre, downtown over 100M sq ft\nThese are planning rules of thumb, not a ridership forecast.\nTags: [measured] read from a cited table or record; [modelled] computed from measured inputs; [assumed] no evidence behind it.\nAnswered from this page's data without the AI.\nSources con"
+    },
+    {
+     "q": "I have $500,000",
+     "answered": true,
+     "intent": "budget",
+     "sent_to_worker": false,
+     "text": "From this page's data (no AI)\nWith $500,000 in Near Highland, Austin: 3 of the 9 plays listed here have a cost on file at or under it.\n• Backyard home (ADU) on a typical lot here (housing play): cost $130,000 [modelled]\n• Outdoor dining and parklets (improvement): cost $168,000 [modelled]\n• Repair broken sidewalks (improvement): cost $328,000 [modelled]\n3 plays cost more than $500,000.\n3 plays have no cost on file, so they cannot be matched to a budget: Split a lot into two parcels, Small apartment building (2-19 homes), Build homes on an underused site (parking lot, golf course, vacant lot).\nThis only compares your budget with the costs on file (the pipeline's [modelled] estimates, which include 10 years of upkeep for public improvements); it does no other financial maths.\nTags: [measured] read from a cited table or record; [modelled] computed from measured inputs; [assumed] no evidence behind it.\nAnswered from this page's data without the AI. Ask the AI for a deeper answer"
+    },
+    {
+     "q": "rent x 12",
+     "answered": true,
+     "intent": "arith",
+     "sent_to_worker": false,
+     "text": "From this page's data (no AI)\nMedian rent, Near Highland, Austin x 12: $2,356 x 12 = $28,272 [modelled] (12 months of the monthly figure; nothing else is added).\nInput: Median rent, Near Highland, Austin: $2,356 a month [measured]. Source: Census 2020-2024 ACS 5-year\nTags: [measured] read from a cited table or record; [modelled] computed from measured inputs; [assumed] no evidence behind it.\nAnswered from this page's data without the AI. Ask the AI for a deeper answer"
+    },
+    {
+     "q": "What is the zoning of this lot?",
+     "answered": true,
+     "intent": "figure",
+     "sent_to_worker": false,
+     "text": "From this page's data (no AI)\nNo lot is open. Open a lot on the map (search an address, or click a lot) and ask again.\nAnswered from this page's data without the AI. Ask the AI for a deeper answer"
+    },
+    {
+     "q": "Is this lot in a flood zone?",
+     "answered": true,
+     "intent": "figure",
+     "sent_to_worker": false,
+     "text": "From this page's data (no AI)\nNo lot is open. Open a lot on the map (search an address, or click a lot) and ask again.\nAnswered from this page's data without the AI. Ask the AI for a deeper answer"
+    },
+    {
+     "q": "Can I add an ADU?",
+     "answered": true,
+     "intent": "lot_adu",
+     "sent_to_worker": false,
+     "text": "From this page's data (no AI)\nNo lot is open. Open a lot on the map (search an address, or click a lot) and ask again.\nAnswered from this page's data without the AI. Ask the AI for a deeper answer"
+    },
+    {
+     "q": "Can I split this lot?",
+     "answered": true,
+     "intent": "lot_split",
+     "sent_to_worker": false,
+     "text": "From this page's data (no AI)\nNo lot is open. Open a lot on the map (search an address, or click a lot) and ask again.\nAnswered from this page's data without the AI. Ask the AI for a deeper answer"
+    },
+    {
+     "q": "Why is the rent so high here?",
+     "answered": false,
+     "intent": "figure",
+     "reason": "asks why",
+     "sent_to_worker": true,
+     "text": "AI advisor (can be wrong)\nstub",
+     "findings_sent": {
+      "intent": "figure",
+      "answered_on_page": false,
+      "findings": [
+       "Median rent, Near Highland, Austin: $2,356 a month [measured]. Source: Census 2020-2024 ACS 5-year"
+      ]
+     }
+    }
+   ],
+   "checks": {
+    "fmr": {
+     "pass": true,
+     "expected": 1817
+    },
+    "rent": {
+     "pass": true,
+     "expected": 2356
+    },
+    "why_handed_off": {
+     "pass": true
+    },
+    "answered_without_request": {
+     "pass": true,
+     "answered": 12,
+     "of": 13
+    }
+   },
+   "page_errors": []
+  },
+  "06037": {
+   "questions": [
+    {
+     "q": "What is the median rent here?",
+     "answered": true,
+     "intent": "figure",
+     "sent_to_worker": false,
+     "text": "From this page's data (no AI)\nMedian rent, Beverlywood, Los Angeles: Not on file (no rent on file for this block group)\nAnswered from this page's data without the AI. Ask the AI for a deeper answer"
+    },
+    {
+     "q": "What is the 2-bedroom fair market rent?",
+     "answered": true,
+     "intent": "figure",
+     "sent_to_worker": false,
+     "text": "From this page's data (no AI)\nHUD Fair Market Rent for Los Angeles-Long Beach-Glendale, CA HUD Metro FMR Area\n• 2 bedrooms: $2,964 a month [measured]\nSource: HUD Fair Market Rents FY2027 (HUD FMR API, pulled 2026-11-16). HUD sets these as the 40th-percentile gross rent (rent plus utilities) for housing vouchers; they are not asking rents.\nTags: [measured] read from a cited table or record; [modelled] computed from measured inputs; [assumed] no evidence behind it.\nAnswered from this page's data without the AI.\nSources consulted (1)\nAsk the AI for a deeper answer"
+    },
+    {
+     "q": "Where should I invest?",
+     "answered": true,
+     "intent": "where",
+     "sent_to_worker": false,
+     "text": "From this page's data (no AI)\nAreas in Los Angeles County that look cheapest for what they have (Census block groups; a relative-value screen, not a price forecast):\n• 1. Unincorporated LA County (confidence C): Typical home value $384,604: cheaper than 100% of block groups in the county.\n• 2. Lancaster (confidence C): Typical home value $390,384: cheaper than 100% of block groups in the county.\n• 3. Unincorporated LA County (confidence C): Typical home value $384,948: cheaper than 100% of block groups in the county.\n• 4. Around El Dorado Park, Lancaster (confidence C): Typical home value $384,260: cheaper than 100% of block groups in the county.\n• 5. Palmdale (confidence C): Typical home value $376,727: cheaper than 100% of block groups in the county.\nNot back-tested here. The test covered 50 large counties, chosen by size from the county data files, and Los Angeles County was not one of them, so we do not know whether this ranking has worked here. Treat it as a list to investigate, not a forecast.\nThe score is [modelled] from measured Census figures with weights fitted on FHFA price history; the Invest view shows each area's reasons and back-test.\nTags: [measured] read from a cited table or record; [modelled] computed from measured inputs; [assumed] no evidence behind it.\nAnswered from this page's data without the AI.\nSources consulted (4)\nAsk the AI for a deeper answer"
+    },
+    {
+     "q": "What should I build here?",
+     "answered": true,
+     "intent": "build",
+     "sent_to_worker": false,
+     "text": "From this page's data (no AI)\nWhat to build in Beverlywood, Los Angeles (the Invest view's list, strongest evidence first):\n• Underground the overhead power lines: cost $12,400,000 [modelled]; $4.87 back per $1 [modelled] of nearby home value (evidence: borrowed study, partially verified)\n• Add a backyard home (ADU), owner-level: cost $130,000 [modelled]; $1.85 back per $1 [modelled] of nearby home value (evidence: borrowed study, partially verified)\n• School modernization (bond-funded): cost $6,670,000 [modelled]; $1.50 back per $1 [modelled] of nearby home value (evidence: borrowed study, partially verified)\n• Convert a tennis court to 4 pickleball courts: cost $127,000 [modelled]; value per $1 Not on file (evidence: borrowed study, partially verified)\n• Park restroom and drinking fountains: cost $1,500,000 [modelled]; value per $1 Not on file (evidence: borrowed study, partially verified)\n• Repair broken sidewalks: cost $1,120,000 [modelled]; value per $1 Not on file (evidence: borrowed study, partially verified)\nHousing plays\n• Backyard home (ADU) on a typical lot here: cost $130,000 [modelled]. Legal: not determined at block-group level: depends on each parcel's zoning (open a lot on the map).\n• Split a lot into two parcels: cost Not on file (parcel zoning; lot-split sale comps). Legal: not determined at block-group level: needs the parcel's zoning code and state law (open a lot on the map).\n• Small apartment building (2-19 homes): cost Not on file (construction cost per"
+    },
+    {
+     "q": "What properties could be redeveloped?",
+     "answered": true,
+     "intent": "sites",
+     "sent_to_worker": false,
+     "text": "From this page's data (no AI)\nSites to redevelop in Los Angeles County (90 measured, largest first):\n• Golf Facility (Parcel 4260), Los Angeles: 134.0 acres [measured], golf course; facts partially verified; homes it could hold: Not on file (model estimate listed as unverified in the record)\n• Golf Facility (Parcel 4263), Los Angeles: 114.2 acres [measured], golf course; facts partially verified; homes it could hold: Not on file (model estimate listed as unverified in the record)\n• Golf Facility (Parcel 4153), Calabasas: 105.0 acres [measured], golf course; facts partially verified; homes it could hold: Not on file (model estimate listed as unverified in the record)\n• Golf Facility (Parcel 4508), Diamond Bar: 89.1 acres [measured], golf course; facts partially verified; homes it could hold: Not on file (model estimate listed as unverified in the record)\n• Golf Facility (Parcel 4151), Westlake Village: 81.5 acres [measured], golf course; facts partially verified; homes it could hold: Not on file (model estimate listed as unverified in the record)\n• Golf Facility (Parcel 4423), Palmdale: 75.4 acres [measured], golf course; facts partially verified; homes it could hold: Not on file (model estimate listed as unverified in the record)\n84 more are listed in the Invest view.\nThe records' model estimates (homes a site could hold, margin, land value) are listed as unverified, so no figure is given for them.\nTags: [measured] read from a cited table or record; [modelled] computed from m"
+    },
+    {
+     "q": "Should transit be built here?",
+     "answered": true,
+     "intent": "transit",
+     "sent_to_worker": false,
+     "text": "From this page's data (no AI)\nTransit for Beverlywood, Los Angeles: Screen only, no build decision; the density supports more frequent buses. (density supports this scale; no proposal or no cost per trip, so no build decision.)\nDensity: 7.5 homes per net acre [modelled]\n• Density 7.5 homes per net acre supports \"Local bus, 2 bus/h\" (needs 7).\n• Commuter rail (1-2 homes/net acre) also needs over 100 million sq ft downtown; not given.\n• Current service is 0 buses/hr, below the 2/hr this density supports: raise frequency first.\nMissing for a firmer answer: cbdMillionSqft (downtown office/commercial floor area) for rail modes; annualizedCapitalCostUsd + annualOperatingCostUsd + annualTrips (for FTA cost per trip).\nThresholds used (TCRP Report 165, Exhibit 3-8; bundle densities are per gross acre, multiplied by 1.5 to compare):\n• Local bus, 1 bus/h: 4.5 homes per net acre, downtown 5-8M sq ft\n• Local bus, 2 bus/h: 7 homes per net acre, downtown 8-20M sq ft\n• Local bus, 6 bus/h: 15 homes per net acre, downtown 20-50M sq ft\n• Light rail, 5-min peak headway: 9 homes per net acre, downtown 35-50M sq ft\n• Rapid transit, 5-min peak headway: 12 homes per net acre, downtown over 50M sq ft\n• Commuter rail, 20 trains/day: 1-2 homes per net acre, downtown over 100M sq ft\nThese are planning rules of thumb, not a ridership forecast.\nTags: [measured] read from a cited table or record; [modelled] computed from measured inputs; [assumed] no evidence behind it.\nAnswered from this page's data witho"
+    },
+    {
+     "q": "I have $500,000",
+     "answered": true,
+     "intent": "budget",
+     "sent_to_worker": false,
+     "text": "From this page's data (no AI)\nWith $500,000 in Beverlywood, Los Angeles: 2 of the 9 plays listed here have a cost on file at or under it.\n• Backyard home (ADU) on a typical lot here (housing play): cost $130,000 [modelled]\n• Convert a tennis court to 4 pickleball courts (improvement): cost $127,000 [modelled]\n4 plays cost more than $500,000.\n3 plays have no cost on file, so they cannot be matched to a budget: Split a lot into two parcels, Small apartment building (2-19 homes), Build homes on an underused site (parking lot, golf course, vacant lot).\nThis only compares your budget with the costs on file (the pipeline's [modelled] estimates, which include 10 years of upkeep for public improvements); it does no other financial maths.\nTags: [measured] read from a cited table or record; [modelled] computed from measured inputs; [assumed] no evidence behind it.\nAnswered from this page's data without the AI. Ask the AI for a deeper answer"
+    },
+    {
+     "q": "rent x 12",
+     "answered": true,
+     "intent": "arith",
+     "sent_to_worker": false,
+     "text": "From this page's data (no AI)\nMedian rent, Beverlywood, Los Angeles: Not on file (no rent on file for this block group)\nAnswered from this page's data without the AI. Ask the AI for a deeper answer"
+    },
+    {
+     "q": "What is the zoning of this lot?",
+     "answered": true,
+     "intent": "figure",
+     "sent_to_worker": false,
+     "text": "From this page's data (no AI)\nZoning code at 2107 DUXBURY CIR LOS ANGELES CA 90034: R1V2-O [measured] (as recorded; not re-checked with the city or county, which decides what it allows). Source: the parcel zoning layer (Los Angeles)\nTags: [measured] read from a cited table or record; [modelled] computed from measured inputs; [assumed] no evidence behind it.\nAnswered from this page's data without the AI. Ask the AI for a deeper answer"
+    },
+    {
+     "q": "Is this lot in a flood zone?",
+     "answered": true,
+     "intent": "figure",
+     "sent_to_worker": false,
+     "text": "From this page's data (no AI)\nFEMA flood zone at 2107 DUXBURY CIR LOS ANGELES CA 90034: Zone X (Minimal flood risk, outside 500-year floodplain) [measured]. Source: FEMA National Flood Hazard Layer\nTags: [measured] read from a cited table or record; [modelled] computed from measured inputs; [assumed] no evidence behind it.\nAnswered from this page's data without the AI.\nSources consulted (1)\nAsk the AI for a deeper answer"
+    },
+    {
+     "q": "Can I add an ADU?",
+     "answered": true,
+     "intent": "lot_adu",
+     "sent_to_worker": false,
+     "text": "From this page's data (no AI)\nA backyard home (ADU) at 2107 DUXBURY CIR LOS ANGELES CA 90034: Not determined: zoning code unknown\nThe lot's Zoning row shows R1V2-O (the parcel zoning layer (Los Angeles)), but the page's legal screen did not receive that code, so no state law was tested here.\nCost and value of this addition: Not on file (no sourced construction cost or value of an addition is on file).\nAnswered from this page's data without the AI.\nSources consulted (1)\nAsk the AI for a deeper answer"
+    },
+    {
+     "q": "Can I split this lot?",
+     "answered": true,
+     "intent": "lot_split",
+     "sent_to_worker": false,
+     "text": "From this page's data (no AI)\nSplitting the lot at 2107 DUXBURY CIR LOS ANGELES CA 90034: Not determined: zoning code unknown\nThe lot's Zoning row shows R1V2-O (the parcel zoning layer (Los Angeles)), but the page's legal screen did not receive that code, so no state law was tested here.\nCost and value of this addition: Not on file (no sourced construction cost or value of an addition is on file).\nAnswered from this page's data without the AI.\nSources consulted (1)\nAsk the AI for a deeper answer"
+    },
+    {
+     "q": "Why is the rent so high here?",
+     "answered": false,
+     "intent": "figure",
+     "reason": "asks why",
+     "sent_to_worker": true,
+     "text": "AI advisor (can be wrong)\nstub",
+     "findings_sent": {
+      "intent": "figure",
+      "answered_on_page": false,
+      "findings": [
+       "Median rent, Beverlywood, Los Angeles: Not on file (no rent on file for this block group)"
+      ]
+     }
+    }
+   ],
+   "checks": {
+    "fmr": {
+     "pass": true,
+     "expected": 2964
+    },
+    "zoning": {
+     "pass": true,
+     "house_panel_zoning_row": "R1V2-O"
+    },
+    "flood": {
+     "pass": true,
+     "page_fema": "Zone X (Minimal flood risk, outside 500-year floodplain)"
+    },
+    "why_handed_off": {
+     "pass": true
+    },
+    "answered_without_request": {
+     "pass": true,
+     "answered": 12,
+     "of": 13
+    }
+   },
+   "lot": {
+    "address": "2107 DUXBURY CIR LOS ANGELES CA 90034",
+    "fema": "Zone X (Minimal flood risk, outside 500-year floodplain)",
+    "sale": null,
+    "bldg": 6974,
+    "panelZone": "R1V2-O"
+   },
+   "page_errors": []
+  }
+ }
+}

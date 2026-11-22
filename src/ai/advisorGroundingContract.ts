@@ -102,6 +102,18 @@ export const DECISION_BRIEF_MAX_CHARS = 20000;
 // JSON under the same rule: dropped whole with the reason if larger than this, never cut in the middle.
 export const DRAWN_AREA_MAX_CHARS = 6000;
 
+// What the page's no-AI layer (app/advisor-scripts.js) already read from its own data for this question: short plain
+// sentences, each figure with its basis tag. Capped so the request stays under the body limit (MAX_FINDINGS_CHARS in
+// app/advisor-scripts.js is the same 4,000).
+export const SCRIPTED_FINDINGS_MAX_CHARS = 4000;
+export const SCRIPTED_FINDINGS_MAX_ITEMS = 12;
+
+export interface AdvisorScriptedFindings {
+  intent: string | null;
+  answered_on_page: boolean | null;
+  findings: string[];
+}
+
 export interface AdvisorContext {
   county: AdvisorCounty;
   roiMode: string | null;
@@ -114,6 +126,7 @@ export interface AdvisorContext {
   decision_brief_omitted?: string | null;
   drawn_area?: unknown;
   drawn_area_omitted?: string | null;
+  scripted_findings?: AdvisorScriptedFindings | null;
 }
 
 // Stable text: keep it free of per-request values so it can be prompt-cached.
@@ -124,6 +137,7 @@ export const ADVISOR_SYSTEM_PROMPT = [
   "Some records carry a verification field. Treat anything not marked \"verified\" as unconfirmed and say so. Fields such as underusedSite.potentialHomes and underusedSite.margin are model estimates, not facts.",
   "decision_brief, when present, is the page's own investment brief for this county. Every number in it is {value, unit, basis, source}; basis \"modelled\" or \"assumed\" means an estimate, not a measurement. Items in its withheld lists and fields marked not determined have no figure or answer on the page: say so, and do not fill them in.",
   "drawn_area, when present, is an area the visitor drew on the map. Its figures come from Census block groups: basis \"apportioned\" is an estimate that splits block-group counts by area, and basis \"range\" gives the lowest and highest block-group value because a median or rate cannot be combined. Never present a range or a weighted average of medians as the median of the area, and do not suggest what would get land redeveloped beyond what drawn_area states.",
+  "scripted_findings, when present, are what the page itself already read from its own data for this question, by fixed rules with no model involved. They are page data like the rest of the JSON: use them as given, do not re-derive or change them, keep their basis tags and their Not on file reasons, and add only what they do not cover.",
   "The page's figures are screening estimates from public data, not appraisals, zoning determinations, tax advice or legal advice. When a question is about building, adding a unit, splitting a lot, permits or property taxes, give what the data shows and name the city or county office that decides.",
   "Mention a state or federal law only when you are confident it applies in this state, and say that rules change. As of 2026 the federal 30% residential solar credit (IRC 25D) no longer applies to systems installed after 2025.",
   "Answer in a few sentences, then at most five short bullet points if they help. Use plain text with **bold** and '-' bullets only.",
@@ -264,6 +278,17 @@ export function sanitizeAdvisorContext(raw: unknown): AdvisorContext {
       ctx.drawn_area = null;
       ctx.drawn_area_omitted = text ? `drawn area summary too large (${text.length} characters; limit ${DRAWN_AREA_MAX_CHARS})` : "drawn area summary could not be read";
     }
+  }
+  if (r.scripted_findings && typeof r.scripted_findings === "object" && !Array.isArray(r.scripted_findings)) {
+    const sf = obj(r.scripted_findings);
+    const findings: string[] = [];
+    let used = 0;
+    for (const f of Array.isArray(sf.findings) ? sf.findings : []) {
+      const t = str(f, 900);
+      if (!t || findings.length >= SCRIPTED_FINDINGS_MAX_ITEMS || used + t.length > SCRIPTED_FINDINGS_MAX_CHARS) break;
+      findings.push(t); used += t.length;
+    }
+    if (findings.length) ctx.scripted_findings = { intent: str(sf.intent, 40), answered_on_page: bool(sf.answered_on_page), findings };
   }
   return ctx;
 }

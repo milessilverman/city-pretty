@@ -83,11 +83,14 @@ function loadData() {
   if (iv.dataP) return iv.dataP;
   const j = id => (typeof cpJson === "function" ? cpJson(id) : Promise.resolve(null)).catch(() => null);
   iv.dataP = Promise.all([j("neighborhood-score-backtest"), j("transit-cost-benchmarks"), j("transit-value-effects"), j("underused-sites"), j("intercity-corridors"), j("transit-pipelines"),
-    j("intervention-verification"), j("statutes"), j("unit-costs"), j("county-valuation-models")])
-    .then(([bt, cost, eff, sites, corr, pipe, ver, laws, uc, vm]) => {
+    j("intervention-verification"), j("statutes"), j("unit-costs"), j("county-valuation-models"), fetch("app/data/neighborhood_prediction.json").then(r => r.ok ? r.json() : null).catch(() => null),
+    // riders, fares and the gap (src/engines/transitDemandEngine.js)
+    ...["transit_demand_model.json", "transit_demand_stops.json", "transit_operating_benchmarks.json"].map(f => fetch("app/data/" + f).then(r => r.ok ? r.json() : null).catch(() => null)), j("funding-programs")])
+    .then(([bt, cost, eff, sites, corr, pipe, ver, laws, uc, vm, pred, dModel, dStops, dOper, fund]) => {
       const verOk = ver && typeof ver === "object" && !Array.isArray(ver);
       iv.data = { backtest: bt, cost: cost && cost.rows || [], effects: eff && eff.rows || [], sites: Array.isArray(sites) ? sites : [], corridors: Array.isArray(corr) ? corr : [], pipelines: Array.isArray(pipe) ? pipe : [],
-        verification: verOk ? ver : null, laws: Array.isArray(laws) ? laws : null, unitCosts: Array.isArray(uc) ? uc : [], valuationModels: vm && vm.counties ? vm : null };
+        verification: verOk ? ver : null, laws: Array.isArray(laws) ? laws : null, unitCosts: Array.isArray(uc) ? uc : [], valuationModels: vm && vm.counties ? vm : null, prediction: pred && pred.counties ? pred : null,
+        demand: dModel && dModel.modes && dStops && dOper ? { model: dModel, stops: dStops, operating: dOper, funding: Array.isArray(fund) ? fund : [] } : null };
       return iv.data;
     });
   return iv.dataP;
@@ -150,23 +153,19 @@ function parcelFacts() {
   const h = (typeof activeHouse !== "undefined") ? activeHouse : null;
   if (!h || !h.a) return null;
   const a = h.a;
-  const zr = (() => {   // LA's zoning layer at the lot, as renderHouse reads it (zoneAt, zoneRules)
-    try {
-      const z = h.ll && typeof zoneAt === "function" ? zoneAt(h.ll) : null;
-      if (!z || typeof zoneRules !== "function") return null;
-      const B = (typeof activeBundle === "function" && activeBundle()) || (typeof D !== "undefined" ? D : null) || {};
-      const sel = typeof selected !== "undefined" ? selected : null;
-      const p = sel && typeof byId !== "undefined" && byId.get(sel) ? byId.get(sel).properties : {};
-      const m = ((B.details && sel && B.details[sel]) || {}).m || p || {};
-      return zoneRules(z.zone, (m.z || {}).j || p.c);
-    } catch (e) { return null; }
-  })();
-  const hasZon = !!(zr ? zr.zone : (a.ZoneCode && !/^(unzoned|unknown|missing|none|n\/a)$/i.test(String(a.ZoneCode).trim())));
-  const baseZone = zr ? zr.zone : (hasZon ? String(a.ZoneCode).trim() : null);
+  // The code comes from the zoning map at the lot (zoneAt, what the house panel's Zoning row shows), else the parcel
+  // record. LA's zone_rules rows carry standards only and have no code, so they are not read for it.
+  const zAt = (() => { try { return h.ll && typeof zoneAt === "function" ? zoneAt(h.ll) : null; } catch (e) { return null; } })();
+  const zCode = String((zAt && zAt.zone) || a.ZoneCode || "").trim();
+  const hasZon = !!zCode && !/^(unzoned|unknown|missing|none|n\/a)$/i.test(zCode);
+  const baseZone = hasZon ? zCode : null;
+  // Where bundleZoneClass (app/app.js) has an answer for the lot's mapped zone, that decides. The text tests misread
+  // LA's R1 variation zones: R1V2-O has no word boundary after R1, and R1R3 reads as R3.
+  const zCat = typeof bundleZoneClass === "function" ? bundleZoneClass(zAt) : null;
   const zoneOrUse = String(baseZone || "") + " " + String(a.UseDescription || "");
-  const isComm = /comm|c-|c1|c2|cbd|mixed|bu-|b-1|b-2|business/i.test(zoneOrUse);
-  const isMulti = (/r-?[2-9]\b|r[2-9]\b|mf\b|multi[- ]?fam|apartment|condo|duplex|triplex|fourplex|residential multi|rm\b/i.test(zoneOrUse) || /[-_]mf\b/i.test(baseZone || ""));
-  const isSfr = !isComm && !isMulti && (/r-?1\b|single[- ]?fam|single unit|residential single|sfr\b|\brs\b|\beu[- ]?m\b/i.test(zoneOrUse) || /^r-?[1a-z]$/i.test(String(baseZone || "").trim()));
+  const isComm = zCat ? /^commercial/.test(zCat) : /comm|c-|c1|c2|cbd|mixed|bu-|b-1|b-2|business/i.test(zoneOrUse);
+  const isMulti = zCat ? zCat === "multifamily" : (/r-?[2-9]\b|r[2-9]\b|mf\b|multi[- ]?fam|apartment|condo|duplex|triplex|fourplex|residential multi|rm\b/i.test(zoneOrUse) || /[-_]mf\b/i.test(baseZone || ""));
+  const isSfr = zCat ? zCat === "single-family" : (!isComm && !isMulti && (/r-?1\b|single[- ]?fam|single unit|residential single|sfr\b|\brs\b|\beu[- ]?m\b/i.test(zoneOrUse) || /^r-?[1a-z]$/i.test(String(baseZone || "").trim())));
   let stn = null;
   if (h.ll && typeof findNearestTransitStation === "function") { try { stn = findNearestTransitStation(h.ll.lat, h.ll.lng); } catch (e) { stn = null; } }
   const R = h.st && h.st.R;
@@ -181,6 +180,7 @@ function parcelFacts() {
       county_pop: isNum(a.county_pop) ? a.county_pop : null,
       is_commercial_or_mixed_use: isComm,
       is_single_family_residential: isSfr,
+      is_multifamily_residential: isMulti,
       dist_to_heavy_rail_mi: (stn && (stn.type === "heavy_rail" || !stn.type) && isNum(stn.distMi)) ? stn.distMi : null,
       dist_to_frequent_bus_or_brt_mi: (stn && (stn.type === "bus" || stn.type === "brt") && isNum(stn.distMi)) ? stn.distMi : null,
       exclusions: {
@@ -216,8 +216,8 @@ function ready() {
 function build(fips, B, d) {
   const eng = E();
   const ctx = { backtest: d.backtest, catalog: D.catalog, verification: d.verification, underusedSites: d.sites, sites: (typeof SITES !== "undefined") ? SITES : null, costBenchmarks: engineCosts(d.cost), valueEffects: engineEffects(d.effects),
-    laws: d.laws || undefined, unitCosts: d.unitCosts, valuationModels: d.valuationModels };
-  const rk = eng.rankNeighborhoods(B, { backtest: d.backtest });
+    laws: d.laws || undefined, unitCosts: d.unitCosts, valuationModels: d.valuationModels, prediction: d.prediction };
+  const rk = eng.rankNeighborhoods(B, { backtest: d.backtest, prediction: d.prediction });
   const ranked = rk.ranked || [];
   const clean = ranked.filter(r => !(r.dataFlags && r.dataFlags.length));
   let hood = iv.hood && ranked.some(r => r.id === iv.hood) ? iv.hood : null;
@@ -226,7 +226,8 @@ function build(fips, B, d) {
   iv.hood = hood;
   const pf = parcelFacts();
   let brief = null;
-  try { brief = eng.buildDecisionBrief(B, { blockGroupId: hood, parcel: pf ? pf.facts : null, top: 10 }, ctx); } catch (e) { brief = null; }
+  const lines = demandLines(fips, d, eng);
+  try { brief = eng.buildDecisionBrief(B, { blockGroupId: hood, parcel: pf ? pf.facts : null, top: 10 }, Object.assign({}, ctx, { transitLines: lines.map(x => x.line) })); } catch (e) { brief = null; }
   const d0 = hood ? B.details[hood] : null;
   let rec = null;
   if (d0) { try { rec = eng.recommendForNeighborhood({ id: hood, m: d0.m, r: d0.r }, { catalog: D.catalog, verification: d.verification, countyFips: fips, underusedSites: d.sites, sites: (SITES_FOR(hood)) }); } catch (e) { rec = null; } }
@@ -238,9 +239,28 @@ function build(fips, B, d) {
   const pipeEval = pipes.map(p => ({ row: p, ev: eng.evaluateTransit({ name: p.title, lengthMiles: null, capitalCostUsd: null, mode: pipeMode(p) }, tCtx) }));
   const corrEval = corr.map(c => {
     const len = checkedNum(c, "route_length_miles"), cost = checkedNum(c, "estimated_capital_cost_billions");
-    return { row: c, len, cost, ev: eng.evaluateTransit({ name: c.name, lengthMiles: len.value, intercityDistanceMiles: len.value, capitalCostUsd: cost.value != null ? cost.value * 1e9 : null, mode: /high_speed/.test(c.corridor_type || "") ? "hsr" : null }, tCtx) };
+    // block groups within 1 mile of each stop city point that lies in this county (src/engines/corridorStopAreas.js)
+    const stops = window.CorridorStopAreas ? window.CorridorStopAreas.stopAreasForCounty(c, B, fips, 1) : [];
+    return { row: c, len, cost, stops, ev: eng.evaluateTransit({ name: c.name, lengthMiles: len.value, intercityDistanceMiles: len.value, capitalCostUsd: cost.value != null ? cost.value * 1e9 : null, mode: /high_speed/.test(c.corridor_type || "") ? "hsr" : null }, tCtx) };
   });
-  return { fips, B, rk, ranked, clean, hood, brief, rec, pf, pipeEval, corrEval, countySites: d.sites.filter(s => s && s.countyFips === fips) };
+  return { fips, B, rk, ranked, clean, hood, brief, rec, pf, pipeEval, corrEval, lines, countySites: countySitesFor(d, fips) };
+}
+// Riders, fares and the gap for this county's local projects and the corridors with a stop here
+// (src/engines/transitDemandEngine.js). A corridor's length is used only when its own verification confirms it.
+function demandLines(fips, d, eng) {
+  const T = window.TransitDemandEngine;
+  if (!T || !d.demand) return [];
+  const tables = { model: d.demand.model, operating: d.demand.operating, costRows: d.cost, funding: d.demand.funding, thresholds: eng.TRANSIT_THRESHOLDS };
+  let ls = [];
+  try { ls = T.linesForCounty(fips, { pipelines: d.pipelines, corridors: d.corridors, stops: d.demand.stops }, c => checkedNum(c, "route_length_miles").value); } catch (e) { return []; }
+  return ls.map(L => {
+    try {
+      const area = T.lineArea(L.stops) || {};
+      const ev = L.kind === "pipeline" ? eng.evaluateTransit(Object.assign({ name: L.name, lengthMiles: L.lengthMiles, mode: L.mode === "streetcar" ? "light_rail" : L.mode, demand: L }, area), { demandEngine: T, demandTables: tables }) : null;
+      const sup = ev && ev.density && ev.density.homesPerNetAcre && ev.density.homesPerNetAcre.value != null ? ev.density.supports.map(s => s.mode).concat(ev.density.supports.some(s => s.buses_per_hour >= 6) ? ["brt"] : []) : null;
+      return { L, ev, line: T.evaluateLine(L, tables, sup) };
+    } catch (e) { return null; }
+  }).filter(Boolean);
 }
 function SITES_FOR(id) {
   try { return (typeof SITES !== "undefined" && SITES && SITES.sites && SITES.sites[id]) ? SITES.sites[id] : []; } catch (e) { return []; }
@@ -337,6 +357,19 @@ function buildLists(m) {
   }
   return out;
 }
+// Station-area sites (src/engines/stationSites.js): land near stations and stop cities from OpenStreetMap and the county parcel record,
+// loaded for a county when it is opened (render() asks for them). The largest PAGE_MAX are listed; the county file holds more.
+function countySitesFor(d, fips) {
+  const base = d.sites.filter(s => s && s.countyFips === fips), SS = window.StationSites && window.StationSites.cached(fips);
+  return SS && SS.length ? base.concat(SS.slice(0, window.StationSites.PAGE_MAX)) : base;
+}
+function stationSiteDetail(s) {
+  const v = s.verification || {};
+  const rows = window.StationSites.facts(s).map(([k, t]) => `<div><dt>${esc2(k)}</dt><dd>${/^Not on file: /.test(t) ? nof(t.slice(13)) : esc2(t)}</dd></div>`).join("");
+  return `<p class="iv-muted">Near ${esc2(s.near.n)}, measured from OpenStreetMap and the county parcel record. No home count, value if built or margin is estimated for it.</p>
+    <p class="iv-muted">Facts verification: ${esc2(v.status)}, checked ${esc2(v.audited)} <a href="${esc2(v.evidence_url)}" target="_blank" rel="noopener">OpenStreetMap element</a></p>
+    <dl class="iv-dl iv-facts">${rows}</dl>`;
+}
 function siteLists(m) {
   const list = m.countySites.slice().sort((a, b) => (b.acres || 0) - (a.acres || 0));
   return { on: list.filter(s => s.acres != null), off: list.filter(s => s.acres == null), all: list };
@@ -396,6 +429,7 @@ function hoodItem(r, rank, m, open) {
   const sel = r.id === m.hood;
   const h = r.historicalRelativeChange;
   const hist = h ? `<div class="iv-hist"><span class="iv-k">Back-test, average for this score fifth (${r.scoreQuintile} of 5)</span> 2020-25: ${fig(h["2020_2025"], "back-test table has no value for this fifth")} &nbsp; 2015-20: ${fig(h["2015_2020"], "back-test table has no value for this fifth")}</div>` : `<div class="iv-hist"><span class="iv-k">Back-test history</span> ${nof("no back-test table in this build")}</div>`;
+  const pr = r.prediction && r.prediction.relative5y, tested = pr ? `<div class="iv-hist"><span class="iv-k">Tested 5-year range, tract-level (80% of tracts like this)</span> ${fig(pr.low)} to ${fig(pr.high)} vs the county's median tract. <span class="iv-muted">${esc2(r.prediction.testedOn || "")}</span></div>` : "";
   const comps = (r.components || []).map(c => `<tr><td>${esc2(c.label || c.signal)}</td><td>${fig(c.countyPercentile)}</td><td>${fig(c.weight)}</td></tr>`).join("");
   return `<li class="iv-hood${sel ? " sel" : ""}" data-hood="${esc2(r.id)}">
     <div class="iv-hood-top">
@@ -408,7 +442,7 @@ function hoodItem(r, rank, m, open) {
       </div>
     </div>
     <p class="iv-reason1">${esc2(r.reasons[0] || "")}</p>
-    ${det(open, "comp-" + r.id, "Score, back-test and all reasons", `<div class="iv-figs"><span class="iv-k">Relative-value score</span> ${fig(r.score)}</div>${hist}
+    ${det(open, "comp-" + r.id, "Score, back-test and all reasons", `<div class="iv-figs"><span class="iv-k">Relative-value score</span> ${fig(r.score)}</div>${hist}${tested}
       <ul class="iv-reasons">${r.reasons.map(x => `<li>${esc2(x)}</li>`).join("")}</ul>
       <div class="iv-tablewrap"><table class="iv-table"><thead><tr><th>Signal</th><th>Where this area sits in the county</th><th>Weight in the score</th></tr></thead><tbody>${comps}</tbody></table></div>
       <p class="iv-k">Why this grade</p><ul class="iv-reasons">${r.confidence.reasons.map(x => `<li>${esc2(x)}</li>`).join("")}</ul>
@@ -460,6 +494,7 @@ function buildCard(m, open) {
 // the record's own note on how each was made is shown instead.
 const SITE_MODEL_FIELDS = [["potentialHomes", "Homes it could hold"], ["margin", "Developer margin"], ["marketLandValue", "Market land value"]];
 function siteDetail(s) {
+  if (s.stationSite && window.StationSites) return stationSiteDetail(s);
   const v = s.verification || {};
   const uf = (v.unverified_fields || []).map(u => String(u).split(/[\s(]/)[0]);
   const held = SITE_MODEL_FIELDS.filter(([f]) => s[f] != null || uf.includes(f)).map(([f, label]) => `<div><dt>${label}</dt><dd>${uf.includes(f) ? nof("model estimate, listed as unverified in the record" + (v.model_output_fields && v.model_output_fields[f] ? ": " + v.model_output_fields[f] : "")) : isNum(s[f]) ? (f === "potentialHomes" ? Math.round(s[f]).toLocaleString("en-US") : money(s[f])) + " " + basisTag("modelled") : nof("")}</dd></div>`).join("");
@@ -481,7 +516,7 @@ function sitesCard(m, open) {
   const places = ((m.rec && m.rec.places) || []).filter(p => !p.cost || p.cost.low.value == null || p.cost.low.value <= bud);
   const openTier = bud >= TIER_MIN.site;
   const shown = iv.moreSites ? sl.on : sl.on.slice(0, 4);
-  const sRow = s => { const v = s.verification || {}; return rowHTML({ name: siteName(s), chip: s.kind || "site", fig: keyFig("Size", fig({ value: s.acres, unit: "acres", source: s.sourceUrl, basis: "measured" })), ev: `<span class="iv-verif" title="${esc2((v.source_fields || []).join(", "))}">Facts: ${esc2((v.status || "not verified").replace(/_/g, " "))}</span>`, sub: s.cityName ? esc2(s.cityName) : "", key: "site-" + esc2(s.id), detail: siteDetail(s) }, open); };
+  const sRow = s => { const v = s.verification || {}; return rowHTML({ name: siteName(s), chip: s.kindLabel || s.kind || "site", fig: keyFig("Size", fig({ value: s.acres, unit: "acres", source: s.sourceUrl, basis: "measured" })), ev: `<span class="iv-verif" title="${esc2((v.source_fields || []).join(", "))}">Facts: ${esc2((v.status || "not verified").replace(/_/g, " "))}</span>`, sub: s.stationSite ? "measured from OpenStreetMap and the county parcel record" + (s.near && s.near.u ? "; the project's stop location is unverified" : "") : s.cityName ? esc2(s.cityName) : "", key: "site-" + esc2(s.id), detail: siteDetail(s) }, open); };
   let body;
   if (!list.length) body = `<p class="iv-empty">No underused sites have been measured for ${esc2(countyShort())} yet, so none are listed. Only sites whose size was measured from a parcel or map record are shown; none are inferred.</p>`;
   else if (!openTier) body = `<p class="iv-gated">${list.length} measured ${list.length === 1 ? "site is" : "sites are"} listed in ${esc2(countyShort())}. Site-sized plays start at about $2M; raise the budget to see ${list.length === 1 ? "it" : "them"}.</p>`;
@@ -493,6 +528,7 @@ function sitesCard(m, open) {
   return `<section class="iv-card" id="iv-sites" aria-labelledby="iv-sites-h">
     <h3 id="iv-sites-h">Properties</h3>
     <p class="iv-lede">Golf courses, parking lots and vacant land to redevelop. The facts (size, place) carry a verification status. The record's model estimates (homes it could hold, margin, land value) are listed as unverified, so no figure is shown for them.</p>
+    ${(SS => SS && SS.length ? `<p class="iv-muted">Includes ${Math.min(SS.length, window.StationSites.PAGE_MAX)} of ${SS.total} sites near stations and stop cities (largest first), measured from OpenStreetMap and the county parcel record.${SS.leftOut ? ` ${SS.leftOut} smaller ones are not in the data file (size limit).` : ""}</p>` : "")(window.StationSites && window.StationSites.cached(m.fips))}
     ${body}${placeHTML}${nofGroup(open, "off-sites", offItems)}
   </section>`;
 }
@@ -604,6 +640,57 @@ function verdictBox(ev, label, open, key, full) {
     ${det(open, key, "Reasons and what is missing", inner)}
   </div>`;
 }
+// Neighborhoods within 1 mile of a stop city's centre point (not a station site), each with a link to the map.
+function stopAreasHTML(stops, open, id) {
+  return (stops || []).map(({ stop, ok, reason, areas }) => {
+    const n = areas.length, city = esc2(stop.city);
+    const note = stop.site_note ? ` <span class="iv-muted">${esc2(stop.site_note)}</span>` : "";
+    if (!ok) return `<p class="iv-muted">${city}: no neighborhood count (${esc2(reason)}).</p>`;
+    const lead = `<b>${n}</b> ${n === 1 ? "neighborhood" : "neighborhoods"} within 1 mile of the ${city} stop city centre (the station site itself is not chosen yet)`;
+    if (!n) return `<p class="iv-stopareas">${lead}.${note}</p>`;
+    const shown = areas.slice(0, 30);
+    const list = `<ul class="iv-stoplist">${shown.map(a => `<li><button type="button" class="tool-btn" data-iv-map="${esc2(a.id)}">${esc2(a.name || "Block group " + a.id)}${a.city ? ", " + esc2(a.city) : ""}</button> <span class="iv-muted">${a.miles === 0 ? "contains the point" : a.miles + " mi away"}</span></li>`).join("")}${n > shown.length ? `<li class="iv-muted">and ${n - shown.length} more</li>` : ""}</ul>`;
+    return `<div class="iv-stopareas"><p>${lead}.${note}</p>${det(open, "sa-" + esc2(id) + "-" + esc2(stop.id), "Show these neighborhoods", list)}</div>`;
+  }).join("");
+}
+// ---- riders, fares and the gap for one line (TransitDemandEngine.evaluateLine output)
+const usd = v => !isNum(v) ? "" : Math.abs(v) >= 1e9 ? "$" + (v / 1e9).toFixed(1) + "B" : Math.abs(v) >= 1e6 ? "$" + (v / 1e6).toFixed(1) + "M" : "$" + Math.round(v).toLocaleString("en-US");
+const cnt = v => isNum(v) ? Math.round(v).toLocaleString("en-US") : "";
+function rangeTxt(r, f, why, per) { return r ? `${esc2(f(r.low))} to ${esc2(f(r.high))}${per ? " " + esc2(per) : ""} ${basisTag(r.basis)}` : nof(why); }
+function demandHTML(x, open, key) {
+  if (!x || !x.line) return "";
+  const L = x.line, p = L.proposed, T = window.TransitDemandEngine;
+  const fit = x.ev && x.ev.modeFit;
+  const lbl = k => (T && T.MODE_LABEL[k]) || SCALE_TXT[k] || String(k || "").replace(/_/g, " ");
+  const notes = [];
+  if (p) for (const mm of p.missing || []) notes.push(mm);
+  if (L.moneyWhy) notes.push(L.moneyWhy);
+  if (L.missing) notes.push(...L.missing);
+  for (const st of L.stopsNotOnFile || []) notes.push(`${st.name}: ${st.why}`);
+  const sc = p && p.riders.weekday && p.riders.weekday.inputs.scaledForStationsNotOnFile;
+  if (sc) notes.push(sc.note + " (an assumption).");
+  if (fit && fit.modes) { const b = fit.modes.find(r => r.mode === "brt"); if (b && b.riders.basis === "NTD trips per route mile") notes.push("Bus and BRT riders come from NTD trips per route mile of operating systems, not from the land around these stops, so comparing them with rail mixes two kinds of estimate."); }
+  const t = p && p.riders && p.riders.test;
+  const warn = t && t.beatsBaseline === false ? `<p class="iv-honest t-bad">In its test this model did not order ${esc2(lbl(p.mode).toLowerCase())} stations better than simply counting people and jobs within half a mile.</p>` : "";
+  const fitLine = L.kind === "pipeline"
+    ? (fit ? (fit.fit ? `<p><span class="iv-k">Mode that fits</span> <b>${esc2(lbl(fit.fit))}</b>${fit.runnerUp ? `; runner-up ${esc2(lbl(fit.runnerUp))}` : ""}. <span class="iv-muted">Proposed: ${esc2(lbl(L.mode))}.</span></p>` : `<p><span class="iv-k">Mode that fits</span> ${fit.verdict === "not_enough_data" ? nof((fit.missing || []).join("; ")) : esc2(fit.summary)}${fit.alsoPasses && fit.alsoPasses.length ? `<span class="iv-muted"> Commuter rail, reported beside the urban modes, also passes.</span>` : ""}</p>`) : "")
+    : `<p class="iv-muted">The commuter-rail station model is used to rank this corridor's stops; there is no intercity station model.</p>`;
+  const why = fit && fit.why && fit.why.length ? det(open, key + "-why", "Why this mode", `<p class="iv-muted">${esc2(fit.rule)}</p><ul class="iv-reasons">${fit.why.map(w => `<li>${esc2(w)}</li>`).join("")}</ul>`) : "";
+  const stops = p && p.perStop && p.perStop.length ? det(open, key + "-stops", `Stops (${p.perStop.length})`, `<div class="iv-tablewrap"><table class="iv-table iv-stoptable"><caption class="iv-muted">${esc2(L.siteNote)}</caption>
+    <thead><tr><th>Stop</th><th>People within 0.5 mi</th><th>Homes</th><th>Jobs within 0.5 mi</th><th>Boardings a day (range)</th></tr></thead><tbody>${p.perStop.map(st => `<tr><td>${esc2(st.name)}</td><td>${cnt(st.ring && st.ring.pop_half)}</td><td>${cnt(st.ring && st.ring.homes_half)}</td><td>${cnt(st.ring && st.ring.jobs_half)}</td><td>${st.weekday ? esc2(cnt(st.weekday.low) + " to " + cnt(st.weekday.high)) : nof((st.missing || []).join("; "))}</td></tr>`).join("")}</tbody></table></div>`) : "";
+  const fund = L.funding && L.funding.programs.length ? det(open, key + "-fund", `Who could pay (${L.funding.programs.length} programmes on file)`, `<ul class="iv-nofl">${L.funding.programs.map(f => `<li><b>${esc2(f.program)}</b>: ${f.share === "share not on file" ? nof("share not on file") : esc2(f.share)}${f.rule ? `<span class="iv-muted"> Rule as quoted: "${esc2(f.rule)}"</span>` : ""}${f.ruleStatus && f.ruleStatus !== "verified" ? ` <span class="iv-chip iv-unconf">${esc2(f.ruleStatus.replace(/_/g, " "))}</span>` : ""}${f.source ? " " + srcMark(f.source) : ""}</li>`).join("")}</ul>${L.projectCost && L.projectCost.cigShareMusd != null ? `<p class="iv-muted">The project's own FTA profile: total $${esc2(L.projectCost.musd.toLocaleString("en-US"))}M, federal CIG share $${esc2(L.projectCost.cigShareMusd.toLocaleString("en-US"))}M. ${srcMark(L.projectCost.url)}</p>` : ""}<p class="iv-muted">${esc2(L.funding.note)}</p>`) : "";
+  const tested = T && p ? T.testedLine(p) : null;
+  return `<div class="iv-demand" data-line="${esc2(L.id)}"><p class="iv-k">Riders, fares and the gap</p>${fitLine}${warn}
+    ${p ? `<dl class="iv-dl">
+      <div><dt>Riders</dt><dd>${rangeTxt(p.riders.weekday, cnt, "riders not on file", "boardings a day")}${p.riders.annual ? `; ${rangeTxt(p.riders.annual, cnt, "", "trips a year")}` : ""}${tested ? `<span class="iv-muted"> (${esc2(tested)})</span>` : ""}</dd></div>
+      <div><dt>Fare revenue</dt><dd>${rangeTxt(p.fareRevenue, usd, L.moneyWhy ? "not on file for this kind of service" : "needs riders a year", "a year")}</dd></div>
+      <div><dt>Operating cost</dt><dd>${rangeTxt(p.operatingCost, usd, L.moneyWhy ? "not on file for this kind of service" : "needs the line length", "a year")}</dd></div>
+      <div><dt>Gap (cost minus fares)</dt><dd>${rangeTxt(p.operatingGap, usd, "needs fares and operating cost", "a year")}</dd></div>
+      <div><dt>Capital cost</dt><dd>${rangeTxt(p.capitalCost, usd, L.moneyWhy ? "not on file for this kind of service" : "needs the line length")}${p.capitalCost ? `<span class="iv-muted"> (line length x the middle half of ${p.capitalCost.inputs.costPerMileMusd.n} projects' cost per mile)</span>` : ""}</dd></div>
+    </dl>` : `<p class="iv-muted">${nof((L.missing || []).join("; "))}</p>`}
+    ${why}${stops}${fund}
+    ${notes.length ? `<p class="iv-k">Not on file</p><ul class="iv-nofl">${[...new Set(notes)].map(n => `<li class="iv-muted">${esc2(n)}</li>`).join("")}</ul>` : ""}</div>`;
+}
 function transitCard(m, open) {
   const d = iv.data, T = E().TRANSIT_THRESHOLDS, bud = BUDGET_OK();
   const area = m.brief && m.brief.transit;
@@ -618,19 +705,23 @@ function transitCard(m, open) {
     pipeRows.push(rowHTML({ name: row.title, chip: "local project", fig: keyFig("Capital cost", nof("not in the project table")), ev: `<span class="iv-chip">${esc2(String((row.verification && row.verification.status) || "unverified").replace(/_/g, " "))}</span>`, sub: esc2(row.agency || ""), key: "tp-" + esc2(row.title),
       detail: `${row.status ? `<p class="iv-muted">Status on file: ${esc2(row.status)}</p>` : ""}${verLine(row)}
         ${row.rtp_document_url ? `<p class="iv-muted"><a href="${esc2(row.rtp_document_url)}" target="_blank" rel="noopener">Project page</a></p>` : ""}
-        <p class="iv-muted">No build verdict: the project table gives no length, cost or ridership, and the density test needs a station-area density that is not on file.</p>` }, open));
+        ${(m.lines || []).some(x => x.L.kind === "pipeline" && x.L.id === row.title && x.L.lengthMiles != null) ? `<p class="iv-muted">The project table itself gives no length or cost; the riders and money below use the length in the project's FTA profile and the people and jobs around its stop points.</p>` : `<p class="iv-muted">No build verdict: the project table gives no length, cost or ridership, and the density test needs a station-area density that is not on file.</p>`}
+        ${demandHTML((m.lines || []).find(x => x.L.kind === "pipeline" && x.L.id === row.title), open, "dm-" + esc2(row.title))}` }, open));
   });
-  m.corrEval.forEach(({ row, ev, len, cost }) => {
+  m.corrEval.forEach(({ row, ev, len, cost, stops }) => {
     const st = (row.verification && row.verification.status) || "unverified";
     const unconfirmed = UNCHECKED.test(st);
-    const chip = "intercity corridor" + (unconfirmed ? ", not confirmed" : "");
-    if (len.value == null && cost.value == null) { offItems.push({ name: row.name, chip, why: `route length ${len.why}; capital cost ${cost.why}` }); return; }
-    corrRows.push(rowHTML({ name: row.name, chip: "intercity corridor", fig: cost.value != null ? keyFig("Capital cost", "$" + esc2(cost.value) + "B") : keyFig("Route length", esc2(len.value + " miles")), ev: `<span class="iv-chip${unconfirmed ? " iv-unconf" : ""}">${esc2(st.replace(/_/g, " "))}</span> <span class="iv-chip">${esc2(VERDICT_TXT[ev.verdict] || "Not enough data to say")}</span>`, sub: esc2(row.funding_status || "No funding status on file."), key: "tc-" + esc2(row.name),
+    const noFig = len.value == null && cost.value == null;
+    // a corridor with a stop city in this county is listed even when no length or cost is on file: where the stop is matters for the land around it
+    corrRows.push(rowHTML({ name: row.name, chip: "intercity corridor", fig: noFig ? keyFig("Route length and cost", nof("not stated in the source documents")) : cost.value != null ? keyFig("Capital cost", "$" + esc2(cost.value) + "B") : keyFig("Route length", esc2(len.value + " miles")), ev: `<span class="iv-chip${unconfirmed ? " iv-unconf" : ""}">${esc2(st.replace(/_/g, " "))}</span> <span class="iv-chip">${esc2(VERDICT_TXT[ev.verdict] || "Not enough data to say")}</span>`, sub: esc2(row.funding_status || "No funding status on file."), key: "tc-" + esc2(row.name),
       detail: `<dl class="iv-dl"><div><dt>Route length</dt><dd>${len.value != null ? esc2(len.value + " miles") : nof(len.why)}</dd></div>
         <div><dt>Capital cost</dt><dd>${cost.value != null ? "$" + esc2(cost.value) + "B" : nof(cost.why)}</dd></div></dl>
+        ${row.status_stated && row.status_stated.text ? `<p class="iv-muted">Status as stated: ${esc2(row.status_stated.text)}${row.status_stated.as_of ? ` (${esc2(row.status_stated.as_of)})` : ""}</p>` : ""}
+        ${stopAreasHTML(stops, open, row.id)}
+        ${demandHTML((m.lines || []).find(x => x.L.kind === "corridor" && x.L.id === row.id), open, "dm-" + esc2(row.id))}
         ${verLine(row)}
         <p class="iv-muted">${(row.official_study_url || row.source_url) ? `<a href="${esc2(row.official_study_url || row.source_url)}" target="_blank" rel="noopener">Source document</a>` : ""}</p>
-        ${verdictBox(ev, "", open, "tcv-" + esc2(row.name))}` }, open));
+        ${noFig ? `<p class="iv-muted">No build verdict: the source documents give no length or cost for this corridor.</p>` : verdictBox(ev, "", open, "tcv-" + esc2(row.name))}` }, open));
   });
   const corr = !nCorr ? `<p class="iv-empty">No local rail or bus project and no intercity corridor in the data lists ${esc2(countyShort())}.</p>`
     : !corridorOpen ? `<p class="iv-gated">${nCorr} corridor-scale ${nCorr === 1 ? "project lists" : "projects list"} ${esc2(countyShort())}. Corridor-scale plays start at about $10M; raise the budget to see ${nCorr === 1 ? "it" : "them"}.</p>`
@@ -696,13 +787,14 @@ function render() {
   loadData().then(d => {
     if (iv.view !== "invest") return;
     const r2 = ready(); if (r2.state !== "ok") { render(); return; }
+    if (window.StationSites && !window.StationSites.cached(r2.fips)) window.StationSites.load(r2.fips).then(() => { if (iv.view === "invest") { iv.key = null; render(); } });
     const p = parcelFacts();
     const key = [r2.fips, iv.hood, p && p.facts.parcel_id, p && p.facts.base_zoning_code, p && p.facts.exclusions && JSON.stringify(p.facts.exclusions), d.laws ? d.laws.length : -1, d.verification ? 1 : 0, typeof SITES !== "undefined" && SITES ? 1 : 0].join("|");
     if (key !== iv.key || !iv.model) { iv.model = build(r2.fips, r2.B, d); iv.key = key; }
     const m = iv.model;
     const open = openSet();
     const y = window.scrollY;
-    el.innerHTML = `<div class="iv-wrap">${headerHTML(m, open)}<div class="iv-cards">${whereCard(m, open)}${buildCard(m, open)}${sitesCard(m, open)}${houseCard(m, open)}${transitCard(m, open)}</div>
+    el.innerHTML = `<div class="iv-wrap">${headerHTML(m, open)}<div class="iv-cards">${whereCard(m, open)}${buildCard(m, open)}${sitesCard(m, open)}${houseCard(m, open)}${transitCard(m, open)}</div>${coursesSection(m, open)}
       <p class="iv-foot">Everything here comes from public data and the tests described above. It is a starting point for due diligence, not advice. A figure marked Not on file is missing from our data, and we do not fill gaps with guesses.</p></div>`;
     if (!fresh) window.scrollTo(0, y);
     window.__cpDecisionBrief = m.brief;
@@ -771,6 +863,235 @@ function init() {
   if (want === "invest") setInvest(true, { keepScroll: true });
 }
 
-window.cpInvest = { render, setView: v => setInvest(v === "invest"), get state() { return iv; } };
+// The same inputs the cards use, for the advisor's no-AI answers (app/advisor-scripts.js): the engine context from
+// the loaded tables, the open lot's facts, this county's measured sites and the back-test honesty line. Builds nothing
+// new; null while the county or the tables are still loading.
+function advisorInputs() {
+  const r = ready();
+  if (r.state === "nodata") return Promise.resolve({ state: "nodata", fips: r.fips });
+  if (r.state !== "ok" || !E()) return Promise.resolve(null);
+  return Promise.all([loadData(), loadPcData()]).then(([d]) => {
+    const r2 = ready(); if (r2.state !== "ok") return null;
+    const ctx = { backtest: d.backtest, catalog: D.catalog, verification: d.verification, underusedSites: d.sites, sites: (typeof SITES !== "undefined") ? SITES : null, costBenchmarks: engineCosts(d.cost), valueEffects: engineEffects(d.effects),
+      laws: d.laws || undefined, unitCosts: d.unitCosts, valuationModels: d.valuationModels, prediction: d.prediction };
+    const sl = siteLists({ countySites: countySitesFor(d, r2.fips) });
+    return { state: "ok", fips: r2.fips, countyName: countyShort(), B: r2.B, ctx, pf: parcelFacts(), honest: honest(d.backtest, r2.fips, countyShort()), countySites: sl.all.map(s => Object.assign({}, s, { displayName: siteName(s) })), projectCards: pcCardsForAdvisorInputs(r2, d) };
+  });
+}
+
+// ================================================================ Courses of action (project cards)
+// Self-contained section. src/engines/projectCardEngine.js builds one card per subject (the selected neighborhood, the
+// open lot, each measured site, each planned-rail stop city in the county); this block only gathers the subjects and
+// formats the cards. It never reads or renders a card's internal_only branch (rows marked display_allowed: false), and
+// the advisor gets only the engine's compact cardsForAdvisor form.
+const pc = { data: null, p: null, budget: null, allSites: false, key: null, cards: null, advKey: null, advCards: null };
+const PCE = () => window.ProjectCardEngine;
+const PC_SITES_SHOWN = 6;
+function loadPcData() {
+  if (pc.p) return pc.p;
+  const get = f => fetch("app/data/" + f).then(r => r.ok ? r.json() : null).catch(() => null);
+  const j = id => (typeof cpJson === "function" ? cpJson(id) : Promise.resolve(null)).catch(() => null);
+  pc.p = Promise.all([get("building_costs.json"), get("housing_funding_rules.json"), get("hud_income_limits.json"), j("hud-fmr"), j("valuation-benchmarks")])
+    .then(([bc, fr, il, fmr, vb]) => (pc.data = { buildingCosts: (bc && bc.rows) || [], fundingRules: fr, incomeLimits: il, fmr, valuationBenchmarks: vb }));
+  return pc.p;
+}
+function pcStop(corr, stop, miles) {
+  return { corridorId: corr.id, corridorName: corr.name, corridorType: corr.corridor_type || null, corridorStatus: (corr.verification && corr.verification.status) || "unverified", stopId: stop.id, stopCity: stop.city, miles, coordinateBasis: stop.coordinate_basis || null };
+}
+function pcSubjects(m) {
+  const fips = m.fips, st = typeof activeState === "function" ? activeState() : null;
+  const det = id => (m.B.details[id] && m.B.details[id].m) || {};
+  const bgRow = id => { const x = det(id); return { id, hv: isNum(x.hv) ? x.hv : null, hvSource: x.hvs ? String(typeof hvSourceText === "function" ? hvSourceText(x.hvs) : x.hvs) : "Census ACS 5-year median home value for the block group" }; };
+  const areas = [];
+  // a stop is used only where its record says how its point was placed (one Austin stop has no stated basis), and one
+  // card per stop city: stop names in an unverified record are not used
+  for (const ce of m.corrEval || []) for (const s of ce.stops || []) if (s.ok && s.stop.coordinate_basis && !areas.some(a => a.corr.id === ce.row.id && a.stop.city === s.stop.city)) areas.push({ corr: ce.row, stop: s.stop, areas: s.areas });
+  const nearBg = id => areas.filter(a => a.areas.some(x => x.id === id)).map(a => pcStop(a.corr, a.stop, a.areas.find(x => x.id === id).miles || null));
+  const out = [];
+  if (m.hood && m.B.details[m.hood]) out.push({ kind: "neighborhood", id: m.hood, name: hoodName(m, m.hood), countyFips: fips, stateCode: st, city: det(m.hood).c || null, blockGroups: [bgRow(m.hood)], nearStops: nearBg(m.hood) });
+  const h = (typeof activeHouse !== "undefined") ? activeHouse : null;
+  if (m.pf && h) {
+    let juris = null; try { const z = h.ll && typeof zoneAt === "function" ? zoneAt(h.ll) : null; juris = z && z.juris ? String(z.juris) : null; } catch (e) { juris = null; }
+    const v = h.valuation || null;
+    let cv = null;
+    if (v && isNum(v.estimatedValue) && /^Recorded sale/.test(String(v.valuationMethod || ""))) cv = { value: v.estimatedValue, recordedSale: true, source: "the lot's panel: " + v.valuationMethod, method: v.valuationMethod };
+    else if (v && isNum(v.estimatedValue) && v.backtest && v.backtest.pass) cv = { value: v.estimatedValue, source: "the lot's panel: " + (v.valuationMethod || "back-tested estimate"), method: v.confidenceRating || null };
+    else if (v) cv = { value: null, reason: String(v.withheldReason || v.confidenceRating || "no back-tested estimate for this lot").replace(/^No estimate:\s*/, "") };
+    out.push({ kind: "lot", id: m.pf.facts.parcel_id, name: m.pf.address || "The lot open on the map", countyFips: fips, stateCode: st, city: juris, point: h.ll || null,
+      parcel: Object.assign({}, m.pf.facts, { municipality_name: juris }), railStationMi: m.pf.facts.dist_to_heavy_rail_mi, currentValue: cv });
+  }
+  const sites = m.countySites.slice().sort((a, b) => (b.acres || 0) - (a.acres || 0));
+  for (const s of (pc.allSites ? sites : sites.slice(0, PC_SITES_SHOWN))) {
+    const uf = ((s.verification && s.verification.unverified_fields) || []).map(u => String(u).split(/[\s(]/)[0]);
+    const acresOk = isNum(s.acres) && !uf.includes("acres");
+    const railOk = isNum(s.distanceToRailMeters) && !uf.includes("distanceToRailMeters");
+    out.push({ kind: "site", id: s.id, name: siteName(s), siteKind: s.kindLabel || s.kind || null, countyFips: fips, stateCode: st, city: s.cityName || null,
+      acres: acresOk ? { value: s.acres, source: s.sourceUrl || "app/data/underused_sites.json" } : null,
+      railStationMi: railOk ? s.distanceToRailMeters / 1609.344 : null,
+      railNote: railOk && s.nearestRailStation ? `the site record names its nearest rail station (${s.nearestRailStation}, ${Math.round(s.distanceToRailMeters)} m away) but not that station's mode, which the SB 79 tiers depend on` : null,
+      nearStops: s.blockGroupId ? nearBg(s.blockGroupId) : [],
+      parcel: { parcel_id: s.id, state_code: st, county_fips: fips, base_zoning_code: s.baseZoning || null, municipality_name: s.cityName || null, is_commercial_or_mixed_use: /commercial/.test(s.zoningCategory || ""), is_single_family_residential: s.zoningCategory === "single-family", is_multifamily_residential: s.zoningCategory === "multifamily", exclusions: {}, lot_sqft: acresOk ? s.acres * 43560 : null } });
+  }
+  for (const a of areas) out.push({ kind: "stop_area", id: a.stop.id, name: `Around the ${a.stop.city} stop city (${a.corr.name})`, countyFips: fips, stateCode: st, city: a.stop.city,
+    blockGroups: a.areas.map(x => bgRow(x.id)), nearStops: [pcStop(a.corr, a.stop, null)], sitesNearby: m.countySites.filter(s => a.areas.some(x => x.id === s.blockGroupId)).length });
+  return { subjects: out, sitesHidden: pc.allSites ? 0 : Math.max(0, sites.length - PC_SITES_SHOWN), sitesAll: sites.length };
+}
+function pcCtx() {
+  const d = iv.data, P = pc.data;
+  return { laws: d.laws || undefined, buildingCosts: P.buildingCosts, fundingRules: P.fundingRules, incomeLimits: P.incomeLimits, fmr: P.fmr, valuationModels: d.valuationModels, valuationBenchmarks: P.valuationBenchmarks, transitEffects: { rows: d.effects }, corridors: d.corridors };
+}
+function pcCards(m) {
+  const h = (typeof activeHouse !== "undefined") ? activeHouse : null;
+  const key = [iv.key, pc.allSites, h && h.valuation ? h.valuation.estimatedValue : "-", h && h.ll ? h.ll.lat + "," + h.ll.lng : "-"].join("|");
+  if (pc.key === key && pc.cards && pc.model === m) return pc.cards;
+  const S = pcSubjects(m), ctx = pcCtx();
+  const cards = S.subjects.map(s => { try { return PCE().buildProjectCard(s, ctx); } catch (e) { return null; } }).filter(Boolean);
+  pc.cards = { cards, sitesHidden: S.sitesHidden, sitesAll: S.sitesAll }; pc.key = key; pc.model = m;
+  return pc.cards;
+}
+// For the scripted advisor ("I have $X"): the same cards the section shows, built from the current model.
+function pcCardsForAdvisorInputs(r2, d) {
+  if (!PCE() || !pc.data) return null;
+  try {
+    const m = iv.model && iv.model.fips === r2.fips ? iv.model : (pc.advKey === r2.fips + "|" + iv.hood && pc.advModel) ? pc.advModel : (pc.advModel = build(r2.fips, r2.B, d));
+    pc.advKey = r2.fips + "|" + iv.hood;
+    return pcCards(m).cards;
+  } catch (e) { return null; }
+}
+
+const pcMoney = v => "$" + Math.round(v).toLocaleString("en-US");
+function pcVal(f) {
+  const u = String(f.unit || ""), v = f.value;
+  if (/^USD/.test(u)) return pcMoney(v);
+  if (/^% /.test(u) || /^%$/.test(u)) return (v > 0 ? "+" : "") + v + "%";
+  if (/^acres/.test(u)) return v.toFixed(2) + " acres";
+  if (/sq ft/.test(u)) return Math.round(v).toLocaleString("en-US") + " sq ft";
+  if (/^homes/.test(u)) return Math.round(v).toLocaleString("en-US") + (Math.round(v) === 1 ? " home" : " homes");
+  if (/^x /.test(u)) return v + "x";
+  return String(v) + (u ? " " + u : "");
+}
+function pcRange(r) {
+  if (!r || !r.low || !isNum(r.low.value)) return "";
+  const u = String(r.unit || ""), pre = /\(up to\)/.test(u) ? "up to " : /at least/.test(u) ? "at least " : "";
+  const txt = pre + (r.low.value === r.high.value ? pcVal(r.low) : pcVal(r.low) + " to " + pcVal(r.high));
+  return `<span class="pc-fig" title="${esc2(u)}">${esc2(txt)}</span> ${basisTag(r.basis)} ${srcMark(r.source)}${r.exact ? `<span class="iv-muted"> (${esc2(typeof r.exact === "string" ? r.exact : "exact")})</span>` : ""}`;
+}
+const pcFig = f => f && isNum(f.value) ? `<span class="pc-fig" title="${esc2(f.unit || "")}">${esc2(pcVal(f))}</span> ${basisTag(f.basis)} ${srcMark(f.source)}` : "";
+const PC_KIND = { neighborhood: "Selected area", lot: "Open lot", site: "Site", stop_area: "Stop city" };
+function pcLegal(x) {
+  const l = x.legal;
+  if (l.basis === "statute") return `<span class="iv-chip" title="${esc2(l.note || "")}">${esc2(String(l.citation || "").split(" — ")[0])}</span>`;
+  if (l.basis === "zoning on file") return `<span class="iv-chip">Zoning on file: ${esc2(l.zone)}</span>`;
+  return `<span class="iv-chip">No approval needed to hold</span>`;
+}
+function pcSize(x) {
+  if (x.course === "hold") return x.size && x.size.area ? pcRange(x.size.area) : nof(x.sizeWhy);
+  const s = x.size || {};
+  const parts = [s.units ? pcRange(s.units) : null, s.sqft ? pcRange(s.sqft) : null].filter(Boolean);
+  return parts.length ? parts.join("; ") : nof("not sized: " + ((x.missing || []).filter(t => /^Size/.test(t)).map(t => t.replace(/^Size \([^)]*\): /, "")).join("; ") || "no limit on file"));
+}
+function pcMoneyHTML(x) {
+  if (!x.publicMoney.length) return `<span class="iv-muted">${x.course === "hold" ? "No programme on file pays for holding a property" : x.course === "adu" ? "No programme on file applied to one market-rate ADU" : "None applied: a market-rate course (see the course with an affordable share)"}</span>`;
+  return `<ul class="pc-pm">${x.publicMoney.map(p => `<li><b>${esc2(p.programme)}</b>: ${esc2(p.status)}${p.cap ? `; federal cap ${pcRange(p.cap)}` : ""}${p.why && p.why.length ? `<span class="iv-muted"> (because ${esc2(p.why.join("; "))})</span>` : ""}${(p.rules || []).length ? `<ul class="pc-rules">${p.rules.map(r => `<li class="iv-muted">${esc2(r.text)}${r.quote ? `: "${esc2(r.quote)}"` : ""} ${srcMark(r.url)}</li>`).join("")}</ul>` : ""}</li>`).join("")}</ul>${x.affordableUnits ? `<p class="iv-muted">Affordable share: ${pcRange(x.affordableUnits)}</p>` : ""}`;
+}
+function pcIncome(x) {
+  if (!x.income) return nof(x.incomeWhy);
+  const i = x.income;
+  return `${pcRange(i.perUnitMonthly)} per home per month${i.yearly ? `; ${pcRange(i.yearly)} a year` : ""}${i.at80 ? `; at the 80% limit ${pcRange(i.at80)}` : ""}<br><span class="iv-muted">${esc2(i.label)}</span>`;
+}
+function pcUplift(t) {
+  if (!t) return "";
+  return `<div class="pc-wide"><dt>Near a planned stop</dt><dd><span class="iv-muted">${esc2(t.stop.corridor)}, ${esc2(t.stop.city)} stop city. Effect on nearby values in published studies (${esc2(t.modeUsed)}; ${esc2(t.modeNote)}):</span>
+    <ul class="pc-up">${t.bands.map(b => `<li>${esc2(b.band)}${b.propertyType ? ` (${esc2(b.propertyType)})` : ""}: average ${pcFig(b.average)}${b.range ? `, studies ranged ${pcRange(b.range)}` : ""} <span class="iv-muted">${esc2(String(b.study).split(",")[0])}</span></li>`).join("")}</ul>
+    <p class="iv-muted">${esc2(t.caution)}</p></dd></div>`;
+}
+function pcInputs(x) {
+  const rows = x.inputs.map(r => {
+    const v = r.range ? pcRange(r.range) : isNum(r.value) ? `<span class="pc-fig">${esc2(/^USD/.test(r.unit || "") ? pcMoney(r.value) : r.value.toLocaleString("en-US") + (r.unit ? " " + r.unit : ""))}</span>` : r.text ? esc2(r.text) : "";
+    return `<tr><td>${esc2(r.name)}${r.note ? `<br><span class="iv-muted">${esc2(r.note)}</span>` : ""}</td><td>${v}</td><td>${basisTag(r.basis)}</td><td>${srcMark(r.source)}</td></tr>`;
+  }).join("");
+  return `<div class="iv-tablewrap"><table class="iv-table pc-inputs"><thead><tr><th>Input</th><th>Value</th><th>Tag</th><th>Source</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+}
+function pcCourse(x, open, key) {
+  return `<li class="pc-course" data-pc-course="${esc2(x.course)}${x.affordable ? "-aff" : ""}"><div class="pc-course-h"><b>${esc2(x.label)}</b> ${pcLegal(x)}</div>
+    <dl class="iv-dl pc-dl">
+      <div><dt>Size</dt><dd>${pcSize(x)}</dd></div>
+      <div><dt>Cost</dt><dd>${x.cost ? `${pcRange(x.cost)}${x.cost.label ? `<br><span class="iv-muted">${esc2(x.cost.label)}${x.course === "adu" ? "; the lot itself is not included" : ""}</span>` : ""}` : nof(x.costWhy)}</dd></div>
+      <div><dt>Public money</dt><dd>${pcMoneyHTML(x)}</dd></div>
+      <div><dt>Income</dt><dd>${pcIncome(x)}</dd></div>
+      <div><dt>Value</dt><dd>${x.value ? `${pcRange(x.value)}${x.valueNote ? `<br><span class="iv-muted">${esc2(x.valueNote)}</span>` : ""}` : nof(x.valueWhy)}</dd></div>
+      ${pcUplift(x.transitUplift)}
+    </dl>
+    ${det(open, key, `Every input and its source (${x.inputs.length}), what could break it, what is missing`, `${pcInputs(x)}
+      ${x.risks.length ? `<p class="iv-k">What could break it</p><ul class="iv-caveats">${x.risks.map(t => `<li>${esc2(t)}</li>`).join("")}</ul>` : ""}
+      ${x.missing.length ? `<p class="iv-k">What is missing</p><ul class="iv-caveats">${x.missing.map(t => `<li>${esc2(t)}</li>`).join("")}</ul>` : ""}`)}</li>`;
+}
+function pcCard(card, open) {
+  const s = card.subject, k = "pc-" + s.kind + "-" + String(s.id || s.name);
+  const costed = card.courses.filter(x => x.cost).length;
+  const st0 = s.kind === "stop_area" && s.nearStops && s.nearStops[0] ? s.nearStops[0].corridorStatus : null;
+  const summary = `<span class="pc-kind">${esc2(PC_KIND[s.kind] || s.kind)}</span> <b>${esc2(s.name || "")}</b>${st0 && st0 !== "verified" ? ` <span class="iv-chip iv-unconf">corridor record: ${esc2(String(st0).replace(/_/g, " "))}</span>` : ""} <span class="iv-muted">${card.courses.length} ${card.courses.length === 1 ? "course" : "courses"}, ${costed} with a cost on file, ${card.notAssessed.length} could not be assessed</span>`;
+  const na = card.notAssessed.length ? `<div class="pc-na"><p class="iv-k">Could not be assessed (${card.notAssessed.length})</p><ul>${card.notAssessed.map(n => `<li><b>${esc2(n.label)}</b><ul class="iv-caveats">${n.missing.map(t => `<li>${esc2(t)}</li>`).join("")}</ul></li>`).join("")}</ul></div>` : "";
+  return `<details class="pc-card" data-pc-subject="${esc2(s.kind)}" ${dk(open, k)}><summary>${summary}</summary>
+    <ul class="pc-courses">${card.courses.map((x, i) => pcCourse(x, open, k + "-" + x.course + (x.affordable ? "-aff" : ""))).join("")}</ul>${na}</details>`;
+}
+function pcFitHTML(cards) {
+  const preset = BUDGET_OK(), b = pc.budget != null ? pc.budget : preset;
+  if (!isFinite(b)) {
+    const f = PCE().fitToBudget(cards, Number.MAX_SAFE_INTEGER);
+    return `<p class="pc-fit-line">With no upper limit: <b>${f.within.length}</b> ${f.within.length === 1 ? "course has" : "courses have"} a cost on file; ${f.uncosted} ${f.uncosted === 1 ? "has" : "have"} no cost on file and ${f.notAssessed} could not be assessed.</p>`;
+  }
+  const f = PCE().fitToBudget(cards, b);
+  const li = (x, tag) => `<li><span class="iv-chip">${tag}</span> <b>${esc2(x.label)}</b> <span class="iv-muted">${esc2(x.subject || "")}</span>: ${pcRange(x.cost)}${x.costLabel ? ` <span class="iv-muted">(${esc2(x.costLabel)})</span>` : ""}</li>`;
+  const list = f.within.map(x => li(x, "Fits")).concat(f.straddle.map(x => li(x, "Could fit"))).slice(0, 8);
+  return `<p class="pc-fit-line">With <b>${esc2(pcMoney(b))}</b>: <b>${f.within.length}</b> ${f.within.length === 1 ? "course costs" : "courses cost"} at most this (the top of the range), <b>${f.straddle.length}</b> could (the range straddles it), ${f.over.length} cost more; ${f.uncosted} ${f.uncosted === 1 ? "has" : "have"} no cost on file and ${f.notAssessed} could not be assessed.</p>
+    ${list.length ? `<ul class="pc-fitlist">${list.join("")}</ul>` : ""}<p class="iv-muted">Listed by the strength of the evidence (measured cost before modelled, a checked law before a partly checked one), not by return: no return figure here has a tested basis.</p>`;
+}
+function coursesSection(m, open) {
+  if (!PCE()) return "";
+  if (!pc.data) { loadPcData().then(() => { if (iv.view === "invest") render(); }); return `<section class="pc-wrap" id="iv-courses"><h3>Courses of action</h3><p class="iv-loading"><span class="spin"></span> Loading cost and funding tables…</p></section>`; }
+  const C = pcCards(m);
+  // the advisor's brief must stay under the Worker's limit (DECISION_BRIEF_MAX_CHARS, 20,000 in
+  // src/ai/advisorGroundingContract.ts): the cards get the room the rest of the brief leaves, at most 6,000 characters
+  if (m.brief) {
+    m.brief.projectCards = null;
+    delete m.brief.transitLinesMaxChars;
+    let used = JSON.stringify(E().briefForAdvisor(m.brief)).length, room = Math.min(6000, 19500 - used);
+    // riders-and-money lines and the cards share what is left: the cards keep at least 2,500 characters, and lines that
+    // no longer fit are named in transitLinesOmitted instead of being dropped silently
+    for (let cap = 2600; room < 2500 && cap > 0; cap -= 650) {
+      m.brief.transitLinesMaxChars = cap - 650;
+      used = JSON.stringify(E().briefForAdvisor(m.brief)).length; room = Math.min(6000, 19500 - used);
+    }
+    m.brief.projectCards = room > 400 ? PCE().cardsForAdvisor(C.cards, room) : null;
+  }
+  const bv = pc.budget != null ? pc.budget : (isFinite(BUDGET_OK()) ? BUDGET_OK() : "");
+  return `<section class="pc-wrap" id="iv-courses" aria-labelledby="iv-courses-h">
+    <h3 id="iv-courses-h">Courses of action</h3>
+    <p class="iv-lede">What could be done, at what cost, for the selected area, the open lot, ${C.sitesAll ? "each measured site, " : ""}and each planned-rail stop city in ${esc2(countyShort())}. A course is listed only where a law or the zoning on file settles that it is allowed; costs come only from tables that may be shown here. Every result is a range with its source.</p>
+    <div class="pc-budget"><label for="pc-budget-in">How much money do you have?</label>
+      <input id="pc-budget-in" type="number" min="0" step="1000" inputmode="numeric" value="${esc2(bv)}" placeholder="for example 150000">
+      <button type="button" class="tool-btn primary" data-pc="budget">Find courses</button></div>
+    <div class="pc-fit" id="pc-fit">${pcFitHTML(C.cards)}</div>
+    <div class="pc-cards">${C.cards.map(c => pcCard(c, open)).join("")}</div>
+    ${C.sitesAll > PC_SITES_SHOWN ? `<button type="button" class="tool-btn" data-pc="all-sites">${pc.allSites ? `Show the ${PC_SITES_SHOWN} largest sites` : `Show all ${C.sitesAll} sites`}</button>` : ""}
+  </section>`;
+}
+function pcSetBudget() {
+  const el = document.getElementById("pc-budget-in");
+  const v = el ? Number(String(el.value).replace(/[,$\s]/g, "")) : NaN;
+  pc.budget = isFinite(v) && v >= 0 && String(el.value).trim() !== "" ? v : null;
+  render();
+}
+document.addEventListener("click", e => {
+  const t = e.target.closest("[data-pc],[data-iv-budget]");
+  if (!t || !host() || !host().contains(t)) return;
+  if (t.dataset.ivBudget != null) { pc.budget = null; return; }   // the preset buttons win over a typed amount
+  if (t.dataset.pc === "budget") pcSetBudget();
+  else if (t.dataset.pc === "all-sites") { pc.allSites = !pc.allSites; render(); }
+});
+document.addEventListener("keydown", e => { if (e.key === "Enter" && e.target && e.target.id === "pc-budget-in") { e.preventDefault(); pcSetBudget(); } });
+
+window.cpInvest = { render, advisorInputs, setView: v => setInvest(v === "invest"), get state() { return iv; }, get courses() { return pc; } };
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
 })();

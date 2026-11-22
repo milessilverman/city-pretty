@@ -1,0 +1,382 @@
+{
+ "ran_on": "2026-11-22T13:20:53.353Z",
+ "script": "scripts/live_check_panels.mjs",
+ "results": {
+  "39059": {
+   "state": "OH",
+   "points": [
+    {
+     "bg": "390599778002",
+     "lat": 39.913604,
+     "lng": -81.499213,
+     "service": "Ohio Statewide Parcels Public View (OGRIP)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $130k, rent $1,266/mo, homes 453"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for OH"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Guernsey County · 390599778002; page \"Census area: Guernsey County · block group 390599778002(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1003 for 39059; page \"HUD Fair Market Rent (FY2027): 1 bed $767 · 2 bed $1,003 · 3 bed $1,339/moGuernsey County, OH. HUD's voucher benchmark (rent plus utilities), not a market askin\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: A; page \"FEMA flood zone: Zone A · special flood hazard areaFederally backed mortgages here require flood insurance.(FEMA Nationa\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 799 ft; page \"Ground elevation: 799 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "✗ Home upgrades — This parcel is 110: Agr-CAUV-Vacant Land, so residential homeowner checks do not apply."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "390599780004",
+     "lat": 39.922662,
+     "lng": -81.565582,
+     "service": "Ohio Statewide Parcels Public View (OGRIP)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $111k, rent $873/mo, homes 556"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for OH"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Guernsey County · 390599780004; page \"Census area: Guernsey County · block group 390599780004(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1003 for 39059; page \"HUD Fair Market Rent (FY2027): 1 bed $767 · 2 bed $1,003 · 3 bed $1,339/moGuernsey County, OH. HUD's voucher benchmark (rent plus utilities), not a market askin\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 897 ft; page \"Ground elevation: 897 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "✗ Home upgrades — This parcel is 100: Agr-Vacant Land, so residential homeowner checks do not apply."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "390599775003",
+     "lat": 40.02977,
+     "lng": -81.585847,
+     "service": "Ohio Statewide Parcels Public View (OGRIP)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $136k, rent $1,385/mo, homes 538"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 17 pts (current release); page: 17 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 16.8 pts below its 40% goal; box: \"16.8 pts below its 40% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for OH"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Guernsey County · 390599775003; page \"Census area: Guernsey County · block group 390599775003(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1003 for 39059; page \"HUD Fair Market Rent (FY2027): 1 bed $767 · 2 bed $1,003 · 3 bed $1,339/moGuernsey County, OH. HUD's voucher benchmark (rent plus utilities), not a market askin\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 853 ft; page \"Ground elevation: 853 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Detached ADU (backyard home) — Building footprint is not on file, so open yard space cannot be verified without a site plan or survey.",
+      "? Duplex, middle housing or lot split — 8,950 sq ft parcel: allowed only where local zoning or a state law permits it; no state middle-housing or lot-split law for OH is on file here.",
+      "✓ Second story — One story (inferred (assumption: single-story layout)). Check the zone's height limit. Foundation inspection required to carry upper-floor loads.",
+      "? Rooftop deck — Requires a flat roof or flat garage roof section."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9211' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9211' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9211' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)"
+   ],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_39059.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_39059.json.gz"
+   ]
+  },
+  "39127": {
+   "state": "OH",
+   "points": [
+    {
+     "bg": "391279662001",
+     "lat": 39.721884,
+     "lng": -82.181917,
+     "service": "Ohio Statewide Parcels Public View (OGRIP)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $182k, rent $683/mo, homes 496"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 28 pts (current release); page: 28 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 27.6 pts below its 50% goal; box: \"27.6 pts below its 50% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for OH"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Perry County · 391279662001; page \"Census area: Perry County · block group 391279662001(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1006 for 39127; page \"HUD Fair Market Rent (FY2027): 1 bed $859 · 2 bed $1,006 · 3 bed $1,267/moPerry County, OH HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities), no\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 926 ft; page \"Ground elevation: 926 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "✗ Home upgrades — This parcel is 110: Agr-CAUV-Vacant Land, so residential homeowner checks do not apply."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "391279660003",
+     "lat": 39.770503,
+     "lng": -82.128896,
+     "service": "Ohio Statewide Parcels Public View (OGRIP)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $107k, rent $1,268/mo, homes 470"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for OH"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Perry County · 391279660003; page \"Census area: Perry County · block group 391279660003(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1006 for 39127; page \"HUD Fair Market Rent (FY2027): 1 bed $859 · 2 bed $1,006 · 3 bed $1,267/moPerry County, OH HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities), no\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 905 ft; page \"Ground elevation: 905 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "✗ Home upgrades — This parcel is 100: Agr-Vacant Land, so residential homeowner checks do not apply."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "391279659012",
+     "lat": 39.76961,
+     "lng": -82.344546,
+     "service": "Ohio Statewide Parcels Public View (OGRIP)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $267k, rent $669/mo, homes 616"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for OH"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Perry County · 391279659012; page \"Census area: Perry County · block group 391279659012(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1006 for 39127; page \"HUD Fair Market Rent (FY2027): 1 bed $859 · 2 bed $1,006 · 3 bed $1,267/moPerry County, OH HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities), no\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 987 ft; page \"Ground elevation: 987 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use (it gives \"111: Agr-CAUV-Cash-Grain Farm\"), so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9211' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9211' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9211' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED"
+   ],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_39127.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_39127.json.gz"
+   ]
+  }
+ }
+}

@@ -1,0 +1,65 @@
+{
+ "generated_by": "scripts/transit/fetch_ntd_annual.py",
+ "primary": {
+  "dataset_id": "npsm-38gk",
+  "name": "2025 NTD Annual Data - Service Data and Operating Expenses by Mode (Time Series 2.1)",
+  "rows_updated_at_utc": "2026-10-15 13:53:46",
+  "licence": "Public Domain U.S. Government",
+  "licence_terms_link": "https://www.usa.gov/government-works",
+  "attribution": "Federal Transit Administration",
+  "landing_url": "https://data.transportation.gov/d/npsm-38gk",
+  "api_url": "https://data.transportation.gov/resource/npsm-38gk.json",
+  "description": "This dataset details service data and operating expenses, broken out by agency and mode, reported to the National Transit Database for the 2025 report year.\n\nNTD Data Tables organize and summarize data from the 2025 National Transit Database in a manner that is more useful for quick reference and summary analysis.\n\nIf you have any other questions about this table, please contact the NTD Help Desk at NTDHelp@dot.gov."
+ },
+ "cross_check": {
+  "dataset_id": "ekg5-frzt",
+  "name": "2022 - 2025 NTD Annual Data - Metrics",
+  "rows_updated_at_utc": "2026-10-14 14:51:19",
+  "licence": "Public Domain U.S. Government",
+  "licence_terms_link": "https://www.usa.gov/government-works",
+  "attribution": "Federal Transit Administration",
+  "landing_url": "https://data.transportation.gov/d/ekg5-frzt",
+  "api_url": "https://data.transportation.gov/resource/ekg5-frzt.json",
+  "description": "This dataset details service and cost efficiency metrics for agencies reporting to the National Transit Database in the 2022, 2023, 2024, and 2025 report years.\n\nOnly Full Reporters report data on Passenger Miles. NTD Data Tables organize and summarize data from the National Transit Database in a manner that is more useful for quick reference and summary analysis. This dataset is based on the 2022 - 2025 Federal Funding Allocation, Operating Expenses, and Service database files.\n\nIn years 2015-2021, you can find this data in the \"Metrics\" data table on NTD Program website, at https://transit.d"
+ },
+ "report_years": [
+  "2020",
+  "2021",
+  "2022",
+  "2023",
+  "2024",
+  "2025"
+ ],
+ "rows_written": 22507,
+ "raw_long_rows": 277397,
+ "formulas": {
+  "opex_per_vrh": "opex / vrh",
+  "opex_per_vrm": "opex / vrm",
+  "opex_per_upt": "opex / upt",
+  "fare_per_upt": "fares / upt",
+  "farebox_recovery": "fares / opex",
+  "avg_trip_miles": "pmt / upt",
+  "vrh_per_route_mile": "vrh / drm"
+ },
+ "mode_names": {
+  "AR": "Alaska Railroad",
+  "CB": "Commuter Bus",
+  "CC": "Cable Car",
+  "CR": "Commuter Rail",
+  "DR": "Demand Response",
+  "FB": "Ferryboat",
+  "HR": "Heavy Rail",
+  "IP": "Inclined Plane",
+  "JT": "Jitney",
+  "LR": "Light Rail",
+  "MB": "Bus",
+  "MG": "Monorail/Automated Guideway",
+  "PB": "Publico",
+  "RB": "Bus Rapid Transit",
+  "SR": "Streetcar Rail",
+  "TB": "Trolleybus",
+  "TR": "Aerial Tramway",
+  "VP": "Vanpool",
+  "YR": "Hybrid Rail"
+ }
+}

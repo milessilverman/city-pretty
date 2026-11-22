@@ -1,0 +1,18 @@
+{
+ "generated_by": "scripts/transit/fetch_ntd_monthly.py",
+ "dataset": {
+  "dataset_id": "8bui-9xvu",
+  "name": "Complete Monthly Ridership (with Adjustments and Estimates)",
+  "rows_updated_at_utc": "2026-11-03 14:51:33",
+  "licence": "Public Domain U.S. Government",
+  "licence_terms_link": "https://www.usa.gov/government-works",
+  "attribution": "Federal Transit Administration",
+  "landing_url": "https://data.transportation.gov/d/8bui-9xvu",
+  "api_url": "https://data.transportation.gov/resource/8bui-9xvu.json",
+  "description": "The Monthly module includes a limited set of key indicators reported by transit properties. Data is reported on a monthly basis, by mode and type of service, for a fiscal year.\n\nThe four data items included are:\n\n1.\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 Unlinked Passenger Trips \n2.\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 Vehicle Revenue Miles\n3.\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 Vehicle Revenue Hours\n4.\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 Vehicles Operated in Maximum Service (Peak Vehicles)\n\nThis dataset presents these values in their own column in a long format (each row of the file is an individual Agency/Mode/TOS/Date). The data source is shared with the static Excel file hosted on the FTA website here: http"
+ },
+ "first_month": "2019-01",
+ "last_month": "2026-09",
+ "series": 1578,
+ "monthly_rows": 121092
+}

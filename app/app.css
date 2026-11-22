@@ -1744,3 +1744,28 @@ body.invest-mode .main, body.invest-mode #report, body.invest-mode #explore { di
   .da-handle { width: 24px; height: 24px; margin: -3px 0 0 -3px; }
 }
 @media print { .da-pop, .da-strip, .da-handle { display: none !important; } }
+/* ---------------------------------------------------------------- Invest: Courses of action (project cards; app/invest.js coursesSection) */
+.pc-wrap { background: var(--sheet); border: 1px solid var(--rule); border-radius: 16px; padding: 14px 18px 16px; margin-top: 16px; min-width: 0; scroll-margin-top: 58px; }
+.pc-wrap h3 { margin: 0 0 4px; }
+.pc-budget { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 10px 0 6px; }
+.pc-budget label { font-weight: 600; font-size: 13.5px; }
+.pc-budget input { width: 11em; max-width: 100%; padding: 6px 8px; border: 1px solid var(--rule); border-radius: 8px; font: inherit; background: var(--sheet); color: var(--ink); }
+.pc-fit { background: var(--land); border-radius: 10px; padding: 8px 12px; margin: 6px 0 10px; font-size: 13.5px; }
+.pc-fit-line { margin: 0 0 4px; }
+.pc-fitlist { margin: 4px 0; padding-left: 1.1em; }
+.pc-fitlist li { margin: 3px 0; }
+.pc-card { border-top: 1px solid var(--rule); padding: 6px 0; }
+.pc-card > summary { cursor: pointer; font-size: 14px; padding: 4px 0; }
+.pc-kind { display: inline-block; font: 600 11px/1.2 var(--body); text-transform: uppercase; letter-spacing: .05em; color: var(--ink-3); margin-right: 4px; }
+.pc-courses { list-style: none; padding: 0; margin: 6px 0 0; display: grid; gap: 10px; }
+.pc-course { border: 1px solid var(--rule); border-radius: 12px; padding: 10px 12px; min-width: 0; }
+.pc-course-h { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.pc-dl dd ul { margin: 2px 0; padding-left: 1.1em; }
+.pc-pm li, .pc-up li { margin: 2px 0; }
+.pc-rules { font-size: 12px; }
+.pc-fig { font-weight: 600; color: var(--ink); }
+.pc-na { margin-top: 10px; background: var(--land); border-radius: 10px; padding: 8px 12px; font-size: 13px; }
+.pc-na > ul { padding-left: 1.1em; margin: 4px 0; }
+.pc-inputs td { vertical-align: top; overflow-wrap: anywhere; }
+@media (max-width: 640px) { .pc-wrap { padding: 12px 14px 14px; border-radius: 14px; } .pc-budget input { width: 100%; } }
+.pc-dl > .pc-wide { grid-column: 1 / -1; }

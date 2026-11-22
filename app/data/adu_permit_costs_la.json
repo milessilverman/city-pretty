@@ -1,0 +1,223 @@
+{
+ "_source": {
+  "dataset": "Building and Safety - Building Permits Issued from 2020 to Present (N), City of Los Angeles (Socrata pi9x-tg5x)",
+  "url": "https://data.lacity.org/resource/pi9x-tg5x.json",
+  "retrieved": "2026-11-22",
+  "select_fields": "permit_nbr,permit_type,permit_sub_type,issue_date,square_footage,valuation,junior_adu,work_desc,construction",
+  "square_footage_filter": "150 to 1200",
+  "measure": "declared permit valuation, not a bid or final cost",
+  "computed_by": "scripts/costs/adu_permit_costs_la.py (medians of valuation / square_footage per permit, by calendar year of issue_date)"
+ },
+ "groups": {
+  "new_detached_or_attached_adu": {
+   "soql_where": "permit_type = 'Bldg-New' AND permit_sub_type = '1 or 2 Family Dwelling' AND (upper(work_desc) like '%ADU%' OR upper(work_desc) like '%ACCESSORY DWELLING%') AND valuation IS NOT NULL AND issue_date IS NOT NULL AND square_footage IS NOT NULL",
+   "rows_returned": 10858,
+   "rows_used": 7966,
+   "by_issue_year": [
+    {
+     "issue_year": 2020,
+     "permits": 547,
+     "median_valuation": 101000,
+     "median_sqft": 909,
+     "median_valuation_per_sqft": 107.04,
+     "p25_valuation_per_sqft": 101.0,
+     "p75_valuation_per_sqft": 121.15
+    },
+    {
+     "issue_year": 2021,
+     "permits": 874,
+     "median_valuation": 104891,
+     "median_sqft": 902,
+     "median_valuation_per_sqft": 109.75,
+     "p25_valuation_per_sqft": 101.26,
+     "p75_valuation_per_sqft": 133.27
+    },
+    {
+     "issue_year": 2022,
+     "permits": 1445,
+     "median_valuation": 110000,
+     "median_sqft": 839,
+     "median_valuation_per_sqft": 120.79,
+     "p25_valuation_per_sqft": 101.69,
+     "p75_valuation_per_sqft": 150.0
+    },
+    {
+     "issue_year": 2023,
+     "permits": 1267,
+     "median_valuation": 120000,
+     "median_sqft": 860,
+     "median_valuation_per_sqft": 125.21,
+     "p25_valuation_per_sqft": 104.64,
+     "p75_valuation_per_sqft": 155.1
+    },
+    {
+     "issue_year": 2024,
+     "permits": 1274,
+     "median_valuation": 107314,
+     "median_sqft": 810,
+     "median_valuation_per_sqft": 122.25,
+     "p25_valuation_per_sqft": 104.17,
+     "p75_valuation_per_sqft": 158.89
+    },
+    {
+     "issue_year": 2025,
+     "permits": 1375,
+     "median_valuation": 110000,
+     "median_sqft": 800,
+     "median_valuation_per_sqft": 126.1,
+     "p25_valuation_per_sqft": 106.09,
+     "p75_valuation_per_sqft": 167.11
+    },
+    {
+     "issue_year": 2026,
+     "permits": 1184,
+     "median_valuation": 105000,
+     "median_sqft": 800,
+     "median_valuation_per_sqft": 128.29,
+     "p25_valuation_per_sqft": 107.62,
+     "p75_valuation_per_sqft": 177.38
+    }
+   ]
+  },
+  "conversion_adu": {
+   "soql_where": "permit_type in ('Bldg-Alter/Repair','Bldg-Addition') AND (junior_adu IS NULL OR junior_adu != '1') AND (upper(work_desc) like '%ADU%' OR upper(work_desc) like '%ACCESSORY DWELLING%') AND valuation IS NOT NULL AND issue_date IS NOT NULL AND square_footage IS NOT NULL",
+   "rows_returned": 26902,
+   "rows_used": 19483,
+   "by_issue_year": [
+    {
+     "issue_year": 2020,
+     "permits": 2032,
+     "median_valuation": 31000,
+     "median_sqft": 466,
+     "median_valuation_per_sqft": 69.23,
+     "p25_valuation_per_sqft": 50.92,
+     "p75_valuation_per_sqft": 97.12
+    },
+    {
+     "issue_year": 2021,
+     "permits": 2864,
+     "median_valuation": 40000,
+     "median_sqft": 462,
+     "median_valuation_per_sqft": 83.52,
+     "p25_valuation_per_sqft": 60.73,
+     "p75_valuation_per_sqft": 109.59
+    },
+    {
+     "issue_year": 2022,
+     "permits": 3626,
+     "median_valuation": 50000,
+     "median_sqft": 493,
+     "median_valuation_per_sqft": 99.68,
+     "p25_valuation_per_sqft": 69.9,
+     "p75_valuation_per_sqft": 127.37
+    },
+    {
+     "issue_year": 2023,
+     "permits": 2932,
+     "median_valuation": 50000,
+     "median_sqft": 514,
+     "median_valuation_per_sqft": 100.49,
+     "p25_valuation_per_sqft": 67.78,
+     "p75_valuation_per_sqft": 134.9
+    },
+    {
+     "issue_year": 2024,
+     "permits": 2863,
+     "median_valuation": 50000,
+     "median_sqft": 501,
+     "median_valuation_per_sqft": 100.33,
+     "p25_valuation_per_sqft": 66.67,
+     "p75_valuation_per_sqft": 140.2
+    },
+    {
+     "issue_year": 2025,
+     "permits": 2986,
+     "median_valuation": 50000,
+     "median_sqft": 520,
+     "median_valuation_per_sqft": 101.14,
+     "p25_valuation_per_sqft": 68.83,
+     "p75_valuation_per_sqft": 138.89
+    },
+    {
+     "issue_year": 2026,
+     "permits": 2180,
+     "median_valuation": 54725,
+     "median_sqft": 509,
+     "median_valuation_per_sqft": 105.57,
+     "p25_valuation_per_sqft": 71.02,
+     "p75_valuation_per_sqft": 150.83
+    }
+   ]
+  },
+  "junior_adu_conversion": {
+   "soql_where": "junior_adu = '1' AND valuation IS NOT NULL AND issue_date IS NOT NULL AND square_footage IS NOT NULL",
+   "rows_returned": 4055,
+   "rows_used": 2080,
+   "by_issue_year": [
+    {
+     "issue_year": 2020,
+     "permits": 61,
+     "median_valuation": 20000,
+     "median_sqft": 400,
+     "median_valuation_per_sqft": 54.95,
+     "p25_valuation_per_sqft": 45.8,
+     "p75_valuation_per_sqft": 68.89
+    },
+    {
+     "issue_year": 2021,
+     "permits": 170,
+     "median_valuation": 25000,
+     "median_sqft": 400,
+     "median_valuation_per_sqft": 68.46,
+     "p25_valuation_per_sqft": 51.22,
+     "p75_valuation_per_sqft": 95.95
+    },
+    {
+     "issue_year": 2022,
+     "permits": 250,
+     "median_valuation": 35000,
+     "median_sqft": 400,
+     "median_valuation_per_sqft": 90.5,
+     "p25_valuation_per_sqft": 64.45,
+     "p75_valuation_per_sqft": 125.0
+    },
+    {
+     "issue_year": 2023,
+     "permits": 365,
+     "median_valuation": 35000,
+     "median_sqft": 400,
+     "median_valuation_per_sqft": 90.09,
+     "p25_valuation_per_sqft": 57.47,
+     "p75_valuation_per_sqft": 121.58
+    },
+    {
+     "issue_year": 2024,
+     "permits": 418,
+     "median_valuation": 35000,
+     "median_sqft": 396,
+     "median_valuation_per_sqft": 88.25,
+     "p25_valuation_per_sqft": 55.44,
+     "p75_valuation_per_sqft": 125.0
+    },
+    {
+     "issue_year": 2025,
+     "permits": 484,
+     "median_valuation": 40000,
+     "median_sqft": 403,
+     "median_valuation_per_sqft": 101.48,
+     "p25_valuation_per_sqft": 67.57,
+     "p75_valuation_per_sqft": 143.68
+    },
+    {
+     "issue_year": 2026,
+     "permits": 332,
+     "median_valuation": 45000,
+     "median_sqft": 408,
+     "median_valuation_per_sqft": 106.89,
+     "p25_valuation_per_sqft": 70.75,
+     "p75_valuation_per_sqft": 156.34
+    }
+   ]
+  }
+ }
+}

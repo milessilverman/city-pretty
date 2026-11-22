@@ -38,7 +38,7 @@ describe("19 Nov 2026 study, program and project corrections", () => {
     expect(atx.funding_status).not.toMatch(/Step 1 Award/);
     const phx = cs.find((c: any) => c.id === "corridor_phx_tus");
     expect(phx.cid_selection.sponsor).toBe("Arizona Department of Transportation");
-    expect(phx.lead_agencies).toEqual(["Arizona Department of Transportation (ADOT)"]);
+    expect(phx.lead_agencies).toEqual(["Arizona Department of Transportation"]); // the FRA text names no acronym
   });
 
   it("transit pipelines: FTA profile figures are kept in fta_profile, with the quote", () => {

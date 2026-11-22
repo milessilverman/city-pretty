@@ -1,11 +1,18 @@
 // Runs the advisor against tests/eval/advisor_questions.json and scores it.
 // Needs a real key: ANTHROPIC_API_KEY=... npm run eval:advisor   (optional CENSUS_API_KEY)
+// Offline, no key, no cost: npm run eval:advisor -- --scripted   scores the page's script-first layer
+// (app/advisor-scripts.js) on tests/eval/advisor_scripted_cases.json and reports how many of the questions above it
+// would answer without the model (scripts/scripted_advisor_eval.mjs).
 // Each question costs real API money (a few cents with Claude Opus 5.5); the full set is ~22 questions.
 import fs from "node:fs";
 import Anthropic from "@anthropic-ai/sdk";
 import { runAdvisor } from "../workers/advisorAgent.ts";
 
 const SYSTEM = "You are City Pretty's property and city-development advisor. Answer the user's question using your tools.";
+if (process.argv.includes("--scripted")) {
+  const { runScriptedEval } = await import("./scripted_advisor_eval.mjs");
+  process.exit(await runScriptedEval());
+}
 const set = JSON.parse(fs.readFileSync(new URL("../tests/eval/advisor_questions.json", import.meta.url), "utf8"));
 if (!process.env.ANTHROPIC_API_KEY) { console.error("Set ANTHROPIC_API_KEY to run the eval."); process.exit(2); }
 const client = new Anthropic();

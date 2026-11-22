@@ -60,7 +60,14 @@ counties plus San Francisco: gaps 4,624 -> 5,099, strengths 6,571 -> 6,398, cras
 2,898 -> 615, crosswalks re-sized 4,291 -> 4,380. The engine's thresholds (`>= 1` pedestrian/cyclist crash and so on) now
 read the split counts, so a block group whose only crash sits on an edge shared with two others (0.33 or 0.5) no longer
 qualifies; that is the intent of audit item P1-3 but it is the main reason rows dropped. Counts and medians in
-`crash_gaps` are shown to one decimal when fractional. Outside California the gaps still use the older, un-split counts.
+`crash_gaps` are shown to one decimal when fractional. Outside California the gaps used the older, un-split counts until 21 Nov (below).
+
+## Update 21 Nov 2026: the 175 counties outside California on the 1/k counts
+
+All 175 count files outside California were rebuilt with the 1/k split and their `crash_gaps` recomputed (same script and
+method). Totals over the 175 from each file's `_meta`: gaps 4,855 -> 5,401, strengths 7,250 -> 6,642, crash rows dropped
+10,451 -> 21,774, added 4,225 -> 661, crosswalks re-sized 1,181 -> 1,521 (Illinois drops none: lower-bound source). Every
+county in the repository now uses split counts.
 
 ## Not done
 

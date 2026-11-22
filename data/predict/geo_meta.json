@@ -1,0 +1,118 @@
+{
+ "retrieved": "2026-11-22",
+ "sources": [
+  {
+   "url": "https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2020_Gazetteer/2020_Gaz_tracts_national.zip",
+   "last_modified": "Fri, 22 Jan 2021 14:24:01 GMT",
+   "rows_kept": 60436
+  },
+  {
+   "url": "https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2020_Gazetteer/2020_Gaz_cousubs_national.zip",
+   "last_modified": "Fri, 22 Jan 2021 14:23:58 GMT",
+   "cousubs_in_sample": 915
+  },
+  {
+   "url": "https://www2.census.gov/programs-surveys/metro-micro/geographies/reference-files/2023/delineation-files/list1_2023.xlsx",
+   "last_modified": "Fri, 04 Aug 2023 14:36:17 GMT",
+   "counties": 1915,
+   "sample_counties_matched": 50
+  },
+  {
+   "url": "https://www2.census.gov/geo/docs/maps-data/data/baf2020/BlockAssign_ST04_AZ.zip",
+   "last_modified": "Mon, 08 Feb 2021 16:02:41 GMT"
+  },
+  {
+   "url": "https://www2.census.gov/geo/docs/maps-data/data/baf2020/BlockAssign_ST06_CA.zip",
+   "last_modified": "Mon, 25 Jan 2021 13:50:13 GMT"
+  },
+  {
+   "url": "https://www2.census.gov/geo/docs/maps-data/data/baf2020/BlockAssign_ST12_FL.zip",
+   "last_modified": "Mon, 08 Feb 2021 16:02:47 GMT"
+  },
+  {
+   "url": "https://www2.census.gov/geo/docs/maps-data/data/baf2020/BlockAssign_ST13_GA.zip",
+   "last_modified": "Thu, 11 Feb 2021 14:14:47 GMT"
+  },
+  {
+   "url": "https://www2.census.gov/geo/docs/maps-data/data/baf2020/BlockAssign_ST17_IL.zip",
+   "last_modified": "Mon, 08 Feb 2021 16:02:52 GMT"
+  },
+  {
+   "url": "https://www2.census.gov/geo/docs/maps-data/data/baf2020/BlockAssign_ST18_IN.zip",
+   "last_modified": "Mon, 25 Jan 2021 13:50:44 GMT"
+  },
+  {
+   "url": "https://www2.census.gov/geo/docs/maps-data/data/baf2020/BlockAssign_ST25_MA.zip",
+   "last_modified": "Mon, 08 Feb 2021 16:02:57 GMT"
+  },
+  {
+   "url": "https://www2.census.gov/geo/docs/maps-data/data/baf2020/BlockAssign_ST26_MI.zip",
+   "last_modified": "Thu, 11 Feb 2021 14:14:58 GMT"
+  },
+  {
+   "url": "https://www2.census.gov/geo/docs/maps-data/data/baf2020/BlockAssign_ST27_MN.zip",
+   "last_modified": "Mon, 08 Feb 2021 16:03:00 GMT"
+  },
+  {
+   "url": "https://www2.census.gov/geo/docs/maps-data/data/baf2020/BlockAssign_ST29_MO.zip",
+   "last_modified": "Mon, 25 Jan 2021 13:51:07 GMT"
+  },
+  {
+   "url": "https://www2.census.gov/geo/docs/maps-data/data/baf2020/BlockAssign_ST32_NV.zip",
+   "last_modified": "Mon, 01 Feb 2021 14:22:49 GMT"
+  },
+  {
+   "url": "https://www2.census.gov/geo/docs/maps-data/data/baf2020/BlockAssign_ST34_NJ.zip",
+   "last_modified": "Tue, 19 Jan 2021 14:57:58 GMT"
+  },
+  {
+   "url": "https://www2.census.gov/geo/docs/maps-data/data/baf2020/BlockAssign_ST36_NY.zip",
+   "last_modified": "Mon, 25 Jan 2021 13:51:17 GMT"
+  },
+  {
+   "url": "https://www2.census.gov/geo/docs/maps-data/data/baf2020/BlockAssign_ST39_OH.zip",
+   "last_modified": "Mon, 25 Jan 2021 13:51:35 GMT"
+  },
+  {
+   "url": "https://www2.census.gov/geo/docs/maps-data/data/baf2020/BlockAssign_ST40_OK.zip",
+   "last_modified": "Mon, 08 Feb 2021 16:03:12 GMT"
+  },
+  {
+   "url": "https://www2.census.gov/geo/docs/maps-data/data/baf2020/BlockAssign_ST42_PA.zip",
+   "last_modified": "Mon, 01 Feb 2021 14:22:58 GMT"
+  },
+  {
+   "url": "https://www2.census.gov/geo/docs/maps-data/data/baf2020/BlockAssign_ST47_TN.zip",
+   "last_modified": "Mon, 08 Feb 2021 16:03:18 GMT"
+  },
+  {
+   "url": "https://www2.census.gov/geo/docs/maps-data/data/baf2020/BlockAssign_ST48_TX.zip",
+   "last_modified": "Mon, 08 Feb 2021 16:03:24 GMT"
+  },
+  {
+   "url": "https://www2.census.gov/geo/docs/maps-data/data/baf2020/BlockAssign_ST49_UT.zip",
+   "last_modified": "Mon, 08 Feb 2021 16:03:27 GMT"
+  },
+  {
+   "url": "https://www2.census.gov/geo/docs/maps-data/data/baf2020/BlockAssign_ST53_WA.zip",
+   "last_modified": "Mon, 01 Feb 2021 14:23:13 GMT"
+  },
+  {
+   "url": "https://www2.census.gov/geo/docs/maps-data/data/baf2020/BlockAssign_ST55_WI.zip",
+   "last_modified": "Mon, 01 Feb 2021 14:23:23 GMT"
+  }
+ ],
+ "block_matches": {
+  "unincorporated": 170287,
+  "place": 797480,
+  "none": 3487,
+  "mcd": 83178
+ },
+ "tracts": 21366,
+ "tracts_by_kind": {
+  "unincorporated": 2722,
+  "place": 17287,
+  "none": 53,
+  "mcd": 1304
+ }
+}

@@ -1,0 +1,108 @@
+{
+ "tracts_2010": 74002,
+ "tracts_2020": 85378,
+ "same_code_both": 62489,
+ "same_code_and_95pct_same_land": 60405,
+ "50_counties": {
+  "tracts_2010": 18936,
+  "tracts_2020": 21364,
+  "same_code_and_95pct_same_land": 15799,
+  "share_2010_tracts_unchanged": 0.8343
+ },
+ "hmda_2018plus": {
+  "2018": {
+   "n": 18484,
+   "share_in_2010_list": 0.9996,
+   "share_in_2020_list": 0.8596
+  },
+  "2019": {
+   "n": 18513,
+   "share_in_2010_list": 0.9996,
+   "share_in_2020_list": 0.8592
+  },
+  "2020": {
+   "n": 18492,
+   "share_in_2010_list": 0.9996,
+   "share_in_2020_list": 0.8591
+  },
+  "2021": {
+   "n": 18550,
+   "share_in_2010_list": 0.9996,
+   "share_in_2020_list": 0.8591
+  },
+  "2022": {
+   "n": 20769,
+   "share_in_2010_list": 0.7668,
+   "share_in_2020_list": 1.0
+  },
+  "2023": {
+   "n": 20738,
+   "share_in_2010_list": 0.7664,
+   "share_in_2020_list": 1.0
+  },
+  "2024": {
+   "n": 20686,
+   "share_in_2010_list": 0.7669,
+   "share_in_2020_list": 1.0
+  },
+  "2025": {
+   "n": 20681,
+   "share_in_2010_list": 0.7669,
+   "share_in_2020_list": 1.0
+  }
+ },
+ "hmda_2012_2017": {
+  "2012": {
+   "n": 18399,
+   "share_in_2010_list": 1.0,
+   "share_in_2020_list": 0.8602
+  },
+  "2013": {
+   "n": 18447,
+   "share_in_2010_list": 1.0,
+   "share_in_2020_list": 0.86
+  },
+  "2014": {
+   "n": 18416,
+   "share_in_2010_list": 1.0,
+   "share_in_2020_list": 0.8598
+  },
+  "2015": {
+   "n": 18397,
+   "share_in_2010_list": 1.0,
+   "share_in_2020_list": 0.8602
+  },
+  "2016": {
+   "n": 18409,
+   "share_in_2010_list": 1.0,
+   "share_in_2020_list": 0.8597
+  },
+  "2017": {
+   "n": 18445,
+   "share_in_2010_list": 0.9996,
+   "share_in_2020_list": 0.8601
+  }
+ },
+ "fhfa_tract": {
+  "1999": {
+   "n": 51556,
+   "share_in_2010_list": 0.7452,
+   "share_in_2020_list": 0.9871
+  },
+  "2010": {
+   "n": 61125,
+   "share_in_2010_list": 0.7312,
+   "share_in_2020_list": 0.9882
+  },
+  "2020": {
+   "n": 62400,
+   "share_in_2010_list": 0.7319,
+   "share_in_2020_list": 0.9884
+  },
+  "2025": {
+   "n": 46719,
+   "share_in_2010_list": 0.752,
+   "share_in_2020_list": 0.9869
+  }
+ }
+}

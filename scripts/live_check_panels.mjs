@@ -53,6 +53,10 @@ const HUD = Object.fromEntries(load("app/data/hud_fair_market_rents.json").recor
 const STATUTES = load("app/data/statutes.json");
 const CORR = (loadIf("app/data/bundle_corrections.json") || {}).block_groups || {};
 const LANV = load("app/data/la_neighborhood_values.json");
+// Census ACS code for a top-coded median gross rent (table B25064). Fetched 21 Nov 2026 from
+// https://www2.census.gov/programs-surveys/acs/tech_docs/jam_values/2024_Jam_Values.xlsx, "Median - Jam Values", row
+// "Gross Rent", upper interval: meaning "$3,500 or more", character value "3,500+", numeric value (API and Summary File) "3501".
+const ACS_RENT_TOP = 3501;
 const SERVICES = load("app/data/parcel_services.json").services;
 
 async function getJson(url, tries = 4) {
@@ -234,10 +238,17 @@ async function main() {
           const m = Object.assign({}, fileM);
           if (m.hv == null && CORR[bg] && CORR[bg].hv != null) m.hv = CORR[bg].hv;
           if (m.rent == null && CORR[bg] && CORR[bg].rent != null) m.rent = CORR[bg].rent;
-          const eHv = await fmt(m.hv), eRent = m.rent ? "$" + Math.round(m.rent).toLocaleString("en-US") + "/mo" : "–";   // to the dollar, formatted here
+          // Rent to the dollar, formatted here (not with the page's own formatter). 3501 is not a dollar figure: it is the
+          // Census code for a median gross rent of "$3,500 or more" (ACS_RENT_TOP above), so the page must show that wording; 100 or less is the bottom-code, "$100 or less".
+          const eRent = !m.rent ? "–" : m.rent === ACS_RENT_TOP ? "$3,500 or more/mo" : m.rent <= 100 ? "$100 or less/mo" : "$" + Math.round(m.rent).toLocaleString("en-US") + "/mo";
+          const eHv = await fmt(m.hv);
           const eHomes = await page.evaluate((x) => (0, eval)("fmtN")(x), m.homes);
-          const pass = panel.includes(`Typical home value${eHv}`) && panel.includes(`Median rent${eRent}`) && panel.includes(`Homes${eHomes}`);
-          ok("neighborhood", pass, `expected home value ${eHv}, rent ${eRent}, homes ${eHomes}` + (pass ? "" : " | panel: " + (panel.match(/Typical home value.{0,140}/) || [""])[0]));
+          // A top-coded rent: the page shows "$N or more/mo" (its ACS top-code rule), which matches when the file's value is at
+          // least N. Found 20 Nov 2026 on Travis block group 484530010004, where this check expected the stored top-code to the dollar.
+          const top = panel.match(/Median rent\$([\d,]+) or more\/mo/);
+          const rentOk = top ? (m.rent != null && m.rent >= Number(top[1].replace(/,/g, ""))) : panel.includes(`Median rent${eRent}`);
+          const pass = panel.includes(`Typical home value${eHv}`) && rentOk && panel.includes(`Homes${eHomes}`);
+          ok("neighborhood", pass, `expected home value ${eHv}, rent ${eRent}${top ? " (page shows the top-code: " + top[0].replace("Median rent", "") + ")" : ""}, homes ${eHomes}` + (pass ? "" : " | panel: " + (panel.match(/Typical home value.{0,140}/) || [""])[0]));
         }
         // tree canopy (details table is in a <details>; textContent includes it)
         const teV = te && Array.isArray(te[bg]) && te[bg][0] != null ? Math.round(te[bg][0]) : null;

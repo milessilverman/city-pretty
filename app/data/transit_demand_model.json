@@ -1,0 +1,731 @@
+{
+ "meta": {
+  "generated_by": "scripts/transit/fit_station_ridership.py",
+  "method": "docs/TRANSIT-DEMAND-MODEL.md (committed before the fit)",
+  "features": [
+   "ln_pop_half",
+   "ln_jobs_half",
+   "ln_pop_ring",
+   "ln_jobs_ring",
+   "terminal",
+   "transfer"
+  ],
+  "form": "ln(weekday or daily station count) = system intercept + sum(coef x feature)",
+  "feature_definitions": {
+   "ln_pop_half": "ln(1 + people within 0.5 mi), ACS 2020-2024 block groups apportioned by polygon area",
+   "ln_jobs_half": "ln(1 + jobs within 0.5 mi), LODES8 WAC 2023 all jobs (block group where on file, else tract spread over its block groups by area)",
+   "ln_pop_ring": "ln(1 + people 0.5 to 1 mi)",
+   "ln_jobs_ring": "ln(1 + jobs 0.5 to 1 mi)",
+   "terminal": "1 if degree 1 in the minimum spanning tree of the line's or system's stops",
+   "transfer": "1 if another rail station is within 0.25 mi"
+  },
+  "lodes_year": 2023,
+  "acs": "2020-2024 ACS 5-year (county bundles)",
+  "test": "leave one system out, within mode; single system-level scaling factor (median log ratio = 0)",
+  "sources": {
+   "stations": "data/transit/station_boardings.csv (see data/transit/station_boardings_sources.json)",
+   "lodes": "https://lehd.ces.census.gov/data/lodes/LODES8/",
+   "ntd": "https://data.transportation.gov/d/npsm-38gk"
+  },
+  "not_obtained": [
+   "Published direct-ridership-model coefficients: TCRP Report 153 PDF (onlinepubs.trb.org returned an empty reply; the web.archive.org copy reset the connection; nap.edu requires a guest sign-in to download), FTA STOPS documentation (transit.dot.gov refuses this machine). None were typed from memory, so none are tested.",
+   "Station-level rail service (trains per hour): no rail frequency table on file; system-level service is absorbed by the system intercept.",
+   "Station boardings for bus rapid transit, streetcar and bus: none on file, so those modes get riders only from NTD trips per route mile."
+  ],
+  "dropped": {
+   "no_coordinates": 4,
+   "outside_block_groups_on_file": 35,
+   "zero_count": 0
+  }
+ },
+ "modes": {
+  "HR": {
+   "label": "heavy rail",
+   "stations": 651,
+   "systems": [
+    "Chicago Transit Authority",
+    "MTA New York City Transit",
+    "Maryland Transit Administration",
+    "Massachusetts Bay Transportation Authority",
+    "San Francisco Bay Area Rapid Transit District"
+   ],
+   "stations_by_system": {
+    "MTA New York City Transit": 399,
+    "Chicago Transit Authority": 143,
+    "San Francisco Bay Area Rapid Transit District": 47,
+    "Massachusetts Bay Transportation Authority": 48,
+    "Maryland Transit Administration": 14
+   },
+   "coef": {
+    "ln_pop_half": 0.0903666533810742,
+    "ln_jobs_half": 0.3000948755370654,
+    "ln_pop_ring": 0.1659886676240551,
+    "ln_jobs_ring": 0.05402621961281097,
+    "terminal": 0.3673316620955809,
+    "transfer": 0.1452675204451609
+   },
+   "se": {
+    "ln_pop_half": 0.0740499297339562,
+    "ln_jobs_half": 0.04590117079429669,
+    "ln_pop_ring": 0.09041100588145144,
+    "ln_jobs_ring": 0.05388213258321278,
+    "terminal": 0.07557473986635939,
+    "transfer": 0.12289453168297294
+   },
+   "intercepts": {
+    "Chicago Transit Authority": 1.6185446972816195,
+    "MTA New York City Transit": 2.0669668317572794,
+    "Maryland Transit Administration": 2.0359854459605726,
+    "Massachusetts Bay Transportation Authority": 2.368499796381157,
+    "San Francisco Bay Area Rapid Transit District": 2.346422244757901
+   },
+   "within_r2_in_sample": 0.42508423694269104,
+   "resid_sd_in_sample": 0.7031996077946145,
+   "loso": [
+    {
+     "held_out": "Chicago Transit Authority",
+     "stations": 143,
+     "trained_on": [
+      "MTA New York City Transit",
+      "Maryland Transit Administration",
+      "Massachusetts Bay Transportation Authority",
+      "San Francisco Bay Area Rapid Transit District"
+     ],
+     "model": {
+      "spearman": 0.5801862546646233,
+      "mdape_after_scaling": 0.4127187830998015,
+      "level_factor": 0.492184408367045
+     },
+     "baseline_system_average": {
+      "spearman": null,
+      "mdape_after_scaling": 0.583988484110287
+     },
+     "baseline_people_plus_jobs_half_mile": {
+      "spearman": 0.5775618224109856,
+      "mdape_after_scaling": 0.5065626500353765
+     }
+    },
+    {
+     "held_out": "MTA New York City Transit",
+     "stations": 399,
+     "trained_on": [
+      "Chicago Transit Authority",
+      "Maryland Transit Administration",
+      "Massachusetts Bay Transportation Authority",
+      "San Francisco Bay Area Rapid Transit District"
+     ],
+     "model": {
+      "spearman": 0.6374173499074319,
+      "mdape_after_scaling": 0.49629183023849777,
+      "level_factor": 1.2708185902898737
+     },
+     "baseline_system_average": {
+      "spearman": null,
+      "mdape_after_scaling": 0.5633644231577183
+     },
+     "baseline_people_plus_jobs_half_mile": {
+      "spearman": 0.6589466127630634,
+      "mdape_after_scaling": 0.44979291379272873
+     }
+    },
+    {
+     "held_out": "Maryland Transit Administration",
+     "stations": 14,
+     "trained_on": [
+      "Chicago Transit Authority",
+      "MTA New York City Transit",
+      "Massachusetts Bay Transportation Authority",
+      "San Francisco Bay Area Rapid Transit District"
+     ],
+     "model": {
+      "spearman": 0.6395604395604395,
+      "mdape_after_scaling": 0.292289569538663,
+      "level_factor": 1.04245252302532
+     },
+     "baseline_system_average": {
+      "spearman": null,
+      "mdape_after_scaling": 0.33119462517375586
+     },
+     "baseline_people_plus_jobs_half_mile": {
+      "spearman": 0.38461538461538464,
+      "mdape_after_scaling": 0.5165678353061958
+     }
+    },
+    {
+     "held_out": "Massachusetts Bay Transportation Authority",
+     "stations": 48,
+     "trained_on": [
+      "Chicago Transit Authority",
+      "MTA New York City Transit",
+      "Maryland Transit Administration",
+      "San Francisco Bay Area Rapid Transit District"
+     ],
+     "model": {
+      "spearman": 0.4744897959183674,
+      "mdape_after_scaling": 0.46157509811988323,
+      "level_factor": 1.4661254762848117
+     },
+     "baseline_system_average": {
+      "spearman": null,
+      "mdape_after_scaling": 0.4113563172807293
+     },
+     "baseline_people_plus_jobs_half_mile": {
+      "spearman": 0.462440295267043,
+      "mdape_after_scaling": 0.49726075965327493
+     }
+    },
+    {
+     "held_out": "San Francisco Bay Area Rapid Transit District",
+     "stations": 47,
+     "trained_on": [
+      "Chicago Transit Authority",
+      "MTA New York City Transit",
+      "Maryland Transit Administration",
+      "Massachusetts Bay Transportation Authority"
+     ],
+     "model": {
+      "spearman": 0.6209528214616096,
+      "mdape_after_scaling": 0.26759842573698617,
+      "level_factor": 1.3373242034454462
+     },
+     "baseline_system_average": {
+      "spearman": null,
+      "mdape_after_scaling": 0.3983254110156557
+     },
+     "baseline_people_plus_jobs_half_mile": {
+      "spearman": 0.6340194264569843,
+      "mdape_after_scaling": 0.3284323060988559
+     }
+    }
+   ],
+   "loso_summary": {
+    "systems_tested": 5,
+    "median_spearman": {
+     "model": 0.6209528214616096,
+     "baseline_people_plus_jobs_half_mile": 0.5775618224109856
+    },
+    "median_mdape_after_scaling": {
+     "model": 0.4127187830998015,
+     "baseline_system_average": 0.4113563172807293,
+     "baseline_people_plus_jobs_half_mile": 0.49726075965327493
+    },
+    "level_factor_range": [
+     0.492184408367045,
+     1.4661254762848117
+    ],
+    "log_error_after_scaling_p10_p90": [
+     -0.9063158269986133,
+     0.9911581597189996
+    ],
+    "log_error_after_scaling_p25_p75": [
+     -0.4764930470290764,
+     0.44890521753082957
+    ]
+   },
+   "beats_people_plus_jobs_baseline": true,
+   "beats_system_average_error": false
+  },
+  "LR": {
+   "label": "light rail",
+   "stations": 183,
+   "systems": [
+    "Maryland Transit Administration",
+    "Massachusetts Bay Transportation Authority",
+    "Utah Transit Authority",
+    "Valley Metro Rail"
+   ],
+   "stations_by_system": {
+    "Massachusetts Bay Transportation Authority": 65,
+    "Utah Transit Authority": 44,
+    "Maryland Transit Administration": 33,
+    "Valley Metro Rail": 41
+   },
+   "coef": {
+    "ln_pop_half": -0.038126955761389955,
+    "ln_jobs_half": 0.18071315951067926,
+    "ln_pop_ring": 0.10884173730688082,
+    "ln_jobs_ring": 0.08271321866652254,
+    "terminal": 0.3417564848309368,
+    "transfer": -0.17057485063840547
+   },
+   "se": {
+    "ln_pop_half": 0.11776552584590035,
+    "ln_jobs_half": 0.08640652313833405,
+    "ln_pop_ring": 0.14383185822747083,
+    "ln_jobs_ring": 0.11143950932551179,
+    "terminal": 0.1810147755705272,
+    "transfer": 0.15764811166329504
+   },
+   "intercepts": {
+    "Maryland Transit Administration": 3.408565612995735,
+    "Massachusetts Bay Transportation Authority": 3.2598673358868813,
+    "Utah Transit Authority": 3.4397389924331265,
+    "Valley Metro Rail": 3.7315727933084997
+   },
+   "within_r2_in_sample": 0.16733706123930592,
+   "resid_sd_in_sample": 0.7469147277723472,
+   "loso": [
+    {
+     "held_out": "Maryland Transit Administration",
+     "stations": 33,
+     "trained_on": [
+      "Massachusetts Bay Transportation Authority",
+      "Utah Transit Authority",
+      "Valley Metro Rail"
+     ],
+     "model": {
+      "spearman": 0.24164438502673796,
+      "mdape_after_scaling": 0.45319004013705444,
+      "level_factor": 1.1302140304126391
+     },
+     "baseline_system_average": {
+      "spearman": null,
+      "mdape_after_scaling": 0.40600450931529536
+     },
+     "baseline_people_plus_jobs_half_mile": {
+      "spearman": 0.3135026737967914,
+      "mdape_after_scaling": 0.6475491713554022
+     }
+    },
+    {
+     "held_out": "Massachusetts Bay Transportation Authority",
+     "stations": 65,
+     "trained_on": [
+      "Maryland Transit Administration",
+      "Utah Transit Authority",
+      "Valley Metro Rail"
+     ],
+     "model": {
+      "spearman": 0.3224720820718021,
+      "mdape_after_scaling": 0.4989010871939791,
+      "level_factor": 0.7377328405773574
+     },
+     "baseline_system_average": {
+      "spearman": null,
+      "mdape_after_scaling": 0.378865979381443
+     },
+     "baseline_people_plus_jobs_half_mile": {
+      "spearman": 0.427850259067616,
+      "mdape_after_scaling": 0.5580655110382459
+     }
+    },
+    {
+     "held_out": "Utah Transit Authority",
+     "stations": 44,
+     "trained_on": [
+      "Maryland Transit Administration",
+      "Massachusetts Bay Transportation Authority",
+      "Valley Metro Rail"
+     ],
+     "model": {
+      "spearman": 0.42973925299506693,
+      "mdape_after_scaling": 0.48882295373779183,
+      "level_factor": 0.9449535106539159
+     },
+     "baseline_system_average": {
+      "spearman": null,
+      "mdape_after_scaling": 0.5176757148477452
+     },
+     "baseline_people_plus_jobs_half_mile": {
+      "spearman": 0.5181113460183228,
+      "mdape_after_scaling": 0.545838623953794
+     }
+    },
+    {
+     "held_out": "Valley Metro Rail",
+     "stations": 41,
+     "trained_on": [
+      "Maryland Transit Administration",
+      "Massachusetts Bay Transportation Authority",
+      "Utah Transit Authority"
+     ],
+     "model": {
+      "spearman": -0.06664053318747744,
+      "mdape_after_scaling": 0.4489715714829044,
+      "level_factor": 1.5129028203659067
+     },
+     "baseline_system_average": {
+      "spearman": null,
+      "mdape_after_scaling": 0.3309455587392545
+     },
+     "baseline_people_plus_jobs_half_mile": {
+      "spearman": 0.03406071696248847,
+      "mdape_after_scaling": 0.5601122547396135
+     }
+    }
+   ],
+   "loso_summary": {
+    "systems_tested": 4,
+    "median_spearman": {
+     "model": 0.28205823354927007,
+     "baseline_people_plus_jobs_half_mile": 0.3706764664322037
+    },
+    "median_mdape_after_scaling": {
+     "model": 0.47100649693742314,
+     "baseline_system_average": 0.3924352443483692,
+     "baseline_people_plus_jobs_half_mile": 0.5590888828889297
+    },
+    "level_factor_range": [
+     0.7377328405773574,
+     1.5129028203659067
+    ],
+    "log_error_after_scaling_p10_p90": [
+     -1.0210246698618095,
+     0.9973063081794696
+    ],
+    "log_error_after_scaling_p25_p75": [
+     -0.5277348580761618,
+     0.4512793771589198
+    ]
+   },
+   "beats_people_plus_jobs_baseline": false,
+   "beats_system_average_error": false
+  },
+  "CR": {
+   "label": "commuter rail",
+   "stations": 53,
+   "systems": [
+    "Maryland Transit Administration",
+    "Utah Transit Authority"
+   ],
+   "stations_by_system": {
+    "Utah Transit Authority": 16,
+    "Maryland Transit Administration": 37
+   },
+   "coef": {
+    "ln_pop_half": 0.8037439660072333,
+    "ln_jobs_half": 0.38744731445818725,
+    "ln_pop_ring": -0.6869873281880458,
+    "ln_jobs_ring": -0.18906147310952157,
+    "terminal": 0.9000743602532426,
+    "transfer": 0.3493145010537686
+   },
+   "se": {
+    "ln_pop_half": 0.6687774395648439,
+    "ln_jobs_half": 0.42507883122400736,
+    "ln_pop_ring": 0.7721594455442936,
+    "ln_jobs_ring": 0.4985645667601875,
+    "terminal": 0.637294192113256,
+    "transfer": 0.5383329048412077
+   },
+   "intercepts": {
+    "Maryland Transit Administration": 3.8151414581795113,
+    "Utah Transit Authority": 4.908967562422998
+   },
+   "within_r2_in_sample": 0.17457577333583396,
+   "resid_sd_in_sample": 1.3769040916152286,
+   "loso": [
+    {
+     "held_out": "Maryland Transit Administration",
+     "stations": 37,
+     "trained_on": [
+      "Utah Transit Authority"
+     ],
+     "model": {
+      "spearman": 0.3560929350403035,
+      "mdape_after_scaling": 0.727065404585869,
+      "level_factor": 0.57080339486859
+     },
+     "baseline_system_average": {
+      "spearman": null,
+      "mdape_after_scaling": 0.6491676168757123
+     },
+     "baseline_people_plus_jobs_half_mile": {
+      "spearman": 0.3326220957799905,
+      "mdape_after_scaling": 0.8635625816645435
+     }
+    },
+    {
+     "held_out": "Utah Transit Authority",
+     "stations": 16,
+     "trained_on": [
+      "Maryland Transit Administration"
+     ],
+     "model": {
+      "spearman": 0.788235294117647,
+      "mdape_after_scaling": 0.3417265541672263,
+      "level_factor": 3.050439127128277
+     },
+     "baseline_system_average": {
+      "spearman": null,
+      "mdape_after_scaling": 0.40891699617752497
+     },
+     "baseline_people_plus_jobs_half_mile": {
+      "spearman": 0.8029411764705883,
+      "mdape_after_scaling": 0.2549232486788531
+     }
+    }
+   ],
+   "loso_summary": {
+    "systems_tested": 2,
+    "median_spearman": {
+     "model": 0.5721641145789753,
+     "baseline_people_plus_jobs_half_mile": 0.5677816361252894
+    },
+    "median_mdape_after_scaling": {
+     "model": 0.5343959793765476,
+     "baseline_system_average": 0.5290423065266187,
+     "baseline_people_plus_jobs_half_mile": 0.5592429151716982
+    },
+    "level_factor_range": [
+     0.57080339486859,
+     3.050439127128277
+    ],
+    "log_error_after_scaling_p10_p90": [
+     -1.7100085263113467,
+     0.9606129894270652
+    ],
+    "log_error_after_scaling_p25_p75": [
+     -0.9009795569974917,
+     0.5234726721321378
+    ]
+   },
+   "beats_people_plus_jobs_baseline": true,
+   "beats_system_average_error": false
+  }
+ },
+ "ntd_extras": {
+  "report_year": "2025",
+  "row_rule": "mode status Operating, both inputs above zero, agency x mode x type-of-service rows, quartiles by linear interpolation (as scripts/transit/build_operating_benchmarks.py)",
+  "by_mode": {
+   "HR": {
+    "upt_per_drm": {
+     "n": 16,
+     "p25": 190181.16276580564,
+     "median": 308385.1495512269,
+     "p75": 731271.7065923964,
+     "unit": "annual unlinked trips per directional route mile",
+     "formula": "unlinked passenger trips / directional route miles"
+    },
+    "avg_speed_mph": {
+     "n": 16,
+     "p25": 15.688803107715549,
+     "median": 18.568634072225088,
+     "p75": 24.532262278951777,
+     "unit": "miles per revenue hour",
+     "formula": "vehicle revenue miles / vehicle revenue hours"
+    }
+   },
+   "LR": {
+    "upt_per_drm": {
+     "n": 23,
+     "p25": 89309.94213547738,
+     "median": 166910.21447721182,
+     "p75": 315096.9012480596,
+     "unit": "annual unlinked trips per directional route mile",
+     "formula": "unlinked passenger trips / directional route miles"
+    },
+    "avg_speed_mph": {
+     "n": 23,
+     "p25": 12.197227410504105,
+     "median": 14.962517745533656,
+     "p75": 18.01290859251284,
+     "unit": "miles per revenue hour",
+     "formula": "vehicle revenue miles / vehicle revenue hours"
+    }
+   },
+   "CR": {
+    "upt_per_drm": {
+     "n": 29,
+     "p25": 6712.392251586625,
+     "median": 12385.540771484375,
+     "p75": 47434.49848024316,
+     "unit": "annual unlinked trips per directional route mile",
+     "formula": "unlinked passenger trips / directional route miles"
+    },
+    "avg_speed_mph": {
+     "n": 29,
+     "p25": 27.588213571533085,
+     "median": 30.510973368409672,
+     "p75": 35.52548845054584,
+     "unit": "miles per revenue hour",
+     "formula": "vehicle revenue miles / vehicle revenue hours"
+    }
+   },
+   "SR": {
+    "upt_per_drm": {
+     "n": 26,
+     "p25": 40798.07628965238,
+     "median": 119450.32735329261,
+     "p75": 196137.32561479916,
+     "unit": "annual unlinked trips per directional route mile",
+     "formula": "unlinked passenger trips / directional route miles"
+    },
+    "avg_speed_mph": {
+     "n": 26,
+     "p25": 4.870278321642582,
+     "median": 5.599755587317215,
+     "p75": 6.5933954126558945,
+     "unit": "miles per revenue hour",
+     "formula": "vehicle revenue miles / vehicle revenue hours"
+    }
+   },
+   "RB": {
+    "upt_per_drm": {
+     "n": 19,
+     "p25": 38613.248769065525,
+     "median": 76404.36991869919,
+     "p75": 131251.41040261643,
+     "unit": "annual unlinked trips per directional route mile",
+     "formula": "unlinked passenger trips / directional route miles"
+    },
+    "avg_speed_mph": {
+     "n": 20,
+     "p25": 9.32499928133067,
+     "median": 11.605891921809157,
+     "p75": 12.950996165495276,
+     "unit": "miles per revenue hour",
+     "formula": "vehicle revenue miles / vehicle revenue hours"
+    }
+   },
+   "MB": {
+    "upt_per_drm": {
+     "n": 455,
+     "p25": 2349.1714822645054,
+     "median": 5285.00154083205,
+     "p75": 12248.91045472812,
+     "unit": "annual unlinked trips per directional route mile",
+     "formula": "unlinked passenger trips / directional route miles"
+    },
+    "avg_speed_mph": {
+     "n": 1212,
+     "p25": 11.923309445085154,
+     "median": 13.938795980406596,
+     "p75": 17.094280033215036,
+     "unit": "miles per revenue hour",
+     "formula": "vehicle revenue miles / vehicle revenue hours"
+    }
+   }
+  },
+  "source_url": "https://data.transportation.gov/d/npsm-38gk"
+ },
+ "annual_trips_per_weekday_count": {
+  "definition": "NTD annual unlinked passenger trips of the agency and mode / sum of the station weekday counts on file for that system and mode. Puts station counts on NTD's trip basis (it includes transfers inside the system and weekend days).",
+  "rows": [
+   {
+    "system": "Chicago Transit Authority",
+    "ntd_id": "50066",
+    "mode": "HR",
+    "station_year": "2025",
+    "day_basis": "weekday",
+    "stations": 144,
+    "ntd_report_year": "2025",
+    "ntd_upt": 138392897.0,
+    "station_weekday_sum": 357883.9,
+    "factor": 386.69774471553484
+   },
+   {
+    "system": "MTA New York City Transit",
+    "ntd_id": "20008",
+    "mode": "HR",
+    "station_year": "2025",
+    "day_basis": "weekday",
+    "stations": 424,
+    "ntd_report_year": "2025",
+    "ntd_upt": 2315209369.0,
+    "station_weekday_sum": 4004320.4,
+    "factor": 578.1778523516749
+   },
+   {
+    "system": "Maryland Transit Administration",
+    "ntd_id": "30034",
+    "mode": "CR",
+    "station_year": "",
+    "day_basis": "weekday",
+    "stations": 38,
+    "factor": null,
+    "why": "station counts are not weekday counts of 2020 or later, so no NTD year matches"
+   },
+   {
+    "system": "Maryland Transit Administration",
+    "ntd_id": "30034",
+    "mode": "HR",
+    "station_year": "",
+    "day_basis": "weekday",
+    "stations": 14,
+    "factor": null,
+    "why": "station counts are not weekday counts of 2020 or later, so no NTD year matches"
+   },
+   {
+    "system": "Maryland Transit Administration",
+    "ntd_id": "30034",
+    "mode": "LR",
+    "station_year": "",
+    "day_basis": "weekday",
+    "stations": 33,
+    "factor": null,
+    "why": "station counts are not weekday counts of 2020 or later, so no NTD year matches"
+   },
+   {
+    "system": "Massachusetts Bay Transportation Authority",
+    "ntd_id": "10003",
+    "mode": "HR",
+    "station_year": "2024",
+    "day_basis": "weekday",
+    "stations": 48,
+    "ntd_report_year": "2024",
+    "ntd_upt": 84772414.0,
+    "station_weekday_sum": 283546.0,
+    "factor": 298.97235016540526
+   },
+   {
+    "system": "Massachusetts Bay Transportation Authority",
+    "ntd_id": "10003",
+    "mode": "LR",
+    "station_year": "2024",
+    "day_basis": "weekday",
+    "stations": 66,
+    "ntd_report_year": "2024",
+    "ntd_upt": 36668303.0,
+    "station_weekday_sum": 73598.0,
+    "factor": 498.2241772874263
+   },
+   {
+    "system": "San Francisco Bay Area Rapid Transit District",
+    "ntd_id": "90003",
+    "mode": "HR",
+    "station_year": "2026",
+    "day_basis": "weekday",
+    "stations": 50,
+    "ntd_report_year": "2025",
+    "ntd_upt": 56592868.0,
+    "station_weekday_sum": 205596.4,
+    "factor": 275.26195983976373
+   },
+   {
+    "system": "Utah Transit Authority",
+    "ntd_id": "80001",
+    "mode": "CR",
+    "station_year": "2025",
+    "day_basis": "weekday",
+    "stations": 16,
+    "ntd_report_year": "2025",
+    "ntd_upt": 4146976.0,
+    "station_weekday_sum": 14561.8,
+    "factor": 284.784573335714
+   },
+   {
+    "system": "Utah Transit Authority",
+    "ntd_id": "80001",
+    "mode": "LR",
+    "station_year": "2025",
+    "day_basis": "weekday",
+    "stations": 48,
+    "ntd_report_year": "2025",
+    "ntd_upt": 13279002.0,
+    "station_weekday_sum": 38626.7,
+    "factor": 343.77780136537683
+   },
+   {
+    "system": "Valley Metro Rail",
+    "ntd_id": "90209",
+    "mode": "LR",
+    "station_year": "2018",
+    "day_basis": "all days",
+    "stations": 41,
+    "factor": null,
+    "why": "station counts are not weekday counts of 2020 or later, so no NTD year matches"
+   }
+  ]
+ }
+}

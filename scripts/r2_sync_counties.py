@@ -83,6 +83,10 @@ def md5(path):
 
 
 def main():
+    # Refuse anything but the two known flags: an unknown one (even --help) used to fall through to a real upload.
+    unknown = [a for a in sys.argv[1:] if a not in ("--dry-run", "--usage")]
+    if unknown:
+        sys.exit(f"Unknown argument(s): {' '.join(unknown)}. Usage: r2_sync_counties.py [--dry-run | --usage]. Nothing was uploaded.")
     dry, usage_only = "--dry-run" in sys.argv, "--usage" in sys.argv
     total, remote = account_usage()
     print(f"Stored in R2 now (all buckets): {total/1e9:.3f} GB of the {ALLOWANCE_BYTES/1e9:.0f} GB allowance; "

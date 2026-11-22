@@ -215,10 +215,15 @@ describe("Audit checklist verification (Section 5)", () => {
   });
 
   describe("P1-4: ACS top- and bottom-coded formatting", () => {
-    it("fmtRent formats top-code ($3,501+) as '$3,500 or more/mo'", () => {
+    it("fmtRent formats the top-code (3501) as '$3,500 or more/mo'", () => {
       expect(fmtRent(3501)).toBe("$3,500 or more/mo");
-      expect(fmtRent(3500)).toBe("$3,500 or more/mo");
       expect(fmtRent(4000)).toBe("$3,500 or more/mo");
+    });
+
+    // Census publishes 3500 as an estimate (block group 484530013092: 3500, margin 2500); only 3501 is the top-code.
+    it("fmtRent shows a published median of exactly $3,500 to the dollar, not as the top-code", () => {
+      expect(fmtRent(3500)).toBe("$3,500/mo");
+      expect(fmtRent(3499)).toBe("$3,499/mo");
     });
 
     it("fmtRent formats bottom-code ($99-$100) as '$100 or less/mo'", () => {

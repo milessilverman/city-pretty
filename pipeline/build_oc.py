@@ -5,6 +5,7 @@ import os, sys, json, gzip, base64, statistics, math, collections, datetime, re
 import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import engine
+import geo
 
 import region
 DATA = region.DATA
@@ -456,7 +457,7 @@ def main():
     plans_acc = collections.defaultdict(lambda: {"homes": 0, "bgs": 0, "gaps": collections.Counter(), "best": {}, "strong": collections.Counter(), "proj": 0.0})
     from shapely.geometry import shape, mapping
     def simp(g):   # LA's block groups carry ~7 vertices each; keep OC comparable (about 10 m tolerance, 5-decimal coordinates)
-        gg = shape(g).simplify(0.00012, preserve_topology=True)
+        gg = geo.shape_ll(g).simplify(0.00012, preserve_topology=True)
         m = mapping(gg)
         rnd = lambda c: [rnd(x) for x in c] if isinstance(c[0], (list, tuple)) else [round(c[0], 5), round(c[1], 5)]
         return {"type": m["type"], "coordinates": rnd(m["coordinates"])}
