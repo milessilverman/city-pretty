@@ -1,7 +1,88 @@
 # Small counties: the Southeast (22 Nov 2026), served from R2 only
 
-**In progress: the states are added one commit at a time (Georgia, Alabama, Mississippi, South Carolina, Florida, North
-Carolina); the totals and the summary of the whole batch are written in the last commit.**
+**Result: all 393 counties of the six states are built, checked and on the page, served from R2 only; none was
+withheld.** Each state was built, checked, uploaded, live-checked and committed on its own.
+
+| State | Counties built / missing | People (ACS 2020-24) | Block groups | Data files (bytes) | Tiers | Census values checked | R2 bytes added |
+|---|---|---|---|---|---|---|---|
+| GA | 132 / 132 | 3,320,290 | 2,517 | 42,245,163 | 26 C, 106 D | 3,056 | 42,278,325 |
+| AL | 53 / 53 | 1,815,314 | 1,542 | 26,822,986 | 7 C, 46 D | 1,272 | 26,836,325 |
+| MS | 76 / 76 | 1,910,304 | 1,683 | 18,154,565 | 15 C, 61 D | 1,808 | 18,173,708 |
+| SC | 30 / 30 | 1,101,374 | 971 | 23,240,848 | 19 C, 11 D | 720 | 23,248,434 |
+| FL | 31 / 31 | 1,063,001 | 788 | 12,096,065 | 10 C, 21 D | 744 | 12,103,870 |
+| NC | 71 / 71 | 2,827,232 | 2,254 | 48,815,417 | 21 C, 50 D | 1,700 | 48,833,288 |
+| **All** | **393 / 393** | **12,037,515** | **9,755** | **171,375,044** | 98 C, 295 D | **9,300** | **171,473,950** |
+
+| Check | Sample | Result | Mismatch rate |
+|---|---|---|---|
+| Census: population, median home value, median gross rent, median household income vs the ACS 2020-24 table files (`scripts/census_spot_check.py`, seed 20261119) | 6 block groups in each of the 393 counties (all of them where a county has fewer), 9,300 values | 9,300 of 9,300 equal | 0% |
+| Tract-median flags (`build_acs_fallback_flags.py`, every county file) | all county files, after each state | 393 counties added, no existing county changed, 0 values matching neither the block group nor the tract | 0% |
+| OpenStreetMap ID for ID vs live Overpass (`scripts/check_osm_extract_vs_overpass.py`) | 2 counties per state, 12 (seed 20261122, drawn from each state's sorted list of new counties) | 8 counties exact (roads and bus stops): GA Jefferson, AL Macon and Lamar, MS Wilkinson and Tishomingo, SC Kershaw and Hampton, FL Levy. The other 4 lie on a state line (GA Wilkes, FL Jefferson, NC Warren and Hertford), so their boxes reach into the next state and into neighbouring counties the extract file does not hold; compared inside the state, every road matches except 1 road in Warren NC added to OpenStreetMap after the extract was made (details in each state's section) | 0% inside the counties apart from that 1 road in Warren |
+| Live, real page loading from R2 (`scripts/live_check_panels.mjs`, `LIVE_PORT=9221`, 3 points per county, seed 20261123) | 12 counties, 36 points | 223 pass, 100 not checkable (no parcel service on the page for the GA, AL, MS and SC counties, so the house-panel rows do not apply; 4 more at one Florida point whose parcel service did not answer); 3 USGS elevation rows first showed "Not available (the service did not answer in time)" (the page's 6 s limit): all 3 passed when re-opened alone or when the county was run again, and the first tries are kept in the result files; no wrong value was shown anywhere | 0 wrong values |
+
+Counties still without a data file after this batch, counted from the registry the same way (not in
+`counties/bundle_*.json.gz` or `counties/.r2-only.txt`, Puerto Rico left out): **628** (1,021 before), of which Los
+Angeles and Orange (built by their own pipeline, loaded from `app/data/`) are 2 and Hawaii's 5 have no OpenStreetMap
+extract in the registry. Remaining by state: TX 211, VA 116, OK 72, AR 67, CO 53, WV 52, LA (Louisiana) 50, HI 5, CA 2.
+
+**R2 storage:** before 1,704,660,375 bytes (2,766 objects), after 1,876,134,325 bytes (3,159 objects): 171,473,950 bytes
+added (the 393 data files, 171,375,044, plus the larger `manifest.json`). 1.876 GB of the 8 GB ceiling and the 10 GB
+allowance. Every upload went through `scripts/r2_sync_counties.py` after a `--dry-run`; the largest projection was 1.876 GB
+(the brief's stop was 4 GB); the per-state figures are in each state's section.
+
+**Measured projection for the rest:** this batch stored 17,568 bytes per block group (state range 10,787 for Mississippi to
+23,935 for South Carolina; 436,069 bytes per county). The 628 remaining counties have 22,472 block groups (ACS 2020-24
+B01003 rows), of which 8,640 are Los Angeles's and Orange's and 1,083 are Hawaii's, which this route does not build: 12,749
+block groups are left for it. At this batch's rate that is 0.224 GB (0.138 GB at Mississippi's rate, 0.305 GB at South
+Carolina's), which would take R2 from 1.876 GB to about 2.10 GB (range 2.01 to 2.18 GB). A projection from these
+southeastern counties; Texas (3,522 block groups) and Virginia (2,604) are the largest remaining.
+
+The batch is every county under 100,000 people with no data file (not in `counties/bundle_*.json.gz`, not in
+`counties/.r2-only.txt`), counted from the registry (`national/data/counties.json`) before starting: GA 132, AL 53, MS 76,
+SC 30, FL 31, NC 71, **393 counties** (no county of these states with 100,000 people or more was without a data file). The
+method is the Great Lakes batch's (`small-counties-greatlakes.md`), unchanged: files are uploaded with
+`scripts/r2_sync_counties.py` after a `--dry-run`, listed in `counties/.r2-only.txt`, and not committed. No pipeline code
+was changed.
+
+## How
+
+- **Pipeline:** `pipeline/fetch_oc.py`, `osm_extract.py`, `metrics_oc.py`, `layers_oc.py`, `build_oc.py inputs/page_dec` from
+  a copy of `pipeline/` in the session's scratch folder, three counties at a time, the national ACS table files already in
+  the shared cache; then `scripts/export_county_bundle.py <dir> <fips> --r2-only` one county at a time;
+  `build_tree_equity_2025.py <state>` (existing counties' files that differ only in `_meta.built` were restored to what is
+  committed); `build_acs_fallback_flags.py` (all county files; the 1,381 earlier R2-only files were downloaded from the
+  bucket's public address into this worktree's gitignored `counties/` first); `build_county_completeness.py` (only the new
+  rows are kept, since a fresh run rewrites `computed_on` on every row).
+- **OpenStreetMap:** Georgia, Florida and North Carolina counties read the sub-region or state files the registry names
+  (openstreetmap.fr, one download each, shared by the counties that use it). Alabama, Mississippi and South Carolina are
+  `split: us-south/<state>` in the registry: `us-south-latest.osm.pbf` (4,623,607,998 bytes, md5
+  `aaee92b7cea7116859b6f51c768d7830`, equal to the published `us-south.osm.pbf.md5`; data timestamp 2026-11-21T01:28:06Z
+  from `us-south.state.txt`) was downloaded once, cut into the three states with `national/osm_split.py` and deleted. Each
+  state's files and build folders were deleted once the state was uploaded and checked.
+- **HUD income limits:** `tests/unit/buildingCosts.test.ts` needs a row (or a listed failure) in
+  `app/data/hud_income_limits.json` for every manifest county. Each state's rows were fetched from HUD's API
+  (`https://www.huduser.gov/hudapi/public/il/data/<fips>99999`) with the script's own `get()` and `row_from()`
+  (`scripts/costs/fetch_hud_income_limits.py`); existing rows were not re-fetched or changed.
+- **Transit corridors:** `tests/unit/transitCorridors.test.ts` checks every stop's `county_on_page` flag against the
+  manifest; the flags of stops whose county is now on the page were set to true in the same commit as the state (three
+  Mississippi stops; none for the other five states).
+- **Empty fields, each named in the county's sources list:** crime (all), 311, assessor parcels and sales, street-tree
+  survey, tax-rate areas (all); bus frequency and rail distance where the per-state notes say so.
+
+## Checks (every state)
+
+- **Census:** `scripts/census_spot_check.py` (seed 20261119): population, median home value, median gross rent and median
+  household income of 6 randomly chosen block groups in every county (all of them where a county has fewer) against the
+  ACS 2020-24 table files, read by a separate parser. Where the block group's median is suppressed the file must hold the
+  tract's published median, flagged as a tract value in `acs_fallback_flags.json`, or nothing.
+- **OpenStreetMap:** `scripts/check_osm_extract_vs_overpass.py`, ID for ID against a live Overpass query of the same box
+  (maps.mail.ru mirror), two counties per state, picked at random from the state's sorted list of new counties with
+  `random.Random(20261122).sample(list, 2)`. The extracts are dated snapshots and Overpass is live, so a few differences
+  could be edits made since; the IDs would be listed. Where a county's box crosses a state line, the comparison was repeated
+  inside the extract's state (Overpass query limited to `area["ISO3166-2"="US-XX"]`), as the Great Lakes record did, and the
+  differing roads were located by TIGERweb county.
+- **Live:** `scripts/live_check_panels.mjs` (`LIVE_PORT=9221`, 3 points per county) on the real page loading each county's
+  file from `pub-79001cd74c284c499559e54d4aa4f33b.r2.dev`; the counties were picked with `random.Random(20261123).sample(list, 2)`.
 
 
 ## Georgia (132 of 132 built, none withheld)
@@ -652,3 +733,37 @@ Files: `data/backtests/southeast_fl_census_spot_2026-11-22.json`, `data/backtest
 Files: `data/backtests/southeast_nc_census_spot_2026-11-22.json`, `data/backtests/southeast_osm_xcheck_37185_2026-11-22.json`,
 `..._37091_...`, `data/backtests/southeast_osm_xcheck_state_37185_2026-11-22.json`,
 `data/backtests/live_check_panels_2026-11-22_southeast_nc.json`, `data/backtests/acs_fallback_mismatches_2026-11-22.json`.
+
+## Tests and housekeeping
+
+- `npm test`: run in full after each state (1,632 of 1,632 in 46 files each time; no state added or removed a test);
+  `npm run typecheck` clean after each. The full browser suite on the final tree: `PW_PORT=9222 npm run test:e2e -- --trace
+  off`, run once after the North Carolina commit (all six states in): 93 of 93 passed (8.5 min). `python3 scripts/r2_only.py --check`
+  passes. No test was skipped or loosened and no test pin was changed (none of the six states has a crash source, so
+  `tests/unit/crashCountsInvariant.test.ts` was not touched). No pipeline code was changed.
+- `app/data/hud_income_limits.json`: 393 rows added from HUD's API (none failed; the test lets only New England counties
+  fail). Rows already in the file were not changed; `_source.added_for_new_counties` records each state's addition.
+- `app/data/intercity_transit_corridors.json`: three stops' `county_on_page` flags (Bay St. Louis MS in Hancock County,
+  Meridian MS in Lauderdale, Vicksburg MS in Warren) now say true, in the Mississippi commit. No Georgia, Alabama, South
+  Carolina, Florida or North Carolina stop needed a change.
+- The 1,381 earlier R2-only files were downloaded from the bucket's public address into this worktree's `counties/` (ignored
+  by version control) so that `build_tree_equity_2025.py`, `build_acs_fallback_flags.py` and `build_county_completeness.py`
+  could run; the 393 new files are in `counties/` here too and not committed.
+- No `sites_` files were built (as for every small-county batch: `w5/tools/sites.py` needs the old build machine's paths).
+- The Overpass mirror (maps.mail.ru, the only one reachable from here) answered 504 for long stretches: the Georgia check was
+  still open when Georgia was committed (its results were added in the next commit), and Hertford's road query needed about
+  50 minutes of retries. All twelve checks were completed; none is open.
+- Scratch use: the scratch folder for this job held the national ACS tables (0.65 GB), the 4.6 GB `us-south` file (from the
+  download until the Alabama, Mississippi and South Carolina cuts were made, then deleted at once instead of at the end),
+  one state's sub-region files and one state's build folders. I did not measure the folder at its peak (the regional file
+  and Georgia's build folders were on disk together); the disk's used space had grown by 6 GB at that moment (which
+  includes the downloaded county files and other sessions' work), and free space was never below 7.2 GB at any of the times I read it (stop: 6 GB). The
+  folder measured 6.7 GB at its largest later measurement (North Carolina's build folders). Each state's build folders were
+  deleted after its checks, except the two counties kept for its OpenStreetMap check.
+
+## What is left
+
+Counties still without a data file nationally: 628 (see the top of this page for the list by state). Not done here: Texas,
+Virginia, Oklahoma, Arkansas, Colorado's remaining small counties, West Virginia and Louisiana, Hawaii (no extract in the
+registry), and crash counts for all six states (no state source is wired into
+`pipeline/region.py` for Georgia, Alabama, Mississippi, South Carolina, Florida or North Carolina).
