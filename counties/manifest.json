@@ -23416,6 +23416,18 @@
    "crash_years": null
   },
   {
+   "fips": "45001",
+   "name": "Abbeville County",
+   "state": "SC",
+   "block_groups": 21,
+   "bundle_mb": 0.9,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "45003",
    "name": "Aiken County",
    "state": "SC",
@@ -23427,6 +23439,18 @@
    "crash_years": null
   },
   {
+   "fips": "45005",
+   "name": "Allendale County",
+   "state": "SC",
+   "block_groups": 10,
+   "bundle_mb": 0.3,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "45007",
    "name": "Anderson County",
    "state": "SC",
@@ -23436,6 +23460,30 @@
    "osm": "2026-11-07T00:59:21Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "45009",
+   "name": "Bamberg County",
+   "state": "SC",
+   "block_groups": 17,
+   "bundle_mb": 0.3,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "45011",
+   "name": "Barnwell County",
+   "state": "SC",
+   "block_groups": 21,
+   "bundle_mb": 0.3,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "45013",
@@ -23460,6 +23508,18 @@
    "crash_years": null
   },
   {
+   "fips": "45017",
+   "name": "Calhoun County",
+   "state": "SC",
+   "block_groups": 12,
+   "bundle_mb": 0.4,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "45019",
    "name": "Charleston County",
    "state": "SC",
@@ -23469,6 +23529,90 @@
    "osm": "2026-11-07T00:59:21Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "45021",
+   "name": "Cherokee County",
+   "state": "SC",
+   "block_groups": 47,
+   "bundle_mb": 0.7,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "45023",
+   "name": "Chester County",
+   "state": "SC",
+   "block_groups": 30,
+   "bundle_mb": 0.6,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "45025",
+   "name": "Chesterfield County",
+   "state": "SC",
+   "block_groups": 38,
+   "bundle_mb": 0.8,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "45027",
+   "name": "Clarendon County",
+   "state": "SC",
+   "block_groups": 28,
+   "bundle_mb": 0.5,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "45029",
+   "name": "Colleton County",
+   "state": "SC",
+   "block_groups": 33,
+   "bundle_mb": 1.8,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "45031",
+   "name": "Darlington County",
+   "state": "SC",
+   "block_groups": 57,
+   "bundle_mb": 0.8,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "45033",
+   "name": "Dillon County",
+   "state": "SC",
+   "block_groups": 28,
+   "bundle_mb": 0.7,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "45035",
@@ -23482,6 +23626,30 @@
    "crash_years": null
   },
   {
+   "fips": "45037",
+   "name": "Edgefield County",
+   "state": "SC",
+   "block_groups": 21,
+   "bundle_mb": 0.9,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "45039",
+   "name": "Fairfield County",
+   "state": "SC",
+   "block_groups": 21,
+   "bundle_mb": 0.5,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "45041",
    "name": "Florence County",
    "state": "SC",
@@ -23491,6 +23659,18 @@
    "osm": "2026-11-07T00:59:21Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "45043",
+   "name": "Georgetown County",
+   "state": "SC",
+   "block_groups": 52,
+   "bundle_mb": 1.0,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "45045",
@@ -23504,6 +23684,30 @@
    "crash_years": null
   },
   {
+   "fips": "45047",
+   "name": "Greenwood County",
+   "state": "SC",
+   "block_groups": 56,
+   "bundle_mb": 0.8,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "45049",
+   "name": "Hampton County",
+   "state": "SC",
+   "block_groups": 19,
+   "bundle_mb": 0.5,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "45051",
    "name": "Horry County",
    "state": "SC",
@@ -23513,6 +23717,30 @@
    "osm": "2026-11-07T00:59:21Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "45053",
+   "name": "Jasper County",
+   "state": "SC",
+   "block_groups": 21,
+   "bundle_mb": 1.5,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "45055",
+   "name": "Kershaw County",
+   "state": "SC",
+   "block_groups": 48,
+   "bundle_mb": 0.6,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "45057",
@@ -23526,6 +23754,30 @@
    "crash_years": null
   },
   {
+   "fips": "45059",
+   "name": "Laurens County",
+   "state": "SC",
+   "block_groups": 57,
+   "bundle_mb": 1.6,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "45061",
+   "name": "Lee County",
+   "state": "SC",
+   "block_groups": 20,
+   "bundle_mb": 0.4,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "45063",
    "name": "Lexington County",
    "state": "SC",
@@ -23535,6 +23787,78 @@
    "osm": "2026-11-07T00:59:21Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "45065",
+   "name": "McCormick County",
+   "state": "SC",
+   "block_groups": 9,
+   "bundle_mb": 0.7,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "45067",
+   "name": "Marion County",
+   "state": "SC",
+   "block_groups": 31,
+   "bundle_mb": 0.6,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "45069",
+   "name": "Marlboro County",
+   "state": "SC",
+   "block_groups": 25,
+   "bundle_mb": 0.8,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "45071",
+   "name": "Newberry County",
+   "state": "SC",
+   "block_groups": 31,
+   "bundle_mb": 0.8,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "45073",
+   "name": "Oconee County",
+   "state": "SC",
+   "block_groups": 58,
+   "bundle_mb": 1.5,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "45075",
+   "name": "Orangeburg County",
+   "state": "SC",
+   "block_groups": 83,
+   "bundle_mb": 0.9,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "45077",
@@ -23559,6 +23883,18 @@
    "crash_years": null
   },
   {
+   "fips": "45081",
+   "name": "Saluda County",
+   "state": "SC",
+   "block_groups": 16,
+   "bundle_mb": 0.7,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "45083",
    "name": "Spartanburg County",
    "state": "SC",
@@ -23579,6 +23915,30 @@
    "osm": "2026-11-07T00:59:21Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "45087",
+   "name": "Union County",
+   "state": "SC",
+   "block_groups": 26,
+   "bundle_mb": 0.6,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "45089",
+   "name": "Williamsburg County",
+   "state": "SC",
+   "block_groups": 35,
+   "bundle_mb": 0.6,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:28\\:06Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "45091",

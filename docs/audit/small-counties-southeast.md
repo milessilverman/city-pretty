@@ -380,3 +380,66 @@ Files: `data/backtests/southeast_al_census_spot_2026-11-22.json`, `data/backtest
 Files: `data/backtests/southeast_ms_census_spot_2026-11-22.json`, `data/backtests/southeast_osm_xcheck_28157_2026-11-22.json`,
 `..._28141_...`, `data/backtests/live_check_panels_2026-11-22_southeast_ms.json`,
 `data/backtests/acs_fallback_mismatches_2026-11-22.json`.
+
+## South Carolina (30 of 30 built, none withheld)
+
+| County | People (ACS 2020-24) | Block groups | Data file (gzip, bytes) | Completeness tier | Canopy block groups (2025 release) |
+|---|---|---|---|---|---|
+| Abbeville County (45001) | 24,420 | 21 | 872,931 | D | 7 |
+| Allendale County (45005) | 7,661 | 10 | 317,594 | D | 0 |
+| Bamberg County (45009) | 13,042 | 17 | 270,232 | C | 0 |
+| Barnwell County (45011) | 20,521 | 21 | 323,329 | D | 0 |
+| Calhoun County (45017) | 14,182 | 12 | 369,550 | C | 0 |
+| Cherokee County (45021) | 56,647 | 47 | 749,572 | D | 23 |
+| Chester County (45023) | 32,182 | 30 | 559,854 | D | 16 |
+| Chesterfield County (45025) | 43,784 | 38 | 814,387 | C | 10 |
+| Clarendon County (45027) | 30,986 | 28 | 508,784 | C | 5 |
+| Colleton County (45029) | 38,783 | 33 | 1,824,477 | C | 14 |
+| Darlington County (45031) | 62,558 | 57 | 845,357 | C | 37 |
+| Dillon County (45033) | 27,862 | 28 | 711,783 | C | 13 |
+| Edgefield County (45037) | 27,476 | 21 | 851,626 | D | 4 |
+| Fairfield County (45039) | 20,550 | 21 | 515,340 | C | 10 |
+| Georgetown County (45043) | 64,811 | 52 | 1,037,974 | C | 32 |
+| Greenwood County (45047) | 69,489 | 56 | 789,229 | D | 41 |
+| Hampton County (45049) | 18,254 | 19 | 546,581 | C | 0 |
+| Jasper County (45053) | 32,166 | 21 | 1,485,985 | C | 1 |
+| Kershaw County (45055) | 68,314 | 48 | 557,809 | C | 29 |
+| Laurens County (45059) | 68,666 | 57 | 1,589,018 | C | 28 |
+| Lee County (45061) | 16,166 | 20 | 365,322 | C | 0 |
+| McCormick County (45065) | 9,760 | 9 | 701,421 | D | 0 |
+| Marion County (45067) | 28,664 | 31 | 627,647 | C | 20 |
+| Marlboro County (45069) | 25,975 | 25 | 788,261 | C | 13 |
+| Newberry County (45071) | 38,435 | 31 | 838,083 | D | 15 |
+| Oconee County (45073) | 80,469 | 58 | 1,547,410 | C | 30 |
+| Orangeburg County (45075) | 83,253 | 83 | 943,961 | C | 36 |
+| Saluda County (45081) | 19,131 | 16 | 677,032 | D | 1 |
+| Union County (45087) | 26,885 | 26 | 637,002 | D | 15 |
+| Williamsburg County (45089) | 30,282 | 35 | 573,297 | C | 9 |
+| **30 counties** | **1,101,374** | **971** | **23,240,848** | 19 C, 11 D | 409 |
+
+- OpenStreetMap: the South Carolina cut of the 21 Nov 2026 `us-south-latest.osm.pbf` (see Alabama: 188 s, peak osmium memory
+  4.13 GB, 250 MB; data timestamp 2026-11-21T01:28:06Z). Build: fetch 14-37 s, build 127-271 s per county, three at a time
+  (the Mississippi checks, tests and the Florida builds ran alongside), about 34 min from the first county to the last.
+- Bus frequency: 15 counties have no value in any block group (no feed that is read has a stop with 7-9 am departures in or
+  near the county); 15 have values. Rail distance: 20 counties have none; 10 have values.
+- Census spot check: 30 counties, 720 of 720 values equal (0% mismatch). Tract-median flags: 30 counties added, no
+  existing county changed, 0 values matching neither the block group nor the tract.
+- Crash counts: South Carolina has no state crash source connected (`pipeline/region.py` STATE_DEFAULTS has no SC); all 30
+  files say "Not connected for South Carolina yet: crash gaps are not scored and crash-based projects are not proposed". No
+  crash counts were built.
+- Tests run: `npm test` 1,632 of 1,632 (46 files), `npm run typecheck` clean. No corridor stop's flag needed changing.
+- OpenStreetMap ID for ID vs live Overpass (maps.mail.ru; two counties picked with seed 20261122 from the state's sorted
+  list): it answered 504 to some tries first. Kershaw (45055) 8,412 = 8,412 roads, 35 = 35 bus stops; Hampton (45049, on the Savannah
+  River and the Georgia line) 3,888 = 3,888 roads, 0 = 0 bus stops (0 missing, 0 extra in both, so no comparison limited to
+  the state was needed). The extract's snapshot is 2026-11-21T01:28:06Z.
+- Live check from R2 (`LIVE_PORT=9221`): Newberry (45071) and Kershaw (45055), 3 points each (picked with seed 20261123 from
+  the state's sorted list). Neither county has a parcel service on the page, so the house-panel rows (Census area, HUD
+  rent, FEMA, USGS) are not checkable; neighborhood, canopy, canopy goal, crash text, state laws and console pass at all 6
+  points (30 pass, 0 fail, 24 not checkable). Each data file came from the r2.dev address (HEAD 200, GET 200).
+- R2: before 1,791,948,733 bytes (3,027 objects); dry run "31 files, net +0.023 GB, projected 1.815 GB"; after
+  1,815,197,167 bytes (3,057 objects): 23,248,434 bytes added (the 30 data files, 23,240,848, plus the larger
+  `manifest.json`).
+
+Files: `data/backtests/southeast_sc_census_spot_2026-11-22.json`, `data/backtests/southeast_osm_xcheck_45055_2026-11-22.json`,
+`..._45049_...`, `data/backtests/live_check_panels_2026-11-22_southeast_sc.json`,
+`data/backtests/acs_fallback_mismatches_2026-11-22.json`.
