@@ -20417,6 +20417,102 @@
    "crash_years": null
   },
   {
+   "fips": "37003",
+   "name": "Alexander County",
+   "state": "NC",
+   "block_groups": 25,
+   "bundle_mb": 0.4,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:06\\:33Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37005",
+   "name": "Alleghany County",
+   "state": "NC",
+   "block_groups": 11,
+   "bundle_mb": 0.4,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:06\\:33Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37007",
+   "name": "Anson County",
+   "state": "NC",
+   "block_groups": 20,
+   "bundle_mb": 0.6,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:06\\:33Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37009",
+   "name": "Ashe County",
+   "state": "NC",
+   "block_groups": 26,
+   "bundle_mb": 0.9,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:06\\:33Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37011",
+   "name": "Avery County",
+   "state": "NC",
+   "block_groups": 16,
+   "bundle_mb": 0.7,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:06\\:33Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37013",
+   "name": "Beaufort County",
+   "state": "NC",
+   "block_groups": 40,
+   "bundle_mb": 0.6,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37015",
+   "name": "Bertie County",
+   "state": "NC",
+   "block_groups": 20,
+   "bundle_mb": 0.5,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37017",
+   "name": "Bladen County",
+   "state": "NC",
+   "block_groups": 30,
+   "bundle_mb": 0.7,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:06\\:33Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "37019",
    "name": "Brunswick County",
    "state": "NC",
@@ -20439,6 +20535,18 @@
    "crash_years": null
   },
   {
+   "fips": "37023",
+   "name": "Burke County",
+   "state": "NC",
+   "block_groups": 61,
+   "bundle_mb": 1.3,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:06\\:33Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "37025",
    "name": "Cabarrus County",
    "state": "NC",
@@ -20448,6 +20556,54 @@
    "osm": "2026-11-07T00:47:05Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "37027",
+   "name": "Caldwell County",
+   "state": "NC",
+   "block_groups": 63,
+   "bundle_mb": 0.9,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:06\\:33Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37029",
+   "name": "Camden County",
+   "state": "NC",
+   "block_groups": 6,
+   "bundle_mb": 0.5,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37031",
+   "name": "Carteret County",
+   "state": "NC",
+   "block_groups": 63,
+   "bundle_mb": 1.0,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37033",
+   "name": "Caswell County",
+   "state": "NC",
+   "block_groups": 18,
+   "bundle_mb": 0.4,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "37035",
@@ -20461,6 +20617,54 @@
    "crash_years": null
   },
   {
+   "fips": "37037",
+   "name": "Chatham County",
+   "state": "NC",
+   "block_groups": 58,
+   "bundle_mb": 1.1,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:06\\:33Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37039",
+   "name": "Cherokee County",
+   "state": "NC",
+   "block_groups": 27,
+   "bundle_mb": 1.1,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37041",
+   "name": "Chowan County",
+   "state": "NC",
+   "block_groups": 14,
+   "bundle_mb": 0.2,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37043",
+   "name": "Clay County",
+   "state": "NC",
+   "block_groups": 8,
+   "bundle_mb": 0.7,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "37045",
    "name": "Cleveland County",
    "state": "NC",
@@ -20470,6 +20674,18 @@
    "osm": "2026-11-07T00:47:05Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "37047",
+   "name": "Columbus County",
+   "state": "NC",
+   "block_groups": 48,
+   "bundle_mb": 0.6,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:06\\:33Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "37049",
@@ -20494,6 +20710,30 @@
    "crash_years": null
   },
   {
+   "fips": "37053",
+   "name": "Currituck County",
+   "state": "NC",
+   "block_groups": 18,
+   "bundle_mb": 0.4,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37055",
+   "name": "Dare County",
+   "state": "NC",
+   "block_groups": 34,
+   "bundle_mb": 0.5,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "37057",
    "name": "Davidson County",
    "state": "NC",
@@ -20503,6 +20743,30 @@
    "osm": "2026-11-07T00:47:05Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "37059",
+   "name": "Davie County",
+   "state": "NC",
+   "block_groups": 27,
+   "bundle_mb": 0.5,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37061",
+   "name": "Duplin County",
+   "state": "NC",
+   "block_groups": 57,
+   "bundle_mb": 0.7,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "37063",
@@ -20516,6 +20780,18 @@
    "crash_years": null
   },
   {
+   "fips": "37065",
+   "name": "Edgecombe County",
+   "state": "NC",
+   "block_groups": 47,
+   "bundle_mb": 0.5,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:06\\:33Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "37067",
    "name": "Forsyth County",
    "state": "NC",
@@ -20525,6 +20801,18 @@
    "osm": "2026-11-07T00:47:05Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "37069",
+   "name": "Franklin County",
+   "state": "NC",
+   "block_groups": 41,
+   "bundle_mb": 1.1,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:06\\:33Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "37071",
@@ -20538,6 +20826,54 @@
    "crash_years": null
   },
   {
+   "fips": "37073",
+   "name": "Gates County",
+   "state": "NC",
+   "block_groups": 10,
+   "bundle_mb": 0.2,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37075",
+   "name": "Graham County",
+   "state": "NC",
+   "block_groups": 9,
+   "bundle_mb": 0.7,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37077",
+   "name": "Granville County",
+   "state": "NC",
+   "block_groups": 39,
+   "bundle_mb": 0.8,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:06\\:33Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37079",
+   "name": "Greene County",
+   "state": "NC",
+   "block_groups": 14,
+   "bundle_mb": 0.3,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "37081",
    "name": "Guilford County",
    "state": "NC",
@@ -20547,6 +20883,18 @@
    "osm": "2026-11-07T00:47:05Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "37083",
+   "name": "Halifax County",
+   "state": "NC",
+   "block_groups": 51,
+   "bundle_mb": 0.8,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "37085",
@@ -20560,6 +20908,18 @@
    "crash_years": null
   },
   {
+   "fips": "37087",
+   "name": "Haywood County",
+   "state": "NC",
+   "block_groups": 54,
+   "bundle_mb": 1.6,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "37089",
    "name": "Henderson County",
    "state": "NC",
@@ -20569,6 +20929,42 @@
    "osm": "2026-11-07T00:47:05Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "37091",
+   "name": "Hertford County",
+   "state": "NC",
+   "block_groups": 20,
+   "bundle_mb": 0.3,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37093",
+   "name": "Hoke County",
+   "state": "NC",
+   "block_groups": 34,
+   "bundle_mb": 0.7,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:05\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37095",
+   "name": "Hyde County",
+   "state": "NC",
+   "block_groups": 8,
+   "bundle_mb": 0.5,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "37097",
@@ -20582,6 +20978,18 @@
    "crash_years": null
   },
   {
+   "fips": "37099",
+   "name": "Jackson County",
+   "state": "NC",
+   "block_groups": 27,
+   "bundle_mb": 1.6,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "37101",
    "name": "Johnston County",
    "state": "NC",
@@ -20591,6 +20999,102 @@
    "osm": "2026-11-07T00:47:05Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "37103",
+   "name": "Jones County",
+   "state": "NC",
+   "block_groups": 7,
+   "bundle_mb": 0.7,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37105",
+   "name": "Lee County",
+   "state": "NC",
+   "block_groups": 40,
+   "bundle_mb": 0.6,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:06\\:33Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37107",
+   "name": "Lenoir County",
+   "state": "NC",
+   "block_groups": 49,
+   "bundle_mb": 0.5,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37109",
+   "name": "Lincoln County",
+   "state": "NC",
+   "block_groups": 51,
+   "bundle_mb": 0.5,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:06\\:33Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37111",
+   "name": "McDowell County",
+   "state": "NC",
+   "block_groups": 33,
+   "bundle_mb": 0.9,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:06\\:33Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37113",
+   "name": "Macon County",
+   "state": "NC",
+   "block_groups": 28,
+   "bundle_mb": 1.2,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37115",
+   "name": "Madison County",
+   "state": "NC",
+   "block_groups": 17,
+   "bundle_mb": 1.0,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37117",
+   "name": "Martin County",
+   "state": "NC",
+   "block_groups": 22,
+   "bundle_mb": 0.5,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "37119",
@@ -20604,6 +21108,30 @@
    "crash_years": null
   },
   {
+   "fips": "37121",
+   "name": "Mitchell County",
+   "state": "NC",
+   "block_groups": 11,
+   "bundle_mb": 0.7,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:06\\:33Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37123",
+   "name": "Montgomery County",
+   "state": "NC",
+   "block_groups": 22,
+   "bundle_mb": 0.7,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:06\\:33Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "37125",
    "name": "Moore County",
    "state": "NC",
@@ -20615,6 +21143,18 @@
    "crash_years": null
   },
   {
+   "fips": "37127",
+   "name": "Nash County",
+   "state": "NC",
+   "block_groups": 72,
+   "bundle_mb": 1.0,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:06\\:33Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "37129",
    "name": "New Hanover County",
    "state": "NC",
@@ -20624,6 +21164,18 @@
    "osm": "2026-11-07T00:47:05Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "37131",
+   "name": "Northampton County",
+   "state": "NC",
+   "block_groups": 23,
+   "bundle_mb": 0.7,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "37133",
@@ -20648,6 +21200,66 @@
    "crash_years": null
   },
   {
+   "fips": "37137",
+   "name": "Pamlico County",
+   "state": "NC",
+   "block_groups": 18,
+   "bundle_mb": 0.4,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37139",
+   "name": "Pasquotank County",
+   "state": "NC",
+   "block_groups": 32,
+   "bundle_mb": 0.4,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37141",
+   "name": "Pender County",
+   "state": "NC",
+   "block_groups": 35,
+   "bundle_mb": 0.9,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37143",
+   "name": "Perquimans County",
+   "state": "NC",
+   "block_groups": 15,
+   "bundle_mb": 0.3,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37145",
+   "name": "Person County",
+   "state": "NC",
+   "block_groups": 26,
+   "bundle_mb": 0.4,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:06\\:33Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "37147",
    "name": "Pitt County",
    "state": "NC",
@@ -20657,6 +21269,18 @@
    "osm": "2026-11-07T00:47:05Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "37149",
+   "name": "Polk County",
+   "state": "NC",
+   "block_groups": 18,
+   "bundle_mb": 0.4,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "37151",
@@ -20670,6 +21294,18 @@
    "crash_years": null
   },
   {
+   "fips": "37153",
+   "name": "Richmond County",
+   "state": "NC",
+   "block_groups": 42,
+   "bundle_mb": 0.7,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:06\\:33Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "37155",
    "name": "Robeson County",
    "state": "NC",
@@ -20679,6 +21315,18 @@
    "osm": "2026-11-07T00:47:05Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "37157",
+   "name": "Rockingham County",
+   "state": "NC",
+   "block_groups": 70,
+   "bundle_mb": 0.8,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "37159",
@@ -20692,6 +21340,114 @@
    "crash_years": null
   },
   {
+   "fips": "37161",
+   "name": "Rutherford County",
+   "state": "NC",
+   "block_groups": 57,
+   "bundle_mb": 0.9,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37163",
+   "name": "Sampson County",
+   "state": "NC",
+   "block_groups": 49,
+   "bundle_mb": 0.8,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:06\\:33Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37165",
+   "name": "Scotland County",
+   "state": "NC",
+   "block_groups": 27,
+   "bundle_mb": 0.4,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:06\\:33Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37167",
+   "name": "Stanly County",
+   "state": "NC",
+   "block_groups": 47,
+   "bundle_mb": 0.7,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:06\\:33Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37169",
+   "name": "Stokes County",
+   "state": "NC",
+   "block_groups": 32,
+   "bundle_mb": 0.6,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37171",
+   "name": "Surry County",
+   "state": "NC",
+   "block_groups": 63,
+   "bundle_mb": 0.9,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37173",
+   "name": "Swain County",
+   "state": "NC",
+   "block_groups": 11,
+   "bundle_mb": 1.4,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37175",
+   "name": "Transylvania County",
+   "state": "NC",
+   "block_groups": 32,
+   "bundle_mb": 1.0,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37177",
+   "name": "Tyrrell County",
+   "state": "NC",
+   "block_groups": 5,
+   "bundle_mb": 0.2,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "37179",
    "name": "Union County",
    "state": "NC",
@@ -20701,6 +21457,18 @@
    "osm": "2026-11-07T00:47:05Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "37181",
+   "name": "Vance County",
+   "state": "NC",
+   "block_groups": 35,
+   "bundle_mb": 0.4,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:06\\:33Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "37183",
@@ -20714,6 +21482,42 @@
    "crash_years": null
   },
   {
+   "fips": "37185",
+   "name": "Warren County",
+   "state": "NC",
+   "block_groups": 15,
+   "bundle_mb": 0.4,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:06\\:33Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37187",
+   "name": "Washington County",
+   "state": "NC",
+   "block_groups": 15,
+   "bundle_mb": 0.2,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37189",
+   "name": "Watauga County",
+   "state": "NC",
+   "block_groups": 32,
+   "bundle_mb": 0.9,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:06\\:33Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "37191",
    "name": "Wayne County",
    "state": "NC",
@@ -20723,6 +21527,54 @@
    "osm": "2026-11-07T00:47:05Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "37193",
+   "name": "Wilkes County",
+   "state": "NC",
+   "block_groups": 55,
+   "bundle_mb": 1.2,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:06\\:33Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37195",
+   "name": "Wilson County",
+   "state": "NC",
+   "block_groups": 65,
+   "bundle_mb": 0.5,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:06\\:33Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37197",
+   "name": "Yadkin County",
+   "state": "NC",
+   "block_groups": 29,
+   "bundle_mb": 0.5,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "37199",
+   "name": "Yancey County",
+   "state": "NC",
+   "block_groups": 10,
+   "bundle_mb": 0.6,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:06\\:33Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "38001",

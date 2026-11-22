@@ -1,0 +1,27 @@
+{
+ "fips": "37091",
+ "state_area": "US-NC",
+ "box_s_w_n_e": "36.218130000293684,-77.22860600019327,36.5663290003227,-76.66946200044823",
+ "direct_in_state": 1872,
+ "extract": 1885,
+ "missing_from_extract": [],
+ "extra_in_extract": [
+  20510301,
+  20511905,
+  20512157,
+  20512911,
+  20513291,
+  20513795,
+  20514068,
+  20514070,
+  20514734,
+  20626838,
+  20633799,
+  20633823,
+  1289102949
+ ],
+ "n_missing": 0,
+ "n_extra": 13,
+ "match": false,
+ "note": "roads in the box that lie in another state are not in a state extract and are left out of this comparison"
+}

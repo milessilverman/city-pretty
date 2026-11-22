@@ -524,3 +524,131 @@ Files: `data/backtests/southeast_fl_census_spot_2026-11-22.json`, `data/backtest
 `..._12065_...`, `data/backtests/southeast_osm_xcheck_state_12065_2026-11-22.json`,
 `data/backtests/live_check_panels_2026-11-22_southeast_fl.json`, `..._southeast_fl_rerun12107.json`,
 `data/backtests/acs_fallback_mismatches_2026-11-22.json`.
+
+## North Carolina (71 of 71 built, none withheld)
+
+| County | People (ACS 2020-24) | Block groups | Data file (gzip, bytes) | Completeness tier | Canopy block groups (2025 release) |
+|---|---|---|---|---|---|
+| Alexander County (37003) | 36,412 | 25 | 410,605 | D | 4 |
+| Alleghany County (37005) | 11,174 | 11 | 408,205 | D | 0 |
+| Anson County (37007) | 22,289 | 20 | 564,408 | D | 8 |
+| Ashe County (37009) | 26,950 | 26 | 896,496 | D | 0 |
+| Avery County (37011) | 17,680 | 16 | 699,016 | D | 0 |
+| Beaufort County (37013) | 44,499 | 40 | 617,183 | D | 16 |
+| Bertie County (37015) | 17,170 | 20 | 544,938 | D | 0 |
+| Bladen County (37017) | 29,566 | 30 | 666,791 | D | 0 |
+| Burke County (37023) | 87,795 | 61 | 1,292,897 | D | 46 |
+| Caldwell County (37027) | 80,536 | 63 | 885,786 | D | 49 |
+| Camden County (37029) | 10,927 | 6 | 458,452 | D | 2 |
+| Carteret County (37031) | 69,148 | 63 | 986,830 | D | 45 |
+| Caswell County (37033) | 22,404 | 18 | 418,563 | C | 2 |
+| Chatham County (37037) | 80,151 | 58 | 1,083,465 | C | 24 |
+| Cherokee County (37039) | 29,562 | 27 | 1,092,249 | C | 0 |
+| Chowan County (37041) | 13,836 | 14 | 224,414 | D | 6 |
+| Clay County (37043) | 11,610 | 8 | 690,151 | D | 0 |
+| Columbus County (37047) | 50,140 | 48 | 606,953 | D | 9 |
+| Currituck County (37053) | 30,601 | 18 | 436,382 | D | 1 |
+| Dare County (37055) | 37,875 | 34 | 536,971 | D | 21 |
+| Davie County (37059) | 44,122 | 27 | 517,602 | C | 12 |
+| Duplin County (37061) | 49,335 | 57 | 656,651 | D | 0 |
+| Edgecombe County (37065) | 48,736 | 47 | 525,568 | C | 33 |
+| Franklin County (37069) | 74,386 | 41 | 1,134,607 | C | 10 |
+| Gates County (37073) | 10,376 | 10 | 219,234 | D | 0 |
+| Graham County (37075) | 8,072 | 9 | 725,813 | C | 0 |
+| Granville County (37077) | 60,877 | 39 | 831,769 | C | 20 |
+| Greene County (37079) | 20,486 | 14 | 251,610 | D | 0 |
+| Halifax County (37083) | 47,675 | 51 | 788,719 | C | 26 |
+| Haywood County (37087) | 62,662 | 54 | 1,623,766 | C | 46 |
+| Hertford County (37091) | 19,908 | 20 | 330,941 | D | 7 |
+| Hoke County (37093) | 53,835 | 34 | 709,111 | C | 24 |
+| Hyde County (37095) | 4,592 | 8 | 465,303 | D | 0 |
+| Jackson County (37099) | 43,771 | 27 | 1,608,193 | C | 16 |
+| Jones County (37103) | 9,302 | 7 | 692,765 | C | 0 |
+| Lee County (37105) | 65,816 | 40 | 576,660 | D | 31 |
+| Lenoir County (37107) | 54,919 | 49 | 497,967 | D | 29 |
+| Lincoln County (37109) | 92,716 | 51 | 512,713 | D | 25 |
+| McDowell County (37111) | 44,817 | 33 | 897,167 | C | 20 |
+| Macon County (37113) | 37,941 | 28 | 1,231,628 | C | 17 |
+| Madison County (37115) | 21,867 | 17 | 971,709 | D | 0 |
+| Martin County (37117) | 21,644 | 22 | 490,989 | D | 8 |
+| Mitchell County (37121) | 14,992 | 11 | 683,293 | D | 0 |
+| Montgomery County (37123) | 26,007 | 22 | 726,958 | D | 0 |
+| Nash County (37127) | 96,216 | 72 | 965,013 | C | 45 |
+| Northampton County (37131) | 16,931 | 23 | 700,050 | D | 5 |
+| Pamlico County (37137) | 12,390 | 18 | 384,219 | D | 0 |
+| Pasquotank County (37139) | 40,834 | 32 | 360,251 | D | 22 |
+| Pender County (37141) | 65,550 | 35 | 908,300 | C | 14 |
+| Perquimans County (37143) | 13,244 | 15 | 274,836 | D | 0 |
+| Person County (37145) | 39,542 | 26 | 406,514 | D | 14 |
+| Polk County (37149) | 19,891 | 18 | 443,840 | D | 4 |
+| Richmond County (37153) | 42,344 | 42 | 689,203 | C | 32 |
+| Rockingham County (37157) | 92,131 | 70 | 763,861 | D | 47 |
+| Rutherford County (37161) | 64,930 | 57 | 915,704 | D | 27 |
+| Sampson County (37163) | 59,470 | 49 | 794,219 | D | 12 |
+| Scotland County (37165) | 33,590 | 27 | 421,331 | C | 18 |
+| Stanly County (37167) | 64,651 | 47 | 749,920 | D | 23 |
+| Stokes County (37169) | 45,139 | 32 | 622,297 | D | 7 |
+| Surry County (37171) | 71,425 | 63 | 891,912 | D | 21 |
+| Swain County (37173) | 14,013 | 11 | 1,354,439 | C | 0 |
+| Transylvania County (37175) | 33,691 | 32 | 1,025,051 | D | 18 |
+| Tyrrell County (37177) | 3,423 | 5 | 246,396 | D | 0 |
+| Vance County (37181) | 42,322 | 35 | 375,596 | D | 25 |
+| Warren County (37185) | 18,795 | 15 | 398,652 | D | 0 |
+| Washington County (37187) | 10,812 | 15 | 203,863 | D | 0 |
+| Watauga County (37189) | 55,123 | 32 | 936,415 | D | 19 |
+| Wilkes County (37193) | 65,935 | 55 | 1,177,166 | D | 28 |
+| Wilson County (37195) | 79,290 | 65 | 516,787 | C | 45 |
+| Yadkin County (37197) | 37,574 | 29 | 527,554 | D | 0 |
+| Yancey County (37199) | 18,797 | 10 | 570,537 | D | 0 |
+| **71 counties** | **2,827,232** | **2,254** | **48,815,417** | 21 C, 50 D | 983 |
+
+- OpenStreetMap: North Carolina counties read the file the registry names for each county, from openstreetmap.fr, each
+  downloaded once and shared: `northeast` (16 counties), `northwest` (11), `western` (11), `north_central` (10),
+  `south_central` (9), `southeast` (7), `piedmont_triad` (6) and `north-carolina-latest.osm.pbf` (1). Data timestamps: 21 Nov
+  2026, 01:06:33Z (north_central, northwest, south_central), 01:07:35Z (northeast, piedmont_triad, southeast, western) and
+  01:05:35Z (the whole-state file); each county's sources list names its own. Build: fetch 20-110 s, build 21-294 s per
+  county, three at a time (the Florida checks, tests and uploads ran alongside), about 32 min from the first county to the
+  last.
+- Bus frequency: 56 counties have no value in any block group (no feed that is read has a stop with 7-9 am departures in or
+  near the county); 15 have values. Rail distance: 65 counties have none; 6 have values.
+- Census spot check: 71 counties, 1,700 of 1,700 values equal (0% mismatch). Tract-median flags: 71 counties added, no
+  existing county changed, 0 values matching neither the block group nor the tract.
+- Crash counts: North Carolina has no state crash source connected (`pipeline/region.py` STATE_DEFAULTS has no NC); all 71
+  files say "Not connected for North Carolina yet: crash gaps are not scored and crash-based projects are not proposed". No
+  crash counts were built.
+- Tests run: `npm test` 1,632 of 1,632 (46 files), `npm run typecheck` clean. No corridor stop's flag needed changing.
+- OpenStreetMap ID for ID vs live Overpass (maps.mail.ru; two counties picked with seed 20261122 from the state's sorted
+  list): it answered 504 to many tries first (Hertford's road query needed about 50 minutes of retries). Both counties lie on the
+  Virginia line, so their boxes reach into Virginia and into neighbouring North Carolina counties that the sub-region file
+  does not hold; run as the script is, both differ in roads and match in bus stops. **Warren (37185): roads 2,567 on
+  Overpass, 2,205 in the extract (362 only on Overpass, 0 only in the extract); bus stops 0 = 0. Hertford (37091): roads
+  1,929 on Overpass, 1,885 in the extract (44 only on Overpass, 0 only in the extract); bus stops 0 = 0.** Looked at where
+  the differing roads are, with the same box, classes and extract and the Overpass query limited to North Carolina's area
+  (`area["ISO3166-2"="US-NC"]`, results `southeast_osm_xcheck_state_37185_...json` and `..._37091_...json`):
+  *Hertford:* 1,872 on Overpass in North Carolina, 1,885 in the extract, **0 only on Overpass**, 13 only in the extract; all
+  44 roads only on Overpass lie in Virginia (Southampton County 24, Suffolk city 20), and the 13 extract-only ways are
+  Virginia-centred ways that cross the line and are kept whole (Southampton 9, Suffolk 4). *Warren:* 2,378 on Overpass in
+  North Carolina, 2,205 in the extract, 211 only on Overpass and 38 only in the extract. Located with TIGERweb (centre
+  point of each way): the 211 are in Halifax County (175) and Northampton County (34), beyond the edge of the sub-region
+  file in the box's margin, 1 in Brunswick County, Virginia (a way across the line) and **1 in Warren County itself: way
+  1582919770, version 1, created 2026-11-21T21:02:48Z, about 20 hours after the extract's snapshot (2026-11-21T01:06:33Z),
+  so a road added since**; the 38 extract-only ways are Virginia-centred ways that cross the line (Mecklenburg County 20,
+  Brunswick County 17) and 1 in Warren County (way 18895937, Birdsong Road, version 3 of 2013, at the state line), which
+  is in the box's full Overpass answer (0 only in the extract there) and is left out only by the state-area filter. The
+  other 151 of Warren's 362 are outside North Carolina (362 minus 211) and were not located one by one. So: inside both
+  counties every road and bus stop matches, except one road in Warren added to OpenStreetMap after the extract was made;
+  what is otherwise missing is the roads of Virginia and of the neighbouring counties in the box's margin.
+- Live check from R2 (`LIVE_PORT=9221`): Vance (37181) and Davie (37059), 3 points each (picked with seed 20261123 from the
+  state's sorted list). North Carolina's parcel service is on the page: all six points had the house panel on live parcel
+  records and pass every check (neighborhood, canopy, canopy goal, crash text, state laws, Census area, HUD rent, FEMA,
+  USGS, console), with one exception on the first try: **Davie 370590807011's USGS elevation row first showed "Not
+  available (the service did not answer in time)"** (the page's 6 s limit); re-opened alone it showed 778 ft, equal to
+  USGS's 778 ft, and passed (the first try is kept in the result file as `usgs_first`). 54 pass, 1 recorded failure (that
+  first try), 0 not checkable. No wrong value was shown. Each data file came from the r2.dev address (HEAD 200, GET 200).
+- R2: before 1,827,301,037 bytes (3,088 objects); dry run "72 files, net +0.049 GB, projected 1.876 GB"; after
+  1,876,134,325 bytes (3,159 objects): 48,833,288 bytes added (the 71 data files, 48,815,417, plus the larger
+  `manifest.json`).
+
+Files: `data/backtests/southeast_nc_census_spot_2026-11-22.json`, `data/backtests/southeast_osm_xcheck_37185_2026-11-22.json`,
+`..._37091_...`, `data/backtests/southeast_osm_xcheck_state_37185_2026-11-22.json`,
+`data/backtests/live_check_panels_2026-11-22_southeast_nc.json`, `data/backtests/acs_fallback_mismatches_2026-11-22.json`.
