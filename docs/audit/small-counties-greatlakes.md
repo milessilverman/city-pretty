@@ -290,3 +290,99 @@ Files: `data/backtests/greatlakes_il_census_spot_2026-11-22.json`, `data/backtes
 Files: `data/backtests/greatlakes_in_census_spot_2026-11-22.json`, `data/backtests/greatlakes_osm_xcheck_18001_2026-11-22.json`,
 `..._18005_...`, `data/backtests/live_check_panels_2026-11-22_greatlakes_in.json`,
 `data/backtests/acs_fallback_mismatches_2026-11-22.json`.
+
+## Ohio (61 of 61 built, none withheld)
+
+| County | People (ACS 2020-24) | Block groups | Data file (gzip, bytes) | Completeness tier | Canopy block groups (2025 release) |
+|---|---|---|---|---|---|
+| Adams County (39001) | 27,540 | 23 | 338,837 | C | 0 |
+| Ashland County (39005) | 52,256 | 44 | 349,106 | D | 24 |
+| Ashtabula County (39007) | 97,167 | 92 | 554,699 | C | 61 |
+| Athens County (39009) | 61,737 | 46 | 588,766 | C | 25 |
+| Auglaize County (39011) | 46,125 | 38 | 319,850 | C | 30 |
+| Belmont County (39013) | 65,473 | 65 | 583,156 | D | 37 |
+| Brown County (39015) | 43,845 | 34 | 345,721 | C | 2 |
+| Carroll County (39019) | 26,659 | 25 | 278,003 | D | 0 |
+| Champaign County (39021) | 38,804 | 34 | 173,394 | D | 13 |
+| Clinton County (39027) | 42,012 | 33 | 253,511 | D | 13 |
+| Coshocton County (39031) | 36,744 | 32 | 334,989 | D | 15 |
+| Crawford County (39033) | 41,711 | 44 | 172,809 | D | 33 |
+| Darke County (39037) | 51,594 | 52 | 210,354 | D | 20 |
+| Defiance County (39039) | 38,343 | 36 | 204,036 | D | 21 |
+| Erie County (39043) | 74,581 | 63 | 385,186 | C | 53 |
+| Fayette County (39047) | 28,876 | 26 | 193,370 | D | 16 |
+| Fulton County (39051) | 42,240 | 30 | 173,214 | D | 6 |
+| Gallia County (39053) | 29,068 | 26 | 386,516 | D | 10 |
+| Geauga County (39055) | 95,481 | 62 | 641,474 | C | 18 |
+| Guernsey County (39059) | 38,223 | 36 | 381,430 | D | 20 |
+| Hancock County (39063) | 74,866 | 64 | 303,464 | C | 49 |
+| Hardin County (39065) | 30,475 | 27 | 158,841 | D | 16 |
+| Harrison County (39067) | 14,306 | 17 | 260,901 | D | 0 |
+| Henry County (39069) | 27,567 | 26 | 183,564 | C | 9 |
+| Highland County (39071) | 43,517 | 37 | 313,915 | D | 14 |
+| Hocking County (39073) | 27,799 | 23 | 427,760 | D | 13 |
+| Holmes County (39075) | 44,418 | 25 | 229,523 | D | 0 |
+| Huron County (39077) | 58,319 | 47 | 216,757 | D | 32 |
+| Jackson County (39079) | 32,650 | 30 | 345,752 | D | 19 |
+| Jefferson County (39081) | 64,518 | 62 | 443,208 | D | 48 |
+| Knox County (39083) | 63,142 | 46 | 454,811 | D | 21 |
+| Lawrence County (39087) | 56,819 | 57 | 453,971 | C | 45 |
+| Logan County (39091) | 46,089 | 40 | 218,823 | D | 23 |
+| Madison County (39097) | 44,423 | 30 | 252,273 | D | 15 |
+| Marion County (39101) | 65,020 | 59 | 206,992 | D | 45 |
+| Meigs County (39105) | 21,896 | 23 | 331,931 | D | 6 |
+| Mercer County (39107) | 42,484 | 32 | 206,207 | D | 11 |
+| Monroe County (39111) | 13,227 | 16 | 377,519 | D | 0 |
+| Morgan County (39115) | 13,651 | 15 | 347,073 | C | 0 |
+| Morrow County (39117) | 35,404 | 25 | 219,912 | D | 1 |
+| Muskingum County (39119) | 86,411 | 71 | 506,543 | C | 47 |
+| Noble County (39121) | 14,282 | 12 | 380,057 | D | 0 |
+| Ottawa County (39123) | 39,994 | 44 | 308,255 | C | 22 |
+| Paulding County (39125) | 18,791 | 17 | 142,885 | D | 0 |
+| Perry County (39127) | 35,535 | 28 | 448,885 | C | 8 |
+| Pickaway County (39129) | 60,131 | 40 | 411,404 | C | 23 |
+| Pike County (39131) | 27,044 | 21 | 302,058 | D | 7 |
+| Preble County (39135) | 40,765 | 33 | 157,734 | D | 12 |
+| Putnam County (39137) | 34,314 | 27 | 232,180 | C | 7 |
+| Ross County (39141) | 76,492 | 61 | 420,304 | D | 31 |
+| Sandusky County (39143) | 58,778 | 58 | 260,430 | D | 40 |
+| Scioto County (39145) | 72,627 | 70 | 574,537 | C | 41 |
+| Seneca County (39147) | 54,770 | 55 | 200,519 | D | 36 |
+| Shelby County (39149) | 47,929 | 39 | 205,022 | D | 25 |
+| Tuscarawas County (39157) | 92,385 | 77 | 455,801 | D | 56 |
+| Union County (39159) | 67,324 | 33 | 289,988 | C | 21 |
+| Van Wert County (39161) | 28,826 | 27 | 189,313 | C | 17 |
+| Vinton County (39163) | 12,630 | 12 | 379,073 | D | 2 |
+| Washington County (39167) | 58,978 | 47 | 713,694 | D | 26 |
+| Williams County (39171) | 36,719 | 37 | 205,642 | C | 13 |
+| Wyandot County (39175) | 21,598 | 22 | 147,640 | D | 11 |
+| **61 counties** | **2,785,392** | **2,373** | **19,753,582** | 20 C, 41 D | 1229 |
+
+- OpenStreetMap: the Ohio cut of the 21 Nov 2026 `us-midwest-latest.osm.pbf` (see Indiana: 150 s, peak osmium memory
+  4.16 GB, 374 MB). Build: fetch 11-62 s, build 199-248 s per county, three at a time (the Indiana checks and the Michigan
+  builds ran alongside, so these are slower than Indiana's), about 83 min from the first county to the last.
+- Bus frequency: 49 counties have no value in any block group (no feed that is read has a stop with 7-9 am departures in or
+  near the county); 12 have values. Rail distance: 55 counties have none; 6 have values.
+- Census spot check: 61 counties, 1,464 of 1,464 values equal (0% mismatch). Tract-median flags: 61 counties added, no
+  existing county changed, 0 values matching neither the block group nor the tract.
+- Crash counts: Ohio has no state crash source connected (`pipeline/region.py` STATE_DEFAULTS has no OH); all 61 files say
+  "Not connected for Ohio yet: crash gaps are not scored and crash-based projects are not proposed".
+- Tests run: `npm test` 1,620 of 1,620 (45 files), `npm run typecheck` clean. No corridor stop's flag changed.
+- OpenStreetMap ID for ID vs live Overpass (maps.mail.ru; it answered 504 for a while first): Ashland (39005) 4,002 =
+  4,002 roads, 0 = 0 bus stops (0 missing, 0 extra). Adams (39001) bus stops 1 = 1; **roads 3,015 on Overpass, 2,463 in the
+  extract (552 only on Overpass, 0 only in the extract)**: Adams County lies on the Ohio River and its box reaches into
+  Kentucky, which an Ohio extract does not hold. With the Overpass query limited to Ohio's area (same box, classes and
+  extract; `area["ISO3166-2"="US-OH"]`): 2,416 on Overpass, 2,463 in the extract, 0 only on Overpass, 47 only in the
+  extract, all 47 centred in Kentucky (Lewis County 46, Mason County 1: ways that cross the river or lie just across it,
+  kept by the extract). Inside Ohio every road matches. The extract's snapshot is 2026-11-21T01:07:35Z.
+- Live check from R2 (`LIVE_PORT=9211`): Guernsey (39059) and Perry (39127), 3 points each (Ohio's parcel service is on
+  the page): all six points had the house panel on live parcel records and pass every check (neighborhood, canopy, canopy
+  goal, crash text, state laws, Census area, HUD rent, FEMA, USGS, console): 54 pass, 0 fail. Each data file came from the
+  r2.dev address (HEAD 200, GET 200).
+- R2: before 1,610,889,441 bytes (2,529 objects); dry run "62 files, net +0.020 GB, projected 1.631 GB"; after
+  1,630,658,373 bytes (2,590 objects): 19,768,932 bytes added (the 61 data files, 19,753,582, plus the larger
+  `manifest.json`).
+
+Files: `data/backtests/greatlakes_oh_census_spot_2026-11-22.json`, `data/backtests/greatlakes_osm_xcheck_39001_2026-11-22.json`,
+`..._39005_...`, `data/backtests/greatlakes_osm_xcheck_state_39001_2026-11-22.json`,
+`data/backtests/live_check_panels_2026-11-22_greatlakes_oh.json`, `data/backtests/acs_fallback_mismatches_2026-11-22.json`.

@@ -15743,6 +15743,18 @@
    "r2_only": true
   },
   {
+   "fips": "39001",
+   "name": "Adams County",
+   "state": "OH",
+   "block_groups": 23,
+   "bundle_mb": 0.3,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "39003",
    "name": "Allen County",
    "state": "OH",
@@ -15754,6 +15766,78 @@
    "crash_years": null
   },
   {
+   "fips": "39005",
+   "name": "Ashland County",
+   "state": "OH",
+   "block_groups": 44,
+   "bundle_mb": 0.3,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "39007",
+   "name": "Ashtabula County",
+   "state": "OH",
+   "block_groups": 92,
+   "bundle_mb": 0.6,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "39009",
+   "name": "Athens County",
+   "state": "OH",
+   "block_groups": 46,
+   "bundle_mb": 0.6,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "39011",
+   "name": "Auglaize County",
+   "state": "OH",
+   "block_groups": 38,
+   "bundle_mb": 0.3,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "39013",
+   "name": "Belmont County",
+   "state": "OH",
+   "block_groups": 65,
+   "bundle_mb": 0.6,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "39015",
+   "name": "Brown County",
+   "state": "OH",
+   "block_groups": 34,
+   "bundle_mb": 0.3,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "39017",
    "name": "Butler County",
    "state": "OH",
@@ -15763,6 +15847,30 @@
    "osm": "2026-11-07T00:47:05Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "39019",
+   "name": "Carroll County",
+   "state": "OH",
+   "block_groups": 25,
+   "bundle_mb": 0.3,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "39021",
+   "name": "Champaign County",
+   "state": "OH",
+   "block_groups": 34,
+   "bundle_mb": 0.2,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "39023",
@@ -15787,6 +15895,18 @@
    "crash_years": null
   },
   {
+   "fips": "39027",
+   "name": "Clinton County",
+   "state": "OH",
+   "block_groups": 33,
+   "bundle_mb": 0.3,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "39029",
    "name": "Columbiana County",
    "state": "OH",
@@ -15796,6 +15916,30 @@
    "osm": "2026-11-07T00:47:05Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "39031",
+   "name": "Coshocton County",
+   "state": "OH",
+   "block_groups": 32,
+   "bundle_mb": 0.3,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "39033",
+   "name": "Crawford County",
+   "state": "OH",
+   "block_groups": 44,
+   "bundle_mb": 0.2,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "39035",
@@ -15809,6 +15953,30 @@
    "crash_years": null
   },
   {
+   "fips": "39037",
+   "name": "Darke County",
+   "state": "OH",
+   "block_groups": 52,
+   "bundle_mb": 0.2,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "39039",
+   "name": "Defiance County",
+   "state": "OH",
+   "block_groups": 36,
+   "bundle_mb": 0.2,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "39041",
    "name": "Delaware County",
    "state": "OH",
@@ -15818,6 +15986,18 @@
    "osm": "2026-11-07T00:47:05Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "39043",
+   "name": "Erie County",
+   "state": "OH",
+   "block_groups": 63,
+   "bundle_mb": 0.4,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "39045",
@@ -15831,6 +16011,18 @@
    "crash_years": null
   },
   {
+   "fips": "39047",
+   "name": "Fayette County",
+   "state": "OH",
+   "block_groups": 26,
+   "bundle_mb": 0.2,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "39049",
    "name": "Franklin County",
    "state": "OH",
@@ -15840,6 +16032,42 @@
    "osm": "2026-11-07T00:47:05Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "39051",
+   "name": "Fulton County",
+   "state": "OH",
+   "block_groups": 30,
+   "bundle_mb": 0.2,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "39053",
+   "name": "Gallia County",
+   "state": "OH",
+   "block_groups": 26,
+   "bundle_mb": 0.4,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "39055",
+   "name": "Geauga County",
+   "state": "OH",
+   "block_groups": 62,
+   "bundle_mb": 0.6,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "39057",
@@ -15853,6 +16081,18 @@
    "crash_years": null
   },
   {
+   "fips": "39059",
+   "name": "Guernsey County",
+   "state": "OH",
+   "block_groups": 36,
+   "bundle_mb": 0.4,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "39061",
    "name": "Hamilton County",
    "state": "OH",
@@ -15862,6 +16102,138 @@
    "osm": "2026-11-07T00:47:05Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "39063",
+   "name": "Hancock County",
+   "state": "OH",
+   "block_groups": 64,
+   "bundle_mb": 0.3,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "39065",
+   "name": "Hardin County",
+   "state": "OH",
+   "block_groups": 27,
+   "bundle_mb": 0.2,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "39067",
+   "name": "Harrison County",
+   "state": "OH",
+   "block_groups": 17,
+   "bundle_mb": 0.3,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "39069",
+   "name": "Henry County",
+   "state": "OH",
+   "block_groups": 26,
+   "bundle_mb": 0.2,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "39071",
+   "name": "Highland County",
+   "state": "OH",
+   "block_groups": 37,
+   "bundle_mb": 0.3,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "39073",
+   "name": "Hocking County",
+   "state": "OH",
+   "block_groups": 23,
+   "bundle_mb": 0.4,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "39075",
+   "name": "Holmes County",
+   "state": "OH",
+   "block_groups": 25,
+   "bundle_mb": 0.2,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "39077",
+   "name": "Huron County",
+   "state": "OH",
+   "block_groups": 47,
+   "bundle_mb": 0.2,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "39079",
+   "name": "Jackson County",
+   "state": "OH",
+   "block_groups": 30,
+   "bundle_mb": 0.3,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "39081",
+   "name": "Jefferson County",
+   "state": "OH",
+   "block_groups": 62,
+   "bundle_mb": 0.4,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "39083",
+   "name": "Knox County",
+   "state": "OH",
+   "block_groups": 46,
+   "bundle_mb": 0.5,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "39085",
@@ -15875,6 +16247,18 @@
    "crash_years": null
   },
   {
+   "fips": "39087",
+   "name": "Lawrence County",
+   "state": "OH",
+   "block_groups": 57,
+   "bundle_mb": 0.5,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "39089",
    "name": "Licking County",
    "state": "OH",
@@ -15884,6 +16268,18 @@
    "osm": "2026-11-07T00:47:05Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "39091",
+   "name": "Logan County",
+   "state": "OH",
+   "block_groups": 40,
+   "bundle_mb": 0.2,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "39093",
@@ -15908,6 +16304,18 @@
    "crash_years": null
   },
   {
+   "fips": "39097",
+   "name": "Madison County",
+   "state": "OH",
+   "block_groups": 30,
+   "bundle_mb": 0.3,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "39099",
    "name": "Mahoning County",
    "state": "OH",
@@ -15917,6 +16325,18 @@
    "osm": "2026-11-07T00:47:05Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "39101",
+   "name": "Marion County",
+   "state": "OH",
+   "block_groups": 59,
+   "bundle_mb": 0.2,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "39103",
@@ -15930,6 +16350,30 @@
    "crash_years": null
   },
   {
+   "fips": "39105",
+   "name": "Meigs County",
+   "state": "OH",
+   "block_groups": 23,
+   "bundle_mb": 0.3,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "39107",
+   "name": "Mercer County",
+   "state": "OH",
+   "block_groups": 32,
+   "bundle_mb": 0.2,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "39109",
    "name": "Miami County",
    "state": "OH",
@@ -15939,6 +16383,18 @@
    "osm": "2026-11-07T00:47:05Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "39111",
+   "name": "Monroe County",
+   "state": "OH",
+   "block_groups": 16,
+   "bundle_mb": 0.4,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "39113",
@@ -15952,6 +16408,114 @@
    "crash_years": null
   },
   {
+   "fips": "39115",
+   "name": "Morgan County",
+   "state": "OH",
+   "block_groups": 15,
+   "bundle_mb": 0.3,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "39117",
+   "name": "Morrow County",
+   "state": "OH",
+   "block_groups": 25,
+   "bundle_mb": 0.2,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "39119",
+   "name": "Muskingum County",
+   "state": "OH",
+   "block_groups": 71,
+   "bundle_mb": 0.5,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "39121",
+   "name": "Noble County",
+   "state": "OH",
+   "block_groups": 12,
+   "bundle_mb": 0.4,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "39123",
+   "name": "Ottawa County",
+   "state": "OH",
+   "block_groups": 44,
+   "bundle_mb": 0.3,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "39125",
+   "name": "Paulding County",
+   "state": "OH",
+   "block_groups": 17,
+   "bundle_mb": 0.1,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "39127",
+   "name": "Perry County",
+   "state": "OH",
+   "block_groups": 28,
+   "bundle_mb": 0.4,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "39129",
+   "name": "Pickaway County",
+   "state": "OH",
+   "block_groups": 40,
+   "bundle_mb": 0.4,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "39131",
+   "name": "Pike County",
+   "state": "OH",
+   "block_groups": 21,
+   "bundle_mb": 0.3,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "39133",
    "name": "Portage County",
    "state": "OH",
@@ -15963,6 +16527,30 @@
    "crash_years": null
   },
   {
+   "fips": "39135",
+   "name": "Preble County",
+   "state": "OH",
+   "block_groups": 33,
+   "bundle_mb": 0.2,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "39137",
+   "name": "Putnam County",
+   "state": "OH",
+   "block_groups": 27,
+   "bundle_mb": 0.2,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "39139",
    "name": "Richland County",
    "state": "OH",
@@ -15972,6 +16560,66 @@
    "osm": "2026-11-07T00:47:05Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "39141",
+   "name": "Ross County",
+   "state": "OH",
+   "block_groups": 61,
+   "bundle_mb": 0.4,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "39143",
+   "name": "Sandusky County",
+   "state": "OH",
+   "block_groups": 58,
+   "bundle_mb": 0.3,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "39145",
+   "name": "Scioto County",
+   "state": "OH",
+   "block_groups": 70,
+   "bundle_mb": 0.6,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "39147",
+   "name": "Seneca County",
+   "state": "OH",
+   "block_groups": 55,
+   "bundle_mb": 0.2,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "39149",
+   "name": "Shelby County",
+   "state": "OH",
+   "block_groups": 39,
+   "bundle_mb": 0.2,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "39151",
@@ -16007,6 +16655,54 @@
    "crash_years": null
   },
   {
+   "fips": "39157",
+   "name": "Tuscarawas County",
+   "state": "OH",
+   "block_groups": 77,
+   "bundle_mb": 0.5,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "39159",
+   "name": "Union County",
+   "state": "OH",
+   "block_groups": 33,
+   "bundle_mb": 0.3,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "39161",
+   "name": "Van Wert County",
+   "state": "OH",
+   "block_groups": 27,
+   "bundle_mb": 0.2,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "39163",
+   "name": "Vinton County",
+   "state": "OH",
+   "block_groups": 12,
+   "bundle_mb": 0.4,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "39165",
    "name": "Warren County",
    "state": "OH",
@@ -16016,6 +16712,18 @@
    "osm": "2026-11-07T00:47:05Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "39167",
+   "name": "Washington County",
+   "state": "OH",
+   "block_groups": 47,
+   "bundle_mb": 0.7,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "39169",
@@ -16029,6 +16737,18 @@
    "crash_years": null
   },
   {
+   "fips": "39171",
+   "name": "Williams County",
+   "state": "OH",
+   "block_groups": 37,
+   "bundle_mb": 0.2,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "39173",
    "name": "Wood County",
    "state": "OH",
@@ -16038,6 +16758,18 @@
    "osm": "2026-11-07T00:47:05Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "39175",
+   "name": "Wyandot County",
+   "state": "OH",
+   "block_groups": 22,
+   "bundle_mb": 0.1,
+   "built": "2026-11-22",
+   "osm": "2026-11-21T01\\:07\\:35Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "40017",
