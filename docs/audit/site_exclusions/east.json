@@ -1,0 +1,735 @@
+{
+ "fetched_on": "2026-11-20",
+ "scope": "Records in app/data/statutes.json with parcel_level not false and state_code in MA, RI, CT, FL, MN, ME, VT, NC, DC (12 records).",
+ "method": "Each law's text was downloaded with curl on 2026-11-20 and every quote below was machine-checked as a verbatim substring (whitespace-normalised) of the downloaded page text. ' ... ' inside a quote marks omitted text between two verbatim pieces. excluded=true: the text bars the lot or lets the municipality bar it (the note says which). excluded=false: the operative sections named in the note were read and contain no such exclusion; a quote on a false entry is the nearest related wording, not an exclusion. null: unknown or conditional, reason in note. Raw downloads were kept outside the repository and are not committed.",
+ "could_not_fetch": [
+  "library.municode.com and api.municode.com (Minneapolis Code of Ordinances Title 20): HTTP 403 bot challenge; no code text obtained for mn_minneapolis_2040",
+  "lims.minneapolismn.gov: HTTP 403",
+  "www.cga.ct.gov chapter pages: TLS certificate verification failed; Connecticut text was taken instead from the official search.cga.state.ct.us statute database",
+  "raleighnc.gov missing-middle page: HTTP 403; Raleigh text was taken from the City's udo.raleighnc.gov",
+  "legislature.maine.gov/statutes/30-A/title30-Asec4364-A.html: HTTP 404; the '-2' URL in the record works"
+ ],
+ "records": {
+  "fl_live_local": {
+   "sections_read": [
+    {
+     "citation": "Fla. Stat. s. 166.04151 (municipalities)",
+     "url": "https://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0100-0199/0166/Sections/0166.04151.html",
+     "source_kind": "official",
+     "as_of": "Page headed 'The 2026 Florida Statutes'; fetched 2026-11-20"
+    },
+    {
+     "citation": "Fla. Stat. s. 125.01055 (counties), subsection (7)(o) onward",
+     "url": "https://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0100-0199/0125/Sections/0125.01055.html",
+     "source_kind": "official",
+     "as_of": "Page headed 'The 2026 Florida Statutes'; fetched 2026-11-20"
+    }
+   ],
+   "conditions": {
+    "fema_100yr_floodway": {
+     "excluded": false,
+     "quote": "the term “story” includes only the habitable space above the base flood elevation as designated by the Federal Emergency Management Agency in the most current Flood Insurance Rate Map",
+     "url": "https://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0100-0199/0166/Sections/0166.04151.html",
+     "note": "No flood-zone exclusion in subsection (7). The only FEMA reference is this height-counting rule for areas of critical state concern; (7)(i) keeps other law in force ('must comply with all applicable state and local laws and regulations'), and (9)(d) lets flood-water moratoria apply. Read s. 166.04151 subsections (1)-(9) in full, including all of subsection (7); in s. 125.01055 read (7)(o) onward only (its exclusion list matches 166.04151(7)(o) word for word)."
+    },
+    "calfire_or_state_vhfhsz": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0100-0199/0166/Sections/0166.04151.html",
+     "note": "No wildfire or fire-hazard exclusion found. Read s. 166.04151 subsections (1)-(9) in full, including all of subsection (7); in s. 125.01055 read (7)(o) onward only (its exclusion list matches 166.04151(7)(o) word for word)."
+    },
+    "williamson_or_ag_preserve": {
+     "excluded": false,
+     "quote": "Farms and farm operations as those terms are defined in s. 823.14(3) and uses associated therewith, including the packaging and sale of products raised on the premises, are not commercial use.",
+     "url": "https://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0100-0199/0166/Sections/0166.04151.html",
+     "note": "No exclusion for agricultural-preserve land as such. But the law only reaches land zoned commercial, industrial or mixed use (or the listed public/religious land), and farms are defined out of 'commercial', 'industrial' and 'mixed' use; (7)(o)5 also removes 'open use rural districts' (see other_site_exclusions_in_text). Automatic, by definition. Read s. 166.04151 subsections (1)-(9) in full, including all of subsection (7); in s. 125.01055 read (7)(o) onward only (its exclusion list matches 166.04151(7)(o) word for word)."
+    },
+    "public_or_tribal_land": {
+     "excluded": false,
+     "quote": "A municipality must authorize multifamily and mixed-use residential as allowable uses in any area zoned for commercial, industrial, or mixed use; in portions of any flexibly zoned area such as a planned unit development permitted for commercial, industrial, or mixed use; on property owned by a county, municipality, or school district",
+     "url": "https://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0100-0199/0166/Sections/0166.04151.html",
+     "note": "Public land is not excluded: land owned by a county, municipality or school district is expressly eligible (the owner must be a party to the application). Tribal land is not mentioned. Read s. 166.04151 subsections (1)-(9) in full, including all of subsection (7); in s. 125.01055 read (7)(o) onward only (its exclusion list matches 166.04151(7)(o) word for word)."
+    },
+    "historic_district_hpoz": {
+     "excluded": false,
+     "quote": "If the proposed development is on a parcel with a contributing structure or building within a historic district which was listed in the National Register of Historic Places before January 1, 2000, or is on a parcel with a structure or building individually listed in the National Register of Historic Places, the municipality may restrict the height of the proposed development to the highest currently allowed, or allowed on July 1, 2023, height for a commercial or residential building located in its jurisdiction within three-fourths of a mile of the proposed development or three stories, whichever is higher.",
+     "url": "https://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0100-0199/0166/Sections/0166.04151.html",
+     "note": "Not an exclusion. Historic parcels stay eligible; the municipality MAY (a power, not automatic) apply a lower height floor ((7)(d)3) and MAY administratively require architectural design compliance that does not affect height, floor area ratio or density ((7)(e)3). Read s. 166.04151 subsections (1)-(9) in full, including all of subsection (7); in s. 125.01055 read (7)(o) onward only (its exclusion list matches 166.04151(7)(o) word for word)."
+    }
+   },
+   "other_site_exclusions_in_text": [
+    {
+     "what": "Automatic exclusions listed in (7)(o): airport-impacted areas; working waterfront in industrial zones; Wekiva Study Area; Everglades Protection Area; open-character districts; areas of critical state concern; land under a recorded conservation easement",
+     "quote": "This subsection does not apply to:1. Airport-impacted areas as provided in s. 333.03. ... 2. Property defined as recreational and commercial working waterfront in s. 342.201(2)(b) in any area zoned as industrial. ... 3. The Wekiva Study Area, as described in s. 369.316. ... 4. The Everglades Protection Area, as defined in s. 373.4592(2). ... 5. Areas subject to land development regulations, as defined in s. 163.3164, which are in existence before July 1, 2026, and are intended to retain the open character of land, including, but not limited to, open space districts, open space recreation districts, open use estate districts, open use rural districts, and park and open space districts. ... 6. Any area of critical state concern, as designated in ss. 380.055, 380.0551, 380.0552, 380.0553, and 380.0555. ... 7. Any portion of a property encumbered by a recorded conservation easement, as defined in s. 704.06(1).",
+     "url": "https://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0100-0199/0166/Sections/0166.04151.html"
+    },
+    {
+     "what": "Near a military installation: still an allowed use, but not eligible for administrative approval",
+     "quote": "A proposed development located within one-quarter mile of a military installation identified in s. 163.3175(2) may not be administratively approved.",
+     "url": "https://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0100-0199/0166/Sections/0166.04151.html"
+    },
+    {
+     "what": "Same (7)(o) list in the county statute",
+     "quote": "This subsection does not apply to:1. Airport-impacted areas as provided in s. 333.03.",
+     "url": "https://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0100-0199/0125/Sections/0125.01055.html"
+    }
+   ]
+  },
+  "me_ld2003": {
+   "sections_read": [
+    {
+     "citation": "30-A M.R.S. s. 4364-A (Residential areas; generally)",
+     "url": "https://legislature.maine.gov/statutes/30-A/title30-Asec4364-A-2.html",
+     "source_kind": "official",
+     "as_of": "Page footer: 'Data for this page extracted on 10/05/2026 17:28:28.' Subsection 1 is shown twice, marked CONFLICT (PL 2025 c. 655 and PL 2025 c. 733 versions). The URL without '-2' returned HTTP 404."
+    },
+    {
+     "citation": "30-A M.R.S. s. 4364-B (Accessory dwelling units)",
+     "url": "https://legislature.maine.gov/statutes/30-A/title30-Asec4364-B.html",
+     "source_kind": "official",
+     "as_of": "Page footer: 'Data for this page extracted on 10/05/2026 17:28:28.'"
+    }
+   ],
+   "conditions": {
+    "fema_100yr_floodway": {
+     "excluded": true,
+     "quote": "This section does not apply to: ... A lot or a portion of a lot that is within an area identified as a coastal barrier in Title 38, section 1904; an area of special flood hazard as defined in Title 38, section 436‑A, subsection 1‑C; or an area within a coastal sand dune system as defined in Title 38, section 480‑B, subsection 1 as long as a municipality exempts the lot or portion of the lot in a duly adopted ordinance.",
+     "url": "https://legislature.maine.gov/statutes/30-A/title30-Asec4364-A-2.html",
+     "note": "MUNICIPAL POWER, not automatic: the lot (or the part of it in the flood area) is excluded from s. 4364-A only if the municipality has exempted it in a duly adopted ordinance (s. 4364-A(1-B)(B)). For ADUs the same power is in s. 4364-B(8)(D): 'Exempt a lot or portion of a lot that is within an area identified as a coastal barrier ...; an area of special flood hazard as defined in Title 38, section 436-A, subsection 1-C; ...'. Without such an ordinance a flood-area lot is not excluded. Read 30-A M.R.S. s. 4364-A and s. 4364-B in full. Not fetched: Title 12 chapter 423-A (the one law both sections yield to), Title 38 ss. 436-A, 1904, 480-B (the definitions the exemption points to)."
+    },
+    "calfire_or_state_vhfhsz": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://legislature.maine.gov/statutes/30-A/title30-Asec4364-A-2.html",
+     "note": "No wildfire or fire-hazard exclusion found. Read 30-A M.R.S. s. 4364-A and s. 4364-B in full. Not fetched: Title 12 chapter 423-A (the one law both sections yield to), Title 38 ss. 436-A, 1904, 480-B (the definitions the exemption points to)."
+    },
+    "williamson_or_ag_preserve": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://legislature.maine.gov/statutes/30-A/title30-Asec4364-A-2.html",
+     "note": "No farmland or resource-land exclusion found; the sections apply to 'any area in which residential uses are allowed, including as a conditional use'. Read 30-A M.R.S. s. 4364-A and s. 4364-B in full. Not fetched: Title 12 chapter 423-A (the one law both sections yield to), Title 38 ss. 436-A, 1904, 480-B (the definitions the exemption points to)."
+    },
+    "public_or_tribal_land": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://legislature.maine.gov/statutes/30-A/title30-Asec4364-A-2.html",
+     "note": "No public-land or tribal-land exclusion found. Read 30-A M.R.S. s. 4364-A and s. 4364-B in full. Not fetched: Title 12 chapter 423-A (the one law both sections yield to), Title 38 ss. 436-A, 1904, 480-B (the definitions the exemption points to)."
+    },
+    "historic_district_hpoz": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://legislature.maine.gov/statutes/30-A/title30-Asec4364-A-2.html",
+     "note": "No historic-district or landmark exclusion found. Read 30-A M.R.S. s. 4364-A and s. 4364-B in full. Not fetched: Title 12 chapter 423-A (the one law both sections yield to), Title 38 ss. 436-A, 1904, 480-B (the definitions the exemption points to)."
+    }
+   },
+   "other_site_exclusions_in_text": [
+    {
+     "what": "Automatic: Lewiston/Auburn unfiltered drinking-water watershed (both sections)",
+     "quote": "A lot or portion of a lot that is within the watershed of a water source that is located in the City of Lewiston or the City of Auburn and that is used to provide drinking water by a water utility that has received a waiver from filtration pursuant to 40 Code of Federal Regulations, Sections 141.70 to 141.76, as determined by the Department of Health and Human Services",
+     "url": "https://legislature.maine.gov/statutes/30-A/title30-Asec4364-A-2.html"
+    },
+    {
+     "what": "Municipal power (by ordinance): coastal barrier and coastal sand dune system, same clause as the flood exemption",
+     "quote": "A lot or a portion of a lot that is within an area identified as a coastal barrier in Title 38, section 1904",
+     "url": "https://legislature.maine.gov/statutes/30-A/title30-Asec4364-A-2.html"
+    },
+    {
+     "what": "ADU version of the municipal exemption power, s. 4364-B(8)(D)",
+     "quote": "Exempt a lot or portion of a lot that is within an area identified as a coastal barrier in Title 38, section 1904; an area of special flood hazard as defined in Title 38, section 436‑A, subsection 1‑C; or an area within a coastal sand dune system as defined in Title 38, section 480‑B, subsection 1.",
+     "url": "https://legislature.maine.gov/statutes/30-A/title30-Asec4364-B.html"
+    },
+    {
+     "what": "Shoreland zoning still applies (a condition, not an exclusion)",
+     "quote": "A housing structure must comply with shoreland zoning requirements established by the Department of Environmental Protection under Title 38, chapter 3 and municipal shoreland zoning ordinances.",
+     "url": "https://legislature.maine.gov/statutes/30-A/title30-Asec4364-A-2.html"
+    },
+    {
+     "what": "ADUs may not be categorically banned in the shoreland zone",
+     "quote": "a municipality may not categorically prohibit accessory dwelling units in the shoreland zone that would otherwise meet requirements established by the Department of Environmental Protection under Title 38, chapter 3 and municipal shoreland zoning ordinances",
+     "url": "https://legislature.maine.gov/statutes/30-A/title30-Asec4364-B.html"
+    }
+   ]
+  },
+  "vt_act47": {
+   "sections_read": [
+    {
+     "citation": "24 V.S.A. s. 4412 (Required provisions and prohibited effects), subdivisions (1)(D)-(F), (12)-(16)",
+     "url": "https://legislature.vermont.gov/statutes/section/24/117/04412",
+     "source_kind": "official",
+     "as_of": "Vermont Statutes Online, fetched 2026-11-20; history note on the page runs through 2025, No. 179 (Adj. Sess.), s. 9a, eff. January 1, 2028. Two versions of (1)(D) are shown (until / from January 1, 2028)."
+    },
+    {
+     "citation": "24 V.S.A. s. 4303(42) (definition of 'served by municipal sewer and water infrastructure')",
+     "url": "https://legislature.vermont.gov/statutes/section/24/117/04303",
+     "source_kind": "official",
+     "as_of": "Vermont Statutes Online, fetched 2026-11-20"
+    }
+   ],
+   "conditions": {
+    "fema_100yr_floodway": {
+     "excluded": true,
+     "quote": "an area established by the municipality by ordinance or bylaw where residential connections and expansions are available to municipal water and direct and indirect discharge wastewater systems and which may exclude: ... flood hazard or inundation areas as established by statute, river corridors or fluvial erosion areas as established by statute, shorelands, areas within a zoning district or overlay district the purpose of which is natural resource protection, and wherever year-round residential development is not allowed;",
+     "url": "https://legislature.vermont.gov/statutes/section/24/117/04303",
+     "note": "MUNICIPAL POWER, not automatic, and only for part of the law. The four-or-fewer-unit entitlement in s. 4412(1)(D) and the five-units-per-acre rule in s. 4412(12) apply in areas 'served by municipal sewer and water infrastructure'; s. 4303(42)(A)(ii) lets a municipality define that area by ordinance or bylaw and 'may exclude' flood hazard areas from it. The duplex entitlement ('In any district that allows year-round residential development, duplexes shall be a permitted use') has no such carve-out. Separately, the ADU rule in s. 4412(1)(E) begins 'Except for flood hazard and fluvial erosion area bylaws adopted pursuant to section 4424 of this title'. Read 24 V.S.A. s. 4412(1)(D), (1)(E), (1)(F) and (12)-(16) in full, and s. 4303(42) in full. s. 4414 (parking) and s. 4424 (flood hazard bylaws) were not fetched."
+    },
+    "calfire_or_state_vhfhsz": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://legislature.vermont.gov/statutes/section/24/117/04412",
+     "note": "No wildfire or fire-hazard exclusion found. Read 24 V.S.A. s. 4412(1)(D), (1)(E), (1)(F) and (12)-(16) in full, and s. 4303(42) in full. s. 4414 (parking) and s. 4424 (flood hazard bylaws) were not fetched."
+    },
+    "williamson_or_ag_preserve": {
+     "excluded": null,
+     "quote": "areas within a zoning district or overlay district the purpose of which is natural resource protection",
+     "url": "https://legislature.vermont.gov/statutes/section/24/117/04303",
+     "note": "Farmland is not named. A municipality MAY exclude natural-resource-protection zoning or overlay districts from its sewer-and-water service area (s. 4303(42)(A)(ii)(I)), which removes the four-unit and five-per-acre entitlements there; whether a given farmland district counts is left to the local bylaw. Read 24 V.S.A. s. 4412(1)(D), (1)(E), (1)(F) and (12)-(16) in full, and s. 4303(42) in full. s. 4414 (parking) and s. 4424 (flood hazard bylaws) were not fetched."
+    },
+    "public_or_tribal_land": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://legislature.vermont.gov/statutes/section/24/117/04412",
+     "note": "No public-land or tribal-land exclusion found. Read 24 V.S.A. s. 4412(1)(D), (1)(E), (1)(F) and (12)-(16) in full, and s. 4303(42) in full. s. 4414 (parking) and s. 4424 (flood hazard bylaws) were not fetched."
+    },
+    "historic_district_hpoz": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://legislature.vermont.gov/statutes/section/24/117/04412",
+     "note": "No historic-district exclusion in the housing subdivisions read (the only historic reference in s. 4412 is in subdivision (8), communications antennae). Read 24 V.S.A. s. 4412(1)(D), (1)(E), (1)(F) and (12)-(16) in full, and s. 4303(42) in full. s. 4414 (parking) and s. 4424 (flood hazard bylaws) were not fetched."
+    }
+   },
+   "other_site_exclusions_in_text": [
+    {
+     "what": "Municipal power: other areas a municipality may leave out of its sewer-and-water service area",
+     "quote": "areas with identified service limits established by State regulations or permits, identified capacity constraints, or municipally adopted service and capacity agreements; ... areas served by sewer and water to address an identified community-scale public health hazard or environmental hazard; ... areas serving a manufactured home park that is not within an area planned for year-round residential growth; ... areas serving an industrial site or park;",
+     "url": "https://legislature.vermont.gov/statutes/section/24/117/04303"
+    },
+    {
+     "what": "ADU rule yields to flood hazard bylaws",
+     "quote": "Except for flood hazard and fluvial erosion area bylaws adopted pursuant to section 4424 of this title, no bylaw shall have the effect of excluding as a permitted use one accessory dwelling unit that is located within or appurtenant to a single-family dwelling.",
+     "url": "https://legislature.vermont.gov/statutes/section/24/117/04412"
+    },
+    {
+     "what": "From January 1, 2028: districts that require larger multiunit buildings",
+     "quote": "unless that district specifically requires multiunit structures to have more than four dwelling units",
+     "url": "https://legislature.vermont.gov/statutes/section/24/117/04412"
+    }
+   ]
+  },
+  "ma_mbta_communities": {
+   "sections_read": [
+    {
+     "citation": "M.G.L. c. 40A s. 3A",
+     "url": "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter40A/Section3A",
+     "source_kind": "official",
+     "as_of": "malegislature.gov General Laws page, fetched 2026-11-20 (page carries no revision date)"
+    },
+    {
+     "citation": "M.G.L. c. 40A s. 1A (definitions)",
+     "url": "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter40A/Section1A",
+     "source_kind": "official",
+     "as_of": "malegislature.gov General Laws page, fetched 2026-11-20"
+    }
+   ],
+   "conditions": {
+    "fema_100yr_floodway": {
+     "excluded": false,
+     "quote": "have a minimum gross density of 15 units per acre, subject to any further limitations imposed by section 40 of chapter 131 and title 5 of the state environmental code established pursuant to section 13 of chapter 21A",
+     "url": "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter40A/Section3A",
+     "note": "No flood-zone exclusion in the statute. The density requirement is made 'subject to' limits imposed by c. 131 s. 40 and Title 5, which were not fetched. Read M.G.L. c. 40A s. 3A in full (subsections (a)-(c)) and the s. 1A definitions of 'Multi-family housing', 'As of right', 'MBTA community'. Not fetched: c. 131 s. 40 (wetlands), Title 5, and the compliance guidelines/regulations that s. 3A(c) tells the executive office to issue; any 'excluded land' rules live there, not in the statute. The section is a duty on the municipality to zone a district, so it sets no per-lot eligibility test."
+    },
+    "calfire_or_state_vhfhsz": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter40A/Section3A",
+     "note": "No wildfire exclusion found. Read M.G.L. c. 40A s. 3A in full (subsections (a)-(c)) and the s. 1A definitions of 'Multi-family housing', 'As of right', 'MBTA community'. Not fetched: c. 131 s. 40 (wetlands), Title 5, and the compliance guidelines/regulations that s. 3A(c) tells the executive office to issue; any 'excluded land' rules live there, not in the statute. The section is a duty on the municipality to zone a district, so it sets no per-lot eligibility test."
+    },
+    "williamson_or_ag_preserve": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter40A/Section3A",
+     "note": "No farmland exclusion found. Read M.G.L. c. 40A s. 3A in full (subsections (a)-(c)) and the s. 1A definitions of 'Multi-family housing', 'As of right', 'MBTA community'. Not fetched: c. 131 s. 40 (wetlands), Title 5, and the compliance guidelines/regulations that s. 3A(c) tells the executive office to issue; any 'excluded land' rules live there, not in the statute. The section is a duty on the municipality to zone a district, so it sets no per-lot eligibility test."
+    },
+    "public_or_tribal_land": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter40A/Section3A",
+     "note": "No public-land or tribal-land exclusion found. Read M.G.L. c. 40A s. 3A in full (subsections (a)-(c)) and the s. 1A definitions of 'Multi-family housing', 'As of right', 'MBTA community'. Not fetched: c. 131 s. 40 (wetlands), Title 5, and the compliance guidelines/regulations that s. 3A(c) tells the executive office to issue; any 'excluded land' rules live there, not in the statute. The section is a duty on the municipality to zone a district, so it sets no per-lot eligibility test."
+    },
+    "historic_district_hpoz": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter40A/Section3A",
+     "note": "No historic-district exclusion found. Read M.G.L. c. 40A s. 3A in full (subsections (a)-(c)) and the s. 1A definitions of 'Multi-family housing', 'As of right', 'MBTA community'. Not fetched: c. 131 s. 40 (wetlands), Title 5, and the compliance guidelines/regulations that s. 3A(c) tells the executive office to issue; any 'excluded land' rules live there, not in the statute. The section is a duty on the municipality to zone a district, so it sets no per-lot eligibility test."
+    }
+   },
+   "other_site_exclusions_in_text": []
+  },
+  "ma_adu_40a3": {
+   "sections_read": [
+    {
+     "citation": "M.G.L. c. 40A s. 3 (accessory dwelling unit paragraph, last paragraph of the section as fetched)",
+     "url": "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter40A/Section3",
+     "source_kind": "official",
+     "as_of": "malegislature.gov General Laws page, fetched 2026-11-20 (page carries no revision date)"
+    },
+    {
+     "citation": "M.G.L. c. 40A s. 1A (definition of 'Accessory dwelling unit')",
+     "url": "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter40A/Section1A",
+     "source_kind": "official",
+     "as_of": "malegislature.gov General Laws page, fetched 2026-11-20"
+    }
+   ],
+   "conditions": {
+    "fema_100yr_floodway": {
+     "excluded": false,
+     "quote": "provided, that the use of land or structures for such accessory dwelling unit under this paragraph may be subject to reasonable regulations, including, but not limited to, 310 CMR 15.000 et seq., if applicable, site plan review, regulations concerning dimensional setbacks and the bulk and height of structures",
+     "url": "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter40A/Section3",
+     "note": "No flood-zone exclusion. The paragraph forbids prohibiting or unreasonably restricting one ADU 'in a single-family residential zoning district' and allows only 'reasonable regulations'; it names no site condition that removes a lot. Read the accessory-dwelling-unit paragraph of M.G.L. c. 40A s. 3 in full and the s. 1A definition of 'Accessory dwelling unit'. Not fetched: 310 CMR 15.000 and the regulations the paragraph lets the executive office promulgate."
+    },
+    "calfire_or_state_vhfhsz": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter40A/Section3",
+     "note": "No wildfire exclusion found. Read the accessory-dwelling-unit paragraph of M.G.L. c. 40A s. 3 in full and the s. 1A definition of 'Accessory dwelling unit'. Not fetched: 310 CMR 15.000 and the regulations the paragraph lets the executive office promulgate."
+    },
+    "williamson_or_ag_preserve": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter40A/Section3",
+     "note": "No farmland exclusion found; the protection is limited to single-family residential zoning districts. Read the accessory-dwelling-unit paragraph of M.G.L. c. 40A s. 3 in full and the s. 1A definition of 'Accessory dwelling unit'. Not fetched: 310 CMR 15.000 and the regulations the paragraph lets the executive office promulgate."
+    },
+    "public_or_tribal_land": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter40A/Section3",
+     "note": "No public-land or tribal-land exclusion found. Read the accessory-dwelling-unit paragraph of M.G.L. c. 40A s. 3 in full and the s. 1A definition of 'Accessory dwelling unit'. Not fetched: 310 CMR 15.000 and the regulations the paragraph lets the executive office promulgate."
+    },
+    "historic_district_hpoz": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter40A/Section3",
+     "note": "No historic-district exclusion found. Read the accessory-dwelling-unit paragraph of M.G.L. c. 40A s. 3 in full and the s. 1A definition of 'Accessory dwelling unit'. Not fetched: 310 CMR 15.000 and the regulations the paragraph lets the executive office promulgate."
+    }
+   },
+   "other_site_exclusions_in_text": []
+  },
+  "ri_adu_large_lot": {
+   "sections_read": [
+    {
+     "citation": "R.I. Gen. Laws s. 45-24-73",
+     "url": "https://webserver.rilegislature.gov/Statutes/TITLE45/45-24/45-24-73.htm",
+     "source_kind": "official",
+     "as_of": "rilegislature.gov statute page, fetched 2026-11-20; history note ends 'P.L. 2024, ch. 285, § 1, effective June 25, 2024.'"
+    },
+    {
+     "citation": "R.I. Gen. Laws s. 45-24-37(e)",
+     "url": "https://webserver.rilegislature.gov/Statutes/TITLE45/45-24/45-24-37.htm",
+     "source_kind": "official",
+     "as_of": "rilegislature.gov statute page, fetched 2026-11-20"
+    },
+    {
+     "citation": "R.I. Gen. Laws s. 45-24-31(2)",
+     "url": "https://webserver.rilegislature.gov/Statutes/TITLE45/45-24/45-24-31.htm",
+     "source_kind": "official",
+     "as_of": "rilegislature.gov statute page, fetched 2026-11-20"
+    }
+   ],
+   "conditions": {
+    "fema_100yr_floodway": {
+     "excluded": false,
+     "quote": "On a lot with a total lot area of twenty thousand square feet (20,000 sq. ft.) or more for which the primary use is residential",
+     "url": "https://webserver.rilegislature.gov/Statutes/TITLE45/45-24/45-24-73.htm",
+     "note": "No flood-zone exclusion. The only site tests are lot area and residential primary use. Read R.I. Gen. Laws s. 45-24-73 in full, s. 45-24-37(e), and the s. 45-24-31(2) definition of accessory dwelling unit; the rest of s. 45-24-37 and s. 45-24-31 was keyword-searched, not read in full."
+    },
+    "calfire_or_state_vhfhsz": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://webserver.rilegislature.gov/Statutes/TITLE45/45-24/45-24-73.htm",
+     "note": "No wildfire exclusion found. Read R.I. Gen. Laws s. 45-24-73 in full, s. 45-24-37(e), and the s. 45-24-31(2) definition of accessory dwelling unit; the rest of s. 45-24-37 and s. 45-24-31 was keyword-searched, not read in full."
+    },
+    "williamson_or_ag_preserve": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://webserver.rilegislature.gov/Statutes/TITLE45/45-24/45-24-73.htm",
+     "note": "No farmland exclusion found. Read R.I. Gen. Laws s. 45-24-73 in full, s. 45-24-37(e), and the s. 45-24-31(2) definition of accessory dwelling unit; the rest of s. 45-24-37 and s. 45-24-31 was keyword-searched, not read in full."
+    },
+    "public_or_tribal_land": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://webserver.rilegislature.gov/Statutes/TITLE45/45-24/45-24-73.htm",
+     "note": "No public-land or tribal-land exclusion found. Read R.I. Gen. Laws s. 45-24-73 in full, s. 45-24-37(e), and the s. 45-24-31(2) definition of accessory dwelling unit; the rest of s. 45-24-37 and s. 45-24-31 was keyword-searched, not read in full."
+    },
+    "historic_district_hpoz": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://webserver.rilegislature.gov/Statutes/TITLE45/45-24/45-24-73.htm",
+     "note": "No historic-district exclusion found. Read R.I. Gen. Laws s. 45-24-73 in full, s. 45-24-37(e), and the s. 45-24-31(2) definition of accessory dwelling unit; the rest of s. 45-24-37 and s. 45-24-31 was keyword-searched, not read in full."
+    }
+   },
+   "other_site_exclusions_in_text": [
+    {
+     "what": "Scope limit (not a hazard exclusion): by-right ADUs are a permitted use in residential zoning districts",
+     "quote": "an accessory dwelling unit (“ADU”) that meets the requirements of §§ 45-24-31 and 45-24-73(a) shall be a permitted use in all residential zoning districts",
+     "url": "https://webserver.rilegislature.gov/Statutes/TITLE45/45-24/45-24-37.htm"
+    }
+   ]
+  },
+  "ri_adu_existing_footprint": {
+   "sections_read": [
+    {
+     "citation": "R.I. Gen. Laws s. 45-24-73",
+     "url": "https://webserver.rilegislature.gov/Statutes/TITLE45/45-24/45-24-73.htm",
+     "source_kind": "official",
+     "as_of": "rilegislature.gov statute page, fetched 2026-11-20; history note ends 'P.L. 2024, ch. 285, § 1, effective June 25, 2024.'"
+    },
+    {
+     "citation": "R.I. Gen. Laws s. 45-24-37(e)",
+     "url": "https://webserver.rilegislature.gov/Statutes/TITLE45/45-24/45-24-37.htm",
+     "source_kind": "official",
+     "as_of": "rilegislature.gov statute page, fetched 2026-11-20"
+    },
+    {
+     "citation": "R.I. Gen. Laws s. 45-24-31(2)",
+     "url": "https://webserver.rilegislature.gov/Statutes/TITLE45/45-24/45-24-31.htm",
+     "source_kind": "official",
+     "as_of": "rilegislature.gov statute page, fetched 2026-11-20"
+    }
+   ],
+   "conditions": {
+    "fema_100yr_floodway": {
+     "excluded": false,
+     "quote": "Where the proposed ADU is located within the existing footprint of the primary structure or existing accessory attached or detached structure and does not expand the footprint of the structure.",
+     "url": "https://webserver.rilegislature.gov/Statutes/TITLE45/45-24/45-24-73.htm",
+     "note": "No flood-zone exclusion. The only site test is that the ADU stays inside an existing footprint. Read R.I. Gen. Laws s. 45-24-73 in full, s. 45-24-37(e), and the s. 45-24-31(2) definition of accessory dwelling unit; the rest of s. 45-24-37 and s. 45-24-31 was keyword-searched, not read in full."
+    },
+    "calfire_or_state_vhfhsz": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://webserver.rilegislature.gov/Statutes/TITLE45/45-24/45-24-73.htm",
+     "note": "No wildfire exclusion found. Read R.I. Gen. Laws s. 45-24-73 in full, s. 45-24-37(e), and the s. 45-24-31(2) definition of accessory dwelling unit; the rest of s. 45-24-37 and s. 45-24-31 was keyword-searched, not read in full."
+    },
+    "williamson_or_ag_preserve": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://webserver.rilegislature.gov/Statutes/TITLE45/45-24/45-24-73.htm",
+     "note": "No farmland exclusion found. Read R.I. Gen. Laws s. 45-24-73 in full, s. 45-24-37(e), and the s. 45-24-31(2) definition of accessory dwelling unit; the rest of s. 45-24-37 and s. 45-24-31 was keyword-searched, not read in full."
+    },
+    "public_or_tribal_land": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://webserver.rilegislature.gov/Statutes/TITLE45/45-24/45-24-73.htm",
+     "note": "No public-land or tribal-land exclusion found. Read R.I. Gen. Laws s. 45-24-73 in full, s. 45-24-37(e), and the s. 45-24-31(2) definition of accessory dwelling unit; the rest of s. 45-24-37 and s. 45-24-31 was keyword-searched, not read in full."
+    },
+    "historic_district_hpoz": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://webserver.rilegislature.gov/Statutes/TITLE45/45-24/45-24-73.htm",
+     "note": "No historic-district exclusion found. Read R.I. Gen. Laws s. 45-24-73 in full, s. 45-24-37(e), and the s. 45-24-31(2) definition of accessory dwelling unit; the rest of s. 45-24-37 and s. 45-24-31 was keyword-searched, not read in full."
+    }
+   },
+   "other_site_exclusions_in_text": [
+    {
+     "what": "Scope limit (not a hazard exclusion): by-right ADUs are a permitted use in residential zoning districts",
+     "quote": "an accessory dwelling unit (“ADU”) that meets the requirements of §§ 45-24-31 and 45-24-73(a) shall be a permitted use in all residential zoning districts",
+     "url": "https://webserver.rilegislature.gov/Statutes/TITLE45/45-24/45-24-37.htm"
+    }
+   ]
+  },
+  "dc_adu_accessory_apartment_u253": {
+   "sections_read": [
+    {
+     "citation": "11-U DCMR s. 253, Accessory Apartment (R)",
+     "url": "https://dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-U253",
+     "source_kind": "official",
+     "as_of": "Page states 'Effective Date : 10/16/2026'; adopted rule R0056434"
+    }
+   ],
+   "conditions": {
+    "fema_100yr_floodway": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-U253",
+     "note": "No flood-zone exclusion in the section (the word 'flood' does not appear). Read 11-U DCMR s. 253 (253.1 to the end) in full, from the 'View Text' file 11U253.doc of adopted rule R0056434 served by the page at this URL. Overlay or flood rules elsewhere in Title 11 or in other DCMR titles were not fetched."
+    },
+    "calfire_or_state_vhfhsz": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-U253",
+     "note": "No fire-hazard-area exclusion in the section. Read 11-U DCMR s. 253 (253.1 to the end) in full, from the 'View Text' file 11U253.doc of adopted rule R0056434 served by the page at this URL. Overlay or flood rules elsewhere in Title 11 or in other DCMR titles were not fetched."
+    },
+    "williamson_or_ag_preserve": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-U253",
+     "note": "No farmland exclusion in the section. Read 11-U DCMR s. 253 (253.1 to the end) in full, from the 'View Text' file 11U253.doc of adopted rule R0056434 served by the page at this URL. Overlay or flood rules elsewhere in Title 11 or in other DCMR titles were not fetched."
+    },
+    "public_or_tribal_land": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-U253",
+     "note": "No public-land or tribal-land exclusion in the section. Read 11-U DCMR s. 253 (253.1 to the end) in full, from the 'View Text' file 11U253.doc of adopted rule R0056434 served by the page at this URL. Overlay or flood rules elsewhere in Title 11 or in other DCMR titles were not fetched."
+    },
+    "historic_district_hpoz": {
+     "excluded": false,
+     "quote": "if in a historic district, a determination is made by the appropriate body that the additional door is compatible with the character of the historic district",
+     "url": "https://dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-U253",
+     "note": "Not an exclusion. The only historic-district rule is a condition on a street-facing additional entrance in R-3 zones (253.7(d)). Read 11-U DCMR s. 253 (253.1 to the end) in full, from the 'View Text' file 11U253.doc of adopted rule R0056434 served by the page at this URL. Overlay or flood rules elsewhere in Title 11 or in other DCMR titles were not fetched."
+    }
+   },
+   "other_site_exclusions_in_text": [
+    {
+     "what": "Zone-based: matter of right in R zones except R-1B/GT and R-3/GT (special exception there)",
+     "quote": "An accessory apartment shall be permitted in a principal dwelling or an accessory building as a matter of right in the R zones, except the R-1B/GT or R 3/GT zone, subject to the provisions of this section.",
+     "url": "https://dcregs.dc.gov/Common/DCMR/SectionList.aspx?SectionNumber=11-U253"
+    }
+   ]
+  },
+  "ct_adu_8_2o": {
+   "sections_read": [
+    {
+     "citation": "Conn. Gen. Stat. s. 8-2o",
+     "url": "https://search.cga.state.ct.us/r/statute/dtsearch.asp?cmd=getdoc&DocId=99440&Index=I%3a%5czindex%5csurs&HitCount=2&hits=470+471+&hc=2&req=%28number+contains+8%2D2o%2A%29&Item=0",
+     "source_kind": "official",
+     "as_of": "CGA statute search (database 'Section Text'); the result list labels the document Year 2027; fetched 2026-11-20. These search.cga.state.ct.us document URLs only return text inside a search session (run the section-number search at https://search.cga.state.ct.us/r/statute/ first; without it the page says 'Your session has timed out'). The chapter page on www.cga.ct.gov could not be fetched (TLS certificate verification failed)."
+    }
+   ],
+   "conditions": {
+    "fema_100yr_floodway": {
+     "excluded": false,
+     "quote": "Designate locations or zoning districts within the municipality in which accessory dwelling units are allowed, provided at least one accessory dwelling unit shall be allowed as of right on each lot that contains a single-family dwelling",
+     "url": "https://search.cga.state.ct.us/r/statute/dtsearch.asp?cmd=getdoc&DocId=99440&Index=I%3a%5czindex%5csurs&HitCount=2&hits=470+471+&hc=2&req=%28number+contains+8%2D2o%2A%29&Item=0",
+     "note": "No flood-zone exclusion. The municipality designates where ADUs are allowed, but one must be allowed as of right on every lot with a single-family dwelling; subsection (e) adds 'A municipality may not use or impose additional standards beyond those set forth in subsections (a) to (d)'. Read Conn. Gen. Stat. s. 8-2o subsections (a)-(g) in full."
+    },
+    "calfire_or_state_vhfhsz": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://search.cga.state.ct.us/r/statute/dtsearch.asp?cmd=getdoc&DocId=99440&Index=I%3a%5czindex%5csurs&HitCount=2&hits=470+471+&hc=2&req=%28number+contains+8%2D2o%2A%29&Item=0",
+     "note": "No wildfire exclusion found. Read Conn. Gen. Stat. s. 8-2o subsections (a)-(g) in full."
+    },
+    "williamson_or_ag_preserve": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://search.cga.state.ct.us/r/statute/dtsearch.asp?cmd=getdoc&DocId=99440&Index=I%3a%5czindex%5csurs&HitCount=2&hits=470+471+&hc=2&req=%28number+contains+8%2D2o%2A%29&Item=0",
+     "note": "No farmland exclusion found. Read Conn. Gen. Stat. s. 8-2o subsections (a)-(g) in full."
+    },
+    "public_or_tribal_land": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://search.cga.state.ct.us/r/statute/dtsearch.asp?cmd=getdoc&DocId=99440&Index=I%3a%5czindex%5csurs&HitCount=2&hits=470+471+&hc=2&req=%28number+contains+8%2D2o%2A%29&Item=0",
+     "note": "No public-land or tribal-land exclusion found. Read Conn. Gen. Stat. s. 8-2o subsections (a)-(g) in full."
+    },
+    "historic_district_hpoz": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://search.cga.state.ct.us/r/statute/dtsearch.asp?cmd=getdoc&DocId=99440&Index=I%3a%5czindex%5csurs&HitCount=2&hits=470+471+&hc=2&req=%28number+contains+8%2D2o%2A%29&Item=0",
+     "note": "No historic-district exclusion found. Read Conn. Gen. Stat. s. 8-2o subsections (a)-(g) in full."
+    }
+   },
+   "other_site_exclusions_in_text": [
+    {
+     "what": "Municipal opt-out of the whole section (window closed January 1, 2023), not a site exclusion",
+     "quote": "on and after January 1, 2023, no municipality may opt out of the provisions of said subsections",
+     "url": "https://search.cga.state.ct.us/r/statute/dtsearch.asp?cmd=getdoc&DocId=99440&Index=I%3a%5czindex%5csurs&HitCount=2&hits=470+471+&hc=2&req=%28number+contains+8%2D2o%2A%29&Item=0"
+    },
+    {
+     "what": "Well / private sewerage requirements preserved (a condition, not an exclusion)",
+     "quote": "other requirements where a well or private sewerage system is being used, provided approval for any such accessory dwelling unit shall not be unreasonably withheld",
+     "url": "https://search.cga.state.ct.us/r/statute/dtsearch.asp?cmd=getdoc&DocId=99440&Index=I%3a%5czindex%5csurs&HitCount=2&hits=470+471+&hc=2&req=%28number+contains+8%2D2o%2A%29&Item=0"
+    }
+   ]
+  },
+  "ct_middle_housing_8_2s": {
+   "sections_read": [
+    {
+     "citation": "Conn. Gen. Stat. s. 8-2s",
+     "url": "https://search.cga.state.ct.us/r/statute/dtsearch.asp?cmd=getdoc&DocId=99441&Index=I%3a%5czindex%5csurs&HitCount=2&hits=14b+14c+&hc=2&req=%28number+contains+8%2D2s%2A%29&Item=0",
+     "source_kind": "official",
+     "as_of": "CGA statute search (database 'Section Text'); the result list labels the document Year 2027; fetched 2026-11-20. These search.cga.state.ct.us document URLs only return text inside a search session (run the section-number search at https://search.cga.state.ct.us/r/statute/ first; without it the page says 'Your session has timed out'). The chapter page on www.cga.ct.gov could not be fetched (TLS certificate verification failed)."
+    },
+    {
+     "citation": "Conn. Gen. Stat. s. 8-13hh (definition of 'transit community middle housing development'; transit-oriented districts)",
+     "url": "https://search.cga.state.ct.us/r/statute/dtsearch.asp?cmd=getdoc&DocId=87383&Index=I%3a%5czindex%5csurs&HitCount=2&hits=8d9+8da+&hc=2&req=%28number+contains+8%2D13hh%2A%29&Item=0",
+     "source_kind": "official",
+     "as_of": "CGA statute search; result list labels the document Year 2027; fetched 2026-11-20"
+    },
+    {
+     "citation": "Conn. Gen. Stat. s. 8-2r (definition of 'summary review')",
+     "url": "https://search.cga.state.ct.us/r/statute/dtsearch.asp?cmd=getdoc&DocId=87368&Index=I%3a%5czindex%5csurs&HitCount=2&hits=1e5+1e6+&hc=2&req=%28number+contains+8%2D2r%2A%29&Item=0",
+     "source_kind": "official",
+     "as_of": "CGA statute search; fetched 2026-11-20"
+    }
+   ],
+   "conditions": {
+    "fema_100yr_floodway": {
+     "excluded": false,
+     "quote": "shall allow for the development of a transit community middle housing development, as defined in section 8-13hh, or a mixed-use development, on any lot that is zoned for commercial or mixed-use development, subject only to summary review, as defined in section 8-2r",
+     "url": "https://search.cga.state.ct.us/r/statute/dtsearch.asp?cmd=getdoc&DocId=99441&Index=I%3a%5czindex%5csurs&HitCount=2&hits=14b+14c+&hc=2&req=%28number+contains+8%2D2s%2A%29&Item=0",
+     "note": "No flood-zone exclusion in s. 8-2s: it reaches 'any lot that is zoned for commercial or mixed-use development'. s. 8-2s borrows only a definition from s. 8-13hh. The flood language in s. 8-13hh(d) concerns a different thing, what land the State may not require inside a transit-oriented district: 'not require the inclusion of the following lands in any such district: (A) Special flood hazard areas designated on a flood insurance rate map published by the National Flood Insurance Program'. Summary review still allows a finding 'that public health and safety will not be substantially impacted' (s. 8-2r). Read Conn. Gen. Stat. s. 8-2s (a)-(c), s. 8-13hh (a)-(k) and s. 8-2r in full."
+    },
+    "calfire_or_state_vhfhsz": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://search.cga.state.ct.us/r/statute/dtsearch.asp?cmd=getdoc&DocId=99441&Index=I%3a%5czindex%5csurs&HitCount=2&hits=14b+14c+&hc=2&req=%28number+contains+8%2D2s%2A%29&Item=0",
+     "note": "No wildfire exclusion found. Read Conn. Gen. Stat. s. 8-2s (a)-(c), s. 8-13hh (a)-(k) and s. 8-2r in full."
+    },
+    "williamson_or_ag_preserve": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://search.cga.state.ct.us/r/statute/dtsearch.asp?cmd=getdoc&DocId=99441&Index=I%3a%5czindex%5csurs&HitCount=2&hits=14b+14c+&hc=2&req=%28number+contains+8%2D2s%2A%29&Item=0",
+     "note": "No farmland exclusion found; the mandatory part is limited to lots zoned commercial or mixed-use. Read Conn. Gen. Stat. s. 8-2s (a)-(c), s. 8-13hh (a)-(k) and s. 8-2r in full."
+    },
+    "public_or_tribal_land": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://search.cga.state.ct.us/r/statute/dtsearch.asp?cmd=getdoc&DocId=99441&Index=I%3a%5czindex%5csurs&HitCount=2&hits=14b+14c+&hc=2&req=%28number+contains+8%2D2s%2A%29&Item=0",
+     "note": "No public-land or tribal-land exclusion found in s. 8-2s. Read Conn. Gen. Stat. s. 8-2s (a)-(c), s. 8-13hh (a)-(k) and s. 8-2r in full."
+    },
+    "historic_district_hpoz": {
+     "excluded": false,
+     "quote": "",
+     "url": "https://search.cga.state.ct.us/r/statute/dtsearch.asp?cmd=getdoc&DocId=99441&Index=I%3a%5czindex%5csurs&HitCount=2&hits=14b+14c+&hc=2&req=%28number+contains+8%2D2s%2A%29&Item=0",
+     "note": "No historic-district exclusion found. Read Conn. Gen. Stat. s. 8-2s (a)-(c), s. 8-13hh (a)-(k) and s. 8-2r in full."
+    }
+   },
+   "other_site_exclusions_in_text": [
+    {
+     "what": "Not part of s. 8-2s: lands the State may not require a municipality to put in a transit-oriented district (s. 8-13hh(d))",
+     "quote": "not require the inclusion of the following lands in any such district: (A) Special flood hazard areas designated on a flood insurance rate map published by the National Flood Insurance Program, (B) wetlands, as defined in section 22a-38, (C) land designated for use as a public park, (D) land subject to a conservation restriction or preservation restriction, as such terms are defined in section 47-42a, (E) coastal resources, as defined in section 22a-93, (F) areas necessary for the protection of drinking water supplies, and (G) areas designated as likely to be inundated during a thirty-year flood event",
+     "url": "https://search.cga.state.ct.us/r/statute/dtsearch.asp?cmd=getdoc&DocId=87383&Index=I%3a%5czindex%5csurs&HitCount=2&hits=8d9+8da+&hc=2&req=%28number+contains+8%2D13hh%2A%29&Item=0"
+    },
+    {
+     "what": "Residential lots are optional for the municipality (s. 8-2s(a)(2))",
+     "quote": "may allow for the development of a transit community middle housing development on any lot that allows for residential use subject only to such summary review",
+     "url": "https://search.cga.state.ct.us/r/statute/dtsearch.asp?cmd=getdoc&DocId=99441&Index=I%3a%5czindex%5csurs&HitCount=2&hits=14b+14c+&hc=2&req=%28number+contains+8%2D2s%2A%29&Item=0"
+    }
+   ]
+  },
+  "nc_raleigh_missing_middle": {
+   "sections_read": [
+    {
+     "citation": "Raleigh UDO Art. 2.1 (Secs. 2.1.1-2.1.3), Secs. 2.2.1-2.2.4, 2.6.1, 2.6.3, 2.7.1",
+     "url": "https://udo.raleighnc.gov/chapter-2-residential-districts",
+     "source_kind": "official",
+     "as_of": "City-run online copy, fetched 2026-11-20; the site disclaims official status and shows no 'current through' date"
+    },
+    {
+     "citation": "Raleigh UDO Sec. 9.3.6 (FEMA Designated SFHA Standards); also 9.3.2, 9.3.3, 9.3.5",
+     "url": "https://udo.raleighnc.gov/sec-936-fema-designated-sfha-standards",
+     "source_kind": "official",
+     "as_of": "same"
+    },
+    {
+     "citation": "Raleigh UDO Sec. 5.4.1 (General Historic Overlay District) and 5.4.2",
+     "url": "https://udo.raleighnc.gov/sec-541-general-historic-overlay-district-hod-g",
+     "source_kind": "official",
+     "as_of": "same"
+    },
+    {
+     "citation": "Raleigh UDO Secs. 6.1.3-6.1.4 (use table and key)",
+     "url": "https://udo.raleighnc.gov/sec-614-allowed-principal-use-table",
+     "source_kind": "official",
+     "as_of": "same"
+    },
+    {
+     "citation": "Raleigh UDO Sec. 1.1.2 (Applicability)",
+     "url": "https://udo.raleighnc.gov/sec-112-applicability",
+     "source_kind": "official",
+     "as_of": "same"
+    }
+   ],
+   "conditions": {
+    "fema_100yr_floodway": {
+     "excluded": null,
+     "quote": "No encroachments, including fill, new construction, substantial improvements, and other developments shall be permitted unless: ... It is demonstrated that the proposed encroachment would not result in any increase in the flood levels during the occurrence of the base flood discharge ... New development applications received after July 19, 2022 proposing development within FEMA floodway fringe areas and FEMA future conditions flood hazard areas are subject to the FEMA Floodway and FEMA Non-Encroachment Area Standards in Sec. 9.3.6.A., unless they qualify for exempt status under Sec. 9.3.6.B.1.a.",
+     "url": "https://udo.raleighnc.gov/sec-936-fema-designated-sfha-standards",
+     "note": "null because the bar is conditional, not a categorical exclusion, and it is not part of the housing rules. Chapter 2 (housing types) has no flood carve-out. Separately and automatically, Sec. 9.3.6 forbids new construction of any kind in FEMA floodways / non-encroachment areas unless a no-rise showing or a FEMA CLOMR is obtained, and since July 19, 2022 applies the same test to the floodway fringe, with exemptions including 'Any lot 0.5 acre or less in size which was recorded prior to July 19, 2022' and 'Any lot with existing development that is not subdivided or created by subdivision after July 19, 2022.' Where building is allowed, Sec. 9.3.5 requires elevation. Source is the City's online UDO at udo.raleighnc.gov, whose home page says: 'The electronically provided version is the not the official version of the Raleigh Unified Development Ordinance (UDO), and the electronic version may not include recently adopted amendments.' Fetched and read: Secs. 1.1.2, 2.1.1, 2.1.2, 2.1.3, 2.2.1-2.2.4, 2.6.1, 2.6.3, 2.7.1, 5.4.1, 5.4.2, 6.1.3, 6.1.4, 9.3.2, 9.3.3, 9.3.5, 9.3.6 (read in full: 1.1.2, 2.1.1-2.1.3, 5.4.1 parts A-E, 9.3.2, 9.3.6; the others, mostly dimensional tables, were keyword-searched for flood, historic, overlay, watershed, agriculture and airport terms rather than read line by line). The rest of the UDO, including Secs. 2.2.7, 2.3, 2.4, 9.3.7, 11.4.6 and the watershed and airport overlays, was not read. raleighnc.gov (the record's statute_url) returned HTTP 403."
+    },
+    "calfire_or_state_vhfhsz": {
+     "excluded": null,
+     "quote": "",
+     "url": "https://udo.raleighnc.gov/table-of-contents",
+     "note": "No wildfire or fire-hazard section title appears in the UDO table of contents and none of the sections read mentions one, but the UDO was not read in full. Source is the City's online UDO at udo.raleighnc.gov, whose home page says: 'The electronically provided version is the not the official version of the Raleigh Unified Development Ordinance (UDO), and the electronic version may not include recently adopted amendments.' Fetched and read: Secs. 1.1.2, 2.1.1, 2.1.2, 2.1.3, 2.2.1-2.2.4, 2.6.1, 2.6.3, 2.7.1, 5.4.1, 5.4.2, 6.1.3, 6.1.4, 9.3.2, 9.3.3, 9.3.5, 9.3.6 (read in full: 1.1.2, 2.1.1-2.1.3, 5.4.1 parts A-E, 9.3.2, 9.3.6; the others, mostly dimensional tables, were keyword-searched for flood, historic, overlay, watershed, agriculture and airport terms rather than read line by line). The rest of the UDO, including Secs. 2.2.7, 2.3, 2.4, 9.3.7, 11.4.6 and the watershed and airport overlays, was not read. raleighnc.gov (the record's statute_url) returned HTTP 403."
+    },
+    "williamson_or_ag_preserve": {
+     "excluded": true,
+     "quote": "Two-unit living | L | P | P | P | P | P | -- | P | P | P | P | -- | -- | -- | -- | -- | Sec. 6.2.1.C. | ... Key: P = Permitted Use L = Limited Use S = Special Use -- = Use Not Permitted",
+     "url": "https://udo.raleighnc.gov/sec-614-allowed-principal-use-table",
+     "note": "Automatic, but zone-based: this is about land ZONED Agriculture Productive (AP), not about farmland as such. The quote is the Sec. 6.1.4 use-table row with cells joined by ' | '; the column order in the table header is R-1, R-2, R-4, R-6, R-10, RX-, OP-, OX-, NX-, CX-, DX-, IX-, CM, AP, IH, MH, so two-unit living is '--' (Use Not Permitted) in AP and CM; the multi-unit living row is also '--' in AP. The missing-middle housing types are set out for the R- districts in Chapter 2. Farmland zoned R- is not excluded by this. No present-use-value or farmland-preservation exclusion was found in the sections read. Source is the City's online UDO at udo.raleighnc.gov, whose home page says: 'The electronically provided version is the not the official version of the Raleigh Unified Development Ordinance (UDO), and the electronic version may not include recently adopted amendments.' Fetched and read: Secs. 1.1.2, 2.1.1, 2.1.2, 2.1.3, 2.2.1-2.2.4, 2.6.1, 2.6.3, 2.7.1, 5.4.1, 5.4.2, 6.1.3, 6.1.4, 9.3.2, 9.3.3, 9.3.5, 9.3.6 (read in full: 1.1.2, 2.1.1-2.1.3, 5.4.1 parts A-E, 9.3.2, 9.3.6; the others, mostly dimensional tables, were keyword-searched for flood, historic, overlay, watershed, agriculture and airport terms rather than read line by line). The rest of the UDO, including Secs. 2.2.7, 2.3, 2.4, 9.3.7, 11.4.6 and the watershed and airport overlays, was not read. raleighnc.gov (the record's statute_url) returned HTTP 403."
+    },
+    "public_or_tribal_land": {
+     "excluded": false,
+     "quote": "To the extent allowed by law, the provisions of this UDO apply to all land, buildings, structures and uses owned, leased or otherwise controlled by any district, County, State or Federal government agencies.",
+     "url": "https://udo.raleighnc.gov/sec-112-applicability",
+     "note": "No exclusion of public land found in the sections read; the UDO says it applies to government-controlled land to the extent the law allows. Tribal land is not mentioned. Source is the City's online UDO at udo.raleighnc.gov, whose home page says: 'The electronically provided version is the not the official version of the Raleigh Unified Development Ordinance (UDO), and the electronic version may not include recently adopted amendments.' Fetched and read: Secs. 1.1.2, 2.1.1, 2.1.2, 2.1.3, 2.2.1-2.2.4, 2.6.1, 2.6.3, 2.7.1, 5.4.1, 5.4.2, 6.1.3, 6.1.4, 9.3.2, 9.3.3, 9.3.5, 9.3.6 (read in full: 1.1.2, 2.1.1-2.1.3, 5.4.1 parts A-E, 9.3.2, 9.3.6; the others, mostly dimensional tables, were keyword-searched for flood, historic, overlay, watershed, agriculture and airport terms rather than read line by line). The rest of the UDO, including Secs. 2.2.7, 2.3, 2.4, 9.3.7, 11.4.6 and the watershed and airport overlays, was not read. raleighnc.gov (the record's statute_url) returned HTTP 403."
+    },
+    "historic_district_hpoz": {
+     "excluded": false,
+     "quote": "no exterior portion of any building or other structure, including masonry walls, fences, light fixtures, steps and pavement, or other appurtenant features, nor above-ground utility structure nor any type of outdoor advertising sign shall be erected, altered, restored, moved, or demolished on the landmark or within the district until after an application for a certificate of appropriateness as to exterior features has been submitted to and approved by the Historic Development Commission",
+     "url": "https://udo.raleighnc.gov/sec-541-general-historic-overlay-district-hod-g",
+     "note": "Not an exclusion from the housing types; an added approval. In a General Historic Overlay District or on a Historic Landmark a certificate of appropriateness from the Historic Development Commission is required before building or demolishing (automatic once the City Council designates), so the project is no longer purely by-right. Source is the City's online UDO at udo.raleighnc.gov, whose home page says: 'The electronically provided version is the not the official version of the Raleigh Unified Development Ordinance (UDO), and the electronic version may not include recently adopted amendments.' Fetched and read: Secs. 1.1.2, 2.1.1, 2.1.2, 2.1.3, 2.2.1-2.2.4, 2.6.1, 2.6.3, 2.7.1, 5.4.1, 5.4.2, 6.1.3, 6.1.4, 9.3.2, 9.3.3, 9.3.5, 9.3.6 (read in full: 1.1.2, 2.1.1-2.1.3, 5.4.1 parts A-E, 9.3.2, 9.3.6; the others, mostly dimensional tables, were keyword-searched for flood, historic, overlay, watershed, agriculture and airport terms rather than read line by line). The rest of the UDO, including Secs. 2.2.7, 2.3, 2.4, 9.3.7, 11.4.6 and the watershed and airport overlays, was not read. raleighnc.gov (the record's statute_url) returned HTTP 403."
+    }
+   },
+   "other_site_exclusions_in_text": [
+    {
+     "what": "Conservation Management (CM) district: two-unit living not permitted (same table row; CM is the 13th district column)",
+     "quote": "Two-unit living | L | P | P | P | P | P | -- | P | P | P | P | -- | -- | -- | -- | -- | Sec. 6.2.1.C. |",
+     "url": "https://udo.raleighnc.gov/sec-614-allowed-principal-use-table"
+    },
+    {
+     "what": "Flood permit required for any development in a Special Flood Hazard Area",
+     "quote": "A flood permit to develop in any regulated SFHA shall be required in conformance with the provisions of this Article and Sec. 11.4.1. prior to commencement of any development within a SFHA.",
+     "url": "https://udo.raleighnc.gov/sec-932-applicability"
+    }
+   ]
+  },
+  "mn_minneapolis_2040": {
+   "sections_read": [
+    {
+     "citation": "City of Minneapolis 'Zoning districts' web page (summary only, not the Code of Ordinances)",
+     "url": "https://www.minneapolismn.gov/business-services/planning-zoning/zoning-maps/zoning-districts/",
+     "source_kind": "official",
+     "as_of": "City web page fetched 2026-11-20; no date on page. Title 20 itself could not be fetched."
+    }
+   ],
+   "conditions": {
+    "fema_100yr_floodway": {
+     "excluded": null,
+     "quote": "",
+     "url": "https://www.minneapolismn.gov/business-services/planning-zoning/zoning-maps/zoning-districts/",
+     "note": "page not fetched: Code text NOT fetched. The City's site links Title 20 (chapters 530, 535, 540) only on library.municode.com, which returned HTTP 403 with a 'Just a moment...' bot challenge to curl and HTTP 403 to WebFetch; api.municode.com also returned 403; lims.minneapolismn.gov returned 403. The record's statute_url (minneapolis2040.com/topics/housing/) was fetched and contains no flood, historic, triplex or unit-count rule. Only the City's plain-language zoning districts page was read, which is not the ordinance."
+    },
+    "calfire_or_state_vhfhsz": {
+     "excluded": null,
+     "quote": "",
+     "url": "https://www.minneapolismn.gov/business-services/planning-zoning/zoning-maps/zoning-districts/",
+     "note": "page not fetched: Code text NOT fetched. The City's site links Title 20 (chapters 530, 535, 540) only on library.municode.com, which returned HTTP 403 with a 'Just a moment...' bot challenge to curl and HTTP 403 to WebFetch; api.municode.com also returned 403; lims.minneapolismn.gov returned 403. The record's statute_url (minneapolis2040.com/topics/housing/) was fetched and contains no flood, historic, triplex or unit-count rule. Only the City's plain-language zoning districts page was read, which is not the ordinance."
+    },
+    "williamson_or_ag_preserve": {
+     "excluded": null,
+     "quote": "",
+     "url": "https://www.minneapolismn.gov/business-services/planning-zoning/zoning-maps/zoning-districts/",
+     "note": "page not fetched: Code text NOT fetched. The City's site links Title 20 (chapters 530, 535, 540) only on library.municode.com, which returned HTTP 403 with a 'Just a moment...' bot challenge to curl and HTTP 403 to WebFetch; api.municode.com also returned 403; lims.minneapolismn.gov returned 403. The record's statute_url (minneapolis2040.com/topics/housing/) was fetched and contains no flood, historic, triplex or unit-count rule. Only the City's plain-language zoning districts page was read, which is not the ordinance."
+    },
+    "public_or_tribal_land": {
+     "excluded": null,
+     "quote": "",
+     "url": "https://www.minneapolismn.gov/business-services/planning-zoning/zoning-maps/zoning-districts/",
+     "note": "page not fetched: Code text NOT fetched. The City's site links Title 20 (chapters 530, 535, 540) only on library.municode.com, which returned HTTP 403 with a 'Just a moment...' bot challenge to curl and HTTP 403 to WebFetch; api.municode.com also returned 403; lims.minneapolismn.gov returned 403. The record's statute_url (minneapolis2040.com/topics/housing/) was fetched and contains no flood, historic, triplex or unit-count rule. Only the City's plain-language zoning districts page was read, which is not the ordinance."
+    },
+    "historic_district_hpoz": {
+     "excluded": null,
+     "quote": "",
+     "url": "https://www.minneapolismn.gov/business-services/planning-zoning/zoning-maps/zoning-districts/",
+     "note": "page not fetched: Code text NOT fetched. The City's site links Title 20 (chapters 530, 535, 540) only on library.municode.com, which returned HTTP 403 with a 'Just a moment...' bot challenge to curl and HTTP 403 to WebFetch; api.municode.com also returned 403; lims.minneapolismn.gov returned 403. The record's statute_url (minneapolis2040.com/topics/housing/) was fetched and contains no flood, historic, triplex or unit-count rule. Only the City's plain-language zoning districts page was read, which is not the ordinance."
+    }
+   },
+   "other_site_exclusions_in_text": [
+    {
+     "what": "City summary only: additional overlay districts override primary and built-form rules (which overlays, and what they bar, was not fetched)",
+     "quote": "Always follow additional overlay rules, even when they are different from the: ... Primary district rules ... Built form overlay district rules",
+     "url": "https://www.minneapolismn.gov/business-services/planning-zoning/zoning-maps/zoning-districts/"
+    }
+   ]
+  }
+ }
+}

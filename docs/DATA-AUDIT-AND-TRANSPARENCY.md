@@ -47,7 +47,7 @@ the record is **not** confirmed.
 | Research studies (`research.json`) | 39 | 8 | 21 | 3 | 7 (source link broken) | 13 nonexistent studies; all "$ per $1" figures; HealthLine figures corrected (round 3) | `audit/research-audit.md` |
 | Case studies (`case_studies.json`) | 8 | | 5 | 1 | 2 (source link broken) | all unsourced money figures nulled; HealthLine and Cultural Trail figures re-sourced (round 3) | `audit/research-audit.md` |
 | State housing laws (`statutes.json`) | 21 | 15 | 4 | 1 | 1 (Minneapolis 2040: cited law not confirmed) | 1 (a bill that never passed); 18 corrected | `audit/laws-finance-audit.md` |
-| State finance profiles (`state_finance_profiles.json`) | 52 | 4 (TX, AZ, WA, CA; FL has all 5 calculator fields too) | 25 | 1 | 22 | round 3: TX homestead $100,000 -> $140,000, TX reappraisal 1 -> 3 years, CO homestead 'none' -> unknown | `audit/laws-finance-audit.md` |
+| State finance profiles (`state_finance_profiles.json`) | 52 | 11 (AK, AL, AZ, CA, DC, KY, LA, NM, TX, WA, WY) | 36 | 2 (NH, PR) | 3 (IN, NY, PA: checked, nothing confirmed) | round 3: TX homestead $100,000 -> $140,000, TX reappraisal 1 -> 3 years, CO homestead 'none' -> unknown; round 4 (21 Nov): 28 values corrected or set to unknown in 21 states | `audit/laws-finance-audit.md`, `audit/state-finance-profiles-2026-11-21.md` |
 | Funding programs (`funding_programs.json`) | 11 | 2 | 6 | 2 | 1 (source link broken) | round 3: CA Urban Greening funding source, cycle and portal corrected | `audit/laws-finance-audit.md` |
 | Construction unit costs (`unit_costs.json`) | 32 | 9 | 12 | 7 | 4 (no source) | 3 wrong bid prices corrected; CDOT Walsenburg price confirmed at its new address (round 3) | `audit/costs-transit-audit.md` |
 | Transit projects (`transit_pipelines.json`) | 5 | | 5 | | | invented housing/EV details nulled | `audit/costs-transit-audit.md` |
@@ -762,7 +762,9 @@ was made from a test that didn't cover the live page.
 
 - 8 unit costs and 2 rail corridors couldn't be reached from the audit machine (TxDOT, ADOT, FRA block it). Re-check
   from a normal browser.
-- 42 state finance profiles were never checked; their numbers feed the tax-increment calculator.
+- State finance profiles (21 Nov): NH and PR could not be fetched; IN, NY and PA were checked but nothing could be
+  confirmed; 8 partly verified profiles (ID, MN, MO, MT, ND, SD, UT, WV) were not re-checked in round 4
+  (`audit/state-finance-profiles-2026-11-21.md`). The page computes no tax-increment amount outside California.
 - **HUD Fair Market Rents (resolved FY2027):** FY2027 rents took effect 1 Oct 2026 (Federal Register
   2026-17891). Replaced the map-service pull with a direct machine pull from HUD's official FMR API
   (`scripts/fetch_hud_fmr_api.py`) with per-record evidence URLs. All 3,222 counties are current FY2027 values
@@ -1179,3 +1181,420 @@ block group by point, fitting the map and service lookups still assumed one long
 ArcGIS envelope ending at exactly 180 returns features far outside it. All fixed and tested 21 Nov (`docs/audit/alaska-bundles.md`, last
 section); the county file is built. Also found and fixed: the map tooltip of a block group with no best bet threw an error, which made a click on
 it select nothing (any county). The 17 Nov entry above that said 29 of 30 Alaska counties are built is now 30 of 30.
+
+### Correction: LA lots in a mapped zone reached the legal screen with no zoning code (found 19 Nov, fixed 20 Nov 2026)
+
+- What was wrong: for a Los Angeles lot inside a mapped zone with a matching `zone_rules` row, the house panel's Zoning
+  row showed the zone (from `zoneAt(ll)`), but the owner playbook said "Zoning is not on file for this parcel" and the
+  Invest view's "This house" said "Not determined: zoning code unknown" for every addition. Example: 2107 Duxbury Cir,
+  Los Angeles (zone R1V2-O).
+- Cause: `computePropertyPlaybook` (`app/app.js`) and `parcelFacts` (`app/invest.js`) read a `zone` field from the row
+  `zoneRules()` returns. The 14 `zone_rules` rows in `app/data/bundle-la.b64.txt` have no `zone` field (they hold
+  `zone_prefix` and the standards), so the code was dropped exactly when a rule matched.
+- Fix: both now take the code from `zoneAt(ll).zone`, the same value the Zoning row shows, and fall back to the parcel
+  record's `ZoneCode`. The rule row is no longer read for the code.
+- Second fault found while checking the fix: with the code restored, the single-family test still failed for LA's R1
+  variation zones. `R1V2-O` has no word boundary after `R1`, `R1R3` matched the multifamily pattern as `R3`, and LA's
+  assessor use text for a house is "Single", which the text test does not match. Where the lot is in the county
+  bundle's own zoning layer and that layer classes the zone as single-family, multifamily or commercial / mixed use,
+  that category now decides; the text tests are kept for every other case (parcel-record zoning, and zones read from a
+  live city service, whose category is a guess from the code). Counted from the bundle on 20 Nov: of 408 zone codes the
+  layer classes single-family, the old text test on the code alone read 127 as single-family, 7 as multifamily (the six
+  `R1R3` codes and `UR2`) and 274 as neither.
+- Limit, stated plainly: the layer's single-family category also holds LA's agricultural and estate codes (for example
+  `A1-1-K`, `RA-1`, `RE40-1-H-K`). Those lots are now screened against the state ADU law and SB 9 like any other lot the
+  layer calls single-family. Whether SB 9 reaches each of those zones was not checked against the city's own text in
+  this session; the cards already say "unverified screening; confirm eligibility with the planning department".
+- Not on this branch: the earlier "found, not fixed" note for this fault and `app/advisor-scripts.js` (`answerLot`)
+  are in none of the pushed branches (checked 20 Nov), so there was no entry to mark fixed and no sentence to remove.
+  If that file lands from another branch, its sentence explaining this gap should be dropped.
+- Seen on the real page (20 Nov, `scripts/live_check_la_zoning_screen.mjs`, LIVE_PORT 8953, result in
+  `data/backtests/live_check_la_zoning_screen_2026-11-20.json`): 2107 Duxbury Cir, geocoded by the Census geocoder
+  (matched "2107 DUXBURY CIR, LOS ANGELES, CA, 90034"), opened as parcel situs "2107 DUXBURY CIR LOS ANGELES CA 90034".
+  Zoning row R1V2-O; owner playbook shows CA SB 9 "as applying to this parcel's recorded zoning (R1V2-O)" and "Also
+  screened: CA: ADU and junior ADU approved ministerially on single-family lots"; "This house" shows "Backyard home
+  (ADU) Allowed by state law".
+- Other checks the same day: `npm test` 862 passed; `npm run typecheck` clean; `npm run test:e2e` 83 passed (one new
+  test for an R1 variation lot with use "Single"); `scripts/live_check_panels.mjs 06037` (LIVE_PORT 8964, 3 lots, all
+  rows ok, `data/backtests/live_check_panels_2026-11-20_lazone.json`); `scripts/live_check_lot_fit.mjs` (LIVE_PORT
+  8965, all groups ok, `data/backtests/live_check_lot_fit_2026-11-20.json`).
+
+### Correction: LA single-family screening followed the map's category, not each jurisdiction's SB 9 list; a failed flood check counted as "not in a flood area"; hazard-blocked lots were told "no law applies" (found and fixed 20 Nov 2026)
+
+Follow-up to the correction above, after (1) the sources were fetched (`docs/audit/la_sb9_zone_scope.md`) and (2) 31
+real lots across zone groups were opened on the real page (`scripts/live_check_la_zoning_screen.mjs --sample`).
+
+- Too wide: the same day's fix let the zoning layer's "single-family" category decide. That category also holds
+  County A-1 / A-2 and City parking variants (R1P, RAP, A2P). A lot is now classed single-family only where the layer
+  says so AND the zone is on the jurisdiction's published list (`bundleZoneClass` in `app/app.js`):
+  - City of Los Angeles, City Planning SB 9 memo: "which includes the following Zones: A, RA, RE, RS, R1, RU, RZ, and
+    RW1 in Chapter 1 of the Zoning Code, as well as 1L Density Districts in Chapter 1A of the Zoning Code."
+    (`https://planning.lacity.gov/odocument/bef6b998-de32-4090-9557-5f98711c6c15/SB9_Memo_2-7-22MG_-_signed.pdf`)
+  - LA County Regional Planning SB 9 memo: "The project site is located within Zone R-1 or R-A"
+    (`https://planning.lacounty.gov/wp-content/uploads/2026/01/SB9_MEMO.pdf`)
+  - Santa Clarita (the layer's third jurisdiction): no list fetched, so the older text tests still apply there.
+- Not confirmed, stated plainly:
+  - The codified statute on leginfo.legislature.ca.gov could not be fetched (HTTP 403 challenge page); SB 9's text is
+    quoted from the copy attached to the County memo. Gov. Code § 66314 (ADU) was not fetched verbatim.
+  - The City memo names "R1" but not the variation zones. R1V, R1F, R1R and R1H are read as R1; that is this project's
+    reading, not the memo's words.
+  - The City lists "A" zones; HCD's SB 9 fact sheet says parcels in agricultural zones "are not subject to SB 9
+    mandates even if they allow single-family residential uses"
+    (`https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/sb-9-fact-sheet.pdf`). The page follows
+    the City's list for City lots; whether state law requires it there is not confirmed.
+  - The state ADU law also reaches multifamily zones (per the sources in the audit file), but the engine applies its
+    ADU record to single-family lots only. R2 / RD / R4 lots with a house are told the ADU law "was not applied"; that
+    is true of the engine and is an open gap, not a finding that no ADU is allowed.
+- Same misread elsewhere: the house panel's statutory notes (`auditSingleHouseParcel`, in `app/app.js` and
+  `src/engines/parcelHouseAuditor.js`) used the old text tests; they now take the same class. The prospectus export
+  passed an empty rule, no point and no hazard answers to the playbook; it now passes the open lot's.
+- A failed flood check counted as "no": on 4 of the sampled single-family lots FEMA did not answer, and SB 9 was shown
+  as applying. A site condition a law names (historic, flood, fire for SB 9) that was asked and not answered now makes
+  that law "Not confirmed" with the reason ("whether the lot is in a FEMA special flood hazard area"); the playbook
+  and the statutory notes show the not-confirmed laws next to the ones that apply
+  (`evaluateByRightHousing`, both copies).
+- "No state housing law applies" with no reason: the engine stops screening every law on a lot in a FEMA flood hazard
+  area, a very high fire hazard severity zone, an agricultural preserve or public / tribal land. That is a rule of the
+  engine, not something each law's record says (the California ADU record lists no site exclusions). Five sampled
+  lots in very high fire zones got the bare sentence. The page now lists each law as "Not screened: the lot is in a
+  very high fire hazard severity zone, and the screening engine stops there for every law (its own rule, not a finding
+  about this law)". The rule itself is unchanged: whether to drop it and let each law's own exclusions decide is the
+  owner's call (it would change results in every state) and is listed in `docs/WORK-QUEUE.md`.
+- Seen on the real page (20 Nov, final code):
+  - Sample, LIVE_PORT 8986 and 8987: 31 lots checked, 0 failed, 0 points skipped
+    (`data/backtests/live_check_la_zoning_screen_2026-11-20_sample.json`). Long Beach, Glendale, Pasadena, Torrance
+    and Burbank have no polygons in the layer and were not sampled.
+  - 2107 Duxbury Cir, LIVE_PORT 8985: all checks ok (`data/backtests/live_check_la_zoning_screen_2026-11-20.json`).
+  - `scripts/live_check_panels.mjs 06037 41051 48453`, LIVE_PORT 8988, 2 lots each: law rows ok on all 6; one
+    unrelated failure, Travis block group 484530010004, where the check expected rent "$3,501/mo" and the page showed
+    "$3,500 or more/mo" (`data/backtests/live_check_panels_2026-11-20_lazone2.json`). Not fixed here.
+  - `scripts/live_check_lot_fit.mjs`: three runs. LIVE_PORT 8989: Portland 1 of 3, Gresham reason not shown; 8990:
+    Portland 2 of 3, Gresham not shown; 8991: all groups ok. In the failing runs the panel said "the zoning map
+    service didn't answer" while the same service answered 6 of 6 direct queries, the intermittent browser-path
+    failure already noted in that script's header. The saved file is the passing third run.
+- Tests the same day: `npm test` 863 passed; `npm run typecheck` clean; `npm run test:e2e` 83 passed. Two existing
+  auditor tests assumed a lot split with no hazard answers given; they now supply the answers, and new assertions
+  cover the unanswered and the blocked cases.
+
+### Correction: the statute engine dropped every law on flood, fire, farmland and public-land lots; site conditions are now decided law by law from each law's text (found and fixed 20 Nov 2026)
+
+- What was wrong: `evaluateByRightHousing` screened no law at all on a lot in a FEMA flood hazard area, a very high
+  fire hazard zone, an agricultural preserve or public / tribal land, in every state. No law record said that. Earlier
+  the same day the page was made to say this was the engine's own rule; the rule itself is now gone.
+- What was checked: for all 39 parcel-level law records, the law's text was fetched and read for five site conditions
+  (flood, fire, farmland, public / tribal land, historic). Evidence, with verbatim quotes and URLs:
+  `docs/audit/site_exclusions/ca.json` (8 records, from the Legislature's own bulk files at
+  `downloads.leginfo.legislature.ca.gov`, which answer where the web pages return 403), `west.json` (19 records),
+  `east.json` (12 records) and `ca_notes.md`. `scripts/apply_site_exclusions.py` writes the results onto each record
+  as `site_conditions` and refuses an exclusion without a quote and a URL. Counts written: 7 exclusions, 145 "text
+  read, no such exclusion", 20 conditional, 23 not settled.
+- The rule now (`evaluateByRightHousing`, identical in `app/app.js` and `src/engines/statutoryZoningEngine.js`):
+  - the text excludes such a lot: the law is listed as "Ruled out here", with the reason and any exception in the text
+    (SB 9 and AB 2011 for flood and fire; Colorado HB 24-1152 for a FEMA floodplain; Arizona adaptive reuse for
+    historic areas);
+  - the text was read and has no such exclusion: the law is screened as on any other lot (for example the California
+    ADU law and AB 2097 in a very high fire zone);
+  - the text excludes such land only on terms the page cannot see: the law is "Not confirmed", with those terms (for
+    example Maine LD 2003 "only where the municipality has exempted the lot by ordinance"; Washington HB 1110 and
+    HB 1337 "a local designation, not the FEMA map"; SB 79 in a fire zone "only from the optional streamlined
+    ministerial approval, and where the city has excluded such sites by ordinance for now");
+  - the text does not settle it, or could not be fetched (Minneapolis: Municode returned 403): "Not confirmed".
+  The short "only ..." wordings and the exception wordings are this project's restatements of the evidence notes; they
+  are listed in `scripts/apply_site_exclusions.py` next to the record and condition they describe.
+- SB 79 was over-excluded: its records listed the fire zone as a site exclusion. § 65912.157 (the standards the page
+  shows) has no such exclusion; the fire-zone bar is on the optional streamlined approval (§ 65912.159(a)(3)) and a
+  city may exclude such sites for a time by ordinance (§ 65912.161(b)). It now reads "Not confirmed" there.
+- California ADU law was applied to single-family lots only. Gov. Code § 66323(a): "a local agency shall ministerially
+  approve an application for a building permit within a residential or mixed-use zone", and (a)(3)(B): "A local agency
+  shall allow at least one accessory dwelling unit within an existing multifamily dwelling". The record now applies to
+  single-family and multifamily zoning (`scripts/apply_ca_adu_zone_scope.py`). Not applied to commercial / mixed-use
+  zoning (the page cannot tell whether such a lot has a dwelling); unit counts on multifamily lots are not modeled.
+- Santa Clarita's SB 9 zones, from the city's SB 9 FAQ: "Parcels must be zoned NU1, NU2, NU3, NU4, NU5, UR1, or UR2."
+  (`https://santaclarita.gov/home/showpublisheddocument/21438/637964290558900000`; PDF metadata dates it 2022; whether
+  it is current after the 2025-2026 amendments is not confirmed).
+- Still not confirmed:
+  - whether LA's R1V / R1F / R1R / R1H and R1P are R1 zones in the municipal code (LAMC and City Planning pages
+    returned 403); the variations are still read as R1 and R1P is still left out;
+  - the § 65913.4 text in force on 16 Sep 2021 that SB 9 freezes (quoted from AB 1174 as chaptered that day);
+  - farmland and land ownership are not measured by the page at all, so those exclusions never fire;
+  - Colorado's current C.R.S. numbering (the signed 2024 acts were read); Minneapolis Title 20;
+  - citation changes the research found and that are NOT yet applied to the records: Utah 10-9a-530 / 17-27a-526 now
+    return no text (the research found 10-21-303 / 17-80-303); Arizona middle housing is now § 9-462.13.
+- Seen on the real page (20 Nov, final code):
+  - LA sample, LIVE_PORT 8995 / 8996 / 8997: 31 lots, 0 failed
+    (`data/backtests/live_check_la_zoning_screen_2026-11-20_sample.json`). 14033 Barner Ave (RS-1, very high fire
+    zone) now shows the ADU law as applying and SB 9 as ruled out with its exception; 436 W Gage Ave (R2-1, a house)
+    and 10050 Sepulveda Blvd (R3-1, apartments) show the ADU law; 28871 Silversmith Dr (Santa Clarita UR2) is classed
+    single-family. The County A-2 desert lot gets no single-family law and "This house" says its zoning is why.
+  - 2107 Duxbury Cir, LIVE_PORT 8998: ok.
+  - `scripts/live_check_panels.mjs 06037 53033 08031 41051`, LIVE_PORT 8999, 2 lots each: law rows ok on all 8; one
+    Multnomah lot's USGS elevation timed out and the page said so
+    (`data/backtests/live_check_panels_2026-11-20_sitecond.json`).
+  - `scripts/live_check_lot_fit.mjs`, LIVE_PORT 9002: all groups ok.
+  - The Travis rent failure noted above is fixed in the check: the page's "$N or more/mo" top-code wording is accepted
+    when the file's value is at least N (`data/backtests/live_check_panels_2026-11-20_travisrent.json`).
+- Tests: `npm test` 869 passed; `npm run typecheck` clean; `npm run test:e2e` 83 passed. Tests that asserted the old
+  blanket stop were rewritten to the sourced behaviour; `tests/unit/statuteSiteConditions.test.ts` covers the rule.
+
+### Correction: the live check expected a Census rent code as a dollar figure; the page called an exact $3,500 median "or more" (found 20 Nov, fixed 21 Nov 2026)
+
+**What failed.** `scripts/live_check_panels.mjs` for Travis County TX (48453), 20 Nov, block group 484530010004
+(saved in `data/backtests/live_check_panels_2026-11-20_lazone2.json` on branch `claude/upbeat-rubin-7orjxv`):
+"expected home value $865k, rent $3,501/mo, homes 245 | panel: ... Median rent$3,500 or more/mo Census ACS 2020–24".
+
+**What the sources say (all fetched 21 Nov 2026).**
+
+- Census ACS jam values, <https://www2.census.gov/programs-surveys/acs/tech_docs/jam_values/2024_Jam_Values.xlsx>
+  (sha256 `14a61938cff58166ef265af9a324b8a6f4cf6040f8630634e5711cb5b07e2cf5`), section "Median - Jam Values", row
+  "Gross Rent", upper interval: meaning "$3,500 or more", character value (data.census.gov) "3,500+", numeric value
+  (API and Summary File) "3501". Lower interval: "Less than $100", "100-", "99". The 2023 workbook in the same folder
+  has the same row. Caveat: the title cell of the file named 2024 reads "Jam Value Specifications for the 2023
+  American Community Survey"; it is the file Census publishes under the 2024 name.
+- Census ACS 2020-24 5-year table file,
+  <https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25064.dat>
+  (header `GEO_ID|B25064_E001|B25064_M001`): `1500000US484530010004|3501|-333333333` and
+  `1500000US484530013092|3500|2500`.
+- `counties/bundle_48453.json.gz` stores `rent: 3501.0` for 484530010004, the same as the Census file. Of its 766 block
+  groups, 31 hold 3501 and one (484530013092) holds 3500.
+
+**Who was wrong.**
+
+1. The live check. It built its expected text as "$" + the stored number, so the code 3501 became "$3,501/mo". The page's
+   "$3,500 or more/mo" for that block group was right. Fixed: the check now expects "$3,500 or more/mo" when the file
+   holds exactly 3501 (`ACS_RENT_TOP`), and still formats every other rent itself, to the dollar.
+2. The page, for a different value. `fmtRent` in `app/app.js` treated any rent of 3500 or above as the top-code, so
+   block group 484530013092, where Census publishes an estimate of 3500 with a margin of 2500, was shown as
+   "$3,500 or more/mo". Fixed: only 3501 and above is the top-code; 3500 is shown as "$3,500/mo". The unit test in
+   `tests/unit/auditChecklist.test.ts` asserted the old behavior for 3500 and was changed to assert the new one.
+
+**Seen on the real page (21 Nov, after the fix).** `LIVE_PORT=18611 LIVE_N=2 node scripts/live_check_panels.mjs 48453`:
+both parcels ok on every panel, 484530010004 "expected home value $865k, rent $3,500 or more/mo, homes 245"
+(`data/backtests/live_check_panels_2026-11-21.json`). A separate read of the panel: 484530013092 shows
+"Median rent$3,500/mo", 484530010004 shows "Median rent$3,500 or more/mo".
+
+**Not changed, still open.** The page words the bottom code (99) as "$100 or less/mo" where Census says "Less than $100";
+no block group in the Travis County file holds it, and the live check would report it as a failure if one were sampled.
+Other counties' files were not searched for a stored 3500. The places that leave a top-coded rent out of a calculation
+(`m.rent < 3500` in `app/app.js`) were left as they are, so an exact 3500 is also left out there.
+
+### Correction: crash counts outside California still counted a boundary crash in full in every bordering block group (fixed 21 Nov 2026)
+
+**What was true before.** The 175 crash-count files outside California (`app/data/crash_counts/`, states 08, 17, 23,
+42, 47, 49, 51; built 16-17 Nov) were made before `scripts/build_state_crash_counts.py` had the 1/k split. A crash within
+10 m of k block groups counted in full in each, so block groups added up to more crashes than were placed. California was
+corrected on 19 Nov (entry above); the page labelled these 175 counties "older rule ... run higher than the number of
+crashes". Their comparisons ("worse than X% of similar areas") and crash-based improvement rows (`app/data/crash_gaps/`)
+used the inflated counts.
+
+**What is true now.** All 175 files rebuilt on 21 Nov 2026 with `python3 scripts/build_state_crash_counts.py <fips...>`
+(same sources, layers, queries and years as on 16-17 Nov; TIGERweb 2020 block groups). Every source answered; no county
+kept its old file. Each source returned the same records as before: crashes read and crashes placed are identical to the old
+files in all 175 counties. Each file's `_meta` now has `weighting: "1/k"`, the 1/k `rule` and `block_group_sums`.
+
+Sum over block groups of the all-crashes count, against the crashes placed in a block group (`_meta.matched`), computed
+from the old and new files:
+
+| State (source) | Counties | Placed crashes | Block-group sum before | Before / placed | Block-group sum after | Pedestrian or cyclist, sum before -> after | Killed or seriously injured, sum before -> after |
+|---|---|---|---|---|---|---|---|
+| 08 Colorado (Denver Police) | 1 | 51,561 | 84,502 | 1.64 | 51,561.0 | 3,479 -> 2,007 | 2,134 -> 1,174 |
+| 17 Illinois (IDOT) | 20 | 803,735 | 1,189,172 | 1.48 | 803,735.0 | 32,761 -> 22,103 | 28,709 -> 18,429 |
+| 23 Maine (MaineDOT) | 5 | 69,522 | 98,692 | 1.42 | 69,522.0 | 1,737 -> 1,115 | 2,089 -> 1,542 |
+| 42 Pennsylvania (PennShare) | 31 | 302,628 | 448,097 | 1.48 | 302,628.0 | 19,420 -> 11,731 | 19,528 -> 13,286 |
+| 47 Tennessee (TITAN, injury crashes) | 95 | 141,107 | 221,471 | 1.57 | 141,107.0 | 8,726 -> 5,692 | 26,994 -> 18,137 |
+| 49 Utah (UDOT) | 6 | 148,709 | 243,448 | 1.64 | 148,709.0 | 7,488 -> 4,606 | 6,683 -> 3,924 |
+| 51 Virginia (VDOT) | 17 | 209,055 | 309,516 | 1.48 | 209,055.0 | 7,551 -> 4,941 | 13,487 -> 8,912 |
+| All 175 | 175 | 1,726,317 | 2,594,898 | 1.50 | 1,726,316.9 | 81,162 -> 52,195 | 99,624 -> 65,404 |
+
+"After" sums are of the rounded per-block-group values (4 decimals), so they differ from whole numbers by rounding only
+(at most 0.03 per state). Before, the 175 counties' block groups held 50% more crashes than were placed (42% Maine to 64%
+Denver and Utah).
+
+- Invariant, every county in the repository (58 California + 175 others): the block groups' all-crashes sum equals
+  `_meta.matched` within rounding, and the three sums equal `_meta.block_group_sums`. The unit test
+  `tests/unit/caCrashInvariant.test.ts` was renamed `tests/unit/crashCountsInvariant.test.ts` and now covers every file and
+  the per-state file counts (58, 1, 20, 5, 31, 95, 6, 17). `tests/unit/stateCrashCounts.test.ts` ("the boundary rule can
+  only add crashes relative to strictly-inside counting") now allows the same 4-decimal rounding tolerance: in 38 counties
+  every placed crash is also strictly inside one block group, and in 25 of them the rounded sum fell below that whole number
+  by rounding alone (at most 0.00005 per block group).
+- `crash_gaps` recomputed for the 175 counties (`scripts/recompute_crash_gaps.py`, unchanged). Totals over the 175, from each
+  file's `_meta` before and after: gaps 4,855 -> 5,401; strengths 7,250 -> 6,642; crash rows dropped 10,451 -> 21,774; added
+  4,225 -> 661; crosswalks re-sized 1,181 -> 1,521. Illinois drops none (its pedestrian/cyclist count is a lower bound).
+  As in California, the engine's ">= 1 pedestrian/cyclist crash" thresholds now read split counts, so a block group whose only
+  crash sits on an edge shared with others (0.5, 0.33) no longer qualifies; owner to confirm that is wanted (same open
+  question as 19 Nov).
+- `scripts/build_state_crash_counts.py`: when FIPS codes are named, it now checks only those county files are on disk
+  instead of stopping because 10 unrelated R2-only Maryland county files are not on this machine (the full-list run still
+  requires every R2-only file). No R2 access was made.
+- e2e test "crash comparisons use the rebuilt counts in a California and a Pennsylvania county": Allegheny block group
+  420035153001 now has 3 pedestrian/cyclist crashes (was 4: counts [4, 2, 35] -> [3.0, 1.5, 27.6667]); the test now reads the
+  expected count from `app/data/crash_gaps/42003.json` and still checks the exact sentence on the page.
+- Seen on the real page (21 Nov, `NODE_USE_ENV_PROXY=1 LIVE_PORT=9311 LIVE_SHARD=crash1k node scripts/live_check_panels.mjs
+  23005 42003 49035`): Cumberland ME, Allegheny PA, Salt Lake UT, 3 block groups each, every panel check ok including
+  crash (the "killed or seriously injured" row equals the new file, e.g. 420034734023 shows 1.5, file [0.5, 1.5, 15], old
+  file [1, 2, 20]): `data/backtests/live_check_panels_2026-11-21_crash1k.json`. Panel text for the same 9 block groups
+  (`scripts/live_check_crash_panel_text.mjs`): where the page writes the crash sentence it shows the new count and the 1/k
+  rule (e.g. 230050010002 "120.7 crashes recorded ... 8.5 involving a pedestrian or cyclist, 2.8 with someone killed or
+  seriously injured", file [8.5, 2.8333, 120.6667], old file [14, 4, 189]); "older rule" appears on none:
+  `data/backtests/live_check_crash_panel_text_2026-11-21_crash1k.json`.
+- Checks before commit (21 Nov): `npm test` 38 files, 1,068 tests pass; `npm run typecheck` passes;
+  `PW_PORT=9310 npm run test:e2e -- --trace off` 87 passed.
+### Correction: state finance profiles held numbers no source gave; 28 values corrected or withheld in 21 states (found and fixed 21 Nov 2026)
+
+**What was wrong.** 22 profiles in `app/data/state_finance_profiles.json` had never been checked, Illinois could not be
+checked on 16 Nov, and the four "verified" profiles (AZ, CA, TX, WA) had a quote on file for only some of the fields the
+tax-increment model uses. Round 4 fetched the state's own statute or revenue-department page for each field and stored
+the verbatim quote, URL and date with the field (`field_evidence`). Every quote was checked word for word against the
+fetched page text before it was written. Full table, sources and hosts: `docs/audit/state-finance-profiles-2026-11-21.md`;
+per-field evidence: `docs/audit/state-finance-profiles-2026-11-21.json`.
+
+**Corrections (old -> new, all sources fetched 21 Nov 2026).**
+
+- AL `annual_assessment_cap` null -> 0.07: ALDOR, "New rules will cap annual increases in taxable assessed value for
+  Class II and Class III real properties at 7 percent." (HB73, Act 2024-344).
+- AK `homestead_exemption_rule` $50,000 of market value -> none: AS 29.45.050(a) allows only a voter-approved municipal
+  exemption that "may not exceed the assessed value of $75,000"; $50,000 appears nowhere.
+- AR `reassessment_cycle_years` 3 -> 4: ACD 2025 annual report, "all counties will now reappraise real property on
+  four-year cycles" (Act 139 of 2023).
+- DC `homestead_exemption_rule` $87,500 -> $95,100 (tax year 2027): OTR, "reduces your real property's assessed value by
+  $95,100.00 for tax year 2027".
+- FL `homestead_exemption_rule` $50,000 -> unknown: DOR bulletin PTO 26-21 (5 Nov 2026), Amendment 3 approved 3 Nov 2026
+  exempts "assessed value up to $150,000 in 2027 and up to $250,000 in 2028" for non-school taxes. The unit test that
+  required every FL field to be confirmed (round 3) now requires exactly this field to be withheld.
+- GA `homestead_exemption_rule` $10,000 -> $2,000 of assessed value: Georgia DOR, "The $2,000 is deducted from the 40%
+  assessed value of the homestead."
+- IL `reassessment_cycle_years` 3 -> 4 and `homestead_exemption_rule` $10,000 -> $6,000: IDOR, "Every four years when all
+  property is reassessed (three years in Cook County)" and "up to a maximum of $10,000 in Cook County, $8,000 in counties
+  contiguous to Cook County, and $6,000 in all other counties". The record mixed Cook County's cycle and exemption with
+  the 33 1/3% ratio used outside Cook; it now describes counties outside Cook and says so on the page (`scope_note`).
+- IN `homestead_exemption_rule` "1% circuit breaker" -> unknown: the circuit breaker limits the bill; the DLGF form gives a
+  standard deduction of "$40,000" for 2026 falling to "$0" in 2030 plus a supplemental percentage, which the model cannot
+  represent.
+- MA `reassessment_cycle_years` 3 -> 1: G.L. c. 59, s. 2A, fair cash valuation "on the first day of January of each year".
+- ME `res_assessment_ratio` 1 -> unknown (36 M.R.S. s. 327: each town's ratio, at least 70%, not above 110%) and
+  `homestead_exemption_rule` $25,000 of assessed value -> $25,000 of just value (36 M.R.S. s. 683).
+- NJ ratios 0.85 -> 1 ("All 21 counties in New Jersey have chosen 100%") and cycle 3 -> unknown (no fixed cycle).
+- NY ratios 1 -> unknown: ORPTS, the law "doesn't require assessments to be at 100 percent of market value".
+- OH `homestead_exemption_rule` $25,000 of assessed value -> unknown: R.C. 323.152 gives "Twenty-five thousand dollars of
+  the true value" to owners 65 and older, disabled owners and qualifying surviving spouses only.
+- OK `uncaps_on_sale` false -> true: OAC 710:10-1-3 (LII copy), the limits "do not apply in any year when the title of the
+  property is transferred".
+- PA ratios 1 -> unknown: 53 Pa.C.S. s. 8842(a), a county "predetermined ratio which may not exceed 100%".
+- RI `res_assessment_ratio` 1 -> unknown: R.I.G.L. 44-5-12, "or at a uniform percentage thereof, not to exceed one
+  hundred percent".
+- SC `uncaps_on_sale` false -> true: S.C. Code 12-37-3140(A)(1)(b), value as of "December thirty-first of the year in
+  which an assessable transfer of interest has occurred".
+- VA `reassessment_cycle_years` 1 -> 4: Va. Code 58.1-3252, "every four years" in counties (3, 5 or 6 by option).
+- VT `reassessment_cycle_years` 3 -> 6: Department of Taxes, "required to reappraise every six years as of January 2025".
+- WI `reassessment_cycle_years` 1 -> 5: DOR PB-060, "within 10% of full value in the same year, at least once within a
+  five-year period".
+- WY `annual_assessment_cap` null -> 0.04 and `homestead_exemption_rule` none -> 25% of market value (first $1,000,000):
+  W.S. 39-11-105(a)(xliii) exempts a home's assessed value "in excess of the prior year assessed value ... plus four percent
+  (4%)", and (a)(xlvi) exempts "twenty-five percent (25%) of the fair market value" of a single-family home and its land.
+- LA `source_url` pointed at Constitution art. VII s. 11 (Budgets); it now points at s. 18.
+- OR's homestead rule and CO's null cap had been counted as confirmed with no quote on file; both are now listed as not
+  confirmed.
+
+**Result.** verified 4 -> 11 (AK, AL, AZ, CA, DC, KY, LA, NM, TX, WA, WY); partly verified 25 -> 36; could not check 1 -> 2
+(NH, PR: no official host answered); unverified 22 -> 3 (IN, NY, PA: checked, nothing could be confirmed).
+New unit test (`tests/unit/financeProfiles.test.ts`): every tax-increment field counted as confirmed must carry a quote
+and an https source URL, and a verified profile may list no unverified field.
+
+**Seen on the real page.** A short Playwright script served this branch on port 9324 (county-file requests to R2 were
+answered from `counties/`, so none reached R2) and read the tax-increment section and methods panel for Jefferson AL,
+DC, Essex NJ and Cook IL (`data/backtests/live_check_finance_profiles_2026-11-21.json`). It caught Cook County being shown
+the downstate 33.3% ratio once Illinois's ratio was confirmed; the profile's new `scope_note` is now printed in both
+places and the rerun shows it.
+
+**Not done.** 8 partly verified profiles (ID, MN, MO, MT, ND, SD, UT, WV) were not re-checked. Fields stored
+as "no cap" or "no homestead exemption" were confirmed only where a source said so; most such fields stay listed as not
+confirmed. The advisor (Cloudflare Worker) does not read these profiles.
+
+### Northeast small counties: what the checks found (21 Nov 2026)
+
+108 counties in CT, RI, NJ, MA, NH, ME, VT, NY and PA were built and served from R2 (`audit/small-counties-northeast.md`).
+Nothing published was wrong; four things were found:
+
+- **New York county edges (found, not fixed).** The registry clips each New York county from the smallest
+  openstreetmap.fr New York file whose polygon contains it, and those sub-region files stop at their own polygons. A
+  live Overpass query of Hamilton County's box returned 2,024 roads; the extract has 1,489. Every road with a node inside
+  Hamilton's block groups in `us-northeast-latest.osm.pbf` (1,092) is in the extract: the 535 missing roads lie in the
+  0.02 degree margin the county box keeps beyond the county line. The same comparison for all 34 new New York counties:
+  0 roads missing inside any county, 0 to 4,550 missing in the margin (Madison 4,550). Distances that can reach across
+  a county line (nearest park, amenity or facility) may therefore be overstated for edge block groups of these counties
+  and, by the same rule, the 28 New York counties built before. Fix: cut New York from the regional file with
+  `osm_split.py` (it skips New York today) and rebuild. Listed in `WORK-QUEUE.md`.
+- **Live checker misread a top-coded rent (fixed).** `scripts/live_check_panels.mjs` expected "$3,501/mo" where the
+  page shows "$3,500 or more/mo" (Bristol RI block group 440010304001: the block group's rent is suppressed and the
+  tract's published median is 3501, the Census top-code for "$3,500+"). The page was right; the checker now expects the
+  Census top- and bottom-code wording.
+- **Crash-count test compared rounded sums exactly (fixed).** `tests/unit/stateCrashCounts.test.ts` required the stored
+  per-block-group sum to be at least the strictly-inside total, but the stored counts are rounded to 4 decimals (1/k
+  parts), so eight of the 47 new Maine and Pennsylvania files fell short by 0.0001-0.0002 (Aroostook: 3993.9998 against
+  3994). The test now allows that rounding (0.00005 per block group) and nothing more. The counts themselves are
+  unchanged.
+- **Corridor stops in counties now on the page (updated).** Six FRA corridor stops (Rockland ME; Rutland, Bennington,
+  Manchester, St. Albans, White River Junction VT) said `county_on_page: false`; their counties now have data files,
+  so `app/data/intercity_transit_corridors.json` says true. No other field changed.
+
+### West small counties: what the checks found (21 Nov 2026)
+
+186 counties in AZ, NV, UT, WY, OR, WA, NM and ID were built and served from R2 (`audit/small-counties-west.md`).
+The Census spot check (4,076 values), the tract-median flags, the OpenStreetMap ID-for-ID check (2 counties) and the
+live check from R2 (15 counties, 405 checks) found no wrong value. Nothing published was wrong; three things were
+found:
+
+- **`scripts/r2_sync_counties.py` uploads on any unrecognised argument (found, not fixed).** The script reads only
+  `--dry-run` and `--usage`; `--help` (or a typo such as `--dryrun`) runs a real upload. Run with `--help` at the start
+  of this batch, it reported "To upload: 0 files" and sent nothing, and the 8 GB guard applies on that path too, but the
+  owner's R2 rule depends on this script, so it should refuse unknown arguments. **Fixed 21 Nov 2026:** any argument other than `--dry-run` or `--usage` now exits with a usage message before anything is listed or uploaded (`python3 scripts/r2_sync_counties.py --help` printed "Unknown argument(s): --help ... Nothing was uploaded." and exit code 1).
+- **Corridor stops in counties now on the page (updated).** Two Big Sky North Coast corridor stops (Pasco WA, Franklin
+  County 53021; Sandpoint ID, Bonner County 16017) said `county_on_page: false`; their counties now have data files, so
+  `app/data/intercity_transit_corridors.json` says true. No other field changed.
+- **Six builds stopped by background time limits; 22 Wyoming build folders deleted by mistake (process, no
+  effect on files).** Every affected county was built again from the start before it was exported and checked; see
+  the West audit file.
+
+### Correction: the two branches' per-law site rules disagreed on six laws; settled at the statute text (found and fixed 22 Nov 2026)
+
+Both branches replaced the blanket site rule (19 Nov entry and 20 Nov entry above) with per-law rules, independently. On
+the merge one design was kept: each law's own list (`exclusion_sources`, statute wording and URL per entry) that must be
+confirmed against the text (`exclusions_review`), a listed condition not checked gives "not determined", and an unlisted
+condition has no effect. The other branch's per-condition evidence is kept on each record as `site_conditions`, and its
+"conditional" kind (an exclusion only on terms the page cannot see) is now an entry `effect: "conditional"`: present or
+not checked it gives "not determined" with those terms; it never rules a law out. Details and the conflict table:
+`docs/audit/merge-2026-11-22.md`. Statute text fetched on 22 Nov 2026:
+
+- **Maine LD 2003 (30-A M.R.S. 4364-A(1-B)(B)) and Oregon ORS 197A.460(3)(b): a true flood flag ruled the law out (trunk).**
+  The texts exclude those lots only "as long as a municipality exempts the lot or portion of the lot in a duly adopted
+  ordinance" (Maine) and on "lands where the local government determines that ... (C) The property is within a 100-year
+  floodplain" (Oregon). Now "not determined" with that wording. The other branch had this right.
+- **California SB 79: the trunk's confirmed list missed Gov. Code 65912.161(b)(1).** Until one year after its seventh
+  housing element revision, a city may exclude from 65912.157 by ordinance six kinds of site, including "Sites within a
+  very high fire hazard severity zone ..." ((D)) and "Sites with a historic resource designated as of January 1, 2025, on
+  a local register" ((F)) (LAW_SECTION_TBL_36658.lob, pubinfo_2025.zip). All six are now conditional entries, so SB 79 in a
+  very high fire zone is "not determined" (the trunk said it applied with a limit). The other branch had (D) and (F).
+- **Vermont Act 47: no flood item (trunk).** 24 V.S.A. 4303(42)(A)(ii) lets a municipality's sewer-and-water area
+  "exclude: (I) flood hazard or inundation areas as established by statute"; the four-unit and five-per-acre parts follow
+  that area. Added as a conditional entry (the duplex rule is not narrowed).
+- **Idaho 67-6541: the historic carve-out ruled the law out (trunk).** The exception is in subsection (2) only; (3)
+  ("approved administratively and as a matter of right") has none. Now conditional.
+- **California SB 9: the other branch applied SB 9 once the flood, fire and historic checks answered "no"; the trunk
+  listed today's wording of four items.** SB 9 uses Gov. Code 65913.4(a)(6)(B)-(K) "as that section read on September 16,
+  2021". Read on 22 Nov from AB 1174's chaptered text (Stats. 2021, ch. 160, 16 Sep 2021; BILL_VERSION_TBL_8486.lob,
+  pubinfo_2021.zip): ten items, including wetlands, hazardous waste sites, earthquake fault zones and protected habitat,
+  which the page never checks, and item (D) reads "or within a high or very high fire hazard severity zone as indicated on
+  maps adopted ... pursuant to Section 4202" (today's text says "the state responsibility area"). All ten are listed with
+  the 2021 wording; the list stays "not confirmed" (whether AB 1174's text is the one SB 9 means was not settled), so SB 9
+  is "not determined" on every lot, as on the trunk.
+- **The other branch ignored a conditional farmland or public-land item when the page had not checked it.** Under the
+  kept design an unchecked item holds the law back. No real record is affected: the other branch's farmland and
+  land-ownership "conditional" items are zoning-scope limits already tested by the zone class (Oregon HB 2001, Raleigh)
+  or duplicate an entry the trunk lists under its own key (SB 9 and AB 2011 prime farmland; Arizona tribal land).
+- **Savings clauses and local powers the other branch left "not settled".** Its engine held a law back on a flood or
+  fire lot when the text "does not settle it" (Oregon HB 2001, Texas SB 15, Idaho ADU law, Washington HB 1110 for
+  fire). The texts do not exclude those lots; they keep local rules in force. Recorded as `effect: "limits"` entries,
+  shown with the law: ORS 197A.420(5)(b) "May regulate middle housing to comply with protective measures adopted pursuant
+  to statewide land use planning goals."; Tex. Loc. Gov't Code 211.053(2) "flooding, sewer facilities, or well water
+  located on an individual residential lot and serving only that lot"; Idaho Code 67-6541(7)(a) "Building codes, fire
+  safety standards, and flood plain regulations". Washington's RCW 36.70A.635(4)(b)(v) ("susceptible to wildfires") only
+  applies where a city chose the 75 percent alternative, so it is conditional.

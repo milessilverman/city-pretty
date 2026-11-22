@@ -1,0 +1,422 @@
+{
+ "ran_on": "2026-11-20T18:03:50.973Z",
+ "script": "scripts/live_check_panels.mjs",
+ "results": {
+  "41051": {
+   "county": "Multnomah OR (Pacific)",
+   "state": "OR",
+   "points": [
+    {
+     "bg": "410510032004",
+     "lat": 45.550586,
+     "lng": -122.645853,
+     "service": "Multnomah County GIS Parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $873k, rent $3,122/mo, homes 598"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected At or above its 40% goal; box: \"At or above its 40% goal\" / \"-1.6°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 3 record(s) for OR"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Multnomah County · 410510032004; page \"Census area: Multnomah County · block group 410510032004(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1878 for 41051; page \"HUD Fair Market Rent (FY2027): 1 bed $1,633 · 2 bed $1,878 · 3 bed $2,550/moPortland-Vancouver-Hillsboro, OR-WA MSA. HUD's voucher benchmark (rent plus utilitie\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 168 ft; page \"Ground elevation: 168 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Zoning district R5 (Portland City Code, Title 33 (Planning and Zoning)) — Housing types allowed in R5: House, Attached house, Accessory dwelling unit, Duplex, Triplex, Fourplex, Multi-dwelling structure, Cottage cluster (PCC 33.110.200, Table 110-2). Height: up to 30 ft (PCC 33.110.215, Table 110-4); the table's note [3]: \"[3] Additional FAR and height may be allowed. See 33.110.265.F.\". Minimum setbacks: front 10 ft, side 5 ft, rear 5 ft, garage entrance 18 ft (PCC 33.110.220, Table 110-4). Required outdoor area: at least 250 sq ft (PCC 33.110.240, Table 110-4). The City's zoning map also puts this lot in: Aircraft Landing. Overlay zones, plan districts and historic or conservation designations change these standards; they aren't checked here.",
+      "• Floor area allowed by zoning — On this ~4,418 sq ft lot (by its parcel outline) the maximum floor area depends on the total number of homes on the lot, ADUs included: 1 home: up to about 2,209 sq ft (FAR 0.5); 2 homes: up to about 2,651 sq ft (FAR 0.6), or 3,093 sq ft with a bonus option (FAR 0.7); 3 homes: up to about 3,093 sq ft (FAR 0.7), or 3,534 sq ft with a bonus option (FAR 0.8); 4 or more homes: up to about 3,534 sq ft (FAR 0.8), or 3,976 sq ft with a bonus option (FAR 0.9) (PCC 33.110.210, Table 110-4). \"Maximum FAR applies to all buildings on the lot, however the maximum allowed is based on the total number of dwelling units on the lot and whether a bonus option is chosen.\" \"Adjustments to the maximum FAR ratios, including bonus ratios, are prohibited.\" Which count and bonus apply depends on what is built, so no single figure is given; the table's note [3]: \"[3] Additional FAR and height may be allowed. See 33.110.265.F.\".",
+      "✓ Second home (two-family or more) — R5 allows duplexes, triplexes and fourplexes (PCC 33.110.200, Table 110-2: \"Duplex No Yes Yes Yes Yes Yes\"; \"Triplex No Yes Yes Yes Yes Yes\"; \"Fourplex No Yes Yes Yes Yes Yes\"), within the floor area above; state law on file: OR HB 2001 (Oregon Housing Choice & Middle Housing) (text checked), which applies only where all of its conditions are met (see Housing laws & rights).",
+      "? Accessory dwelling unit (ADU) — Allowed in R5 (PCC 33.110.200, Table 110-2: \"Accessory dwelling unit (See Chapter 33.205) Yes Yes Yes Yes Yes Yes\"). Its size, placement and number are set by Chapter 33.205, which isn't read here; state law on file: OR ADU law: one ADU per detached home inside urban growth boundaries (text checked), which applies only where all of its conditions are met (see Housing laws & rights).",
+      "✗ Split into two lots (by area only) — Two new lots would each need at least 3,000 sq ft in R5 (PCC 33.610.200, Table 610-2); this lot has about 4,418 sq ft by its parcel outline.",
+      "? Second story — One story (inferred (assumption: single-story layout)). The height limit here is 30 ft (PCC 33.110.215); the floor area allowed is above. Foundation inspection required to carry upper-floor loads.",
+      "? Rooftop deck — Requires a flat roof or flat garage roof section."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "410510020013",
+     "lat": 45.529539,
+     "lng": -122.633474,
+     "service": "Multnomah County GIS Parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $623k, rent $1,626/mo, homes 412"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 8 pts (current release); page: 8 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 8 pts below its 40% goal; box: \"8 pts below its 40% goal\" / \"+0.8°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 3 record(s) for OR"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Multnomah County · 410510020013; page \"Census area: Multnomah County · block group 410510020013(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1878 for 41051; page \"HUD Fair Market Rent (FY2027): 1 bed $1,633 · 2 bed $1,878 · 3 bed $2,550/moPortland-Vancouver-Hillsboro, OR-WA MSA. HUD's voucher benchmark (rent plus utilitie\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 164 ft; page \"Ground elevation: 164 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: City of Portland's standards are on file only for R20, R10, R7, R5, R2.5; this lot is RM1. Only the single-dwelling zones R20, R10, R7, R5 and R2.5 are encoded. RF (its FAR cells can't be read from the PDF's text layer), the multi-dwelling (RM1-RM4, RX, RMP), commercial, employment, industrial and open-space zones, plan districts and overlay zones are not.",
+      "• Detached ADU (backyard home) — Building footprint is not on file, so open yard space cannot be verified without a site plan or survey.",
+      "? Duplex, middle housing or lot split — 4,965 sq ft parcel: allowed only where local zoning or a state law permits it; state law on file: OR HB 2001 (Oregon Housing Choice & Middle Housing) (text checked), which applies only where all of its conditions are met (see Housing laws & rights).",
+      "✓ Second story — One story (inferred (assumption: single-story layout)). Check the zone's height limit. Foundation inspection required to carry upper-floor loads.",
+      "? Rooftop deck — Requires a flat roof or flat garage roof section."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8988' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8988' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)"
+   ],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_41051.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_41051.json.gz"
+   ]
+  },
+  "48453": {
+   "county": "Travis TX (West South Central)",
+   "state": "TX",
+   "points": [
+    {
+     "bg": "484530010004",
+     "lat": 30.250146,
+     "lng": -97.723467,
+     "service": "Travis Central Appraisal District parcels (City of Austin copy)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": false,
+       "detail": "expected home value $865k, rent $3,501/mo, homes 245 | panel: Typical home value$865kCensus ACS 2020-24 median value for this block group (Census values stop at $2M) Median rent$3,500 or more/moCensus ACS 2020–24 Homes24"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 11 pts (current release); page: 11 pts, Tree Equity Score 2026 release (file dated 2026-03-13), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 10.7 pts below its 50% goal; box: \"10.7 pts below its 50% goal\" / \"-3.9°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 3 record(s) for TX"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Travis County · 484530010004; page \"Census area: Travis County · block group 484530010004(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1817 for 48453; page \"HUD Fair Market Rent (FY2027): 1 bed $1,530 · 2 bed $1,817 · 3 bed $2,292/moAustin-Round Rock-San Marcos, TX MSA. HUD's voucher benchmark (rent plus utilities),\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (0.2 pct annual chance flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 446 ft; page \"Ground elevation: 446 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file here. Austin: Austin's Land Development Code is published on Municode, which answered the build machine with a bot check (HTTP 403) on 16 Nov 2026, so no standard could be read from the code itself.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "484530330002",
+     "lat": 30.240477,
+     "lng": -97.899217,
+     "service": "Travis Central Appraisal District parcels (City of Austin copy)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $560k, rent $1,904/mo, homes 1,106"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 2 pts (current release); page: 2 pts, Tree Equity Score 2026 release (file dated 2026-03-13), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 1.5 pts below its 50% goal; box: \"1.5 pts below its 50% goal\" / \"-0.7°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 3 record(s) for TX"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Travis County · 484530330002; page \"Census area: Travis County · block group 484530330002(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1817 for 48453; page \"HUD Fair Market Rent (FY2027): 1 bed $1,530 · 2 bed $1,817 · 3 bed $2,292/moAustin-Round Rock-San Marcos, TX MSA. HUD's voucher benchmark (rent plus utilities),\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 1051 ft; page \"Ground elevation: 1,051 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file here. Austin: Austin's Land Development Code is published on Municode, which answered the build machine with a bot check (HTTP 403) on 16 Nov 2026, so no standard could be read from the code itself.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "fail",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8988' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8988' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)"
+   ],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_48453.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_48453.json.gz"
+   ]
+  },
+  "06037": {
+   "county": "Los Angeles CA",
+   "state": "CA",
+   "points": [
+    {
+     "bg": "060372218101",
+     "lat": 34.030749,
+     "lng": -118.293745,
+     "service": "Los Angeles County Assessor parcels (LA County GIS)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "home value expected $1.0M (la_neighborhood_values.json); rent/homes not independently checked for LA"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 19 pts (current release); page: 19 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 18.8 pts below its 30% goal; box: \"18.8 pts below its 30% goal\" / \"+2.1°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [0,0,0]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 8 record(s) for CA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Los Angeles County · 060372218101; page \"Census area: Los Angeles County · block group 060372218101(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2964 for 06037; page \"HUD Fair Market Rent (FY2027): 1 bed $2,402 · 2 bed $2,964 · 3 bed $3,760/moLos Angeles-Long Beach-Glendale, CA HUD Metro FMR Area. HUD's voucher benchmark (ren\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 188 ft; page \"Ground elevation: 188 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Historic district or landmark — This lot is in a historic district or is a designated resource: exterior alterations require HPOZ design review, and SB 9 does not apply.",
+      "• Detached ADU (backyard home) — Building footprint is not on file, so open yard space cannot be verified without a site plan or survey.",
+      "✓ Second story — One story (inferred (assumption: single-story layout)). Check the zone's height limit. Foundation inspection required to carry upper-floor loads.",
+      "? Rooftop deck — Requires a flat roof or flat garage roof section.",
+      "? Whole-house repiping — Built in 1903: galvanized steel supply piping common in pre-1975 homes.",
+      "✓ Add a bathroom — 3 bedrooms but only 1 bath: would fix the bedroom-to-bath imbalance. What an added bathroom is worth at resale is not on file (the survey figure used before could not be checked, and it was for Los Angeles only).",
+      "✓ Heat-pump heating and cooling — Existing heating is floor or wall heat with no central AC: heat pump provides both."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "060372049102",
+     "lat": 34.024464,
+     "lng": -118.197027,
+     "service": "Los Angeles County Assessor parcels (LA County GIS)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "home value expected $583k (la_neighborhood_values.json); rent/homes not independently checked for LA"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 17 pts (current release); page: 17 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 17.2 pts below its 30% goal; box: \"17.2 pts below its 30% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [1.75,4.25,63.75]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 8 record(s) for CA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Los Angeles County · 060372049102; page \"Census area: Los Angeles County · block group 060372049102(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 2964 for 06037; page \"HUD Fair Market Rent (FY2027): 1 bed $2,402 · 2 bed $2,964 · 3 bed $3,760/moLos Angeles-Long Beach-Glendale, CA HUD Metro FMR Area. HUD's voucher benchmark (ren\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 231 ft; page \"Ground elevation: 231 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Detached ADU (backyard home) — Building footprint is not on file, so open yard space cannot be verified without a site plan or survey.",
+      "✓ Second story — One story (inferred (assumption: single-story layout)). Check the zone's height limit. Foundation inspection required to carry upper-floor loads.",
+      "? Rooftop deck — Requires a flat roof or flat garage roof section.",
+      "? Whole-house repiping — Built in 1911: galvanized steel supply piping common in pre-1975 homes.",
+      "✓ Add a bathroom — 3 bedrooms but only 1 bath: would fix the bedroom-to-bath imbalance. What an added bathroom is worth at resale is not on file (the survey figure used before could not be checked, and it was for Los Angeles only).",
+      "✓ Heat-pump heating and cooling — Existing heating is floor or wall heat with no central AC: heat pump provides both."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8988' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:8988' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)"
+   ],
+   "bundle_requests": []
+  }
+ }
+}

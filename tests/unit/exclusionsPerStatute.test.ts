@@ -18,7 +18,8 @@ describe("every record carries its own exclusion list and says whether it was co
     for (const r of LAWS) {
       expect(Array.isArray(r.exclusion_sources), r.id).toBe(true);
       expect(["confirmed", "not confirmed"], r.id).toContain(r.exclusions_review.status);
-      expect(r.exclusions_review.checked_on, r.id).toBe("2026-11-19");
+      // 19 Nov 2026: every list read; 22 Nov 2026: the lists the two branches' evidence disagreed on were re-read at the statute.
+      expect(r.exclusions_review.checked_on, r.id).toMatch(/^2026-11-(19|22)$/);
       expect(r.exclusions_review.note.length, r.id).toBeGreaterThan(20);
       expect(r.statutory_exclusions, r.id).toBeUndefined();
       const unverified = (r.verification.unverified_fields || []).join(" | ");
@@ -34,8 +35,10 @@ describe("every record carries its own exclusion list and says whether it was co
         expect(e.wording.length, r.id + " " + e.key).toBeGreaterThan(10);
         expect(e.citation, r.id + " " + e.key).toBeTruthy();
         expect(e.url, r.id + " " + e.key).toMatch(/^https:\/\//);
-        expect(e.checked_on, r.id + " " + e.key).toBe("2026-11-19");
-        if (e.effect !== undefined) expect(e.effect).toBe("limits");
+        expect(e.checked_on, r.id + " " + e.key).toMatch(/^2026-11-(19|22)$/);
+        if (e.effect !== undefined) expect(["limits", "conditional"]).toContain(e.effect);
+        // a conditional exclusion says on what terms the text excludes the site
+        if (e.effect === "conditional") expect(String(e.condition || "").length, r.id + " " + e.key).toBeGreaterThan(10);
       }
     }
   });
@@ -51,7 +54,7 @@ describe("every record carries its own exclusion list and says whether it was co
   it("(a) for every confirmed record, each listed blocking exclusion that is present is reported with the statute's wording", () => {
     let checked = 0;
     for (const r of LAWS.filter((x: any) => x.exclusions_review.status === "confirmed")) {
-      for (const e of r.exclusion_sources.filter((x: any) => x.effect !== "limits")) {
+      for (const e of r.exclusion_sources.filter((x: any) => x.effect === undefined)) {
         const c = statuteExclusionCheck(r, { exclusions: { ...clear(r), [e.key]: true } });
         expect(c.confirmed, r.id).toBe(true);
         expect(c.present.map((p: any) => p.key), r.id + " " + e.key).toContain(e.key);
@@ -61,6 +64,22 @@ describe("every record carries its own exclusion list and says whether it was co
       }
     }
     expect(checked).toBeGreaterThan(40);
+  });
+
+  // (a2) an exclusion the text makes only on terms the page cannot see (a local ordinance or determination) never rules the
+  // law out and never lets it apply: present, the law is not determined and the reason quotes the statute and the terms.
+  it("(a2) for every confirmed record, each conditional exclusion that is present gives 'not determined' with the statute's wording and terms", () => {
+    let checked = 0;
+    for (const r of LAWS.filter((x: any) => x.exclusions_review.status === "confirmed")) {
+      for (const e of r.exclusion_sources.filter((x: any) => x.effect === "conditional")) {
+        const c = statuteExclusionCheck(r, { exclusions: { ...clear(r), [e.key]: true } });
+        expect(c.present.map((p: any) => p.key), r.id + " " + e.key).toEqual(r.exclusion_sources.filter((x: any) => x.key === e.key && x.effect === undefined).map((x: any) => x.key));
+        expect(c.conditionalPresent.map((p: any) => p.key), r.id + " " + e.key).toContain(e.key);
+        expect(c.quote(e)).toContain(e.wording);
+        checked++;
+      }
+    }
+    expect(checked).toBeGreaterThan(10);
   });
 
   it("(b) a flag the law does not list has no effect on it, for every record", () => {
@@ -121,11 +140,16 @@ describe("the engine uses the law's own list", () => {
 
   // These two laws also carry an unmapped_condition (a will-serve letter, a covenant), so the engine reports them as not on
   // file before it reaches the exclusions; the check function is tested directly.
-  it("Oregon commercial-land law: the 100-year floodplain is listed, and the note says the page's flag is FEMA's special flood hazard area", () => {
+  // 22 Nov 2026 merge, settled at the statute: ORS 197A.460(3)(b) says the section does not "Apply on lands where the local
+  // government determines that" ... "(C) The property is within a 100-year floodplain" (fetched 22 Nov). The trunk's test had
+  // the flood item rule the law out; it is a local determination the page cannot see, so it is "conditional".
+  it("Oregon commercial-land law: the 100-year floodplain is listed as a local determination, and the note says the page's flag is FEMA's special flood hazard area", () => {
     const rec = byId("or_commercial_197a460");
     const c = statuteExclusionCheck(rec, { exclusions: { ...clear(rec), fema_100yr_floodway: true } });
-    expect(c.present.map((e: any) => e.key)).toEqual(["fema_100yr_floodway"]);
-    const note = c.quote(c.present[0]);
+    expect(c.present).toEqual([]);
+    expect(c.conditionalPresent.map((e: any) => e.key)).toEqual(["fema_100yr_floodway"]);
+    expect(c.conditionalPresent[0].condition).toBe("only where the local government determines it");
+    const note = c.quote(c.conditionalPresent[0]);
     expect(note).toContain("The property is within a 100-year floodplain");
     expect(note).toContain("FEMA's special flood hazard area");
   });
@@ -144,15 +168,29 @@ describe("the engine uses the law's own list", () => {
     expect(r.not_confirmed.find((e: any) => e.id === "ca_sb9_lot_split").reason).toMatch(/has not been confirmed against the statute text/);
   });
 
-  it("a limit stays on the law: SB 79 in a very high fire zone applies and quotes 65912.159(a)(3)", () => {
+  // 22 Nov 2026 merge, settled at the statute: the trunk's test said SB 79 applies in a very high fire zone with the
+  // 65912.159(a)(3) streamlining limit quoted. Gov. Code 65912.161(b)(1)(D) (fetched 22 Nov) also lets a city exclude such
+  // sites from 65912.157 by ordinance until a year after its seventh housing element revision, so in the zone, or with the
+  // zone not checked, SB 79 is not determined. The limit is still on the record and is reported where the law applies.
+  it("SB 79 in a very high fire zone is not determined (65912.161(b)(1)(D)); the streamlining limit stays on the record", () => {
     const rec = byId("ca_sb79_tier1");
     const p = comm("CA", { county_fips: "06037", dist_to_heavy_rail_mi: 0.2, exclusions: { ...clear(rec), calfire_or_state_vhfhsz: true } });
-    const t1 = evaluateByRightHousing(p, LAWS).applicable_statutes.find((s: any) => s.id === "ca_sb79_tier1");
-    expect(t1.exclusion_limits.join(" ")).toContain("very high fire hazard severity zone");
-    // not checked: the law still applies, and the limit is listed as not checked
-    const q = evaluateByRightHousing({ ...p, exclusions: { rent_controlled_housing_site: false, rent_controlled_housing_site_prior_use: false, mobilehome_or_rv_park_site: false } }, LAWS);
-    const t1b = q.applicable_statutes.find((s: any) => s.id === "ca_sb79_tier1");
-    expect(t1b.exclusion_limits_not_checked.join(" ")).toMatch(/very high fire hazard/);
+    const r = evaluateByRightHousing(p, LAWS);
+    expect(ids(r)).not.toContain("ca_sb79_tier1");
+    expect(r.excluded_by_statute.map((x: any) => x.id)).not.toContain("ca_sb79_tier1");
+    const nc = r.not_confirmed.find((x: any) => x.id === "ca_sb79_tier1");
+    expect(nc.reason).toContain("Cal. Gov. Code 65912.161(b)(1)(D)");
+    expect(nc.reason).toContain("Sites within a very high fire hazard severity zone");
+    // not checked: not determined either (the page cannot tell whether the lot is in the zone)
+    const noFire: Record<string, any> = clear(rec);
+    delete noFire.calfire_or_state_vhfhsz;
+    const q = evaluateByRightHousing({ ...p, exclusions: noFire }, LAWS);
+    expect(ids(q)).not.toContain("ca_sb79_tier1");
+    expect(q.not_confirmed.find((x: any) => x.id === "ca_sb79_tier1").reason).toMatch(/^Not determined: the law excludes .*very high fire hazard/);
+    // every check clear: it applies, and the limit is on the record
+    const ok = evaluateByRightHousing({ ...p, exclusions: clear(rec) }, LAWS).applicable_statutes.find((s: any) => s.id === "ca_sb79_tier1");
+    expect(ok).toBeTruthy();
+    expect(rec.exclusion_sources.find((e: any) => e.key === "calfire_or_state_vhfhsz" && e.effect === "limits").citation).toBe("Cal. Gov. Code 65912.159(a)(3)");
   });
 
   it("Washington's middle-housing law excludes only what RCW 36.70A.635(8) lists, and quotes it", () => {

@@ -1,0 +1,248 @@
+{
+ "ran_on": "2026-11-21T11:44:12.656Z",
+ "script": "scripts/live_check_panels.mjs",
+ "results": {
+  "23003": {
+   "state": "ME",
+   "points": [
+    {
+     "bg": "230039501001",
+     "lat": 46.981054,
+     "lng": -68.188333,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $171k, rent $814/mo, homes 350"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [1,0,39]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for ME"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel at point"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel at point"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel at point"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel at point"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel at point"
+    },
+    {
+     "bg": "230039510002",
+     "lat": 46.881329,
+     "lng": -68.121276,
+     "service": "Maine Parcels Organized Towns (Maine GeoLibrary / MEGIS)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $150k, rent $497/mo, homes 556"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [1,3,79.5]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for ME"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Aroostook County · 230039510002; page \"Census area: Aroostook County · block group 230039510002(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR [1175,1175] for 23003; page \"HUD Fair Market Rent (FY2027): 2 bed $1,175/moHUD's voucher benchmark (rent plus utilities), not a market asking rent. New England: HUD sets FMRs by town; 71 to\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: unmapped; page \"FEMA flood zone: Not available (No effective FEMA flood map here (unmapped, not 'no risk'))(FEMA National Flood Hazard L\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 687 ft; page \"Ground elevation: 687 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9210' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+   ],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_23003.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_23003.json.gz"
+   ]
+  },
+  "42023": {
+   "state": "PA",
+   "points": [
+    {
+     "bg": "420239602001",
+     "lat": 41.369855,
+     "lng": -78.11868,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $118k, rent $575/mo, homes 1,498"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [0,3,39]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for PA"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel service for this county"
+    },
+    {
+     "bg": "420239601001",
+     "lat": 41.50948,
+     "lng": -78.233745,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $72k, rent $725/mo, homes 574"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [0.5,0,5]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for PA"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel service for this county"
+    }
+   ],
+   "checks": {
+    "census_area": "n/a",
+    "hud": "n/a",
+    "fema": "n/a",
+    "usgs": "n/a",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_42023.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_42023.json.gz"
+   ]
+  }
+ }
+}

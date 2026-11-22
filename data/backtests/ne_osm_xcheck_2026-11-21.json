@@ -1,0 +1,408 @@
+{
+ "_source": {
+  "script": "scripts/check_osm_extract_vs_overpass.py",
+  "note": "Northeast small counties, 21 Nov 2026: ID-for-ID comparison of the county extract with a live Overpass query of the same box (maps.mail.ru mirror). 44001 and 42023 are cut from us-northeast-latest.osm.pbf (data timestamp 2026-11-21T01:28:06Z) by osm_split.py; 36041 is clipped from openstreetmap.fr's us-northeast/new-york/north_country file (data timestamp 2026-11-21T01:27:06Z), the file the registry names for it. For New York, ny_regional_compare lists, for every one of the 34 New York counties built, the roads of the same classes in us-northeast-latest.osm.pbf that have a node inside the county's block groups or inside the county box, and how many of them the county extract lacks."
+ },
+ "counties": {
+  "44001": {
+   "fips": "44001",
+   "box_s_w_n_e": "41.618137000103026,-71.38520700003086,41.79619900011075,-71.18837099965407",
+   "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+   "extract_snapshot": "2026-11-21T01:28:06Z",
+   "checked_at": "2026-11-21T09:58:12Z",
+   "roads": {
+    "direct": 4082,
+    "extract": 4082,
+    "missing_from_extract": [],
+    "extra_in_extract": [],
+    "n_missing": 0,
+    "n_extra": 0,
+    "match": true
+   },
+   "bus_stops": {
+    "direct": 278,
+    "extract": 278,
+    "missing_from_extract": [],
+    "extra_in_extract": [],
+    "n_missing": 0,
+    "n_extra": 0,
+    "match": true
+   }
+  },
+  "42023": {
+   "fips": "42023",
+   "box_s_w_n_e": "41.19693100024674,-78.44115399999203,41.6375990000406,-77.96887899983628",
+   "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+   "extract_snapshot": "2026-11-21T01:28:06Z",
+   "checked_at": "2026-11-21T10:21:35Z",
+   "roads": {
+    "direct": 1212,
+    "extract": 1212,
+    "missing_from_extract": [],
+    "extra_in_extract": [],
+    "n_missing": 0,
+    "n_extra": 0,
+    "match": true
+   },
+   "bus_stops": {
+    "direct": 0,
+    "extract": 0,
+    "missing_from_extract": [],
+    "extra_in_extract": [],
+    "n_missing": 0,
+    "n_extra": 0,
+    "match": true
+   }
+  },
+  "36041": {
+   "fips": "36041",
+   "box_s_w_n_e": "43.19468399971085,-74.88771200002284,44.14055199968415,-74.02611399999385",
+   "endpoint": "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
+   "extract_snapshot": "2026-11-21T01:27:06Z",
+   "checked_at": "2026-11-21T10:13:53Z",
+   "roads": {
+    "direct": 2024,
+    "extract": 1489,
+    "missing_from_extract": [
+     5627760,
+     5628042,
+     5628044,
+     5628047,
+     5628590,
+     5629975,
+     5631675,
+     5632704,
+     5632763,
+     5632797,
+     5633010,
+     5633865,
+     5633905,
+     5633971,
+     5634201,
+     5634315,
+     5634389,
+     5634390,
+     5634734,
+     5635221,
+     5635477,
+     5635520,
+     5635873,
+     5635976,
+     5636139,
+     5636301,
+     5636408,
+     5636762,
+     5636837,
+     5636882,
+     5637926,
+     5639099,
+     5639104,
+     5639194,
+     5639554,
+     5639773,
+     5640035,
+     5640049,
+     5640114,
+     5640237,
+     5640326,
+     5640339,
+     5640590,
+     5641270,
+     5641324,
+     5641816,
+     5642582,
+     5642849,
+     5643131,
+     5643625
+    ],
+    "extra_in_extract": [],
+    "n_missing": 535,
+    "n_extra": 0,
+    "match": false
+   },
+   "bus_stops": {
+    "direct": 0,
+    "extract": 0,
+    "missing_from_extract": [],
+    "extra_in_extract": [],
+    "n_missing": 0,
+    "n_extra": 0,
+    "match": true
+   }
+  }
+ },
+ "ny_regional_compare": {
+  "36003": {
+   "extract": 4165,
+   "reference_in_county": 3914,
+   "missing_in_county": 0,
+   "reference_in_box": 4502,
+   "missing_in_box": 337,
+   "sample_missing_in_county": []
+  },
+  "36009": {
+   "extract": 5622,
+   "reference_in_county": 4724,
+   "missing_in_county": 0,
+   "reference_in_box": 5728,
+   "missing_in_box": 106,
+   "sample_missing_in_county": []
+  },
+  "36011": {
+   "extract": 8241,
+   "reference_in_county": 2980,
+   "missing_in_county": 0,
+   "reference_in_box": 8543,
+   "missing_in_box": 302,
+   "sample_missing_in_county": []
+  },
+  "36015": {
+   "extract": 3830,
+   "reference_in_county": 3261,
+   "missing_in_county": 0,
+   "reference_in_box": 4106,
+   "missing_in_box": 276,
+   "sample_missing_in_county": []
+  },
+  "36017": {
+   "extract": 4205,
+   "reference_in_county": 2942,
+   "missing_in_county": 0,
+   "reference_in_box": 4484,
+   "missing_in_box": 279,
+   "sample_missing_in_county": []
+  },
+  "36019": {
+   "extract": 4138,
+   "reference_in_county": 3413,
+   "missing_in_county": 0,
+   "reference_in_box": 4339,
+   "missing_in_box": 201,
+   "sample_missing_in_county": []
+  },
+  "36021": {
+   "extract": 6282,
+   "reference_in_county": 3922,
+   "missing_in_county": 0,
+   "reference_in_box": 8482,
+   "missing_in_box": 2200,
+   "sample_missing_in_county": []
+  },
+  "36023": {
+   "extract": 2403,
+   "reference_in_county": 1964,
+   "missing_in_county": 0,
+   "reference_in_box": 2517,
+   "missing_in_box": 114,
+   "sample_missing_in_county": []
+  },
+  "36025": {
+   "extract": 5486,
+   "reference_in_county": 4261,
+   "missing_in_county": 0,
+   "reference_in_box": 8254,
+   "missing_in_box": 2768,
+   "sample_missing_in_county": []
+  },
+  "36031": {
+   "extract": 5459,
+   "reference_in_county": 3928,
+   "missing_in_county": 0,
+   "reference_in_box": 6426,
+   "missing_in_box": 967,
+   "sample_missing_in_county": []
+  },
+  "36033": {
+   "extract": 4905,
+   "reference_in_county": 3288,
+   "missing_in_county": 0,
+   "reference_in_box": 4905,
+   "missing_in_box": 0,
+   "sample_missing_in_county": []
+  },
+  "36035": {
+   "extract": 3281,
+   "reference_in_county": 2558,
+   "missing_in_county": 0,
+   "reference_in_box": 3450,
+   "missing_in_box": 169,
+   "sample_missing_in_county": []
+  },
+  "36037": {
+   "extract": 2486,
+   "reference_in_county": 2152,
+   "missing_in_county": 0,
+   "reference_in_box": 2596,
+   "missing_in_box": 110,
+   "sample_missing_in_county": []
+  },
+  "36039": {
+   "extract": 4828,
+   "reference_in_county": 3655,
+   "missing_in_county": 0,
+   "reference_in_box": 6209,
+   "missing_in_box": 1381,
+   "sample_missing_in_county": []
+  },
+  "36041": {
+   "extract": 1489,
+   "reference_in_county": 1092,
+   "missing_in_county": 0,
+   "reference_in_box": 2024,
+   "missing_in_box": 535,
+   "sample_missing_in_county": []
+  },
+  "36043": {
+   "extract": 6318,
+   "reference_in_county": 3445,
+   "missing_in_county": 0,
+   "reference_in_box": 6538,
+   "missing_in_box": 220,
+   "sample_missing_in_county": []
+  },
+  "36049": {
+   "extract": 3746,
+   "reference_in_county": 1977,
+   "missing_in_county": 0,
+   "reference_in_box": 4497,
+   "missing_in_box": 751,
+   "sample_missing_in_county": []
+  },
+  "36051": {
+   "extract": 3569,
+   "reference_in_county": 2567,
+   "missing_in_county": 0,
+   "reference_in_box": 4936,
+   "missing_in_box": 1367,
+   "sample_missing_in_county": []
+  },
+  "36053": {
+   "extract": 4470,
+   "reference_in_county": 2877,
+   "missing_in_county": 0,
+   "reference_in_box": 9020,
+   "missing_in_box": 4550,
+   "sample_missing_in_county": []
+  },
+  "36057": {
+   "extract": 4487,
+   "reference_in_county": 2391,
+   "missing_in_county": 0,
+   "reference_in_box": 4770,
+   "missing_in_box": 283,
+   "sample_missing_in_county": []
+  },
+  "36073": {
+   "extract": 1733,
+   "reference_in_county": 1507,
+   "missing_in_county": 0,
+   "reference_in_box": 1733,
+   "missing_in_box": 0,
+   "sample_missing_in_county": []
+  },
+  "36077": {
+   "extract": 5190,
+   "reference_in_county": 3711,
+   "missing_in_county": 0,
+   "reference_in_box": 6089,
+   "missing_in_box": 899,
+   "sample_missing_in_county": []
+  },
+  "36079": {
+   "extract": 8661,
+   "reference_in_county": 3961,
+   "missing_in_county": 0,
+   "reference_in_box": 9278,
+   "missing_in_box": 617,
+   "sample_missing_in_county": []
+  },
+  "36095": {
+   "extract": 3033,
+   "reference_in_county": 2252,
+   "missing_in_county": 0,
+   "reference_in_box": 3517,
+   "missing_in_box": 484,
+   "sample_missing_in_county": []
+  },
+  "36097": {
+   "extract": 2594,
+   "reference_in_county": 1581,
+   "missing_in_county": 0,
+   "reference_in_box": 2775,
+   "missing_in_box": 181,
+   "sample_missing_in_county": []
+  },
+  "36099": {
+   "extract": 2533,
+   "reference_in_county": 1526,
+   "missing_in_county": 0,
+   "reference_in_box": 3745,
+   "missing_in_box": 1212,
+   "sample_missing_in_county": []
+  },
+  "36101": {
+   "extract": 7241,
+   "reference_in_county": 6163,
+   "missing_in_county": 0,
+   "reference_in_box": 8063,
+   "missing_in_box": 822,
+   "sample_missing_in_county": []
+  },
+  "36105": {
+   "extract": 9552,
+   "reference_in_county": 6133,
+   "missing_in_county": 0,
+   "reference_in_box": 11176,
+   "missing_in_box": 1624,
+   "sample_missing_in_county": []
+  },
+  "36107": {
+   "extract": 3716,
+   "reference_in_county": 2214,
+   "missing_in_county": 0,
+   "reference_in_box": 4038,
+   "missing_in_box": 322,
+   "sample_missing_in_county": []
+  },
+  "36113": {
+   "extract": 6241,
+   "reference_in_county": 3925,
+   "missing_in_county": 0,
+   "reference_in_box": 6805,
+   "missing_in_box": 564,
+   "sample_missing_in_county": []
+  },
+  "36115": {
+   "extract": 5282,
+   "reference_in_county": 3454,
+   "missing_in_county": 0,
+   "reference_in_box": 6171,
+   "missing_in_box": 889,
+   "sample_missing_in_county": []
+  },
+  "36117": {
+   "extract": 3445,
+   "reference_in_county": 2863,
+   "missing_in_county": 0,
+   "reference_in_box": 3621,
+   "missing_in_box": 176,
+   "sample_missing_in_county": []
+  },
+  "36121": {
+   "extract": 2331,
+   "reference_in_county": 1845,
+   "missing_in_county": 0,
+   "reference_in_box": 2508,
+   "missing_in_box": 177,
+   "sample_missing_in_county": []
+  },
+  "36123": {
+   "extract": 1798,
+   "reference_in_county": 1496,
+   "missing_in_county": 0,
+   "reference_in_box": 2333,
+   "missing_in_box": 535,
+   "sample_missing_in_county": []
+  }
+ }
+}

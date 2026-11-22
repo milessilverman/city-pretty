@@ -218,5 +218,5 @@ Geofabrik, overpass-api.de and the other Overpass mirrors (no answer), the 2021 
 `aleutians_click_west_of_180.png` in the scratchpad): the county opens at zoom 9 centred on Unalaska (191.8 to 194.4 east), not on the whole
 world; a click on Attu (173.02 E) selects 020160001001 and a click on Unalaska (166.8 W) selects 020160002002; `pointInFeature` finds the
 Unalaska block group at -166.8 and nothing at (-150, 50); no console error except four 404s for the crash files that do not exist.
-`scripts/live_check_panels.mjs 02016`: 3 block groups, every panel ok (`data/backtests/live_check_panels_2026-11-21.json`). At the page's minimum
+`scripts/live_check_panels.mjs 02016`: 3 block groups, every panel ok (`data/backtests/live_check_panels_2026-11-21_02016.json`; renamed on the 22 Nov merge, the other branch had a file of the same name). At the page's minimum
 zoom of 9 only one island group fits on the screen; the chain is 22 degrees long.

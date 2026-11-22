@@ -103,11 +103,22 @@ describe("City Pretty Multi-State & Engine Audit Regression Suite", () => {
     // County eligibility list is from a secondary source: reported as not confirmed.
     expect(t1.unconfirmed_fields.join(" ")).toMatch(/eligible_counties/);
 
-    // A very high fire zone limits only SB 79's streamlined-approval route (Gov. Code 65912.159(a)(3)); the law stays on the
-    // parcel and the output quotes that limit. Sites in 65912.157(h) (rent-controlled housing, mobilehome parks) are excluded.
+    // Very high fire zone, settled at the statute on the 22 Nov 2026 merge. The two branches disagreed: the trunk's test said
+    // SB 79 still applies with a limit (65912.159(a)(3) bars the zone only from the streamlined route), the other branch's
+    // said not confirmed. Gov. Code 65912.161(b)(1)(D) (fetched 22 Nov from the Legislative Counsel bulk file) lets a city
+    // exclude such sites from 65912.157 by ordinance until a year after its seventh housing element revision; the page
+    // cannot see that ordinance, so SB 79 is not determined there: not applied, not ruled out. The streamlined-route limit
+    // is still on the record.
     const fire = evaluateByRightHousing({ ...laTransitParcel, exclusions: { ...laTransitParcel.exclusions, calfire_or_state_vhfhsz: true } }, LAWS);
-    const fireT1 = fire.applicable_statutes.find(s => s.id === "ca_sb79_tier1")!;
-    expect(fireT1.exclusion_limits.join(" ")).toContain("very high fire hazard severity zone");
+    expect(fire.applicable_statutes.map(s => s.id)).not.toContain("ca_sb79_tier1");
+    const nc = fire.not_confirmed.find(n => n.id === "ca_sb79_tier1")!;
+    expect(nc.reason).toContain("Cal. Gov. Code 65912.161(b)(1)(D)");
+    expect(nc.reason).toContain("only where the local government has adopted an ordinance under 65912.160 excluding the site");
+    expect(fire.excluded_by_statute.map((x: any) => x.id)).not.toContain("ca_sb79_tier1");
+    expect(LAWS.find((r: any) => r.id === "ca_sb79_tier1").exclusion_sources.some((e: any) => e.key === "calfire_or_state_vhfhsz" && e.effect === "limits")).toBe(true);
+    // AB 2097 was read in full and has no site exclusion, so the fire zone does not hold it back (other branch's test).
+    expect(fire.applicable_statutes.map(s => s.id)).toContain("ca_ab2097");
+    // Sites in 65912.157(h) (rent-controlled housing, mobilehome parks) are excluded outright (trunk's test).
     const mh = evaluateByRightHousing({ ...laTransitParcel, exclusions: { ...laTransitParcel.exclusions, mobilehome_or_rv_park_site: true } }, LAWS);
     expect(mh.applicable_statutes.map(s => s.id)).not.toContain("ca_sb79_tier1");
     const mhT1 = mh.excluded_by_statute.find((x: any) => x.id === "ca_sb79_tier1")!;

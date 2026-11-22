@@ -1,4 +1,8 @@
-# Crash counts outside California: rebuilt with a boundary rule (16 Nov 2026)
+# Crash counts outside California: rebuilt with a boundary rule (16 Nov 2026; 1/k split 21 Nov 2026)
+
+> **21 Nov 2026:** the rule below (a boundary crash counts for each block group it borders) is the 16 Nov rule. Since 21 Nov a
+> crash within 10 m of k block groups counts 1/k in each, so a county's block groups add up to its placed crashes. The
+> tables below describe the 16 Nov pass (the "boundary rule vs strictly inside" ratios are the overcount the split removes).
 
 ## Why
 
@@ -56,8 +60,28 @@ observed on 16 Nov 2026, and the checks recorded in `pipeline/region.py`.
 
 - **Crashes stored without a location** are not returned by a map query, so their share is unknown for these
   sources (in LA's CCRS data it is 26%).
-- **California** was rebuilt separately (`scripts/build_crash_counts_ca.py`; San Francisco with this script) and, on 19 Nov 2026, again with the 1/k split. The files from this pass (outside California) were built under the older rule (a boundary crash counts in full in each bordering block group) and have not been rebuilt with the 1/k split; the page labels each county with its own rule (`_meta.weighting` is `1/k` only in rebuilt files).
+- **California** was rebuilt separately (`scripts/build_crash_counts_ca.py`; San Francisco with this script) and, on 19 Nov 2026, again with the 1/k split. The files from this pass (outside California) were built under the older rule (a boundary crash counts in full in each bordering block group); all 175 were rebuilt with the 1/k split on 21 Nov 2026 (below).
 - **Counties with no crash source** (most of the 637) have no crash counts; only federal FARS fatal crashes were
   downloaded and are not scored.
 - The bundles' own crash-based rankings and the traffic-calming placement still use the old counts until the page is
   wired to these files and the bundles are rebuilt (not done here; `app/app.js` was out of scope).
+
+## Update 21 Nov 2026: all 175 files rebuilt with the 1/k split
+
+The 175 files outside California (the 94 counties above plus 81 Tennessee counties added 17 Nov) were rebuilt with
+`scripts/build_state_crash_counts.py` (same services, queries and years). Every source answered, and every county's crashes
+read and placed are the same as in the old files. Block-group sums (all crashes) against placed crashes, from the files:
+
+| State | Counties | Placed | Sum before (ratio) | Sum after |
+|---|---|---|---|---|
+| 08 Colorado (Denver) | 1 | 51,561 | 84,502 (1.64) | 51,561.0 |
+| 17 Illinois | 20 | 803,735 | 1,189,172 (1.48) | 803,735.0 |
+| 23 Maine | 5 | 69,522 | 98,692 (1.42) | 69,522.0 |
+| 42 Pennsylvania | 31 | 302,628 | 448,097 (1.48) | 302,628.0 |
+| 47 Tennessee | 95 | 141,107 | 221,471 (1.57) | 141,107.0 |
+| 49 Utah | 6 | 148,709 | 243,448 (1.64) | 148,709.0 |
+| 51 Virginia | 17 | 209,055 | 309,516 (1.48) | 209,055.0 |
+| All | 175 | 1,726,317 | 2,594,898 (1.50) | 1,726,316.9 |
+
+Invariant test over every county: `tests/unit/crashCountsInvariant.test.ts`. Details, the recomputed comparisons and the
+live check: `docs/DATA-AUDIT-AND-TRANSPARENCY.md`, 21 Nov 2026 entry.

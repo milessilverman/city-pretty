@@ -1,28 +1,29 @@
 {
- "ran_on": "2026-11-21T09:45:23.315Z",
+ "ran_on": "2026-11-21T00:23:48.929Z",
  "script": "scripts/live_check_panels.mjs",
  "results": {
-  "02016": {
-   "state": "AK",
+  "48453": {
+   "county": "Travis TX (West South Central)",
+   "state": "TX",
    "points": [
     {
-     "bg": "020160002002",
-     "lat": 53.621091,
-     "lng": -166.770979,
-     "service": null,
-     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "bg": "484530010004",
+     "lat": 30.250146,
+     "lng": -97.723467,
+     "service": "Travis Central Appraisal District parcels (City of Austin copy)",
+     "note": null,
      "checks": {
       "neighborhood": {
        "pass": true,
-       "detail": "expected home value $485k, rent $2,043/mo, homes 585"
+       "detail": "expected home value $865k, rent $3,500 or more/mo, homes 245"
       },
       "canopy": {
        "pass": true,
-       "detail": "no current-release value; page: row not shown"
+       "detail": "expected 11 pts (current release); page: 11 pts, Tree Equity Score 2026 release (file dated 2026-03-13), 2020 block groups"
       },
       "canopy_hud": {
        "pass": true,
-       "detail": "expected no goal figure; box: \"–\" / \"–\""
+       "detail": "expected 10.7 pts below its 50% goal; box: \"10.7 pts below its 50% goal\" / \"-3.9°F vs. urban area\""
       },
       "crash": {
        "pass": true,
@@ -30,46 +31,49 @@
       },
       "laws": {
        "pass": true,
-       "detail": "panel lists 0 record(s) for AK"
+       "detail": "panel lists 3 record(s) for TX"
       },
       "census_area": {
-       "pass": null,
-       "detail": "not shown: no parcel service for this county"
+       "pass": true,
+       "detail": "TIGERweb Travis County · 484530010004; page \"Census area: Travis County · block group 484530010004(U.S. Census Bureau TIGERweb)\""
       },
       "hud": {
-       "pass": null,
-       "detail": "not shown: no parcel service for this county"
+       "pass": true,
+       "detail": "expected 2BR 1817 for 48453; page \"HUD Fair Market Rent (FY2027): 1 bed $1,530 · 2 bed $1,817 · 3 bed $2,292/moAustin-Round Rock-San Marcos, TX MSA. HUD's voucher benchmark (rent plus utilities),\""
       },
       "fema": {
-       "pass": null,
-       "detail": "not shown: no parcel service for this county"
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (0.2 pct annual chance flood hazard)(FEMA National Flood Hazard Layer)\""
       },
       "usgs": {
-       "pass": null,
-       "detail": "not shown: no parcel service for this county"
+       "pass": true,
+       "detail": "USGS now: 446 ft; page \"Ground elevation: 446 ft(U.S. Geological Survey 3DEP)\""
       }
      },
-     "house_checks": [],
-     "house_status": "no parcel service for this county"
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file here. Austin: Austin's Land Development Code is published on Municode, which answered the build machine with a bot check (HTTP 403) on 16 Nov 2026, so no standard could be read from the code itself.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
     },
     {
-     "bg": "020160002001",
-     "lat": 53.858423,
-     "lng": -166.890178,
-     "service": null,
-     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "bg": "484530330002",
+     "lat": 30.240477,
+     "lng": -97.899217,
+     "service": "Travis Central Appraisal District parcels (City of Austin copy)",
+     "note": null,
      "checks": {
       "neighborhood": {
        "pass": true,
-       "detail": "expected home value $442k, rent $2,024/mo, homes 416"
+       "detail": "expected home value $560k, rent $1,904/mo, homes 1,106"
       },
       "canopy": {
        "pass": true,
-       "detail": "no current-release value; page: row not shown"
+       "detail": "expected 2 pts (current release); page: 2 pts, Tree Equity Score 2026 release (file dated 2026-03-13), 2020 block groups"
       },
       "canopy_hud": {
        "pass": true,
-       "detail": "expected no goal figure; box: \"–\" / \"–\""
+       "detail": "expected 1.5 pts below its 50% goal; box: \"1.5 pts below its 50% goal\" / \"-0.7°F vs. urban area\""
       },
       "crash": {
        "pass": true,
@@ -77,81 +81,37 @@
       },
       "laws": {
        "pass": true,
-       "detail": "panel lists 0 record(s) for AK"
+       "detail": "panel lists 3 record(s) for TX"
       },
       "census_area": {
-       "pass": null,
-       "detail": "not shown: no parcel service for this county"
+       "pass": true,
+       "detail": "TIGERweb Travis County · 484530330002; page \"Census area: Travis County · block group 484530330002(U.S. Census Bureau TIGERweb)\""
       },
       "hud": {
-       "pass": null,
-       "detail": "not shown: no parcel service for this county"
+       "pass": true,
+       "detail": "expected 2BR 1817 for 48453; page \"HUD Fair Market Rent (FY2027): 1 bed $1,530 · 2 bed $1,817 · 3 bed $2,292/moAustin-Round Rock-San Marcos, TX MSA. HUD's voucher benchmark (rent plus utilities),\""
       },
       "fema": {
-       "pass": null,
-       "detail": "not shown: no parcel service for this county"
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
       },
       "usgs": {
-       "pass": null,
-       "detail": "not shown: no parcel service for this county"
+       "pass": true,
+       "detail": "USGS now: 1051 ft; page \"Ground elevation: 1,051 ft(U.S. Geological Survey 3DEP)\""
       }
      },
-     "house_checks": [],
-     "house_status": "no parcel service for this county"
-    },
-    {
-     "bg": "020160001001",
-     "lat": 51.948964,
-     "lng": 179.621188,
-     "service": null,
-     "note": "no parcel found near the block group's interior point; clicked the interior point",
-     "checks": {
-      "neighborhood": {
-       "pass": true,
-       "detail": "expected home value $114k, rent $956/mo, homes 355"
-      },
-      "canopy": {
-       "pass": true,
-       "detail": "no current-release value; page: row not shown"
-      },
-      "canopy_hud": {
-       "pass": true,
-       "detail": "expected no goal figure; box: \"–\" / \"–\""
-      },
-      "crash": {
-       "pass": true,
-       "detail": "no crash data for this county; page shows no rebuilt crash text"
-      },
-      "laws": {
-       "pass": true,
-       "detail": "panel lists 0 record(s) for AK"
-      },
-      "census_area": {
-       "pass": null,
-       "detail": "not shown: no parcel service for this county"
-      },
-      "hud": {
-       "pass": null,
-       "detail": "not shown: no parcel service for this county"
-      },
-      "fema": {
-       "pass": null,
-       "detail": "not shown: no parcel service for this county"
-      },
-      "usgs": {
-       "pass": null,
-       "detail": "not shown: no parcel service for this county"
-      }
-     },
-     "house_checks": [],
-     "house_status": "no parcel service for this county"
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file here. Austin: Austin's Land Development Code is published on Municode, which answered the build machine with a bot check (HTTP 403) on 16 Nov 2026, so no standard could be read from the code itself.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
     }
    ],
    "checks": {
-    "census_area": "n/a",
-    "hud": "n/a",
-    "fema": "n/a",
-    "usgs": "n/a",
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
     "crash": "pass",
     "laws": "pass",
     "neighborhood": "pass",
@@ -163,14 +123,12 @@
    "network_errors": [
     "Failed to load resource: the server responded with a status of 404 (Not Found)",
     "Failed to load resource: the server responded with a status of 404 (Not Found)",
-    "Failed to load resource: the server responded with a status of 404 (Not Found)",
-    "Failed to load resource: the server responded with a status of 404 (Not Found)"
-   ],
-   "bundle_requests": [
-    "HEAD 404 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_02016.json.gz",
-    "HEAD 200 http://127.0.0.1:9001/city-pretty/counties/bundle_02016.json.gz",
-    "GET 404 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_02016.json.gz",
-    "GET 200 http://127.0.0.1:9001/city-pretty/counties/bundle_02016.json.gz"
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:18611' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested r",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:18611' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested r",
+    "Failed to load resource: net::ERR_FAILED"
    ]
   }
  }

@@ -1,0 +1,31 @@
+{
+ "port": 9324,
+ "r2_requests_answered_locally": 12,
+ "errors": [],
+ "results": [
+  {
+   "fips": "01073",
+   "st": "AL",
+   "tif": "AL TIF (Ala. Code § 11-99) Annual assessment cap: 7%. Residential assessment ratio: 10.0%. Law: Ala. Code § 40-8-1 & § 11-99 (TIF Act). (Verified) Not computed: this state's state rules are confirmed, but local tax rates and pledge shares are not on file from a source.",
+   "methods": "Tax-increment financing (AL)On file for AL: AL TIF (Ala. Code § 11-99), Ala. Code § 40-8-1 & § 11-99 (TIF Act) (Verified) · source.No tax-increment amount is computed for AL: local tax rates and pledge shares are not on file from a source.Funding program records on file:Federal-State Partnership for Intercity Passenger Rail Grant Program (49 U.S.C. § 24911 (Infrastructure Investment and Jobs Act § 22307)) Verified; not confirmed: cycle_dates (annual NOFO), example corridors in eligible_improvements are illustrative, not FRA-designated · source"
+  },
+  {
+   "fips": "11001",
+   "st": "DC",
+   "tif": "DC TIF / PILOT / SRC Credits Annual assessment cap: 10%. Residential assessment ratio: 100.0%. Law: D.C. Code § 47-820 (market value, annual assessment), § 47-850 (homestead deduction), § 47-864 (10% assessment cap credit) & § 2-1217.01 (TIF). (Verified) Not computed: this state's state rules are confirmed, but local tax rates and pledge shares are not on file from a source.",
+   "methods": "Tax-increment financing (DC)On file for DC: DC TIF / PILOT / SRC Credits, D.C. Code § 47-820 (market value, annual assessment), § 47-850 (homestead deduction), § 47-864 (10% assessment cap credit) & § 2-1217.01 (TIF) (Verified) · source.No tax-increment amount is computed for DC: local tax rates and pledge shares are not on file from a source.Funding program records on file:Federal-State Partnership for Intercity Passenger Rail Grant Program (49 U.S.C. § 24911 (Infrastructure Investment and Jobs Act § 22307)) Verified; not confirmed: cycle_dates (annual NOFO), example corridors in eligible_improvements are illustrative, not FRA-designated · source"
+  },
+  {
+   "fips": "34013",
+   "st": "NJ",
+   "tif": "NJ Redevelopment PILOT / RAB Residential assessment ratio: 100.0%. Law: N.J. Stat. Ann. § 54:4-23 (True Value) & § 52:27D-489 (ERB / TIF). (Partly verified) Not computed: this state tax rules not verified yet (annual assessment cap, uncaps on sale, reassessment cycle years, homestead exemption rule).",
+   "methods": "Tax-increment financing (NJ)On file for NJ: NJ Redevelopment PILOT / RAB, N.J. Stat. Ann. § 54:4-23 (True Value) & § 52:27D-489 (ERB / TIF) (Partly verified) · source.No tax-increment amount is computed for NJ: local tax rates and pledge shares are not on file from a source.Funding program records on file:Federal-State Partnership for Intercity Passenger Rail Grant Program (49 U.S.C. § 24911 (Infrastructure Investment and Jobs Act § 22307)) Verified; not confirmed: cycle_dates (annual NOFO), example corridors in eligible_improvements are illustrative, not FRA-designated · source"
+  },
+  {
+   "fips": "17031",
+   "st": "IL",
+   "tif": "IL TIF (65 ILCS 5/11-74.4) / SSA Residential assessment ratio: 33.3%. Law: 35 ILCS 200/ (Property Tax Code), 35 ILCS 200/15-175 (general homestead exemption) & 65 ILCS 5/11-74.4 (TIF Act). These figures are for counties outside Cook County (in the counties next to Cook the homestead exemption is up to $8,000). Cook County assesses the residential class at 10% of market value, reassesses every three years and allows a homestead exemption of up to $10,000 (Illinois Department of Revenue). (Partly verified) Not computed: Illinois tax rules not verified yet (annual assessment cap, uncaps on sale).",
+   "methods": "Tax-increment financing (IL)On file for IL: IL TIF (65 ILCS 5/11-74.4) / SSA, 35 ILCS 200/ (Property Tax Code), 35 ILCS 200/15-175 (general homestead exemption) & 65 ILCS 5/11-74.4 (TIF Act) (Partly verified) · source. These figures are for counties outside Cook County (in the counties next to Cook the homestead exemption is up to $8,000). Cook County assesses the residential class at 10% of market value, reassesses every three years and allows a homestead exemption of up to $10,000 (Illinois Department of Revenue).No tax-increment amount is computed for IL: local tax rates and pledge shares are not on file from a source.Funding program records on file:Illinois Transit Tax Increment Financing (Transit TIF) (65 ILCS 5/11-74.4-3.1) Unverified; not confirmed: all fields, 35-year term, 0.5-mile corridor · sourceFederal-State Partnership for Intercity Passenger Rail Grant Program (49 U.S.C. § 24911 (Infrastructure Investment and Jobs Act § 22307)) Verified; not confirmed: cycle_dates (annual NOFO), example corridors in eligible_improvements are illustrative, not FRA-designated · source"
+  }
+ ]
+}

@@ -73,7 +73,13 @@ describe("19 Nov 2026 statute corrections", () => {
     const t1 = LAWS.find((r: any) => r.id === "ca_sb79_tier1");
     expect(t1.statute_citation).toMatch(/SB 722/);
     expect(t1.exclusion_sources.map((e: any) => e.key)).toContain("mobilehome_or_rv_park_site");
-    expect(JSON.stringify(t1.exclusion_sources)).not.toMatch(/sea_level_rise|local_historic_register/);
+    // Sea-level-rise and historic-register sites are not exclusions of the law (the pre-19-Nov list had them as such); since the
+    // 22 Nov merge they are on file only as 65912.161(b)(1) local-ordinance options ("conditional": never a ruling-out).
+    for (const e of t1.exclusion_sources.filter((e: any) => /sea_level_rise|historic/.test(e.key))) {
+      expect(e.effect, e.key).toBe("conditional");
+      expect(e.citation, e.key).toMatch(/^Cal\. Gov\. Code 65912\.161\(b\)\(1\)/);
+    }
+    expect(JSON.stringify(t1.exclusion_sources)).not.toMatch(/local_historic_register/);
     // the fire zone is a limit on the streamlining route, not an exclusion of the law
     expect(t1.exclusion_sources.find((e: any) => e.key === "calfire_or_state_vhfhsz").effect).toBe("limits");
   });
