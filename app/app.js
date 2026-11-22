@@ -1,5 +1,6 @@
 
 const $ = s => document.querySelector(s);
+window.__cpInitialHash = String(location.hash || "");   // the link the page was opened with, before select() rewrites the hash (read by app/draw-area.js)
 
 // Data files. LA and Orange County data used to be pasted into index.html (30 MB); it now lives in app/data/ and is
 // fetched when needed. cpText(id) returns a promise of the file's text (cached); cpTextNow(id) returns it only if loaded.

@@ -101,12 +101,13 @@ test("a polygon drawn over three block groups: the panel's counts equal an indep
   expect(state.ring).toHaveLength(4);
   // the rectangle as the page holds it (four clicks on a map whose meridians and parallels are straight)
   const xs = state.ring.map((p) => p[0]).sort((a, b) => a - b), ys = state.ring.map((p) => p[1]).sort((a, b) => a - b);
-  expect(xs[1] - xs[0]).toBeLessThan(1e-9); expect(xs[3] - xs[2]).toBeLessThan(1e-9); expect(ys[1] - ys[0]).toBeLessThan(1e-9); expect(ys[3] - ys[2]).toBeLessThan(1e-9);
+  // (corners are kept to five decimals, so a side can be off by one unit in the fifth decimal: about a metre in 500)
+  expect(xs[1] - xs[0]).toBeLessThan(1.5e-5); expect(xs[3] - xs[2]).toBeLessThan(1.5e-5); expect(ys[1] - ys[0]).toBeLessThan(1.5e-5); expect(ys[3] - ys[2]).toBeLessThan(1.5e-5);
   const [x0, x1, y0, y1] = [(xs[0] + xs[1]) / 2, (xs[2] + xs[3]) / 2, (ys[0] + ys[1]) / 2, (ys[2] + ys[3]) / 2];
   const shares = all.map((f: any) => ({ id: f.id as string, share: shareInRect(f.geometry, x0, y0, x1, y1) })).filter((s: any) => s.share > 0);
   // the page lists exactly the block groups this computation finds (above the tool's half-percent noise floor), with the same shares
   const mine = new Map(shares.map((s: any) => [s.id, s.share]));
-  for (const b of state.bgs) expect(Math.abs(b.share - (mine.get(b.id) ?? 0))).toBeLessThan(2e-4);
+  for (const b of state.bgs) expect(Math.abs(b.share - (mine.get(b.id) ?? 0))).toBeLessThan(1e-3);
   for (const s of shares) if (s.share > 0.02) expect(state.bgs.some((b) => b.id === s.id)).toBe(true);
   for (const f of three) expect(state.bgs.find((b) => b.id === f.id)?.share).toBe(1);
   expect(state.bgs.length).toBeGreaterThan(3);   // the box also cuts their neighbours
@@ -116,7 +117,7 @@ test("a polygon drawn over three block groups: the panel's counts equal an indep
     const want = state.bgs.reduce((s, b) => s + (mine.get(b.id) ?? 0) * (m[b.id] as any)[field], 0);
     const el = page.locator(`#da-panel [data-da-fig="${key}"]`);
     const raw = Number(await el.getAttribute("data-da-value"));
-    expect(Math.abs(raw - want)).toBeLessThan(Math.max(0.5, want * 2e-4));
+    expect(Math.abs(raw - want)).toBeLessThan(Math.max(0.5, want * 5e-4));
     const shown = Number((await el.locator(".da-num").innerText()).replace(/[^0-9.]/g, ""));
     expect(Math.abs(shown - raw)).toBeLessThanOrEqual(key === "landAcres" ? 0.51 : 0.5);   // the text is the figure, rounded
     expect(await el.getAttribute("data-da-basis")).toBe("apportioned");
@@ -208,9 +209,9 @@ test("a link with an area reproduces it, in the right county, with the same figu
   const again = await p2.evaluate(() => { const a = (window as any).DrawArea.current(); return { fips: (0, eval)("activeFips()"), pop: a.figures.pop.value, homes: a.figures.homes.value, n: a.blockGroups.length, hash: location.hash, onMap: document.querySelectorAll(".da-handle").length }; });
   expect(again.fips).toBe(TRAVIS);
   expect(again.n).toBe(first.n);
-  // the link keeps five decimals of each corner (about a metre), so the figures agree to a small fraction of a person
-  expect(Math.abs(again.pop - first.pop)).toBeLessThan(0.5);
-  expect(Math.abs(again.homes - first.homes)).toBeLessThan(0.5);
+  // the page keeps corners to the five decimals the link carries, so the figures are the same
+  expect(Math.abs(again.pop - first.pop)).toBeLessThan(1e-6);
+  expect(Math.abs(again.homes - first.homes)).toBeLessThan(1e-6);
   expect(again.hash).toContain("area=p_");
   expect(again.onMap).toBe(4);   // the shape is back on the map with its four corner handles
   expect(await badWords(p2)).toEqual([]);

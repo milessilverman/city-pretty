@@ -29,7 +29,7 @@ const st = {
   open: { here: true, build: true, land: true, transit: true },
 };
 // The link the page was opened with: app/app.js rewrites the hash when it selects its first block group, so read it now.
-const LINK = (() => { const p = new URLSearchParams(String(location.hash || "").replace(/^#/, "")); return { area: p.get("area"), county: p.get("county"), bg: p.get("bg") }; })();
+const LINK = (() => { const p = new URLSearchParams(String(window.__cpInitialHash != null ? window.__cpInitialHash : location.hash || "").replace(/^#/, "")); return { area: p.get("area"), county: p.get("county"), bg: p.get("bg") }; })();
 
 // ---------------------------------------------------------------- data the engine needs
 function loadTables() {
@@ -281,7 +281,7 @@ function hereHtml(a) {
   return `<p class="small muted">Figures come from ${a.blockGroups.length} Census block group${a.blockGroups.length > 1 ? "s" : ""}. Each one is tagged with how it was reached; open "How this was worked out" for the block groups and shares behind it.</p>
     ${order.map(k => figRow(f[k], a)).join("")}
     <h4 class="da-h4">Counted exactly (mapped points inside the shape)</h4>
-    ${[p.stations, p.stops, p.places].map(x => figRow(x, a)).join("")}`;
+    ${figRow(p.places, a)}<p class="da-sub">Stations and bus stops inside the shape are under Transit; redevelopment sites under Land to redevelop.</p>`;
 }
 function vpdLine(x, a) {
   const v = x.valuePerDollar;
@@ -468,7 +468,9 @@ async function restore(link) {
   if (!spec) return false;
   st.applying = true;
   try {
+    st.step = "waiting for the map";
     if (!(await whenReady(mapReady, 90000))) return false;
+    st.step = "map ready";
     const want = link.county ? String(link.county).padStart(5, "0") : "06037";
     if (want !== fipsNow() && typeof openCounty === "function") {
       try { await openCounty(want, link.bg && String(link.bg).startsWith(want) ? link.bg : undefined); } catch (e) { /* the message below covers it */ }
@@ -517,7 +519,11 @@ function drawShape() {
     });
   }
 }
+// Positions are kept to five decimals (about a metre), the precision the link carries, so a link reproduces the shape exactly.
+const r5 = v => Math.round(v * 1e5) / 1e5;
+const snap = spec => !spec ? spec : spec.type === "circle" ? { type: "circle", center: [r5(spec.center[0]), r5(spec.center[1])], radiusMiles: spec.radiusMiles } : { type: "polygon", ring: (spec.ring || []).map(p => [r5(p[0]), r5(p[1])]) };
 async function setArea(spec, opts) {
+  spec = snap(spec);
   const A = AE(), chk = A.normalizeShape(spec);
   if (!chk.ok) { toast("That shape cannot be used: " + chk.error + "."); return; }
   st.spec = spec; st.fips = fipsNow();
@@ -747,6 +753,7 @@ window.DrawArea = {
     try { return AE().advisorSummary(st.result, 6000); } catch (e) { return null; }
   },
   current: () => st.result,
+  state: () => ({ mode: st.mode, applying: st.applying, step: st.step || null, link: LINK, fips: st.fips }),
   spec: () => st.spec,
   setArea: (spec, opts) => setArea(spec, opts || {}),
   clear: () => clearArea(),
