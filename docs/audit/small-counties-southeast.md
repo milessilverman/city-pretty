@@ -178,3 +178,93 @@ Carolina); the totals and the summary of the whole batch are written in the last
 Files: `data/backtests/southeast_ga_census_spot_2026-11-22.json`, `data/backtests/southeast_osm_xcheck_13317_2026-11-22.json`,
 `..._13163_...`, `data/backtests/live_check_panels_2026-11-22_southeast_ga.json`,
 `data/backtests/acs_fallback_mismatches_2026-11-22.json`.
+
+## Alabama (53 of 53 built, none withheld)
+
+| County | People (ACS 2020-24) | Block groups | Data file (gzip, bytes) | Completeness tier | Canopy block groups (2025 release) |
+|---|---|---|---|---|---|
+| Autauga County (01001) | 59,947 | 45 | 346,607 | C | 28 |
+| Barbour County (01005) | 24,643 | 22 | 340,056 | D | 11 |
+| Bibb County (01007) | 22,130 | 18 | 757,009 | D | 0 |
+| Blount County (01009) | 59,518 | 43 | 718,474 | D | 8 |
+| Bullock County (01011) | 10,058 | 9 | 164,027 | D | 0 |
+| Butler County (01013) | 18,630 | 19 | 216,253 | D | 9 |
+| Chambers County (01017) | 34,192 | 30 | 431,343 | D | 19 |
+| Cherokee County (01019) | 25,443 | 25 | 729,938 | D | 0 |
+| Chilton County (01021) | 45,992 | 32 | 530,422 | D | 11 |
+| Choctaw County (01023) | 12,380 | 15 | 322,657 | D | 0 |
+| Clarke County (01025) | 22,543 | 25 | 451,960 | D | 0 |
+| Clay County (01027) | 14,192 | 11 | 367,242 | D | 0 |
+| Cleburne County (01029) | 15,426 | 10 | 816,919 | C | 0 |
+| Coffee County (01031) | 54,920 | 36 | 272,364 | D | 20 |
+| Colbert County (01033) | 58,022 | 49 | 491,626 | D | 33 |
+| Conecuh County (01035) | 11,275 | 12 | 388,840 | D | 0 |
+| Coosa County (01037) | 10,300 | 10 | 255,895 | D | 0 |
+| Covington County (01039) | 37,628 | 38 | 362,921 | D | 18 |
+| Crenshaw County (01041) | 13,122 | 13 | 219,612 | D | 0 |
+| Cullman County (01043) | 90,566 | 66 | 707,498 | D | 26 |
+| Dale County (01045) | 49,599 | 43 | 414,083 | D | 30 |
+| Dallas County (01047) | 36,858 | 41 | 790,012 | D | 26 |
+| DeKalb County (01049) | 72,269 | 56 | 818,821 | D | 12 |
+| Elmore County (01051) | 89,526 | 52 | 474,261 | C | 22 |
+| Escambia County (01053) | 36,629 | 32 | 348,687 | D | 19 |
+| Fayette County (01057) | 16,053 | 19 | 379,648 | D | 0 |
+| Franklin County (01059) | 31,966 | 27 | 291,460 | D | 11 |
+| Geneva County (01061) | 26,887 | 24 | 276,582 | D | 2 |
+| Greene County (01063) | 7,424 | 11 | 1,230,719 | D | 0 |
+| Hale County (01065) | 14,829 | 15 | 803,593 | D | 0 |
+| Henry County (01067) | 17,647 | 16 | 228,906 | D | 0 |
+| Jackson County (01071) | 53,053 | 44 | 610,457 | D | 15 |
+| Lamar County (01075) | 13,693 | 15 | 255,970 | D | 0 |
+| Lauderdale County (01077) | 95,830 | 71 | 593,614 | D | 39 |
+| Lawrence County (01079) | 33,276 | 31 | 327,335 | D | 1 |
+| Lowndes County (01085) | 9,833 | 11 | 225,674 | C | 0 |
+| Macon County (01087) | 18,691 | 21 | 337,899 | D | 13 |
+| Marengo County (01091) | 18,851 | 25 | 654,120 | D | 8 |
+| Marion County (01093) | 29,184 | 29 | 404,747 | D | 0 |
+| Monroe County (01099) | 19,388 | 21 | 439,289 | D | 8 |
+| Perry County (01105) | 8,031 | 11 | 806,101 | D | 0 |
+| Pickens County (01107) | 18,721 | 19 | 562,546 | D | 0 |
+| Pike County (01109) | 32,987 | 29 | 254,082 | D | 16 |
+| Randolph County (01111) | 22,510 | 19 | 463,860 | D | 0 |
+| Russell County (01113) | 58,811 | 45 | 498,108 | C | 31 |
+| St. Clair County (01115) | 94,166 | 61 | 790,692 | C | 33 |
+| Sumter County (01119) | 11,878 | 14 | 1,547,553 | D | 0 |
+| Talladega County (01121) | 81,021 | 60 | 952,663 | C | 39 |
+| Tallapoosa County (01123) | 40,938 | 36 | 455,259 | D | 13 |
+| Walker County (01127) | 64,841 | 60 | 733,019 | D | 16 |
+| Washington County (01129) | 15,143 | 18 | 316,413 | D | 0 |
+| Wilcox County (01131) | 10,172 | 13 | 329,175 | D | 0 |
+| Winston County (01133) | 23,682 | 25 | 315,975 | D | 0 |
+| **53 counties** | **1,815,314** | **1,542** | **26,822,986** | 7 C, 46 D | 537 |
+
+- OpenStreetMap: `us-south-latest.osm.pbf` from download.openstreetmap.fr (4,623,607,998 bytes, md5
+  `aaee92b7cea7116859b6f51c768d7830`, equal to the published `us-south.osm.pbf.md5`; data timestamp 2026-11-21T01:28:06Z
+  from `us-south.state.txt`). Alabama, Mississippi and South Carolina were cut from it one at a time with
+  `national/osm_split.py us-south --states AL,MS,SC --per-pass 1` (osmium `extract -s smart`, union of the state's county
+  boxes plus 0.05 degrees): Alabama 176 s, peak osmium memory 4.13 GB, 184 MB; Mississippi 174 s, 4.09 GB, 117 MB; South
+  Carolina 188 s, 4.13 GB, 250 MB. The regional file was deleted once the three were cut (it was on disk for the cuts only).
+  Alabama build: fetch 12-51 s, build 100-197 s per county, three at a time (the Georgia checks, tests and the Mississippi
+  builds ran alongside), about 42 min from the first county to the last.
+- Bus frequency: 48 counties have no value in any block group (no feed that is read has a stop with 7-9 am departures in or
+  near the county); 5 have values. Rail distance: 51 counties have none; 2 have values.
+- Census spot check: 53 counties, 1,272 of 1,272 values equal (0% mismatch). Tract-median flags: 53 counties added, no
+  existing county changed, 0 values matching neither the block group nor the tract.
+- Crash counts: Alabama has no state crash source connected (`pipeline/region.py` STATE_DEFAULTS has no AL); all 53 files say
+  "Not connected for Alabama yet: crash gaps are not scored and crash-based projects are not proposed". No crash counts were
+  built.
+- Tests run: `npm test` 1,632 of 1,632 (46 files), `npm run typecheck` clean. No corridor stop's flag needed changing.
+- OpenStreetMap ID for ID vs live Overpass (maps.mail.ru; two counties picked with seed 20261122 from the state's sorted
+  list): it answered 504 to some tries first. Macon (01087) 5,355 = 5,355 roads, 58 = 58 bus stops; Lamar (01075) 2,027 = 2,027
+  roads, 0 = 0 bus stops (0 missing, 0 extra). The extract's snapshot is 2026-11-21T01:28:06Z.
+- Live check from R2 (`LIVE_PORT=9221`): Tallapoosa (01123) and Macon (01087), 3 points each (picked with seed 20261123 from
+  the state's sorted list). Neither county has a parcel service on the page, so the house-panel rows (Census area, HUD
+  rent, FEMA, USGS) are not checkable; neighborhood, canopy, canopy goal, crash text, state laws and console pass at all 6
+  points (30 pass, 0 fail, 24 not checkable). Each data file came from the r2.dev address (HEAD 200, GET 200).
+- R2: before 1,746,938,700 bytes (2,898 objects); dry run "54 files, net +0.027 GB, projected 1.774 GB"; after
+  1,773,775,025 bytes (2,951 objects): 26,836,325 bytes added (the 53 data files, 26,822,986, plus the larger
+  `manifest.json`).
+
+Files: `data/backtests/southeast_al_census_spot_2026-11-22.json`, `data/backtests/southeast_osm_xcheck_01087_2026-11-22.json`,
+`..._01075_...`, `data/backtests/live_check_panels_2026-11-22_southeast_al.json`,
+`data/backtests/acs_fallback_mismatches_2026-11-22.json`.
