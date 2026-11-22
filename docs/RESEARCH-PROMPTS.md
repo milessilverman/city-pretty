@@ -326,3 +326,6 @@ If a chapter is too long for one file, split it by article and say so. If a site
 and give the URL; do not substitute another source.
 ```
 Put the files in the shared Drive folder.
+
+The chapter and section numbers in this prompt are pointers written from memory to help find the right text; they
+were not fetched and are not a source. Nothing enters a data file until it is read from the downloaded code itself.
