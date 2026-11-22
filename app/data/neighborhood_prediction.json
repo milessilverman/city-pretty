@@ -30,10 +30,10 @@
   "what_ships": "the relative-value screen (cheap for its county) in every county, with its tested 5-year ranges by home-value fifth and its hit rate"
  },
  "headline": [
-  "The leading-signal model did not beat the plain 'cheapest tracts' screen: over the next 5 years its top fifth of tracts beat its bottom fifth by 6.6 points (90% 5.23 to 7.92), against 6.42 for the cheapest-tracts screen; the difference, 0.18 points (90% -0.26 to 0.57), is not distinguishable from zero.",
-  "It did beat the prior-trend baseline, by 5.65 points (90% 4.11 to 7.24).",
-  "Without the price-level inputs the model's spread falls to 2.73 points: most of the edge is cheap tracts catching up.",
-  "The cheapest fifth's median 5-year gain over its county's median tract shrank from 10.56 points (windows starting 2015) to 2.44 (starting 2020).",
+  "The leading-signal model did not beat the plain 'cheapest tracts' screen: over the next 5 years its top fifth of tracts beat its bottom fifth by 6.6 points (90% 5.2 to 7.9), against 6.4 for the cheapest-tracts screen; the difference, 0.2 points (90% -0.3 to 0.6), is not distinguishable from zero.",
+  "It did beat the prior-trend baseline, by 5.7 points (90% 4.1 to 7.2).",
+  "Without the price-level inputs the model's spread falls to 2.7 points: most of the edge is cheap tracts catching up.",
+  "The cheapest fifth's median 5-year gain over its county's median tract shrank from 10.6 points (windows starting 2015) to 2.4 (starting 2020).",
   "So every county keeps the relative-value screen, now with its tested ranges and hit rate."
  ],
  "tested_on": "tested on 48 counties, 5-year windows starting 2019 and 2020 (fitted only on earlier, non-overlapping windows); 3-year windows starting 2017-2022",

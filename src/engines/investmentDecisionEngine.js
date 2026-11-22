@@ -826,6 +826,7 @@ function buildDecisionBrief(county, selection, ctx) {
       const tail = p2 != null ? ` In 2020-25 it ranked tracts the right way round in ${Math.round(p2 * 100)}% of counties tested.` : "";
       return rank.role === "screen" ? `The neighborhood score is a relative-value screen. In the back-test (${n == null ? "?" : n} large counties, 2015-20 and 2020-25) it did no better than picking the cheapest tracts in the county.${tail}` : `The neighborhood score beat simple baselines in the back-test.${tail}`;
     })(),
+    ...(rank.prediction && rank.prediction.inSample && rank.prediction.headline.length ? [`Walk-forward test of mortgage, permit, job and migration signals (docs/PREDICTION-MODEL.md): ${rank.prediction.headline[0]}`] : []),
     "Scores rank block groups against their own county only; a county-wide boom or bust is not predicted.",
     "Back-tested on tracts whose boundaries did not change 2010-2020; fast-growing new-build areas are under-represented.",
     "Improvement costs and value gains are pipeline estimates, shown only for ideas whose effect size or cost the data audit confirmed against a source; effect sizes come from studies in other places.",

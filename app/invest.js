@@ -83,11 +83,11 @@ function loadData() {
   if (iv.dataP) return iv.dataP;
   const j = id => (typeof cpJson === "function" ? cpJson(id) : Promise.resolve(null)).catch(() => null);
   iv.dataP = Promise.all([j("neighborhood-score-backtest"), j("transit-cost-benchmarks"), j("transit-value-effects"), j("underused-sites"), j("intercity-corridors"), j("transit-pipelines"),
-    j("intervention-verification"), j("statutes"), j("unit-costs"), j("county-valuation-models")])
-    .then(([bt, cost, eff, sites, corr, pipe, ver, laws, uc, vm]) => {
+    j("intervention-verification"), j("statutes"), j("unit-costs"), j("county-valuation-models"), fetch("app/data/neighborhood_prediction.json").then(r => r.ok ? r.json() : null).catch(() => null)])
+    .then(([bt, cost, eff, sites, corr, pipe, ver, laws, uc, vm, pred]) => {
       const verOk = ver && typeof ver === "object" && !Array.isArray(ver);
       iv.data = { backtest: bt, cost: cost && cost.rows || [], effects: eff && eff.rows || [], sites: Array.isArray(sites) ? sites : [], corridors: Array.isArray(corr) ? corr : [], pipelines: Array.isArray(pipe) ? pipe : [],
-        verification: verOk ? ver : null, laws: Array.isArray(laws) ? laws : null, unitCosts: Array.isArray(uc) ? uc : [], valuationModels: vm && vm.counties ? vm : null };
+        verification: verOk ? ver : null, laws: Array.isArray(laws) ? laws : null, unitCosts: Array.isArray(uc) ? uc : [], valuationModels: vm && vm.counties ? vm : null, prediction: pred && pred.counties ? pred : null };
       return iv.data;
     });
   return iv.dataP;
@@ -216,8 +216,8 @@ function ready() {
 function build(fips, B, d) {
   const eng = E();
   const ctx = { backtest: d.backtest, catalog: D.catalog, verification: d.verification, underusedSites: d.sites, sites: (typeof SITES !== "undefined") ? SITES : null, costBenchmarks: engineCosts(d.cost), valueEffects: engineEffects(d.effects),
-    laws: d.laws || undefined, unitCosts: d.unitCosts, valuationModels: d.valuationModels };
-  const rk = eng.rankNeighborhoods(B, { backtest: d.backtest });
+    laws: d.laws || undefined, unitCosts: d.unitCosts, valuationModels: d.valuationModels, prediction: d.prediction };
+  const rk = eng.rankNeighborhoods(B, { backtest: d.backtest, prediction: d.prediction });
   const ranked = rk.ranked || [];
   const clean = ranked.filter(r => !(r.dataFlags && r.dataFlags.length));
   let hood = iv.hood && ranked.some(r => r.id === iv.hood) ? iv.hood : null;
@@ -398,6 +398,7 @@ function hoodItem(r, rank, m, open) {
   const sel = r.id === m.hood;
   const h = r.historicalRelativeChange;
   const hist = h ? `<div class="iv-hist"><span class="iv-k">Back-test, average for this score fifth (${r.scoreQuintile} of 5)</span> 2020-25: ${fig(h["2020_2025"], "back-test table has no value for this fifth")} &nbsp; 2015-20: ${fig(h["2015_2020"], "back-test table has no value for this fifth")}</div>` : `<div class="iv-hist"><span class="iv-k">Back-test history</span> ${nof("no back-test table in this build")}</div>`;
+  const pr = r.prediction && r.prediction.relative5y, tested = pr ? `<div class="iv-hist"><span class="iv-k">Tested 5-year range, tract-level (80% of tracts like this)</span> ${fig(pr.low)} to ${fig(pr.high)} vs the county's median tract. <span class="iv-muted">${esc2(r.prediction.testedOn || "")}</span></div>` : "";
   const comps = (r.components || []).map(c => `<tr><td>${esc2(c.label || c.signal)}</td><td>${fig(c.countyPercentile)}</td><td>${fig(c.weight)}</td></tr>`).join("");
   return `<li class="iv-hood${sel ? " sel" : ""}" data-hood="${esc2(r.id)}">
     <div class="iv-hood-top">
@@ -410,7 +411,7 @@ function hoodItem(r, rank, m, open) {
       </div>
     </div>
     <p class="iv-reason1">${esc2(r.reasons[0] || "")}</p>
-    ${det(open, "comp-" + r.id, "Score, back-test and all reasons", `<div class="iv-figs"><span class="iv-k">Relative-value score</span> ${fig(r.score)}</div>${hist}
+    ${det(open, "comp-" + r.id, "Score, back-test and all reasons", `<div class="iv-figs"><span class="iv-k">Relative-value score</span> ${fig(r.score)}</div>${hist}${tested}
       <ul class="iv-reasons">${r.reasons.map(x => `<li>${esc2(x)}</li>`).join("")}</ul>
       <div class="iv-tablewrap"><table class="iv-table"><thead><tr><th>Signal</th><th>Where this area sits in the county</th><th>Weight in the score</th></tr></thead><tbody>${comps}</tbody></table></div>
       <p class="iv-k">Why this grade</p><ul class="iv-reasons">${r.confidence.reasons.map(x => `<li>${esc2(x)}</li>`).join("")}</ul>
@@ -798,7 +799,7 @@ function advisorInputs() {
   return loadData().then(d => {
     const r2 = ready(); if (r2.state !== "ok") return null;
     const ctx = { backtest: d.backtest, catalog: D.catalog, verification: d.verification, underusedSites: d.sites, sites: (typeof SITES !== "undefined") ? SITES : null, costBenchmarks: engineCosts(d.cost), valueEffects: engineEffects(d.effects),
-      laws: d.laws || undefined, unitCosts: d.unitCosts, valuationModels: d.valuationModels };
+      laws: d.laws || undefined, unitCosts: d.unitCosts, valuationModels: d.valuationModels, prediction: d.prediction };
     const sl = siteLists({ countySites: d.sites.filter(s => s && s.countyFips === r2.fips) });
     return { state: "ok", fips: r2.fips, countyName: countyShort(), B: r2.B, ctx, pf: parcelFacts(), honest: honest(d.backtest, r2.fips, countyShort()), countySites: sl.all.map(s => Object.assign({}, s, { displayName: siteName(s) })) };
   });

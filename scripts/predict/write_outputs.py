@@ -102,15 +102,16 @@ def main():
     tested_on = (f"tested on {D['paired_vs_cheapest']['counties']} counties, 5-year windows starting {H5['test_origins'][0]} and {H5['test_origins'][-1]} "
                  f"(fitted only on earlier, non-overlapping windows); 3-year windows starting {H3['test_origins'][0]}-{H3['test_origins'][-1]}")
     ff = H5["baseline_fifths"]
+    p1 = lambda x: None if x is None else f"{100 * x:+.1f}".replace("+", "") if x >= 0 else f"{100 * x:.1f}"
     headline = [
         f"The leading-signal model did not beat the plain 'cheapest tracts' screen: over the next 5 years its top fifth of tracts beat its bottom fifth by "
-        f"{pts(s5['ridge']['pooled']['mean'])} points (90% {pts(s5['ridge']['pooled']['ci90'][0])} to {pts(s5['ridge']['pooled']['ci90'][1])}), against "
-        f"{pts(s5['cheapest']['pooled']['mean'])} for the cheapest-tracts screen; the difference, {pts(p5['ridge_minus_cheapest']['pooled']['mean'])} points "
-        f"(90% {pts(p5['ridge_minus_cheapest']['pooled']['ci90'][0])} to {pts(p5['ridge_minus_cheapest']['pooled']['ci90'][1])}), is not distinguishable from zero.",
-        f"It did beat the prior-trend baseline, by {pts(p5['ridge_minus_trend']['pooled']['mean'])} points (90% {pts(p5['ridge_minus_trend']['pooled']['ci90'][0])} to {pts(p5['ridge_minus_trend']['pooled']['ci90'][1])}).",
-        f"Without the price-level inputs the model's spread falls to {pts(s5['ridge_noprice']['pooled']['mean'])} points: most of the edge is cheap tracts catching up.",
-        f"The cheapest fifth's median 5-year gain over its county's median tract shrank from {ff['by_origin']['2015']['1'][1]} points (windows starting 2015) to "
-        f"{ff['by_origin']['2020']['1'][1]} (starting 2020).",
+        f"{p1(s5['ridge']['pooled']['mean'])} points (90% {p1(s5['ridge']['pooled']['ci90'][0])} to {p1(s5['ridge']['pooled']['ci90'][1])}), against "
+        f"{p1(s5['cheapest']['pooled']['mean'])} for the cheapest-tracts screen; the difference, {p1(p5['ridge_minus_cheapest']['pooled']['mean'])} points "
+        f"(90% {p1(p5['ridge_minus_cheapest']['pooled']['ci90'][0])} to {p1(p5['ridge_minus_cheapest']['pooled']['ci90'][1])}), is not distinguishable from zero.",
+        f"It did beat the prior-trend baseline, by {p1(p5['ridge_minus_trend']['pooled']['mean'])} points (90% {p1(p5['ridge_minus_trend']['pooled']['ci90'][0])} to {p1(p5['ridge_minus_trend']['pooled']['ci90'][1])}).",
+        f"Without the price-level inputs the model's spread falls to {p1(s5['ridge_noprice']['pooled']['mean'])} points: most of the edge is cheap tracts catching up.",
+        f"The cheapest fifth's median 5-year gain over its county's median tract shrank from {ff['by_origin']['2015']['1'][1]:.1f} points (windows starting 2015) to "
+        f"{ff['by_origin']['2020']['1'][1]:.1f} (starting 2020).",
         "So every county keeps the relative-value screen, now with its tested ranges and hit rate.",
     ]
     counties = {}
