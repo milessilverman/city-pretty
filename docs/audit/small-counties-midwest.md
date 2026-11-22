@@ -171,3 +171,120 @@ files are uploaded to the R2 bucket with `scripts/r2_sync_counties.py` after a `
 Files: `data/backtests/midwest_ia_census_spot_2026-11-22.json`, `data/backtests/midwest_osm_xcheck_19001_2026-11-22.json`,
 `..._19009_...`, `data/backtests/live_check_panels_2026-11-22_midwest_ia.json`,
 `data/backtests/acs_fallback_mismatches_2026-11-22.json`.
+
+## Nebraska (90 of 90 built, none withheld)
+
+| County | People (ACS 2020-24) | Block groups | Data file (gzip, bytes) | Completeness tier | Canopy block groups (2025 release) |
+|---|---|---|---|---|---|
+| Adams County (31001) | 31,052 | 28 | 129,117 | C | 26 |
+| Antelope County (31003) | 6,305 | 8 | 130,108 | D | 0 |
+| Arthur County (31005) | 484 | 1 | 39,033 | D | 0 |
+| Banner County (31007) | 742 | 1 | 43,497 | C | 0 |
+| Blaine County (31009) | 422 | 1 | 78,517 | D | 0 |
+| Boone County (31011) | 5,356 | 7 | 128,831 | D | 0 |
+| Box Butte County (31013) | 10,714 | 11 | 104,263 | D | 10 |
+| Boyd County (31015) | 1,688 | 2 | 135,296 | D | 0 |
+| Brown County (31017) | 2,869 | 2 | 106,313 | D | 0 |
+| Buffalo County (31019) | 50,579 | 37 | 241,216 | D | 25 |
+| Burt County (31021) | 6,740 | 6 | 133,462 | D | 0 |
+| Butler County (31023) | 8,424 | 7 | 180,205 | D | 0 |
+| Cass County (31025) | 27,161 | 22 | 295,600 | D | 8 |
+| Cedar County (31027) | 8,315 | 9 | 195,866 | D | 0 |
+| Chase County (31029) | 3,671 | 4 | 63,213 | D | 0 |
+| Cherry County (31031) | 5,498 | 7 | 293,171 | D | 0 |
+| Cheyenne County (31033) | 9,533 | 8 | 125,770 | C | 7 |
+| Clay County (31035) | 6,095 | 7 | 107,458 | D | 0 |
+| Colfax County (31037) | 10,641 | 10 | 118,376 | D | 5 |
+| Cuming County (31039) | 8,975 | 8 | 131,022 | D | 0 |
+| Custer County (31041) | 10,518 | 12 | 252,830 | D | 0 |
+| Dakota County (31043) | 21,354 | 14 | 246,395 | C | 12 |
+| Dawes County (31045) | 8,140 | 8 | 188,795 | D | 5 |
+| Dawson County (31047) | 24,202 | 23 | 213,070 | D | 8 |
+| Deuel County (31049) | 1,847 | 2 | 73,836 | C | 0 |
+| Dixon County (31051) | 5,545 | 6 | 170,031 | D | 0 |
+| Dodge County (31053) | 37,351 | 32 | 226,278 | D | 24 |
+| Dundy County (31057) | 1,736 | 3 | 92,902 | D | 0 |
+| Fillmore County (31059) | 5,541 | 5 | 108,886 | D | 0 |
+| Franklin County (31061) | 2,846 | 4 | 71,302 | D | 0 |
+| Frontier County (31063) | 2,569 | 3 | 114,484 | D | 0 |
+| Furnas County (31065) | 4,568 | 6 | 145,490 | D | 0 |
+| Gage County (31067) | 21,629 | 21 | 222,774 | D | 14 |
+| Garden County (31069) | 1,761 | 2 | 134,964 | D | 0 |
+| Garfield County (31071) | 1,718 | 2 | 71,477 | D | 0 |
+| Gosper County (31073) | 2,040 | 2 | 83,027 | D | 0 |
+| Grant County (31075) | 626 | 1 | 55,211 | D | 0 |
+| Greeley County (31077) | 2,202 | 2 | 89,302 | D | 0 |
+| Hall County (31079) | 62,536 | 47 | 219,267 | D | 44 |
+| Hamilton County (31081) | 9,464 | 9 | 183,033 | D | 0 |
+| Harlan County (31083) | 2,847 | 3 | 94,055 | D | 0 |
+| Hayes County (31085) | 843 | 1 | 59,469 | D | 0 |
+| Hitchcock County (31087) | 2,569 | 4 | 93,194 | D | 0 |
+| Holt County (31089) | 10,102 | 12 | 307,091 | D | 0 |
+| Hooker County (31091) | 647 | 1 | 70,992 | D | 0 |
+| Howard County (31093) | 6,534 | 6 | 122,104 | D | 0 |
+| Jefferson County (31095) | 7,161 | 6 | 108,790 | D | 3 |
+| Johnson County (31097) | 5,261 | 4 | 92,852 | D | 0 |
+| Kearney County (31099) | 6,713 | 5 | 116,631 | D | 0 |
+| Keith County (31101) | 8,219 | 9 | 152,730 | D | 7 |
+| Keya Paha County (31103) | 822 | 1 | 70,896 | D | 0 |
+| Kimball County (31105) | 3,248 | 4 | 78,465 | C | 0 |
+| Knox County (31107) | 8,363 | 6 | 234,125 | D | 0 |
+| Lincoln County (31111) | 33,802 | 36 | 283,289 | D | 28 |
+| Logan County (31113) | 773 | 1 | 42,810 | D | 0 |
+| Loup County (31115) | 578 | 1 | 61,894 | D | 0 |
+| McPherson County (31117) | 475 | 1 | 45,819 | D | 0 |
+| Madison County (31119) | 35,532 | 30 | 171,263 | C | 22 |
+| Merrick County (31121) | 7,724 | 8 | 249,551 | D | 0 |
+| Morrill County (31123) | 4,534 | 4 | 179,820 | D | 0 |
+| Nance County (31125) | 3,324 | 4 | 130,752 | D | 0 |
+| Nemaha County (31127) | 7,046 | 7 | 127,171 | D | 0 |
+| Nuckolls County (31129) | 4,087 | 5 | 97,788 | D | 0 |
+| Otoe County (31131) | 16,241 | 12 | 180,824 | D | 6 |
+| Pawnee County (31133) | 2,530 | 3 | 95,126 | D | 0 |
+| Perkins County (31135) | 2,821 | 3 | 47,066 | D | 0 |
+| Phelps County (31137) | 9,009 | 10 | 118,600 | C | 7 |
+| Pierce County (31139) | 7,325 | 6 | 115,526 | D | 0 |
+| Platte County (31141) | 34,716 | 28 | 230,642 | D | 22 |
+| Polk County (31143) | 5,225 | 5 | 134,193 | D | 0 |
+| Red Willow County (31145) | 10,557 | 12 | 134,393 | C | 9 |
+| Richardson County (31147) | 7,751 | 8 | 147,398 | D | 4 |
+| Rock County (31149) | 1,319 | 2 | 98,213 | D | 0 |
+| Saline County (31151) | 14,650 | 10 | 141,482 | D | 4 |
+| Saunders County (31155) | 23,048 | 16 | 336,733 | D | 4 |
+| Scotts Bluff County (31157) | 35,843 | 36 | 255,536 | C | 26 |
+| Seward County (31159) | 17,641 | 12 | 160,993 | D | 5 |
+| Sheridan County (31161) | 5,014 | 5 | 160,284 | D | 0 |
+| Sherman County (31163) | 2,967 | 3 | 107,677 | D | 0 |
+| Sioux County (31165) | 1,171 | 2 | 216,079 | D | 0 |
+| Stanton County (31167) | 5,796 | 6 | 114,468 | C | 2 |
+| Thayer County (31169) | 4,901 | 4 | 102,877 | D | 0 |
+| Thomas County (31171) | 564 | 1 | 82,173 | D | 0 |
+| Thurston County (31173) | 6,627 | 6 | 156,114 | D | 0 |
+| Valley County (31175) | 4,066 | 5 | 85,057 | D | 0 |
+| Washington County (31177) | 21,106 | 17 | 202,556 | D | 9 |
+| Wayne County (31179) | 9,844 | 10 | 113,835 | D | 6 |
+| Webster County (31181) | 3,360 | 4 | 68,900 | D | 0 |
+| Wheeler County (31183) | 847 | 1 | 61,425 | D | 0 |
+| York County (31185) | 14,286 | 11 | 128,888 | D | 8 |
+| **90 counties** | **863,886** | **787** | **12,532,297** | 11 C, 79 D | 360 |
+
+- Nebraska cut alone: 88 s, peak osmium memory 4.08 GB, 117 MB. Build: fetch 7-30 s, build 68-130 s per county, four at a
+  time, 37 min from the first county to the last (Kansas's cut ran alongside).
+- Bus frequency: 82 counties have none (no feed that is read has a stop with 7-9 am departures in or near the county);
+  8 have feeds. Rail distance: 87 counties have no station in or near them.
+- Census spot check: 90 counties, 1,608 of 1,608 values equal (0% mismatch). Tract-median flags: 90 counties added, no
+  existing county changed, 0 values matching neither the block group nor the tract.
+- OpenStreetMap ID for ID vs live Overpass (maps.mail.ru): Adams 1,580 = 1,580 roads, 0 = 0 bus stops; Arthur 131 = 131 roads, 0 = 0 bus stops (0 missing, 0 extra; the mirror answered 504 on bus stops several times first). The extract's snapshot is 2026-11-21T01:07:35Z (the
+  result files' `extract_snapshot` is empty because the build folder's state file was not copied next to them).
+- Crash counts: Nebraska has no state crash source connected.
+- Live check from R2 (`LIVE_PORT=9191`): Hall and Madison, 3 points each, all six with the house panel on live parcel
+  records (Nebraska's statewide parcel service): all checks pass at all 6 points (neighborhood, canopy, canopy goal,
+  crash text, state laws, Census area, HUD rent, FEMA, USGS, console): 54 pass, 0 fail. Each data file
+  came from the r2.dev address (GET 200). Failed loads on the page: optional files (404), overpass-api.de blocked by
+  CORS from this machine, 403s, as in earlier batches.
+- R2: before 1,432,802,609 bytes (1,833 objects); dry run "91 files, net +0.013 GB, projected 1.445 GB"; after
+  1,445,357,457 bytes (1,923 objects): 12,554,848 bytes added (the 90 data files, 12,532,297, plus the larger
+  `manifest.json`).
+
+Files: `data/backtests/midwest_ne_census_spot_2026-11-22.json`, `data/backtests/midwest_osm_xcheck_31001_2026-11-22.json`,
+`..._31005_...`, `data/backtests/live_check_panels_2026-11-22_midwest_ne.json`.
