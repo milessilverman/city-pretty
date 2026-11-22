@@ -1,0 +1,340 @@
+{
+ "ran_on": "2026-11-22T04:22:37.735Z",
+ "script": "scripts/live_check_panels.mjs",
+ "results": {
+  "19127": {
+   "state": "IA",
+   "points": [
+    {
+     "bg": "191279506001",
+     "lat": 42.056438,
+     "lng": -92.917236,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $91k, rent $647/mo, homes 306"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 15 pts (current release); page: 15 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 14.8 pts below its 30% goal; box: \"14.8 pts below its 30% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for IA"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel service for this county"
+    },
+    {
+     "bg": "191279507003",
+     "lat": 42.055507,
+     "lng": -92.924314,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $88k, rent $1,223/mo, homes 503"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 12 pts (current release); page: 12 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 11.5 pts below its 30% goal; box: \"11.5 pts below its 30% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for IA"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel service for this county"
+    },
+    {
+     "bg": "191279501003",
+     "lat": 42.080751,
+     "lng": -92.820171,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $218k, rent $900/mo, homes 414"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for IA"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel service for this county"
+    }
+   ],
+   "checks": {
+    "census_area": "n/a",
+    "hud": "n/a",
+    "fema": "n/a",
+    "usgs": "n/a",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_19127.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_19127.json.gz"
+   ]
+  },
+  "19139": {
+   "state": "IA",
+   "points": [
+    {
+     "bg": "191390509002",
+     "lat": 41.417352,
+     "lng": -91.050124,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $120k, rent $772/mo, homes 560"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 10 pts (current release); page: 10 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 10 pts below its 30% goal; box: \"10 pts below its 30% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for IA"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel service for this county"
+    },
+    {
+     "bg": "191390510002",
+     "lat": 41.401327,
+     "lng": -91.066571,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $70k, rent $1,085/mo, homes 584"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 40 pts (current release); page: 40 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 39.7 pts below its 50% goal; box: \"39.7 pts below its 50% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for IA"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel service for this county"
+    },
+    {
+     "bg": "191390503005",
+     "lat": 41.581448,
+     "lng": -91.240194,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $210k, rent $1,109/mo, homes 656"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for IA"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel service for this county"
+    }
+   ],
+   "checks": {
+    "census_area": "n/a",
+    "hud": "n/a",
+    "fema": "n/a",
+    "usgs": "n/a",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_19139.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_19139.json.gz"
+   ]
+  }
+ }
+}

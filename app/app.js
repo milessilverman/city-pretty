@@ -208,6 +208,16 @@ const CA_COUNTIES_REGISTRY = {};
  *  - A law applies only when every condition it needs is known for the parcel (zoning, population, transit
  *    distance...). A condition that cannot be checked is reported, not assumed.
  *  - Recorded zoning is required. Missing zoning never implies residential use.
+ *  - Site exclusions come from each law's own list (rec.exclusion_sources, one entry per exclusion with the statute's
+ *    wording and URL), never from a rule applied to every state. A listed condition that is present blocks that law and
+ *    the output quotes the statute. A listed condition the page has not checked (null) or an exclusion list not yet
+ *    confirmed against the statute text (rec.exclusions_review.status other than "confirmed") gives "not determined",
+ *    never "allowed". A condition the statute does not list has no effect on that law.
+ *  - An entry with effect "conditional" is an exclusion the text makes only on terms the page cannot see (a local
+ *    ordinance or a local determination, or one part of the law only). Present or not checked, it gives "not
+ *    determined" with those terms quoted; it never rules the law out and never lets it apply. An entry with effect
+ *    "limits" narrows the law without removing it and is reported with the law. (22 Nov 2026: the two branches'
+ *    per-law designs merged on this one; the other branch's per-condition evidence is kept as rec.site_conditions.)
  */
 
 const STATUTE_USABLE_STATUSES = new Set(["verified", "partially_verified"]);
@@ -239,14 +249,11 @@ function statuteAppliesTo(rec, parcel) {
   const heavy = parcel.dist_to_heavy_rail_mi;
   const bus = parcel.dist_to_frequent_bus_or_brt_mi;
   const light = parcel.dist_to_light_rail_mi;
-  const ex = parcel.exclusions || {};
   const popAtLeast = (min) => {
     if (min == null) return true;
     if (pop == null) { missing.push("municipality population"); return false; }
     return pop >= min;
   };
-  const excludedBy = (rec.statutory_exclusions || []).some(e => ex[String(e).split(/[\s(]/)[0]]);
-  if (excludedBy) return { applies: false, missing };
   // A city ordinance (local_jurisdiction) applies only inside that city. Before 17 Nov 2026 Raleigh's and Minneapolis's
   // ordinances fell through to the generic state-wide rule below and were applied to residential lots across NC and MN.
   if (rec.local_jurisdiction) {
@@ -317,6 +324,7 @@ function statuteAppliesTo(rec, parcel) {
       // optional population and lot-size floors; any condition the parcel record can't express (unmapped_condition) is
       // reported as missing, never assumed.
       if (rec.applies_to_zone === "commercial") { if (!comm) return { applies: false, missing }; }
+      else if (rec.applies_to_zone === "residential") { if (!sfr && !parcel.is_multifamily_residential) return { applies: false, missing }; }   // single-family or multifamily zoning
       else if (!sfr) return { applies: false, missing };
       if (!popAtLeast(rec.municipality_pop_min)) return { applies: false, missing };
       if (rec.min_lot_size_sqft != null) {
@@ -329,6 +337,31 @@ function statuteAppliesTo(rec, parcel) {
   }
 }
 
+// Checks one law's own exclusion list against the parcel's flags. A flag is true (present), false (checked, absent) or
+// null/undefined (not checked). Only flags the page really reads are ever true or false: fema_100yr_floodway (FEMA special
+// flood hazard area, every state), calfire_or_state_vhfhsz (very high zone, California only), historic_district_hpoz
+// (Los Angeles only).
+function statuteExclusionCheck(rec, parcel) {
+  const ex = parcel.exclusions || {};
+  const entries = Array.isArray(rec.exclusion_sources) ? rec.exclusion_sources : [];
+  const review = rec.exclusions_review || {};
+  const confirmed = review.status === "confirmed" && Array.isArray(rec.exclusion_sources);
+  // An entry with effect "limits" does not remove the law from the parcel (it narrows a route or leaves other laws in force);
+  // it is reported with the law but never blocks it or makes it "not determined". An entry with effect "conditional"
+  // excludes the site only on terms the page cannot see (e.condition): present, it makes the law "not determined" with
+  // those terms; not checked, it counts as not checked.
+  const present = [], notChecked = [], limitsPresent = [], limitsNotChecked = [], conditionalPresent = [];
+  for (const e of entries) {
+    const v = ex[e.key], lim = e.effect === "limits", cond = e.effect === "conditional";
+    if (v === true) (lim ? limitsPresent : cond ? conditionalPresent : present).push(e);
+    else if (v !== false) (lim ? limitsNotChecked : notChecked).push(e);
+  }
+  const quote = e => "\"" + e.wording + "\"" + (e.citation ? " (" + e.citation + ")" : "") +
+    (e.key === "fema_100yr_floodway" ? ". The page's flood flag is FEMA's special flood hazard area (the 100-year floodplain)" + (e.scope_note ? "; " + e.scope_note : "") : (e.scope_note ? ". " + e.scope_note : "")) +
+    (e.exception ? ". The text's exception: \"" + e.exception + "\"" : "");
+  return { confirmed, present, notChecked, limitsPresent, limitsNotChecked, conditionalPresent, quote, review };
+}
+
 function evaluateByRightHousing(parcel, laws) {
   const ex = Object.assign({}, parcel.exclusions);
   const lawList = Array.isArray(laws) ? laws
@@ -338,6 +371,7 @@ function evaluateByRightHousing(parcel, laws) {
     state_code: parcel.state_code,
     applicable_statutes: [],
     not_confirmed: [],
+    excluded_by_statute: [],
     statutory_exclusions: ex,
     net_by_right_feasible: false,
     laws_loaded: lawList.length > 0,
@@ -347,11 +381,6 @@ function evaluateByRightHousing(parcel, laws) {
     return Object.assign(base, { base_zoning_code: null });
   }
   base.base_zoning_code = parcel.base_zoning_code;
-
-  const hasHardPhysicalExclusion =
-    ex.fema_100yr_floodway || ex.calfire_or_state_vhfhsz || ex.williamson_or_ag_preserve ||
-    ex.public_or_tribal_land;
-  if (hasHardPhysicalExclusion) return base;
 
   for (const rec of lawList) {
     if (!rec || rec.state_code !== parcel.state_code) continue;
@@ -369,6 +398,28 @@ function evaluateByRightHousing(parcel, laws) {
     }
     if (!check.applies) {
       if (check.missing.length) base.not_confirmed.push({ id: rec.id, name: label, reason: "Not on file for this parcel: " + check.missing.join(", ") + "." });
+      continue;
+    }
+    const exc = statuteExclusionCheck(rec, parcel);
+    if (exc.confirmed && exc.present.length) {
+      base.excluded_by_statute.push({
+        id: rec.id, name: label, statute_url: rec.statute_url || null,
+        exclusions: exc.present.map(e => ({ key: e.key, wording: e.wording, citation: e.citation || null, url: e.url || null, note: exc.quote(e) })),
+        detail: exc.present.map(exc.quote).join("; ") + ".",
+        reason: "Excluded by the law's own text: " + exc.present.map(exc.quote).join("; ") + ".",
+      });
+      continue;
+    }
+    if (!exc.confirmed) {
+      base.not_confirmed.push({ id: rec.id, name: label, reason: "Not determined: the list of sites this law excludes has not been confirmed against the statute text" + (exc.present.length ? " (the page found a condition that may be on it: " + exc.present.map(e => e.label || e.key).join("; ") + ")" : "") + "." });
+      continue;
+    }
+    if (exc.conditionalPresent.length) {
+      base.not_confirmed.push({ id: rec.id, name: label, reason: "Not determined: the lot is in " + exc.conditionalPresent.map(e => (e.label || e.key) + ", which the law's text excludes " + (e.condition || "only on terms the page cannot see") + ": " + exc.quote(e)).join("; ") + ". The page cannot see whether that applies to this lot." + (exc.notChecked.length ? " The page has also not checked " + exc.notChecked.map(e => (e.label || e.key) + " (" + (e.citation || "statute text") + ")").join("; ") + "." : "") });
+      continue;
+    }
+    if (exc.notChecked.length) {
+      base.not_confirmed.push({ id: rec.id, name: label, reason: "Not determined: the law excludes " + exc.notChecked.map(e => (e.label || e.key) + " (" + (e.citation || "statute text") + ")").join("; ") + ", and the page has not checked " + (exc.notChecked.length > 1 ? "these" : "this") + " for this parcel." });
       continue;
     }
     const unconfirmed = [];
@@ -392,6 +443,8 @@ function evaluateByRightHousing(parcel, laws) {
       max_parking_requirement_per_unit: statuteField(rec, "max_parking_requirement_per_unit", unconfirmed),
       affordability_mandate_pct: statuteField(rec, "affordability_mandate_pct", unconfirmed),
       tax_exemption_pct: statuteField(rec, "tax_exemption_pct", unconfirmed),
+      exclusion_limits: exc.limitsPresent.map(exc.quote),
+      exclusion_limits_not_checked: exc.limitsNotChecked.map(e => e.label || e.key),
       unconfirmed_fields: unconfirmed.concat(((rec.verification && rec.verification.unverified_fields) || []).map(String).filter(u => !unconfirmed.includes(u.split(/[\s(]/)[0]))),
     });
   }
@@ -400,7 +453,7 @@ function evaluateByRightHousing(parcel, laws) {
 }
 
 if (typeof module !== "undefined" && module.exports) {
-  module.exports = { evaluateByRightHousing, statuteAppliesTo };
+  module.exports = { evaluateByRightHousing, statuteAppliesTo, statuteExclusionCheck };
 }
 
 /**
@@ -1326,9 +1379,12 @@ function auditSingleHouseParcel(input) {
   const hasZoning = !!(input.zoningCode && !/^(unzoned|unknown|missing|none|n\/a)$/i.test(String(input.zoningCode).trim()));
   const rawZone = hasZoning ? String(input.zoningCode).trim() : null;
   const zoneOrUse = String(rawZone || "") + " " + String(input.useDescription || "");
-  const isComm = hasZoning && /comm|c-|c1|c2|cbd|mixed|bu-|b-1|b-2|business/i.test(zoneOrUse);
-  const isMulti = hasZoning && (/r-?[2-9]\b|r[2-9]\b|mf\b|multi[- ]?fam|apartment|condo|duplex|triplex|fourplex|residential multi|rm\b/i.test(zoneOrUse) || /[-_]mf\b/i.test(rawZone));
-  const isSfr = hasZoning && !isComm && !isMulti && (/r-?1\b|single[- ]?fam|single unit|residential single|sfr\b|\brs\b|\beu[- ]?m\b/i.test(zoneOrUse) || /^r-?[1a-z]$/i.test(String(rawZone || "").trim()));
+  // input.zoningCategory: the zoning map's own class for the zone, when the caller has one (LA's bundle layer). It decides;
+  // the text tests misread LA's R1 variation zones (R1V2-O has no word boundary after R1, and R1R3 reads as R3).
+  const zCat = hasZoning && /^(single-family|multifamily|commercial|none$)/.test(String(input.zoningCategory || "")) ? String(input.zoningCategory) : null;
+  const isComm = hasZoning && (zCat ? /^commercial/.test(zCat) : /comm|c-|c1|c2|cbd|mixed|bu-|b-1|b-2|business/i.test(zoneOrUse));
+  const isMulti = hasZoning && (zCat ? zCat === "multifamily" : (/r-?[2-9]\b|r[2-9]\b|mf\b|multi[- ]?fam|apartment|condo|duplex|triplex|fourplex|residential multi|rm\b/i.test(zoneOrUse) || /[-_]mf\b/i.test(rawZone)));
+  const isSfr = hasZoning && (zCat ? zCat === "single-family" : (!isComm && !isMulti && (/r-?1\b|single[- ]?fam|single unit|residential single|sfr\b|\brs\b|\beu[- ]?m\b/i.test(zoneOrUse) || /^r-?[1a-z]$/i.test(String(rawZone || "").trim()))));
 
   const parcelCtx = {
     parcel_id: input.parcelId,
@@ -1339,6 +1395,7 @@ function auditSingleHouseParcel(input) {
     base_zoning_code: rawZone,
     is_commercial_or_mixed_use: isComm,
     is_single_family_residential: isSfr,
+    is_multifamily_residential: isMulti,
     dist_to_heavy_rail_mi: input.distToHeavyRailMi ?? null,
     dist_to_frequent_bus_or_brt_mi: input.distToFrequentBusMi ?? null,
     exclusions: {
@@ -1366,10 +1423,14 @@ function auditSingleHouseParcel(input) {
   } else if (!statutoryZoning.laws_loaded) {
     statutoryNotes = "State housing law records are still loading; by-right screening will update once available.";
   } else if ((statutoryZoning.applicable_statutes || []).length) {
-    statutoryNotes = "State laws the screening engine applies here: " + statutoryZoning.applicable_statutes.map(s => s.short_name || s.citation).filter(Boolean).join(", ") + ". Unverified screening — confirm with the planning department.";
-  } else if ((statutoryZoning.not_confirmed || []).length) {
-    const unconfirmedReasons = statutoryZoning.not_confirmed.map(nc => `${nc.name} (${nc.reason})`).join("; ");
-    statutoryNotes = "Screening not confirmed for state housing laws: " + unconfirmedReasons + ". Local zoning governs.";
+    statutoryNotes = "State laws the screening engine applies here: " + statutoryZoning.applicable_statutes.map(s => s.short_name || s.citation).filter(Boolean).join(", ") + ". Unverified screening — confirm with the planning department."
+      + ((statutoryZoning.not_confirmed || []).length ? " Not confirmed: " + statutoryZoning.not_confirmed.map(nc => `${nc.name} (${nc.reason})`).join("; ") : "")
+      + ((statutoryZoning.excluded_by_statute || []).length ? " Ruled out here: " + statutoryZoning.excluded_by_statute.map(nc => `${nc.name} (${nc.reason})`).join("; ") : "");
+  } else if ((statutoryZoning.not_confirmed || []).length || (statutoryZoning.excluded_by_statute || []).length) {
+    // Laws that are not determined and laws the lot is excluded from by their own text are both named, with the reason.
+    const list = l => (l || []).map(nc => `${nc.name} (${nc.reason})`).join("; ");
+    statutoryNotes = [(statutoryZoning.not_confirmed || []).length ? "Screening not confirmed for state housing laws: " + list(statutoryZoning.not_confirmed) + "." : "",
+      (statutoryZoning.excluded_by_statute || []).length ? "Ruled out here: " + list(statutoryZoning.excluded_by_statute) + "." : ""].filter(Boolean).join(" ") + " Local zoning governs.";
   } else {
     statutoryNotes = "No state housing law in the screening engine applies to this parcel as recorded. Local zoning governs.";
   }
@@ -1431,6 +1492,8 @@ function auditSingleHouseParcel(input) {
       state_code: statutoryZoning.state_code,
       base_zoning_code: statutoryZoning.base_zoning_code,
       applicable_statutes: statutoryZoning.applicable_statutes,
+      not_confirmed: statutoryZoning.not_confirmed || [],
+      excluded_by_statute: statutoryZoning.excluded_by_statute || [],
       statutory_exclusions: statutoryZoning.statutory_exclusions,
       net_by_right_feasible: statutoryZoning.net_by_right_feasible,
       privateCovenantsDisclaimer: "Private covenants: state housing laws override city zoning but may not cancel recorded HOA covenants or CC&Rs. Check the title report.",
@@ -2088,9 +2151,10 @@ const fmt$ = v => {
 const fmtN = v => v == null || isNaN(v) ? "–" : Math.round(v).toLocaleString();
 // Rent to the dollar: fmt$ rounds to thousands, which showed a $2,356 median rent as "$2k" (found by the live panel check).
 // Census ACS top-code for median gross rent is 3501 ("$3,500 or more"), bottom-code is 99/100 ("$100 or less").
+// Exactly 3500 is a published estimate, not the code (Census 2024 jam values: "$3,500 or more" = numeric 3501), so it is shown to the dollar.
 const fmtRent = v => {
   if (v == null || isNaN(v) || !v) return "–";
-  if (v >= 3500) return "$3,500 or more/mo";
+  if (v >= 3501) return "$3,500 or more/mo";
   if (v > 0 && v <= 100) return "$100 or less/mo";
   return "$" + Math.round(v).toLocaleString("en-US") + "/mo";
 };
@@ -3257,6 +3321,24 @@ function zoneRules(code, juris) {
   juris = String(juris).replace(/ \(SCAG 2019\)$/, "");
   return (D.zone_rules || []).find(r => r.jurisdiction === juris && new RegExp("^" + r.zone_prefix.replace(/[.]/g, "\\.") + "(?![0-9.])").test(t));
 }
+// How the statute screen classes a lot that sits in the county bundle's own zoning layer (LA): "single-family",
+// "multifamily", "commercial / mixed use", "none" (no single-family or commercial law is screened), or null (not this
+// layer, or a jurisdiction with no list on file: the caller's text tests apply). Single-family needs both the layer's
+// own category and a zone on the jurisdiction's published SB 9 list (docs/audit/la_sb9_zone_scope.md, fetched 20 Nov
+// 2026): City of Los Angeles memo "A, RA, RE, RS, R1, RU, RZ, and RW1"; LA County memo "Zone R-1 or R-A"; Santa Clarita
+// SB 9 FAQ "NU1, NU2, NU3, NU4, NU5, UR1, or UR2" (docs/audit/site_exclusions/ca_notes.md, section B3). R1V/R1F/
+// R1R/R1H are read as R1 (the memo does not name the variations). Parking variants (R1P, RAP, A2P) are not on the list.
+function bundleZoneClass(z) {
+  if (!z || !z.zone || z.desc !== undefined) return null;   // zones read from a live city service carry a desc and a guessed category
+  const cat = String(z.cat || "");
+  if (cat === "multifamily" || /^commercial/.test(cat)) return cat;
+  const t = String(z.zone).toUpperCase().replace(/\[[^\]]*\]|\([^)]*\)/g, "").replace(/^[QTD]+(?=[A-Z])/, "");
+  const list = z.juris === "Los Angeles" ? /^(A[12]|RA|RE|RS|RU|RZ|RW1|R1(?:[VFRH]\d)?)(?![A-Z])/ : z.juris === "Unincorporated LA County" ? /^R-?[1A](?![0-9A-Z])/
+    : z.juris === "Santa Clarita" ? /^(NU[1-5]|UR[12])(?![0-9A-Z])/ : null;
+  if (!list || cat !== "single-family") return null;
+  const m = t.match(list);
+  return m && !/^(A[12]|R1|RW1)\d/.test(t.replace(/^R1[VFRH]\d/, "R1")) ? "single-family" : "none";
+}
 // Local zoning standards for a parcel, from app/data/zoning_standards.json (parsed from each code's own text by
 // scripts/build_zoning_standards.py). Returns { juris, district, std } when the district's standards are on file;
 // otherwise { missing: reason } (with the jurisdiction and district when known). Nothing is filled in.
@@ -3421,13 +3503,22 @@ function modelBlockGroup(fips, a, ll) {
   }
   return houseBlockGroup(ll) || (typeof selected !== "undefined" ? selected : null);
 }
+const _e180 = new WeakMap();
 function pointInFeature(f, lon, lat) {
-  const inRing = ring => { let c = false;
-    for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) { const [xi, yi] = ring[i], [xj, yj] = ring[j];
-      if ((yi > lat) !== (yj > lat) && lon < (xj - xi) * (lat - yi) / (yj - yi) + xi) c = !c; }
-    return c; };
   const polys = f.geometry.type === "Polygon" ? [f.geometry.coordinates] : f.geometry.coordinates;
-  return polys.some(([outer, ...holes]) => inRing(outer) && !holes.some(inRing));
+  const test = lon => {
+    const inRing = ring => { let c = false;
+      for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) { const [xi, yi] = ring[i], [xj, yj] = ring[j];
+        if ((yi > lat) !== (yj > lat) && lon < (xj - xi) * (lat - yi) / (yj - yi) + xi) c = !c; }
+      return c; };
+    return polys.some(([outer, ...holes]) => inRing(outer) && !holes.some(inRing));
+  };
+  if (test(lon)) return true;
+  // A county that crosses the 180th meridian (Aleutians West) is stored with west-hemisphere longitudes above 180 (166 W = 194); a point
+  // read as -166 (a click or a search result) is tried there too. Other counties never have a longitude above 180.
+  if (lon >= 0) return false;
+  if (!_e180.has(f)) _e180.set(f, polys.some(([outer]) => outer.some(c => c[0] > 180)));
+  return _e180.get(f) && test(lon + 360);
 }
 let youMarker = null;
 function selectAt(ll) {
@@ -5568,6 +5659,7 @@ function showOutlines(F) {
 }
 
 async function houseAt(ll, fOverride = null) {
+  if (ll && ll.lng > 180) ll = L.latLng(ll.lat, ll.lng - 360);   // longitudes above 180 (Aleutians West's west half) back to -180..180 for the services
   clearTimeout(hoverTimer);
   if (hoverLayer) { map.removeLayer(hoverLayer); hoverLayer = null; }
   const el0 = $("#house"); if (el0) el0.remove();
@@ -5802,6 +5894,12 @@ function findNearestTransitStation(lat, lng) {
 // be here were invented and were removed 2026-11-16. A card that cannot show a number says so.
 const PLAYBOOK_NOT_MODELED = "Not modeled yet — no sourced cost data";
 
+// The statute engine's not-confirmed list as one line: laws that share a reason are named together.
+function playbookNotConfirmed(list) {
+  const by = new Map();
+  for (const nc of list || []) { if (!by.has(nc.reason)) by.set(nc.reason, []); by.get(nc.reason).push(nc.name); }
+  return [...by].map(([reason, names]) => `${names.join("; ")} (${String(reason).replace(/\.$/, "")}).`).join(" ");
+}
 function computePropertyPlaybook(a, lot, F, zRule, ll, st) {
   a = a || {};
   const hasLoc = !!(ll && Number.isFinite(ll.lat) && Number.isFinite(ll.lng));
@@ -5824,16 +5922,23 @@ function computePropertyPlaybook(a, lot, F, zRule, ll, st) {
   const strategies = [];
   const blank = { equity: null, roi: null, cost: null, annualCashflow: null, paybackYrs: null, dollarStatus: PLAYBOOK_NOT_MODELED, modeled: false };
 
-  const hasZon = !!(zRule ? zRule.zone : (a.ZoneCode && !/^(unzoned|unknown|missing|none|n\/a)$/i.test(String(a.ZoneCode).trim())));
-  const baseZone = zRule ? zRule.zone : (hasZon ? String(a.ZoneCode).trim() : null);
+  // The code comes from the zoning map at the lot (zoneAt, what the Zoning row shows), else the parcel record.
+  // zRule (a zone_rules row) carries standards only and has no code of its own, so it is not read here.
+  const zAt = (hasLoc && typeof zoneAt === "function") ? zoneAt(ll) : null;
+  const zCode = String((zAt && zAt.zone) || a.ZoneCode || "").trim();
+  const hasZon = !!zCode && !/^(unzoned|unknown|missing|none|n\/a)$/i.test(zCode);
+  const baseZone = hasZon ? zCode : null;
   let statutes = [];
   let statEval = null;
   if (hasZon && typeof evaluateByRightHousing === "function") {
     try {
+      // Where bundleZoneClass has an answer for the lot's mapped zone, that decides. The text tests misread LA's R1
+      // variation zones: R1V2-O has no word boundary after R1, and R1R3 reads as R3.
+      const zCat = bundleZoneClass(zAt);
       const zoneOrUse = String(baseZone || "") + " " + String(a.UseDescription || "");
-      const isComm = /comm|c-|c1|c2|cbd|mixed|bu-|b-1|b-2|business/i.test(zoneOrUse);
-      const isMulti = (/r-?[2-9]\b|r[2-9]\b|mf\b|multi[- ]?fam|apartment|condo|duplex|triplex|fourplex|residential multi|rm\b/i.test(zoneOrUse) || /[-_]mf\b/i.test(baseZone));
-      const isSfr = !isComm && !isMulti && (/r-?1\b|single[- ]?fam|single unit|residential single|sfr\b|\brs\b|\beu[- ]?m\b/i.test(zoneOrUse) || /^r-?[1a-z]$/i.test(String(baseZone || "").trim()));
+      const isComm = zCat ? /^commercial/.test(zCat) : /comm|c-|c1|c2|cbd|mixed|bu-|b-1|b-2|business/i.test(zoneOrUse);
+      const isMulti = zCat ? zCat === "multifamily" : (/r-?[2-9]\b|r[2-9]\b|mf\b|multi[- ]?fam|apartment|condo|duplex|triplex|fourplex|residential multi|rm\b/i.test(zoneOrUse) || /[-_]mf\b/i.test(baseZone));
+      const isSfr = zCat ? zCat === "single-family" : (!isComm && !isMulti && (/r-?1\b|single[- ]?fam|single unit|residential single|sfr\b|\brs\b|\beu[- ]?m\b/i.test(zoneOrUse) || /^r-?[1a-z]$/i.test(String(baseZone || "").trim())));
       const R = st && st.R;
       statEval = evaluateByRightHousing({
         parcel_id: String(a.AIN || a.APN || "PARCEL"),
@@ -5844,20 +5949,22 @@ function computePropertyPlaybook(a, lot, F, zRule, ll, st) {
         base_zoning_code: baseZone,
         is_commercial_or_mixed_use: isComm,
         is_single_family_residential: isSfr,
+        is_multifamily_residential: isMulti,
         dist_to_heavy_rail_mi: (nearestStn && (nearestStn.type === "heavy_rail" || !nearestStn.type)) ? nearestStn.distMi : null,
         dist_to_frequent_bus_or_brt_mi: (nearestStn && (nearestStn.type === "bus" || nearestStn.type === "brt")) ? nearestStn.distMi : null,
         exclusions: {
           historic_district_hpoz: (R && R.hpoz && R.hpoz.ok) ? ([R.hpoz, R.hcm].filter(Boolean).some(x => x && x.ok && x.v && x.v.length) || (R.hc && R.hc.ok && Array.isArray(R.hc.v) && R.hc.v.some(r => /design|landmark|register/i.test(r.Status_Code_Description || "")))) : null,
-          coastal_commission_or_sma: false,
+          // Only the three flags above are read from a source. Every other exclusion is "not checked" (null), never false.
+          coastal_commission_or_sma: null,
           fema_100yr_floodway: (R && R.fema) ? !!R.fema.sfha : null,
           calfire_or_state_vhfhsz: (R && R.fire) ? !!R.fire.vh : null,
-          airport_noise_or_runway_zone: false,
-          working_waterfront_or_port: false,
-          wekiva_or_everglades_protection_area: false,
-          williamson_or_ag_preserve: false,
-          public_or_tribal_land: false,
-          has_active_single_family_stepdown: false,
-          population_threshold_ineligible: false,
+          airport_noise_or_runway_zone: null,
+          working_waterfront_or_port: null,
+          wekiva_or_everglades_protection_area: null,
+          williamson_or_ag_preserve: null,
+          public_or_tribal_land: null,
+          has_active_single_family_stepdown: null,
+          population_threshold_ineligible: null,
         },
       });
       statutes = (statEval && statEval.applicable_statutes) || [];
@@ -5919,8 +6026,9 @@ function computePropertyPlaybook(a, lot, F, zRule, ll, st) {
   } else if (!strategies.length) {
     if (statEval && !statEval.laws_loaded) {
       note = "State housing law records are still loading; by-right screening will update once available.";
-    } else if (statEval && statEval.not_confirmed && statEval.not_confirmed.length) {
-      note = "Not confirmed: transit distance or municipal eligibility is unknown for this parcel. Local zoning governs.";
+    } else if (statEval && ((statEval.not_confirmed || []).length || (statEval.excluded_by_statute || []).length)) {
+      note = [(statEval.not_confirmed || []).length ? "Not confirmed: " + playbookNotConfirmed(statEval.not_confirmed) : "",
+        (statEval.excluded_by_statute || []).length ? "Ruled out here: " + playbookNotConfirmed(statEval.excluded_by_statute) : ""].filter(Boolean).join(" ") + " Local zoning governs.";
     } else {
       note = "No state housing law in the screening engine applies to this parcel as recorded. Local zoning governs.";
     }
@@ -5931,6 +6039,8 @@ function computePropertyPlaybook(a, lot, F, zRule, ll, st) {
     alternatives: strategies.slice(1),
     all: strategies,
     zoningOnFile: hasZon,
+    notConfirmed: (strategies.length && statEval && statEval.not_confirmed && statEval.not_confirmed.length) ? playbookNotConfirmed(statEval.not_confirmed) : null,
+    ruledOut: (strategies.length && statEval && (statEval.excluded_by_statute || []).length) ? playbookNotConfirmed(statEval.excluded_by_statute) : null,
     note,
   };
 }
@@ -6090,6 +6200,7 @@ function renderHouse(box, a, lot, ll, st) {
         isVacantLand: valuation ? valuation.isVacantLand : false,
         units: F.units || 1,
         zoningCode: z ? z.zone : ((a.ZoneCode && !/^(unzoned|unknown|missing|none|n\/a)$/i.test(String(a.ZoneCode).trim())) ? String(a.ZoneCode).trim() : null),
+        zoningCategory: bundleZoneClass(z),   // null outside the county bundle's own layer: the text tests apply
         useDescription: a.UseDescription || "",
         rollLandValue: rollLand,
         rollImpValue: rollImp,
@@ -6520,7 +6631,9 @@ function renderHouse(box, a, lot, ll, st) {
         <div style="font-size:12px;color:#475569;">${esc(pb.note || "No state housing law in the screening engine applies to this parcel as recorded.")}</div>
       </div>`;
       }
-      const others = pb.alternatives.length ? `<div style="font-size:11px;color:#475569;margin-bottom:8px;">Also screened: ${pb.alternatives.map(x => esc(x.title)).join(" · ")}</div>` : "";
+      const others = (pb.alternatives.length ? `<div style="font-size:11px;color:#475569;margin-bottom:8px;">Also screened: ${pb.alternatives.map(x => esc(x.title)).join(" · ")}</div>` : "")
+        + (pb.notConfirmed ? `<div style="font-size:11px;color:#475569;margin-bottom:8px;">Not confirmed: ${esc(pb.notConfirmed)}</div>` : "")
+        + (pb.ruledOut ? `<div style="font-size:11px;color:#475569;margin-bottom:8px;">Ruled out here: ${esc(pb.ruledOut)}</div>` : "");
       return `
       <div class="owner-playbook-card" style="margin:12px 0;background:linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);border:1.5px solid #0284c7;border-radius:10px;padding:14px;box-shadow:0 4px 14px rgba(2,132,199,0.08);">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:6px;">
@@ -6830,6 +6943,7 @@ function jsonpGet(url, ms = 15000) {   // the Census Bureau geocoder answers JSO
 }
 const CENSUS_GEOCODER = "https://geocoding.geo.census.gov/geocoder/geographies/";
 async function fipsFromLatLng(lat, lon) {
+  if (lon > 180) lon -= 360;   // a county across the 180th meridian is drawn with longitudes above 180; services want -180..180
   try {
     const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 1200);
     const r = await fetch(`https://geo.fcc.gov/api/census/block/find?latitude=${lat}&longitude=${lon}&format=json`, { signal: ctl.signal });
@@ -7811,6 +7925,7 @@ function eifdSection(p, m) {
         ${pf.reassessment_increase_cap != null ? `Assessment increases capped at <b>${(pf.reassessment_increase_cap * 100).toFixed(0)}%</b> per reassessment. ` : ""}
         ${pf.tax_bill_growth_cap != null ? `Owner-occupied home tax bills capped at <b>${(pf.tax_bill_growth_cap * 100).toFixed(0)}%</b> growth a year. ` : ""}
         ${pf.statutory_citation ? `Law: ${esc(pf.statutory_citation)}. ` : ""}
+        ${pf.scope_note ? `${esc(pf.scope_note)} ` : ""}
         <span style="color:${vlab.color}">(${vlab.text})</span>
       </p>` : `<p class="small muted">No finance profile on file for this state.</p>`}
       <p class="small muted">${(() => { const miss = financeGateMissing(pf); return miss.length
@@ -8320,16 +8435,23 @@ function openInvestFor(id) {
   if (window.cpInvest && typeof window.cpInvest.openFor === "function") window.cpInvest.openFor(id);
   else { const b = document.querySelector('#view-switch [data-view="invest"]'); if (b) b.click(); }
 }
+// Bounds to fit for a block group. A block group of islands on both sides of the 180th meridian (Aleutians West) is stored on the
+// continuous longitude scale (166 W = 194), so its own bounds are 20+ degrees wide, mostly ocean; its largest part is fitted instead.
+// Every other block group: its bounds, as before.
+function fitBoundsOf(f) {
+  const b = L.geoJSON(f).getBounds();
+  if (!b.isValid() || b.getEast() <= 180 || f.geometry.type !== "MultiPolygon") return b;
+  let best = null, area = -1;
+  for (const poly of f.geometry.coordinates) {
+    const pb = L.latLngBounds(poly[0].map(c => [c[1], c[0]])), a = (pb.getEast() - pb.getWest()) * (pb.getNorth() - pb.getSouth());
+    if (a > area) { area = a; best = pb; }
+  }
+  return best || b;
+}
 function select(id, fly) {
   selected = id; highlight(); syncHash(id); updateCompareUI();
   const f = byId.get(id); if (!f) return;
-  if (fly) {
-    const b = L.geoJSON(f).getBounds();
-    if (b && b.isValid()) {
-      if (Math.abs(b.getEast() - b.getWest()) > 180) map.setView(b.getCenter(), 8);
-      else map.fitBounds(b, { maxZoom: 15, padding: [60, 60] });
-    }
-  }
+  if (fly) { const b = fitBoundsOf(f); if (b && b.isValid()) map.fitBounds(b, { maxZoom: 15, padding: [60, 60] }); }
   const p = f.properties, d = D.details[id] || {}, m = d.m || {};
   // Verification gate: only verified / partly verified interventions carry numbers below; the rest are listed by name.
   const { recs, other: otherIdeas } = gateRecs(recsOf(d), m);
@@ -9458,7 +9580,7 @@ function aiTextToHtml(t) {
     .replace(/\n/g, "<br>");
 }
 
-async function sendAiQuery(q, promptKey = null) {
+async function sendAiQuery(q, promptKey = null, opts = null) {
   aiHistory.push({ role: "user", text: q });
   const ep = aiEndpoint();
   if (!ep) {
@@ -9476,6 +9598,8 @@ async function sendAiQuery(q, promptKey = null) {
     box.appendChild(typingEl); box.scrollTop = box.scrollHeight;
   }
   const context = serializeLiveAdvisorContext();
+  // what the page's no-AI layer (app/advisor-scripts.js) already found for this question, so the model need not redo it
+  if (opts && opts.scripted && Array.isArray(opts.scripted.findings) && opts.scripted.findings.length) context.scripted_findings = { intent: opts.scripted.intent || null, answered_on_page: !!opts.scripted.answered, findings: opts.scripted.findings };
   const previewEl = document.getElementById("ai-grounded-json-preview");
   if (previewEl) { try { previewEl.textContent = JSON.stringify(context, null, 2); } catch (e) {} }
   const history = aiHistory.filter(m => m.role === "user" || m.role === "assistant").slice(0, -1).slice(-8)
@@ -9615,10 +9739,11 @@ function renderAiChat() {
         </details>`
       : "";
     return `<div style="align-self:flex-start;background:${isAi ? "#fff" : "#f8fafc"};border:1px solid #e2e8f0;color:#0f172a;padding:12px 14px;border-radius:12px 12px 12px 0;max-width:92%;line-height:1.5;">
-        <div style="font-size:11px;font-weight:700;color:${isAi ? "#7c3aed" : "#475569"};margin-bottom:4px;">${isAi ? "AI advisor (can be wrong)" : "City Pretty"}</div>
+        <div style="font-size:11px;font-weight:700;color:${isAi ? "#7c3aed" : "#475569"};margin-bottom:4px;">${msg.scripted ? "From this page's data (no AI)" : isAi ? "AI advisor (can be wrong)" : "City Pretty"}</div>
         ${msg.text}
         ${stoppedNotice}
         ${sourcesHtml}
+        ${msg.scripted ? `<button type="button" class="tool-btn" data-ai-deeper="${aiHistory.indexOf(msg)}" style="margin-top:8px;">Ask the AI for a deeper answer</button>` : ""}
       </div>`;
   }).join("");
   box.scrollTop = box.scrollHeight;
@@ -9631,8 +9756,24 @@ function handleAiSubmit(e) {
   const q = input.value.trim();
   if (!q) return;
   input.value = "";
-  sendAiQuery(q, null);
+  // Script-first (app/advisor-scripts.js): a plain lookup is answered from the page's own data, with no request and no
+  // cost; anything else goes to the Worker with what the page already found.
+  const S = window.AdvisorScripts, loaded = typeof activeFips === "function" && activeFips() && (document.getElementById("loading") || {}).hidden !== false;
+  if (!S || !loaded) { sendAiQuery(q, null); return; }
+  S.tryScripted(q).then(r => {
+    if (!r || !r.answered) { sendAiQuery(q, null, { scripted: r }); return; }
+    aiHistory.push({ role: "user", text: q });
+    aiHistory.push({ role: "assistant", scripted: true, question: q, findings: r.findings, intent: r.intent, raw: r.text, text: aiTextToHtml(r.text), sources: r.sources || [] });
+    renderAiChat();
+  }, () => sendAiQuery(q, null));
 }
+// "Ask the AI for a deeper answer" under a page-data answer sends the same question to the Worker, with the findings
+if (typeof document !== "undefined") document.addEventListener("click", e => {
+  const b = e.target && e.target.closest ? e.target.closest("[data-ai-deeper]") : null;
+  if (!b) return;
+  const msg = aiHistory[+b.getAttribute("data-ai-deeper")];
+  if (msg && msg.scripted) { b.disabled = true; sendAiQuery(msg.question, null, { scripted: { intent: msg.intent, answered: true, findings: msg.findings } }); }
+});
 
 function askAiPrompt(key) {
   let promptText = "";
@@ -9765,7 +9906,7 @@ function methodsFinancingHtml(f, st, countyName) {
   const vl = pf ? verificationLabel(pf) : null;
   let h = `<h3>Tax-increment financing (${esc(st)})</h3>`;
   h += pf
-    ? `<p class="small">On file for ${esc(st)}: <b>${esc(pf.tif_vehicle_name || "tax-increment financing")}</b>${pf.statutory_citation ? `, ${esc(pf.statutory_citation)}` : ""} <span style="color:${vl.color}">(${vl.text})</span>${pf.source_url ? ` · <a href="${esc(pf.source_url)}" target="_blank" rel="noopener">source</a>` : ""}.</p>`
+    ? `<p class="small">On file for ${esc(st)}: <b>${esc(pf.tif_vehicle_name || "tax-increment financing")}</b>${pf.statutory_citation ? `, ${esc(pf.statutory_citation)}` : ""} <span style="color:${vl.color}">(${vl.text})</span>${pf.source_url ? ` · <a href="${esc(pf.source_url)}" target="_blank" rel="noopener">source</a>` : ""}.${pf.scope_note ? ` ${esc(pf.scope_note)}` : ""}</p>`
     : `<p class="small muted">No finance profile on file for ${esc(st)}.</p>`;
   if (f === "06037") {
     const E = (typeof D !== "undefined" && D && D.eifd && D.eifd.tras) ? D.eifd : null;
@@ -10852,7 +10993,7 @@ function switchCounty(c, wantBgId) {
           l.bindTooltip(() => {
             const k = $("#metric").value;
             const m = METRICS[k];
-            const mv = m ? m.unit(m.f(p)) : "";
+            const mv0 = m ? m.f(p) : null, mv = m ? (mv0 == null ? "not scored" : m.unit(mv0)) : "";   // a block group with no best bet has no value: the tooltip threw, and a click there selected nothing
             const catName = p.t && D.catalog[p.t] ? D.catalog[p.t].name : p.t;
             return `<b>${esc(p.n)}</b> · ${esc(p.c)}<br>${m ? m.label.split("(")[0] + ": " + mv + "<br>" : ""}${p.t && p.v >= 1 ? "Best bet: " + esc(catName) + " (" + fvpd(p.v) + " / $1)" : "Nothing returns $1 per $1"}`;
           }, { sticky: true });
@@ -10895,9 +11036,9 @@ function switchCounty(c, wantBgId) {
         } else {
           const bounds = (ocLayer && ocLayer.getBounds && ocLayer.getBounds().isValid()) ? ocLayer.getBounds() : (D_OC && D_OC.features && D_OC.features.length ? L.geoJSON(D_OC).getBounds() : null);
           if (bounds && bounds.isValid && bounds.isValid()) {
-            if (Math.abs(bounds.getEast() - bounds.getWest()) > 180) {
-              const c = (D_OC && D_OC.features && D_OC.features[0]) ? L.geoJSON(D_OC.features[0]).getBounds().getCenter() : bounds.getCenter();
-              map.setView(c, 7);
+            if (bounds.getEast() > 180) {   // a county across the 180th meridian: the map would hold mostly ocean, so fit the selected block group's largest part
+              const sf = (targetId && byId.get(targetId)) || (D_OC && D_OC.features && D_OC.features[0]);
+              map.fitBounds(sf ? fitBoundsOf(sf) : bounds, { maxZoom: 11.5, padding: [25, 25] });
             } else {
               map.fitBounds(bounds, { maxZoom: 11.5, padding: [25, 25] });
             }
@@ -11359,7 +11500,7 @@ function exportExecutiveProspectus() {
   const lot = window.__activeLotData || (typeof currentHouse !== "undefined" && currentHouse && currentHouse.lot) || (AH && AH.lot ? { lotSqft: AH.lot } : {});
   const F = window.__activeFacts || (typeof currentHouse !== "undefined" && currentHouse && currentHouse.F) || (AH && AH.F) || {};
   const zRule = window.__activeZRule || (typeof currentHouse !== "undefined" && currentHouse && currentHouse.zRule) || {};
-  const playbook = (typeof computePropertyPlaybook === "function") ? computePropertyPlaybook(a, lot, F, zRule, window.__activeLatLng, activeState()) : null;
+  const playbook = (typeof computePropertyPlaybook === "function") ? computePropertyPlaybook(a, AH ? AH.lot : lot, F, zRule, window.__activeLatLng || (AH && AH.ll), AH ? AH.st : null) : null;   // the open lot's size, point and hazard checks, as the panel passes them
 
   const addr = a.SitusFullAddress || a.PROPERTYADDRESS || a.Address || "Address not recorded";
   const ain = a.AIN || a.APN || a.PPN_TEXT || a.ParcelID || "not recorded";

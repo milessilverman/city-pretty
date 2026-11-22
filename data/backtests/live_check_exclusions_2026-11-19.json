@@ -1,0 +1,178 @@
+{
+  "ran_on": "2026-11-19",
+  "script": "scripts/live_check_exclusions.mjs",
+  "note": "before = the 996c1c4 checkout served from a clean copy (OLD_PAGE=1 builds the flags the way that page did); after = this branch. Vermont, Massachusetts and Maine have no zoning source on the page, so for those points the page's own flood and fire checks ran on the real point and the script supplied zoning R-1; the Los Angeles point went through the page's click path.",
+  "before": [
+    {
+      "label": "Los Angeles R1-1 lot",
+      "fips": "06037",
+      "find": "R1-1",
+      "lat": 33.97192,
+      "lng": -118.45760800000001,
+      "errors": [],
+      "zoning": "R1-1parcel zoning layer ",
+      "has_house_panel": true,
+      "flags": {
+        "historic_district_hpoz": false,
+        "coastal_commission_or_sma": null,
+        "fema_100yr_floodway": false,
+        "calfire_or_state_vhfhsz": false,
+        "airport_noise_or_runway_zone": null,
+        "williamson_or_ag_preserve": null,
+        "public_or_tribal_land": null,
+        "wekiva_or_everglades_protection_area": null,
+        "population_threshold_ineligible": null
+      },
+      "applied": [
+        "ca_sb9_lot_split",
+        "ca_adu_66323"
+      ],
+      "not_confirmed": [],
+      "excluded_by_statute": [],
+      "notes": "State laws the screening engine applies here: CA SB 9 (California HOME Act) \u2014 two units per lot and urban lot split, CA: ADU and junior ADU approved ministerially on single-family lots. Unverified screening \u2014 confirm with the planning department.",
+      "panel_lines": [
+        "\u2022 Geologic hazard zone \u2014 In state liquefaction hazard zone: new additions or ADUs require a site-specific geotechnical/soils investigation.",
+        "\u2022 Detached ADU (backyard home) \u2014 Building footprint is not on file, so open yard space cannot be verified without a site plan or survey.",
+        "\u2713 Junior ADU (inside the house, up to 500 sq ft) \u2014 4,088 sq ft single-family home: state law (Gov. Code \u00a7\u00a7 66313 and 66333) allows converting up to 500 sq ft of interior livable space; under the current text of \u00a7 66333, owner-occupancy can be required only if the JADU shares sanitation facilities with the house, and rentals must be longer than 30 days.",
+        "? SB 9 lot split / second home \u2014 2,870 sq ft parcel: in a single-family zone, SB 9 allows a split into two lots of roughly equal area, each at least 1,200 sq ft and at least 40% of the original (about 1,435 sq ft each here), if the lot meets the law's other conditions, which aren't checked here (among them: the split can't require demolishing or altering housing occupied by a tenant in the last three years or under rent control or an affordability covenant, and the parcel must meet the site conditions of Gov. Code \u00a7 65913.4(a)(6)(B)\u2013(K) as it read on 16 Sep 2021). A city doesn't have to allow more than two units on each new lot (Gov. Code \u00a7 66411.7(j)).",
+        "State housing laws (screening, unverified)",
+        "May apply: CA SB 9 (California HOME Act) \u2014 two units per lot and urban lot split, CA: ADU and junior ADU approved ministerially on single-family lots",
+        "Private covenants: state housing laws override city zoning but may not cancel recorded HOA covenants or CC&Rs. Check the title report.",
+        "Junior ADU (inside the house)",
+        "Garage to living space (not an ADU)"
+      ]
+    },
+    {
+      "label": "Vermont Montpelier",
+      "fips": "00000",
+      "engine": "VT",
+      "lat": 44.2594,
+      "lng": -72.5753,
+      "mode": "engine on the real point; zoning R-1 supplied by the script",
+      "fema": "Zone AE (100-year Special Flood Hazard Area; mandatory flood insurance requirement)",
+      "flood_flag": true,
+      "fire_flag": null,
+      "applied": [],
+      "not_confirmed": [],
+      "excluded_by_statute": []
+    },
+    {
+      "label": "Massachusetts Boston Seaport",
+      "fips": "00000",
+      "engine": "MA",
+      "lat": 42.3519,
+      "lng": -71.044,
+      "mode": "engine on the real point; zoning R-1 supplied by the script",
+      "fema": "Zone AE (100-year Special Flood Hazard Area; mandatory flood insurance requirement; Base Flood Elevation 10 ft)",
+      "flood_flag": true,
+      "fire_flag": null,
+      "applied": [],
+      "not_confirmed": [],
+      "excluded_by_statute": []
+    },
+    {
+      "label": "Maine Portland",
+      "fips": "00000",
+      "engine": "ME",
+      "lat": 43.6615,
+      "lng": -70.2553,
+      "mode": "engine on the real point; zoning R-1 supplied by the script",
+      "fema": "Zone X (Minimal flood risk, outside 500-year floodplain)",
+      "flood_flag": false,
+      "fire_flag": null,
+      "applied": [
+        "me_ld2003"
+      ],
+      "not_confirmed": [],
+      "excluded_by_statute": []
+    }
+  ],
+  "after": [
+    {
+      "label": "Los Angeles R1-1 lot",
+      "fips": "06037",
+      "find": "R1-1",
+      "lat": 33.97192,
+      "lng": -118.45760800000001,
+      "errors": [],
+      "zoning": "R1-1parcel zoning layer ",
+      "has_house_panel": true,
+      "flags": {
+        "historic_district_hpoz": false,
+        "coastal_commission_or_sma": null,
+        "fema_100yr_floodway": false,
+        "calfire_or_state_vhfhsz": false,
+        "airport_noise_or_runway_zone": null,
+        "williamson_or_ag_preserve": null,
+        "public_or_tribal_land": null,
+        "wekiva_or_everglades_protection_area": null,
+        "population_threshold_ineligible": null
+      },
+      "applied": [
+        "ca_adu_66323"
+      ],
+      "not_confirmed": [],
+      "excluded_by_statute": [],
+      "notes": "State laws the screening engine applies here: CA: ADU and junior ADU approved ministerially on single-family lots. Unverified screening \u2014 confirm with the planning department. Not applied: CA SB 9 (California HOME Act) \u2014 two units per lot and urban lot split (Not determined: the list of sites this law excludes has not been confirmed against the statute text.)",
+      "panel_lines": [
+        "\u2022 Geologic hazard zone \u2014 In state liquefaction hazard zone: new additions or ADUs require a site-specific geotechnical/soils investigation.",
+        "\u2022 Detached ADU (backyard home) \u2014 Building footprint is not on file, so open yard space cannot be verified without a site plan or survey.",
+        "\u2713 Junior ADU (inside the house, up to 500 sq ft) \u2014 4,088 sq ft single-family home: state law (Gov. Code \u00a7\u00a7 66313 and 66333) allows converting up to 500 sq ft of interior livable space; under the current text of \u00a7 66333, owner-occupancy can be required only if the JADU shares sanitation facilities with the house, and rentals must be longer than 30 days.",
+        "? SB 9 lot split / second home \u2014 2,870 sq ft parcel: in a single-family zone, SB 9 allows a split into two lots of roughly equal area, each at least 1,200 sq ft and at least 40% of the original (about 1,435 sq ft each here), if the lot meets the law's other conditions, which aren't checked here (among them: the split can't require demolishing or altering housing occupied by a tenant in the last three years or under rent control or an affordability covenant, and the parcel must meet the site conditions of Gov. Code \u00a7 65913.4(a)(6)(B)\u2013(K) as it read on 16 Sep 2021). A city doesn't have to allow more than two units on each new lot (Gov. Code \u00a7 66411.7(j)).",
+        "State housing laws (screening, unverified)",
+        "May apply: CA: ADU and junior ADU approved ministerially on single-family lots",
+        "Private covenants: state housing laws override city zoning but may not cancel recorded HOA covenants or CC&Rs. Check the title report.",
+        "Junior ADU (inside the house)",
+        "Garage to living space (not an ADU)"
+      ]
+    },
+    {
+      "label": "Vermont Montpelier",
+      "fips": "00000",
+      "engine": "VT",
+      "lat": 44.2594,
+      "lng": -72.5753,
+      "mode": "engine on the real point; zoning R-1 supplied by the script",
+      "fema": "Zone AE (100-year Special Flood Hazard Area; mandatory flood insurance requirement)",
+      "flood_flag": true,
+      "fire_flag": null,
+      "applied": [
+        "vt_act47"
+      ],
+      "not_confirmed": [],
+      "excluded_by_statute": []
+    },
+    {
+      "label": "Massachusetts Boston Seaport",
+      "fips": "00000",
+      "engine": "MA",
+      "lat": 42.3519,
+      "lng": -71.044,
+      "mode": "engine on the real point; zoning R-1 supplied by the script",
+      "fema": "Zone AE (100-year Special Flood Hazard Area; mandatory flood insurance requirement; Base Flood Elevation 10 ft)",
+      "flood_flag": true,
+      "fire_flag": null,
+      "applied": [
+        "ma_adu_40a3"
+      ],
+      "not_confirmed": [],
+      "excluded_by_statute": []
+    },
+    {
+      "label": "Maine Portland",
+      "fips": "00000",
+      "engine": "ME",
+      "lat": 43.6615,
+      "lng": -70.2553,
+      "mode": "engine on the real point; zoning R-1 supplied by the script",
+      "fema": "Zone X (Minimal flood risk, outside 500-year floodplain)",
+      "flood_flag": false,
+      "fire_flag": null,
+      "applied": [],
+      "not_confirmed": [
+        "me_ld2003: Not determined: the law excludes a lot in the watershed of a filtration-waiver drinking water source of Lewiston or Auburn (30-A M.R.S. 4364-A(1-B)(A)); a coastal barrier (Title 38, section 1904), where the municipality exempts the lot in an adopted ordinance (30-A M.R.S. 4364-A(1-B)(B)); a coastal sand dune system (Title 38, section 480-B), where the municipality exempts the lot in an adopted ordinance (30-A M.R.S. 4364-A(1-B)(B)); land governed by Title 12, chapter 423-A (30-A M.R.S. 4364-A(1)), and the page has not checked these for this parcel."
+      ],
+      "excluded_by_statute": []
+    }
+  ]
+}

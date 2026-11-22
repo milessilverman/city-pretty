@@ -1,0 +1,380 @@
+{
+ "ran_on": "2026-11-22T08:29:37.916Z",
+ "script": "scripts/live_check_panels.mjs",
+ "results": {
+  "55071": {
+   "state": "WI",
+   "points": [
+    {
+     "bg": "550710008002",
+     "lat": 44.0616,
+     "lng": -87.656925,
+     "service": "Wisconsin Statewide Parcels V12 (Statewide Parcel Map Initiative)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $149k, rent $911/mo, homes 640"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 26 pts (current release); page: 26 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 26.4 pts below its 50% goal; box: \"26.4 pts below its 50% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for WI"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Manitowoc County · 550710008002; page \"Census area: Manitowoc County · block group 550710008002(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1014 for 55071; page \"HUD Fair Market Rent (FY2027): 1 bed $775 · 2 bed $1,014 · 3 bed $1,208/moManitowoc County, WI. HUD's voucher benchmark (rent plus utilities), not a market aski\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 622 ft; page \"Ground elevation: 622 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "550710054004",
+     "lat": 44.141111,
+     "lng": -87.586829,
+     "service": "Wisconsin Statewide Parcels V12 (Statewide Parcel Map Initiative)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $119k, rent $754/mo, homes 421"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 40 pts (current release); page: 40 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 39.7 pts below its 50% goal; box: \"39.7 pts below its 50% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for WI"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Manitowoc County · 550710054004; page \"Census area: Manitowoc County · block group 550710054004(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1014 for 55071; page \"HUD Fair Market Rent (FY2027): 1 bed $775 · 2 bed $1,014 · 3 bed $1,208/moManitowoc County, WI. HUD's voucher benchmark (rent plus utilities), not a market aski\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 592 ft; page \"Ground elevation: 592 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use (it gives \"1\"), so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "550710006002",
+     "lat": 44.082757,
+     "lng": -87.687071,
+     "service": "Wisconsin Statewide Parcels V12 (Statewide Parcel Map Initiative)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $109k, rent $878/mo, homes 685"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 29 pts (current release); page: 29 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 29.4 pts below its 40% goal; box: \"29.4 pts below its 40% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for WI"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Manitowoc County · 550710006002; page \"Census area: Manitowoc County · block group 550710006002(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1014 for 55071; page \"HUD Fair Market Rent (FY2027): 1 bed $775 · 2 bed $1,014 · 3 bed $1,208/moManitowoc County, WI. HUD's voucher benchmark (rent plus utilities), not a market aski\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 645 ft; page \"Ground elevation: 645 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use (it gives \"1\"), so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9191' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9191' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9191' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)"
+   ],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_55071.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_55071.json.gz"
+   ]
+  },
+  "55141": {
+   "state": "WI",
+   "points": [
+    {
+     "bg": "551410107004",
+     "lat": 44.561256,
+     "lng": -90.251438,
+     "service": "Wisconsin Statewide Parcels V12 (Statewide Parcel Map Initiative)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $285k, rent $1,088/mo, homes 412"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for WI"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Wood County · 551410107004; page \"Census area: Wood County · block group 551410107004(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1014 for 55141; page \"HUD Fair Market Rent (FY2027): 1 bed $775 · 2 bed $1,014 · 3 bed $1,299/moWood County, WI. HUD's voucher benchmark (rent plus utilities), not a market asking re\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 1155 ft; page \"Ground elevation: 1,155 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use (it gives \"5\"), so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "551410115003",
+     "lat": 44.362177,
+     "lng": -89.746907,
+     "service": "Wisconsin Statewide Parcels V12 (Statewide Parcel Map Initiative)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $199k, rent $620/mo, homes 828"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected At or above its 50% goal; box: \"At or above its 50% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for WI"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Wood County · 551410115003; page \"Census area: Wood County · block group 551410115003(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1014 for 55141; page \"HUD Fair Market Rent (FY2027): 1 bed $775 · 2 bed $1,014 · 3 bed $1,299/moWood County, WI. HUD's voucher benchmark (rent plus utilities), not a market asking re\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 1029 ft; page \"Ground elevation: 1,029 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use (it gives \"1\"), so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "551410116004",
+     "lat": 44.26872,
+     "lng": -89.797936,
+     "service": "Wisconsin Statewide Parcels V12 (Statewide Parcel Map Initiative)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $193k, rent $1,013/mo, homes 914"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for WI"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Wood County · 551410116004; page \"Census area: Wood County · block group 551410116004(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1014 for 55141; page \"HUD Fair Market Rent (FY2027): 1 bed $775 · 2 bed $1,014 · 3 bed $1,299/moWood County, WI. HUD's voucher benchmark (rent plus utilities), not a market asking re\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 1009 ft; page \"Ground elevation: 1,009 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9191' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9191' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9191' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)"
+   ],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_55141.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_55141.json.gz"
+   ]
+  }
+ }
+}

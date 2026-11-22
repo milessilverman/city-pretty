@@ -1,0 +1,138 @@
+{
+ "230050046001": {
+  "file_counts": [
+   0,
+   1,
+   93.5
+  ],
+  "count_sentence_matches_file": false,
+  "file_weighting": "1/k",
+  "shown": [
+   "Crashes with someone killed or seriously injured, inside or on boundary streets1"
+  ],
+  "rule_1k_shown": false,
+  "older_rule_shown": false
+ },
+ "230050010002": {
+  "file_counts": [
+   8.5,
+   2.8333,
+   120.6667
+  ],
+  "count_sentence_matches_file": true,
+  "file_weighting": "1/k",
+  "shown": [
+   "120.7 crashes recorded inside this block group or on its boundary streets (MaineDOT crash records 2023–2025): 8.5 involving a pedestrian or cyclist, 2.8 with someone killed or seriously injured; crashes the state recorded without a location are not counted, and their share is unknown (a crash within 10 m of the edges of k block groups counts 1/k in each, so a county's block groups add up to its located crashes)",
+   "Crashes with someone killed or seriously injured, inside or on boundary streets2.8",
+   "and their share is unknown (a crash within 10 m of the edges of k block groups counts 1/k in each, so a county's block groups add up to its located crashes",
+   "a crash within 10 m of the edges of k block groups counts 1/k in each, so a county's block groups add up to its located crashes"
+  ],
+  "rule_1k_shown": true,
+  "older_rule_shown": false
+ },
+ "230050113001": {
+  "file_counts": [
+   0,
+   3,
+   164.5
+  ],
+  "count_sentence_matches_file": false,
+  "file_weighting": "1/k",
+  "shown": [
+   "Crashes with someone killed or seriously injured, inside or on boundary streets3"
+  ],
+  "rule_1k_shown": false,
+  "older_rule_shown": false
+ },
+ "420034035004": {
+  "file_counts": [
+   0,
+   0,
+   4
+  ],
+  "count_sentence_matches_file": false,
+  "file_weighting": "1/k",
+  "shown": [
+   "Crashes with someone killed or seriously injured, inside or on boundary streets0"
+  ],
+  "rule_1k_shown": false,
+  "older_rule_shown": false
+ },
+ "420034734023": {
+  "file_counts": [
+   0.5,
+   1.5,
+   15
+  ],
+  "count_sentence_matches_file": false,
+  "file_weighting": "1/k",
+  "shown": [
+   "Crashes with someone killed or seriously injured, inside or on boundary streets1.5"
+  ],
+  "rule_1k_shown": false,
+  "older_rule_shown": false
+ },
+ "420030902001": {
+  "file_counts": [
+   4,
+   1.5,
+   26.8333
+  ],
+  "count_sentence_matches_file": false,
+  "file_weighting": "1/k",
+  "shown": [
+   "26.8 crashes recorded inside this block group or on its boundary streets (Pennsylvania DOT crash records (PennShare) 2021–2023)",
+   "Crashes with someone killed or seriously injured, inside or on boundary streets1.5",
+   "and their share is unknown (a crash within 10 m of the edges of k block groups counts 1/k in each, so a county's block groups add up to its located crashes",
+   "a crash within 10 m of the edges of k block groups counts 1/k in each, so a county's block groups add up to its located crashes"
+  ],
+  "rule_1k_shown": true,
+  "older_rule_shown": false
+ },
+ "490351003081": {
+  "file_counts": [
+   7.5833,
+   6,
+   69
+  ],
+  "count_sentence_matches_file": true,
+  "file_weighting": "1/k",
+  "shown": [
+   "69 crashes recorded inside this block group or on its boundary streets (Utah DOT crash records 2023–2025): 7.6 involving a pedestrian or cyclist, 6 with someone killed or seriously injured; crashes the state recorded without a location are not counted, and their share is unknown (a crash within 10 m of the edges of k block groups counts 1/k in each, so a county's block groups add up to its located crashes)",
+   "Crashes with someone killed or seriously injured, inside or on boundary streets6",
+   "and their share is unknown (a crash within 10 m of the edges of k block groups counts 1/k in each, so a county's block groups add up to its located crashes"
+  ],
+  "rule_1k_shown": true,
+  "older_rule_shown": false
+ },
+ "490351128261": {
+  "file_counts": [
+   0,
+   0.5,
+   114
+  ],
+  "count_sentence_matches_file": false,
+  "file_weighting": "1/k",
+  "shown": [
+   "Crashes with someone killed or seriously injured, inside or on boundary streets0.5"
+  ],
+  "rule_1k_shown": false,
+  "older_rule_shown": false
+ },
+ "490351135141": {
+  "file_counts": [
+   2.5,
+   3.25,
+   64.9167
+  ],
+  "count_sentence_matches_file": true,
+  "file_weighting": "1/k",
+  "shown": [
+   "64.9 crashes recorded inside this block group or on its boundary streets (Utah DOT crash records 2023–2025): 2.5 involving a pedestrian or cyclist, 3.3 with someone killed or seriously injured; crashes the state recorded without a location are not counted, and their share is unknown (a crash within 10 m of the edges of k block groups counts 1/k in each, so a county's block groups add up to its located crashes)",
+   "Crashes with someone killed or seriously injured, inside or on boundary streets3.3",
+   "and their share is unknown (a crash within 10 m of the edges of k block groups counts 1/k in each, so a county's block groups add up to its located crashes"
+  ],
+  "rule_1k_shown": true,
+  "older_rule_shown": false
+ }
+}

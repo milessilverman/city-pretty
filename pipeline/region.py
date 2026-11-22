@@ -5,7 +5,10 @@ pipeline reads from here, so a new county is: add nothing, or add a COUNTY_OVERR
 import os, json, re
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-REG = json.load(open(os.path.join(HERE, "..", "data", "counties.json")))
+_REG_PATH = os.path.join(HERE, "..", "data", "counties.json")
+if not os.path.exists(_REG_PATH):   # a fresh checkout keeps the registry under national/data
+    _REG_PATH = os.path.join(HERE, "..", "national", "data", "counties.json")
+REG = json.load(open(_REG_PATH))
 FIPS = os.environ.get("CP_FIPS", "06059")
 C = REG[FIPS]
 STATE_FIPS, COUNTY_FIPS, STATE = C["state_fips"], C["county_fips"], C["state"]
@@ -110,3 +113,76 @@ STATE_DEFAULTS = {
 OV = {**STATE_DEFAULTS.get(STATE, {}), **COUNTY_OVERRIDES.get(FIPS, {})}
 GTFS = OV.get("gtfs", [])
 os.makedirs(DATA, exist_ok=True)
+
+
+# ---- counties that cross the 180th meridian (Aleutians West, 02016: Attu is at 172 E, Unalaska at 166 W) ----
+# Longitudes are written -180..180 in every raw download. For a county whose block groups lie on both sides of 180 the pipeline works on a
+# continuous scale instead: west-hemisphere longitudes get +360 when a file is read (geo.wl / geo.shape_ll), so 166 W is 194 and all
+# distances and nearest-neighbour searches are plain geometry; the bundle keeps that scale (Leaflet draws longitudes above 180 in the
+# same place as their -180..180 twins and keeps the county in one piece). A box that crosses 180 is written west > east (the GeoJSON
+# convention); split_box() cuts it into the two plain boxes a web query needs. Every other county takes the old code path unchanged.
+def crosses_antimeridian(xs):
+    """True when longitudes (-180..180) lie on both sides of 180 and are closer together that way round than through 0"""
+    xs = list(xs)
+    if not xs:
+        return False
+    lo, hi = min(xs), max(xs)
+    if lo >= 0 or hi <= 0:
+        return False
+    sh = [x + 360.0 if x < 0 else x for x in xs]
+    return max(sh) - min(sh) < hi - lo
+
+
+def lon_extent(xs):
+    """(west, east) of longitudes; west > east when the set crosses the 180th meridian (west is then the smallest positive, east the largest negative)"""
+    xs = list(xs)
+    if crosses_antimeridian(xs):
+        return min(x for x in xs if x >= 0), max(x for x in xs if x < 0)
+    return min(xs), max(xs)
+
+
+def split_box(b, east_edge=180.0):
+    """(w, s, e, n) -> list of plain boxes: the box itself, or two boxes cut at 180 when w > e. east_edge is where the east box stops:
+    ArcGIS servers answer an envelope that ends at exactly 180 with features from far outside it (the NCES school layer returned
+    schools 40 degrees east of the box), so arcgis_query asks for 179.999; Overpass takes 180."""
+    w, s, e, n = b
+    return [tuple(b)] if w <= e else [(w, s, east_edge, n), (-180.0, s, e, n)]
+
+
+def lon_in(w, e, lon):
+    """lon inside west..east, where west > east means the range crosses 180"""
+    return w <= lon <= e if w <= e else (lon >= w or lon <= e)
+
+
+def lon_overlap(w1, e1, w2, e2):
+    """do two longitude ranges (west > east: crossing 180) share any longitude"""
+    return any(not (b[2] < a[0] or b[0] > a[2]) for a in split_box((w1, 0, e1, 0)) for b in split_box((w2, 0, e2, 0)))
+
+
+def bg_lons(path=None):
+    """every longitude of data_dir/bg.geojson (None when the file is not there yet)"""
+    path = path or os.path.join(DATA, "bg.geojson")
+    if not os.path.exists(path):
+        return None
+    xs = []
+    def walk(c):
+        if isinstance(c[0], (int, float)):
+            xs.append(c[0])
+        else:
+            for q in c:
+                walk(q)
+    for f in json.load(open(path))["features"]:
+        walk(f["geometry"]["coordinates"])
+    return xs
+
+
+_CROSS = None
+def crosses_180():
+    """does this county's block-group file cross the 180th meridian (False until bg.geojson exists)"""
+    global _CROSS
+    if _CROSS is None:
+        xs = bg_lons()
+        if xs is None:
+            return False
+        _CROSS = crosses_antimeridian(xs)
+    return _CROSS

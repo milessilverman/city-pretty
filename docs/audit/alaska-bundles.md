@@ -98,10 +98,7 @@ rule as every other county.
 most similar block groups across LA County and the borough (`build_oc.py` peer pool), so a one-block-group borough still
 gets them, and its Census, HUD and canopy figures are its own. No borough had zero OSM roads.
 
-**Left out: Aleutians West Census Area (02016).** Its block groups cross the 180th meridian (Attu and the Near Islands
-are at +172 to +180 longitude), so the pipeline's box (min to max longitude) would span the globe and the Overpass
-download would cover the whole band; the page's map and lot lookups also assume one longitude range. It stays "lot
-lines only". A build would need the box split at the meridian in `fetch_oc.py`, `osm_extract.py` and the page.
+**Aleutians West Census Area (02016): built 21 Nov** (it was left out on 17 Nov; see the section below).
 
 **Large files.** Most of the size is OpenStreetMap water lines and park outlines at full detail: Prince of Wales-Hyder
 (17.5 MB; 182,728 water features), Bethel (14.8 MB; 273,964 water lines in the Yukon-Kuskokwim delta), Hoonah-Angoon
@@ -169,3 +166,57 @@ Harris). So no county lost a working service. e2e: a Fairbanks click shows the n
   only after main's loader fix, and passed.
 - Round 2: the first Skagway live check sampled no block group (the check skipped the first one); fixed in the script and
   re-run.
+
+## Aleutians West (02016) and the 180th meridian (21 Nov 2026)
+Its block groups run from Attu (172.35 E) through 180 to Unalaska and the Pribilofs (165.9 W): 3 block groups, one of them (020160001001) a
+28-part multipolygon with islands on both sides of 180. Every step of the county pipeline had assumed a county's longitudes are one range.
+
+**What was changed** (`pipeline/region.py`, `geo.py`, `fetch_oc.py`, `osm_extract.py`, `metrics_oc.py`, `sources_oc.py`, `layers_oc.py`,
+`build_oc.py`; page: `app/app.js`)
+- A county crosses 180 when its block groups have longitudes on both sides and are closer together that way round (`region.crosses_antimeridian`).
+  Only then: west-hemisphere longitudes get +360 as files are read (`geo.wl`, `geo.shape_ll`), so 166 W is 194 and every distance and
+  nearest-neighbour search is plain geometry (before, a stop at 179.9 and one at -179.9 were 359.8 degrees apart). The bundle keeps that
+  scale: Leaflet draws it as one piece, and a split at 180 would draw the two halves 358 degrees apart.
+- Download boxes: a box with west > east is split at 180 into two plain boxes (Overpass tiles, ArcGIS/TIGER envelopes, GTFS feed boxes,
+  stop filters, the AFDC SQL). ArcGIS envelopes end at 179.999: the NCES school layer answers an envelope ending at exactly 180 with
+  schools 40 degrees east of it (58 returned, 6 real; found here, fixed).
+- Street/facility grid keys wrap modulo 360/cell, which is what the page's grid (`gridCellIndicesX`) already does.
+- Page: a point at -166 (click, search) is found in a block group stored at 194 (`pointInFeature`); a block group of islands on both sides is
+  fitted by its largest part (`fitBoundsOf`), not by 20 degrees of ocean; `houseAt` and `fipsFromLatLng` give services -180..180 again.
+- Mistakes found on the way: `osm_extract.py` had a `NameError` (`BOX`) from 835f341 (18 Nov) that stopped every clipped build (also fixed on the
+  base by the Maryland work); the 18 Nov note that the page "wraps the 180th meridian" covered only the street grid, not selection, fit or
+  services; the block-group tooltip threw on a block group with no best bet ("not scored"), and because the canvas hover never finished, a click
+  there selected nothing (any county).
+- Overpass: the public endpoint (maps.mail.ru) answered about 9 in 10 requests with 504 on 19-21 Nov; `_overpass_xml` now retries 30 times, 4 s apart after a 504.
+
+**No change to other counties** (the point of the design): Skagway (02230, 1 block group) downloaded once (OSM base 2026-11-19T18:03:56Z, 17 tiles),
+then `osm_extract`, `metrics_oc`, `layers_oc`, `build_oc` run on identical copies with the code as it was before 835f341 and with this change:
+all 8 `osm_*.json`, `metrics.json`, `layers.json` and `bundle-oc.json` are byte-identical (`cmp`; sha256 b3fcb1b0...), `bundle-oc.b64`
+differs only in the gzip header, and decompresses to the same 20,852,978 bytes. Unit tests (`pipeline/test_antimeridian.py`, run by
+`tests/unit/pipelineAntimeridian.test.ts`): synthetic block groups either side of 180 (two plain download boxes, a 13.7 km pair across 180 measures
+13.7 km, grid column, ArcGIS asked in two halves) and a non-crossing county keeps its one box and old keys.
+
+**Inputs reached from this machine:** Census TIGERweb (block groups, roads, water, places), ACS 2020-2024 table files (www2.census.gov), NCES
+schools, AFDC chargers, Esri USA Parks, American Forests current Tree Equity (AK file has no block group in this county), MobilityData catalog (no
+feed has a stop in the county), OpenStreetMap through maps.mail.ru Overpass (34 tiles, 47 MB, database time 2026-11-21T09:00:00Z). Not reachable:
+Geofabrik, overpass-api.de and the other Overpass mirrors (no answer), the 2021 Tree Equity Alaska file (403, as before).
+
+**Checks on the file** (`counties/bundle_02016.json.gz`, 2.4 MB, built 21 Nov):
+| Check | Result |
+|---|---|
+| Block groups | 3 (TIGERweb for state 02, county 016: 3) |
+| Population | 2,766 + 1,790 + 679 = 5,235, equal to Census table B01003 (`acs_b01003.dat`) for each of the three GEOIDs |
+| Longitudes in the file | east of 180: 172.35 to 180 (Attu and the Near Islands; 933 of block group 020160001001's 3,189 vertices); west: 180 to 194.08 (= 165.92 W), 2,256 + 394 + 243 vertices; no block-group vertex below 172.35 or above 194.08 |
+| Widest block group | 020160001001: 19.96 degrees (172.35 to 192.30); the three together span 21.73, so none is wider than the county |
+| Distances not inflated | nearest grocery 34 km, 21 km, 211 km; nearest pool 33 km, 23 km, 522 km (from the rep. point of the island chain, to Unalaska); a wrap error would give 20,000 km |
+| Parks | 100 OSM parks in the extract; the Alaska Maritime and Aleutian Islands Wilderness refuges are whole outlines, reaching 197.6 and 226.5 (= 133.5 W), as full outlines are kept in every county |
+| Bus, rail, EV | none: no feed stop in the county, no station, no charger (shown as not on file, not 0) |
+| Not built | crash gaps, 2021 heat, crime, rail distance, site suggestions (same reasons as the other boroughs) |
+| OSM extract vs a direct Overpass count of the same two boxes | roads 485 = 485, bus stops 0 = 0, ID for ID (`data/backtests/aleutians_west_overpass_xcheck_2026-11-21.json`) |
+
+**On the real page** (`LIVE_PORT` 9001, local file; screenshots `aleutians_open.png`, `aleutians_click_east_of_180.png`,
+`aleutians_click_west_of_180.png` in the scratchpad): the county opens at zoom 9 centred on Unalaska (191.8 to 194.4 east), not on the whole
+world; a click on Attu (173.02 E) selects 020160001001 and a click on Unalaska (166.8 W) selects 020160002002; `pointInFeature` finds the
+Unalaska block group at -166.8 and nothing at (-150, 50); no console error except four 404s for the crash files that do not exist.
+`scripts/live_check_panels.mjs 02016`: 3 block groups, every panel ok (`data/backtests/live_check_panels_2026-11-21_02016.json`; renamed on the 22 Nov merge, the other branch had a file of the same name). At the page's minimum
+zoom of 9 only one island group fits on the screen; the chain is 22 degrees long.

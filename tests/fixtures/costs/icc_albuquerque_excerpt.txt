@@ -1,0 +1,9 @@
+Group (2024 International       IA       IB       IIA      IIB      IIIA      IIIB     IV       VA       VB
+B Business                      309.01   297.89   287.04   274.77   250.17    241.34   264.17   223.59   213.27
+M Mercantile                    207.08   198.94   189.48   180.53   164.30    158.91   171.92   143.00   135.89
+R-1 Residential, hotels         286.53   276.38   266.63   256.68   234.71    228.48   256.15   211.66   204.20
+R-2 Residential, multiple       239.24   229.09   219.34   209.38   188.69    182.45   208.85   165.63   158.18
+R-3 Residential, one- and        224.62   218.65   213.40    208.84   201.86   194.67   213.06   187.70   175.92
+R-4 Residential, care/assisted   283.25   273.10   263.35    253.39   231.93   225.70   252.86   208.88   201.43
+U Utility, miscellaneous         125.18   118.05   109.33    104.91   93.46    87.55    99.89    74.38    71.07
+Source: International Code Council, Building Valuation Data, February 2026

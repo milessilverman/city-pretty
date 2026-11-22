@@ -24,7 +24,13 @@ const _ideEvalHousing = (typeof evaluateByRightHousing !== "undefined")
   ? evaluateByRightHousing
   : ((typeof require !== "undefined") ? require("./statutoryZoningEngine").evaluateByRightHousing : null);
 
+// riders and money for transit lines (src/engines/transitDemandEngine.js, loaded before this file by index.html)
+const _ideDemand = (typeof window !== "undefined" && window.TransitDemandEngine)
+  ? window.TransitDemandEngine
+  : ((typeof require !== "undefined") ? require("./transitDemandEngine") : null);
+
 const DECISION_ENGINE_VERSION = "1.0.0";
+const TRANSIT_LINES_MAX_CHARS = 2600; // share of the advisor brief (DECISION_BRIEF_MAX_CHARS 20,000) given to riders-and-money lines; leaves room for the project cards
 
 // ---------------------------------------------------------------- cited thresholds (fetched 2026-11-18)
 const TRANSIT_THRESHOLDS = {
@@ -174,11 +180,60 @@ function gradeFromEvidence(model, ev) {
   return { grade: g, reasons };
 }
 
+// ---------------------------------------------------------------- 1a. the walk-forward prediction test (app/data/neighborhood_prediction.json)
+// docs/PREDICTION-MODEL.md: a leading-signal model is used for a county only where it beat both baselines in the
+// walk-forward test (decision rule written before the test). Elsewhere the screen below stays, with the screen's own
+// tested 5-year ranges by home-value fifth and its measured hit rate. Ranges are stored in points (100 x log change).
+const PRED_FILE = "app/data/neighborhood_prediction.json";
+const ptsToPct = p => p == null ? null : round(100 * (Math.exp(p / 100) - 1), 1);
+function predictionEvidence(prediction, fips) {
+  if (!prediction || !prediction.counties || !prediction.decision) return null;
+  const c = prediction.counties[fips] || null;
+  const res = prediction.results_5y || {};
+  const pooledHit = res.hit_rate_top_third && res.hit_rate_top_third.cheapest ? res.hit_rate_top_third.cheapest.pooled : null;
+  return {
+    inSample: !!c, county: c, applies: c ? c.applies : null, overallPass: !!prediction.decision.overall_pass,
+    testedOn: prediction.tested_on || null, headline: Array.isArray(prediction.headline) ? prediction.headline : [],
+    pooledFifths: res.baseline_fifth_ranges ? res.baseline_fifth_ranges.pooled : null,
+    pooledHitCheapest: pooledHit, modelHitPooled: res.hit_rate_top_third && res.hit_rate_top_third.ridge ? res.hit_rate_top_third.ridge.pooled : null,
+  };
+}
+function screenPrediction(pe, fifth, fips) { // the baseline's tested range for a block group in home-value fifth `fifth` (1 = cheapest)
+  if (!pe || !pe.inSample || fifth == null) return null;
+  const own = pe.county.baseline_fifth_ranges_5y && pe.county.baseline_fifth_ranges_5y[String(fifth)];
+  const pooled = pe.pooledFifths && pe.pooledFifths[String(fifth)];
+  const q = own || pooled; if (!q) return null;
+  const src = `${PRED_FILE} ${own ? `counties.${fips}.baseline_fifth_ranges_5y` : "results_5y.baseline_fifth_ranges.pooled"}`;
+  const ch = pe.county.hit_rate_top_third_5y ? num(pe.county.hit_rate_top_third_5y.cheapest) : null;
+  return {
+    model: "relative-value screen (cheap for its county)",
+    newModelTested: true, newModelResult: pe.overallPass ? "beat the screen overall but not in this county's own test" : "did not beat this screen in the walk-forward test",
+    level: "tract-level test, applied to this block group",
+    homeValueFifth: fifth,
+    relative5y: {
+      low: tv(ptsToPct(q[0]), "% vs county median tract, 5 years (10th percentile)", src, "measured"),
+      median: tv(ptsToPct(q[1]), "% vs county median tract, 5 years (median)", src, "measured"),
+      high: tv(ptsToPct(q[2]), "% vs county median tract, 5 years (90th percentile)", src, "measured"),
+      tracts: q[3], basis: own ? "this county's tracts, 5-year windows starting 2014-2020" : "all 50 test counties, 5-year windows starting 2014-2020",
+    },
+    hitRateTopThird: tv(ch, "share of the county's cheapest third of tracts that ended in its top third for 5-year gain (no skill 0.333)", `${PRED_FILE} counties.${fips}.hit_rate_top_third_5y.cheapest`, "measured"),
+    hitRateTopThirdAllCounties: pe.pooledHitCheapest ? tv(num(pe.pooledHitCheapest.mean), "share, all test counties", `${PRED_FILE} results_5y.hit_rate_top_third.cheapest`, "measured") : null,
+    testedOn: pe.testedOn,
+  };
+}
+function modelGrade(pe) {
+  const h = pe.county && pe.county.hit_rate_top_third_5y ? num(pe.county.hit_rate_top_third_5y.ridge) : null;
+  const g = h != null && h >= 0.45 ? "A" : "B";
+  return { grade: g, reasons: [`the leading-signal model beat both baselines in the walk-forward test and in this county's own test windows; its top-third call was right ${h == null ? "an unknown share" : Math.round(h * 100) + "%"} of the time here (no skill 33%)${g === "B" ? ", under the 45% needed for grade A" : ""}`] };
+}
+
 // ---------------------------------------------------------------- 1. neighborhoods
 /**
  * rankNeighborhoods(countyBundle, opts)
  *   countyBundle: a decoded counties/bundle_<fips>.json.gz (needs .details and .meta)
  *   opts.backtest: the parsed app/data/neighborhood_score_backtest.json (required)
+ *   opts.prediction: the parsed app/data/neighborhood_prediction.json (optional; adds the tested ranges and hit rate)
+ *   opts.predictionTracts: the parsed app/data/prediction/<fips>.json (used only where the county's entry says "model")
  *   opts.limit (default all), opts.minHomes (default 0)
  */
 function rankNeighborhoods(countyBundle, opts) {
@@ -201,12 +256,26 @@ function rankNeighborhoods(countyBundle, opts) {
     if (miss.length) unscored.push({ id, name: m.n || null, city: m.c || null, score: null, missing: miss });
     else rows.push({ id, m, vals });
   }
+  // the walk-forward prediction test: the model only where this county passed it, and only with its tract file
+  const pe = predictionEvidence(opts.prediction, fips);
+  const pt = opts.predictionTracts;
+  const useModel = !!(pe && pe.applies === "model" && pt && pt.county === fips && Array.isArray(pt.tracts));
+  const tractPred = useModel ? Object.fromEntries(pt.tracts.map(t => [t.tract, t])) : null;
+  if (useModel) {
+    for (let i = rows.length - 1; i >= 0; i--) {
+      if (!tractPred[rows[i].id.slice(0, 11)]) { const x = rows.splice(i, 1)[0]; unscored.push({ id: x.id, name: x.m.n || null, city: x.m.c || null, score: null, missing: [`tract prediction for ${x.id.slice(0, 11)} (app/data/prediction/${fips}.json)`] }); }
+    }
+  }
   const pct = {};
   for (const s of feats) { const p = percentileRanks(rows.map(r => r.vals[s])); rows.forEach((r, i) => { (pct[r.id] = pct[r.id] || {})[s] = p[i]; }); }
+  const hvRows = rows.filter(r => num(r.m.hv) != null && r.m.hv > 0), hvP = percentileRanks(hvRows.map(r => r.m.hv)), hvPct = {};
+  hvRows.forEach((r, i) => { hvPct[r.id] = hvP[i]; });
   const ev = countyEvidence(model.backtest, fips);
-  const gradeBase = gradeFromEvidence(model, ev);
+  const gradeBase = useModel ? modelGrade(pe) : gradeFromEvidence(model, ev);
+  if (!useModel && pe && pe.inSample) gradeBase.reasons.push(pe.overallPass ? "the leading-signal model was not used here: it did worse than a baseline in this county's own test windows" : "the leading-signal model (mortgage, permit, job and migration signals) was tested and did not beat this screen, so the screen stays");
   for (const r of rows) {
-    r.raw = model.weights.reduce((a, w) => a + w.weight * (pct[r.id][w.signal] - 0.5), 0);
+    r.raw = useModel ? -tractPred[r.id.slice(0, 11)].rank_in_county / tractPred[r.id.slice(0, 11)].of
+      : model.weights.reduce((a, w) => a + w.weight * (pct[r.id][w.signal] - 0.5), 0);
   }
   const scorePct = percentileRanks(rows.map(r => r.raw));
   rows.forEach((r, i) => { r.scorePct = scorePct[i]; });
@@ -232,12 +301,33 @@ function rankNeighborhoods(countyBundle, opts) {
     if (ip != null) reasons.push(`Median household income ${fmtUsd(m.inc)} (${Math.round(ip * 100)}th percentile in the county).`);
     const hist = quintileHistory(model.backtest, q);
     if (hist && hist["2020_2025"].value != null) reasons.push(`In the back-test, tracts in this score fifth (${q} of 5) went on to gain ${fmtPct(hist["2020_2025"].value)} vs their county's median tract over 2020-25 and ${fmtPct(hist["2015_2020"].value)} over 2015-20 (averages; individual tracts varied widely).`);
-    reasons.push(model.role === "screen" ? "This is a relative-value screen (cheap for its county, high rent for its price), not a forecast; it did no better than simply picking the cheapest tracts." : "Score beat simple baselines in the back-test.");
+    let prediction = null;
+    if (useModel) {
+      const tp = tractPred[r.id.slice(0, 11)], rg = tp.relative_5y_range_pct || [];
+      prediction = {
+        model: "leading-signal model", level: `tract-level: this block group inherits tract ${tp.tract}'s prediction`, tract: tp.tract,
+        relative5y: { low: tv(num(rg[0]), "% vs county median tract, 5 years (10th percentile of the model's past errors)", `app/data/prediction/${fips}.json`, "modelled"),
+          high: tv(num(rg[1]), "% vs county median tract, 5 years (90th percentile of the model's past errors)", `app/data/prediction/${fips}.json`, "modelled") },
+        rankInCounty: tp.rank_in_county, of: tp.of, drivers: (tp.drivers || []).map(d => d.text),
+        hitRateTopThird: tv(num(pt.hit_rate_top_third), "share of top-third calls that ended in the county's top third (no skill 0.333)", `app/data/prediction/${fips}.json`, "measured"),
+        testedOn: pt.tested_on || (pe && pe.testedOn) || null,
+      };
+      reasons.unshift(`Prediction (tract level): ${fmtPct(prediction.relative5y.low.value)} to ${fmtPct(prediction.relative5y.high.value)} vs the county's median tract over 5 years (80% range), tract ranked ${tp.rank_in_county} of ${tp.of} in the county${prediction.drivers.length ? "; main drivers: " + prediction.drivers.join("; ") : ""}.`);
+    } else {
+      const hp = hvPct[r.id];
+      prediction = screenPrediction(pe, hp == null ? null : Math.min(5, Math.floor(hp * 5) + 1), fips);
+      if (prediction && prediction.relative5y.low.value != null) {
+        const h = prediction.hitRateTopThird.value;
+        reasons.push(`Tested (on tracts): areas in this home-value fifth (${prediction.homeValueFifth} of 5, 1 = cheapest) ended between ${fmtPct(prediction.relative5y.low.value)} and ${fmtPct(prediction.relative5y.high.value)} vs their county's median tract over 5 years in 80% of cases (median ${fmtPct(prediction.relative5y.median.value)}; ${prediction.relative5y.basis}).${h != null ? ` In this county's test windows (starting 2019 and 2020), ${Math.round(h * 100)}% of the cheapest third of tracts ended in the top third for gain (no skill 33%).` : ""}`);
+      }
+    }
+    reasons.push(useModel ? "The leading-signal model beat both simple baselines in this county's walk-forward test." : model.role === "screen" ? "This is a relative-value screen (cheap for its county, high rent for its price), not a forecast; it did no better than simply picking the cheapest tracts." : "Score beat simple baselines in the back-test.");
     return {
       rank: i + 1, id: r.id, name: m.n || null, city: m.c || null,
       score: tv(round(r.scorePct * 100, 1), "percentile within county (100 = strongest relative-value signal)", "investmentDecisionEngine.rankNeighborhoods", "modelled"),
       scoreQuintile: q,
       historicalRelativeChange: hist,
+      prediction,
       components,
       confidence: { grade, reasons: gradeReasons },
       dataFlags: flags,
@@ -247,10 +337,16 @@ function rankNeighborhoods(countyBundle, opts) {
   });
   const limit = opts.limit ? Math.max(0, opts.limit | 0) : ranked.length;
   return {
-    role: model.role,
+    role: useModel ? "predictor" : model.role,
     county: { fips, name: (countyBundle.meta && countyBundle.meta.county) || null, acs },
-    method: "Within-county percentile of each back-test-supported bundle field, weighted by app/data/neighborhood_score_backtest.json engine_model.weights; score = percentile of the weighted sum.",
+    method: useModel ? `Rank of the tract's predicted 5-year change relative to the county (app/data/prediction/${fips}.json); block groups inherit their tract's prediction.`
+      : "Within-county percentile of each back-test-supported bundle field, weighted by app/data/neighborhood_score_backtest.json engine_model.weights; score = percentile of the weighted sum.",
     countyEvidence: ev.row,
+    prediction: pe ? {
+      applies: useModel ? "model" : (pe.inSample ? "baseline" : "not tested"), overallPass: pe.overallPass, inSample: pe.inSample,
+      testedOn: pe.inSample ? pe.testedOn : null, headline: pe.headline.slice(0, 2), source: PRED_FILE,
+      note: !pe.inSample ? "this county was not in the 50-county walk-forward test" : useModel ? "leading-signal model, tract level" : "the leading-signal model did not beat the screen here, so the screen is shown with its tested ranges",
+    } : null,
     ranked: ranked.slice(0, limit),
     rankedCount: ranked.length,
     unscored,
@@ -459,13 +555,14 @@ function recommendForParcel(parcelFacts, ctx) {
   const zoningKnown = !!(p.base_zoning_code && !/^(unzoned|unknown|missing|none|n\/a)$/i.test(String(p.base_zoning_code).trim()));
   if (!zoningKnown) missing.push("base_zoning_code");
   if (zoningKnown && zoningFn) {
-    const ex = Object.assign({ historic_district_hpoz: false, coastal_commission_or_sma: false, fema_100yr_floodway: false, calfire_or_state_vhfhsz: false, airport_noise_or_runway_zone: false, williamson_or_ag_preserve: false, public_or_tribal_land: false, everglades_or_wekiva_or_trpa: false, population_threshold_ineligible: false }, p.exclusions || {});
+    // A flag the caller does not supply is "not checked" (left out), never false.
+    const ex = Object.assign({}, p.exclusions || {});
     try {
       zoning = zoningFn(Object.assign({}, p, { exclusions: ex, municipality_pop: num(p.municipality_pop), county_pop: num(p.county_pop), dist_to_heavy_rail_mi: num(p.dist_to_heavy_rail_mi), dist_to_frequent_bus_or_brt_mi: num(p.dist_to_frequent_bus_or_brt_mi), lot_sqft: num(p.lot_sqft != null ? p.lot_sqft : p.lotSqft) }), ctx.laws);
     } catch (e) { zoning = null; }
   }
   const statutes = zoning ? zoning.applicable_statutes || [] : [];
-  const notConfirmed = zoning ? zoning.not_confirmed || [] : [];
+  const notConfirmed = zoning ? (zoning.not_confirmed || []).concat(zoning.excluded_by_statute || []) : [];   // both carry the engine's reason
   const lawsLoaded = !!(zoning && zoning.laws_loaded !== false);
   // "allowed by state law" only for a law the statute engine applied to this parcel; otherwise not determined, with
   // the engine's own reason for any law of that kind it could not confirm.
@@ -480,8 +577,10 @@ function recommendForParcel(parcelFacts, ctx) {
     if (!lawsLoaded) return { status: "not determined", why: "state law table (app/data/statutes.json) not loaded" };
     if (id === "lot_split") { const s = statutes.find(x => /lot split/i.test(x.citation)); return s ? allowed(s) : { status: "not determined", why: heldWhy(/lot.?split/i, "no state lot-split law on file applies to this parcel; local subdivision rules decide") }; }
     if (id === "adu") {
-      const s = p.is_single_family_residential ? (statutes.find(x => /(^|_)adu(_|$)/i.test(String(x.id))) || statutes.find(x => num(x.max_units_by_right) != null && x.max_units_by_right >= 2)) : null;
-      return s ? allowed(s) : { status: "not determined", why: heldWhy(/(^|_)adu(_|$)|\bADU\b/i, p.is_single_family_residential ? "no state ADU law on file applies to this parcel; local ADU rules decide" : "the lot is not recorded as single-family, so state ADU laws on file were not applied") };
+      // an ADU law the statute engine applied to this lot counts whatever the zone class (the engine checked it); the
+      // "two or more units by right" stand-in is used for single-family lots only
+      const s = statutes.find(x => /(^|_)adu(_|$)/i.test(String(x.id))) || (p.is_single_family_residential ? statutes.find(x => num(x.max_units_by_right) != null && x.max_units_by_right >= 2) : null);
+      return s ? allowed(s) : { status: "not determined", why: heldWhy(/(^|_)adu(_|$)|\bADU\b/i, p.is_single_family_residential ? "no state ADU law on file applies to this parcel; local ADU rules decide" : "the lot's zoning is not classed here as single-family or multifamily residential, so state ADU laws on file were not applied") };
     }
     return { status: "not determined", why: "set by local height, floor-area and setback rules; no local rule table is loaded" };
   };
@@ -550,6 +649,9 @@ function rateCostPerTrip(v) { if (v == null) return null; for (const r of TRANSI
  *     annualTrips, annualizedCapitalCostUsd, annualOperatingCostUsd, capitalCostUsd, intercityDistanceMiles, mode? }
  *   ctx.costBenchmarks: rows { mode, cost_per_mile, year, source_url } (app/data/transit_cost_benchmarks.json)
  *   ctx.valueEffects: rows { mode, distance_band, effect_pct, source_url } (app/data/transit_value_effects.json)
+ *   optional riders and money: corridorOrArea.demand (a line for TransitDemandEngine.compareModes: lengthMiles, stops, ...),
+ *     ctx.demandEngine (window.TransitDemandEngine or require("./transitDemandEngine")), ctx.demandTables (its tables);
+ *     the result's modeFit is then the mode that fits, the runner-up and why (null when not asked)
  */
 function evaluateTransit(corridorOrArea, ctx) {
   ctx = ctx || {};
@@ -650,6 +752,14 @@ function evaluateTransit(corridorOrArea, ctx) {
     if (!hsr) missing.push("intercityDistanceMiles");
   }
   if (hsr) why.push(hsr.inBand ? `Trip of ${dist} miles is inside FRA's 100-500 mile high-speed rail market.` : `Trip of ${dist} miles is outside FRA's 100-500 mile high-speed rail market.`);
+  // riders and money by mode (src/engines/transitDemandEngine.js), when the caller passes the engine, its tables and the line
+  let modeFit = null;
+  if (ctx.demandEngine && a.demand) {
+    modeFit = ctx.demandEngine.compareModes(a.demand, ctx.demandTables || {}, duNet == null ? null : supports.map(s => s.mode).concat(supports.some(s => s.mode === "bus_frequency" && s.buses_per_hour >= 6) ? ["brt"] : []));
+    if (modeFit.fit) why.push(`On predicted riders and operating cost per trip, ${modeFit.fit.replace(/_/g, " ")} fits${modeFit.runnerUp ? `; runner-up ${modeFit.runnerUp.replace(/_/g, " ")}` : ""}.`);
+    else if (modeFit.verdict === "not_enough_data") missing.push(...modeFit.missing.map(m => `for riders and money: ${m}`));
+    else why.push("On predicted riders and operating cost per trip, no mode passes.");
+  } else if (a.demand) missing.push("ctx.demandEngine and ctx.demandTables (riders and money by mode)");
   const effects = (ctx.valueEffects || []).filter(r => scale && normMode(r.mode) === scale).map(r => ({ mode: r.mode, distanceBand: r.distance_band, effect: tv(num(r.effect_pct), "% home value", r.source_url || "ctx.valueEffects", "measured") }));
   return {
     name: a.name || null,
@@ -659,7 +769,7 @@ function evaluateTransit(corridorOrArea, ctx) {
     ftaLandUse: { populationDensityRating: popRating, employmentRating: jobRating, source: T.fta_cig.source.url },
     costEffectiveness: { costPerTrip: tv(cpt == null ? null : round(cpt, 2), "USD per trip", "caller's annualised cost / annual trips", "modelled"), rating: ceRating, breakpoints: T.fta_cig.source.quote_cost_effectiveness },
     capitalCost: tv(cap, "USD", num(a.capitalCostUsd) != null ? "caller" : (mode0 && costByMode[mode0] ? costByMode[mode0].capital.source : null), num(a.capitalCostUsd) != null ? "measured" : "modelled"),
-    costByMode, warrant, hsr, valueEffects: effects,
+    costByMode, warrant, hsr, valueEffects: effects, modeFit,
     reasons: why,
     sources: [T.tcqsm_density.source.url, T.fta_cig.source.url, T.fra_hsr.source.url],
     missing,
@@ -683,25 +793,26 @@ function areaFromBlockGroup(id, m) {
  * buildDecisionBrief(county, selection, ctx)
  *   county: decoded county bundle
  *   selection: { blockGroupId?, parcel?, corridor?, top? (default 10) }
- *   ctx: { backtest, catalog, verification, underusedSites, sites, costBenchmarks, valueEffects, laws, unitCosts, valueCoefficients,
- *          valuationModels, sizes, overCapRatio }
+ *   ctx: { backtest, prediction?, predictionTracts?, catalog, verification, underusedSites, sites, costBenchmarks, valueEffects, laws, unitCosts,
+ *          valueCoefficients, valuationModels, sizes, overCapRatio, transitLines? (TransitDemandEngine.evaluateLine results) }
  */
 function buildDecisionBrief(county, selection, ctx) {
   selection = selection || {}; ctx = ctx || {};
   const top = selection.top || 10;
-  const rank = rankNeighborhoods(county, { backtest: ctx.backtest });
+  const rank = rankNeighborhoods(county, { backtest: ctx.backtest, prediction: ctx.prediction, predictionTracts: ctx.predictionTracts });
   const fips = rank.county ? rank.county.fips : (county && county.meta && county.meta.fips) || null;
-  const compact = r => ({ rank: r.rank, id: r.id, name: r.name, city: r.city, score: r.score.value, quintile: r.scoreQuintile, confidence: r.confidence.grade, reason: r.reasons[0] || null, history2020_25: r.historicalRelativeChange ? r.historicalRelativeChange["2020_2025"].value : null });
+  const compact = r => ({ rank: r.rank, id: r.id, name: r.name, city: r.city, score: r.score.value, quintile: r.scoreQuintile, confidence: r.confidence.grade, reason: r.reasons[0] || null, history2020_25: r.historicalRelativeChange ? r.historicalRelativeChange["2020_2025"].value : null, tested5yRangePct: r.prediction && r.prediction.relative5y ? [r.prediction.relative5y.low.value, r.prediction.relative5y.high.value] : null });
   const brief = {
     schema: "city-pretty/decision-brief@1", engineVersion: DECISION_ENGINE_VERSION,
     county: rank.county || { fips },
     role: rank.role,
     howToRead: "Every number is {value, unit, source, basis}. basis: measured = read from a cited table; modelled = computed from measured inputs; assumed = no evidence. null means not known.",
     backtest: ctx.backtest ? { headline: ctx.backtest.headline || null, verdict: ctx.backtest.verdict || null, retrieved: ctx.backtest.retrieved || null } : null,
+    prediction: rank.prediction || null,
     topNeighborhoods: (rank.ranked || []).filter(r => !r.dataFlags.length).slice(0, top).map(compact),
     topNeighborhoodsNote: "block groups failing a data check (dataFlags) are left out of this list; rankNeighborhoods still returns them, graded D",
     flaggedInTopN: (rank.ranked || []).slice(0, top).filter(r => r.dataFlags.length).length,
-    neighborhood: null, parcel: null, transit: null,
+    neighborhood: null, parcel: null, transit: null, transitLines: Array.isArray(ctx.transitLines) ? ctx.transitLines : [],
     caveats: [],
     missing: rank.missing.slice(),
   };
@@ -734,10 +845,12 @@ function buildDecisionBrief(county, selection, ctx) {
       const tail = p2 != null ? ` In 2020-25 it ranked tracts the right way round in ${Math.round(p2 * 100)}% of counties tested.` : "";
       return rank.role === "screen" ? `The neighborhood score is a relative-value screen. In the back-test (${n == null ? "?" : n} large counties, 2015-20 and 2020-25) it did no better than picking the cheapest tracts in the county.${tail}` : `The neighborhood score beat simple baselines in the back-test.${tail}`;
     })(),
+    ...(rank.prediction && rank.prediction.inSample && rank.prediction.headline.length ? [`Walk-forward test of mortgage, permit, job and migration signals (docs/PREDICTION-MODEL.md): ${rank.prediction.headline[0]}`] : []),
     "Scores rank block groups against their own county only; a county-wide boom or bust is not predicted.",
     "Back-tested on tracts whose boundaries did not change 2010-2020; fast-growing new-build areas are under-represented.",
     "Improvement costs and value gains are pipeline estimates, shown only for ideas whose effect size or cost the data audit confirmed against a source; effect sizes come from studies in other places.",
     "Transit verdicts use planning rules of thumb (TCQSM density guidelines, FTA CIG breakpoints); they are not a ridership forecast.",
+    ...((brief.transitLines || []).length ? ["Riders for the lines below come from a station model tested by leaving each of 7 systems out (docs/TRANSIT-DEMAND-MODEL.md): it ranks stops; the level for a new system is only bracketed, and light-rail stations were not predicted better than simple baselines."] : []),
   ];
   brief.sources = [
     ...((ctx.backtest && ctx.backtest.sources) || []).map(x => ({ name: x.name, url: x.url })),
@@ -758,6 +871,7 @@ function briefForAdvisor(brief) {
   return {
     schema: brief.schema, engineVersion: brief.engineVersion, county: brief.county, role: brief.role, howToRead: brief.howToRead,
     backtest: brief.backtest ? { headline: brief.backtest.headline, engine_role: brief.backtest.verdict ? brief.backtest.verdict.engine_role || null : null, retrieved: brief.backtest.retrieved } : null,
+    prediction: brief.prediction || null,
     topNeighborhoods: brief.topNeighborhoods, topNeighborhoodsNote: brief.topNeighborhoodsNote, flaggedInTopN: brief.flaggedInTopN,
     neighborhood: n ? {
       id: n.ranking ? n.ranking.id : null, name: n.ranking ? n.ranking.name : null,
@@ -769,8 +883,20 @@ function briefForAdvisor(brief) {
       missing: n.missing,
     } : null,
     parcel: p ? { parcelId: p.parcelId, zoning: p.zoning, expansions: (p.expansions || []).map(e => ({ expansion: e.expansion, label: e.label, legal: e.legal, costLow: f(e.cost.low), costHigh: f(e.cost.high), valueAdded: f(e.valueAdded), netValue: f(e.netValue), missing: e.missing })), missing: p.missing } : null,
+    // local projects first, then corridors, while the lines stay within TRANSIT_LINES_MAX_CHARS; the rest are named only
+    ...(() => {
+      const all = _ideDemand ? (brief.transitLines || []).slice().sort((a, b) => (a.kind === "pipeline" ? 0 : 1) - (b.kind === "pipeline" ? 0 : 1)) : [];
+      const kept = [], omitted = [];
+      // the page may lower the share (brief.transitLinesMaxChars) so the project cards keep room in the brief
+      const lineCap = Number.isFinite(brief.transitLinesMaxChars) ? Math.max(0, Math.min(TRANSIT_LINES_MAX_CHARS, brief.transitLinesMaxChars)) : TRANSIT_LINES_MAX_CHARS;
+      let used = 0;
+      for (const L of all) { const x = _ideDemand.lineForAdvisor(L), n = JSON.stringify(x).length; if (used + n <= lineCap) { kept.push(x); used += n; } else omitted.push(L.name); }
+      return { transitLines: kept, transitLinesOmitted: omitted };
+    })(),
     transit: t ? { name: t.name || null, verdict: t.verdict, scale: t.scale, verdictMeaning: t.verdictMeaning || null, homesPerNetAcre: t.density ? f(t.density.homesPerNetAcre) : null, reasons: t.reasons || [], missing: t.missing || [] } : null,
     caveats: brief.caveats, missing: brief.missing, sources: brief.sources,
+    // courses of action (src/engines/projectCardEngine.js cardsForAdvisor: compact, capped, no internal-only branch)
+    projectCards: brief.projectCards && brief.projectCards.schema === "city-pretty/project-cards-for-advisor@1" ? brief.projectCards : null,
   };
 }
 

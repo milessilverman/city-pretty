@@ -1,0 +1,358 @@
+{
+ "ran_on": "2026-11-21T12:24:01.421Z",
+ "script": "scripts/live_check_panels.mjs",
+ "results": {
+  "32005": {
+   "state": "NV",
+   "points": [
+    {
+     "bg": "320050012002",
+     "lat": 38.900006,
+     "lng": -119.765753,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $1.0M, rent $1,322/mo, homes 361"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 5 pts (current release); page: 5 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 5.2 pts below its 15% goal; box: \"5.2 pts below its 15% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for NV"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel service for this county"
+    },
+    {
+     "bg": "320050022005",
+     "lat": 39.069237,
+     "lng": -119.754272,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $699k, rent $1,475/mo, homes 620"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 11 pts (current release); page: 11 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 10.6 pts below its 15% goal; box: \"10.6 pts below its 15% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for NV"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel service for this county"
+    },
+    {
+     "bg": "320050023003",
+     "lat": 38.892711,
+     "lng": -119.649974,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $677k, rent –, homes 785"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for NV"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel service for this county"
+    }
+   ],
+   "checks": {
+    "census_area": "n/a",
+    "hud": "n/a",
+    "fema": "n/a",
+    "usgs": "n/a",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_32005.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_32005.json.gz"
+   ]
+  },
+  "32510": {
+   "state": "NV",
+   "points": [
+    {
+     "bg": "325100009002",
+     "lat": 39.190589,
+     "lng": -119.730712,
+     "service": "Carson City County GIS Parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $369k, rent $2,615/mo, homes 667"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 9 pts (current release); page: 9 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 8.6 pts below its 15% goal; box: \"8.6 pts below its 15% goal\" / \"+1.6°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for NV"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Carson City · 325100009002; page \"Census area: Carson City · block group 325100009002(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1453 for 32510; page \"HUD Fair Market Rent (FY2027): 1 bed $1,131 · 2 bed $1,453 · 3 bed $2,012/moCarson City, NV MSA. HUD's voucher benchmark (rent plus utilities), not a market ask\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 4689 ft; page \"Ground elevation: 4,689 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "325100002002",
+     "lat": 39.177258,
+     "lng": -119.773532,
+     "service": "Carson City County GIS Parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $602k, rent $1,607/mo, homes 392"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected At or above its 15% goal; box: \"At or above its 15% goal\" / \"+1.3°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for NV"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Carson City · 325100002002; page \"Census area: Carson City · block group 325100002002(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1453 for 32510; page \"HUD Fair Market Rent (FY2027): 1 bed $1,131 · 2 bed $1,453 · 3 bed $2,012/moCarson City, NV MSA. HUD's voucher benchmark (rent plus utilities), not a market ask\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (0.2 pct annual chance flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 4732 ft; page \"Ground elevation: 4,732 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "325100007022",
+     "lat": 39.137331,
+     "lng": -119.758946,
+     "service": "Carson City County GIS Parcels",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $347k, rent $1,703/mo, homes 746"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 0 pts (current release); page: 0 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected At or above its 15% goal; box: \"At or above its 15% goal\" / \"-1.0°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 1 record(s) for NV"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Carson City · 325100007022; page \"Census area: Carson City · block group 325100007022(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1453 for 32510; page \"HUD Fair Market Rent (FY2027): 1 bed $1,131 · 2 bed $1,453 · 3 bed $2,012/moCarson City, NV MSA. HUD's voucher benchmark (rent plus utilities), not a market ask\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 4705 ft; page \"Ground elevation: 4,705 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9333' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9333' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9333' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED"
+   ],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_32510.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_32510.json.gz"
+   ]
+  }
+ }
+}

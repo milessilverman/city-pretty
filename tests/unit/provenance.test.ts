@@ -192,7 +192,7 @@ describe("Tree Equity Score current release (2020 block groups), per county", ()
 
   it("all Connecticut county files have > 0 block groups (crosswalked to planning regions)", () => {
     const ctFiles = files.filter((f) => f.startsWith("09"));
-    expect(ctFiles.length).toBe(8);
+    expect(ctFiles.length).toBe(9); // all 9 planning regions (Northeastern CT, 09150, added 21 Nov 2026)
     for (const f of ctFiles) {
       const d = JSON.parse(fs.readFileSync(path.join(dir, f), "utf8"));
       const bgCount = Object.keys(d).filter((k) => k !== "_meta").length;

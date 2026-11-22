@@ -1,0 +1,392 @@
+{
+ "ran_on": "2026-11-22T07:43:11.433Z",
+ "script": "scripts/live_check_panels.mjs",
+ "results": {
+  "38035": {
+   "state": "ND",
+   "points": [
+    {
+     "bg": "380350114001",
+     "lat": 48.111447,
+     "lng": -97.617136,
+     "service": "NDGISHUB Parcels + Parcels_TaxRoll (North Dakota State Parcel Program)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $157k, rent $442/mo, homes 398"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for ND"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Grand Forks County · 380350114001; page \"Census area: Grand Forks County · block group 380350114001(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1014 for 38035; page \"HUD Fair Market Rent (FY2027): 1 bed $821 · 2 bed $1,014 · 3 bed $1,404/moGrand Forks, ND-MN MSA. HUD's voucher benchmark (rent plus utilities), not a market as\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "re-checked alone: USGS now 989 ft; page \"Ground elevation: 989 ft(U.S. Geological Survey 3DEP)\""
+      },
+      "usgs_first": {
+       "pass": false,
+       "detail": "USGS now: 989 ft; page \"Ground elevation: Not available (the service did not answer in time)(U.S. Geolog\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "380350102001",
+     "lat": 47.929939,
+     "lng": -97.051127,
+     "service": "NDGISHUB Parcels + Parcels_TaxRoll (North Dakota State Parcel Program)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $174k, rent $1,219/mo, homes 348"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 5 pts (current release); page: 5 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 5.3 pts below its 30% goal; box: \"5.3 pts below its 30% goal\" / \"+0.9°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for ND"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Grand Forks County · 380350102001; page \"Census area: Grand Forks County · block group 380350102001(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1014 for 38035; page \"HUD Fair Market Rent (FY2027): 1 bed $821 · 2 bed $1,014 · 3 bed $1,404/moGrand Forks, ND-MN MSA. HUD's voucher benchmark (rent plus utilities), not a market as\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area with reduced flood risk due to levee)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": false,
+       "detail": "re-checked alone: USGS now 832 ft; page \"Ground elevation: Not available (the service did not answer in time)(U.S. Geolog\""
+      },
+      "usgs_first": {
+       "pass": false,
+       "detail": "re-checked alone: USGS now 832 ft; page \"Ground elevation: Not available (the service did not answer in time)(U.S. Geolog\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "380350108012",
+     "lat": 47.907723,
+     "lng": -97.06132,
+     "service": "NDGISHUB Parcels + Parcels_TaxRoll (North Dakota State Parcel Program)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $232k, rent $1,151/mo, homes 472"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 1 pts (current release); page: 1 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 1.3 pts below its 30% goal; box: \"1.3 pts below its 30% goal\" / \"+0.3°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for ND"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Grand Forks County · 380350108012; page \"Census area: Grand Forks County · block group 380350108012(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1014 for 38035; page \"HUD Fair Market Rent (FY2027): 1 bed $821 · 2 bed $1,014 · 3 bed $1,404/moGrand Forks, ND-MN MSA. HUD's voucher benchmark (rent plus utilities), not a market as\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area with reduced flood risk due to levee)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "USGS now: no answer; page \"Ground elevation: Not available (the service did not answer in time)(U.S. Geolog\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "fail",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9191' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9191' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9191' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)"
+   ],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_38035.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_38035.json.gz"
+   ]
+  },
+  "38101": {
+   "state": "ND",
+   "points": [
+    {
+     "bg": "381010109022",
+     "lat": 48.420655,
+     "lng": -101.310151,
+     "service": "NDGISHUB Parcels + Parcels_TaxRoll (North Dakota State Parcel Program)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value –, rent $1,375/mo, homes 385"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for ND"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Ward County · 381010109022; page \"Census area: Ward County · block group 381010109022(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1049 for 38101; page \"HUD Fair Market Rent (FY2027): 1 bed $864 · 2 bed $1,049 · 3 bed $1,458/moWard County, ND HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities), not\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: unmapped; page \"FEMA flood zone: Not available (No effective FEMA flood map here (unmapped, not 'no risk'))(FEMA National Flood Hazard L\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "re-checked alone: USGS now 1628 ft; page \"Ground elevation: 1,628 ft(U.S. Geological Survey 3DEP)\""
+      },
+      "usgs_first": {
+       "pass": false,
+       "detail": "USGS now: 1628 ft; page \"Ground elevation: Not available (the service did not answer in time)(U.S. Geolog\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "381010108003",
+     "lat": 48.291598,
+     "lng": -101.285865,
+     "service": "NDGISHUB Parcels + Parcels_TaxRoll (North Dakota State Parcel Program)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $436k, rent $1,142/mo, homes 1,150"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 27 pts (current release); page: 27 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 26.5 pts below its 30% goal; box: \"26.5 pts below its 30% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for ND"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Ward County · 381010108003; page \"Census area: Ward County · block group 381010108003(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1049 for 38101; page \"HUD Fair Market Rent (FY2027): 1 bed $864 · 2 bed $1,049 · 3 bed $1,458/moWard County, ND HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities), not\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: unmapped; page \"FEMA flood zone: Not available (No effective FEMA flood map here (unmapped, not 'no risk'))(FEMA National Flood Hazard L\""
+      },
+      "usgs": {
+       "pass": false,
+       "detail": "re-checked alone: USGS now 1669 ft; page \"Ground elevation: Not available (the service did not answer in time)(U.S. Geolog\""
+      },
+      "usgs_first": {
+       "pass": false,
+       "detail": "re-checked alone: USGS now 1669 ft; page \"Ground elevation: Not available (the service did not answer in time)(U.S. Geolog\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "381010106012",
+     "lat": 48.20321,
+     "lng": -101.312314,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $297k, rent $1,057/mo, homes 872"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 25 pts (current release); page: 25 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 25.2 pts below its 30% goal; box: \"25.2 pts below its 30% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for ND"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel at point"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel at point"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel at point"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel at point"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel at point"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "fail",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9191' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9191' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)"
+   ],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_38101.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_38101.json.gz"
+   ]
+  }
+ },
+ "fema_rechecked_on": "2026-11-22T07:49:54.457Z"
+}

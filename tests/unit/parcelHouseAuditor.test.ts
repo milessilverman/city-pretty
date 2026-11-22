@@ -9,6 +9,7 @@ import { estimatePropertyMarketValue } from "../../src/engines/propertyValuation
 // These tests pin the honest behavior adopted on 2026-11-16: values come only from records on file, invented
 // constants are gone, and anything that cannot be sourced is null with a reason.
 
+const ANSWERED_NO = { historic_district_hpoz: false, fema_100yr_floodway: false, calfire_or_state_vhfhsz: false };
 const BASE = {
   lat: 34.05,
   lng: -118.25,
@@ -105,12 +106,60 @@ describe("Parcel house auditor", () => {
   });
 
   it("8. Flags a California lot split only from the SB 9 record, and never in an HPOZ", () => {
-    const ok = auditSingleHouseParcel({ ...BASE, parcelId: "p8", lotSqft: 7500, livingSqft: 1800, zoningCode: "R-1", neighborhoodMedianHv: 850000 });
-    expect(ok.statutoryZoning.applicable_statutes.map((s: any) => s.id)).toContain("ca_sb9_lot_split");
-    expect(ok.statutoryZoning.lotSplitFeasible).toBe(true);
+    // The SB 9 record's list of excluded sites is not confirmed, so the lot split is "not determined", with the reason, and is
+    // never flagged feasible. Settled on the 22 Nov 2026 merge: the other branch's test expected SB 9 to apply once the
+    // historic, flood and fire checks answered "no", but SB 9 also excludes wetlands, listed hazardous waste sites,
+    // earthquake fault zones, conservation-plan land, protected habitat and easement land (Gov. Code 65913.4(a)(6)(C), (E),
+    // (F), (I)-(K) as AB 1174 printed it on 16 Sep 2021, fetched 22 Nov), which the page never checks.
+    const ok = auditSingleHouseParcel({ ...BASE, parcelId: "p8", lotSqft: 7500, livingSqft: 1800, zoningCode: "R-1", neighborhoodMedianHv: 850000, exclusions: ANSWERED_NO });
+    expect(ok.statutoryZoning.applicable_statutes.map((s: any) => s.id)).not.toContain("ca_sb9_lot_split");
+    expect(ok.statutoryZoning.lotSplitFeasible).toBe(false);
+    expect(ok.statutoryZoning.statutoryNotes).toMatch(/excludes has not been confirmed/);
+    const unanswered = auditSingleHouseParcel({ ...BASE, parcelId: "p8u", lotSqft: 7500, livingSqft: 1800, zoningCode: "R-1", neighborhoodMedianHv: 850000 });
+    expect(unanswered.statutoryZoning.applicable_statutes.map((s: any) => s.id)).not.toContain("ca_sb9_lot_split");
+    expect(unanswered.statutoryZoning.lotSplitFeasible).toBe(false);
 
     const hpoz = auditSingleHouseParcel({ ...BASE, parcelId: "p8b", lotSqft: 7500, livingSqft: 1800, zoningCode: "R-1", neighborhoodMedianHv: 850000, exclusions: { historic_district_hpoz: true } });
     expect(hpoz.statutoryZoning.lotSplitFeasible).toBe(false);
+
+    // A site check that was not answered (FEMA did not reply): SB 9 is not confirmed, with the reason. It is not applied.
+    const noFema: any = auditSingleHouseParcel({ ...BASE, parcelId: "p8n", lotSqft: 7500, livingSqft: 1800, zoningCode: "R-1", neighborhoodMedianHv: 850000, exclusions: { historic_district_hpoz: false, calfire_or_state_vhfhsz: false } });
+    expect(noFema.statutoryZoning.applicable_statutes.map((s: any) => s.id)).not.toContain("ca_sb9_lot_split");
+    expect(noFema.statutoryZoning.lotSplitFeasible).toBe(false);
+    expect(noFema.statutoryZoning.not_confirmed.find((n: any) => n.id === "ca_sb9_lot_split").reason).toMatch(/^Not determined/);
+    // Very high fire zone: decided law by law; no law is applied or dropped silently (the engine's old blanket stop is gone,
+    // tests/unit/statuteSiteConditions.test.ts). SB 9's list is not confirmed, so SB 9 is "not determined" and the reason
+    // names the fire zone the page found (22 Nov 2026 merge: the other branch ruled it out with the text's exception; see
+    // the comment above for why the list is not confirmed). The exception is on the record and is quoted when it rules out.
+    const fire: any = auditSingleHouseParcel({ ...BASE, parcelId: "p8v", lotSqft: 7500, livingSqft: 1800, zoningCode: "R-1", neighborhoodMedianHv: 850000, exclusions: { ...ANSWERED_NO, calfire_or_state_vhfhsz: true } });
+    expect(fire.statutoryZoning.applicable_statutes.map((s: any) => s.id)).not.toContain("ca_sb9_lot_split");
+    expect(fire.statutoryZoning.lotSplitFeasible).toBe(false);
+    expect(fire.statutoryZoning.not_confirmed.find((n: any) => n.id === "ca_sb9_lot_split").reason).toContain("the page found a condition that may be on it: a very high fire hazard severity zone");
+    expect(fire.statutoryZoning.excluded_by_statute).toEqual([]);
+    // The state ADU law's text was read and has no fire-zone exclusion, so it still applies there.
+    expect(fire.statutoryZoning.applicable_statutes.map((s: any) => s.id)).toContain("ca_adu_66323");
+    expect(fire.statutoryZoning.statutoryNotes).toContain("very high fire hazard severity zone");
+  });
+
+  it("8b. The zoning map's own category decides where the caller has one (LA R1 variation zones)", () => {
+    // Laws the zone test lets through: applied, or held back only after the zone test (SB 9 is "not determined" until its
+    // exclusion list is confirmed, test 8). A law whose zone class does not fit is in neither list.
+    const ids = (x: any) => x.statutoryZoning.applicable_statutes.concat(x.statutoryZoning.not_confirmed).map((s: any) => s.id);
+    const base = { ...BASE, lotSqft: 7500, livingSqft: 1800, neighborhoodMedianHv: 850000, useDescription: "Single", exclusions: ANSWERED_NO };
+    // Without a category the text tests misread both codes (found 20 Nov 2026 at 2107 Duxbury Cir and on R1R3 lots).
+    expect(ids(auditSingleHouseParcel({ ...base, parcelId: "p8c", zoningCode: "R1V2-O" }))).not.toContain("ca_sb9_lot_split");
+    expect(ids(auditSingleHouseParcel({ ...base, parcelId: "p8d", zoningCode: "R1R3-RG" }))).not.toContain("ca_sb9_lot_split");
+    for (const zoningCode of ["R1V2-O", "R1R3-RG"]) {
+      const a: any = auditSingleHouseParcel({ ...base, parcelId: "p8e", zoningCode, zoningCategory: "single-family" } as any);
+      expect(ids(a)).toContain("ca_sb9_lot_split");
+      expect(a.statutoryZoning.base_zoning_code).toBe(zoningCode);
+    }
+    // A multifamily or commercial category is never single-family, whatever the code looks like; other categories fall back to the text tests.
+    expect(ids(auditSingleHouseParcel({ ...base, parcelId: "p8f", zoningCode: "R-1", zoningCategory: "multifamily" } as any))).not.toContain("ca_sb9_lot_split");
+    expect(ids(auditSingleHouseParcel({ ...base, parcelId: "p8g", zoningCode: "R-1", zoningCategory: "commercial / mixed use" } as any))).not.toContain("ca_sb9_lot_split");
+    expect(ids(auditSingleHouseParcel({ ...base, parcelId: "p8h", zoningCode: "R-1", zoningCategory: "other" } as any))).toContain("ca_sb9_lot_split");
+    // "none": the caller knows the zone is on no single-family list (e.g. an LA County A-1 lot), so no text test rescues it.
+    expect(ids(auditSingleHouseParcel({ ...base, parcelId: "p8i", zoningCode: "R-1", zoningCategory: "none" } as any))).not.toContain("ca_sb9_lot_split");
   });
 
   it("9. Shows no solar size, cost, savings or payback (none is sourced)", () => {

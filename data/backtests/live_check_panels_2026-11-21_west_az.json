@@ -1,0 +1,173 @@
+{
+ "ran_on": "2026-11-21T12:12:29.934Z",
+ "script": "scripts/live_check_panels.mjs",
+ "results": {
+  "04023": {
+   "state": "AZ",
+   "points": [
+    {
+     "bg": "040239661083",
+     "lat": 31.445312,
+     "lng": -110.998001,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $243k, rent $1,067/mo, homes 747"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 2 record(s) for AZ"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel service for this county"
+    },
+    {
+     "bg": "040239661084",
+     "lat": 31.438834,
+     "lng": -110.975627,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $185k, rent $1,067/mo, homes 541"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 2 record(s) for AZ"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel service for this county"
+    },
+    {
+     "bg": "040239661091",
+     "lat": 31.39941,
+     "lng": -110.805467,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $272k, rent $658/mo, homes 332"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 2 record(s) for AZ"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel service for this county"
+    }
+   ],
+   "checks": {
+    "census_area": "n/a",
+    "hud": "n/a",
+    "fema": "n/a",
+    "usgs": "n/a",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_04023.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_04023.json.gz"
+   ]
+  }
+ }
+}

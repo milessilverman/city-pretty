@@ -1,0 +1,2457 @@
+{
+ "_source": {
+  "purpose": "Free, citable construction cost figures for pricing courses of action (ADU, small multifamily, station-area building, conventional vs prefabricated). Data only; not wired into the engine or page.",
+  "built": "2026-11-22",
+  "builder": "scripts/costs/build_building_costs.py",
+  "icc": {
+   "table": "ICC Building Valuation Data, February 2026: 27 occupancy groups x 9 construction types; 'N.P.' (not permitted) cells omitted",
+   "primary_copy": "https://www.cabq.gov/mra/documents/appendix-b_building-valuation-2026.pdf",
+   "second_copy": "https://www.hermiston.gov/sites/default/files/fileattachments/community_development/page/2531/valuationdatatable2026.pdf",
+   "copies_agree": "all 243 table cells identical (checked by this script)",
+   "header_discrepancy": "The Albuquerque copy heads the table 'Group (2024 International Building Code)'; the Hermiston copy 'Group (2021 International Building Code)'. The numbers are identical.",
+   "footnotes_in_copy": [
+    "b. For shell only buildings deduct 20 percent",
+    "a. Private Garages use Utility, miscellaneous",
+    "d. Unfinished basements (Group R-3) = $31.50 per sq. ft."
+   ],
+   "edition_statement": "Source: International Code Council, Building Valuation Data, February 2026",
+   "latest_edition_note": "ICC updates the table every six months; an August 2026 edition may exist but no copy of it could be found (Irvine's 'effective August 15, 2026' page carries a REV 06/24 table). February 2026 is the latest obtained.",
+   "icc_statements": [
+    "The average costs include foundation work, structural and nonstructural building components, electrical, plumbing, mechanical and interior finish material.",
+    "The data is a national average and does not take into account any regional cost differences.",
+    "This data table is not intended to be used as an estimating guide because the data only reflects average costs and is not representative of specific construction.",
+    "The BVD will be updated at six-month intervals"
+   ],
+   "icc_statements_source": "https://www.iccsafe.org/building-safety-journal/bsj-technical/building-valuation-data/",
+   "icc_statements_caveat": "These statements are from ICC's August 2020 edition article; ICC's pages for the 2026 edition are members-only and could not be read.",
+   "access": "This is an ICC member-exclusive benefit",
+   "access_url": "https://www.iccsafe.org/products-and-services/i-codes/code-development/building-valuation-data/",
+   "reuse_terms_quote": "no portion of the Services may be reprinted, republished, modified, publicly displayed, publicly performed, or distributed in any form without Our express written permission",
+   "reuse_terms_url": "https://www.iccsafe.org/terms-of-use/",
+   "display_decision": "internal use only: not displayed"
+  },
+  "schema": "item, building_type, construction_method, measure (cost_per_sqft | cost_per_unit | factor | months), value or range, unit, year, place, source_url, quote, verification, display_allowed (+display_terms)",
+  "display_rule": "Rows with display_allowed=false are internal use only: not displayed.",
+  "row_counts": {
+   "total": 96,
+   "rows_not_displayable_kept_outside_the_published_site": 254
+  },
+  "internal_rows_note": "Rows marked display_allowed: false (publisher terms forbid display, or terms not checked) are not in this file. They are kept in a separate folder that the page never requests and the site build never copies."
+ },
+ "rows": [
+  {
+   "item": "DoD MILCON area cost factor, Alabama",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 0.85,
+   "range": [
+    0.8,
+    0.97
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "Alabama: median of 362 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST Alabama | Mobile | Mobile | Alabama National Guard | AREA COST FACTOR 0.8 ; HIGHEST Alabama | Houston | Dothan | Alabama National Guard | AREA COST FACTOR 0.97",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, Alaska",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 2.47,
+   "range": [
+    2.2,
+    4.94
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "Alaska: median of 202 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST Alaska | Anchorage | Unknown | TED STEVENS IAP | AREA COST FACTOR 2.2 ; HIGHEST Alaska | Aleutians West | Unknown | EARECKSON AS | AREA COST FACTOR 4.94",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, Arizona",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 0.99,
+   "range": [
+    0.97,
+    1.17
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "Arizona: median of 228 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST Arizona | Pima | Tucson | AIR FORCE PLANT 42 | AREA COST FACTOR 0.97 ; HIGHEST Arizona | Yuma | Yuma Proving Ground | Yuma Proving Ground | AREA COST FACTOR 1.17",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, Arkansas",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 0.83,
+   "range": [
+    0.81,
+    0.86
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "Arkansas: median of 201 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST Arkansas | Pulaski | North Little Rock | Camp Joseph T Robinson | AREA COST FACTOR 0.81 ; HIGHEST Arkansas | Jefferson | White Hall | Pine Bluff Arsenal | AREA COST FACTOR 0.86",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, California",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 1.2,
+   "range": [
+    1.09,
+    1.97
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "California: median of 1152 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST California | Riverside | Norco | NAVWPNSTA SEAL BEACH | AREA COST FACTOR 1.09 ; HIGHEST California | Santa Barbara | Santa Rosa Island | NAVBASE Ventura City Pt Mugu CA | AREA COST FACTOR 1.97",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, Colorado",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 0.97,
+   "range": [
+    0.95,
+    1.4
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "Colorado: median of 313 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST Colorado | Arapahoe | Unknown | BUCKLEY AFB | AREA COST FACTOR 0.95 ; HIGHEST Colorado | El Paso | Manitou Springs | Army Mission Support | AREA COST FACTOR 1.4",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, Connecticut",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 1.09,
+   "range": [
+    1.05,
+    1.15
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "Connecticut: median of 111 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST Connecticut | Fairfield | Newtown | Connecticut National Guard | AREA COST FACTOR 1.05 ; HIGHEST Connecticut | New London | Groton | Connecticut National Guard | AREA COST FACTOR 1.15",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, Delaware",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 0.98,
+   "range": [
+    0.97,
+    1.03
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "Delaware: median of 48 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST Delaware | Kent | Harrington | Delaware National Guard | AREA COST FACTOR 0.97 ; HIGHEST Delaware | Kent | Unknown | DOVER AFB | AREA COST FACTOR 1.03",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, District Of Columbia",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 1.02,
+   "range": [
+    1.02,
+    1.02
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "District Of Columbia: median of 15 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST District Of Columbia | District Of Columbia | Washington | NAVAL SUPPORT ACTIVITY WASH | AREA COST FACTOR 1.02 ; HIGHEST District Of Columbia | District Of Columbia | Washington | Joint Recruiting Program | AREA COST FACTOR 1.02",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, District of Columbia",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 1.02,
+   "range": [
+    1.02,
+    1.02
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "District of Columbia: median of 21 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST District of Columbia | District of Columbia | Washington, DC | MARBKS WASHINGTON DC | AREA COST FACTOR 1.02 ; HIGHEST District of Columbia | District of Columbia | Washington, Dc | Joint Recruiting Program | AREA COST FACTOR 1.02",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, Florida",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 0.87,
+   "range": [
+    0.85,
+    0.94
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "Florida: median of 763 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST Florida | Hillsborough | Tampa | HDQTRS 4TH MARDIV NEW ORLEANS | AREA COST FACTOR 0.85 ; HIGHEST Florida | Monroe | Key West | MOODY AIR FORCE BASE | AREA COST FACTOR 0.94",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, Georgia",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 0.88,
+   "range": [
+    0.83,
+    0.98
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "Georgia: median of 361 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST Georgia | Chatham | Savannah | MCRD BEAUFORT PI  SC | AREA COST FACTOR 0.83 ; HIGHEST Georgia | Richmond | Augusta | Joint Recruiting Program | AREA COST FACTOR 0.98",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, Hawaii",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 2.13,
+   "range": [
+    2.03,
+    2.6
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "Hawaii: median of 203 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST Hawaii | Honolulu | Pearl City | MCB HAWAII KANEOHE | AREA COST FACTOR 2.03 ; HIGHEST Hawaii | Kauai | Lihue | Joint Recruiting Program | AREA COST FACTOR 2.6",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, Idaho",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 1.13,
+   "range": [
+    1.04,
+    1.23
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "Idaho: median of 176 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST Idaho | Ada | Boise | NAVSTA EVERETT WA | AREA COST FACTOR 1.04 ; HIGHEST Idaho | Elmore | Mountain Home | White Sands Missile Range | AREA COST FACTOR 1.23",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, Illinois",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 1.02,
+   "range": [
+    1.02,
+    1.21
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "Illinois: median of 367 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST Illinois | Macon | Decatur | NAVAL STATION  GREAT LAKES IL | AREA COST FACTOR 1.02 ; HIGHEST Illinois | Lake | Gurnee | Joint Recruiting Program | AREA COST FACTOR 1.21",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, Indiana",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 0.95,
+   "range": [
+    0.93,
+    1.05
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "Indiana: median of 299 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST Indiana | Cass | Logansport | INDIANA NATIONAL GUARD | AREA COST FACTOR 0.93 ; HIGHEST Indiana | Martin | Crane | NAVAL SUPPORT ACTIVITY CRANE | AREA COST FACTOR 1.05",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, Iowa",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 1,
+   "range": [
+    0.98,
+    1.09
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "Iowa: median of 217 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST Iowa | Polk | Des Moines | NAVAL STATION  GREAT LAKES IL | AREA COST FACTOR 0.98 ; HIGHEST Iowa | Des Moines | Middletown | Iowa Army Ammunition Plant | AREA COST FACTOR 1.09",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, Kansas",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 0.91,
+   "range": [
+    0.88,
+    1.05
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "Kansas: median of 175 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST Kansas | Sedgwick | Wichita | NAVAL STATION  GREAT LAKES IL | AREA COST FACTOR 0.88 ; HIGHEST Kansas | Geary | Junction City | Joint Recruiting Program | AREA COST FACTOR 1.05",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, Kentucky",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 0.87,
+   "range": [
+    0.84,
+    0.97
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "Kentucky: median of 196 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST Kentucky | Jefferson | Louisville | Naval Station  Great Lakes IL | AREA COST FACTOR 0.84 ; HIGHEST Kentucky | Hardin | Elizabethtown | Joint Recruiting Program | AREA COST FACTOR 0.97",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, Louisiana",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 0.85,
+   "range": [
+    0.81,
+    0.9
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "Louisiana: median of 259 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST Louisiana | Bossier | Bossier City | NAS JRB NEW ORLEANS LA | AREA COST FACTOR 0.81 ; HIGHEST Louisiana | Orleans | New Orleans | NAS JRB New Orleans LA | AREA COST FACTOR 0.9",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, Maine",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 1.08,
+   "range": [
+    1.07,
+    1.22
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "Maine: median of 129 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST Maine | York | Kittery | NSY PORTSMOUTH | AREA COST FACTOR 1.07 ; HIGHEST Maine | Penobscot | Bangor | Independent Duty Housing Program | AREA COST FACTOR 1.22",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, Maryland",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 0.97,
+   "range": [
+    0.93,
+    1.08
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "Maryland: median of 261 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST Maryland | Baltimore | Unknown | Fort George G Meade | AREA COST FACTOR 0.93 ; HIGHEST Maryland | Washington | Hagerstown | Joint Recruiting Program | AREA COST FACTOR 1.08",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, Massachusetts",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 1.2,
+   "range": [
+    1.12,
+    1.29
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "Massachusetts: median of 260 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST Massachusetts | Hampden | Chicopee | HDQTRS 4TH MAW NEW ORLEANS LA | AREA COST FACTOR 1.12 ; HIGHEST Massachusetts | Middlesex | Natick | Natick Soldier Systems Center | AREA COST FACTOR 1.29",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, Michigan",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 1.04,
+   "range": [
+    1,
+    1.09
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "Michigan: median of 370 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST Michigan | Marquette | Ishpeming | Michigan National Guard | AREA COST FACTOR 1 ; HIGHEST Michigan | Macomb | Selfridge Angb | Detroit Arsenal | AREA COST FACTOR 1.09",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, Minnesota",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 1.12,
+   "range": [
+    1.11,
+    1.13
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "Minnesota: median of 319 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST Minnesota | St. Louis | Duluth | DULUTH INTERNATIONAL AIRPORT | AREA COST FACTOR 1.11 ; HIGHEST Minnesota | Hennepin | Fort Snelling | DoD USMEPCOM | AREA COST FACTOR 1.13",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, Mississippi",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 0.81,
+   "range": [
+    0.79,
+    0.89
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "Mississippi: median of 425 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST Mississippi | Lowndes | Columbus | Mississippi National Guard | AREA COST FACTOR 0.79 ; HIGHEST Mississippi | Lauderdale | Meridian | Mississippi National Guard | AREA COST FACTOR 0.89",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, Missouri",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 0.98,
+   "range": [
+    0.97,
+    1.09
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "Missouri: median of 342 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST Missouri | Cass | Belton | MCSPTACT KANSAS CITY MO | AREA COST FACTOR 0.97 ; HIGHEST Missouri | Johnson | Warrensburg | Independent Duty Housing Program | AREA COST FACTOR 1.09",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, Montana",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 1.07,
+   "range": [
+    1.04,
+    1.12
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "Montana: median of 361 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST Montana | Yellowstone | Billings | NAVSTA EVERETT WA | AREA COST FACTOR 1.04 ; HIGHEST Montana | Cascade | Malmstrom Afb | Joint Recruiting Program | AREA COST FACTOR 1.12",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, Nebraska",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 1.0,
+   "range": [
+    0.97,
+    1.03
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "Nebraska: median of 264 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST Nebraska | Douglas | Omaha | NAVAL STATION  GREAT LAKES IL | AREA COST FACTOR 0.97 ; HIGHEST Nebraska | Hall | Grand Island | Cornhusker Army Ammunition Plant DERP FUDS Monitoring Wells | AREA COST FACTOR 1.03",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, Nevada",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 1.17,
+   "range": [
+    1.13,
+    1.3
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "Nevada: median of 218 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST Nevada | Clark | Las Vegas | NAS FALLON NV | AREA COST FACTOR 1.13 ; HIGHEST Nevada | Mineral | Hawthorne | Hawthorne Army Depot | AREA COST FACTOR 1.3",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, New Hampshire",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 1.11,
+   "range": [
+    1.09,
+    1.13
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "New Hampshire: median of 89 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST New Hampshire | Merrimack | Franklin | New Hampshire National Guard | AREA COST FACTOR 1.09 ; HIGHEST New Hampshire | Rockingham | Newington | Joint Recruiting Program | AREA COST FACTOR 1.13",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, New Jersey",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 1.18,
+   "range": [
+    1.18,
+    1.21
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "New Jersey: median of 218 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST New Jersey | Burlington | Moorestown | Naval Weapons Station Earle NJ | AREA COST FACTOR 1.18 ; HIGHEST New Jersey | Morris | Morristown | Joint Recruiting Program | AREA COST FACTOR 1.21",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, New Mexico",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 0.89,
+   "range": [
+    0.89,
+    1.02
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "New Mexico: median of 160 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST New Mexico | Luna | Unknown | ACC AMIC | AREA COST FACTOR 0.89 ; HIGHEST New Mexico | Curry | Cannon AFB | CANNON AIR FORCE BASE | AREA COST FACTOR 1.02",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, New York",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 1.03,
+   "range": [
+    1.01,
+    1.33
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "New York: median of 525 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST New York | Erie | Buffalo | NAVSUPPACT Mechanicsburg PA | AREA COST FACTOR 1.01 ; HIGHEST New York | Richmond | Unknown | Joint Recruiting Program | AREA COST FACTOR 1.33",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, North Carolina",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 0.81,
+   "range": [
+    0.78,
+    0.9
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "North Carolina: median of 492 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST North Carolina | Wayne | Unknown | SEYMOUR JOHNSON AIR FORCE BS | AREA COST FACTOR 0.78 ; HIGHEST North Carolina | Carteret | Newport | MCAS CHERRY POINT NC | AREA COST FACTOR 0.9",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, North Dakota",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 1.14,
+   "range": [
+    1.09,
+    1.21
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "North Dakota: median of 269 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST North Dakota | Grand Forks | Grand Forks | 88th Readiness Division | AREA COST FACTOR 1.09 ; HIGHEST North Dakota | Ward | Kenmare | MINOT AFB | AREA COST FACTOR 1.21",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, Ohio",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 0.93,
+   "range": [
+    0.92,
+    0.98
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "Ohio: median of 470 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST Ohio | Trumbull | Vienna | NAVAL STATION  GREAT LAKES IL | AREA COST FACTOR 0.92 ; HIGHEST Ohio | Greene | Wright-Patterson Afb | Joint Recruiting Program | AREA COST FACTOR 0.98",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, Oklahoma",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 0.88,
+   "range": [
+    0.86,
+    0.95
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "Oklahoma: median of 316 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST Oklahoma | Jackson | Altus | Oklahoma National Guard | AREA COST FACTOR 0.86 ; HIGHEST Oklahoma | Garfield | Enid | Joint Recruiting Program | AREA COST FACTOR 0.95",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, Oregon",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 1.24,
+   "range": [
+    1.19,
+    1.28
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "Oregon: median of 240 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST Oregon | Multnomah | Portland | NAVSTA EVERETT WA | AREA COST FACTOR 1.19 ; HIGHEST Oregon | Umatilla | Hermiston | Oregon National Guard | AREA COST FACTOR 1.28",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, Pennsylvania",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 1.09,
+   "range": [
+    1,
+    1.17
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "Pennsylvania: median of 535 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST Pennsylvania | Dauphin | Middletown | HARRISBURG IAP ANG | AREA COST FACTOR 1 ; HIGHEST Pennsylvania | Philadelphia | Philadelphia | Army Mission Support | AREA COST FACTOR 1.17",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, Rhode Island",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 1.17,
+   "range": [
+    1.17,
+    1.17
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "Rhode Island: median of 77 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST Rhode Island | Newport | Newport | NAVAL STATION NEWPORT RI | AREA COST FACTOR 1.17 ; HIGHEST Rhode Island | Newport | Portsmouth | Joint Recruiting Program | AREA COST FACTOR 1.17",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, South Carolina",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 0.88,
+   "range": [
+    0.86,
+    1
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "South Carolina: median of 269 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST South Carolina | Lexington | Columbia | CHARLESTON AFB | AREA COST FACTOR 0.86 ; HIGHEST South Carolina | Beaufort | Beaufort | MCAS BEAUFORT SC | AREA COST FACTOR 1",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, South Dakota",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 1.01,
+   "range": [
+    1,
+    1.02
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "South Dakota: median of 140 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST South Dakota | Pennington | Rapid City | Camp Rapid | AREA COST FACTOR 1 ; HIGHEST South Dakota | Perkins | Shadehill | ELLSWORTH AFB | AREA COST FACTOR 1.02",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, Tennessee",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 0.87,
+   "range": [
+    0.84,
+    0.92
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "Tennessee: median of 295 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST Tennessee | Hamilton | Chattanooga | Naval Station  Great Lakes IL | AREA COST FACTOR 0.84 ; HIGHEST Tennessee | Coffee | Manchester | Joint Recruiting Program | AREA COST FACTOR 0.92",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, Texas",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 0.82,
+   "range": [
+    0.79,
+    0.98
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "Texas: median of 986 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST Texas | Bexar | San Antonio | NAS CORPUS CHRISTI TX | AREA COST FACTOR 0.79 ; HIGHEST Texas | Val Verde | Laughlin AFB | LAUGHLIN AIR FORCE BASE | AREA COST FACTOR 0.98",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, Utah",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 1.08,
+   "range": [
+    1.06,
+    1.16
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "Utah: median of 247 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST Utah | Weber | Unknown | HILL AFB | AREA COST FACTOR 1.06 ; HIGHEST Utah | Tooele | Dugway | HILL AFB | AREA COST FACTOR 1.16",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, Vermont",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 1.05,
+   "range": [
+    1.04,
+    1.06
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "Vermont: median of 68 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST Vermont | Chittenden | South Burlington | BURLINGTON INTERNATIONAL AIRPORT | AREA COST FACTOR 1.04 ; HIGHEST Vermont | Washington | Berlin | Independent Duty Housing Program | AREA COST FACTOR 1.06",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, Virginia",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 0.92,
+   "range": [
+    0.83,
+    1.07
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "Virginia: median of 514 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST Virginia | Nottoway | Blackstone | Fort Pickett Training Center | AREA COST FACTOR 0.83 ; HIGHEST Virginia | Accomack | Belle Haven | Joint Recruiting Program | AREA COST FACTOR 1.07",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, Washington",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 1.1,
+   "range": [
+    1.08,
+    1.29
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "Washington: median of 372 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST Washington | Spokane | Spokane | NAVSTA Everett WA | AREA COST FACTOR 1.08 ; HIGHEST Washington | Island | Oak Harbor | NAS Whidbey Island WA | AREA COST FACTOR 1.29",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, West Virginia",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 0.94,
+   "range": [
+    0.93,
+    1.23
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "West Virginia: median of 163 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST West Virginia | Mercer | Bluefield | West Virginia National Guard | AREA COST FACTOR 0.93 ; HIGHEST West Virginia | Pendleton | Sugar Grove | NAVAL WEAPONS STATION YORKTOWN | AREA COST FACTOR 1.23",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, Wisconsin",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 1.11,
+   "range": [
+    1.1,
+    1.11
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "Wisconsin: median of 329 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST Wisconsin | Milwaukee | Milwaukee | NAVAL STATION  GREAT LAKES IL | AREA COST FACTOR 1.1 ; HIGHEST Wisconsin | Waukesha | Pewaukee | Independent Duty Housing Program | AREA COST FACTOR 1.11",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD MILCON area cost factor, Wyoming",
+   "building_type": "all facility types (bare unit cost multiplier)",
+   "construction_method": "not method-specific",
+   "measure": "factor",
+   "value": 1.05,
+   "range": [
+    1.04,
+    1.06
+   ],
+   "unit": "multiplier on a national 'bare' cost; 96-Base-City average = 1.00",
+   "year": 2026,
+   "place": "Wyoming: median of 157 DoD sites (range = lowest to highest site)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables workbook, Table 4-1 CONUS (list dated 06-06-2026 on the WBDG page)",
+   "quote": "LOWEST Wyoming | Laramie | Cheyenne | NAVSTA EVERETT WA | AREA COST FACTOR 1.04 ; HIGHEST Wyoming | Natrona | Evansville | Wyoming National Guard | AREA COST FACTOR 1.06",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "build script computed median/min/max from Table 4-1 CONUS rows; see app/data/area_cost_factors.json for every site",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched.",
+   "applies_with": "ICC / unit costs only as a rough scaler; the publisher says not to apply it to commercial cost data (see area_cost_factors.json _source.application_limit)"
+  },
+  {
+   "item": "DoD barracks / dormitory",
+   "building_type": "military unaccompanied personnel housing (not market housing)",
+   "construction_method": "conventional (MILCON)",
+   "measure": "cost_per_sqft",
+   "value": 534.44,
+   "unit": "USD per gross sq ft, before area cost factor",
+   "year": 2025,
+   "place": "United States (DoD national average; apply Table 4-1 factor)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables, Table 2 ('Oct 2025 unit cost')",
+   "quote": "BARRACKS / DORMITORY (does not include kitchenette equipment) | reference size 63088 gross SF | $534.44/SF | 7 projects",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "cell values copied from Table 2",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched."
+  },
+  {
+   "item": "DoD student dorm",
+   "building_type": "military unaccompanied personnel housing (not market housing)",
+   "construction_method": "conventional (MILCON)",
+   "measure": "cost_per_sqft",
+   "value": 492.99,
+   "unit": "USD per gross sq ft, before area cost factor",
+   "year": 2025,
+   "place": "United States (DoD national average; apply Table 4-1 factor)",
+   "source_url": "https://www.wbdg.org/FFC/DOD/UFC/ufs_3_701_01_2026_Data_Tables.xlsx",
+   "publisher": "U.S. Department of Defense, Unified Facilities Supplement 3-701-01 'DoD Facilities Pricing Guide'",
+   "edition": "UFS 3-701-01 2026 Data Tables, Table 2 ('Oct 2025 unit cost')",
+   "quote": "BARRACKS - STUDENT DORMS, ADVANCE TRAINING | reference size 75285 gross SF | $492.99/SF | 5 projects",
+   "verification": {
+    "status": "re-read_from_workbook",
+    "method": "cell values copied from Table 2",
+    "checked_on": "2026-11-22",
+    "source_file_sha256": "3bf160445a24eb53ff015301f6f3d8f7ade6710b8e1c9ed351ea8e203b8ff28a"
+   },
+   "display_allowed": true,
+   "display_terms": "Document is marked 'APPROVED FOR PUBLIC RELEASE; DISTRIBUTION UNLIMITED'. U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched."
+  },
+  {
+   "item": "New-construction ADU (Bldg-New permit naming an ADU): median declared cost per sq ft",
+   "building_type": "accessory dwelling unit",
+   "construction_method": "conventional (site-built; permit data does not say)",
+   "measure": "cost_per_sqft",
+   "value": 107.04,
+   "range": [
+    101.0,
+    121.15
+   ],
+   "unit": "USD per sq ft, declared permit valuation (25th-75th percentile range); not a bid or final cost",
+   "year": 2020,
+   "place": "Los Angeles, CA (city)",
+   "quote": "median valuation / square_footage over 547 permits issued in 2020 (declared 'Estimated value of work to be done' / 'Square footage'); query kept in source_url",
+   "publisher": "City of Los Angeles, Department of Building and Safety (open data)",
+   "edition": "dataset refreshed 2026-11-22; permits issued in calendar year 2020",
+   "source_url": "https://data.lacity.org/resource/pi9x-tg5x.json?%24select=permit_nbr%2Cpermit_type%2Cpermit_sub_type%2Cissue_date%2Csquare_footage%2Cvaluation%2Cjunior_adu%2Cwork_desc%2Cconstruction&%24where=permit_type+%3D+%27Bldg-New%27+AND+permit_sub_type+%3D+%271+or+2+Family+Dwelling%27+AND+%28upper%28work_desc%29+like+%27%25ADU%25%27+OR+upper%28work_desc%29+like+%27%25ACCESSORY+DWELLING%25%27%29+AND+valuation+IS+NOT+NULL+AND+issue_date+IS+NOT+NULL+AND+square_footage+IS+NOT+NULL",
+   "display_allowed": true,
+   "display_terms": "City of Los Angeles Open Data Portal terms (May 2014): 'Public data sets made available on the Site are provided for informational purposes'; no ban on display found. Valuations are applicants' declared values.",
+   "verification": {
+    "status": "computed_from_raw_permits",
+    "method": "scripts/costs/adu_permit_costs_la.py: median over 547 permits after square_footage 150-1200 and valuation > 0 filters (10858 rows returned by the query for all years)",
+    "checked_on": "2026-11-22"
+   }
+  },
+  {
+   "item": "New-construction ADU (Bldg-New permit naming an ADU): median declared cost per unit",
+   "building_type": "accessory dwelling unit",
+   "construction_method": "conventional (site-built; permit data does not say)",
+   "measure": "cost_per_unit",
+   "value": 101000,
+   "unit": "USD per ADU, declared permit valuation (median size 909 sq ft)",
+   "year": 2020,
+   "place": "Los Angeles, CA (city)",
+   "quote": "median of declared valuation over 547 permits issued in 2020; query kept in source_url",
+   "publisher": "City of Los Angeles, Department of Building and Safety (open data)",
+   "edition": "dataset refreshed 2026-11-22; permits issued in calendar year 2020",
+   "source_url": "https://data.lacity.org/resource/pi9x-tg5x.json?%24select=permit_nbr%2Cpermit_type%2Cpermit_sub_type%2Cissue_date%2Csquare_footage%2Cvaluation%2Cjunior_adu%2Cwork_desc%2Cconstruction&%24where=permit_type+%3D+%27Bldg-New%27+AND+permit_sub_type+%3D+%271+or+2+Family+Dwelling%27+AND+%28upper%28work_desc%29+like+%27%25ADU%25%27+OR+upper%28work_desc%29+like+%27%25ACCESSORY+DWELLING%25%27%29+AND+valuation+IS+NOT+NULL+AND+issue_date+IS+NOT+NULL+AND+square_footage+IS+NOT+NULL",
+   "display_allowed": true,
+   "display_terms": "City of Los Angeles Open Data Portal terms (May 2014): 'Public data sets made available on the Site are provided for informational purposes'; no ban on display found. Valuations are applicants' declared values.",
+   "verification": {
+    "status": "computed_from_raw_permits",
+    "method": "scripts/costs/adu_permit_costs_la.py: median over 547 permits after square_footage 150-1200 and valuation > 0 filters (10858 rows returned by the query for all years)",
+    "checked_on": "2026-11-22"
+   }
+  },
+  {
+   "item": "New-construction ADU (Bldg-New permit naming an ADU): median declared cost per sq ft",
+   "building_type": "accessory dwelling unit",
+   "construction_method": "conventional (site-built; permit data does not say)",
+   "measure": "cost_per_sqft",
+   "value": 109.75,
+   "range": [
+    101.26,
+    133.27
+   ],
+   "unit": "USD per sq ft, declared permit valuation (25th-75th percentile range); not a bid or final cost",
+   "year": 2021,
+   "place": "Los Angeles, CA (city)",
+   "quote": "median valuation / square_footage over 874 permits issued in 2021 (declared 'Estimated value of work to be done' / 'Square footage'); query kept in source_url",
+   "publisher": "City of Los Angeles, Department of Building and Safety (open data)",
+   "edition": "dataset refreshed 2026-11-22; permits issued in calendar year 2021",
+   "source_url": "https://data.lacity.org/resource/pi9x-tg5x.json?%24select=permit_nbr%2Cpermit_type%2Cpermit_sub_type%2Cissue_date%2Csquare_footage%2Cvaluation%2Cjunior_adu%2Cwork_desc%2Cconstruction&%24where=permit_type+%3D+%27Bldg-New%27+AND+permit_sub_type+%3D+%271+or+2+Family+Dwelling%27+AND+%28upper%28work_desc%29+like+%27%25ADU%25%27+OR+upper%28work_desc%29+like+%27%25ACCESSORY+DWELLING%25%27%29+AND+valuation+IS+NOT+NULL+AND+issue_date+IS+NOT+NULL+AND+square_footage+IS+NOT+NULL",
+   "display_allowed": true,
+   "display_terms": "City of Los Angeles Open Data Portal terms (May 2014): 'Public data sets made available on the Site are provided for informational purposes'; no ban on display found. Valuations are applicants' declared values.",
+   "verification": {
+    "status": "computed_from_raw_permits",
+    "method": "scripts/costs/adu_permit_costs_la.py: median over 874 permits after square_footage 150-1200 and valuation > 0 filters (10858 rows returned by the query for all years)",
+    "checked_on": "2026-11-22"
+   }
+  },
+  {
+   "item": "New-construction ADU (Bldg-New permit naming an ADU): median declared cost per unit",
+   "building_type": "accessory dwelling unit",
+   "construction_method": "conventional (site-built; permit data does not say)",
+   "measure": "cost_per_unit",
+   "value": 104891,
+   "unit": "USD per ADU, declared permit valuation (median size 902 sq ft)",
+   "year": 2021,
+   "place": "Los Angeles, CA (city)",
+   "quote": "median of declared valuation over 874 permits issued in 2021; query kept in source_url",
+   "publisher": "City of Los Angeles, Department of Building and Safety (open data)",
+   "edition": "dataset refreshed 2026-11-22; permits issued in calendar year 2021",
+   "source_url": "https://data.lacity.org/resource/pi9x-tg5x.json?%24select=permit_nbr%2Cpermit_type%2Cpermit_sub_type%2Cissue_date%2Csquare_footage%2Cvaluation%2Cjunior_adu%2Cwork_desc%2Cconstruction&%24where=permit_type+%3D+%27Bldg-New%27+AND+permit_sub_type+%3D+%271+or+2+Family+Dwelling%27+AND+%28upper%28work_desc%29+like+%27%25ADU%25%27+OR+upper%28work_desc%29+like+%27%25ACCESSORY+DWELLING%25%27%29+AND+valuation+IS+NOT+NULL+AND+issue_date+IS+NOT+NULL+AND+square_footage+IS+NOT+NULL",
+   "display_allowed": true,
+   "display_terms": "City of Los Angeles Open Data Portal terms (May 2014): 'Public data sets made available on the Site are provided for informational purposes'; no ban on display found. Valuations are applicants' declared values.",
+   "verification": {
+    "status": "computed_from_raw_permits",
+    "method": "scripts/costs/adu_permit_costs_la.py: median over 874 permits after square_footage 150-1200 and valuation > 0 filters (10858 rows returned by the query for all years)",
+    "checked_on": "2026-11-22"
+   }
+  },
+  {
+   "item": "New-construction ADU (Bldg-New permit naming an ADU): median declared cost per sq ft",
+   "building_type": "accessory dwelling unit",
+   "construction_method": "conventional (site-built; permit data does not say)",
+   "measure": "cost_per_sqft",
+   "value": 120.79,
+   "range": [
+    101.69,
+    150.0
+   ],
+   "unit": "USD per sq ft, declared permit valuation (25th-75th percentile range); not a bid or final cost",
+   "year": 2022,
+   "place": "Los Angeles, CA (city)",
+   "quote": "median valuation / square_footage over 1445 permits issued in 2022 (declared 'Estimated value of work to be done' / 'Square footage'); query kept in source_url",
+   "publisher": "City of Los Angeles, Department of Building and Safety (open data)",
+   "edition": "dataset refreshed 2026-11-22; permits issued in calendar year 2022",
+   "source_url": "https://data.lacity.org/resource/pi9x-tg5x.json?%24select=permit_nbr%2Cpermit_type%2Cpermit_sub_type%2Cissue_date%2Csquare_footage%2Cvaluation%2Cjunior_adu%2Cwork_desc%2Cconstruction&%24where=permit_type+%3D+%27Bldg-New%27+AND+permit_sub_type+%3D+%271+or+2+Family+Dwelling%27+AND+%28upper%28work_desc%29+like+%27%25ADU%25%27+OR+upper%28work_desc%29+like+%27%25ACCESSORY+DWELLING%25%27%29+AND+valuation+IS+NOT+NULL+AND+issue_date+IS+NOT+NULL+AND+square_footage+IS+NOT+NULL",
+   "display_allowed": true,
+   "display_terms": "City of Los Angeles Open Data Portal terms (May 2014): 'Public data sets made available on the Site are provided for informational purposes'; no ban on display found. Valuations are applicants' declared values.",
+   "verification": {
+    "status": "computed_from_raw_permits",
+    "method": "scripts/costs/adu_permit_costs_la.py: median over 1445 permits after square_footage 150-1200 and valuation > 0 filters (10858 rows returned by the query for all years)",
+    "checked_on": "2026-11-22"
+   }
+  },
+  {
+   "item": "New-construction ADU (Bldg-New permit naming an ADU): median declared cost per unit",
+   "building_type": "accessory dwelling unit",
+   "construction_method": "conventional (site-built; permit data does not say)",
+   "measure": "cost_per_unit",
+   "value": 110000,
+   "unit": "USD per ADU, declared permit valuation (median size 839 sq ft)",
+   "year": 2022,
+   "place": "Los Angeles, CA (city)",
+   "quote": "median of declared valuation over 1445 permits issued in 2022; query kept in source_url",
+   "publisher": "City of Los Angeles, Department of Building and Safety (open data)",
+   "edition": "dataset refreshed 2026-11-22; permits issued in calendar year 2022",
+   "source_url": "https://data.lacity.org/resource/pi9x-tg5x.json?%24select=permit_nbr%2Cpermit_type%2Cpermit_sub_type%2Cissue_date%2Csquare_footage%2Cvaluation%2Cjunior_adu%2Cwork_desc%2Cconstruction&%24where=permit_type+%3D+%27Bldg-New%27+AND+permit_sub_type+%3D+%271+or+2+Family+Dwelling%27+AND+%28upper%28work_desc%29+like+%27%25ADU%25%27+OR+upper%28work_desc%29+like+%27%25ACCESSORY+DWELLING%25%27%29+AND+valuation+IS+NOT+NULL+AND+issue_date+IS+NOT+NULL+AND+square_footage+IS+NOT+NULL",
+   "display_allowed": true,
+   "display_terms": "City of Los Angeles Open Data Portal terms (May 2014): 'Public data sets made available on the Site are provided for informational purposes'; no ban on display found. Valuations are applicants' declared values.",
+   "verification": {
+    "status": "computed_from_raw_permits",
+    "method": "scripts/costs/adu_permit_costs_la.py: median over 1445 permits after square_footage 150-1200 and valuation > 0 filters (10858 rows returned by the query for all years)",
+    "checked_on": "2026-11-22"
+   }
+  },
+  {
+   "item": "New-construction ADU (Bldg-New permit naming an ADU): median declared cost per sq ft",
+   "building_type": "accessory dwelling unit",
+   "construction_method": "conventional (site-built; permit data does not say)",
+   "measure": "cost_per_sqft",
+   "value": 125.21,
+   "range": [
+    104.64,
+    155.1
+   ],
+   "unit": "USD per sq ft, declared permit valuation (25th-75th percentile range); not a bid or final cost",
+   "year": 2023,
+   "place": "Los Angeles, CA (city)",
+   "quote": "median valuation / square_footage over 1267 permits issued in 2023 (declared 'Estimated value of work to be done' / 'Square footage'); query kept in source_url",
+   "publisher": "City of Los Angeles, Department of Building and Safety (open data)",
+   "edition": "dataset refreshed 2026-11-22; permits issued in calendar year 2023",
+   "source_url": "https://data.lacity.org/resource/pi9x-tg5x.json?%24select=permit_nbr%2Cpermit_type%2Cpermit_sub_type%2Cissue_date%2Csquare_footage%2Cvaluation%2Cjunior_adu%2Cwork_desc%2Cconstruction&%24where=permit_type+%3D+%27Bldg-New%27+AND+permit_sub_type+%3D+%271+or+2+Family+Dwelling%27+AND+%28upper%28work_desc%29+like+%27%25ADU%25%27+OR+upper%28work_desc%29+like+%27%25ACCESSORY+DWELLING%25%27%29+AND+valuation+IS+NOT+NULL+AND+issue_date+IS+NOT+NULL+AND+square_footage+IS+NOT+NULL",
+   "display_allowed": true,
+   "display_terms": "City of Los Angeles Open Data Portal terms (May 2014): 'Public data sets made available on the Site are provided for informational purposes'; no ban on display found. Valuations are applicants' declared values.",
+   "verification": {
+    "status": "computed_from_raw_permits",
+    "method": "scripts/costs/adu_permit_costs_la.py: median over 1267 permits after square_footage 150-1200 and valuation > 0 filters (10858 rows returned by the query for all years)",
+    "checked_on": "2026-11-22"
+   }
+  },
+  {
+   "item": "New-construction ADU (Bldg-New permit naming an ADU): median declared cost per unit",
+   "building_type": "accessory dwelling unit",
+   "construction_method": "conventional (site-built; permit data does not say)",
+   "measure": "cost_per_unit",
+   "value": 120000,
+   "unit": "USD per ADU, declared permit valuation (median size 860 sq ft)",
+   "year": 2023,
+   "place": "Los Angeles, CA (city)",
+   "quote": "median of declared valuation over 1267 permits issued in 2023; query kept in source_url",
+   "publisher": "City of Los Angeles, Department of Building and Safety (open data)",
+   "edition": "dataset refreshed 2026-11-22; permits issued in calendar year 2023",
+   "source_url": "https://data.lacity.org/resource/pi9x-tg5x.json?%24select=permit_nbr%2Cpermit_type%2Cpermit_sub_type%2Cissue_date%2Csquare_footage%2Cvaluation%2Cjunior_adu%2Cwork_desc%2Cconstruction&%24where=permit_type+%3D+%27Bldg-New%27+AND+permit_sub_type+%3D+%271+or+2+Family+Dwelling%27+AND+%28upper%28work_desc%29+like+%27%25ADU%25%27+OR+upper%28work_desc%29+like+%27%25ACCESSORY+DWELLING%25%27%29+AND+valuation+IS+NOT+NULL+AND+issue_date+IS+NOT+NULL+AND+square_footage+IS+NOT+NULL",
+   "display_allowed": true,
+   "display_terms": "City of Los Angeles Open Data Portal terms (May 2014): 'Public data sets made available on the Site are provided for informational purposes'; no ban on display found. Valuations are applicants' declared values.",
+   "verification": {
+    "status": "computed_from_raw_permits",
+    "method": "scripts/costs/adu_permit_costs_la.py: median over 1267 permits after square_footage 150-1200 and valuation > 0 filters (10858 rows returned by the query for all years)",
+    "checked_on": "2026-11-22"
+   }
+  },
+  {
+   "item": "New-construction ADU (Bldg-New permit naming an ADU): median declared cost per sq ft",
+   "building_type": "accessory dwelling unit",
+   "construction_method": "conventional (site-built; permit data does not say)",
+   "measure": "cost_per_sqft",
+   "value": 122.25,
+   "range": [
+    104.17,
+    158.89
+   ],
+   "unit": "USD per sq ft, declared permit valuation (25th-75th percentile range); not a bid or final cost",
+   "year": 2024,
+   "place": "Los Angeles, CA (city)",
+   "quote": "median valuation / square_footage over 1274 permits issued in 2024 (declared 'Estimated value of work to be done' / 'Square footage'); query kept in source_url",
+   "publisher": "City of Los Angeles, Department of Building and Safety (open data)",
+   "edition": "dataset refreshed 2026-11-22; permits issued in calendar year 2024",
+   "source_url": "https://data.lacity.org/resource/pi9x-tg5x.json?%24select=permit_nbr%2Cpermit_type%2Cpermit_sub_type%2Cissue_date%2Csquare_footage%2Cvaluation%2Cjunior_adu%2Cwork_desc%2Cconstruction&%24where=permit_type+%3D+%27Bldg-New%27+AND+permit_sub_type+%3D+%271+or+2+Family+Dwelling%27+AND+%28upper%28work_desc%29+like+%27%25ADU%25%27+OR+upper%28work_desc%29+like+%27%25ACCESSORY+DWELLING%25%27%29+AND+valuation+IS+NOT+NULL+AND+issue_date+IS+NOT+NULL+AND+square_footage+IS+NOT+NULL",
+   "display_allowed": true,
+   "display_terms": "City of Los Angeles Open Data Portal terms (May 2014): 'Public data sets made available on the Site are provided for informational purposes'; no ban on display found. Valuations are applicants' declared values.",
+   "verification": {
+    "status": "computed_from_raw_permits",
+    "method": "scripts/costs/adu_permit_costs_la.py: median over 1274 permits after square_footage 150-1200 and valuation > 0 filters (10858 rows returned by the query for all years)",
+    "checked_on": "2026-11-22"
+   }
+  },
+  {
+   "item": "New-construction ADU (Bldg-New permit naming an ADU): median declared cost per unit",
+   "building_type": "accessory dwelling unit",
+   "construction_method": "conventional (site-built; permit data does not say)",
+   "measure": "cost_per_unit",
+   "value": 107314,
+   "unit": "USD per ADU, declared permit valuation (median size 810 sq ft)",
+   "year": 2024,
+   "place": "Los Angeles, CA (city)",
+   "quote": "median of declared valuation over 1274 permits issued in 2024; query kept in source_url",
+   "publisher": "City of Los Angeles, Department of Building and Safety (open data)",
+   "edition": "dataset refreshed 2026-11-22; permits issued in calendar year 2024",
+   "source_url": "https://data.lacity.org/resource/pi9x-tg5x.json?%24select=permit_nbr%2Cpermit_type%2Cpermit_sub_type%2Cissue_date%2Csquare_footage%2Cvaluation%2Cjunior_adu%2Cwork_desc%2Cconstruction&%24where=permit_type+%3D+%27Bldg-New%27+AND+permit_sub_type+%3D+%271+or+2+Family+Dwelling%27+AND+%28upper%28work_desc%29+like+%27%25ADU%25%27+OR+upper%28work_desc%29+like+%27%25ACCESSORY+DWELLING%25%27%29+AND+valuation+IS+NOT+NULL+AND+issue_date+IS+NOT+NULL+AND+square_footage+IS+NOT+NULL",
+   "display_allowed": true,
+   "display_terms": "City of Los Angeles Open Data Portal terms (May 2014): 'Public data sets made available on the Site are provided for informational purposes'; no ban on display found. Valuations are applicants' declared values.",
+   "verification": {
+    "status": "computed_from_raw_permits",
+    "method": "scripts/costs/adu_permit_costs_la.py: median over 1274 permits after square_footage 150-1200 and valuation > 0 filters (10858 rows returned by the query for all years)",
+    "checked_on": "2026-11-22"
+   }
+  },
+  {
+   "item": "New-construction ADU (Bldg-New permit naming an ADU): median declared cost per sq ft",
+   "building_type": "accessory dwelling unit",
+   "construction_method": "conventional (site-built; permit data does not say)",
+   "measure": "cost_per_sqft",
+   "value": 126.1,
+   "range": [
+    106.09,
+    167.11
+   ],
+   "unit": "USD per sq ft, declared permit valuation (25th-75th percentile range); not a bid or final cost",
+   "year": 2025,
+   "place": "Los Angeles, CA (city)",
+   "quote": "median valuation / square_footage over 1375 permits issued in 2025 (declared 'Estimated value of work to be done' / 'Square footage'); query kept in source_url",
+   "publisher": "City of Los Angeles, Department of Building and Safety (open data)",
+   "edition": "dataset refreshed 2026-11-22; permits issued in calendar year 2025",
+   "source_url": "https://data.lacity.org/resource/pi9x-tg5x.json?%24select=permit_nbr%2Cpermit_type%2Cpermit_sub_type%2Cissue_date%2Csquare_footage%2Cvaluation%2Cjunior_adu%2Cwork_desc%2Cconstruction&%24where=permit_type+%3D+%27Bldg-New%27+AND+permit_sub_type+%3D+%271+or+2+Family+Dwelling%27+AND+%28upper%28work_desc%29+like+%27%25ADU%25%27+OR+upper%28work_desc%29+like+%27%25ACCESSORY+DWELLING%25%27%29+AND+valuation+IS+NOT+NULL+AND+issue_date+IS+NOT+NULL+AND+square_footage+IS+NOT+NULL",
+   "display_allowed": true,
+   "display_terms": "City of Los Angeles Open Data Portal terms (May 2014): 'Public data sets made available on the Site are provided for informational purposes'; no ban on display found. Valuations are applicants' declared values.",
+   "verification": {
+    "status": "computed_from_raw_permits",
+    "method": "scripts/costs/adu_permit_costs_la.py: median over 1375 permits after square_footage 150-1200 and valuation > 0 filters (10858 rows returned by the query for all years)",
+    "checked_on": "2026-11-22"
+   }
+  },
+  {
+   "item": "New-construction ADU (Bldg-New permit naming an ADU): median declared cost per unit",
+   "building_type": "accessory dwelling unit",
+   "construction_method": "conventional (site-built; permit data does not say)",
+   "measure": "cost_per_unit",
+   "value": 110000,
+   "unit": "USD per ADU, declared permit valuation (median size 800 sq ft)",
+   "year": 2025,
+   "place": "Los Angeles, CA (city)",
+   "quote": "median of declared valuation over 1375 permits issued in 2025; query kept in source_url",
+   "publisher": "City of Los Angeles, Department of Building and Safety (open data)",
+   "edition": "dataset refreshed 2026-11-22; permits issued in calendar year 2025",
+   "source_url": "https://data.lacity.org/resource/pi9x-tg5x.json?%24select=permit_nbr%2Cpermit_type%2Cpermit_sub_type%2Cissue_date%2Csquare_footage%2Cvaluation%2Cjunior_adu%2Cwork_desc%2Cconstruction&%24where=permit_type+%3D+%27Bldg-New%27+AND+permit_sub_type+%3D+%271+or+2+Family+Dwelling%27+AND+%28upper%28work_desc%29+like+%27%25ADU%25%27+OR+upper%28work_desc%29+like+%27%25ACCESSORY+DWELLING%25%27%29+AND+valuation+IS+NOT+NULL+AND+issue_date+IS+NOT+NULL+AND+square_footage+IS+NOT+NULL",
+   "display_allowed": true,
+   "display_terms": "City of Los Angeles Open Data Portal terms (May 2014): 'Public data sets made available on the Site are provided for informational purposes'; no ban on display found. Valuations are applicants' declared values.",
+   "verification": {
+    "status": "computed_from_raw_permits",
+    "method": "scripts/costs/adu_permit_costs_la.py: median over 1375 permits after square_footage 150-1200 and valuation > 0 filters (10858 rows returned by the query for all years)",
+    "checked_on": "2026-11-22"
+   }
+  },
+  {
+   "item": "New-construction ADU (Bldg-New permit naming an ADU): median declared cost per sq ft",
+   "building_type": "accessory dwelling unit",
+   "construction_method": "conventional (site-built; permit data does not say)",
+   "measure": "cost_per_sqft",
+   "value": 128.29,
+   "range": [
+    107.62,
+    177.38
+   ],
+   "unit": "USD per sq ft, declared permit valuation (25th-75th percentile range); not a bid or final cost",
+   "year": 2026,
+   "place": "Los Angeles, CA (city)",
+   "quote": "median valuation / square_footage over 1184 permits issued in 2026 (declared 'Estimated value of work to be done' / 'Square footage'); query kept in source_url",
+   "publisher": "City of Los Angeles, Department of Building and Safety (open data)",
+   "edition": "dataset refreshed 2026-11-22; permits issued in calendar year 2026",
+   "source_url": "https://data.lacity.org/resource/pi9x-tg5x.json?%24select=permit_nbr%2Cpermit_type%2Cpermit_sub_type%2Cissue_date%2Csquare_footage%2Cvaluation%2Cjunior_adu%2Cwork_desc%2Cconstruction&%24where=permit_type+%3D+%27Bldg-New%27+AND+permit_sub_type+%3D+%271+or+2+Family+Dwelling%27+AND+%28upper%28work_desc%29+like+%27%25ADU%25%27+OR+upper%28work_desc%29+like+%27%25ACCESSORY+DWELLING%25%27%29+AND+valuation+IS+NOT+NULL+AND+issue_date+IS+NOT+NULL+AND+square_footage+IS+NOT+NULL",
+   "display_allowed": true,
+   "display_terms": "City of Los Angeles Open Data Portal terms (May 2014): 'Public data sets made available on the Site are provided for informational purposes'; no ban on display found. Valuations are applicants' declared values.",
+   "verification": {
+    "status": "computed_from_raw_permits",
+    "method": "scripts/costs/adu_permit_costs_la.py: median over 1184 permits after square_footage 150-1200 and valuation > 0 filters (10858 rows returned by the query for all years)",
+    "checked_on": "2026-11-22"
+   }
+  },
+  {
+   "item": "New-construction ADU (Bldg-New permit naming an ADU): median declared cost per unit",
+   "building_type": "accessory dwelling unit",
+   "construction_method": "conventional (site-built; permit data does not say)",
+   "measure": "cost_per_unit",
+   "value": 105000,
+   "unit": "USD per ADU, declared permit valuation (median size 800 sq ft)",
+   "year": 2026,
+   "place": "Los Angeles, CA (city)",
+   "quote": "median of declared valuation over 1184 permits issued in 2026; query kept in source_url",
+   "publisher": "City of Los Angeles, Department of Building and Safety (open data)",
+   "edition": "dataset refreshed 2026-11-22; permits issued in calendar year 2026",
+   "source_url": "https://data.lacity.org/resource/pi9x-tg5x.json?%24select=permit_nbr%2Cpermit_type%2Cpermit_sub_type%2Cissue_date%2Csquare_footage%2Cvaluation%2Cjunior_adu%2Cwork_desc%2Cconstruction&%24where=permit_type+%3D+%27Bldg-New%27+AND+permit_sub_type+%3D+%271+or+2+Family+Dwelling%27+AND+%28upper%28work_desc%29+like+%27%25ADU%25%27+OR+upper%28work_desc%29+like+%27%25ACCESSORY+DWELLING%25%27%29+AND+valuation+IS+NOT+NULL+AND+issue_date+IS+NOT+NULL+AND+square_footage+IS+NOT+NULL",
+   "display_allowed": true,
+   "display_terms": "City of Los Angeles Open Data Portal terms (May 2014): 'Public data sets made available on the Site are provided for informational purposes'; no ban on display found. Valuations are applicants' declared values.",
+   "verification": {
+    "status": "computed_from_raw_permits",
+    "method": "scripts/costs/adu_permit_costs_la.py: median over 1184 permits after square_footage 150-1200 and valuation > 0 filters (10858 rows returned by the query for all years)",
+    "checked_on": "2026-11-22"
+   }
+  },
+  {
+   "item": "ADU created by conversion or addition (Bldg-Alter/Repair or Bldg-Addition naming an ADU): median declared cost per sq ft",
+   "building_type": "accessory dwelling unit",
+   "construction_method": "conventional (site-built; permit data does not say)",
+   "measure": "cost_per_sqft",
+   "value": 69.23,
+   "range": [
+    50.92,
+    97.12
+   ],
+   "unit": "USD per sq ft, declared permit valuation (25th-75th percentile range); not a bid or final cost",
+   "year": 2020,
+   "place": "Los Angeles, CA (city)",
+   "quote": "median valuation / square_footage over 2032 permits issued in 2020 (declared 'Estimated value of work to be done' / 'Square footage'); query kept in source_url",
+   "publisher": "City of Los Angeles, Department of Building and Safety (open data)",
+   "edition": "dataset refreshed 2026-11-22; permits issued in calendar year 2020",
+   "source_url": "https://data.lacity.org/resource/pi9x-tg5x.json?%24select=permit_nbr%2Cpermit_type%2Cpermit_sub_type%2Cissue_date%2Csquare_footage%2Cvaluation%2Cjunior_adu%2Cwork_desc%2Cconstruction&%24where=permit_type+in+%28%27Bldg-Alter%2FRepair%27%2C%27Bldg-Addition%27%29+AND+%28junior_adu+IS+NULL+OR+junior_adu+%21%3D+%271%27%29+AND+%28upper%28work_desc%29+like+%27%25ADU%25%27+OR+upper%28work_desc%29+like+%27%25ACCESSORY+DWELLING%25%27%29+AND+valuation+IS+NOT+NULL+AND+issue_date+IS+NOT+NULL+AND+square_footage+IS+NOT+NULL",
+   "display_allowed": true,
+   "display_terms": "City of Los Angeles Open Data Portal terms (May 2014): 'Public data sets made available on the Site are provided for informational purposes'; no ban on display found. Valuations are applicants' declared values.",
+   "verification": {
+    "status": "computed_from_raw_permits",
+    "method": "scripts/costs/adu_permit_costs_la.py: median over 2032 permits after square_footage 150-1200 and valuation > 0 filters (26902 rows returned by the query for all years)",
+    "checked_on": "2026-11-22"
+   }
+  },
+  {
+   "item": "ADU created by conversion or addition (Bldg-Alter/Repair or Bldg-Addition naming an ADU): median declared cost per unit",
+   "building_type": "accessory dwelling unit",
+   "construction_method": "conventional (site-built; permit data does not say)",
+   "measure": "cost_per_unit",
+   "value": 31000,
+   "unit": "USD per ADU, declared permit valuation (median size 466 sq ft)",
+   "year": 2020,
+   "place": "Los Angeles, CA (city)",
+   "quote": "median of declared valuation over 2032 permits issued in 2020; query kept in source_url",
+   "publisher": "City of Los Angeles, Department of Building and Safety (open data)",
+   "edition": "dataset refreshed 2026-11-22; permits issued in calendar year 2020",
+   "source_url": "https://data.lacity.org/resource/pi9x-tg5x.json?%24select=permit_nbr%2Cpermit_type%2Cpermit_sub_type%2Cissue_date%2Csquare_footage%2Cvaluation%2Cjunior_adu%2Cwork_desc%2Cconstruction&%24where=permit_type+in+%28%27Bldg-Alter%2FRepair%27%2C%27Bldg-Addition%27%29+AND+%28junior_adu+IS+NULL+OR+junior_adu+%21%3D+%271%27%29+AND+%28upper%28work_desc%29+like+%27%25ADU%25%27+OR+upper%28work_desc%29+like+%27%25ACCESSORY+DWELLING%25%27%29+AND+valuation+IS+NOT+NULL+AND+issue_date+IS+NOT+NULL+AND+square_footage+IS+NOT+NULL",
+   "display_allowed": true,
+   "display_terms": "City of Los Angeles Open Data Portal terms (May 2014): 'Public data sets made available on the Site are provided for informational purposes'; no ban on display found. Valuations are applicants' declared values.",
+   "verification": {
+    "status": "computed_from_raw_permits",
+    "method": "scripts/costs/adu_permit_costs_la.py: median over 2032 permits after square_footage 150-1200 and valuation > 0 filters (26902 rows returned by the query for all years)",
+    "checked_on": "2026-11-22"
+   }
+  },
+  {
+   "item": "ADU created by conversion or addition (Bldg-Alter/Repair or Bldg-Addition naming an ADU): median declared cost per sq ft",
+   "building_type": "accessory dwelling unit",
+   "construction_method": "conventional (site-built; permit data does not say)",
+   "measure": "cost_per_sqft",
+   "value": 83.52,
+   "range": [
+    60.73,
+    109.59
+   ],
+   "unit": "USD per sq ft, declared permit valuation (25th-75th percentile range); not a bid or final cost",
+   "year": 2021,
+   "place": "Los Angeles, CA (city)",
+   "quote": "median valuation / square_footage over 2864 permits issued in 2021 (declared 'Estimated value of work to be done' / 'Square footage'); query kept in source_url",
+   "publisher": "City of Los Angeles, Department of Building and Safety (open data)",
+   "edition": "dataset refreshed 2026-11-22; permits issued in calendar year 2021",
+   "source_url": "https://data.lacity.org/resource/pi9x-tg5x.json?%24select=permit_nbr%2Cpermit_type%2Cpermit_sub_type%2Cissue_date%2Csquare_footage%2Cvaluation%2Cjunior_adu%2Cwork_desc%2Cconstruction&%24where=permit_type+in+%28%27Bldg-Alter%2FRepair%27%2C%27Bldg-Addition%27%29+AND+%28junior_adu+IS+NULL+OR+junior_adu+%21%3D+%271%27%29+AND+%28upper%28work_desc%29+like+%27%25ADU%25%27+OR+upper%28work_desc%29+like+%27%25ACCESSORY+DWELLING%25%27%29+AND+valuation+IS+NOT+NULL+AND+issue_date+IS+NOT+NULL+AND+square_footage+IS+NOT+NULL",
+   "display_allowed": true,
+   "display_terms": "City of Los Angeles Open Data Portal terms (May 2014): 'Public data sets made available on the Site are provided for informational purposes'; no ban on display found. Valuations are applicants' declared values.",
+   "verification": {
+    "status": "computed_from_raw_permits",
+    "method": "scripts/costs/adu_permit_costs_la.py: median over 2864 permits after square_footage 150-1200 and valuation > 0 filters (26902 rows returned by the query for all years)",
+    "checked_on": "2026-11-22"
+   }
+  },
+  {
+   "item": "ADU created by conversion or addition (Bldg-Alter/Repair or Bldg-Addition naming an ADU): median declared cost per unit",
+   "building_type": "accessory dwelling unit",
+   "construction_method": "conventional (site-built; permit data does not say)",
+   "measure": "cost_per_unit",
+   "value": 40000,
+   "unit": "USD per ADU, declared permit valuation (median size 462 sq ft)",
+   "year": 2021,
+   "place": "Los Angeles, CA (city)",
+   "quote": "median of declared valuation over 2864 permits issued in 2021; query kept in source_url",
+   "publisher": "City of Los Angeles, Department of Building and Safety (open data)",
+   "edition": "dataset refreshed 2026-11-22; permits issued in calendar year 2021",
+   "source_url": "https://data.lacity.org/resource/pi9x-tg5x.json?%24select=permit_nbr%2Cpermit_type%2Cpermit_sub_type%2Cissue_date%2Csquare_footage%2Cvaluation%2Cjunior_adu%2Cwork_desc%2Cconstruction&%24where=permit_type+in+%28%27Bldg-Alter%2FRepair%27%2C%27Bldg-Addition%27%29+AND+%28junior_adu+IS+NULL+OR+junior_adu+%21%3D+%271%27%29+AND+%28upper%28work_desc%29+like+%27%25ADU%25%27+OR+upper%28work_desc%29+like+%27%25ACCESSORY+DWELLING%25%27%29+AND+valuation+IS+NOT+NULL+AND+issue_date+IS+NOT+NULL+AND+square_footage+IS+NOT+NULL",
+   "display_allowed": true,
+   "display_terms": "City of Los Angeles Open Data Portal terms (May 2014): 'Public data sets made available on the Site are provided for informational purposes'; no ban on display found. Valuations are applicants' declared values.",
+   "verification": {
+    "status": "computed_from_raw_permits",
+    "method": "scripts/costs/adu_permit_costs_la.py: median over 2864 permits after square_footage 150-1200 and valuation > 0 filters (26902 rows returned by the query for all years)",
+    "checked_on": "2026-11-22"
+   }
+  },
+  {
+   "item": "ADU created by conversion or addition (Bldg-Alter/Repair or Bldg-Addition naming an ADU): median declared cost per sq ft",
+   "building_type": "accessory dwelling unit",
+   "construction_method": "conventional (site-built; permit data does not say)",
+   "measure": "cost_per_sqft",
+   "value": 99.68,
+   "range": [
+    69.9,
+    127.37
+   ],
+   "unit": "USD per sq ft, declared permit valuation (25th-75th percentile range); not a bid or final cost",
+   "year": 2022,
+   "place": "Los Angeles, CA (city)",
+   "quote": "median valuation / square_footage over 3626 permits issued in 2022 (declared 'Estimated value of work to be done' / 'Square footage'); query kept in source_url",
+   "publisher": "City of Los Angeles, Department of Building and Safety (open data)",
+   "edition": "dataset refreshed 2026-11-22; permits issued in calendar year 2022",
+   "source_url": "https://data.lacity.org/resource/pi9x-tg5x.json?%24select=permit_nbr%2Cpermit_type%2Cpermit_sub_type%2Cissue_date%2Csquare_footage%2Cvaluation%2Cjunior_adu%2Cwork_desc%2Cconstruction&%24where=permit_type+in+%28%27Bldg-Alter%2FRepair%27%2C%27Bldg-Addition%27%29+AND+%28junior_adu+IS+NULL+OR+junior_adu+%21%3D+%271%27%29+AND+%28upper%28work_desc%29+like+%27%25ADU%25%27+OR+upper%28work_desc%29+like+%27%25ACCESSORY+DWELLING%25%27%29+AND+valuation+IS+NOT+NULL+AND+issue_date+IS+NOT+NULL+AND+square_footage+IS+NOT+NULL",
+   "display_allowed": true,
+   "display_terms": "City of Los Angeles Open Data Portal terms (May 2014): 'Public data sets made available on the Site are provided for informational purposes'; no ban on display found. Valuations are applicants' declared values.",
+   "verification": {
+    "status": "computed_from_raw_permits",
+    "method": "scripts/costs/adu_permit_costs_la.py: median over 3626 permits after square_footage 150-1200 and valuation > 0 filters (26902 rows returned by the query for all years)",
+    "checked_on": "2026-11-22"
+   }
+  },
+  {
+   "item": "ADU created by conversion or addition (Bldg-Alter/Repair or Bldg-Addition naming an ADU): median declared cost per unit",
+   "building_type": "accessory dwelling unit",
+   "construction_method": "conventional (site-built; permit data does not say)",
+   "measure": "cost_per_unit",
+   "value": 50000,
+   "unit": "USD per ADU, declared permit valuation (median size 493 sq ft)",
+   "year": 2022,
+   "place": "Los Angeles, CA (city)",
+   "quote": "median of declared valuation over 3626 permits issued in 2022; query kept in source_url",
+   "publisher": "City of Los Angeles, Department of Building and Safety (open data)",
+   "edition": "dataset refreshed 2026-11-22; permits issued in calendar year 2022",
+   "source_url": "https://data.lacity.org/resource/pi9x-tg5x.json?%24select=permit_nbr%2Cpermit_type%2Cpermit_sub_type%2Cissue_date%2Csquare_footage%2Cvaluation%2Cjunior_adu%2Cwork_desc%2Cconstruction&%24where=permit_type+in+%28%27Bldg-Alter%2FRepair%27%2C%27Bldg-Addition%27%29+AND+%28junior_adu+IS+NULL+OR+junior_adu+%21%3D+%271%27%29+AND+%28upper%28work_desc%29+like+%27%25ADU%25%27+OR+upper%28work_desc%29+like+%27%25ACCESSORY+DWELLING%25%27%29+AND+valuation+IS+NOT+NULL+AND+issue_date+IS+NOT+NULL+AND+square_footage+IS+NOT+NULL",
+   "display_allowed": true,
+   "display_terms": "City of Los Angeles Open Data Portal terms (May 2014): 'Public data sets made available on the Site are provided for informational purposes'; no ban on display found. Valuations are applicants' declared values.",
+   "verification": {
+    "status": "computed_from_raw_permits",
+    "method": "scripts/costs/adu_permit_costs_la.py: median over 3626 permits after square_footage 150-1200 and valuation > 0 filters (26902 rows returned by the query for all years)",
+    "checked_on": "2026-11-22"
+   }
+  },
+  {
+   "item": "ADU created by conversion or addition (Bldg-Alter/Repair or Bldg-Addition naming an ADU): median declared cost per sq ft",
+   "building_type": "accessory dwelling unit",
+   "construction_method": "conventional (site-built; permit data does not say)",
+   "measure": "cost_per_sqft",
+   "value": 100.49,
+   "range": [
+    67.78,
+    134.9
+   ],
+   "unit": "USD per sq ft, declared permit valuation (25th-75th percentile range); not a bid or final cost",
+   "year": 2023,
+   "place": "Los Angeles, CA (city)",
+   "quote": "median valuation / square_footage over 2932 permits issued in 2023 (declared 'Estimated value of work to be done' / 'Square footage'); query kept in source_url",
+   "publisher": "City of Los Angeles, Department of Building and Safety (open data)",
+   "edition": "dataset refreshed 2026-11-22; permits issued in calendar year 2023",
+   "source_url": "https://data.lacity.org/resource/pi9x-tg5x.json?%24select=permit_nbr%2Cpermit_type%2Cpermit_sub_type%2Cissue_date%2Csquare_footage%2Cvaluation%2Cjunior_adu%2Cwork_desc%2Cconstruction&%24where=permit_type+in+%28%27Bldg-Alter%2FRepair%27%2C%27Bldg-Addition%27%29+AND+%28junior_adu+IS+NULL+OR+junior_adu+%21%3D+%271%27%29+AND+%28upper%28work_desc%29+like+%27%25ADU%25%27+OR+upper%28work_desc%29+like+%27%25ACCESSORY+DWELLING%25%27%29+AND+valuation+IS+NOT+NULL+AND+issue_date+IS+NOT+NULL+AND+square_footage+IS+NOT+NULL",
+   "display_allowed": true,
+   "display_terms": "City of Los Angeles Open Data Portal terms (May 2014): 'Public data sets made available on the Site are provided for informational purposes'; no ban on display found. Valuations are applicants' declared values.",
+   "verification": {
+    "status": "computed_from_raw_permits",
+    "method": "scripts/costs/adu_permit_costs_la.py: median over 2932 permits after square_footage 150-1200 and valuation > 0 filters (26902 rows returned by the query for all years)",
+    "checked_on": "2026-11-22"
+   }
+  },
+  {
+   "item": "ADU created by conversion or addition (Bldg-Alter/Repair or Bldg-Addition naming an ADU): median declared cost per unit",
+   "building_type": "accessory dwelling unit",
+   "construction_method": "conventional (site-built; permit data does not say)",
+   "measure": "cost_per_unit",
+   "value": 50000,
+   "unit": "USD per ADU, declared permit valuation (median size 514 sq ft)",
+   "year": 2023,
+   "place": "Los Angeles, CA (city)",
+   "quote": "median of declared valuation over 2932 permits issued in 2023; query kept in source_url",
+   "publisher": "City of Los Angeles, Department of Building and Safety (open data)",
+   "edition": "dataset refreshed 2026-11-22; permits issued in calendar year 2023",
+   "source_url": "https://data.lacity.org/resource/pi9x-tg5x.json?%24select=permit_nbr%2Cpermit_type%2Cpermit_sub_type%2Cissue_date%2Csquare_footage%2Cvaluation%2Cjunior_adu%2Cwork_desc%2Cconstruction&%24where=permit_type+in+%28%27Bldg-Alter%2FRepair%27%2C%27Bldg-Addition%27%29+AND+%28junior_adu+IS+NULL+OR+junior_adu+%21%3D+%271%27%29+AND+%28upper%28work_desc%29+like+%27%25ADU%25%27+OR+upper%28work_desc%29+like+%27%25ACCESSORY+DWELLING%25%27%29+AND+valuation+IS+NOT+NULL+AND+issue_date+IS+NOT+NULL+AND+square_footage+IS+NOT+NULL",
+   "display_allowed": true,
+   "display_terms": "City of Los Angeles Open Data Portal terms (May 2014): 'Public data sets made available on the Site are provided for informational purposes'; no ban on display found. Valuations are applicants' declared values.",
+   "verification": {
+    "status": "computed_from_raw_permits",
+    "method": "scripts/costs/adu_permit_costs_la.py: median over 2932 permits after square_footage 150-1200 and valuation > 0 filters (26902 rows returned by the query for all years)",
+    "checked_on": "2026-11-22"
+   }
+  },
+  {
+   "item": "ADU created by conversion or addition (Bldg-Alter/Repair or Bldg-Addition naming an ADU): median declared cost per sq ft",
+   "building_type": "accessory dwelling unit",
+   "construction_method": "conventional (site-built; permit data does not say)",
+   "measure": "cost_per_sqft",
+   "value": 100.33,
+   "range": [
+    66.67,
+    140.2
+   ],
+   "unit": "USD per sq ft, declared permit valuation (25th-75th percentile range); not a bid or final cost",
+   "year": 2024,
+   "place": "Los Angeles, CA (city)",
+   "quote": "median valuation / square_footage over 2863 permits issued in 2024 (declared 'Estimated value of work to be done' / 'Square footage'); query kept in source_url",
+   "publisher": "City of Los Angeles, Department of Building and Safety (open data)",
+   "edition": "dataset refreshed 2026-11-22; permits issued in calendar year 2024",
+   "source_url": "https://data.lacity.org/resource/pi9x-tg5x.json?%24select=permit_nbr%2Cpermit_type%2Cpermit_sub_type%2Cissue_date%2Csquare_footage%2Cvaluation%2Cjunior_adu%2Cwork_desc%2Cconstruction&%24where=permit_type+in+%28%27Bldg-Alter%2FRepair%27%2C%27Bldg-Addition%27%29+AND+%28junior_adu+IS+NULL+OR+junior_adu+%21%3D+%271%27%29+AND+%28upper%28work_desc%29+like+%27%25ADU%25%27+OR+upper%28work_desc%29+like+%27%25ACCESSORY+DWELLING%25%27%29+AND+valuation+IS+NOT+NULL+AND+issue_date+IS+NOT+NULL+AND+square_footage+IS+NOT+NULL",
+   "display_allowed": true,
+   "display_terms": "City of Los Angeles Open Data Portal terms (May 2014): 'Public data sets made available on the Site are provided for informational purposes'; no ban on display found. Valuations are applicants' declared values.",
+   "verification": {
+    "status": "computed_from_raw_permits",
+    "method": "scripts/costs/adu_permit_costs_la.py: median over 2863 permits after square_footage 150-1200 and valuation > 0 filters (26902 rows returned by the query for all years)",
+    "checked_on": "2026-11-22"
+   }
+  },
+  {
+   "item": "ADU created by conversion or addition (Bldg-Alter/Repair or Bldg-Addition naming an ADU): median declared cost per unit",
+   "building_type": "accessory dwelling unit",
+   "construction_method": "conventional (site-built; permit data does not say)",
+   "measure": "cost_per_unit",
+   "value": 50000,
+   "unit": "USD per ADU, declared permit valuation (median size 501 sq ft)",
+   "year": 2024,
+   "place": "Los Angeles, CA (city)",
+   "quote": "median of declared valuation over 2863 permits issued in 2024; query kept in source_url",
+   "publisher": "City of Los Angeles, Department of Building and Safety (open data)",
+   "edition": "dataset refreshed 2026-11-22; permits issued in calendar year 2024",
+   "source_url": "https://data.lacity.org/resource/pi9x-tg5x.json?%24select=permit_nbr%2Cpermit_type%2Cpermit_sub_type%2Cissue_date%2Csquare_footage%2Cvaluation%2Cjunior_adu%2Cwork_desc%2Cconstruction&%24where=permit_type+in+%28%27Bldg-Alter%2FRepair%27%2C%27Bldg-Addition%27%29+AND+%28junior_adu+IS+NULL+OR+junior_adu+%21%3D+%271%27%29+AND+%28upper%28work_desc%29+like+%27%25ADU%25%27+OR+upper%28work_desc%29+like+%27%25ACCESSORY+DWELLING%25%27%29+AND+valuation+IS+NOT+NULL+AND+issue_date+IS+NOT+NULL+AND+square_footage+IS+NOT+NULL",
+   "display_allowed": true,
+   "display_terms": "City of Los Angeles Open Data Portal terms (May 2014): 'Public data sets made available on the Site are provided for informational purposes'; no ban on display found. Valuations are applicants' declared values.",
+   "verification": {
+    "status": "computed_from_raw_permits",
+    "method": "scripts/costs/adu_permit_costs_la.py: median over 2863 permits after square_footage 150-1200 and valuation > 0 filters (26902 rows returned by the query for all years)",
+    "checked_on": "2026-11-22"
+   }
+  },
+  {
+   "item": "ADU created by conversion or addition (Bldg-Alter/Repair or Bldg-Addition naming an ADU): median declared cost per sq ft",
+   "building_type": "accessory dwelling unit",
+   "construction_method": "conventional (site-built; permit data does not say)",
+   "measure": "cost_per_sqft",
+   "value": 101.14,
+   "range": [
+    68.83,
+    138.89
+   ],
+   "unit": "USD per sq ft, declared permit valuation (25th-75th percentile range); not a bid or final cost",
+   "year": 2025,
+   "place": "Los Angeles, CA (city)",
+   "quote": "median valuation / square_footage over 2986 permits issued in 2025 (declared 'Estimated value of work to be done' / 'Square footage'); query kept in source_url",
+   "publisher": "City of Los Angeles, Department of Building and Safety (open data)",
+   "edition": "dataset refreshed 2026-11-22; permits issued in calendar year 2025",
+   "source_url": "https://data.lacity.org/resource/pi9x-tg5x.json?%24select=permit_nbr%2Cpermit_type%2Cpermit_sub_type%2Cissue_date%2Csquare_footage%2Cvaluation%2Cjunior_adu%2Cwork_desc%2Cconstruction&%24where=permit_type+in+%28%27Bldg-Alter%2FRepair%27%2C%27Bldg-Addition%27%29+AND+%28junior_adu+IS+NULL+OR+junior_adu+%21%3D+%271%27%29+AND+%28upper%28work_desc%29+like+%27%25ADU%25%27+OR+upper%28work_desc%29+like+%27%25ACCESSORY+DWELLING%25%27%29+AND+valuation+IS+NOT+NULL+AND+issue_date+IS+NOT+NULL+AND+square_footage+IS+NOT+NULL",
+   "display_allowed": true,
+   "display_terms": "City of Los Angeles Open Data Portal terms (May 2014): 'Public data sets made available on the Site are provided for informational purposes'; no ban on display found. Valuations are applicants' declared values.",
+   "verification": {
+    "status": "computed_from_raw_permits",
+    "method": "scripts/costs/adu_permit_costs_la.py: median over 2986 permits after square_footage 150-1200 and valuation > 0 filters (26902 rows returned by the query for all years)",
+    "checked_on": "2026-11-22"
+   }
+  },
+  {
+   "item": "ADU created by conversion or addition (Bldg-Alter/Repair or Bldg-Addition naming an ADU): median declared cost per unit",
+   "building_type": "accessory dwelling unit",
+   "construction_method": "conventional (site-built; permit data does not say)",
+   "measure": "cost_per_unit",
+   "value": 50000,
+   "unit": "USD per ADU, declared permit valuation (median size 520 sq ft)",
+   "year": 2025,
+   "place": "Los Angeles, CA (city)",
+   "quote": "median of declared valuation over 2986 permits issued in 2025; query kept in source_url",
+   "publisher": "City of Los Angeles, Department of Building and Safety (open data)",
+   "edition": "dataset refreshed 2026-11-22; permits issued in calendar year 2025",
+   "source_url": "https://data.lacity.org/resource/pi9x-tg5x.json?%24select=permit_nbr%2Cpermit_type%2Cpermit_sub_type%2Cissue_date%2Csquare_footage%2Cvaluation%2Cjunior_adu%2Cwork_desc%2Cconstruction&%24where=permit_type+in+%28%27Bldg-Alter%2FRepair%27%2C%27Bldg-Addition%27%29+AND+%28junior_adu+IS+NULL+OR+junior_adu+%21%3D+%271%27%29+AND+%28upper%28work_desc%29+like+%27%25ADU%25%27+OR+upper%28work_desc%29+like+%27%25ACCESSORY+DWELLING%25%27%29+AND+valuation+IS+NOT+NULL+AND+issue_date+IS+NOT+NULL+AND+square_footage+IS+NOT+NULL",
+   "display_allowed": true,
+   "display_terms": "City of Los Angeles Open Data Portal terms (May 2014): 'Public data sets made available on the Site are provided for informational purposes'; no ban on display found. Valuations are applicants' declared values.",
+   "verification": {
+    "status": "computed_from_raw_permits",
+    "method": "scripts/costs/adu_permit_costs_la.py: median over 2986 permits after square_footage 150-1200 and valuation > 0 filters (26902 rows returned by the query for all years)",
+    "checked_on": "2026-11-22"
+   }
+  },
+  {
+   "item": "ADU created by conversion or addition (Bldg-Alter/Repair or Bldg-Addition naming an ADU): median declared cost per sq ft",
+   "building_type": "accessory dwelling unit",
+   "construction_method": "conventional (site-built; permit data does not say)",
+   "measure": "cost_per_sqft",
+   "value": 105.57,
+   "range": [
+    71.02,
+    150.83
+   ],
+   "unit": "USD per sq ft, declared permit valuation (25th-75th percentile range); not a bid or final cost",
+   "year": 2026,
+   "place": "Los Angeles, CA (city)",
+   "quote": "median valuation / square_footage over 2180 permits issued in 2026 (declared 'Estimated value of work to be done' / 'Square footage'); query kept in source_url",
+   "publisher": "City of Los Angeles, Department of Building and Safety (open data)",
+   "edition": "dataset refreshed 2026-11-22; permits issued in calendar year 2026",
+   "source_url": "https://data.lacity.org/resource/pi9x-tg5x.json?%24select=permit_nbr%2Cpermit_type%2Cpermit_sub_type%2Cissue_date%2Csquare_footage%2Cvaluation%2Cjunior_adu%2Cwork_desc%2Cconstruction&%24where=permit_type+in+%28%27Bldg-Alter%2FRepair%27%2C%27Bldg-Addition%27%29+AND+%28junior_adu+IS+NULL+OR+junior_adu+%21%3D+%271%27%29+AND+%28upper%28work_desc%29+like+%27%25ADU%25%27+OR+upper%28work_desc%29+like+%27%25ACCESSORY+DWELLING%25%27%29+AND+valuation+IS+NOT+NULL+AND+issue_date+IS+NOT+NULL+AND+square_footage+IS+NOT+NULL",
+   "display_allowed": true,
+   "display_terms": "City of Los Angeles Open Data Portal terms (May 2014): 'Public data sets made available on the Site are provided for informational purposes'; no ban on display found. Valuations are applicants' declared values.",
+   "verification": {
+    "status": "computed_from_raw_permits",
+    "method": "scripts/costs/adu_permit_costs_la.py: median over 2180 permits after square_footage 150-1200 and valuation > 0 filters (26902 rows returned by the query for all years)",
+    "checked_on": "2026-11-22"
+   }
+  },
+  {
+   "item": "ADU created by conversion or addition (Bldg-Alter/Repair or Bldg-Addition naming an ADU): median declared cost per unit",
+   "building_type": "accessory dwelling unit",
+   "construction_method": "conventional (site-built; permit data does not say)",
+   "measure": "cost_per_unit",
+   "value": 54725,
+   "unit": "USD per ADU, declared permit valuation (median size 509 sq ft)",
+   "year": 2026,
+   "place": "Los Angeles, CA (city)",
+   "quote": "median of declared valuation over 2180 permits issued in 2026; query kept in source_url",
+   "publisher": "City of Los Angeles, Department of Building and Safety (open data)",
+   "edition": "dataset refreshed 2026-11-22; permits issued in calendar year 2026",
+   "source_url": "https://data.lacity.org/resource/pi9x-tg5x.json?%24select=permit_nbr%2Cpermit_type%2Cpermit_sub_type%2Cissue_date%2Csquare_footage%2Cvaluation%2Cjunior_adu%2Cwork_desc%2Cconstruction&%24where=permit_type+in+%28%27Bldg-Alter%2FRepair%27%2C%27Bldg-Addition%27%29+AND+%28junior_adu+IS+NULL+OR+junior_adu+%21%3D+%271%27%29+AND+%28upper%28work_desc%29+like+%27%25ADU%25%27+OR+upper%28work_desc%29+like+%27%25ACCESSORY+DWELLING%25%27%29+AND+valuation+IS+NOT+NULL+AND+issue_date+IS+NOT+NULL+AND+square_footage+IS+NOT+NULL",
+   "display_allowed": true,
+   "display_terms": "City of Los Angeles Open Data Portal terms (May 2014): 'Public data sets made available on the Site are provided for informational purposes'; no ban on display found. Valuations are applicants' declared values.",
+   "verification": {
+    "status": "computed_from_raw_permits",
+    "method": "scripts/costs/adu_permit_costs_la.py: median over 2180 permits after square_footage 150-1200 and valuation > 0 filters (26902 rows returned by the query for all years)",
+    "checked_on": "2026-11-22"
+   }
+  },
+  {
+   "item": "Junior ADU inside an existing home (junior_adu = 1): median declared cost per sq ft",
+   "building_type": "accessory dwelling unit",
+   "construction_method": "conventional (site-built; permit data does not say)",
+   "measure": "cost_per_sqft",
+   "value": 54.95,
+   "range": [
+    45.8,
+    68.89
+   ],
+   "unit": "USD per sq ft, declared permit valuation (25th-75th percentile range); not a bid or final cost",
+   "year": 2020,
+   "place": "Los Angeles, CA (city)",
+   "quote": "median valuation / square_footage over 61 permits issued in 2020 (declared 'Estimated value of work to be done' / 'Square footage'); query kept in source_url",
+   "publisher": "City of Los Angeles, Department of Building and Safety (open data)",
+   "edition": "dataset refreshed 2026-11-22; permits issued in calendar year 2020",
+   "source_url": "https://data.lacity.org/resource/pi9x-tg5x.json?%24select=permit_nbr%2Cpermit_type%2Cpermit_sub_type%2Cissue_date%2Csquare_footage%2Cvaluation%2Cjunior_adu%2Cwork_desc%2Cconstruction&%24where=junior_adu+%3D+%271%27+AND+valuation+IS+NOT+NULL+AND+issue_date+IS+NOT+NULL+AND+square_footage+IS+NOT+NULL",
+   "display_allowed": true,
+   "display_terms": "City of Los Angeles Open Data Portal terms (May 2014): 'Public data sets made available on the Site are provided for informational purposes'; no ban on display found. Valuations are applicants' declared values.",
+   "verification": {
+    "status": "computed_from_raw_permits",
+    "method": "scripts/costs/adu_permit_costs_la.py: median over 61 permits after square_footage 150-1200 and valuation > 0 filters (4055 rows returned by the query for all years)",
+    "checked_on": "2026-11-22"
+   }
+  },
+  {
+   "item": "Junior ADU inside an existing home (junior_adu = 1): median declared cost per unit",
+   "building_type": "accessory dwelling unit",
+   "construction_method": "conventional (site-built; permit data does not say)",
+   "measure": "cost_per_unit",
+   "value": 20000,
+   "unit": "USD per ADU, declared permit valuation (median size 400 sq ft)",
+   "year": 2020,
+   "place": "Los Angeles, CA (city)",
+   "quote": "median of declared valuation over 61 permits issued in 2020; query kept in source_url",
+   "publisher": "City of Los Angeles, Department of Building and Safety (open data)",
+   "edition": "dataset refreshed 2026-11-22; permits issued in calendar year 2020",
+   "source_url": "https://data.lacity.org/resource/pi9x-tg5x.json?%24select=permit_nbr%2Cpermit_type%2Cpermit_sub_type%2Cissue_date%2Csquare_footage%2Cvaluation%2Cjunior_adu%2Cwork_desc%2Cconstruction&%24where=junior_adu+%3D+%271%27+AND+valuation+IS+NOT+NULL+AND+issue_date+IS+NOT+NULL+AND+square_footage+IS+NOT+NULL",
+   "display_allowed": true,
+   "display_terms": "City of Los Angeles Open Data Portal terms (May 2014): 'Public data sets made available on the Site are provided for informational purposes'; no ban on display found. Valuations are applicants' declared values.",
+   "verification": {
+    "status": "computed_from_raw_permits",
+    "method": "scripts/costs/adu_permit_costs_la.py: median over 61 permits after square_footage 150-1200 and valuation > 0 filters (4055 rows returned by the query for all years)",
+    "checked_on": "2026-11-22"
+   }
+  },
+  {
+   "item": "Junior ADU inside an existing home (junior_adu = 1): median declared cost per sq ft",
+   "building_type": "accessory dwelling unit",
+   "construction_method": "conventional (site-built; permit data does not say)",
+   "measure": "cost_per_sqft",
+   "value": 68.46,
+   "range": [
+    51.22,
+    95.95
+   ],
+   "unit": "USD per sq ft, declared permit valuation (25th-75th percentile range); not a bid or final cost",
+   "year": 2021,
+   "place": "Los Angeles, CA (city)",
+   "quote": "median valuation / square_footage over 170 permits issued in 2021 (declared 'Estimated value of work to be done' / 'Square footage'); query kept in source_url",
+   "publisher": "City of Los Angeles, Department of Building and Safety (open data)",
+   "edition": "dataset refreshed 2026-11-22; permits issued in calendar year 2021",
+   "source_url": "https://data.lacity.org/resource/pi9x-tg5x.json?%24select=permit_nbr%2Cpermit_type%2Cpermit_sub_type%2Cissue_date%2Csquare_footage%2Cvaluation%2Cjunior_adu%2Cwork_desc%2Cconstruction&%24where=junior_adu+%3D+%271%27+AND+valuation+IS+NOT+NULL+AND+issue_date+IS+NOT+NULL+AND+square_footage+IS+NOT+NULL",
+   "display_allowed": true,
+   "display_terms": "City of Los Angeles Open Data Portal terms (May 2014): 'Public data sets made available on the Site are provided for informational purposes'; no ban on display found. Valuations are applicants' declared values.",
+   "verification": {
+    "status": "computed_from_raw_permits",
+    "method": "scripts/costs/adu_permit_costs_la.py: median over 170 permits after square_footage 150-1200 and valuation > 0 filters (4055 rows returned by the query for all years)",
+    "checked_on": "2026-11-22"
+   }
+  },
+  {
+   "item": "Junior ADU inside an existing home (junior_adu = 1): median declared cost per unit",
+   "building_type": "accessory dwelling unit",
+   "construction_method": "conventional (site-built; permit data does not say)",
+   "measure": "cost_per_unit",
+   "value": 25000,
+   "unit": "USD per ADU, declared permit valuation (median size 400 sq ft)",
+   "year": 2021,
+   "place": "Los Angeles, CA (city)",
+   "quote": "median of declared valuation over 170 permits issued in 2021; query kept in source_url",
+   "publisher": "City of Los Angeles, Department of Building and Safety (open data)",
+   "edition": "dataset refreshed 2026-11-22; permits issued in calendar year 2021",
+   "source_url": "https://data.lacity.org/resource/pi9x-tg5x.json?%24select=permit_nbr%2Cpermit_type%2Cpermit_sub_type%2Cissue_date%2Csquare_footage%2Cvaluation%2Cjunior_adu%2Cwork_desc%2Cconstruction&%24where=junior_adu+%3D+%271%27+AND+valuation+IS+NOT+NULL+AND+issue_date+IS+NOT+NULL+AND+square_footage+IS+NOT+NULL",
+   "display_allowed": true,
+   "display_terms": "City of Los Angeles Open Data Portal terms (May 2014): 'Public data sets made available on the Site are provided for informational purposes'; no ban on display found. Valuations are applicants' declared values.",
+   "verification": {
+    "status": "computed_from_raw_permits",
+    "method": "scripts/costs/adu_permit_costs_la.py: median over 170 permits after square_footage 150-1200 and valuation > 0 filters (4055 rows returned by the query for all years)",
+    "checked_on": "2026-11-22"
+   }
+  },
+  {
+   "item": "Junior ADU inside an existing home (junior_adu = 1): median declared cost per sq ft",
+   "building_type": "accessory dwelling unit",
+   "construction_method": "conventional (site-built; permit data does not say)",
+   "measure": "cost_per_sqft",
+   "value": 90.5,
+   "range": [
+    64.45,
+    125.0
+   ],
+   "unit": "USD per sq ft, declared permit valuation (25th-75th percentile range); not a bid or final cost",
+   "year": 2022,
+   "place": "Los Angeles, CA (city)",
+   "quote": "median valuation / square_footage over 250 permits issued in 2022 (declared 'Estimated value of work to be done' / 'Square footage'); query kept in source_url",
+   "publisher": "City of Los Angeles, Department of Building and Safety (open data)",
+   "edition": "dataset refreshed 2026-11-22; permits issued in calendar year 2022",
+   "source_url": "https://data.lacity.org/resource/pi9x-tg5x.json?%24select=permit_nbr%2Cpermit_type%2Cpermit_sub_type%2Cissue_date%2Csquare_footage%2Cvaluation%2Cjunior_adu%2Cwork_desc%2Cconstruction&%24where=junior_adu+%3D+%271%27+AND+valuation+IS+NOT+NULL+AND+issue_date+IS+NOT+NULL+AND+square_footage+IS+NOT+NULL",
+   "display_allowed": true,
+   "display_terms": "City of Los Angeles Open Data Portal terms (May 2014): 'Public data sets made available on the Site are provided for informational purposes'; no ban on display found. Valuations are applicants' declared values.",
+   "verification": {
+    "status": "computed_from_raw_permits",
+    "method": "scripts/costs/adu_permit_costs_la.py: median over 250 permits after square_footage 150-1200 and valuation > 0 filters (4055 rows returned by the query for all years)",
+    "checked_on": "2026-11-22"
+   }
+  },
+  {
+   "item": "Junior ADU inside an existing home (junior_adu = 1): median declared cost per unit",
+   "building_type": "accessory dwelling unit",
+   "construction_method": "conventional (site-built; permit data does not say)",
+   "measure": "cost_per_unit",
+   "value": 35000,
+   "unit": "USD per ADU, declared permit valuation (median size 400 sq ft)",
+   "year": 2022,
+   "place": "Los Angeles, CA (city)",
+   "quote": "median of declared valuation over 250 permits issued in 2022; query kept in source_url",
+   "publisher": "City of Los Angeles, Department of Building and Safety (open data)",
+   "edition": "dataset refreshed 2026-11-22; permits issued in calendar year 2022",
+   "source_url": "https://data.lacity.org/resource/pi9x-tg5x.json?%24select=permit_nbr%2Cpermit_type%2Cpermit_sub_type%2Cissue_date%2Csquare_footage%2Cvaluation%2Cjunior_adu%2Cwork_desc%2Cconstruction&%24where=junior_adu+%3D+%271%27+AND+valuation+IS+NOT+NULL+AND+issue_date+IS+NOT+NULL+AND+square_footage+IS+NOT+NULL",
+   "display_allowed": true,
+   "display_terms": "City of Los Angeles Open Data Portal terms (May 2014): 'Public data sets made available on the Site are provided for informational purposes'; no ban on display found. Valuations are applicants' declared values.",
+   "verification": {
+    "status": "computed_from_raw_permits",
+    "method": "scripts/costs/adu_permit_costs_la.py: median over 250 permits after square_footage 150-1200 and valuation > 0 filters (4055 rows returned by the query for all years)",
+    "checked_on": "2026-11-22"
+   }
+  },
+  {
+   "item": "Junior ADU inside an existing home (junior_adu = 1): median declared cost per sq ft",
+   "building_type": "accessory dwelling unit",
+   "construction_method": "conventional (site-built; permit data does not say)",
+   "measure": "cost_per_sqft",
+   "value": 90.09,
+   "range": [
+    57.47,
+    121.58
+   ],
+   "unit": "USD per sq ft, declared permit valuation (25th-75th percentile range); not a bid or final cost",
+   "year": 2023,
+   "place": "Los Angeles, CA (city)",
+   "quote": "median valuation / square_footage over 365 permits issued in 2023 (declared 'Estimated value of work to be done' / 'Square footage'); query kept in source_url",
+   "publisher": "City of Los Angeles, Department of Building and Safety (open data)",
+   "edition": "dataset refreshed 2026-11-22; permits issued in calendar year 2023",
+   "source_url": "https://data.lacity.org/resource/pi9x-tg5x.json?%24select=permit_nbr%2Cpermit_type%2Cpermit_sub_type%2Cissue_date%2Csquare_footage%2Cvaluation%2Cjunior_adu%2Cwork_desc%2Cconstruction&%24where=junior_adu+%3D+%271%27+AND+valuation+IS+NOT+NULL+AND+issue_date+IS+NOT+NULL+AND+square_footage+IS+NOT+NULL",
+   "display_allowed": true,
+   "display_terms": "City of Los Angeles Open Data Portal terms (May 2014): 'Public data sets made available on the Site are provided for informational purposes'; no ban on display found. Valuations are applicants' declared values.",
+   "verification": {
+    "status": "computed_from_raw_permits",
+    "method": "scripts/costs/adu_permit_costs_la.py: median over 365 permits after square_footage 150-1200 and valuation > 0 filters (4055 rows returned by the query for all years)",
+    "checked_on": "2026-11-22"
+   }
+  },
+  {
+   "item": "Junior ADU inside an existing home (junior_adu = 1): median declared cost per unit",
+   "building_type": "accessory dwelling unit",
+   "construction_method": "conventional (site-built; permit data does not say)",
+   "measure": "cost_per_unit",
+   "value": 35000,
+   "unit": "USD per ADU, declared permit valuation (median size 400 sq ft)",
+   "year": 2023,
+   "place": "Los Angeles, CA (city)",
+   "quote": "median of declared valuation over 365 permits issued in 2023; query kept in source_url",
+   "publisher": "City of Los Angeles, Department of Building and Safety (open data)",
+   "edition": "dataset refreshed 2026-11-22; permits issued in calendar year 2023",
+   "source_url": "https://data.lacity.org/resource/pi9x-tg5x.json?%24select=permit_nbr%2Cpermit_type%2Cpermit_sub_type%2Cissue_date%2Csquare_footage%2Cvaluation%2Cjunior_adu%2Cwork_desc%2Cconstruction&%24where=junior_adu+%3D+%271%27+AND+valuation+IS+NOT+NULL+AND+issue_date+IS+NOT+NULL+AND+square_footage+IS+NOT+NULL",
+   "display_allowed": true,
+   "display_terms": "City of Los Angeles Open Data Portal terms (May 2014): 'Public data sets made available on the Site are provided for informational purposes'; no ban on display found. Valuations are applicants' declared values.",
+   "verification": {
+    "status": "computed_from_raw_permits",
+    "method": "scripts/costs/adu_permit_costs_la.py: median over 365 permits after square_footage 150-1200 and valuation > 0 filters (4055 rows returned by the query for all years)",
+    "checked_on": "2026-11-22"
+   }
+  },
+  {
+   "item": "Junior ADU inside an existing home (junior_adu = 1): median declared cost per sq ft",
+   "building_type": "accessory dwelling unit",
+   "construction_method": "conventional (site-built; permit data does not say)",
+   "measure": "cost_per_sqft",
+   "value": 88.25,
+   "range": [
+    55.44,
+    125.0
+   ],
+   "unit": "USD per sq ft, declared permit valuation (25th-75th percentile range); not a bid or final cost",
+   "year": 2024,
+   "place": "Los Angeles, CA (city)",
+   "quote": "median valuation / square_footage over 418 permits issued in 2024 (declared 'Estimated value of work to be done' / 'Square footage'); query kept in source_url",
+   "publisher": "City of Los Angeles, Department of Building and Safety (open data)",
+   "edition": "dataset refreshed 2026-11-22; permits issued in calendar year 2024",
+   "source_url": "https://data.lacity.org/resource/pi9x-tg5x.json?%24select=permit_nbr%2Cpermit_type%2Cpermit_sub_type%2Cissue_date%2Csquare_footage%2Cvaluation%2Cjunior_adu%2Cwork_desc%2Cconstruction&%24where=junior_adu+%3D+%271%27+AND+valuation+IS+NOT+NULL+AND+issue_date+IS+NOT+NULL+AND+square_footage+IS+NOT+NULL",
+   "display_allowed": true,
+   "display_terms": "City of Los Angeles Open Data Portal terms (May 2014): 'Public data sets made available on the Site are provided for informational purposes'; no ban on display found. Valuations are applicants' declared values.",
+   "verification": {
+    "status": "computed_from_raw_permits",
+    "method": "scripts/costs/adu_permit_costs_la.py: median over 418 permits after square_footage 150-1200 and valuation > 0 filters (4055 rows returned by the query for all years)",
+    "checked_on": "2026-11-22"
+   }
+  },
+  {
+   "item": "Junior ADU inside an existing home (junior_adu = 1): median declared cost per unit",
+   "building_type": "accessory dwelling unit",
+   "construction_method": "conventional (site-built; permit data does not say)",
+   "measure": "cost_per_unit",
+   "value": 35000,
+   "unit": "USD per ADU, declared permit valuation (median size 396 sq ft)",
+   "year": 2024,
+   "place": "Los Angeles, CA (city)",
+   "quote": "median of declared valuation over 418 permits issued in 2024; query kept in source_url",
+   "publisher": "City of Los Angeles, Department of Building and Safety (open data)",
+   "edition": "dataset refreshed 2026-11-22; permits issued in calendar year 2024",
+   "source_url": "https://data.lacity.org/resource/pi9x-tg5x.json?%24select=permit_nbr%2Cpermit_type%2Cpermit_sub_type%2Cissue_date%2Csquare_footage%2Cvaluation%2Cjunior_adu%2Cwork_desc%2Cconstruction&%24where=junior_adu+%3D+%271%27+AND+valuation+IS+NOT+NULL+AND+issue_date+IS+NOT+NULL+AND+square_footage+IS+NOT+NULL",
+   "display_allowed": true,
+   "display_terms": "City of Los Angeles Open Data Portal terms (May 2014): 'Public data sets made available on the Site are provided for informational purposes'; no ban on display found. Valuations are applicants' declared values.",
+   "verification": {
+    "status": "computed_from_raw_permits",
+    "method": "scripts/costs/adu_permit_costs_la.py: median over 418 permits after square_footage 150-1200 and valuation > 0 filters (4055 rows returned by the query for all years)",
+    "checked_on": "2026-11-22"
+   }
+  },
+  {
+   "item": "Junior ADU inside an existing home (junior_adu = 1): median declared cost per sq ft",
+   "building_type": "accessory dwelling unit",
+   "construction_method": "conventional (site-built; permit data does not say)",
+   "measure": "cost_per_sqft",
+   "value": 101.48,
+   "range": [
+    67.57,
+    143.68
+   ],
+   "unit": "USD per sq ft, declared permit valuation (25th-75th percentile range); not a bid or final cost",
+   "year": 2025,
+   "place": "Los Angeles, CA (city)",
+   "quote": "median valuation / square_footage over 484 permits issued in 2025 (declared 'Estimated value of work to be done' / 'Square footage'); query kept in source_url",
+   "publisher": "City of Los Angeles, Department of Building and Safety (open data)",
+   "edition": "dataset refreshed 2026-11-22; permits issued in calendar year 2025",
+   "source_url": "https://data.lacity.org/resource/pi9x-tg5x.json?%24select=permit_nbr%2Cpermit_type%2Cpermit_sub_type%2Cissue_date%2Csquare_footage%2Cvaluation%2Cjunior_adu%2Cwork_desc%2Cconstruction&%24where=junior_adu+%3D+%271%27+AND+valuation+IS+NOT+NULL+AND+issue_date+IS+NOT+NULL+AND+square_footage+IS+NOT+NULL",
+   "display_allowed": true,
+   "display_terms": "City of Los Angeles Open Data Portal terms (May 2014): 'Public data sets made available on the Site are provided for informational purposes'; no ban on display found. Valuations are applicants' declared values.",
+   "verification": {
+    "status": "computed_from_raw_permits",
+    "method": "scripts/costs/adu_permit_costs_la.py: median over 484 permits after square_footage 150-1200 and valuation > 0 filters (4055 rows returned by the query for all years)",
+    "checked_on": "2026-11-22"
+   }
+  },
+  {
+   "item": "Junior ADU inside an existing home (junior_adu = 1): median declared cost per unit",
+   "building_type": "accessory dwelling unit",
+   "construction_method": "conventional (site-built; permit data does not say)",
+   "measure": "cost_per_unit",
+   "value": 40000,
+   "unit": "USD per ADU, declared permit valuation (median size 403 sq ft)",
+   "year": 2025,
+   "place": "Los Angeles, CA (city)",
+   "quote": "median of declared valuation over 484 permits issued in 2025; query kept in source_url",
+   "publisher": "City of Los Angeles, Department of Building and Safety (open data)",
+   "edition": "dataset refreshed 2026-11-22; permits issued in calendar year 2025",
+   "source_url": "https://data.lacity.org/resource/pi9x-tg5x.json?%24select=permit_nbr%2Cpermit_type%2Cpermit_sub_type%2Cissue_date%2Csquare_footage%2Cvaluation%2Cjunior_adu%2Cwork_desc%2Cconstruction&%24where=junior_adu+%3D+%271%27+AND+valuation+IS+NOT+NULL+AND+issue_date+IS+NOT+NULL+AND+square_footage+IS+NOT+NULL",
+   "display_allowed": true,
+   "display_terms": "City of Los Angeles Open Data Portal terms (May 2014): 'Public data sets made available on the Site are provided for informational purposes'; no ban on display found. Valuations are applicants' declared values.",
+   "verification": {
+    "status": "computed_from_raw_permits",
+    "method": "scripts/costs/adu_permit_costs_la.py: median over 484 permits after square_footage 150-1200 and valuation > 0 filters (4055 rows returned by the query for all years)",
+    "checked_on": "2026-11-22"
+   }
+  },
+  {
+   "item": "Junior ADU inside an existing home (junior_adu = 1): median declared cost per sq ft",
+   "building_type": "accessory dwelling unit",
+   "construction_method": "conventional (site-built; permit data does not say)",
+   "measure": "cost_per_sqft",
+   "value": 106.89,
+   "range": [
+    70.75,
+    156.34
+   ],
+   "unit": "USD per sq ft, declared permit valuation (25th-75th percentile range); not a bid or final cost",
+   "year": 2026,
+   "place": "Los Angeles, CA (city)",
+   "quote": "median valuation / square_footage over 332 permits issued in 2026 (declared 'Estimated value of work to be done' / 'Square footage'); query kept in source_url",
+   "publisher": "City of Los Angeles, Department of Building and Safety (open data)",
+   "edition": "dataset refreshed 2026-11-22; permits issued in calendar year 2026",
+   "source_url": "https://data.lacity.org/resource/pi9x-tg5x.json?%24select=permit_nbr%2Cpermit_type%2Cpermit_sub_type%2Cissue_date%2Csquare_footage%2Cvaluation%2Cjunior_adu%2Cwork_desc%2Cconstruction&%24where=junior_adu+%3D+%271%27+AND+valuation+IS+NOT+NULL+AND+issue_date+IS+NOT+NULL+AND+square_footage+IS+NOT+NULL",
+   "display_allowed": true,
+   "display_terms": "City of Los Angeles Open Data Portal terms (May 2014): 'Public data sets made available on the Site are provided for informational purposes'; no ban on display found. Valuations are applicants' declared values.",
+   "verification": {
+    "status": "computed_from_raw_permits",
+    "method": "scripts/costs/adu_permit_costs_la.py: median over 332 permits after square_footage 150-1200 and valuation > 0 filters (4055 rows returned by the query for all years)",
+    "checked_on": "2026-11-22"
+   }
+  },
+  {
+   "item": "Junior ADU inside an existing home (junior_adu = 1): median declared cost per unit",
+   "building_type": "accessory dwelling unit",
+   "construction_method": "conventional (site-built; permit data does not say)",
+   "measure": "cost_per_unit",
+   "value": 45000,
+   "unit": "USD per ADU, declared permit valuation (median size 408 sq ft)",
+   "year": 2026,
+   "place": "Los Angeles, CA (city)",
+   "quote": "median of declared valuation over 332 permits issued in 2026; query kept in source_url",
+   "publisher": "City of Los Angeles, Department of Building and Safety (open data)",
+   "edition": "dataset refreshed 2026-11-22; permits issued in calendar year 2026",
+   "source_url": "https://data.lacity.org/resource/pi9x-tg5x.json?%24select=permit_nbr%2Cpermit_type%2Cpermit_sub_type%2Cissue_date%2Csquare_footage%2Cvaluation%2Cjunior_adu%2Cwork_desc%2Cconstruction&%24where=junior_adu+%3D+%271%27+AND+valuation+IS+NOT+NULL+AND+issue_date+IS+NOT+NULL+AND+square_footage+IS+NOT+NULL",
+   "display_allowed": true,
+   "display_terms": "City of Los Angeles Open Data Portal terms (May 2014): 'Public data sets made available on the Site are provided for informational purposes'; no ban on display found. Valuations are applicants' declared values.",
+   "verification": {
+    "status": "computed_from_raw_permits",
+    "method": "scripts/costs/adu_permit_costs_la.py: median over 332 permits after square_footage 150-1200 and valuation > 0 filters (4055 rows returned by the query for all years)",
+    "checked_on": "2026-11-22"
+   }
+  }
+ ]
+}

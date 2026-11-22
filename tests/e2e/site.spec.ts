@@ -135,6 +135,77 @@ test("AI advisor shows a Worker reply as text, not HTML", async ({ page }) => {
   expect(JSON.stringify(body)).not.toMatch(/systemPrompt|apiKey/);
 });
 
+// Script-first advisor (app/advisor-scripts.js): plain lookups are answered from the page's data with no request.
+async function advisorWithStubbedWorker(page: Page) {
+  await page.route("**/app/config.js", (r) => r.fulfill({ contentType: "text/javascript", body: 'window.CITY_PRETTY_CONFIG = { workerUrl: "https://worker.test" };' }));
+  await page.route("https://worker.test/api/health", (r) => r.fulfill({ contentType: "application/json", headers: { "access-control-allow-origin": "*" }, body: '{"status":"ok","ai_advisor_ready":true}' }));
+  const bodies: any[] = [];
+  await page.route("https://worker.test/api/ai", (r) => {
+    bodies.push(JSON.parse(r.request().postData() || "{}"));
+    return r.fulfill({ contentType: "application/json", headers: { "access-control-allow-origin": "*" }, body: JSON.stringify({ ok: true, text: "Stub reply from the Worker." }) });
+  });
+  await openPage(page);
+  // the tables the answers read (HUD rents, the Invest view's inputs) are loaded
+  await page.waitForFunction(() => typeof (window as any).getHudFmr === "function" && (window as any).getHudFmr("06037") && (window as any).AdvisorScripts, null, { timeout: 30_000 });
+  await page.waitForFunction(() => (window as any).cpInvest.advisorInputs().then((x: any) => !!(x && x.state === "ok")), null, { timeout: 30_000 });
+  await page.click("#btn-ai-header");
+  return bodies;
+}
+async function ask(page: Page, q: string) {
+  await page.fill("#ai-user-input", q);
+  await page.press("#ai-user-input", "Enter");
+}
+
+test("advisor answers a figure lookup from the page's data without calling the Worker", async ({ page }) => {
+  const bodies = await advisorWithStubbedWorker(page);
+  const fmr = await page.evaluate(() => "$" + (window as any).getHudFmr("06037").two_bed_2br.toLocaleString("en-US"));
+  await ask(page, "What is the 2-bedroom fair market rent?");
+  const chat = page.locator("#ai-chat-history");
+  await expect(chat).toContainText("From this page's data (no AI)");
+  await expect(chat).toContainText(fmr);
+  await expect(chat).toContainText("[measured]");
+  await expect(chat).toContainText("Answered from this page's data without the AI.");
+  await page.waitForTimeout(500);
+  expect(bodies.length).toBe(0);
+  // the button sends the same question to the Worker, with what the page found
+  await chat.getByRole("button", { name: "Ask the AI for a deeper answer" }).click();
+  await expect(chat).toContainText("Stub reply from the Worker.");
+  expect(bodies.length).toBe(1);
+  expect(bodies[0].question).toBe("What is the 2-bedroom fair market rent?");
+  expect(bodies[0].context.scripted_findings.answered_on_page).toBe(true);
+  expect(JSON.stringify(bodies[0].context.scripted_findings.findings)).toContain(fmr);
+});
+
+test("advisor sends a complex question to the Worker with the page's partial findings", async ({ page }) => {
+  const bodies = await advisorWithStubbedWorker(page);
+  await ask(page, "Why is the rent so high here?");
+  await expect(page.locator("#ai-chat-history")).toContainText("Stub reply from the Worker.");
+  expect(bodies.length).toBe(1);
+  expect(Object.keys(bodies[0]).sort()).toEqual(["context", "history", "promptKey", "question"]);
+  expect(bodies[0].context.scripted_findings.answered_on_page).toBe(false);
+  expect(bodies[0].context.scripted_findings.findings.join(" ")).toMatch(/Median rent/);
+});
+
+test("advisor budget answer lists only plays within the budget", async ({ page }) => {
+  const bodies = await advisorWithStubbedWorker(page);
+  await ask(page, "I have $500,000");
+  const chat = page.locator("#ai-chat-history");
+  await expect(chat).toContainText("Answered from this page's data without the AI.");
+  const r = await page.evaluate(async () => {
+    const last = (window as any).__cpAdvisorLast;
+    const snap = await (window as any).AdvisorScripts.pageSnapshot();
+    const n = snap.brief.neighborhood;
+    const items = n.housingPlays.map((h: any) => ({ name: h.label, cost: h.cost && h.cost.value })).concat(n.build.map((x: any) => ({ name: x.name, cost: x.cost && x.cost.value })));
+    return { intent: last.intent, matched: last.matched, over: items.filter((x: any) => typeof x.cost === "number" && x.cost > 500000).map((x: any) => x.name), within: items.filter((x: any) => typeof x.cost === "number" && x.cost <= 500000).map((x: any) => x.name) };
+  });
+  expect(r.intent).toBe("budget");
+  for (const x of r.matched) expect(x.cost).toBeLessThanOrEqual(500000);
+  const text = await chat.innerText();
+  for (const name of r.matched.map((x: any) => x.name)) expect(text).toContain(name);
+  for (const name of r.over) if (!r.within.includes(name)) expect(text).not.toContain(name);
+  expect(bodies.length).toBe(0);
+});
+
 test("fits a phone screen", async ({ browser }) => {
   const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
   const page = await ctx.newPage();
@@ -513,7 +584,12 @@ test("crash comparisons use the rebuilt counts in a California and a Pennsylvani
       dropped: (d["420035162002"].r || []).some((r: any) => r[0] === "traffic_calming"),
     };
   });
-  expect(pa.text).toContain("4 crashes involving a pedestrian or cyclist inside this block group or on its boundary streets");
+  // The expected count is read from the committed comparison file: 4 under the older rule (16 Nov), 3 since the 1/k
+  // rebuild of 21 Nov 2026 (a crash on the edge of k block groups counts 1/k in each).
+  const paGap = JSON.parse(require("fs").readFileSync(require("path").join(__dirname, "../../app/data/crash_gaps/42003.json"), "utf8")).bg["420035153001"].p;
+  expect(paGap[3]).toBe("g");
+  const paShown = Number.isInteger(paGap[0]) ? paGap[0].toLocaleString() : paGap[0].toFixed(1); // 1/k counts show one decimal
+  expect(pa.text).toContain(`${paShown} ${paGap[0] === 1 ? "crash" : "crashes"} involving a pedestrian or cyclist inside this block group or on its boundary streets`);
   expect(pa.text).not.toContain("crashes injured people walking or biking here");
   expect(pa.dropped).toBe(false);
   expect(errors).toEqual([]);
@@ -1284,6 +1360,85 @@ test("methods panel financing and stormwater text come from sourced records (LA 
   expect(tx.water).toContain("No checked stormwater funding record");
   expect(tx.water).not.toMatch(/TWDB|BRIC/);
   expect(errors).toEqual([]);
+});
+
+// Found 19 Nov 2026 at 2107 Duxbury Cir (zone R1V2-O, assessor use "Single"): the Zoning row showed the mapped zone, but
+// the owner playbook said "Zoning is not on file" because it read a `zone` field LA's zone_rules rows do not have.
+test("an LA lot in a mapped single-family variation zone reaches the state-law screen with its zoning code (live click path)", async ({ page }) => {
+  let ring: number[][] = [];
+  await page.route(/LACounty_Parcel\/MapServer\/0\/query/, (route: any) => route.fulfill({ status: 200, contentType: "application/json", headers: { "access-control-allow-origin": "*" },
+    body: JSON.stringify({ features: [{ attributes: { AIN: "5000000002", SitusFullAddress: "2 TEST ST LOS ANGELES CA", UseCode: "0100", UseType: "Residential", UseDescription: "Single",
+      Roll_LandValue: 400000, Roll_ImpValue: 150000, Roll_LandBaseYear: "2012", YearBuilt1: "1952", SQFTmain1: 1500, Bedrooms1: 4, Bathrooms1: 1, Units1: 1 }, geometry: { rings: [ring] } }] }) }));
+  await openPage(page);
+  // A point inside a real R1 variation polygon (R1V2, R1R3, ...) of the page's own LA zoning layer, where a zone_rules row matches.
+  const found = await page.evaluate(() => {
+    const ev = (s: string) => (0, eval)(s), Z = ev("D").layers.zoning, zCell = ev("zCell"), zoneAt = ev("zoneAt"), zoneRules = ev("zoneRules");
+    for (const k of Object.keys(Z.cells)) for (const z of zCell(k)) {
+      if (!/^R1[A-Z]\d/.test(z.zone) || z.cat !== "single-family" || !z.rings || !z.rings[0] || !zoneRules(z.zone, z.juris)) continue;
+      const r = z.rings[0], c = { lat: r.reduce((s: number, q: number[]) => s + q[0], 0) / r.length, lng: r.reduce((s: number, q: number[]) => s + q[1], 0) / r.length };
+      const hit = zoneAt(c);
+      if (hit && hit.zone === z.zone) return { ll: c, zone: z.zone as string };
+    }
+    return null;
+  });
+  expect(found).toBeTruthy();
+  const { ll, zone } = found as { ll: { lat: number; lng: number }; zone: string };
+  ring = [[ll.lng - 0.0002, ll.lat - 0.00012], [ll.lng + 0.0002, ll.lat - 0.00012], [ll.lng + 0.0002, ll.lat + 0.00012], [ll.lng - 0.0002, ll.lat + 0.00012], [ll.lng - 0.0002, ll.lat - 0.00012]];
+  await page.evaluate((p) => (0, eval)("houseAt")(p), ll);
+  await page.waitForFunction(() => { const b = document.querySelector("#house"); const ah = (0, eval)("typeof activeHouse !== 'undefined' ? activeHouse : null");
+    return !!b && !b.querySelector(".house-loading") && !!b.querySelector(".owner-playbook-card") && !!ah && !!ah.st && ah.st.rDone && ah.st.osmDone; }, null, { timeout: 60_000 });
+  const pb = await page.evaluate(() => (document.querySelector("#house .owner-playbook-card") as HTMLElement).innerText);
+  expect(pb).not.toContain("Zoning is not on file");
+  // The hazard checks the laws depend on are not answered in the test sandbox, so the panel may say "not confirmed".
+  // With those answers supplied (not historic, not in a floodway, not very-high fire), the same function screens the laws.
+  const scr = await page.evaluate(() => {
+    const ev = (s: string) => (0, eval)(s), ah = ev("activeHouse");
+    const R = { hpoz: { ok: true, v: [] }, hcm: { ok: true, v: [] }, hc: { ok: true, v: [] }, fema: { sfha: false }, fire: { vh: false } };
+    const out = ev("computePropertyPlaybook")(ah.a, 6000, {}, ev("zoneRules")(ev("zoneAt")(ah.ll).zone, "Los Angeles"), ah.ll, { R });
+    return { onFile: out.zoningOnFile, ids: out.all.map((x: any) => x.id), text: out.all.map((x: any) => x.rationale).join(" | "), held: String(out.notConfirmed || "") + " " + String(out.note || "") };
+  });
+  expect(scr.onFile).toBe(true);
+  // 22 Nov 2026 merge: SB 9 reaches this lot's zone but is "not determined" until its site list is confirmed (it also
+  // excludes wetlands, fault zones, habitat and other sites the page never checks; docs/audit/merge-2026-11-22.md), so the
+  // playbook names it as not confirmed instead of offering the lot split. This test used to expect the lot-split strategy.
+  expect(scr.ids).toContain("adu");
+  expect(scr.ids).not.toContain("lot_split_duplex");
+  expect(scr.held).toMatch(/CA SB 9[^;]*?\(Not determined: the list of sites this law excludes has not been confirmed/);
+  expect(scr.text).toContain(`recorded zoning (${zone})`);
+  // Single-family needs the jurisdiction's published SB 9 list as well as the layer's category (docs/audit/la_sb9_zone_scope.md):
+  // the County lists "Zone R-1 or R-A" only, so a County A-1 lot the layer calls single-family is screened for no single-family law.
+  const cls = await page.evaluate(() => {
+    const ev = (s: string) => (0, eval)(s), Z = ev("D").layers.zoning, zCell = ev("zCell"), f = ev("bundleZoneClass"), pb = ev("computePropertyPlaybook");
+    const R = { hpoz: { ok: true, v: [] }, hcm: { ok: true, v: [] }, hc: { ok: true, v: [] }, fema: { sfha: false }, fire: { vh: false } };
+    const out: Record<string, any> = {};
+    for (const k of Object.keys(Z.cells)) for (const z of zCell(k)) {
+      const key = z.juris === "Unincorporated LA County" && z.cat === "single-family" ? (/^A-1/.test(z.zone) ? "countyA1" : /^R-1/.test(z.zone) ? "countyR1" : null)
+        : z.juris === "Los Angeles" && /^R3-1$/.test(z.zone) ? "cityR3" : z.juris === "Los Angeles" && z.cat === "single-family" && /^R1P/.test(z.zone) ? "cityR1P" : null;
+      if (!key || out[key] || !z.rings || !z.rings[0]) continue;
+      const r = z.rings[0], c = { lat: r.reduce((s: number, q: number[]) => s + q[0], 0) / r.length, lng: r.reduce((s: number, q: number[]) => s + q[1], 0) / r.length };
+      const hit = ev("zoneAt")(c);
+      if (!hit || hit.zone !== z.zone) continue;
+      const o = pb({ AIN: "1", UseDescription: "Single" }, 8000, {}, null, c, { R });
+      // sb9: SB 9 reached the lot's zone (offered, or named as not determined after the zone test)
+      out[key] = { cls: f(z), ids: o.all.map((x: any) => x.id), sb9: o.all.some((x: any) => x.id === "lot_split_duplex") || /CA SB 9/.test(String(o.notConfirmed || "") + " " + String(o.note || "")) };
+    }
+    return out;
+  });
+  expect(cls.countyR1.cls).toBe("single-family");
+  expect(cls.countyR1.sb9).toBe(true);
+  expect(cls.countyA1.cls).toBe("none");
+  expect(cls.countyA1.sb9).toBe(false);
+  expect(cls.countyA1.ids).not.toContain("lot_split_duplex");
+  expect(cls.cityR3.cls).toBe("multifamily");
+  expect(cls.cityR3.sb9).toBe(false);
+  expect(cls.cityR3.ids).not.toContain("lot_split_duplex");
+  expect(cls.cityR1P.cls).toBe("none");   // parking variants are not on the City's list
+  // The Invest view's "This house" reads the same lot the same way.
+  await page.click("#view-switch [data-view=invest]");
+  await page.waitForFunction(() => { const h = document.querySelector("#iv-house"); return !!h && /Backyard home \(ADU\)/.test(h.textContent || ""); }, null, { timeout: 90_000 });
+  const ih = await page.evaluate(() => (document.querySelector("#iv-house") as HTMLElement).innerText);
+  expect(ih).not.toContain("zoning code unknown");
+  expect(ih).not.toContain("not classed here as single-family");
 });
 
 test("California house checks state SB 9, ADU sale and fee rules only as the statutes say (live click path, LA)", async ({ page }) => {

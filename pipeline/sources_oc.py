@@ -44,7 +44,7 @@ def merged_parks(osm_parks):
             if pr.get("FEATTYPE") not in ("Local park", "Regional park", "County park", "State park or forest", "National park or forest"):
                 continue
             try:
-                g = shape(f["geometry"]).buffer(0)
+                g = geo.shape_ll(f["geometry"]).buffer(0)
             except Exception:
                 continue
             if g.is_empty or covered(g):
@@ -59,7 +59,7 @@ def merged_parks(osm_parks):
             if (pr.get("Status") or "Existing") != "Existing":
                 continue
             try:
-                g = shape(f["geometry"]).buffer(0)
+                g = geo.shape_ll(f["geometry"]).buffer(0)
             except Exception:
                 continue
             if g.is_empty or covered(g):
@@ -85,7 +85,7 @@ def census_places():
         return out
     from shapely.ops import unary_union
     bgj = ld("bg.geojson")
-    bgs = [shape(f["geometry"]).buffer(0) for f in bgj["features"]] if bgj else []
+    bgs = [geo.shape_ll(f["geometry"]).buffer(0) for f in bgj["features"]] if bgj else []
     county = unary_union(bgs).buffer(0) if bgs else None
     bg_pts = [b.representative_point() for b in bgs]
     # round 8.6: towns and townships (Census county subdivisions with a functioning government: FUNCSTAT A, or C where coextensive with
@@ -94,7 +94,7 @@ def census_places():
     for f in ((ld("cousub.geojson") or {}).get("features", []) if region.STATE in region.TOWN_STATES else []):
         p = f["properties"]; base = (p.get("BASENAME") or "").strip()
         if p.get("FUNCSTAT") in ("A", "C") and base and f.get("geometry"):
-            g = shape(f["geometry"]).buffer(0)
+            g = geo.shape_ll(f["geometry"]).buffer(0)
             if county is not None:
                 g = g.intersection(county)
                 if g.geom_type == "GeometryCollection":
@@ -105,7 +105,7 @@ def census_places():
         p = f["properties"]; nm = (p.get("BASENAME") or p.get("NAME") or "").strip()
         if not nm or not f.get("geometry"):
             continue
-        g = shape(f["geometry"]).buffer(0)
+        g = geo.shape_ll(f["geometry"]).buffer(0)
         if county is not None:   # the download is a box: keep only the part inside the county, drop places barely inside it
             gi = g.intersection(county)
             if gi.geom_type == "GeometryCollection":
@@ -145,7 +145,7 @@ def county_park_amenities():
         if (pr.get("Status") or "Existing") != "Existing":
             continue
         try:
-            c = shape(f["geometry"]).representative_point()
+            c = geo.shape_ll(f["geometry"]).representative_point()
         except Exception:
             continue
         for k, cols in flags.items():
@@ -164,7 +164,7 @@ def city_polys():
         nm = (f["properties"].get("CITY") or "").strip()
         if not nm:
             continue
-        g = shape(f["geometry"])
+        g = geo.shape_ll(f["geometry"])
         if re.match(r"^\d-", nm) or nm.upper() == "UNINCORPORATED":
             out.append((g, "Unincorporated Orange County", False))
         elif nm.isupper():
@@ -243,7 +243,7 @@ def crash_box():
     for f in (ld("bg.geojson") or {}).get("features", []):
         def walk(c):
             if isinstance(c[0], (int, float)):
-                xs.append(c[0]); ys.append(c[1])
+                xs.append(geo.wl(c[0])); ys.append(c[1])
             else:
                 for q in c: walk(q)
         walk(f["geometry"]["coordinates"])
@@ -259,6 +259,8 @@ def crash_points():
         for row in loc["rows"]:
             _id, lat, lon, k, si, ped, bike, d = row[:8]   # state DOT rows carry a 9th field (persons injured)
             n_all += 1
+            if lon is not None:
+                lon = geo.wl(lon)
             if lat is None or lon is None or not (S <= lat <= N and W <= lon <= E):
                 continue
             n_coord += 1; pts.append((lon, lat, {"pb": bool(ped or bike), "ksi": (k or 0) > 0 or (si or 0) > 0}))
@@ -278,7 +280,7 @@ def crash_points():
         for r in rows:
             n_all += 1
             try:
-                lat = float(r.get("Latitude")); lon = float(r.get("Longitude"))
+                lat = float(r.get("Latitude")); lon = geo.wl(float(r.get("Longitude")))
             except Exception:
                 continue
             if not (S <= lat <= N and W <= lon <= E):

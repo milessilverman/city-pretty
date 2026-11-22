@@ -238,11 +238,20 @@ def fetch_rows(job, env):
     return rows, aliases, (meta.get("editingInfo") or {}).get("dataLastEditDate")
 
 
-def bundle_crash_sources():
-    """fips -> (source name as in SOURCES, old window string) for every bundle that loaded a state/city crash row."""
+def bundle_crash_sources(wanted=None):
+    """fips -> (source name as in SOURCES, old window string) for every bundle that loaded a state/city crash row.
+    With `wanted` (FIPS codes named on the command line) only those bundles are read, and each must be on disk."""
     out = {}
-    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import r2_only; r2_only.require_local("build_state_crash_counts.py")   # R2-only county files must be on disk, or they would be dropped
-    for p in sorted(glob.glob(os.path.join(ROOT, "counties", "bundle_*.json.gz"))):
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import r2_only
+    if wanted:
+        miss = [f for f in wanted if not os.path.exists(os.path.join(ROOT, "counties", f"bundle_{f}.json.gz"))]
+        if miss:
+            raise SystemExit(f"build_state_crash_counts.py: county files not in counties/ here: {miss[:5]}")
+        paths = [os.path.join(ROOT, "counties", f"bundle_{f}.json.gz") for f in sorted(set(wanted))]
+    else:
+        r2_only.require_local("build_state_crash_counts.py")   # R2-only county files must be on disk, or they would be dropped
+        paths = sorted(glob.glob(os.path.join(ROOT, "counties", "bundle_*.json.gz")))
+    for p in paths:
         d = json.loads(gzip.decompress(open(p, "rb").read())); m = d["meta"]
         for s in m.get("sources", []):
             if len(s) > 3 and s[3] is True:
@@ -338,7 +347,7 @@ def build(fips, name, old_window, bundle_path):
 
 
 def main():
-    todo = bundle_crash_sources()
+    todo = bundle_crash_sources(sys.argv[1:])
     if sys.argv[1:]:
         todo = {f: v for f, v in todo.items() if f in sys.argv[1:]}
     print(f"{len(todo)} counties", file=sys.stderr)

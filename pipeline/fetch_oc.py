@@ -81,43 +81,33 @@ def manifest(name, url, rows, note=""):
     log("  manifest", name, rows, "rows", url)
 
 
-def county_bboxes():
-    """west, south, east, north list of the county's block groups (plus 0.01 degree).
-    If coordinates cross the 180th meridian (e.g. Aleutians West 02016), splits into two boxes
-    at the antimeridian rather than spanning 358 degrees across the planet."""
+def county_bbox():
+    """west, south, east, north of the county's block groups (plus 0.01 degree); Orange County keeps its original box.
+    A county that crosses the 180th meridian (Aleutians West, 02016) gets west > east: west is its easternmost island's edge
+    (positive longitude), east its westernmost (negative); see region.py"""
     global BBOX
     if BBOX:
-        return [BBOX]
+        return BBOX
     j = json.load(open(os.path.join(DATA, "bg.geojson")))
     xs, ys = [], []
     def walk(c):
         if isinstance(c[0], (int, float)): xs.append(c[0]); ys.append(c[1])
         else: [walk(x) for x in c]
     for f in j["features"]: walk(f["geometry"]["coordinates"])
-    min_x, max_x = min(xs), max(xs)
-    min_y, max_y = round(min(ys) - .01, 4), round(max(ys) + .01, 4)
-    if min_x < -160 and max_x > 160:
-        pos_xs = [x for x in xs if x > 0]
-        neg_xs = [x for x in xs if x < 0]
-        b1 = (round(min(pos_xs) - .01, 4), min_y, 180.0, max_y)
-        b2 = (-180.0, min_y, round(max(neg_xs) + .01, 4), max_y)
-        return [b1, b2]
-    BBOX = (round(min_x - .01, 4), min_y, round(max_x + .01, 4), max_y)
-    return [BBOX]
+    w, e = region.lon_extent(xs)
+    BBOX = (round(w - .01, 4), round(min(ys) - .01, 4), round(e + .01, 4), round(max(ys) + .01, 4))
+    return BBOX
 
 
-def county_bbox():
-    """west, south, east, north of the county's block groups (plus 0.01 degree); Orange County keeps its original box"""
-    boxes = county_bboxes()
-    return boxes[0]
+def county_bboxes():
+    """the county box as plain boxes for web queries: one box, or two (cut at 180) for a county that crosses the 180th meridian"""
+    return region.split_box(county_bbox())
 
 
 def arcgis_query(url, where="1=1", fields="*", bbox=None, page=2000, extra=None, use_bbox=True):
-    """Page through an ArcGIS REST layer as GeoJSON features. Seamlessly handles antimeridian split boxes."""
-    if use_bbox and bbox is None:
-        boxes = county_bboxes()
-    elif use_bbox and bbox is not None:
-        boxes = [bbox]
+    """Page through an ArcGIS REST layer as GeoJSON features. A box that crosses 180 (west > east) is asked for as two boxes."""
+    if use_bbox:
+        boxes = region.split_box(bbox if bbox is not None else county_bbox(), east_edge=179.999)   # not 180: see region.split_box
     else:
         boxes = [None]
     all_feats, seen_ids = [], set()
@@ -134,11 +124,12 @@ def arcgis_query(url, where="1=1", fields="*", bbox=None, page=2000, extra=None,
                 raise RuntimeError(f"{url}: {j['error']}")
             got = j.get("features", [])
             for feat in got:
-                fid = feat.get("id") or (feat.get("properties") and feat.get("properties").get("OBJECTID"))
-                if fid is not None:
-                    if fid in seen_ids:
-                        continue
-                    seen_ids.add(fid)
+                if len(boxes) > 1:   # the two halves of a box cut at 180 can return the same feature: keep it once
+                    fid = feat.get("id") or (feat.get("properties") or {}).get("OBJECTID")
+                    if fid is not None:
+                        if fid in seen_ids:
+                            continue
+                        seen_ids.add(fid)
                 all_feats.append(feat)
             log("   ", url.split("/services/")[-1][:60], "offset", offset, "got", len(got))
             if len(got) < page and not j.get("exceededTransferLimit"):
@@ -448,7 +439,7 @@ def _rail_stops(r, rd, W, S, E, N, rail):
             if re.search(r"employees? only", nm + " " + pnm, re.I) or re.fullmatch(r"canadian border", nm, re.I):
                 continue   # selection 17: Amtrak's feed lists its border timing point "Canadian Border" as a stop
             lon, lat = float(x["stop_lon"]), float(x["stop_lat"])
-            if W <= lon <= E and S <= lat <= N:
+            if region.lon_in(W, E, lon) and S <= lat <= N:
                 rail.append([lon, lat, pnm or nm, _nid(r["mdb_source_id"]), stype[sid], sag[sid], pid if pnm else ""])
 
 
@@ -496,7 +487,7 @@ def _inactive_gap(r, rd, W, S, E, N, gap):
                 lon, lat = float(x["stop_lon"]), float(x["stop_lat"])
             except (KeyError, TypeError, ValueError):
                 continue
-            if W <= lon <= E and S <= lat <= N:
+            if region.lon_in(W, E, lon) and S <= lat <= N:
                 gap.append([lon, lat, r["provider"], frozenset(stop_ags[x["stop_id"]])]); n += 1
     ok8 = lambda v: isinstance(v, str) and len(v) == 8 and v.isdigit()
     d = [c.get("end_date") for c in rd("calendar.txt") if ok8(c.get("end_date"))] + [c.get("date") for c in rd("calendar_dates.txt") if ok8(c.get("date"))]
@@ -509,7 +500,7 @@ def _stops_in_box(rd, W, S, E, N):
     n = 0
     for x in rd("stops.txt"):
         try:
-            n += W <= float(x["stop_lon"]) <= E and S <= float(x["stop_lat"]) <= N
+            n += region.lon_in(W, E, float(x["stop_lon"])) and S <= float(x["stop_lat"]) <= N
         except (KeyError, TypeError, ValueError):
             continue
     return n
@@ -609,7 +600,7 @@ def _gtfs_feed(r, rd, W, S, E, N, today, skipped, gap):
             a = bus_trips.get(st.get("trip_id"))
             if a: stop_ags[st.get("stop_id")].add(_agency_key(a))
         for x in rd("stops.txt"):   # where this operator's buses stop: evidence of service the current feeds may be missing
-            if x.get("stop_id") in stop_ags and x.get("stop_lat") and x.get("stop_lon") and W <= float(x["stop_lon"]) <= E and S <= float(x["stop_lat"]) <= N:
+            if x.get("stop_id") in stop_ags and x.get("stop_lat") and x.get("stop_lon") and region.lon_in(W, E, float(x["stop_lon"])) and S <= float(x["stop_lat"]) <= N:
                 gap.append([float(x["stop_lon"]), float(x["stop_lat"]), r["provider"], frozenset(stop_ags[x["stop_id"]])])
         log("   gtfs stale, skipped", r["mdb_source_id"], r["provider"][:50], "calendar ends", hi); return None
     weds = [lo + datetime.timedelta(days=i) for i in range((hi - lo).days + 1) if (lo + datetime.timedelta(days=i)).weekday() == 2]
@@ -737,7 +728,7 @@ def _gtfs_feed(r, rd, W, S, E, N, today, skipped, gap):
         for sid, n in cnt.items():
             if sid in stops:
                 x, y, nm, rnd = stops[sid]
-                if W <= x <= E and S <= y <= N:   # selection 20: a stop at a rounded position (Cal-ITP) is kept apart from its neighbours
+                if region.lon_in(W, E, x) and S <= y <= N:   # selection 20: a stop at a rounded position (Cal-ITP) is kept apart from its neighbours
                     d = pts.setdefault(rr, {}); k = (round(x, 5), round(y, 5)) + ((sid,) if rnd else ()); prev = d.get(k)
                     d[k] = [x, y, round((prev[2] if prev else 0) + n / 2.0, 1), nm or (prev[3] if prev else "")]
     log("   gtfs", r["mdb_source_id"], r["provider"][:50], "weekday", day, "untimed stop times interpolated", n_interp, "bus stops served 7-9am in county", len({k for d in pts.values() for k in d}),
@@ -1037,7 +1028,7 @@ def fetch_gtfs_mdb():
         except (KeyError, ValueError):   # no bounding box in the catalog: the box of the feed's own stops
             b = feed_box(r["mdb_source_id"])
         if b is not None:
-            if b[2] < W or b[0] > E or b[3] < S or b[1] > N or (b[2] - b[0]) * (b[3] - b[1]) > 20:   # no overlap, or multi-state (Amtrak, intercity coaches)
+            if not region.lon_overlap(b[0], b[2], W, E) or b[3] < S or b[1] > N or (b[2] - b[0]) * (b[3] - b[1]) > 20:   # no overlap, or multi-state (Amtrak, intercity coaches)
                 continue
             if r.get("status") == "inactive":   # selection 23: placed by its box only, read later for gap stops
                 inactive_rows.append(r); continue
@@ -1396,7 +1387,7 @@ def fetch_fire_ev():
     if not have("afdc_dcfc.json"):
         u = "https://services.arcgis.com/xOi1kZaI0eWDREZv/arcgis/rest/services/Alternative_Fueling_Stations/FeatureServer/0"
         w_, s_, e_, n_ = county_bbox()
-        where = f"fuel_type_code='ELEC' AND access_code='public' AND status_code='E' AND ev_dc_fast_num>0 AND latitude>{s_ - .1} AND latitude<{n_ + .1} AND longitude>{w_ - .1} AND longitude<{e_ + .1}"
+        where = f"fuel_type_code='ELEC' AND access_code='public' AND status_code='E' AND ev_dc_fast_num>0 AND latitude>{s_ - .1} AND latitude<{n_ + .1} AND {f"longitude>{w_ - .1} AND longitude<{e_ + .1}" if w_ <= e_ else f"(longitude>{w_ - .1} OR longitude<{e_ + .1})"}"
         rows, off = [], 0
         while True:
             j = json.loads(get(f"{u}/query", {"where": where, "outFields": "id,station_name,street_address,city,ev_dc_fast_num,ev_level2_evse_num,latitude,longitude,date_last_confirmed", "returnGeometry": "false", "f": "json", "resultOffset": off, "resultRecordCount": 2000, "orderByFields": "OBJECTID"}))
@@ -1488,6 +1479,8 @@ def fetch_state_crashes(c):
     [id, lat, lon, killed, serious ('A') injuries, pedestrian(0/1), bicycle(0/1), 'YYYY-MM-DD', persons injured] - the 9th field lets
     the site screens keep injury and fatal crashes the way they do with CCRS."""
     W, S, E, N = county_bbox()
+    if W > E:
+        raise RuntimeError("state crash records: a county box crossing the 180th meridian is not supported here")
     geo = {"geometry": f"{W},{S},{E},{N}", "geometryType": "esriGeometryEnvelope", "inSR": "4326", "spatialRel": "esriSpatialRelIntersects"}
     jobs = ([(y, u, "1=1") for y, u in sorted(c["layers"].items())] if c["kind"] == "il_idot"
             else [(None, c["url"], f"CRASH_YEAR >= '{c['years'][0]}' AND CRASH_YEAR <= '{c['years'][1]}'")])
@@ -1531,6 +1524,8 @@ def fetch_state_crashes_map(c):
     """state crash layers read through a field map (state_crashes.py; region.STATE_DEFAULTS): the same 9-field rows as fetch_state_crashes"""
     import state_crashes
     W, S, E, N = county_bbox()
+    if W > E:
+        raise RuntimeError("state crash records: a county box crossing the 180th meridian is not supported here")
     geo = {"geometry": f"{W},{S},{E},{N}", "geometryType": "esriGeometryEnvelope", "inSR": "4326", "spatialRel": "esriSpatialRelIntersects"}
     rows, edits = [], {}
     for job in c["jobs"]:
@@ -1768,15 +1763,17 @@ def _overpass_xml(sel, box, depth=0):
     retried with growing waits, and a box that still fails is cut in four (up to twice). Returns a list of XML strings (one per box)."""
     s_, w, n, e = box
     q = "[out:xml][timeout:900];(" + "".join(f"{x}({s_:.5f},{w:.5f},{n:.5f},{e:.5f});" for x in sel) + ");(._;>;);out body;"
-    for i in range(8):
+    last = ""
+    for i in range(30):   # the public endpoint's gateway answers most requests with 504 at once (about one in ten gets through, 19 Nov): try again soon
         try:
             x = get(region.OVERPASS_URL, data=("data=" + urllib.parse.quote(q)).encode(), binary=True, timeout=1000, retries=1)
             if b"</osm>" in x[-200:] and b"<remark>" not in x[-3000:]:
                 return [x]
             log("  overpass incomplete answer", box, x[-300:].decode("utf-8", "replace"))
         except Exception as ex:
+            last = str(ex)
             log("  overpass", "try", i + 1, box, str(ex)[:80])
-        time.sleep(min(15 * (i + 1), 90))
+        time.sleep(4 if i < 28 and "504" in last else min(15 * (i + 1), 90))
     if depth >= 2:
         raise RuntimeError(f"Overpass: box {box} failed after retries and splits")
     ms, mw = (s_ + n) / 2, (w + e) / 2
@@ -1794,7 +1791,7 @@ def fetch_osm_overpass(p):
     # the box osm_extract.py clips an extract to (its county_box: block groups plus 0.02 degree), not county_bbox()'s 0.01: with the smaller
     # box, 111 of Anchorage's 10,674 road ways in the clip box were never downloaded (found by comparing with an Overpass count, 16 Nov)
     import osm_extract
-    boxes = osm_extract.county_boxes() if hasattr(osm_extract, "county_boxes") else [osm_extract.county_box()]
+    boxes = osm_extract.county_boxes()
     parts, base = [], None
     for w, s_, e, n in boxes:
         for sel, k in OVERPASS_GROUPS:
@@ -1823,7 +1820,7 @@ def fetch_osm_overpass(p):
         os.remove(os.path.join(tmp, f))
     os.rmdir(tmp)
     os.replace(p + ".tmp.osm", p)
-    box = f"{s_:.4f},{w:.4f},{n:.4f},{e:.4f}"
+    box = ";".join(f"{s_:.4f},{w:.4f},{n:.4f},{e:.4f}" for w, s_, e, n in boxes)   # one box, or two for a county crossing 180
     open(os.path.join(os.path.dirname(p), region.OSM_STATE), "w").write(f"timestamp={base or ''}\nsource={region.OVERPASS_URL}\nbox={box}\nqueries={len(parts)}\n")
     log("saved", p, f"{os.path.getsize(p) / 1e6:.0f} MB", "osm_base", base, "box", box, len(parts), "queries")
 

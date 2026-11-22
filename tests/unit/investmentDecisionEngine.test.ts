@@ -237,9 +237,11 @@ describe("one house", () => {
     const law = statutes.find((l: any) => l.id === adu.legal.statute_id);
     expect(["verified", "partially_verified"]).toContain(law.verification.status);
     expect(adu.legal.verification_status).toBe(law.verification.status);
+    // SB 9's site exclusions are taken from a 2021 version of Gov. Code 65913.4 that was not read, so the record's exclusion
+    // list is "not confirmed" and the lot split is never "allowed" on it (it was, before 19 Nov 2026, on a blanket rule).
     const split = out.expansions.find((e: any) => e.expansion === "lot_split");
-    expect(split.legal.status).toBe("allowed by state law");
-    expect(split.legal.citation).toMatch(/lot split/i);
+    expect(split.legal.status).toBe("not determined");
+    expect(split.legal.why).toMatch(/excludes has not been confirmed/);
     const bed = out.expansions.find((e: any) => e.expansion === "added_bedroom");
     expect(bed.legal.status).toBe("not determined");
   });
@@ -349,5 +351,73 @@ describe("transit decisions", () => {
     expect(evaluateTransit({ mode: "hsr", intercityDistanceMiles: 80 }, {}).verdict).toBe("do_not_build");
     expect(evaluateTransit({ mode: "hsr", intercityDistanceMiles: 300 }, {}).verdict).toBe("screen_only");
     expect(evaluateTransit({ mode: "hsr" }, {}).verdict).toBe("not_enough_data");
+  });
+});
+
+describe("walk-forward prediction (app/data/neighborhood_prediction.json)", () => {
+  const prediction = JSON.parse(fs.readFileSync(path.join(root, "app/data/neighborhood_prediction.json"), "utf8"));
+  const asCounty = (fips: string) => { const c = fixtureCounty(); c.meta.fips = fips; return c; };
+
+  it("records the pre-written rule, a result for every back-test county and no tract files where the model failed", () => {
+    expect(prediction.method_doc).toMatch(/PREDICTION-MODEL\.md/);
+    expect(prediction.decision.rule).toMatch(/both/);
+    for (const c of backtest.sample.county_list) expect(["model", "baseline"]).toContain(prediction.counties[c].applies);
+    if (!prediction.decision.overall_pass) {
+      expect(prediction.decision.counties_using_model).toBe(0);
+      for (const c of Object.values(prediction.counties) as any[]) expect(c.applies).toBe("baseline");
+      expect(prediction.tract_files).toEqual([]);
+    }
+    for (const f of prediction.features) expect(f.as_of_rule.length).toBeGreaterThan(10);
+    const cal = prediction.results_5y.calibration_80pct_range.model.coverage;
+    expect(cal.mean).toBeGreaterThan(0); // the measured coverage is shipped, whatever it is
+  });
+
+  it("keeps the screen's order where the model failed, and adds the tested range and hit rate", () => {
+    const fips = prediction.decision.overall_pass ? null : backtest.sample.county_list[0];
+    if (!fips) return;
+    const a = rankNeighborhoods(asCounty(fips) as any, { backtest });
+    const b = rankNeighborhoods(asCounty(fips) as any, { backtest, prediction });
+    expect(b.ranked.map((x: any) => x.id)).toEqual(a.ranked.map((x: any) => x.id));
+    expect(b.role).toBe(a.role);
+    expect(b.prediction.applies).toBe("baseline");
+    const cheapest = b.ranked.find((x: any) => x.id === "990010000011");
+    expect(cheapest.prediction.homeValueFifth).toBe(1);
+    const q = prediction.counties[fips].baseline_fifth_ranges_5y["1"];
+    expect(cheapest.prediction.relative5y.low.value).toBeCloseTo(100 * (Math.exp(q[0] / 100) - 1), 1);
+    expect(cheapest.prediction.relative5y.high.value).toBeCloseTo(100 * (Math.exp(q[2] / 100) - 1), 1);
+    expect(cheapest.prediction.relative5y.low.basis).toBe("measured");
+    expect(cheapest.prediction.level).toMatch(/tract-level/);
+    expect(cheapest.prediction.newModelResult).toMatch(/did not beat/);
+    expect(cheapest.reasons.join(" ")).toMatch(/Tested \(on tracts\)/);
+    expect(cheapest.confidence.reasons.join(" ")).toMatch(/did not beat this screen/);
+  });
+
+  it("uses tract predictions only where the county passed, block groups inherit their tract, grade tied to the hit rate", () => {
+    const pass = JSON.parse(JSON.stringify(prediction));
+    pass.decision.overall_pass = true;
+    pass.counties["99001"] = { applies: "model", hit_rate_top_third_5y: { ridge: 0.5, cheapest: 0.4, trend: 0.35 } };
+    const tracts = { county: "99001", hit_rate_top_third: 0.5, tested_on: "test windows", tracts: [
+      { tract: "99001000001", rank_in_county: 2, of: 2, relative_5y_range_pct: [-4.1, 9.3], drivers: [{ text: "growth in loan sizes: 90th percentile in the county, which raises the prediction" }] },
+      { tract: "99001000002", rank_in_county: 1, of: 2, relative_5y_range_pct: [1.0, 15.0], drivers: [] }] };
+    const c = fixtureCounty({ "990010000021": { m: { n: "Other", c: "Town", hv: 800000, rent: 2000, inc: 150000, homes: 400, own: 60, acres: 100 }, r: [] },
+      "990010000031": { m: { n: "NoTract", c: "Town", hv: 400000, rent: 1800, inc: 90000, homes: 400, own: 60, acres: 100 }, r: [] } });
+    const r = rankNeighborhoods(c as any, { backtest, prediction: pass, predictionTracts: tracts });
+    expect(r.role).toBe("predictor");
+    expect(r.ranked[0].id).toBe("990010000021"); // its tract ranks first, although it is the dearest
+    const x = r.ranked.find((y: any) => y.id === "990010000011");
+    expect(x.prediction.level).toMatch(/inherits tract 99001000001/);
+    expect([x.prediction.relative5y.low.value, x.prediction.relative5y.high.value]).toEqual([-4.1, 9.3]);
+    expect(x.confidence.grade).toBe("A");
+    expect(r.unscored.find((u: any) => u.id === "990010000031").missing[0]).toMatch(/tract prediction/);
+    // without the tract file nothing changes
+    expect(rankNeighborhoods(c as any, { backtest, prediction: pass }).role).toBe(backtest.verdict.engine_role);
+  });
+
+  it("leaves counties outside the test unchanged and says so", () => {
+    const a = rankNeighborhoods(smallBundle, { backtest });
+    const b = rankNeighborhoods(smallBundle, { backtest, prediction });
+    expect(b.prediction.applies).toBe("not tested");
+    expect(b.ranked.map((x: any) => x.id)).toEqual(a.ranked.map((x: any) => x.id));
+    expect(b.ranked.every((x: any) => x.prediction === null)).toBe(true);
   });
 });
