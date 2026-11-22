@@ -10,12 +10,14 @@ import { DECISION_BRIEF_MAX_CHARS } from "../../src/ai/advisorGroundingContract"
 const root = path.resolve(__dirname, "../..");
 const j = (f: string) => JSON.parse(fs.readFileSync(path.join(root, "app/data", f), "utf8"));
 const costs = j("building_costs.json").rows;
+// Node-only offline table (data/internal/): rows the publisher does not allow us to display. The browser never loads it.
+const internalCosts = JSON.parse(fs.readFileSync(path.join(root, "data/internal/building_costs_internal.json"), "utf8")).rows;
 const ctxFull = {
-  laws: j("statutes.json"), buildingCosts: costs, fundingRules: j("housing_funding_rules.json"), incomeLimits: j("hud_income_limits.json"),
+  laws: j("statutes.json"), buildingCosts: costs, internalBuildingCosts: internalCosts, fundingRules: j("housing_funding_rules.json"), incomeLimits: j("hud_income_limits.json"),
   fmr: j("hud_fair_market_rents.json"), valuationModels: j("county_valuation_models.json"), valuationBenchmarks: j("valuation_backtest_benchmarks.json"),
   transitEffects: j("transit_value_effects.json"), corridors: j("intercity_transit_corridors.json"),
 };
-const ctxPublic = { ...ctxFull, buildingCosts: costs.filter((r: any) => r.display_allowed === true) };
+const ctxPublic = { ...ctxFull, internalBuildingCosts: undefined };   // what the page passes: no internal rows at all
 
 const laParcel = (over: any = {}) => ({ parcel_id: "FIXTURE-LA", state_code: "CA", county_fips: "06037", base_zoning_code: "R1-1", is_single_family_residential: true, is_commercial_or_mixed_use: false, is_multifamily_residential: false,
   exclusions: { historic_district_hpoz: false, fema_100yr_floodway: false, calfire_or_state_vhfhsz: false }, lot_sqft: 6000, ...over });
@@ -110,9 +112,16 @@ describe("honesty checks", () => {
     const adv = JSON.stringify(P.cardsForAdvisor([full]));
     expect(adv).not.toMatch(/internal_only|ICC/);
     for (const v of [est.low, est.high]) expect(adv).not.toContain(String(v));
-    const icc = costs.filter((r: any) => r.display_allowed === false && typeof r.value === "number").map((r: any) => String(r.value));
+    const icc = internalCosts.filter((r: any) => r.display_allowed === false && typeof r.value === "number").map((r: any) => String(r.value));
     const pubText = JSON.stringify(publicPart(full));
     for (const v of icc) expect(pubText.includes(`"value":${v},`) || pubText.includes(`"value":${v}}`), v).toBe(false);
+    // the page's path: no internal rows passed, so nothing is computed from them
+    expect(pub.internal_only.estimates.filter((e: any) => e.computed)).toEqual([]);
+    expect(JSON.stringify(pub.internal_only)).toContain("ICC rows not passed in");
+    // a caller that wrongly puts internal rows in buildingCosts does not get an estimate either
+    const leaky = laLot({ ...ctxPublic, buildingCosts: [...costs, ...internalCosts] });
+    expect(leaky.internal_only.estimates.filter((e: any) => e.computed)).toEqual([]);
+    expect(JSON.stringify(publicPart(leaky))).toBe(JSON.stringify(publicPart(pub)));
     // ... and the decision brief the advisor reads carries only the compact form
     const brief = { schema: "city-pretty/decision-brief@1", county: { fips: "06037" }, neighborhood: null, parcel: null, transit: null, caveats: [], missing: [], sources: [], projectCards: P.cardsForAdvisor([full]) };
     const a = JSON.stringify(E.briefForAdvisor(brief));

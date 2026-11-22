@@ -3,6 +3,8 @@
 //   node scripts/brief.mjs 48453 --json     the JSON the Invest view and the AI advisor read
 //   node scripts/brief.mjs 48453 --area 484530023271   pick the neighborhood (block group) to detail
 //   node scripts/brief.mjs 48453 --budget 800000    also fit the courses of action to a budget
+//   node scripts/brief.mjs 48453 --internal         also print, to the terminal only, the offline estimate computed from the internal
+//                                                   cost table (data/internal/, rows the publisher does not allow us to display)
 // Uses the same tables as the Invest view: the idea catalog from the LA bundle, the verification audit
 // (intervention_verification.json: only audited ideas carry figures), state laws, unit costs, valuation models and the
 // California bundle corrections the page applies. Los Angeles County (06037) is packed differently and is not supported.
@@ -20,6 +22,8 @@ const data = (f) => JSON.parse(fs.readFileSync(path.join(root, "app/data", f), "
 const args = process.argv.slice(2);
 const fips = args.find((a) => /^\d{5}$/.test(a));
 const asJson = args.includes("--json");
+const internalMode = args.includes("--internal");
+if (internalMode && asJson) { console.error("--internal prints to the terminal only; it cannot be combined with --json."); process.exit(1); }
 const areaArg = args.includes("--area") ? args[args.indexOf("--area") + 1] : null;
 if (!fips) { console.error("Usage: node scripts/brief.mjs <5-digit county FIPS> [--json] [--area <block group id>]"); process.exit(1); }
 const bundlePath = path.join(root, `counties/bundle_${fips}.json.gz`);
@@ -69,11 +73,12 @@ if (area) brief = E.buildDecisionBrief(bundle, { top: 5, blockGroupId: area }, c
 
 // Courses of action (src/engines/projectCardEngine.js): the selected area, the county's measured sites and each planned-rail
 // stop city, built from the same tables as the Invest view's section (pcSubjects / pcCtx in app/invest.js). Only
-// display-allowed cost rows are passed, so no internal-only estimate is computed here either.
+// display-allowed cost rows are passed, so no internal-only estimate is computed unless --internal loads data/internal/ below.
 const P = require("../src/engines/projectCardEngine.js");
 const CSA = require("../src/engines/corridorStopAreas.js");
 const ST = { "06": "CA", "12": "FL", "48": "TX" }[fips.slice(0, 2)] || (data("hud_fair_market_rents.json").records.find((r) => r.fips === fips) || {}).state_code || null;
-const pctx = { laws: ctx.laws, buildingCosts: data("building_costs.json").rows.filter((r) => r.display_allowed === true), fundingRules: data("housing_funding_rules.json"), incomeLimits: data("hud_income_limits.json"),
+const pctx = { laws: ctx.laws, buildingCosts: data("building_costs.json").rows,
+  internalBuildingCosts: internalMode ? JSON.parse(fs.readFileSync(path.join(root, "data/internal/building_costs_internal.json"), "utf8")).rows : [], fundingRules: data("housing_funding_rules.json"), incomeLimits: data("hud_income_limits.json"),
   fmr: data("hud_fair_market_rents.json"), valuationModels: ctx.valuationModels, valuationBenchmarks: data("valuation_backtest_benchmarks.json"), transitEffects: data("transit_value_effects.json"), corridors: data("intercity_transit_corridors.json") };
 const bgRow = (id) => { const m = (bundle.details[id] || {}).m || {}; return { id, hv: Number.isFinite(m.hv) ? m.hv : null, hvSource: m.hvs || "Census ACS 5-year median home value" }; };
 const stopCards = [];
@@ -157,6 +162,18 @@ for (const L of brief.transitLines || []) {
   for (const f of (L.funding && L.funding.programs) || []) out.push(`  Could apply: ${f.program} (${f.share})`);
   for (const n of a.notOnFile) out.push(`  Not on file: ${n}`);
   out.push(`  ${L.siteNote}`);
+}
+if (internalMode) {
+  out.push("", "==== internal estimate: not for display ====", "  Computed offline from data/internal/building_costs_internal.json (ICC Building Valuation Data, whose terms forbid public display).",
+    "  Never shown on the page, never sent to the advisor. Do not copy these figures into anything published.");
+  let n = 0;
+  for (const c of cards) for (const e of c.internal_only.estimates) {
+    n++;
+    out.push(e.computed ? `  ${c.subject.name}: ${e.course}${e.affordable ? " (affordable share)" : ""}: ${money(e.low)} to ${money(e.high)} hard cost only; ${e.floorArea} sq ft (${e.floorAreaBasis}); ICC ${e.iccGroup} ${e.iccTypes.join("/")} x DoD factor ${e.dodFactorRange.join("-")}`
+      : `  ${c.subject.name}: ${e.course}${e.affordable ? " (affordable share)" : ""}: not computed: ${e.why}`);
+  }
+  if (!n) out.push("  no internal estimates for these subjects");
+  out.push("==== end internal estimate ====");
 }
 if ((brief.missing || []).length) { out.push("", "MISSING DATA"); for (const m of brief.missing) out.push("  - " + m); }
 console.log(out.join("\n"));

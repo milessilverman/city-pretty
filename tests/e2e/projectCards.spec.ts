@@ -89,8 +89,8 @@ test("Los Angeles: an opened lot's ADU course is priced from the LA permit media
   await openAllCourses(page);
   const h = await honesty(page);
   expect(h.untagged).toEqual([]);
-  expect(h.internalN).toBeGreaterThan(0);   // the internal estimate exists in memory ...
-  expect(h.internalShown).toEqual([]);      // ... and is nowhere on the page or in the advisor brief
+  expect(h.internalN).toBe(0);              // the page is given no internal rows, so no internal estimate exists in the browser ...
+  expect(h.internalShown).toEqual([]);      // ... and none is on the page or in the advisor brief
   expect(h.internalKey).toBe(false);
   expect(h.briefHasCards).toBe(true);
   expect(h.briefLen).toBeLessThanOrEqual(20000);
@@ -174,4 +174,20 @@ test("Travis County: the Austin stop city card shows the measured transit range 
   await page.click("[data-iv-budget='2']");
   await expect(page.locator("#pc-fit")).toContainText("With $2,000,000");
   expect(errors).toEqual([]);
+});
+
+test("the Invest view requests nothing from an internal folder, and the cost files it loads carry no not-displayable row", async ({ page }) => {
+  const urls: string[] = [];
+  const bodies: Record<string, Promise<string>> = {};
+  page.on("request", (r) => urls.push(r.url()));
+  page.on("response", (r) => { if (/building_costs\.json|housing_funding_rules\.json/.test(r.url())) bodies[r.url()] = r.text().catch(() => ""); });
+  await openPage(page);
+  await openCounty(page, "48453");
+  await toInvest(page);
+  await openAllCourses(page);
+  expect(urls.length).toBeGreaterThan(20);
+  expect(urls.filter((u) => /internal/i.test(u))).toEqual([]);
+  expect(Object.keys(bodies).some((u) => /building_costs\.json/.test(u))).toBe(true);
+  expect(Object.keys(bodies).some((u) => /housing_funding_rules\.json/.test(u))).toBe(true);
+  for (const [u, p] of Object.entries(bodies)) { const b = await p; expect(/"display_allowed"\s*:\s*false/.test(b) || /icc_occupancy_group/.test(b), u).toBe(false); }
 });

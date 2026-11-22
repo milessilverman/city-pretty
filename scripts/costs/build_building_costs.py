@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build app/data/building_costs.json and app/data/area_cost_factors.json from fetched official sources.
+"""Build app/data/building_costs.json (displayable rows) + data/internal/building_costs_internal.json (display_allowed: false rows) and app/data/area_cost_factors.json from fetched official sources.
 
 Sources (all fetched by this script into --cache, default /tmp/city-pretty-costs):
   * ICC Building Valuation Data, February 2026 edition, from two city copies (Albuquerque names the edition; Hermiston's
@@ -19,7 +19,7 @@ import sys
 from collections import defaultdict
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from costlib import ROOT, TODAY, Source, dump, fetch, html_text, norm, pdf_text  # noqa: E402
+from costlib import ROOT, TODAY, Source, dump, dump_split, fetch, html_text, norm, pdf_text  # noqa: E402
 
 CACHE = sys.argv[sys.argv.index("--cache") + 1] if "--cache" in sys.argv else "/tmp/city-pretty-costs"
 DATA = os.path.join(ROOT, "app", "data")
@@ -235,7 +235,7 @@ def main():
                        "row_counts": {"icc_bvd": icc_cells}},
            "rows": rows}
     out["_source"]["row_counts"]["total"] = len(rows)
-    dump(os.path.join(DATA, "building_costs.json"), out)
+    dump_split("building_costs", out)
 
 
 if __name__ == "__main__":

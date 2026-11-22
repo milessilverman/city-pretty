@@ -81,3 +81,46 @@ def dump(path, obj, compact=False):
         json.dump(obj, f, ensure_ascii=False, **({"separators": (",", ":")} if compact else {"indent": 1}))
         f.write("\n")
     print("wrote", os.path.relpath(path, ROOT), os.path.getsize(path), "bytes")
+
+
+INTERNAL_DIR = os.path.join(ROOT, "data", "internal")
+
+
+def dump_split(name, obj):
+    """Write a {_source, rows} table as two files so internal rows can never sit under app/ (the published site).
+
+    Rows with display_allowed !== false go to app/data/<name>.json (what the page fetches). The rest go to
+    data/internal/<name>_internal.json, same shape, a folder the page never requests and scripts/build_site_dist.mjs
+    never copies. Always write both files here; never write the whole table to app/ and filter later.
+    """
+    rows = obj["rows"]
+    public = [r for r in rows if r.get("display_allowed") is not False]
+    internal = [r for r in rows if r.get("display_allowed") is False]
+    pub_src = json.loads(json.dumps(obj["_source"]))
+    counts = pub_src.setdefault("row_counts", {})
+    for k in list(counts):  # per-section counts are recounted for the rows left; counts of internal-only tables stay in the internal file
+        if k == "total":
+            continue
+        n = sum(1 for r in public if r.get("section") == k)
+        if n:
+            counts[k] = n
+        else:
+            del counts[k]
+    counts["total"] = len(public)
+    counts["rows_not_displayable_kept_outside_the_published_site"] = len(internal)
+    pub_src["internal_rows_note"] = ("Rows marked display_allowed: false (publisher terms forbid display, or terms not checked) are not in this file. "
+                                     "They are kept in a separate folder that the page never requests and the site build never copies.")
+    int_src = json.loads(json.dumps(obj["_source"]))
+    icounts = int_src.setdefault("row_counts", {})
+    for k in list(icounts):
+        if k != "total" and any(r.get("section") == k for r in rows):
+            n = sum(1 for r in internal if r.get("section") == k)
+            if n:
+                icounts[k] = n
+            else:
+                del icounts[k]
+    icounts["total"] = len(internal)
+    int_src["internal_use_only"] = "INTERNAL USE ONLY: every row here has display_allowed: false. Not published, not shown on the page, not sent to the advisor."
+    os.makedirs(INTERNAL_DIR, exist_ok=True)
+    dump(os.path.join(ROOT, "app", "data", name + ".json"), {"_source": pub_src, "rows": public})
+    dump(os.path.join(INTERNAL_DIR, name + "_internal.json"), {"_source": int_src, "rows": internal})

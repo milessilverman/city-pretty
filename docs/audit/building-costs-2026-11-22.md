@@ -1,13 +1,15 @@
 # Building costs and housing funding: what was fetched (22 Nov 2026)
 
-Data and loaders only. Nothing here is wired into the engine or the page. Files:
+Data and loaders. The displayable rows feed the Invest view's courses of action (docs/PROJECT-CARDS.md). Rows marked `display_allowed: false` are not in `app/`: since 22 Nov 2026 the build scripts write them to `data/internal/<name>_internal.json` (same shape), which the page never requests and the site build never copies (`scripts/costs/costlib.py` `dump_split`). Files:
 
 | File | What | Built by |
 |---|---|---|
-| `app/data/building_costs.json` | 350 cost rows (ICC table, DoD factors by state, Terner studies, Los Angeles ADU medians) | `scripts/costs/build_building_costs.py`, `adu_permit_costs_la.py` |
+| `app/data/building_costs.json` | 96 displayable cost rows (DoD factors by state, Terner studies that may be shown, Los Angeles ADU medians) | `scripts/costs/build_building_costs.py`, `adu_permit_costs_la.py` |
+| `data/internal/building_costs_internal.json` | the other 254 rows, all `display_allowed: false`: the ICC table (238 cells) and 16 more | same script |
 | `app/data/area_cost_factors.json` | DoD area cost factor for 5,016 places | same |
-| `app/data/housing_funding_rules.json` | 235 rows: LIHTC law and rates, HUD limits, HOME limits, Florida and Pennsylvania cost data, one equity-price survey | `scripts/costs/build_housing_funding_rules.py` |
-| `app/data/hud_income_limits.json` | HUD income limits, FY2026, 1,036 counties | `scripts/costs/fetch_hud_income_limits.py` |
+| `app/data/housing_funding_rules.json` | 173 displayable rows: LIHTC law and rates, HUD limits, HOME limits | `scripts/costs/build_housing_funding_rules.py` |
+| `data/internal/housing_funding_rules_internal.json` | the other 62 rows, `display_allowed: false`: Florida and Pennsylvania cost data, one equity-price survey | same script |
+| `app/data/hud_income_limits.json` | HUD income limits, FY2026, 1,038 counties | `scripts/costs/fetch_hud_income_limits.py` |
 | `app/data/adu_permit_costs_la.json` | the Los Angeles ADU medians with the exact query | `scripts/costs/adu_permit_costs_la.py` |
 | `tests/unit/buildingCosts.test.ts`, `tests/fixtures/costs/` | schema checks, and values re-checked against saved source text or API responses | |
 
@@ -86,8 +88,9 @@ Not obtained, with reason:
 ## d. HUD income limits (FY2026)
 
 - Obtained: HUD API `/hudapi/public/il/data/<county FIPS>99999`, FY2026 (the API rejects 2027). Area median income and the
-  30, 50 and 80 percent limits for household sizes 1 to 8, for 1,036 of the 1,104 manifest counties (the 357 R2-only counties are
-  all in the manifest). Raw responses were kept outside the repository; 5 are saved as test fixtures.
+  30, 50 and 80 percent limits for household sizes 1 to 8, for 1,038 of 1,106 counties: the 1,104 in the manifest plus Los Angeles (06037) and Orange (06059), which the manifest does not list
+  because the page loads them from `app/data/`. The first run (1,036 rows) missed those two, and they were in neither the rows nor the
+  failed list; added 22 Nov 2026 (median income: Los Angeles $108,100, Orange $138,600). The 357 R2-only counties are all in the manifest. Raw responses were kept outside the repository; 5 are saved as test fixtures.
 - Not provided by this API: a 60 percent limit (LIHTC) or 120 percent. None is computed. Statute says the LIHTC 60 percent
   limit is the "imputed income limitation"; HUD publishes it as the MTSP table, not through this API (not fetched).
 - 68 New England counties (CT, ME, MA, NH, RI, VT) have no county row: HUD's entity ids there are towns or areas, and the

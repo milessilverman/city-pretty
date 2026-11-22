@@ -24,6 +24,10 @@ ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 OUT = os.path.join(ROOT, "app", "data", "hud_income_limits.json")
 API = "https://www.huduser.gov/hudapi/public/il"
 NEW_ENGLAND_STATE_FIPS = {"09", "23", "25", "33", "44", "50"}
+# Counties that are NOT in counties/manifest.json because the page loads them from app/data/ (bundle-la.b64.txt,
+# bundle-oc.b64.txt) instead of counties/bundle_<fips>.json.gz. Reading the manifest alone silently left them out of this
+# file and out of its failed list (found 22 Nov 2026: no Los Angeles County row).
+EXTRA_FIPS = ["06037", "06059"]
 
 
 def get(path):
@@ -42,12 +46,25 @@ def get(path):
     return json.dumps({"error": "failed after retries"})
 
 
+def row_from(fips, d):
+    """One output row from the `data` object of HUD's response (values copied, never edited)."""
+    row = {"fips": fips, "area_name": d.get("area_name"), "county_name": d.get("county_name"), "metro_name": d.get("metro_name"),
+           "year": d.get("year"), "median_income": d.get("median_income")}
+    for key, grp, pre in (("il30", "extremely_low", "il30_p"), ("il50", "very_low", "il50_p"), ("il80", "low", "il80_p")):
+        row[key] = [d[grp].get(f"{pre}{n}") for n in range(1, 9)]
+    if d.get("town_name"):
+        row["town_name"] = d["town_name"]
+    if d.get("counties_msa"):
+        row["counties_msa"] = d["counties_msa"]
+    return row
+
+
 def main():
     raw_dir = sys.argv[1] if len(sys.argv) > 1 else None
     if raw_dir:
         os.makedirs(raw_dir, exist_ok=True)
     counties = json.load(open(os.path.join(ROOT, "counties", "manifest.json")))["counties"]
-    fips_list = [c["fips"] for c in counties]
+    fips_list = sorted({c["fips"] for c in counties} | set(EXTRA_FIPS))
 
     def one(fips):
         cached = os.path.join(raw_dir, f"{fips}.json") if raw_dir else None
@@ -71,15 +88,9 @@ def main():
                 reason += "; New England: HUD sets limits by town / area (entity ids are town-level), so no county-wide row exists and none is invented"
             failed.append({"fips": fips, "reason": reason})
             continue
-        row = {"fips": fips, "area_name": d.get("area_name"), "county_name": d.get("county_name"), "metro_name": d.get("metro_name"),
-               "year": d.get("year"), "median_income": d.get("median_income")}
-        for key, grp, pre in (("il30", "extremely_low", "il30_p"), ("il50", "very_low", "il50_p"), ("il80", "low", "il80_p")):
-            row[key] = [d[grp].get(f"{pre}{n}") for n in range(1, 9)]
-        if d.get("town_name"):
-            row["town_name"] = d["town_name"]
-        if d.get("counties_msa"):
-            row["counties_msa"] = d["counties_msa"]
-        rows.append(row)
+        rows.append(row_from(fips, d))
+    for f in EXTRA_FIPS:
+        assert any(r["fips"] == f for r in rows) or any(x["fips"] == f for x in failed), f"{f} is neither a row nor in the failed list"
     years = sorted({r["year"] for r in rows})
     payload = {
         "_source": {

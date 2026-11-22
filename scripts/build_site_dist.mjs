@@ -4,7 +4,7 @@
 // Cloudflare R2 host in app/data/county_hosts.json. Fails if a required file is missing or a file is over the
 // Workers static-assets per-file limit (25 MiB; developers.cloudflare.com/workers/platform/limits, read 19 Nov 2026)
 // or the file count passes the free-plan limit (20,000 files per Worker version, same page).
-import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from "node:fs";
+import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync } from "node:fs";
 import { dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -59,16 +59,12 @@ for (const [src, keep] of RULES) {
   }
 }
 // Rows marked display_allowed: false (the ICC building valuation table, whose terms forbid republishing it, and rows whose
-// terms were not checked) stay out of the published site: the deployed copy of each such file keeps only rows that may be
-// shown. The page computes nothing from them (app/invest.js shows no internal-only estimate). docs/PROJECT-CARDS.md.
-for (const f of readdirSync(join(OUT, "app/data")).filter((n) => n.endsWith(".json"))) {
-  const p = join(OUT, "app/data", f);
-  let doc; try { doc = JSON.parse(readFileSync(p, "utf8")); } catch (e) { continue; }
-  if (!doc || !Array.isArray(doc.rows) || !doc.rows.some((r) => r && r.display_allowed === false)) continue;
-  const before = doc.rows.length;
-  doc.rows = doc.rows.filter((r) => !(r && r.display_allowed === false));
-  writeFileSync(p, JSON.stringify(doc));
-  console.log(`dist-site: ${f}: left out ${before - doc.rows.length} rows marked display_allowed: false`);
+// terms were not checked) are kept in data/internal/, which this build never copies, so they cannot get here. Second line
+// of defence, kept on purpose: if one ever lands in a published data file again (a builder script writing it back, a hand
+// edit), the build fails instead of quietly shipping or quietly filtering it. tests/unit/noInternalRows.test.ts checks the same.
+for (const f of walk(join(OUT, "app"))) {
+  if (!f.endsWith(".json")) continue;
+  if (/"display_allowed"\s*:\s*false/.test(readFileSync(f, "utf8"))) problems.push(`row(s) marked display_allowed: false in published file ${posix(relative(ROOT, f))}; move them to data/internal/ (scripts/costs/costlib.py dump_split)`);
 }
 for (const r of REQUIRED) if (!existsSync(join(OUT, r))) problems.push("required file missing from dist-site: " + r);
 // Every local script and stylesheet in index.html must be present.

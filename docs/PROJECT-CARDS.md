@@ -56,7 +56,7 @@ exact, and then the card says why (a statutory limit, a median of recorded sales
 
 | Data | Shown on the page | Note |
 |---|---|---|
-| ICC Building Valuation Data (Feb 2026) | **No** (`display_allowed: false`) | used only in the card's `internal_only` branch (ICC x DoD factor range x floor area); never rendered, never in the advisor context (unit and browser tests). `scripts/build_site_dist.mjs` now leaves every `display_allowed: false` row out of the published copies of the data files |
+| ICC Building Valuation Data (Feb 2026) | **No** (`display_allowed: false`) | kept only in `data/internal/building_costs_internal.json`, a folder the page never requests and the site build never copies (since 22 Nov 2026 the rows are no longer in `app/data/` at all). Used only in the card's `internal_only` branch (ICC x DoD factor range x floor area), which is computed only in Node when a script or test passes the internal rows in (`ctx.internalBuildingCosts`; `node scripts/brief.mjs <fips> --internal` prints it to the terminal under the banner "internal estimate: not for display"). The browser passes no internal rows, so the branch is empty there; it is never rendered and `cardsForAdvisor` drops it. Guard tests: `tests/unit/noInternalRows.test.ts` (nothing under `app/` or `dist-site/` carries a `display_allowed: false` row or five ICC cells), and the Invest e2e check that no request URL contains `internal`. `scripts/build_site_dist.mjs` fails the build if such a row is ever found in a published data file |
 | DoD area cost factors | Yes | context only; the publisher says not to apply them to commercial cost data |
 | Los Angeles ADU permit medians | Yes | declared permit valuations, City of Los Angeles only |
 | Terner Center modular figures, Florida and Pennsylvania cost rows, LIHTC equity price | No | terms not checked |
@@ -86,8 +86,8 @@ own click path):
 - With $150,000 the ADU course fits (top of its range $133,688); with $50,000 nothing fits.
 
 Affordable rent ceilings, for comparison: Miami-Dade 50% limit $47,700 (1 person) to $68,100 (4 people) gives
-$1,192.50 to $1,702.50 a month; Travis $1,176.25 to $1,680.00. **Los Angeles County has no HUD income limit row on file**
-(it is not in `hud_income_limits.json` and not in its `failed` list), so its affordable courses say so.
+$1,192.50 to $1,702.50 a month; Travis $1,176.25 to $1,680.00. **Los Angeles County's row was missing until 22 Nov 2026**
+(the fetch script read only `counties/manifest.json`, which does not list Los Angeles or Orange County; both rows were added that day from HUD's API: Los Angeles County FY2026 median income $108,100, 50% limit for 4 people $83,300). Cards for Los Angeles built before that said "not on file".
 
 ## Data that would turn "not on file" into numbers (most cards first)
 
@@ -103,7 +103,7 @@ $1,192.50 to $1,702.50 a month; Travis $1,176.25 to $1,680.00. **Los Angeles Cou
 4. **A sourced capitalisation rate, or a valuation model tested on new ADUs and apartments**, per county. Blocks every
    finished value. No research prompt covers cap rates yet; paid comparables (CoStar) have no published price
    (docs/GAME-PLAN.md).
-5. **HUD's 2027 QCT/DDA list, the 60% (MTSP) income limits, Los Angeles County's income limits, and each county's FHA base
-   city.** Needed before any LIHTC or FHA figure is computed. Research prompt 6 and HUD's own downloads.
+5. **HUD's 2027 QCT/DDA list, the 60% (MTSP) income limits, and each county's FHA base
+   city.** (Los Angeles County's income limits were added 22 Nov 2026.) Needed before any LIHTC or FHA figure is computed. Research prompt 6 and HUD's own downloads.
 6. **Market rents for new homes** (FMRs are payment standards). Paid: RentCast "$74 / $199 / $449 per month" (docs/GAME-PLAN.md,
    checked 16 Nov 2026); research prompt 11 covers value effects, not rents.

@@ -197,13 +197,16 @@ function legalFromStatute(s, laws) {
  *             nearStops?: [...] (stopsNear output; computed from point and ctx.corridors when absent),
  *             currentValue?: { value, source, method, tested: { mdape, p80 } } (lot: the page's back-tested estimate),
  *             blockGroups?: [{ id, hv, hvSource }] (neighborhood, stop_area), sitesNearby?: number }
- *  ctx: { laws, buildingCosts (rows), fundingRules, incomeLimits, fmr, valuationModels, transitEffects, corridors, zoningEngine? }
+ *  ctx: { laws, buildingCosts (rows; only display_allowed: true rows are used), internalBuildingCosts (optional rows from data/internal/, Node only; feeds internal_only), fundingRules, incomeLimits, fmr, valuationModels, transitEffects, corridors, zoningEngine? }
  */
 function buildProjectCard(subject, ctx) {
   ctx = ctx || {};
   const S = Object.assign({}, subject || {});
   const fips = S.countyFips || null, state = S.stateCode || null;
-  const costRows = Array.isArray(ctx.buildingCosts) ? ctx.buildingCosts : (ctx.buildingCosts && ctx.buildingCosts.rows) || [];
+  const costRows = displayRows(Array.isArray(ctx.buildingCosts) ? ctx.buildingCosts : (ctx.buildingCosts && ctx.buildingCosts.rows) || []);
+  // Rows marked display_allowed: false come only from ctx.internalBuildingCosts (Node scripts and tests load data/internal/ explicitly).
+  // The browser passes none, so the internal_only branch is empty there.
+  const iccRows = internalRows(Array.isArray(ctx.internalBuildingCosts) ? ctx.internalBuildingCosts : (ctx.internalBuildingCosts && ctx.internalBuildingCosts.rows) || []);
   const nearStops = Array.isArray(S.nearStops) ? S.nearStops : stopsNear(S.point, ctx.corridors, fips, STOP_RADIUS_MI);
   const uplift = transitUplift(nearStops, ctx.transitEffects);
   const isParcel = S.kind === "lot" || S.kind === "site";
@@ -267,7 +270,7 @@ function buildProjectCard(subject, ctx) {
       }
     }
     const variants = c.affordable ? [false, true] : [false];
-    for (const aff of variants) courses.push(courseFigures(c, aff, { S, legal, sizing, costRows, fmr, ilim, vm, uplift, ctx, state, fips, internal }));
+    for (const aff of variants) courses.push(courseFigures(c, aff, { S, legal, sizing, costRows, iccRows, fmr, ilim, vm, uplift, ctx, state, fips, internal }));
   }
   const order = courses.slice().sort(evidenceCompare);
   const missing = [...new Set(courses.flatMap(x => x.missing).concat(notAssessed.flatMap(x => x.missing)))];
@@ -292,7 +295,7 @@ function evidenceCompare(a, b) {
 }
 
 function courseFigures(c, aff, k) {
-  const { S, legal, sizing, costRows, fmr, ilim, vm, uplift, ctx, state, fips, internal } = k;
+  const { S, legal, sizing, costRows, iccRows, fmr, ilim, vm, uplift, ctx, state, fips, internal } = k;
   const inputs = [], missing = [], risks = [];
   const out = { course: c.id, affordable: aff, label: c.label + (aff ? " with an affordable share" : ""), legal, size: null, cost: null, costWhy: null, publicMoney: [], income: null, incomeWhy: null, value: null, valueWhy: null, transitUplift: uplift, inputs, missing, risks };
   if (legal.basis === "statute") {
@@ -336,12 +339,12 @@ function courseFigures(c, aff, k) {
     } else {
       out.costWhy = `cost not on file for this place: the only displayable ADU cost rows are City of Los Angeles permit valuations${S.city ? ` and this ${S.kind} is in ${S.city}` : ` and this ${S.kind}'s city is not on file`}`;
     }
-    internalEstimate(internal, out, "R-3", ["VB", "VA"], S, state, costRows, size != null ? size : null, size != null ? "median floor area of permitted Los Angeles ADUs" : null);
+    internalEstimate(internal, out, "R-3", ["VB", "VA"], S, state, costRows, iccRows, size != null ? size : null, size != null ? "median floor area of permitted Los Angeles ADUs" : null);
   } else {
     out.costWhy = `cost not on file for this place: no displayable construction cost for ${/station/.test(c.id) || c.id === "small_multifamily" ? "multifamily buildings" : "added units"} in ${state || "this state"} (${PROMPT.build_cost})`;
     if (c.id === "station_prefab") risks.push("Cost: no study on file gives a like-for-like prefabricated versus conventional cost for finished multifamily buildings; the schedule and cost findings on file (Terner Center) are not cleared for display");
     const gross = out.size && out.size.sqft ? out.size.sqft.low.value : null;
-    internalEstimate(internal, out, "R-2", ["VB", "VA", "IIIA", "IA"], S, state, costRows, gross, gross != null ? "the law's floor-area limit times the site area" : null);
+    internalEstimate(internal, out, "R-2", ["VB", "VA", "IIIA", "IA"], S, state, costRows, iccRows, gross, gross != null ? "the law's floor-area limit times the site area" : null);
   }
   if (!out.cost && out.costWhy) missing.push("Cost: " + out.costWhy);
   if (c.id !== "hold" && !out.cost) {
@@ -485,8 +488,8 @@ function publicMoney(out, S, legal, ctx, ilim, inputs, missing) {
 }
 
 // ICC table x DoD state factor x floor area: internal use only (display_allowed: false). Never on the page.
-function internalEstimate(internal, out, group, types, S, state, rows, sqft, sqftBasis) {
-  const icc = types.map(t => iccRow(rows, group, t)).filter(Boolean);
+function internalEstimate(internal, out, group, types, S, state, rows, iccRows, sqft, sqftBasis) {
+  const icc = types.map(t => iccRow(iccRows, group, t)).filter(Boolean);
   const f = dodStateFactor(rows, state);
   const base = { course: out.course, affordable: out.affordable, subject: S.id || S.name || null };
   if (!icc.length) { internal.push(Object.assign(base, { computed: false, why: "ICC rows not passed in" })); return; }
