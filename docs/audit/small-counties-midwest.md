@@ -615,3 +615,88 @@ Files: `data/backtests/midwest_mn_census_spot_2026-11-22.json`, `data/backtests/
 
 Files: `data/backtests/midwest_sd_census_spot_2026-11-22.json`, `data/backtests/midwest_osm_xcheck_46003_2026-11-22.json`,
 `..._46005_...`, `data/backtests/live_check_panels_2026-11-22_midwest_sd.json`.
+
+## North Dakota (51 of 51 built, none withheld)
+
+| County | People (ACS 2020-24) | Block groups | Data file (gzip, bytes) | Completeness tier | Canopy block groups (2025 release) |
+|---|---|---|---|---|---|
+| Adams County (38001) | 2,145 | 2 | 87,617 | D | 0 |
+| Barnes County (38003) | 10,773 | 13 | 356,690 | D | 9 |
+| Benson County (38005) | 5,808 | 7 | 298,108 | C | 0 |
+| Billings County (38007) | 1,024 | 1 | 219,516 | D | 0 |
+| Bottineau County (38009) | 6,378 | 7 | 159,598 | D | 0 |
+| Bowman County (38011) | 2,906 | 4 | 116,222 | D | 0 |
+| Burke County (38013) | 2,156 | 2 | 88,288 | D | 0 |
+| Cavalier County (38019) | 3,633 | 5 | 360,729 | D | 0 |
+| Dickey County (38021) | 4,935 | 7 | 110,100 | D | 0 |
+| Divide County (38023) | 2,167 | 2 | 71,911 | D | 0 |
+| Dunn County (38025) | 4,040 | 3 | 802,270 | D | 0 |
+| Eddy County (38027) | 2,307 | 3 | 105,080 | D | 0 |
+| Emmons County (38029) | 3,254 | 4 | 145,166 | D | 0 |
+| Foster County (38031) | 3,358 | 3 | 73,560 | D | 0 |
+| Golden Valley County (38033) | 1,653 | 2 | 111,447 | D | 0 |
+| Grand Forks County (38035) | 72,923 | 60 | 613,304 | C | 49 |
+| Grant County (38037) | 2,269 | 2 | 187,352 | D | 0 |
+| Griggs County (38039) | 2,245 | 2 | 189,979 | D | 0 |
+| Hettinger County (38041) | 2,432 | 3 | 92,544 | D | 0 |
+| Kidder County (38043) | 2,377 | 3 | 74,015 | D | 0 |
+| LaMoure County (38045) | 4,118 | 4 | 103,330 | D | 0 |
+| Logan County (38047) | 1,819 | 2 | 50,553 | D | 0 |
+| McHenry County (38049) | 5,207 | 4 | 177,315 | D | 0 |
+| McIntosh County (38051) | 2,497 | 3 | 51,393 | D | 0 |
+| McKenzie County (38053) | 14,321 | 12 | 473,576 | C | 6 |
+| McLean County (38055) | 9,823 | 8 | 736,009 | D | 0 |
+| Mercer County (38057) | 8,337 | 8 | 742,225 | D | 0 |
+| Morton County (38059) | 33,777 | 20 | 585,195 | C | 13 |
+| Mountrail County (38061) | 9,507 | 6 | 246,442 | C | 0 |
+| Nelson County (38063) | 3,016 | 4 | 177,001 | D | 0 |
+| Oliver County (38065) | 1,839 | 2 | 256,406 | D | 0 |
+| Pembina County (38067) | 6,727 | 9 | 325,666 | D | 0 |
+| Pierce County (38069) | 3,928 | 5 | 179,994 | C | 0 |
+| Ramsey County (38071) | 11,556 | 12 | 268,617 | C | 9 |
+| Ransom County (38073) | 5,643 | 6 | 180,249 | D | 0 |
+| Renville County (38075) | 2,304 | 3 | 123,853 | D | 0 |
+| Richland County (38077) | 16,584 | 14 | 369,482 | D | 7 |
+| Rolette County (38079) | 11,924 | 11 | 155,903 | D | 0 |
+| Sargent County (38081) | 3,804 | 6 | 188,105 | D | 0 |
+| Sheridan County (38083) | 1,303 | 1 | 102,990 | D | 0 |
+| Sioux County (38085) | 3,740 | 4 | 212,664 | D | 0 |
+| Slope County (38087) | 766 | 1 | 76,931 | D | 0 |
+| Stark County (38089) | 33,302 | 28 | 343,342 | D | 23 |
+| Steele County (38091) | 1,804 | 2 | 283,725 | D | 0 |
+| Stutsman County (38093) | 21,549 | 21 | 227,665 | D | 15 |
+| Towner County (38095) | 2,079 | 3 | 273,516 | D | 0 |
+| Traill County (38097) | 7,970 | 10 | 254,932 | D | 0 |
+| Walsh County (38099) | 10,396 | 13 | 416,279 | C | 0 |
+| Ward County (38101) | 68,973 | 54 | 413,542 | C | 40 |
+| Wells County (38103) | 3,890 | 5 | 116,983 | D | 0 |
+| Williams County (38105) | 39,555 | 21 | 261,583 | C | 18 |
+| **51 counties** | **490,841** | **437** | **12,638,962** | 10 C, 41 D | 189 |
+
+- North Dakota cut alone: 138 MB (cut while South Dakota was building). Build: fetch 8-42 s, build 62-126 s per county,
+  four at a time, 19.8 min from the first county to the last.
+- Bus frequency: 49 counties have none (no feed that is read has a stop with 7-9 am departures in or near the county);
+  2 have feeds. Rail distance: 42 counties have no station in or near them.
+- Census spot check: 51 counties, 864 of 864 values equal (0% mismatch). Tract-median flags: 51 counties added, no
+  existing county changed, 0 values matching neither the block group nor the tract.
+- OpenStreetMap ID for ID vs live Overpass (maps.mail.ru): Barnes 1,557 = 1,557 roads, 0 = 0 bus stops. **Adams 699
+  roads on Overpass, 698 in the extract (1 not in the extract)**, 0 = 0 bus stops. The one road is way 9776296 (77th Avenue
+  Southwest, `highway=unclassified`, last edited 2 Nov 2022). It is in `us-midwest-latest.osm.pbf` and in the North
+  Dakota cut; its nodes run from x -101.97793 to -101.977686, and the county box's east edge is x -101.9779300002878, so
+  it sits on the box's edge (the 0.02 degree margin beyond the county's block groups) and the clip drops it by a rounding
+  difference of the edge, not by a data gap. 1 of 699 roads (0.14%) in that box; 0 of 1,557 in Barnes.
+- Crash counts: North Dakota has no state crash source connected.
+- Live check from R2 (`LIVE_PORT=9191`): Grand Forks and Ward, 3 points each (North Dakota's statewide parcel service
+  is on the page): 5 of the 6 points had the house panel on live parcel records and pass the Census area, HUD rent, FEMA and
+  neighborhood, canopy, crash text and state-law checks; 1 had no parcel at the point. **4 USGS elevation rows showed
+  "Not available (the service did not answer in time)", the page's own 6 s limit, while USGS's service gave 989, 832,
+  1,628 and 1,669 ft to the checker.** Re-opened alone, 2 of the 4 showed 989 and 1,628 ft as USGS does; the other 2 (Grand
+  Forks 380350102001, Ward 381010108003) again showed "did not answer in time" on two re-checks. The page showed no wrong
+  elevation; it said it had none. Counted in the result file as 47 pass, 6 fail (the 4 first-run rows are kept as
+  `usgs_first`; 2 rows still fail), 5 not checkable. Each data file came from the r2.dev address (GET 200).
+- R2: before 1,499,685,353 bytes (2,162 objects); dry run "52 files, net +0.013 GB, projected 1.512 GB"; after
+  1,512,337,107 bytes (2,213 objects): 12,651,754 bytes added (the 51 data files, 12,638,962, plus the larger
+  `manifest.json`).
+
+Files: `data/backtests/midwest_nd_census_spot_2026-11-22.json`, `data/backtests/midwest_osm_xcheck_38001_2026-11-22.json`,
+`..._38003_...`, `data/backtests/live_check_panels_2026-11-22_midwest_nd.json`.
