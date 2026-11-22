@@ -1179,3 +1179,13 @@ block group by point, fitting the map and service lookups still assumed one long
 ArcGIS envelope ending at exactly 180 returns features far outside it. All fixed and tested 21 Nov (`docs/audit/alaska-bundles.md`, last
 section); the county file is built. Also found and fixed: the map tooltip of a block group with no best bet threw an error, which made a click on
 it select nothing (any county). The 17 Nov entry above that said 29 of 30 Alaska counties are built is now 30 of 30.
+
+### Neighborhood prediction: leading signals tested, no edge over "cheapest tracts" (22 Nov 2026)
+`docs/PREDICTION-MODEL.md` (method committed before any evaluation), `app/data/neighborhood_prediction.json`. A walk-forward test of
+16 dated signals (mortgage applications, loan sizes, investor buying, denial rates, permits, jobs, ACS composition, price trends) on the
+50 back-test counties did **not** beat the plain cheapest-tracts screen on 5-year county-relative price change, so by the pre-written rule no
+county uses it; the screen stays everywhere and now shows its tested 5-year range by home-value fifth and its measured hit rate. Also found:
+the cheap-tract edge has shrunk sharply in recent windows (see the doc's B.2-B.3), and the stated 80% ranges held only about three quarters of
+outcomes in the test, which the page and file now say. Fixed in passing: `scripts/signals/loaders.py` `level_to_tract20` / `count_to_tract20`
+crashed on the 471 crosswalk rows with a blank weight (water-only tracts with no land, e.g. 01003990000); they now skip them. No published
+file had used those functions.

@@ -108,6 +108,12 @@ and is not used.
 Renting, year built, single-family share, no-car share and density all get weight 0 because their sign flipped
 between periods.
 
+**Leading signals, walk-forward (22 Nov 2026).** `docs/PREDICTION-MODEL.md` tests mortgage, permit, job, migration and ACS
+signals in a walk-forward design fixed before the test. They did not beat "cheapest tracts", so no county uses that model; with
+`opts.prediction` (`app/data/neighborhood_prediction.json`) the ranking above is unchanged and each block group in the 50 tested
+counties also carries the screen's tested 5-year range for its home-value fifth and the county's measured hit rate. A county that
+passed in a later run would be ranked by its tract predictions (`opts.predictionTracts`, `app/data/prediction/<fips>.json`).
+
 Rerun: `node scripts/backtest_neighborhood_score.mjs --cache <scratch dir>`. It downloads about 700 MB on the first
 run, and the bootstrap is seeded so results repeat.
 
@@ -118,9 +124,11 @@ The file is one IIFE that publishes `window.InvestmentDecisionEngine`; `index.ht
 Node, `src/engines/statutoryZoningEngine.js`). In Node, `require()` it; the tests import it as an ES module.
 
 ```
-rankNeighborhoods(countyBundle, { backtest, limit?, minHomes? })
-  -> { role: "screen"|"predictor", county, method, countyEvidence, ranked: [ { rank, id, name, city, score, scoreQuintile,
-       historicalRelativeChange: { "2020_2025", "2015_2020" }, components: [...], confidence: { grade A-D, reasons },
+rankNeighborhoods(countyBundle, { backtest, prediction?, predictionTracts?, limit?, minHomes? })
+  -> { role: "screen"|"predictor", county, method, countyEvidence, prediction: { applies, overallPass, testedOn, headline } | null,
+       ranked: [ { rank, id, name, city, score, scoreQuintile,
+       historicalRelativeChange: { "2020_2025", "2015_2020" }, prediction: { model, level, relative5y, hitRateTopThird, testedOn, ... } | null,
+       components: [...], confidence: { grade A-D, reasons },
        dataFlags, reasons: [plain sentences], missing } ], rankedCount, unscored: [ { id, missing } ], missing }
 
 recommendForNeighborhood({ id, m, r }, { catalog, verification, countyFips?, underusedSites?, sites? })
