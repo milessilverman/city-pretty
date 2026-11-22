@@ -98,6 +98,9 @@ export interface AdvisorUnderusedSite {
 // Kept under this size so a request with a full chat history stays under the Worker's 64,000-byte body limit; a larger
 // brief is dropped whole and the reason is sent instead (never cut in the middle).
 export const DECISION_BRIEF_MAX_CHARS = 20000;
+// The area a visitor drew on the map (app/draw-area.js; the area engine's advisorSummary form), passed through as plain
+// JSON under the same rule: dropped whole with the reason if larger than this, never cut in the middle.
+export const DRAWN_AREA_MAX_CHARS = 6000;
 
 export interface AdvisorContext {
   county: AdvisorCounty;
@@ -109,6 +112,8 @@ export interface AdvisorContext {
   underusedSite?: AdvisorUnderusedSite | null;
   decision_brief?: unknown;
   decision_brief_omitted?: string | null;
+  drawn_area?: unknown;
+  drawn_area_omitted?: string | null;
 }
 
 // Stable text: keep it free of per-request values so it can be prompt-cached.
@@ -118,6 +123,7 @@ export const ADVISOR_SYSTEM_PROMPT = [
   "If parcel.valueEstimateWithheld is set, the page deliberately gives no home value for this lot. Do not give one; explain the reason it states. A parcel.valueEstimate has no accuracy range; unless its status reports a back-test result, it is an unvalidated estimate that has not been tested against recorded sales. Say which whenever you use it.",
   "Some records carry a verification field. Treat anything not marked \"verified\" as unconfirmed and say so. Fields such as underusedSite.potentialHomes and underusedSite.margin are model estimates, not facts.",
   "decision_brief, when present, is the page's own investment brief for this county. Every number in it is {value, unit, basis, source}; basis \"modelled\" or \"assumed\" means an estimate, not a measurement. Items in its withheld lists and fields marked not determined have no figure or answer on the page: say so, and do not fill them in.",
+  "drawn_area, when present, is an area the visitor drew on the map. Its figures come from Census block groups: basis \"apportioned\" is an estimate that splits block-group counts by area, and basis \"range\" gives the lowest and highest block-group value because a median or rate cannot be combined. Never present a range or a weighted average of medians as the median of the area, and do not suggest what would get land redeveloped beyond what drawn_area states.",
   "The page's figures are screening estimates from public data, not appraisals, zoning determinations, tax advice or legal advice. When a question is about building, adding a unit, splitting a lot, permits or property taxes, give what the data shows and name the city or county office that decides.",
   "Mention a state or federal law only when you are confident it applies in this state, and say that rules change. As of 2026 the federal 30% residential solar credit (IRC 25D) no longer applies to systems installed after 2025.",
   "Answer in a few sentences, then at most five short bullet points if they help. Use plain text with **bold** and '-' bullets only.",
@@ -247,6 +253,16 @@ export function sanitizeAdvisorContext(raw: unknown): AdvisorContext {
     } else {
       ctx.decision_brief = null;
       ctx.decision_brief_omitted = text ? `decision brief too large (${text.length} characters; limit ${DECISION_BRIEF_MAX_CHARS})` : "decision brief could not be read";
+    }
+  }
+  if (r.drawn_area != null && typeof r.drawn_area === "object" && !Array.isArray(r.drawn_area)) {
+    let text: string | null = null;
+    try { text = JSON.stringify(r.drawn_area); } catch { text = null; }
+    if (text && text.length <= DRAWN_AREA_MAX_CHARS) {
+      ctx.drawn_area = JSON.parse(text);
+    } else {
+      ctx.drawn_area = null;
+      ctx.drawn_area_omitted = text ? `drawn area summary too large (${text.length} characters; limit ${DRAWN_AREA_MAX_CHARS})` : "drawn area summary could not be read";
     }
   }
   return ctx;

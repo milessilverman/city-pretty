@@ -215,7 +215,7 @@ describe("aggregation rules, with figures worked by hand", () => {
     expect(f.homesPerAcre.value).toBe(1200 / 240);
     expect(f.homesPerAcre.basis).toBe("modelled");
     expect(f.hv.how).toMatch(/median of the surrounding Census tract/);
-    expect(plainSummary(a)).toMatch(/It holds 3,000 people and 1,200 homes\. The median home value is \$500,000\./);
+    expect(plainSummary(a)).toMatch(/It holds 3,000 people and 1,200 homes\. The typical \(median\) home value is \$500,000\./);
     expect(plainSummary(a)).toMatch(/exact sums/);
   });
 
@@ -264,7 +264,7 @@ describe("aggregation rules, with figures worked by hand", () => {
     expect(hv.how).toMatch(/1 of these 2 values is the median of the surrounding Census tract/);
     expect(a.figures.rent.range).toEqual([1500, 2100]);
     expect(a.figures.rent.weightedAverage.value).toBeCloseTo((200 * 1500 + 600 * 2100) / 800, 6);   // 1,950
-    expect(plainSummary(a)).toMatch(/Block-group median home values run from \$300,000 to \$500,000; the median for the area itself cannot be worked out/);
+    expect(plainSummary(a)).toMatch(/Typical home values \(block-group medians\) run from \$300,000 to \$500,000; the median for the area itself cannot be worked out/);
   });
 
   it("a withheld value stays withheld, and the figure says how many block groups had none", () => {
@@ -352,7 +352,7 @@ describe("aggregation rules, with figures worked by hand", () => {
   });
 
   it("a Census top code is named, not treated as a real median", () => {
-    const f = medianFigure({ key: "hv", label: "Median home value", unit: "USD", topCode: 2000000, topCodeText: "$2,000,000 or more" }, [{ id: "a", share: 1, v: 2000001, w: 10 }, { id: "b", share: 1, v: 800000, w: 10 }]);
+    const f = medianFigure({ key: "hv", label: "Median home value", unit: "USD", topCode: [2000000, 2000001], topCodeText: "$2,000,000 or more" }, [{ id: "a", share: 1, v: 2000001, w: 10 }, { id: "b", share: 1, v: 800000, w: 10 }]);
     expect(f.topCoded).toBe(1);
     expect(f.how).toMatch(/top code/);
   });

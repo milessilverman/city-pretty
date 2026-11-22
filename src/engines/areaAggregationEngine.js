@@ -280,7 +280,7 @@ function medianFigure(o, rows) {
   const have = rows.filter(r => num(r.v) != null && r.v > 0), none = rows.length - have.length;
   const base = { key: o.key, label: o.label, unit: o.unit, source: o.source || null, kind: "median", from: fromRows(rows), blockGroups: rows.length, noValue: none };
   if (!have.length) return Object.assign(base, { value: null, basis: null, how: "No block group in the area has this value on file." });
-  const tract = have.filter(r => r.tract).length, top = o.topCode ? have.filter(r => r.v >= o.topCode).length : 0;
+  const tract = have.filter(r => r.tract).length, top = o.topCode ? have.filter(r => r.v >= o.topCode[0] && r.v <= o.topCode[1]).length : 0;
   const topNote = top ? ` ${top} of these values ${top > 1 ? "are" : "is"} at the Census's top code (published only as "${o.topCodeText}"), so the high end${have.length > 1 ? " and the average are" : " is"} understated.` : "";
   const tractNote = tract ? ` ${tract} of these ${have.length} values ${tract > 1 ? "are" : "is"} the median of the surrounding Census tract, because the block group's own is not published.` : "";
   const missing = none ? ` ${none} of ${rows.length} block groups have no value on file.` : "";
@@ -348,13 +348,17 @@ function areaFigures(rows, ctx) {
   const src = (base, f) => `${base} (field ${f})`;
   const col = (f, extra) => rows.map(r => Object.assign({ id: r.id, share: r.share, v: num(r.m && r.m[f]) }, extra ? extra(r) : null));
   const homesW = r => ({ w: num(r.m && r.m.homes) });
+  // each block group says where its own home value comes from (field hvs): the ACS median, the surrounding tract's
+  // median, or for Los Angeles County a median of homes that changed hands
+  const hvKinds = [...new Set(rows.filter(r => r.m && num(r.m.hv) != null && r.m.hvs).map(r => String(r.m.hvs).replace(/median of [\d,]+ homes/, "median of homes")))];
+  const hvSource = hvKinds.length ? `${hvKinds.slice(0, 2).join("; ")}${hvKinds.length > 2 ? "; and " + (hvKinds.length - 2) + " more kinds of source" : ""}, as carried in ${file} (fields hv, hvs)` : src(acs, "hv");
   const out = {};
   out.landAcres = Object.assign(countFigure({ key: "landAcres", label: "Land inside the shape", unit: "acres", source: src(`block-group acres in ${file}`, "acres") }, col("acres")), {});
   out.pop = countFigure({ key: "pop", label: "People", unit: "people", source: src(acs, "pop") }, col("pop"));
   out.homes = countFigure({ key: "homes", label: "Homes", unit: "homes", source: src(acs, "homes") }, col("homes"));
-  out.hv = medianFigure({ key: "hv", label: "Median home value", unit: "USD", topCode: 2000000, topCodeText: "$2,000,000 or more", source: src(acs, "hv") }, col("hv", r => Object.assign(homesW(r), { tract: /tract/i.test(String((r.m && r.m.hvs) || "")) })));
-  out.rent = medianFigure({ key: "rent", label: "Median rent", unit: "USD per month", topCode: 3500, topCodeText: "$3,500 or more", source: src(acs, "rent") }, col("rent", homesW));
-  out.inc = medianFigure({ key: "inc", label: "Median household income", unit: "USD per year", topCode: 250000, topCodeText: "$250,000 or more", source: src(acs, "inc") }, col("inc", homesW));
+  out.hv = medianFigure({ key: "hv", label: "Typical home value", unit: "USD", topCode: [2000000, 2000001], topCodeText: "$2,000,000 or more", source: hvSource }, col("hv", r => Object.assign(homesW(r), { tract: /tract/i.test(String((r.m && r.m.hvs) || "")) })));
+  out.rent = medianFigure({ key: "rent", label: "Median rent", unit: "USD per month", topCode: [3500, Infinity], topCodeText: "$3,500 or more", source: src(acs, "rent") }, col("rent", homesW));
+  out.inc = medianFigure({ key: "inc", label: "Median household income", unit: "USD per year", topCode: [250001, 250001], topCodeText: "$250,000 or more", source: src(acs, "inc") }, col("inc", homesW));
   out.yb = medianFigure({ key: "yb", label: "Median year homes were built", unit: "year", source: src(acs, "yb") }, col("yb", homesW));
   out.sf = rateFigure({ key: "sf", label: "Homes in single-unit buildings", unit: "% of homes", denominator: "homes", rounded: true, source: src(acs, "sf") }, col("sf", r => ({ d: num(r.m && r.m.homes) })));
   out.own = rateFigure({ key: "own", label: "Owner-occupied", unit: "% of occupied homes", whyRange: FIELD_NOTES.own, source: src(acs, "own") }, col("own"));
@@ -588,7 +592,7 @@ function summarizeArea(input) {
   base.points = {
     stations: Object.assign(pointFigure({ key: "stations", label: "Rail stations", unit: "stations", source: pts.stationsSource || "the county data file's stations layer" }, stations), { items: stations.map(s => ({ name: s.name || null })) }),
     plannedStations: Object.assign(pointFigure({ key: "plannedStations", label: "Stations under construction or planned", unit: "stations", source: pts.plannedSource || "the county data file and app/data/transit_pipelines.json (positions marked confirmed only)" }, planned), { items: planned.map(s => ({ name: s.name || null, status: s.status || null })), unplaced: pts.plannedUnplaced || 0 }),
-    stops: pointFigure({ key: "stops", label: "Bus stops on the map's frequent-bus layer", unit: "stops", source: pts.stopsSource || "the county data file's stops layer" }, stops),
+    stops: pointFigure({ key: "stops", label: "Busier bus stops (the map's stops layer)", unit: "stops", source: pts.stopsSource || "the county data file's stops layer", how: pts.stopsHow || null }, stops),
     sites: pointFigure({ key: "sites", label: "Redevelopment candidates", unit: "sites", source: pts.sitesSource || "the site records on file", how: "A site is counted only if the centre of its mapped outline (or its mapped point) is inside the drawn shape. Sites the record marks as already built, under construction or approved are listed apart." }, candidates),
     places: Object.assign(pointFigure({ key: "places", label: "Specific places suggested for projects", unit: "places", source: pts.placesSource || "the county's site suggestions file" }, places), { items: places.slice(0, 40).map(p => ({ type: p.type, name: p.name || null, idea: p.idea || null })) }),
   };
@@ -626,8 +630,8 @@ function plainSummary(a) {
   if (f.pop.value != null) bits.push(`${est(f.pop)}${fmtInt(f.pop.value)} people`);
   if (f.homes.value != null) bits.push(`${est(f.homes)}${fmtInt(f.homes.value)} homes`);
   let third = "";
-  if (f.hv.basis === "measured") third = ` The median home value is ${fmtUsd(f.hv.value)}.`;
-  else if (f.hv.basis === "range") third = ` Block-group median home values run from ${fmtUsd(f.hv.range[0])} to ${fmtUsd(f.hv.range[1])}; the median for the area itself cannot be worked out from block-group data.`;
+  if (f.hv.basis === "measured") third = ` The typical (median) home value is ${fmtUsd(f.hv.value)}.`;
+  else if (f.hv.basis === "range") third = ` Typical home values (block-group medians) run from ${fmtUsd(f.hv.range[0])} to ${fmtUsd(f.hv.range[1])}; the median for the area itself cannot be worked out from block-group data.`;
   else third = " No home value is on file for these block groups.";
   const cut = a.blockGroups.filter(b => b.share < 1).length;
   const how = cut ? ` ${cut} of the ${n} block groups are cut by the shape, so the counts are estimates by area.` : " Every block group is wholly inside, so the counts are exact sums.";

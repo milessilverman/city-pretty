@@ -8578,6 +8578,7 @@ function syncHash(id) {
   if (typeof compareList !== "undefined" && compareList && compareList.length) {
     params.set("compare", compareList.join(","));
   }
+  if (window.DrawArea) window.DrawArea.onSyncHash(params, fips);   // a drawn area stays in the link (app/draw-area.js)
   const hash = "#" + params.toString();
   if (window.location.hash !== hash) {
     history.replaceState(null, null, hash);
@@ -9225,6 +9226,8 @@ function serializeLiveAdvisorContext() {
     // The Invest view's brief for this county (app/invest.js), in the engine's advisor form; null until that view built one.
     decision_brief: (typeof window !== "undefined" && window.__cpDecisionBrief && window.__cpDecisionBrief.county && window.__cpDecisionBrief.county.fips === fips && window.InvestmentDecisionEngine)
       ? window.InvestmentDecisionEngine.briefForAdvisor(window.__cpDecisionBrief) : null,
+    // The area the visitor drew and asked about (app/draw-area.js), as the area engine's compact summary; null otherwise.
+    drawn_area: (typeof window !== "undefined" && window.DrawArea) ? window.DrawArea.advisorContext(fips) : null,
   };
   if (selected && byId.get(selected)) {
     const p = byId.get(selected).properties || {};
