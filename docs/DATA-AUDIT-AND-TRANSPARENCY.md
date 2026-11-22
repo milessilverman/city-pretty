@@ -1614,3 +1614,19 @@ pattern `data/signals/zillow_*` is read relative to `data/signals/`, so it match
 `data/signals/zillow_*.csv.gz` tables (terms not confirmed: internal testing only). Fixed on this branch: the pattern is now `zillow_*` and the
 four files are removed from the index (they stay on disk for internal tests). **They remain in the history of a245b7b and every branch
 built on it**; removing them from history needs the owner's decision (a history rewrite of shared branches).
+
+### Correction: rows marked "not displayable" were published with the site (found 22 Nov 2026)
+`app/data/building_costs.json` holds the ICC Building Valuation Data table (254 rows in all marked `display_allowed: false`; ICC's
+terms forbid republishing the table) and `app/data/housing_funding_rules.json` holds 62 rows whose terms were not checked.
+`scripts/build_site_dist.mjs` copied all of `app/` into the published site, so both files went out whole: the "internal use only"
+label held on the page but not in the deployed data files. Fixed on this branch: the build now writes the published copy of every
+`app/data/*.json` file that has `rows` without the rows marked `display_allowed: false` (checked: 96 of 350 building-cost rows and
+173 of 235 funding rows remain). A copy deployed before this fix stays on the live site until the next deploy; whether one was
+deployed is for the owner to check.
+
+### Gap found while building project cards: Los Angeles County has no HUD income limits on file (22 Nov 2026)
+`app/data/hud_income_limits.json` has no row for 06037 and does not list it in `_source.failed` (the fetch list was the county
+manifest, which does not include Los Angeles, packed separately). The project cards say "HUD income limits not on file for county
+06037" instead of a rent ceiling. Also noted: the Austin - San Antonio corridor record lists all its stations as unverified, and one
+Austin stop (`atx_south`) has no stated coordinate basis; the cards use only stops whose point basis is stated, and show the
+corridor record's status beside the stop city.

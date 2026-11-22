@@ -4,7 +4,7 @@
 // Cloudflare R2 host in app/data/county_hosts.json. Fails if a required file is missing or a file is over the
 // Workers static-assets per-file limit (25 MiB; developers.cloudflare.com/workers/platform/limits, read 19 Nov 2026)
 // or the file count passes the free-plan limit (20,000 files per Worker version, same page).
-import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync } from "node:fs";
+import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from "node:fs";
 import { dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -57,6 +57,18 @@ for (const [src, keep] of RULES) {
     cpSync(f, join(OUT, rel));
     count++; bytes += size;
   }
+}
+// Rows marked display_allowed: false (the ICC building valuation table, whose terms forbid republishing it, and rows whose
+// terms were not checked) stay out of the published site: the deployed copy of each such file keeps only rows that may be
+// shown. The page computes nothing from them (app/invest.js shows no internal-only estimate). docs/PROJECT-CARDS.md.
+for (const f of readdirSync(join(OUT, "app/data")).filter((n) => n.endsWith(".json"))) {
+  const p = join(OUT, "app/data", f);
+  let doc; try { doc = JSON.parse(readFileSync(p, "utf8")); } catch (e) { continue; }
+  if (!doc || !Array.isArray(doc.rows) || !doc.rows.some((r) => r && r.display_allowed === false)) continue;
+  const before = doc.rows.length;
+  doc.rows = doc.rows.filter((r) => !(r && r.display_allowed === false));
+  writeFileSync(p, JSON.stringify(doc));
+  console.log(`dist-site: ${f}: left out ${before - doc.rows.length} rows marked display_allowed: false`);
 }
 for (const r of REQUIRED) if (!existsSync(join(OUT, r))) problems.push("required file missing from dist-site: " + r);
 // Every local script and stylesheet in index.html must be present.

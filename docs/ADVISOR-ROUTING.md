@@ -25,7 +25,7 @@ question to the Worker with the page's findings.
 | ADU / lot split / N units on the open lot | "Can I add an ADU?", "Can I split this lot?", "Can I build 4 units?" | the brief's `parcel.expansions[].legal` and `parcel.zoning` (the statute engine, `evaluateByRightHousing`, with app/data/statutes.json). "N units" is answered only when no state law applied (then "not determined" with the reasons); when a law applies it hands off |
 | Sites to redevelop | "What properties could be redeveloped?" | app/data/underused_sites.json rows for the county, largest first; model fields listed as unverified are not given |
 | Transit | "Should transit be built here?", "What kind of transit does this area support?" | the brief's `transit` (evaluateTransit on the selected block group) and `TRANSIT_THRESHOLDS` (TCRP Report 165 Exhibit 3-8, FTA CIG) |
-| Budget | "I have $50,000", "My budget is $300k", "What can I do with $1.5 million?" | the brief's housing plays then improvements for the selected neighborhood (the Build card's order); lists those whose cost on file is at or under the budget, counts those over it and names those with no cost on file. No other financial maths |
+| Budget | "I have $50,000", "My budget is $300k", "What can I do with $1.5 million?" | the brief's housing plays then improvements for the selected neighborhood (the Build card's order); lists those whose cost on file is at or under the budget, counts those over it and names those with no cost on file. Then the courses of action (project cards, `fitToBudget` in src/engines/projectCardEngine.js; docs/PROJECT-CARDS.md): those whose cost range tops out at or under the budget, those it straddles, and counts of those over it, with no cost on file and not assessed, in evidence order. No other financial maths |
 | Arithmetic on a named figure | "rent x 12", "What is the annual rent?", "2-bedroom FMR x 12", "What is the sale price per square foot?" | the figure above, with the sum shown; price per square foot = the lot's last recorded sale price (or assessed value, if asked) / its living area on the parcel record |
 
 `cpInvest.advisorInputs()` (app/invest.js) gives the layer the same engine inputs, open-lot facts, measured sites and
@@ -49,8 +49,8 @@ the system prompt tells the model these are page data to use as given, not to re
 
 ## Measuring it
 
-`npm run eval:advisor -- --scripted` runs offline (no key, no network): 58 cases in
-`tests/eval/advisor_scripted_cases.json` (37 that must be answered, 21 near misses that must hand off) against
+`npm run eval:advisor -- --scripted` runs offline (no key, no network): 62 cases in
+`tests/eval/advisor_scripted_cases.json` (40 that must be answered, 22 near misses that must hand off) against
 snapshots built from the repository's data files by `scripts/lib/advisor_snapshot.mjs`, and it reports how many of
 the model eval's questions (`tests/eval/advisor_questions.json`) the layer would answer itself. The unit test
 `tests/unit/advisorScripts.test.ts` runs the same eval and fails on any wrong scripted answer.
