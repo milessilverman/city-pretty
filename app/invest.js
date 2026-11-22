@@ -243,7 +243,7 @@ function build(fips, B, d) {
     const stops = window.CorridorStopAreas ? window.CorridorStopAreas.stopAreasForCounty(c, B, fips, 1) : [];
     return { row: c, len, cost, stops, ev: eng.evaluateTransit({ name: c.name, lengthMiles: len.value, intercityDistanceMiles: len.value, capitalCostUsd: cost.value != null ? cost.value * 1e9 : null, mode: /high_speed/.test(c.corridor_type || "") ? "hsr" : null }, tCtx) };
   });
-  return { fips, B, rk, ranked, clean, hood, brief, rec, pf, pipeEval, corrEval, lines, countySites: d.sites.filter(s => s && s.countyFips === fips) };
+  return { fips, B, rk, ranked, clean, hood, brief, rec, pf, pipeEval, corrEval, lines, countySites: countySitesFor(d, fips) };
 }
 // Riders, fares and the gap for this county's local projects and the corridors with a stop here
 // (src/engines/transitDemandEngine.js). A corridor's length is used only when its own verification confirms it.
@@ -356,6 +356,19 @@ function buildLists(m) {
     (key ? out.on : out.off).push(item);
   }
   return out;
+}
+// Station-area sites (src/engines/stationSites.js): land near stations and stop cities from OpenStreetMap and the county parcel record,
+// loaded for a county when it is opened (render() asks for them). The largest PAGE_MAX are listed; the county file holds more.
+function countySitesFor(d, fips) {
+  const base = d.sites.filter(s => s && s.countyFips === fips), SS = window.StationSites && window.StationSites.cached(fips);
+  return SS && SS.length ? base.concat(SS.slice(0, window.StationSites.PAGE_MAX)) : base;
+}
+function stationSiteDetail(s) {
+  const v = s.verification || {};
+  const rows = window.StationSites.facts(s).map(([k, t]) => `<div><dt>${esc2(k)}</dt><dd>${/^Not on file: /.test(t) ? nof(t.slice(13)) : esc2(t)}</dd></div>`).join("");
+  return `<p class="iv-muted">Near ${esc2(s.near.n)}, measured from OpenStreetMap and the county parcel record. No home count, value if built or margin is estimated for it.</p>
+    <p class="iv-muted">Facts verification: ${esc2(v.status)}, checked ${esc2(v.audited)} <a href="${esc2(v.evidence_url)}" target="_blank" rel="noopener">OpenStreetMap element</a></p>
+    <dl class="iv-dl iv-facts">${rows}</dl>`;
 }
 function siteLists(m) {
   const list = m.countySites.slice().sort((a, b) => (b.acres || 0) - (a.acres || 0));
@@ -481,6 +494,7 @@ function buildCard(m, open) {
 // the record's own note on how each was made is shown instead.
 const SITE_MODEL_FIELDS = [["potentialHomes", "Homes it could hold"], ["margin", "Developer margin"], ["marketLandValue", "Market land value"]];
 function siteDetail(s) {
+  if (s.stationSite && window.StationSites) return stationSiteDetail(s);
   const v = s.verification || {};
   const uf = (v.unverified_fields || []).map(u => String(u).split(/[\s(]/)[0]);
   const held = SITE_MODEL_FIELDS.filter(([f]) => s[f] != null || uf.includes(f)).map(([f, label]) => `<div><dt>${label}</dt><dd>${uf.includes(f) ? nof("model estimate, listed as unverified in the record" + (v.model_output_fields && v.model_output_fields[f] ? ": " + v.model_output_fields[f] : "")) : isNum(s[f]) ? (f === "potentialHomes" ? Math.round(s[f]).toLocaleString("en-US") : money(s[f])) + " " + basisTag("modelled") : nof("")}</dd></div>`).join("");
@@ -502,7 +516,7 @@ function sitesCard(m, open) {
   const places = ((m.rec && m.rec.places) || []).filter(p => !p.cost || p.cost.low.value == null || p.cost.low.value <= bud);
   const openTier = bud >= TIER_MIN.site;
   const shown = iv.moreSites ? sl.on : sl.on.slice(0, 4);
-  const sRow = s => { const v = s.verification || {}; return rowHTML({ name: siteName(s), chip: s.kind || "site", fig: keyFig("Size", fig({ value: s.acres, unit: "acres", source: s.sourceUrl, basis: "measured" })), ev: `<span class="iv-verif" title="${esc2((v.source_fields || []).join(", "))}">Facts: ${esc2((v.status || "not verified").replace(/_/g, " "))}</span>`, sub: s.cityName ? esc2(s.cityName) : "", key: "site-" + esc2(s.id), detail: siteDetail(s) }, open); };
+  const sRow = s => { const v = s.verification || {}; return rowHTML({ name: siteName(s), chip: s.kindLabel || s.kind || "site", fig: keyFig("Size", fig({ value: s.acres, unit: "acres", source: s.sourceUrl, basis: "measured" })), ev: `<span class="iv-verif" title="${esc2((v.source_fields || []).join(", "))}">Facts: ${esc2((v.status || "not verified").replace(/_/g, " "))}</span>`, sub: s.stationSite ? "measured from OpenStreetMap and the county parcel record" + (s.near && s.near.u ? "; the project's stop location is unverified" : "") : s.cityName ? esc2(s.cityName) : "", key: "site-" + esc2(s.id), detail: siteDetail(s) }, open); };
   let body;
   if (!list.length) body = `<p class="iv-empty">No underused sites have been measured for ${esc2(countyShort())} yet, so none are listed. Only sites whose size was measured from a parcel or map record are shown; none are inferred.</p>`;
   else if (!openTier) body = `<p class="iv-gated">${list.length} measured ${list.length === 1 ? "site is" : "sites are"} listed in ${esc2(countyShort())}. Site-sized plays start at about $2M; raise the budget to see ${list.length === 1 ? "it" : "them"}.</p>`;
@@ -514,6 +528,7 @@ function sitesCard(m, open) {
   return `<section class="iv-card" id="iv-sites" aria-labelledby="iv-sites-h">
     <h3 id="iv-sites-h">Properties</h3>
     <p class="iv-lede">Golf courses, parking lots and vacant land to redevelop. The facts (size, place) carry a verification status. The record's model estimates (homes it could hold, margin, land value) are listed as unverified, so no figure is shown for them.</p>
+    ${(SS => SS && SS.length ? `<p class="iv-muted">Includes ${Math.min(SS.length, window.StationSites.PAGE_MAX)} of ${SS.total} sites near stations and stop cities (largest first), measured from OpenStreetMap and the county parcel record.${SS.leftOut ? ` ${SS.leftOut} smaller ones are not in the data file (size limit).` : ""}</p>` : "")(window.StationSites && window.StationSites.cached(m.fips))}
     ${body}${placeHTML}${nofGroup(open, "off-sites", offItems)}
   </section>`;
 }
@@ -772,6 +787,7 @@ function render() {
   loadData().then(d => {
     if (iv.view !== "invest") return;
     const r2 = ready(); if (r2.state !== "ok") { render(); return; }
+    if (window.StationSites && !window.StationSites.cached(r2.fips)) window.StationSites.load(r2.fips).then(() => { if (iv.view === "invest") { iv.key = null; render(); } });
     const p = parcelFacts();
     const key = [r2.fips, iv.hood, p && p.facts.parcel_id, p && p.facts.base_zoning_code, p && p.facts.exclusions && JSON.stringify(p.facts.exclusions), d.laws ? d.laws.length : -1, d.verification ? 1 : 0, typeof SITES !== "undefined" && SITES ? 1 : 0].join("|");
     if (key !== iv.key || !iv.model) { iv.model = build(r2.fips, r2.B, d); iv.key = key; }
@@ -858,7 +874,7 @@ function advisorInputs() {
     const r2 = ready(); if (r2.state !== "ok") return null;
     const ctx = { backtest: d.backtest, catalog: D.catalog, verification: d.verification, underusedSites: d.sites, sites: (typeof SITES !== "undefined") ? SITES : null, costBenchmarks: engineCosts(d.cost), valueEffects: engineEffects(d.effects),
       laws: d.laws || undefined, unitCosts: d.unitCosts, valuationModels: d.valuationModels, prediction: d.prediction };
-    const sl = siteLists({ countySites: d.sites.filter(s => s && s.countyFips === r2.fips) });
+    const sl = siteLists({ countySites: countySitesFor(d, r2.fips) });
     return { state: "ok", fips: r2.fips, countyName: countyShort(), B: r2.B, ctx, pf: parcelFacts(), honest: honest(d.backtest, r2.fips, countyShort()), countySites: sl.all.map(s => Object.assign({}, s, { displayName: siteName(s) })), projectCards: pcCardsForAdvisorInputs(r2, d) };
   });
 }
@@ -909,7 +925,7 @@ function pcSubjects(m) {
     const uf = ((s.verification && s.verification.unverified_fields) || []).map(u => String(u).split(/[\s(]/)[0]);
     const acresOk = isNum(s.acres) && !uf.includes("acres");
     const railOk = isNum(s.distanceToRailMeters) && !uf.includes("distanceToRailMeters");
-    out.push({ kind: "site", id: s.id, name: siteName(s), siteKind: s.kind || null, countyFips: fips, stateCode: st, city: s.cityName || null,
+    out.push({ kind: "site", id: s.id, name: siteName(s), siteKind: s.kindLabel || s.kind || null, countyFips: fips, stateCode: st, city: s.cityName || null,
       acres: acresOk ? { value: s.acres, source: s.sourceUrl || "app/data/underused_sites.json" } : null,
       railStationMi: railOk ? s.distanceToRailMeters / 1609.344 : null,
       railNote: railOk && s.nearestRailStation ? `the site record names its nearest rail station (${s.nearestRailStation}, ${Math.round(s.distanceToRailMeters)} m away) but not that station's mode, which the SB 79 tiers depend on` : null,
