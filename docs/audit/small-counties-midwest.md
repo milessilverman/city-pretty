@@ -524,3 +524,94 @@ Files: `data/backtests/midwest_ks_census_spot_2026-11-22.json`, `data/backtests/
 
 Files: `data/backtests/midwest_mn_census_spot_2026-11-22.json`, `data/backtests/midwest_osm_xcheck_27001_2026-11-22.json`,
 `..._27005_...`, `data/backtests/live_check_panels_2026-11-22_midwest_mn.json`.
+
+## South Dakota (64 of 64 built, none withheld)
+
+| County | People (ACS 2020-24) | Block groups | Data file (gzip, bytes) | Completeness tier | Canopy block groups (2025 release) |
+|---|---|---|---|---|---|
+| Aurora County (46003) | 2,642 | 3 | 72,009 | D | 0 |
+| Beadle County (46005) | 19,309 | 17 | 182,665 | D | 13 |
+| Bennett County (46007) | 3,345 | 4 | 143,754 | D | 0 |
+| Bon Homme County (46009) | 7,044 | 5 | 162,943 | D | 0 |
+| Brookings County (46011) | 35,353 | 26 | 168,358 | D | 0 |
+| Brown County (46013) | 37,877 | 31 | 234,172 | D | 23 |
+| Brule County (46015) | 5,283 | 6 | 90,596 | D | 0 |
+| Buffalo County (46017) | 1,808 | 2 | 73,442 | D | 0 |
+| Butte County (46019) | 10,676 | 8 | 284,200 | D | 6 |
+| Campbell County (46021) | 1,593 | 2 | 93,932 | D | 0 |
+| Charles Mix County (46023) | 9,281 | 8 | 307,503 | D | 0 |
+| Clark County (46025) | 3,917 | 5 | 73,250 | D | 0 |
+| Clay County (46027) | 15,219 | 12 | 134,555 | D | 8 |
+| Codington County (46029) | 28,767 | 22 | 164,789 | D | 19 |
+| Corson County (46031) | 3,806 | 4 | 306,088 | D | 0 |
+| Custer County (46033) | 8,892 | 7 | 324,162 | D | 0 |
+| Davison County (46035) | 19,952 | 19 | 114,013 | D | 16 |
+| Day County (46037) | 5,437 | 6 | 108,974 | D | 0 |
+| Deuel County (46039) | 4,328 | 4 | 282,208 | D | 0 |
+| Dewey County (46041) | 5,205 | 4 | 226,027 | D | 0 |
+| Douglas County (46043) | 2,828 | 3 | 60,797 | D | 0 |
+| Edmunds County (46045) | 4,048 | 4 | 69,187 | D | 0 |
+| Fall River County (46047) | 7,258 | 6 | 234,724 | D | 0 |
+| Faulk County (46049) | 2,126 | 3 | 63,205 | D | 0 |
+| Grant County (46051) | 7,563 | 9 | 464,202 | D | 0 |
+| Gregory County (46053) | 4,016 | 4 | 200,536 | D | 0 |
+| Haakon County (46055) | 1,722 | 2 | 140,292 | D | 0 |
+| Hamlin County (46057) | 6,373 | 5 | 65,988 | D | 0 |
+| Hand County (46059) | 3,140 | 4 | 86,955 | D | 0 |
+| Hanson County (46061) | 3,472 | 3 | 73,689 | D | 0 |
+| Harding County (46063) | 1,148 | 1 | 219,811 | D | 0 |
+| Hughes County (46065) | 17,664 | 14 | 188,413 | D | 13 |
+| Hutchinson County (46067) | 7,404 | 7 | 119,384 | D | 0 |
+| Hyde County (46069) | 1,191 | 2 | 43,014 | D | 0 |
+| Jackson County (46071) | 2,802 | 4 | 265,274 | D | 0 |
+| Jerauld County (46073) | 1,772 | 2 | 43,770 | D | 0 |
+| Jones County (46075) | 1,004 | 1 | 134,170 | D | 0 |
+| Kingsbury County (46077) | 5,244 | 6 | 83,849 | D | 0 |
+| Lake County (46079) | 10,972 | 9 | 83,133 | D | 4 |
+| Lawrence County (46081) | 27,233 | 16 | 351,481 | D | 15 |
+| Lincoln County (46083) | 70,638 | 41 | 279,981 | D | 30 |
+| Lyman County (46085) | 3,724 | 4 | 258,600 | D | 0 |
+| McCook County (46087) | 5,751 | 6 | 77,567 | D | 0 |
+| McPherson County (46089) | 2,145 | 3 | 81,919 | D | 0 |
+| Marshall County (46091) | 4,344 | 3 | 218,321 | D | 0 |
+| Meade County (46093) | 30,546 | 19 | 389,238 | D | 16 |
+| Mellette County (46095) | 1,943 | 2 | 156,527 | D | 0 |
+| Miner County (46097) | 2,300 | 3 | 68,868 | D | 0 |
+| Moody County (46101) | 6,397 | 6 | 93,437 | D | 0 |
+| Oglala Lakota County (46102) | 13,491 | 5 | 266,295 | D | 0 |
+| Perkins County (46105) | 3,001 | 3 | 226,374 | D | 0 |
+| Potter County (46107) | 2,388 | 2 | 58,853 | D | 0 |
+| Roberts County (46109) | 10,221 | 12 | 531,564 | D | 0 |
+| Sanborn County (46111) | 2,384 | 3 | 75,022 | D | 0 |
+| Spink County (46115) | 6,219 | 7 | 147,612 | D | 0 |
+| Stanley County (46117) | 3,015 | 3 | 231,796 | D | 3 |
+| Sully County (46119) | 1,526 | 2 | 78,755 | D | 0 |
+| Todd County (46121) | 9,244 | 7 | 122,671 | D | 0 |
+| Tripp County (46123) | 5,611 | 5 | 126,997 | D | 0 |
+| Turner County (46125) | 8,882 | 8 | 116,109 | D | 0 |
+| Union County (46127) | 17,081 | 11 | 206,410 | C | 4 |
+| Walworth County (46129) | 5,271 | 6 | 96,490 | D | 0 |
+| Yankton County (46135) | 23,414 | 19 | 156,170 | D | 14 |
+| Ziebach County (46137) | 2,377 | 2 | 155,799 | D | 0 |
+| **64 counties** | **590,627** | **482** | **10,760,889** | 1 C, 63 D | 184 |
+
+- South Dakota cut alone: 60 MB (cut while Minnesota was building). Build: fetch 8-31 s, build 42-87 s per county,
+  four at a time, 17.5 min from the first county to the last (the smallest state file, so the fastest builds).
+- Bus frequency: 63 counties have none (no feed that is read has a stop with 7-9 am departures in or near the county);
+  1 has feeds. Rail distance: all 64 counties have no station in or near them.
+- Census spot check: 64 counties, 1,140 of 1,140 values equal (0% mismatch). Tract-median flags: 64 counties added, no
+  existing county changed, 0 values matching neither the block group nor the tract.
+- OpenStreetMap ID for ID vs live Overpass (maps.mail.ru): Aurora 723 = 723 roads, 0 = 0 bus stops; Beadle 2,221 = 2,221
+  roads, 0 = 0 bus stops (0 missing, 0 extra).
+- Crash counts: South Dakota has no state crash source connected (`national/STATE_CRASH_SOURCES.md` notes a rolling
+  five-year layer with no counts; none is wired into the pipeline).
+- Live check from R2 (`LIVE_PORT=9191`): Lincoln and Brown, 3 points each. Lincoln's page has the Sioux Falls parcel
+  service: 2 of its 3 points had the house panel on live parcel records and pass every check, the third had no parcel at
+  the point; Brown has no parcel service. House-panel rows that do not apply are not checkable and the rest pass:
+  38 pass, 0 fail, 16 not checkable. Each data file came from the r2.dev address (GET 200).
+- R2: before 1,488,908,420 bytes (2,098 objects); dry run "65 files, net +0.011 GB, projected 1.500 GB"; after
+  1,499,685,353 bytes (2,162 objects): 10,776,933 bytes added (the 64 data files, 10,760,889, plus the larger
+  `manifest.json`).
+
+Files: `data/backtests/midwest_sd_census_spot_2026-11-22.json`, `data/backtests/midwest_osm_xcheck_46003_2026-11-22.json`,
+`..._46005_...`, `data/backtests/live_check_panels_2026-11-22_midwest_sd.json`.

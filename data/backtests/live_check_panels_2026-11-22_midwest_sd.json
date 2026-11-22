@@ -1,0 +1,352 @@
+{
+ "ran_on": "2026-11-22T07:19:11.901Z",
+ "script": "scripts/live_check_panels.mjs",
+ "results": {
+  "46013": {
+   "state": "SD",
+   "points": [
+    {
+     "bg": "460139514004",
+     "lat": 45.495054,
+     "lng": -98.443371,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $430k, rent $1,345/mo, homes 763"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 24 pts (current release); page: 24 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 24.2 pts below its 30% goal; box: \"24.2 pts below its 30% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for SD"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel service for this county"
+    },
+    {
+     "bg": "460139513003",
+     "lat": 45.4768,
+     "lng": -98.488444,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $243k, rent $913/mo, homes 789"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 3 pts (current release); page: 3 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 2.5 pts below its 30% goal; box: \"2.5 pts below its 30% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for SD"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel service for this county"
+    },
+    {
+     "bg": "460139520005",
+     "lat": 45.625542,
+     "lng": -98.383535,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $200k, rent $947/mo, homes 484"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for SD"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel service for this county"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel service for this county"
+    }
+   ],
+   "checks": {
+    "census_area": "n/a",
+    "hud": "n/a",
+    "fema": "n/a",
+    "usgs": "n/a",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_46013.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_46013.json.gz"
+   ]
+  },
+  "46083": {
+   "state": "SD",
+   "points": [
+    {
+     "bg": "460830101033",
+     "lat": 43.495179,
+     "lng": -96.811594,
+     "service": "City of Sioux Falls Parcels (Lincoln and Minnehaha counties, SD)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $280k, rent $1,252/mo, homes 619"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 17 pts (current release); page: 17 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 17.3 pts below its 30% goal; box: \"17.3 pts below its 30% goal\" / \"-0.7°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for SD"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Lincoln County · 460830101033; page \"Census area: Lincoln County · block group 460830101033(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1228 for 46083; page \"HUD Fair Market Rent (FY2027): 1 bed $1,044 · 2 bed $1,228 · 3 bed $1,694/moSioux Falls, SD HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities), n\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 1517 ft; page \"Ground elevation: 1,517 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "460830101121",
+     "lat": 43.496323,
+     "lng": -96.680852,
+     "service": "City of Sioux Falls Parcels (Lincoln and Minnehaha counties, SD)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $355k, rent $1,378/mo, homes 1,086"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 29 pts (current release); page: 29 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 28.9 pts below its 30% goal; box: \"28.9 pts below its 30% goal\" / \"+1.0°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for SD"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Lincoln County · 460830101121; page \"Census area: Lincoln County · block group 460830101121(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1228 for 46083; page \"HUD Fair Market Rent (FY2027): 1 bed $1,044 · 2 bed $1,228 · 3 bed $1,694/moSioux Falls, SD HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities), n\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 1457 ft; page \"Ground elevation: 1,457 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "460830101151",
+     "lat": 43.442841,
+     "lng": -96.813815,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $421k, rent $1,159/mo, homes 1,322"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 27 pts (current release); page: 27 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 26.6 pts below its 30% goal; box: \"26.6 pts below its 30% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for SD"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel at point"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel at point"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel at point"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel at point"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel at point"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9191' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9191' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED"
+   ],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_46083.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_46083.json.gz"
+   ]
+  }
+ }
+}
