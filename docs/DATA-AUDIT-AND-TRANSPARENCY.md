@@ -1630,3 +1630,41 @@ manifest, which does not include Los Angeles, packed separately). The project ca
 06037" instead of a rent ceiling. Also noted: the Austin - San Antonio corridor record lists all its stations as unverified, and one
 Austin stop (`atx_south`) has no stated coordinate basis; the cards use only stops whose point basis is stated, and show the
 corridor record's status beside the stop city.
+
+### Correction: the not-displayable rows are now kept out of `app/` altogether, and the entry above overstated what was published (22 Nov 2026)
+The entry above ("rows marked 'not displayable' were published with the site") filtered the rows in the Cloudflare build only, and its
+last sentence implied a copy might already be live. Checked precisely, and the fix made structural:
+
+- **What was exposed, where.** The 254 `display_allowed: false` rows of `app/data/building_costs.json` (238 of them the ICC Building
+  Valuation Data table) came in with commit b0cc895 (22 Nov 2026, 01:41 UTC) and the 62 such rows of `housing_funding_rules.json` with
+  27968c8 (01:46 UTC), both on branch `claude/nifty-wozniak-tl4d5g`. From 87c5d5c (02:20 UTC) the Invest view fetched both whole files in
+  the visitor's browser (it rendered none of those rows). The repository is public (`gh api repos/milessilverman/city-pretty`:
+  `private: false`, `has_pages: true`), so the rows have been readable in that branch since 22 Nov.
+- **What was not.** `git log origin/main -- app/data/building_costs.json` and the same for `housing_funding_rules.json` print nothing, and
+  `git ls-tree -r origin/main` lists neither file: the rows were **never merged to `main`** (`origin/main` is ac7faf3, 19 Nov). GitHub
+  Pages publishes `main`, and `deploy-site.yml` runs on pushes to `main` (or by hand), so no visitor to the main site and no Cloudflare
+  deploy from `main` received them. I could not read the Pages settings or the Actions run list from here (the proxy refuses those
+  API paths), so a hand-started run of the deploy workflow from the branch cannot be ruled out by me; the owner can see it in the
+  Actions tab.
+- **Fix.** `scripts/costs/` now writes two files per table (`costlib.dump_split`): rows with `display_allowed !== false` to
+  `app/data/<name>.json` (same shape, page unchanged), the rest to `data/internal/<name>_internal.json` (same shape), a folder the page
+  never requests and `scripts/build_site_dist.mjs` never copies. Re-running a builder cannot put them back under `app/`. The project card
+  engine takes internal rows only through `ctx.internalBuildingCosts`; the browser passes none, so its `internal_only` branch is empty
+  there (the browser test that expected a computed internal estimate in memory now expects none). `node scripts/brief.mjs <fips> --internal`
+  prints the offline estimate to the terminal. Guards: `tests/unit/noInternalRows.test.ts` (nothing under `app/` or in a fresh
+  `dist-site/` has a `display_allowed: false` row or five ICC cells), a failing check in the site build, and an e2e check that the Invest
+  view requests no URL containing `internal`. The build's old row-stripping was replaced by that failing check.
+- **Not fixed, owner's decision.** The rows are still in the git history of the branch, and `data/internal/` is a folder in a public
+  repository. With `.nojekyll` present GitHub Pages serves every file in the repository, so merging this branch to `main` would make
+  `/data/internal/*.json` reachable by URL even though the page never asks for it. If ICC's terms are to be respected, the internal tables
+  must not be committed to a public repository (private repository or kept off git), and the earlier commits would need a history
+  rewrite. I did neither.
+
+### Correction: Los Angeles and Orange County income limits were missing, and why (22 Nov 2026)
+`app/data/hud_income_limits.json` had no row for Los Angeles County (06037) or Orange County (06059), and neither was in `_source.failed`.
+Cause: `scripts/costs/fetch_hud_income_limits.py` built its list from `counties/manifest.json`, which does not list those two counties
+(the page loads them from `app/data/bundle-la.b64.txt` and `bundle-oc.b64.txt`). Fetched both from HUD's API
+(`/hudapi/public/il/data/0603799999` and `0605999999`, HTTP 200, FY2026): Los Angeles County median income $108,100, 50% limit for four
+people $83,300; Orange County $138,600 and $93,050. The script now adds them (`EXTRA_FIPS`) and fails if either is neither a row nor a
+failed entry; the raw responses are saved as `tests/fixtures/costs/hud_il/06037.json` and `06059.json` and the new tests compare the rows
+with them. County count 1,036 -> 1,038.

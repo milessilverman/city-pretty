@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build app/data/housing_funding_rules.json: public-money rules and cost limits for affordable housing, from fetched sources.
+"""Build app/data/housing_funding_rules.json (displayable rows) + data/internal/housing_funding_rules_internal.json (display_allowed: false rows): public-money rules and cost limits for affordable housing, from fetched sources.
 
 Parts: LIHTC statute (26 U.S.C. 42), IRS monthly percentages and the 2026 state ceiling, the 2027 DDA/QCT designation
 notice, HUD's 2026 statutory mortgage limits and high cost percentages, HOME per-unit subsidy limits, one state agency's
@@ -13,7 +13,7 @@ import re
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from costlib import ROOT, TODAY, Source, dump, fetch, html_text, norm, pdf_text, sha256  # noqa: E402
+from costlib import ROOT, TODAY, Source, dump, dump_split, fetch, html_text, norm, pdf_text, sha256  # noqa: E402
 
 CACHE = sys.argv[sys.argv.index("--cache") + 1] if "--cache" in sys.argv else "/tmp/city-pretty-costs"
 FED = "U.S. federal government publication; no reuse restriction appears in the fetched document. Separate licence text not fetched."
@@ -202,7 +202,7 @@ def main():
     for r in ROWS:
         counts[r["section"]] = counts.get(r["section"], 0) + 1
     src_info["row_counts"] = {**counts, "total": len(ROWS)}
-    dump(os.path.join(ROOT, "app", "data", "housing_funding_rules.json"), {"_source": src_info, "rows": ROWS})
+    dump_split("housing_funding_rules", {"_source": src_info, "rows": ROWS})
 
 
 if __name__ == "__main__":

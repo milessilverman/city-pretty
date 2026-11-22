@@ -13,8 +13,12 @@ const fx = (n: string) => fs.readFileSync(path.join(FX, n), "utf-8");
 const norm = (s: string) => s.replace(/\s+/g, " ").trim();
 const median = (a: number[]) => { const s = [...a].sort((x, y) => x - y); const m = s.length >> 1; return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; };
 
-const BC = json(path.join(D, "building_costs.json"));
-const FR = json(path.join(D, "housing_funding_rules.json"));
+// Rows the page may show are in app/data/; rows marked display_allowed: false are in data/internal/ (same shape). The tests
+// below check both together, as the build scripts produced them.
+const INTERNAL = path.join(__dirname, "../../data/internal");
+const merge = (a: any, b: any) => ({ ...a, rows: [...a.rows, ...b.rows] });
+const BC = merge(json(path.join(D, "building_costs.json")), json(path.join(INTERNAL, "building_costs_internal.json")));
+const FR = merge(json(path.join(D, "housing_funding_rules.json")), json(path.join(INTERNAL, "housing_funding_rules_internal.json")));
 const IL = json(path.join(D, "hud_income_limits.json"));
 const ACF = json(path.join(D, "area_cost_factors.json"));
 
@@ -174,11 +178,14 @@ describe("housing_funding_rules.json", () => {
 
 describe("hud_income_limits.json", () => {
   it("covers the manifest counties HUD serves, with the fiscal year the API returned", () => {
-    const manifest = json(path.join(__dirname, "../../counties/manifest.json")).counties.map((c: any) => c.fips);
+    // Los Angeles and Orange are not in the manifest (the page loads them from app/data/) but need rows too: they were
+    // missing from the first run, in neither the rows nor the failed list.
+    const manifest = Array.from(new Set([...json(path.join(__dirname, "../../counties/manifest.json")).counties.map((c: any) => c.fips), "06037", "06059"]));
     const got = new Set(IL.counties.map((c: any) => c.fips));
     const failed = new Set(IL._source.failed.map((f: any) => f.fips));
     for (const f of manifest) expect(got.has(f) || failed.has(f), f).toBe(true);
     expect(IL.counties.length + IL._source.failed.length).toBe(manifest.length);
+    expect(IL._source.county_count).toBe(IL.counties.length);
     expect(IL._source.fiscal_year).toBe("2026");
     for (const f of IL._source.failed) expect(["09", "23", "25", "33", "44", "50"]).toContain(f.fips.slice(0, 2)); // New England: town-level areas
     for (const c of IL.counties) {
@@ -190,6 +197,24 @@ describe("hud_income_limits.json", () => {
       expect(c.il50[3]).toBeLessThan(c.il80[3]);
       expect(c.median_income).toBeGreaterThan(20000);
     }
+  });
+
+  it("Los Angeles County (06037) and Orange County (06059) have rows that equal the saved HUD responses", () => {
+    for (const [fips, name] of [["06037", "Los Angeles County, CA"], ["06059", "Orange County, CA"]]) {
+      const raw = JSON.parse(fs.readFileSync(path.join(FX, "hud_il", fips + ".json"), "utf-8")).data;
+      const row = IL.counties.find((c: any) => c.fips === fips);
+      expect(row, fips).toBeTruthy();
+      expect(row.county_name).toBe(raw.county_name);
+      expect(row.county_name).toBe(name);
+      expect(row.il50).toEqual([1, 2, 3, 4, 5, 6, 7, 8].map((n) => raw.very_low[`il50_p${n}`]));
+      expect(IL._source.failed.some((f: any) => f.fips === fips)).toBe(false);
+    }
+  });
+
+  it("the fetch script includes the two counties the manifest does not list", () => {
+    const src = fs.readFileSync(path.join(__dirname, "../../scripts/costs/fetch_hud_income_limits.py"), "utf-8");
+    expect(src).toContain('EXTRA_FIPS = ["06037", "06059"]');
+    expect(src).toMatch(/fips_list = sorted\(\{c\["fips"\] for c in counties\} \| set\(EXTRA_FIPS\)\)/);
   });
 
   it("values equal the saved HUD API responses", () => {
