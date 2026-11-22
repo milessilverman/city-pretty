@@ -6,13 +6,15 @@
  * brownfield land, golf courses) and matched to the county's parcel record where a service is on file. Nothing here
  * estimates homes, value or margin. See docs/audit/station-sites-2026-11-22.md for how the files were made.
  *
- * API: load(fips) -> Promise<site[]>, cached(fips) -> site[] | null, normalize(doc), facts(site) -> [[label, text], ...].
+ * API: load(fips) -> Promise<site[]>, cached(fips) -> site[] | null, normalize(doc), facts(site) -> [[label, text], ...],
+ * loadPlaces(fips) -> Promise (adds site.place: census tract and ZIP area, from app/data/station_site_places/<fips>.json).
  * A site has the fields app/invest.js reads from underused_sites.json records (id, name, kind, acres, countyFips, sourceUrl,
  * verification) and no homes, value or margin field.
  */
 (function (root) {
 "use strict";
 const BASE = "app/data/station_sites/";
+const PLACES = "app/data/station_site_places/";
 const PAGE_MAX = 150;   // the page lists the largest this many sites of a county; the file holds more
 const KIND = { surface_parking: "Surface parking lot", vacant_or_brownfield: "Vacant or brownfield land", golf_course: "Golf course" };
 const CLASS = { pipeline_station: "station of a local project on file", existing_station: "existing rail station", corridor_stop_city: "stop city centre, not a station site" };
@@ -80,7 +82,27 @@ function load(fips) {
 }
 const cached = fips => cache[fips] || null;
 
-const api = { load, cached, normalize, facts, KIND, CLASS, PAGE_MAX };
+// Census tract and ZIP area of each site (app/data/station_site_places/<fips>.json, pipeline/site_places_build.py):
+// [tract GEOID, metres to the tract's edge, ZCTA, metres to the ZCTA's edge, how the ZCTA was read]. Attached as
+// site.place for the project card's place rows (HUD QCT / DDA, rent ceilings, permit cost). A site with no row keeps none.
+function placeOf(row) {
+  if (!Array.isArray(row)) return null;
+  return { tract: row[0] || null, tractEdgeM: typeof row[1] === "number" ? row[1] : null, zcta: row[2] || null, zctaEdgeM: typeof row[3] === "number" ? row[3] : null, zctaHow: row[4] || null };
+}
+function attachPlaces(list, doc) {
+  const by = doc && doc.sites ? doc.sites : null;
+  if (!by || !Array.isArray(list)) return list;
+  for (const s of list) { const p = placeOf(by[s.osm && s.osm.id]); if (p) s.place = p; }
+  return list;
+}
+const placesP = {};
+function loadPlaces(fips) {
+  if (!fips || typeof fetch !== "function") return Promise.resolve(null);
+  if (!placesP[fips]) placesP[fips] = fetch(PLACES + fips + ".json").then(r => r.ok ? r.json() : null).catch(() => null);
+  return Promise.all([placesP[fips], load(fips)]).then(([doc, list]) => { attachPlaces(list, doc); return doc; });
+}
+
+const api = { load, cached, normalize, facts, loadPlaces, attachPlaces, placeOf, KIND, CLASS, PAGE_MAX };
 if (typeof module !== "undefined" && module.exports) module.exports = api;
 else root.StationSites = api;
 })(typeof window !== "undefined" ? window : this);

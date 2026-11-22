@@ -1696,6 +1696,26 @@ no earlier record of this kind existed outside Los Angeles. One e2e test (`tests
 have been measured; that stopped being true when its station-area sites were added, so it now expects the card to say they are measured from
 OpenStreetMap and the county parcel record and to show no homes, margin or market-value rows for them.
 
+### Station-site cards: place rows added; what still blocks them (22 Nov 2026, `audit/site-cards-2026-11-22.md`)
+
+Measured first: on all 7,098 station-site cards, five of six courses were "not assessed: the zoning code is not on file",
+and none showed a cost, a funding rule or an income. Added, for every site whatever is built: HUD's 2026 and 2027
+qualified census tracts and difficult development areas (HUD User downloads; the site's 2020 tract and ZCTA from Census
+boundary files, TIGERweb where two ZCTAs with different flags lie within 150 m) and whether the 130% basis of 26 U.S.C.
+42(d)(5)(B) applies, quoted from the statute; the county's declared construction value per new home in 5+ unit buildings
+(Census Building Permits Survey, 2023-2025, 174 rows in `building_costs.json`); tax-credit rent ceilings at 60% and 50%
+(HUD MTSP limits x 0.30 / 12, persons per 42(g)(2)(C)); HUD FMRs. After: 7,098 sites show a per-home cost, 4,639 are in
+a 2027 QCT or DDA (7,079 known either way), 7,095 show rent ceilings; 0 building courses are priced, still for want of
+zoning. Re-derived by hand for 10 random sites in 8 counties: 130 figures, 0 differ. Found:
+
+- **Correction:** 544 station sites lie in another county than the file that lists them (170 of Kings County's are in
+  Queens). The card's place rows use the county the site lies in; the site files are unchanged.
+- **Correction:** `hud_income_limits.json` and the card said HUD's API has no 60% limit. HUD's `mtspil` endpoint has
+  it; it is now in `hud_mtsp_income_limits.json` (site counties only) and used.
+- **Correction:** `cardsForAdvisor` could return a few characters over its cap (6,006 for 6,000). Fixed and tested.
+- **Found, not changed:** 467 of 5,613 sites near existing stations are counted within 0.5 mile by their outline's edge
+  but are more than 0.5 mile away by the interior point the card uses.
+
 ### Ease-of-use pass (20-22 Nov 2026, `audit/usability-2026-11-20.md`)
 
 Layout and wording only; no figure, source or calculation changed. Mistakes found on the page while doing it:

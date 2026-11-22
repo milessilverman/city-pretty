@@ -1,0 +1,971 @@
+{
+ "run_on": "2026-11-22T18:32:06.947Z",
+ "port": 9241,
+ "places": {
+  "los_angeles": {
+   "fips": "06037",
+   "county": "Los Angeles (opening county)",
+   "siteCards": 6,
+   "stationSiteCards": 4,
+   "cards": [
+    {
+     "id": "ss:06037:way/1486726152",
+     "name": "Vacant or brownfield land near Santa Clarita",
+     "open": true,
+     "place": [
+      {
+       "id": "qct_dda",
+       "status": "known",
+       "boost": "applies",
+       "tract": "06037920314",
+       "zcta": "91350",
+       "years": [
+        "2026: QCT false, DDA true",
+        "2027: QCT false, DDA true"
+       ]
+      },
+      {
+       "id": "cost",
+       "range": [
+        128917,
+        175436,
+        "measured",
+        "https://www2.census.gov/econ/bps/County/co2025a.txt"
+       ],
+       "why": null
+      },
+      {
+       "id": "rent_limits",
+       "range": [
+        1749,
+        2249,
+        "modelled",
+        "https://www.huduser.gov/hudapi/public/mtspil/data/0603799999"
+       ],
+       "why": null
+      },
+      {
+       "id": "fmr",
+       "range": [
+        2151,
+        3760,
+        "measured",
+        "https://www.huduser.gov/hudapi/public/fmr/statedata/CA?year=2027"
+       ],
+       "why": null
+      }
+     ],
+     "dollarsShown": 19,
+     "dollarsNotOnTheCard": [],
+     "badText": 0,
+     "text": "THIS PLACE, WHATEVER IS BUILT\n\nTAX-CREDIT HIGH-COST AREA (HUD QUALIFIED CENSUS TRACT OR DIFFICULT DEVELOPMENT AREA)\nA new tax-credit building here counts 130% of its eligible basis\n2027 lists: qualified census tract (tract 06037920314): no source; difficult development area (metropolitan Small DDA list, ZIP area 91350): yes source\n2026 lists: qualified census tract (tract 06037920314): no source; difficult development area (metropolitan Small DDA list, ZIP area 91350): yes source\n\n26 U.S.C. 42(d)(5)(B)(i)(I): \"In the case of any building located in a qualified census tract or difficult development area which is designated for purposes of this subparagraph— (I) in the case of a new building, the eligible basis of such building shall be 130 percent of such basis\" source\n\n\"The 2027 lists of QCTs and DDAs are effective: (1) for allocations of credit after December 31, 2026\" source\n\nDECLARED CONSTRUCTION VALUE PER NEW HOME, BUILDINGS WITH 5 OR MORE UNITS (COUNTY BUILDING PERMITS)\n$128,917 to $175,436 Measured source per home\nLos Angeles County, CA (county FIPS 06037): 2023 $175,436 (12,607 homes) source; 2024 $142,007 (8,807 homes) source; 2025 $128,917 (9,376 homes) source. Census: \"Valuation - The valuation is the estimated value of the residential structure as shown on the building permit. If no value is listed on the permit, we accept estimates from the permit official.\" source\nthe value of the structure as written on the permit: no land, fees, financing, site work or developer costs; permit valuations often run below final cost\nTAX-CREDIT RENT CEILINGS (GROSS RENT, STUDIO TO 2-BEDROOM)\n$1,749 to $2,249 Modelled source per home per month at the 60% limit; at the 50% limit $1,458 to $1,874 Modelled source\nLos Angeles-Long Beach-Glendale, CA HUD Metro FMR Area, HUD 2026 ta"
+    },
+    {
+     "id": "ss:06037:way/56135439",
+     "name": "Golf course near Century City / Constellation",
+     "open": true,
+     "place": [
+      {
+       "id": "qct_dda",
+       "status": "known",
+       "boost": "applies",
+       "tract": "06037265100",
+       "zcta": "90024",
+       "years": [
+        "2026: QCT false, DDA true",
+        "2027: QCT false, DDA true"
+       ]
+      },
+      {
+       "id": "cost",
+       "range": [
+        128917,
+        175436,
+        "measured",
+        "https://www2.census.gov/econ/bps/County/co2025a.txt"
+       ],
+       "why": null
+      },
+      {
+       "id": "rent_limits",
+       "range": [
+        1749,
+        2249,
+        "modelled",
+        "https://www.huduser.gov/hudapi/public/mtspil/data/0603799999"
+       ],
+       "why": null
+      },
+      {
+       "id": "fmr",
+       "range": [
+        2151,
+        3760,
+        "measured",
+        "https://www.huduser.gov/hudapi/public/fmr/statedata/CA?year=2027"
+       ],
+       "why": null
+      }
+     ],
+     "dollarsShown": 19,
+     "dollarsNotOnTheCard": [],
+     "badText": 0,
+     "text": "THIS PLACE, WHATEVER IS BUILT\n\nTAX-CREDIT HIGH-COST AREA (HUD QUALIFIED CENSUS TRACT OR DIFFICULT DEVELOPMENT AREA)\nA new tax-credit building here counts 130% of its eligible basis\n2027 lists: qualified census tract (tract 06037265100): no source; difficult development area (metropolitan Small DDA list, ZIP area 90024): yes source\n2026 lists: qualified census tract (tract 06037265100): no source; difficult development area (metropolitan Small DDA list, ZIP area 90024): yes source\n\n26 U.S.C. 42(d)(5)(B)(i)(I): \"In the case of any building located in a qualified census tract or difficult development area which is designated for purposes of this subparagraph— (I) in the case of a new building, the eligible basis of such building shall be 130 percent of such basis\" source\n\n\"The 2027 lists of QCTs and DDAs are effective: (1) for allocations of credit after December 31, 2026\" source\n\nDECLARED CONSTRUCTION VALUE PER NEW HOME, BUILDINGS WITH 5 OR MORE UNITS (COUNTY BUILDING PERMITS)\n$128,917 to $175,436 Measured source per home\nLos Angeles County, CA (county FIPS 06037): 2023 $175,436 (12,607 homes) source; 2024 $142,007 (8,807 homes) source; 2025 $128,917 (9,376 homes) source. Census: \"Valuation - The valuation is the estimated value of the residential structure as shown on the building permit. If no value is listed on the permit, we accept estimates from the permit official.\" source\nthe value of the structure as written on the permit: no land, fees, financing, site work or developer costs; permit valuations often run below final cost\nTAX-CREDIT RENT CEILINGS (GROSS RENT, STUDIO TO 2-BEDROOM)\n$1,749 to $2,249 Modelled source per home per month at the 60% limit; at the 50% limit $1,458 to $1,874 Modelled source\nLos Angeles-Long Beach-Glendale, CA HUD Metro FMR Area, HUD 2026 ta"
+    },
+    {
+     "id": "ss:06037:way/468697513",
+     "name": "Golf course near Buena Park",
+     "open": false,
+     "place": [
+      {
+       "id": "qct_dda",
+       "status": "known",
+       "boost": "does not apply by location",
+       "tract": "06059110604",
+       "zcta": "90621",
+       "years": [
+        "2026: QCT false, DDA false",
+        "2027: QCT false, DDA false"
+       ]
+      },
+      {
+       "id": "cost",
+       "range": [
+        194471,
+        231949,
+        "measured",
+        "https://www2.census.gov/econ/bps/County/co2025a.txt"
+       ],
+       "why": null
+      },
+      {
+       "id": "rent_limits",
+       "range": [
+        1955,
+        2513,
+        "modelled",
+        "https://www.huduser.gov/hudapi/public/mtspil/data/0605999999"
+       ],
+       "why": null
+      },
+      {
+       "id": "fmr",
+       "range": [
+        2580,
+        4153,
+        "measured",
+        "https://www.huduser.gov/hudapi/public/fmr/statedata/CA?year=2027"
+       ],
+       "why": null
+      }
+     ],
+     "dollarsShown": 0,
+     "dollarsNotOnTheCard": [],
+     "badText": 0,
+     "text": ""
+    },
+    {
+     "id": "site_la_8_4260",
+     "name": "Golf Facility (Parcel 4260)",
+     "open": false,
+     "place": [
+      {
+       "id": "qct_dda",
+       "status": "not on file",
+       "boost": null,
+       "years": []
+      },
+      {
+       "id": "cost",
+       "range": [
+        128917,
+        175436,
+        "measured",
+        "https://www2.census.gov/econ/bps/County/co2025a.txt"
+       ],
+       "why": null
+      },
+      {
+       "id": "rent_limits",
+       "range": [
+        1749,
+        2249,
+        "modelled",
+        "https://www.huduser.gov/hudapi/public/mtspil/data/0603799999"
+       ],
+       "why": null
+      },
+      {
+       "id": "fmr",
+       "range": [
+        2151,
+        3760,
+        "measured",
+        "https://www.huduser.gov/hudapi/public/fmr/statedata/CA?year=2027"
+       ],
+       "why": null
+      }
+     ],
+     "dollarsShown": 0,
+     "dollarsNotOnTheCard": [],
+     "badText": 0,
+     "text": ""
+    },
+    {
+     "id": "ss:06037:way/30933784",
+     "name": "Golf course near Universal City/Studio City",
+     "open": false,
+     "place": [
+      {
+       "id": "qct_dda",
+       "status": "known",
+       "boost": "applies",
+       "tract": "06037143101",
+       "zcta": "91602",
+       "years": [
+        "2026: QCT false, DDA true",
+        "2027: QCT false, DDA true"
+       ]
+      },
+      {
+       "id": "cost",
+       "range": [
+        128917,
+        175436,
+        "measured",
+        "https://www2.census.gov/econ/bps/County/co2025a.txt"
+       ],
+       "why": null
+      },
+      {
+       "id": "rent_limits",
+       "range": [
+        1749,
+        2249,
+        "modelled",
+        "https://www.huduser.gov/hudapi/public/mtspil/data/0603799999"
+       ],
+       "why": null
+      },
+      {
+       "id": "fmr",
+       "range": [
+        2151,
+        3760,
+        "measured",
+        "https://www.huduser.gov/hudapi/public/fmr/statedata/CA?year=2027"
+       ],
+       "why": null
+      }
+     ],
+     "dollarsShown": 0,
+     "dollarsNotOnTheCard": [],
+     "badText": 0,
+     "text": ""
+    },
+    {
+     "id": "site_la_9_4263",
+     "name": "Golf Facility (Parcel 4263)",
+     "open": false,
+     "place": [
+      {
+       "id": "qct_dda",
+       "status": "not on file",
+       "boost": null,
+       "years": []
+      },
+      {
+       "id": "cost",
+       "range": [
+        128917,
+        175436,
+        "measured",
+        "https://www2.census.gov/econ/bps/County/co2025a.txt"
+       ],
+       "why": null
+      },
+      {
+       "id": "rent_limits",
+       "range": [
+        1749,
+        2249,
+        "modelled",
+        "https://www.huduser.gov/hudapi/public/mtspil/data/0603799999"
+       ],
+       "why": null
+      },
+      {
+       "id": "fmr",
+       "range": [
+        2151,
+        3760,
+        "measured",
+        "https://www.huduser.gov/hudapi/public/fmr/statedata/CA?year=2027"
+       ],
+       "why": null
+      }
+     ],
+     "dollarsShown": 0,
+     "dollarsNotOnTheCard": [],
+     "badText": 0,
+     "text": ""
+    }
+   ],
+   "sectionBadText": 0,
+   "screenshot": "/home/user/city-pretty/.claude/worktrees/agent-ae4f6d3675e59e8a1/data/backtests/site_cards_los_angeles.png",
+   "placeScreenshot": "/home/user/city-pretty/.claude/worktrees/agent-ae4f6d3675e59e8a1/data/backtests/site_cards_los_angeles_place.png",
+   "errors": [],
+   "placeRowsShown": true
+  },
+  "travis": {
+   "fips": "48453",
+   "county": "Travis County",
+   "siteCards": 6,
+   "stationSiteCards": 6,
+   "cards": [
+    {
+     "id": "ss:48453:way/30769048",
+     "name": "Golf course near Montopolis / Crossing Place",
+     "open": true,
+     "place": [
+      {
+       "id": "qct_dda",
+       "status": "known",
+       "boost": "applies",
+       "tract": "48453002327",
+       "zcta": "78741",
+       "years": [
+        "2026: QCT true, DDA false",
+        "2027: QCT true, DDA false"
+       ]
+      },
+      {
+       "id": "cost",
+       "range": [
+        88195,
+        131985,
+        "measured",
+        "https://www2.census.gov/econ/bps/County/co2025a.txt"
+       ],
+       "why": null
+      },
+      {
+       "id": "rent_limits",
+       "range": [
+        1412,
+        1815,
+        "modelled",
+        "https://www.huduser.gov/hudapi/public/mtspil/data/4845399999"
+       ],
+       "why": null
+      },
+      {
+       "id": "fmr",
+       "range": [
+        1447,
+        2292,
+        "measured",
+        "https://www.huduser.gov/hudapi/public/fmr/statedata/TX?year=2027"
+       ],
+       "why": null
+      }
+     ],
+     "dollarsShown": 19,
+     "dollarsNotOnTheCard": [],
+     "badText": 0,
+     "text": "THIS PLACE, WHATEVER IS BUILT\n\nTAX-CREDIT HIGH-COST AREA (HUD QUALIFIED CENSUS TRACT OR DIFFICULT DEVELOPMENT AREA)\nA new tax-credit building here counts 130% of its eligible basis\n2027 lists: qualified census tract (tract 48453002327): yes source; difficult development area (metropolitan Small DDA list, ZIP area 78741): no source\n2026 lists: qualified census tract (tract 48453002327): yes source; difficult development area (metropolitan Small DDA list, ZIP area 78741): no source\n\n26 U.S.C. 42(d)(5)(B)(i)(I): \"In the case of any building located in a qualified census tract or difficult development area which is designated for purposes of this subparagraph— (I) in the case of a new building, the eligible basis of such building shall be 130 percent of such basis\" source\n\n\"The 2027 lists of QCTs and DDAs are effective: (1) for allocations of credit after December 31, 2026\" source\n\nDECLARED CONSTRUCTION VALUE PER NEW HOME, BUILDINGS WITH 5 OR MORE UNITS (COUNTY BUILDING PERMITS)\n$88,195 to $131,985 Measured source per home\nTravis County, TX (county FIPS 48453): 2023 $88,195 (18,311 homes) source; 2024 $114,890 (12,145 homes) source; 2025 $131,985 (9,780 homes) source. Census: \"Valuation - The valuation is the estimated value of the residential structure as shown on the building permit. If no value is listed on the permit, we accept estimates from the permit official.\" source\nthe value of the structure as written on the permit: no land, fees, financing, site work or developer costs; permit valuations often run below final cost\nTAX-CREDIT RENT CEILINGS (GROSS RENT, STUDIO TO 2-BEDROOM)\n$1,412 to $1,815 Modelled source per home per month at the 60% limit; at the 50% limit $1,176 to $1,513 Modelled source\nAustin-Round Rock-San Marcos, TX MSA, HUD 2026 tax-credit income limits: "
+    },
+    {
+     "id": "ss:48453:way/187669417",
+     "name": "Surface parking lot near Waterfront / Lady Bird Lake",
+     "open": true,
+     "place": [
+      {
+       "id": "qct_dda",
+       "status": "known",
+       "boost": "does not apply by location",
+       "tract": "48453001401",
+       "zcta": "78704",
+       "years": [
+        "2026: QCT false, DDA false",
+        "2027: QCT false, DDA false"
+       ]
+      },
+      {
+       "id": "cost",
+       "range": [
+        88195,
+        131985,
+        "measured",
+        "https://www2.census.gov/econ/bps/County/co2025a.txt"
+       ],
+       "why": null
+      },
+      {
+       "id": "rent_limits",
+       "range": [
+        1412,
+        1815,
+        "modelled",
+        "https://www.huduser.gov/hudapi/public/mtspil/data/4845399999"
+       ],
+       "why": null
+      },
+      {
+       "id": "fmr",
+       "range": [
+        1447,
+        2292,
+        "measured",
+        "https://www.huduser.gov/hudapi/public/fmr/statedata/TX?year=2027"
+       ],
+       "why": null
+      }
+     ],
+     "dollarsShown": 19,
+     "dollarsNotOnTheCard": [],
+     "badText": 0,
+     "text": "THIS PLACE, WHATEVER IS BUILT\n\nTAX-CREDIT HIGH-COST AREA (HUD QUALIFIED CENSUS TRACT OR DIFFICULT DEVELOPMENT AREA)\nNo 130% basis by location; the state housing credit agency may still designate the building\n2027 lists: qualified census tract (tract 48453001401): no source; difficult development area (metropolitan Small DDA list, ZIP area 78704): no source\n2026 lists: qualified census tract (tract 48453001401): no source; difficult development area (metropolitan Small DDA list, ZIP area 78704): no source\n\n26 U.S.C. 42(d)(5)(B)(v): \"designated by the State housing credit agency as requiring the increase in credit under this subparagraph in order for such building to be financially feasible\" source\n\n\"The 2027 lists of QCTs and DDAs are effective: (1) for allocations of credit after December 31, 2026\" source\n\nDECLARED CONSTRUCTION VALUE PER NEW HOME, BUILDINGS WITH 5 OR MORE UNITS (COUNTY BUILDING PERMITS)\n$88,195 to $131,985 Measured source per home\nTravis County, TX (county FIPS 48453): 2023 $88,195 (18,311 homes) source; 2024 $114,890 (12,145 homes) source; 2025 $131,985 (9,780 homes) source. Census: \"Valuation - The valuation is the estimated value of the residential structure as shown on the building permit. If no value is listed on the permit, we accept estimates from the permit official.\" source\nthe value of the structure as written on the permit: no land, fees, financing, site work or developer costs; permit valuations often run below final cost\nTAX-CREDIT RENT CEILINGS (GROSS RENT, STUDIO TO 2-BEDROOM)\n$1,412 to $1,815 Modelled source per home per month at the 60% limit; at the 50% limit $1,176 to $1,513 Modelled source\nAustin-Round Rock-San Marcos, TX MSA, HUD 2026 tax-credit income limits: 60% limit $56,460 (1 person) and $72,600 (3 persons) a year; 50% limit $4"
+    },
+    {
+     "id": "ss:48453:way/701662566",
+     "name": "Surface parking lot near East Riverside & Pleasant Valley (Hub)",
+     "open": false,
+     "place": [
+      {
+       "id": "qct_dda",
+       "status": "known",
+       "boost": "does not apply by location",
+       "tract": "48453002304",
+       "zcta": "78741",
+       "years": [
+        "2026: QCT false, DDA false",
+        "2027: QCT false, DDA false"
+       ]
+      },
+      {
+       "id": "cost",
+       "range": [
+        88195,
+        131985,
+        "measured",
+        "https://www2.census.gov/econ/bps/County/co2025a.txt"
+       ],
+       "why": null
+      },
+      {
+       "id": "rent_limits",
+       "range": [
+        1412,
+        1815,
+        "modelled",
+        "https://www.huduser.gov/hudapi/public/mtspil/data/4845399999"
+       ],
+       "why": null
+      },
+      {
+       "id": "fmr",
+       "range": [
+        1447,
+        2292,
+        "measured",
+        "https://www.huduser.gov/hudapi/public/fmr/statedata/TX?year=2027"
+       ],
+       "why": null
+      }
+     ],
+     "dollarsShown": 0,
+     "dollarsNotOnTheCard": [],
+     "badText": 0,
+     "text": ""
+    },
+    {
+     "id": "ss:48453:way/187668222",
+     "name": "Surface parking lot near Waterfront / Lady Bird Lake",
+     "open": false,
+     "place": [
+      {
+       "id": "qct_dda",
+       "status": "known",
+       "boost": "does not apply by location",
+       "tract": "48453001311",
+       "zcta": "78704",
+       "years": [
+        "2026: QCT false, DDA false",
+        "2027: QCT false, DDA false"
+       ]
+      },
+      {
+       "id": "cost",
+       "range": [
+        88195,
+        131985,
+        "measured",
+        "https://www2.census.gov/econ/bps/County/co2025a.txt"
+       ],
+       "why": null
+      },
+      {
+       "id": "rent_limits",
+       "range": [
+        1412,
+        1815,
+        "modelled",
+        "https://www.huduser.gov/hudapi/public/mtspil/data/4845399999"
+       ],
+       "why": null
+      },
+      {
+       "id": "fmr",
+       "range": [
+        1447,
+        2292,
+        "measured",
+        "https://www.huduser.gov/hudapi/public/fmr/statedata/TX?year=2027"
+       ],
+       "why": null
+      }
+     ],
+     "dollarsShown": 0,
+     "dollarsNotOnTheCard": [],
+     "badText": 0,
+     "text": ""
+    },
+    {
+     "id": "ss:48453:way/187669419",
+     "name": "Surface parking lot near Waterfront / Lady Bird Lake",
+     "open": false,
+     "place": [
+      {
+       "id": "qct_dda",
+       "status": "known",
+       "boost": "does not apply by location",
+       "tract": "48453001401",
+       "zcta": "78704",
+       "years": [
+        "2026: QCT false, DDA false",
+        "2027: QCT false, DDA false"
+       ]
+      },
+      {
+       "id": "cost",
+       "range": [
+        88195,
+        131985,
+        "measured",
+        "https://www2.census.gov/econ/bps/County/co2025a.txt"
+       ],
+       "why": null
+      },
+      {
+       "id": "rent_limits",
+       "range": [
+        1412,
+        1815,
+        "modelled",
+        "https://www.huduser.gov/hudapi/public/mtspil/data/4845399999"
+       ],
+       "why": null
+      },
+      {
+       "id": "fmr",
+       "range": [
+        1447,
+        2292,
+        "measured",
+        "https://www.huduser.gov/hudapi/public/fmr/statedata/TX?year=2027"
+       ],
+       "why": null
+      }
+     ],
+     "dollarsShown": 0,
+     "dollarsNotOnTheCard": [],
+     "badText": 0,
+     "text": ""
+    },
+    {
+     "id": "ss:48453:way/187766498",
+     "name": "Surface parking lot near Waterfront / Lady Bird Lake",
+     "open": false,
+     "place": [
+      {
+       "id": "qct_dda",
+       "status": "known",
+       "boost": "does not apply by location",
+       "tract": "48453001311",
+       "zcta": "78704",
+       "years": [
+        "2026: QCT false, DDA false",
+        "2027: QCT false, DDA false"
+       ]
+      },
+      {
+       "id": "cost",
+       "range": [
+        88195,
+        131985,
+        "measured",
+        "https://www2.census.gov/econ/bps/County/co2025a.txt"
+       ],
+       "why": null
+      },
+      {
+       "id": "rent_limits",
+       "range": [
+        1412,
+        1815,
+        "modelled",
+        "https://www.huduser.gov/hudapi/public/mtspil/data/4845399999"
+       ],
+       "why": null
+      },
+      {
+       "id": "fmr",
+       "range": [
+        1447,
+        2292,
+        "measured",
+        "https://www.huduser.gov/hudapi/public/fmr/statedata/TX?year=2027"
+       ],
+       "why": null
+      }
+     ],
+     "dollarsShown": 0,
+     "dollarsNotOnTheCard": [],
+     "badText": 0,
+     "text": ""
+    }
+   ],
+   "sectionBadText": 0,
+   "screenshot": "/home/user/city-pretty/.claude/worktrees/agent-ae4f6d3675e59e8a1/data/backtests/site_cards_travis.png",
+   "placeScreenshot": "/home/user/city-pretty/.claude/worktrees/agent-ae4f6d3675e59e8a1/data/backtests/site_cards_travis_place.png",
+   "errors": [],
+   "placeRowsShown": true
+  },
+  "cook": {
+   "fips": "17031",
+   "county": "Cook County",
+   "siteCards": 6,
+   "stationSiteCards": 6,
+   "cards": [
+    {
+     "id": "ss:17031:way/143789356",
+     "name": "Golf course near Medinah",
+     "open": true,
+     "place": [
+      {
+       "id": "qct_dda",
+       "status": "known",
+       "boost": "does not apply by location",
+       "tract": "17043840901",
+       "zcta": "60157",
+       "years": [
+        "2026: QCT false, DDA false",
+        "2027: QCT false, DDA false"
+       ]
+      },
+      {
+       "id": "cost",
+       "range": [
+        151252,
+        243886,
+        "measured",
+        "https://www2.census.gov/econ/bps/County/co2025a.txt"
+       ],
+       "why": null
+      },
+      {
+       "id": "rent_limits",
+       "range": [
+        1277,
+        1641,
+        "modelled",
+        "https://www.huduser.gov/hudapi/public/mtspil/data/1704399999"
+       ],
+       "why": null
+      },
+      {
+       "id": "fmr",
+       "range": [
+        1678,
+        2586,
+        "measured",
+        "https://www.huduser.gov/hudapi/public/fmr/statedata/IL?year=2027"
+       ],
+       "why": null
+      }
+     ],
+     "dollarsShown": 19,
+     "dollarsNotOnTheCard": [],
+     "badText": 0,
+     "text": "THIS PLACE, WHATEVER IS BUILT\n\nTAX-CREDIT HIGH-COST AREA (HUD QUALIFIED CENSUS TRACT OR DIFFICULT DEVELOPMENT AREA)\nNo 130% basis by location; the state housing credit agency may still designate the building\n2027 lists: qualified census tract (tract 17043840901): no source; difficult development area (metropolitan Small DDA list, ZIP area 60157): no source\n2026 lists: qualified census tract (tract 17043840901): no source; difficult development area (metropolitan Small DDA list, ZIP area 60157): no source\n\n26 U.S.C. 42(d)(5)(B)(v): \"designated by the State housing credit agency as requiring the increase in credit under this subparagraph in order for such building to be financially feasible\" source\n\n\"The 2027 lists of QCTs and DDAs are effective: (1) for allocations of credit after December 31, 2026\" source\n\nthe site's point lies in county 17043, not in county 17031 whose file lists it (it is within range of a station there); the place figures use county 17043\nDECLARED CONSTRUCTION VALUE PER NEW HOME, BUILDINGS WITH 5 OR MORE UNITS (COUNTY BUILDING PERMITS)\n$151,252 to $243,886 Measured source per home\nDuPage County, IL (county FIPS 17043): 2023 $151,252 (303 homes) source; 2024 $243,886 (647 homes) source; 2025 $226,808 (411 homes) source. Census: \"Valuation - The valuation is the estimated value of the residential structure as shown on the building permit. If no value is listed on the permit, we accept estimates from the permit official.\" source\nthe value of the structure as written on the permit: no land, fees, financing, site work or developer costs; permit valuations often run below final cost\nTAX-CREDIT RENT CEILINGS (GROSS RENT, STUDIO TO 2-BEDROOM)\n$1,277 to $1,641 Modelled source per home per month at the 60% limit; at the 50% limit $1,064 to $1,368 Modelled sour"
+    },
+    {
+     "id": "ss:17031:way/187782527",
+     "name": "Golf course near Olympia Fields",
+     "open": true,
+     "place": [
+      {
+       "id": "qct_dda",
+       "status": "known",
+       "boost": "applies",
+       "tract": "17031830005",
+       "zcta": "60461",
+       "years": [
+        "2026: QCT false, DDA true",
+        "2027: QCT false, DDA true"
+       ]
+      },
+      {
+       "id": "cost",
+       "range": [
+        202411,
+        250113,
+        "measured",
+        "https://www2.census.gov/econ/bps/County/co2025a.txt"
+       ],
+       "why": null
+      },
+      {
+       "id": "rent_limits",
+       "range": [
+        1277,
+        1641,
+        "modelled",
+        "https://www.huduser.gov/hudapi/public/mtspil/data/1703199999"
+       ],
+       "why": null
+      },
+      {
+       "id": "fmr",
+       "range": [
+        1678,
+        2586,
+        "measured",
+        "https://www.huduser.gov/hudapi/public/fmr/statedata/IL?year=2027"
+       ],
+       "why": null
+      }
+     ],
+     "dollarsShown": 19,
+     "dollarsNotOnTheCard": [],
+     "badText": 0,
+     "text": "THIS PLACE, WHATEVER IS BUILT\n\nTAX-CREDIT HIGH-COST AREA (HUD QUALIFIED CENSUS TRACT OR DIFFICULT DEVELOPMENT AREA)\nA new tax-credit building here counts 130% of its eligible basis\n2027 lists: qualified census tract (tract 17031830005): no source; difficult development area (metropolitan Small DDA list, ZIP area 60461): yes source\n2026 lists: qualified census tract (tract 17031830005): no source; difficult development area (metropolitan Small DDA list, ZIP area 60461): yes source\n\n26 U.S.C. 42(d)(5)(B)(i)(I): \"In the case of any building located in a qualified census tract or difficult development area which is designated for purposes of this subparagraph— (I) in the case of a new building, the eligible basis of such building shall be 130 percent of such basis\" source\n\n\"The 2027 lists of QCTs and DDAs are effective: (1) for allocations of credit after December 31, 2026\" source\n\nDECLARED CONSTRUCTION VALUE PER NEW HOME, BUILDINGS WITH 5 OR MORE UNITS (COUNTY BUILDING PERMITS)\n$202,411 to $250,113 Measured source per home\nCook County, IL (county FIPS 17031): 2023 $202,411 (3,267 homes) source; 2024 $243,469 (4,793 homes) source; 2025 $250,113 (3,088 homes) source. Census: \"Valuation - The valuation is the estimated value of the residential structure as shown on the building permit. If no value is listed on the permit, we accept estimates from the permit official.\" source\nthe value of the structure as written on the permit: no land, fees, financing, site work or developer costs; permit valuations often run below final cost\nTAX-CREDIT RENT CEILINGS (GROSS RENT, STUDIO TO 2-BEDROOM)\n$1,277 to $1,641 Modelled source per home per month at the 60% limit; at the 50% limit $1,064 to $1,368 Modelled source\nChicago-Joliet-Naperville, IL HUD Metro FMR Area, HUD 2026 tax-credit incom"
+    },
+    {
+     "id": "ss:17031:way/764224674",
+     "name": "Golf course near 153rd Street (Orland Park)",
+     "open": false,
+     "place": [
+      {
+       "id": "qct_dda",
+       "status": "known",
+       "boost": "does not apply by location",
+       "tract": "17031824114",
+       "zcta": "60462",
+       "years": [
+        "2026: QCT false, DDA false",
+        "2027: QCT false, DDA false"
+       ]
+      },
+      {
+       "id": "cost",
+       "range": [
+        202411,
+        250113,
+        "measured",
+        "https://www2.census.gov/econ/bps/County/co2025a.txt"
+       ],
+       "why": null
+      },
+      {
+       "id": "rent_limits",
+       "range": [
+        1277,
+        1641,
+        "modelled",
+        "https://www.huduser.gov/hudapi/public/mtspil/data/1703199999"
+       ],
+       "why": null
+      },
+      {
+       "id": "fmr",
+       "range": [
+        1678,
+        2586,
+        "measured",
+        "https://www.huduser.gov/hudapi/public/fmr/statedata/IL?year=2027"
+       ],
+       "why": null
+      }
+     ],
+     "dollarsShown": 0,
+     "dollarsNotOnTheCard": [],
+     "badText": 0,
+     "text": ""
+    },
+    {
+     "id": "ss:17031:way/195246184",
+     "name": "Golf course near Ravinia",
+     "open": false,
+     "place": [
+      {
+       "id": "qct_dda",
+       "status": "known",
+       "boost": "applies",
+       "tract": "17097865700",
+       "zcta": "60035",
+       "years": [
+        "2026: QCT false, DDA true",
+        "2027: QCT false, DDA true"
+       ]
+      },
+      {
+       "id": "cost",
+       "range": [
+        249548,
+        522575,
+        "measured",
+        "https://www2.census.gov/econ/bps/County/co2025a.txt"
+       ],
+       "why": null
+      },
+      {
+       "id": "rent_limits",
+       "range": [
+        1277,
+        1641,
+        "modelled",
+        "https://www.huduser.gov/hudapi/public/mtspil/data/1709799999"
+       ],
+       "why": null
+      },
+      {
+       "id": "fmr",
+       "range": [
+        1678,
+        2586,
+        "measured",
+        "https://www.huduser.gov/hudapi/public/fmr/statedata/IL?year=2027"
+       ],
+       "why": null
+      }
+     ],
+     "dollarsShown": 0,
+     "dollarsNotOnTheCard": [],
+     "badText": 0,
+     "text": ""
+    },
+    {
+     "id": "ss:17031:way/188547004",
+     "name": "Golf course near Palos Heights",
+     "open": false,
+     "place": [
+      {
+       "id": "qct_dda",
+       "status": "known",
+       "boost": "applies",
+       "tract": "17031823102",
+       "zcta": "60482",
+       "years": [
+        "2026: QCT false, DDA false",
+        "2027: QCT true, DDA false"
+       ]
+      },
+      {
+       "id": "cost",
+       "range": [
+        202411,
+        250113,
+        "measured",
+        "https://www2.census.gov/econ/bps/County/co2025a.txt"
+       ],
+       "why": null
+      },
+      {
+       "id": "rent_limits",
+       "range": [
+        1277,
+        1641,
+        "modelled",
+        "https://www.huduser.gov/hudapi/public/mtspil/data/1703199999"
+       ],
+       "why": null
+      },
+      {
+       "id": "fmr",
+       "range": [
+        1678,
+        2586,
+        "measured",
+        "https://www.huduser.gov/hudapi/public/fmr/statedata/IL?year=2027"
+       ],
+       "why": null
+      }
+     ],
+     "dollarsShown": 0,
+     "dollarsNotOnTheCard": [],
+     "badText": 0,
+     "text": ""
+    },
+    {
+     "id": "ss:17031:way/140496656",
+     "name": "Golf course near Flossmoor",
+     "open": false,
+     "place": [
+      {
+       "id": "qct_dda",
+       "status": "known",
+       "boost": "applies",
+       "tract": "17031828801",
+       "zcta": "60422",
+       "years": [
+        "2026: QCT false, DDA true",
+        "2027: QCT false, DDA true"
+       ]
+      },
+      {
+       "id": "cost",
+       "range": [
+        202411,
+        250113,
+        "measured",
+        "https://www2.census.gov/econ/bps/County/co2025a.txt"
+       ],
+       "why": null
+      },
+      {
+       "id": "rent_limits",
+       "range": [
+        1277,
+        1641,
+        "modelled",
+        "https://www.huduser.gov/hudapi/public/mtspil/data/1703199999"
+       ],
+       "why": null
+      },
+      {
+       "id": "fmr",
+       "range": [
+        1678,
+        2586,
+        "measured",
+        "https://www.huduser.gov/hudapi/public/fmr/statedata/IL?year=2027"
+       ],
+       "why": null
+      }
+     ],
+     "dollarsShown": 0,
+     "dollarsNotOnTheCard": [],
+     "badText": 0,
+     "text": ""
+    }
+   ],
+   "sectionBadText": 0,
+   "screenshot": "/home/user/city-pretty/.claude/worktrees/agent-ae4f6d3675e59e8a1/data/backtests/site_cards_cook.png",
+   "placeScreenshot": "/home/user/city-pretty/.claude/worktrees/agent-ae4f6d3675e59e8a1/data/backtests/site_cards_cook_place.png",
+   "errors": [],
+   "placeRowsShown": true
+  }
+ }
+}

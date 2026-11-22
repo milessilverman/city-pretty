@@ -1,0 +1,1040 @@
+{
+ "date": "2026-11-22",
+ "seed": 20261122,
+ "n": 10,
+ "counties": [
+  "04013",
+  "06073",
+  "17031",
+  "27123",
+  "36047",
+  "37183",
+  "41051",
+  "48113"
+ ],
+ "script": "scripts/recheck_site_cards.py",
+ "figures_checked": 130,
+ "figures_differ": 0,
+ "sites": [
+  {
+   "site": "36047:way/240197648",
+   "file_county": "36047",
+   "point": [
+    40.747569,
+    -73.95464
+   ],
+   "checks": [
+    {
+     "figure": "census tract",
+     "card": "36081000103",
+     "by_hand": "36081000103",
+     "how": "Census Geocoder, Census2020 vintage, at the site's interior point",
+     "same": true
+    },
+    {
+     "figure": "ZIP Code Tabulation Area",
+     "card": "11101",
+     "by_hand": "11101",
+     "how": "Census TIGERweb 2020 ZCTA layer (full outline)",
+     "same": true
+    },
+    {
+     "figure": "2026 QCT",
+     "card": false,
+     "by_hand": false,
+     "how": "HUD QCT2026.csv: tract GEOID listed",
+     "same": true
+    },
+    {
+     "figure": "2026 metro Small DDA",
+     "card": true,
+     "by_hand": true,
+     "how": "HUD 2026 MDDA sheet: ZCTA flag",
+     "same": true
+    },
+    {
+     "figure": "2027 QCT",
+     "card": false,
+     "by_hand": false,
+     "how": "HUD QCT2027.csv: tract GEOID listed",
+     "same": true
+    },
+    {
+     "figure": "2027 metro Small DDA",
+     "card": true,
+     "by_hand": true,
+     "how": "HUD 2027 MDDA sheet: ZCTA flag",
+     "same": true
+    },
+    {
+     "figure": "130% basis by location (2027)",
+     "card": "applies",
+     "by_hand": "applies",
+     "how": "statute: QCT or DDA -> 130%",
+     "same": true
+    },
+    {
+     "figure": "permit value per home, low",
+     "card": 153038,
+     "by_hand": 153038,
+     "how": "co<year>a.txt 5+ units reported value / units, lowest year",
+     "same": true
+    },
+    {
+     "figure": "permit value per home, high",
+     "card": 174953,
+     "by_hand": 174953,
+     "how": "same, highest year",
+     "same": true
+    },
+    {
+     "figure": "60% rent ceiling, studio",
+     "card": 1782,
+     "by_hand": 1782.0,
+     "how": "HUD MTSP API il60_p1 x 0.30 / 12",
+     "same": true
+    },
+    {
+     "figure": "60% rent ceiling, 2-bedroom",
+     "card": 2290.5,
+     "by_hand": 2290.5,
+     "how": "HUD MTSP API il60_p3 x 0.30 / 12 (3 persons = 1.5 x 2 bedrooms)",
+     "same": true
+    },
+    {
+     "figure": "FMR low (studio to 3-bedroom)",
+     "card": 2593,
+     "by_hand": 2593,
+     "how": "HUD FMR API, asked again, FY2027",
+     "same": true
+    },
+    {
+     "figure": "FMR high",
+     "card": 3760,
+     "by_hand": 3760,
+     "how": "same",
+     "same": true
+    }
+   ],
+   "differ": 0
+  },
+  {
+   "site": "27123:way/54581340",
+   "file_county": "27123",
+   "point": [
+    44.945867,
+    -93.100081
+   ],
+   "checks": [
+    {
+     "figure": "census tract",
+     "card": "27123034201",
+     "by_hand": "27123034201",
+     "how": "Census Geocoder, Census2020 vintage, at the site's interior point",
+     "same": true
+    },
+    {
+     "figure": "ZIP Code Tabulation Area",
+     "card": "55102",
+     "by_hand": "55102",
+     "how": "Census TIGERweb 2020 ZCTA layer (full outline)",
+     "same": true
+    },
+    {
+     "figure": "2026 QCT",
+     "card": false,
+     "by_hand": false,
+     "how": "HUD QCT2026.csv: tract GEOID listed",
+     "same": true
+    },
+    {
+     "figure": "2026 metro Small DDA",
+     "card": false,
+     "by_hand": false,
+     "how": "HUD 2026 MDDA sheet: ZCTA flag",
+     "same": true
+    },
+    {
+     "figure": "2027 QCT",
+     "card": false,
+     "by_hand": false,
+     "how": "HUD QCT2027.csv: tract GEOID listed",
+     "same": true
+    },
+    {
+     "figure": "2027 metro Small DDA",
+     "card": false,
+     "by_hand": false,
+     "how": "HUD 2027 MDDA sheet: ZCTA flag",
+     "same": true
+    },
+    {
+     "figure": "130% basis by location (2027)",
+     "card": "does not apply by location",
+     "by_hand": "does not apply by location",
+     "how": "statute: QCT or DDA -> 130%",
+     "same": true
+    },
+    {
+     "figure": "permit value per home, low",
+     "card": 173137,
+     "by_hand": 173137,
+     "how": "co<year>a.txt 5+ units reported value / units, lowest year",
+     "same": true
+    },
+    {
+     "figure": "permit value per home, high",
+     "card": 239630,
+     "by_hand": 239630,
+     "how": "same, highest year",
+     "same": true
+    },
+    {
+     "figure": "60% rent ceiling, studio",
+     "card": 1381.5,
+     "by_hand": 1381.5,
+     "how": "HUD MTSP API il60_p1 x 0.30 / 12",
+     "same": true
+    },
+    {
+     "figure": "60% rent ceiling, 2-bedroom",
+     "card": 1776,
+     "by_hand": 1776.0,
+     "how": "HUD MTSP API il60_p3 x 0.30 / 12 (3 persons = 1.5 x 2 bedrooms)",
+     "same": true
+    },
+    {
+     "figure": "FMR low (studio to 3-bedroom)",
+     "card": 1265,
+     "by_hand": 1265,
+     "how": "HUD FMR API, asked again, FY2027",
+     "same": true
+    },
+    {
+     "figure": "FMR high",
+     "card": 2264,
+     "by_hand": 2264,
+     "how": "same",
+     "same": true
+    }
+   ],
+   "differ": 0
+  },
+  {
+   "site": "06073:way/721126842",
+   "file_county": "06073",
+   "point": [
+    32.770693,
+    -117.148556
+   ],
+   "checks": [
+    {
+     "figure": "census tract",
+     "card": "06073009307",
+     "by_hand": "06073009307",
+     "how": "Census Geocoder, Census2020 vintage, at the site's interior point",
+     "same": true
+    },
+    {
+     "figure": "ZIP Code Tabulation Area",
+     "card": "92108",
+     "by_hand": "92108",
+     "how": "Census TIGERweb 2020 ZCTA layer (full outline)",
+     "same": true
+    },
+    {
+     "figure": "2026 QCT",
+     "card": false,
+     "by_hand": false,
+     "how": "HUD QCT2026.csv: tract GEOID listed",
+     "same": true
+    },
+    {
+     "figure": "2026 metro Small DDA",
+     "card": true,
+     "by_hand": true,
+     "how": "HUD 2026 MDDA sheet: ZCTA flag",
+     "same": true
+    },
+    {
+     "figure": "2027 QCT",
+     "card": false,
+     "by_hand": false,
+     "how": "HUD QCT2027.csv: tract GEOID listed",
+     "same": true
+    },
+    {
+     "figure": "2027 metro Small DDA",
+     "card": true,
+     "by_hand": true,
+     "how": "HUD 2027 MDDA sheet: ZCTA flag",
+     "same": true
+    },
+    {
+     "figure": "130% basis by location (2027)",
+     "card": "applies",
+     "by_hand": "applies",
+     "how": "statute: QCT or DDA -> 130%",
+     "same": true
+    },
+    {
+     "figure": "permit value per home, low",
+     "card": 167113,
+     "by_hand": 167113,
+     "how": "co<year>a.txt 5+ units reported value / units, lowest year",
+     "same": true
+    },
+    {
+     "figure": "permit value per home, high",
+     "card": 206470,
+     "by_hand": 206470,
+     "how": "same, highest year",
+     "same": true
+    },
+    {
+     "figure": "60% rent ceiling, studio",
+     "card": 1837.5,
+     "by_hand": 1837.5,
+     "how": "HUD MTSP API il60_p1 x 0.30 / 12",
+     "same": true
+    },
+    {
+     "figure": "60% rent ceiling, 2-bedroom",
+     "card": 2362.5,
+     "by_hand": 2362.5,
+     "how": "HUD MTSP API il60_p3 x 0.30 / 12 (3 persons = 1.5 x 2 bedrooms)",
+     "same": true
+    },
+    {
+     "figure": "FMR low (studio to 3-bedroom)",
+     "card": 2192,
+     "by_hand": 2192,
+     "how": "HUD FMR API, asked again, FY2027",
+     "same": true
+    },
+    {
+     "figure": "FMR high",
+     "card": 3743,
+     "by_hand": 3743,
+     "how": "same",
+     "same": true
+    }
+   ],
+   "differ": 0
+  },
+  {
+   "site": "41051:way/36796199",
+   "file_county": "41051",
+   "point": [
+    45.53278,
+    -122.664675
+   ],
+   "checks": [
+    {
+     "figure": "census tract",
+     "card": "41051002303",
+     "by_hand": "41051002303",
+     "how": "Census Geocoder, Census2020 vintage, at the site's interior point",
+     "same": true
+    },
+    {
+     "figure": "ZIP Code Tabulation Area",
+     "card": "97232",
+     "by_hand": "97232",
+     "how": "Census TIGERweb 2020 ZCTA layer (full outline)",
+     "same": true
+    },
+    {
+     "figure": "2026 QCT",
+     "card": true,
+     "by_hand": true,
+     "how": "HUD QCT2026.csv: tract GEOID listed",
+     "same": true
+    },
+    {
+     "figure": "2026 metro Small DDA",
+     "card": false,
+     "by_hand": false,
+     "how": "HUD 2026 MDDA sheet: ZCTA flag",
+     "same": true
+    },
+    {
+     "figure": "2027 QCT",
+     "card": true,
+     "by_hand": true,
+     "how": "HUD QCT2027.csv: tract GEOID listed",
+     "same": true
+    },
+    {
+     "figure": "2027 metro Small DDA",
+     "card": false,
+     "by_hand": false,
+     "how": "HUD 2027 MDDA sheet: ZCTA flag",
+     "same": true
+    },
+    {
+     "figure": "130% basis by location (2027)",
+     "card": "applies",
+     "by_hand": "applies",
+     "how": "statute: QCT or DDA -> 130%",
+     "same": true
+    },
+    {
+     "figure": "permit value per home, low",
+     "card": 168995,
+     "by_hand": 168995,
+     "how": "co<year>a.txt 5+ units reported value / units, lowest year",
+     "same": true
+    },
+    {
+     "figure": "permit value per home, high",
+     "card": 232692,
+     "by_hand": 232692,
+     "how": "same, highest year",
+     "same": true
+    },
+    {
+     "figure": "60% rent ceiling, studio",
+     "card": 1348.5,
+     "by_hand": 1348.5,
+     "how": "HUD MTSP API il60_p1 x 0.30 / 12",
+     "same": true
+    },
+    {
+     "figure": "60% rent ceiling, 2-bedroom",
+     "card": 1732.5,
+     "by_hand": 1732.5,
+     "how": "HUD MTSP API il60_p3 x 0.30 / 12 (3 persons = 1.5 x 2 bedrooms)",
+     "same": true
+    },
+    {
+     "figure": "FMR low (studio to 3-bedroom)",
+     "card": 1527,
+     "by_hand": 1527,
+     "how": "HUD FMR API, asked again, FY2027",
+     "same": true
+    },
+    {
+     "figure": "FMR high",
+     "card": 2550,
+     "by_hand": 2550,
+     "how": "same",
+     "same": true
+    }
+   ],
+   "differ": 0
+  },
+  {
+   "site": "17031:way/947059562",
+   "file_county": "17031",
+   "point": [
+    41.915949,
+    -87.665047
+   ],
+   "checks": [
+    {
+     "figure": "census tract",
+     "card": "17031832300",
+     "by_hand": "17031832300",
+     "how": "Census Geocoder, Census2020 vintage, at the site's interior point",
+     "same": true
+    },
+    {
+     "figure": "ZIP Code Tabulation Area",
+     "card": "60642",
+     "by_hand": "60642",
+     "how": "Census TIGERweb 2020 ZCTA layer (full outline)",
+     "same": true
+    },
+    {
+     "figure": "2026 QCT",
+     "card": false,
+     "by_hand": false,
+     "how": "HUD QCT2026.csv: tract GEOID listed",
+     "same": true
+    },
+    {
+     "figure": "2026 metro Small DDA",
+     "card": true,
+     "by_hand": true,
+     "how": "HUD 2026 MDDA sheet: ZCTA flag",
+     "same": true
+    },
+    {
+     "figure": "2027 QCT",
+     "card": false,
+     "by_hand": false,
+     "how": "HUD QCT2027.csv: tract GEOID listed",
+     "same": true
+    },
+    {
+     "figure": "2027 metro Small DDA",
+     "card": true,
+     "by_hand": true,
+     "how": "HUD 2027 MDDA sheet: ZCTA flag",
+     "same": true
+    },
+    {
+     "figure": "130% basis by location (2027)",
+     "card": "applies",
+     "by_hand": "applies",
+     "how": "statute: QCT or DDA -> 130%",
+     "same": true
+    },
+    {
+     "figure": "permit value per home, low",
+     "card": 202411,
+     "by_hand": 202411,
+     "how": "co<year>a.txt 5+ units reported value / units, lowest year",
+     "same": true
+    },
+    {
+     "figure": "permit value per home, high",
+     "card": 250113,
+     "by_hand": 250113,
+     "how": "same, highest year",
+     "same": true
+    },
+    {
+     "figure": "60% rent ceiling, studio",
+     "card": 1276.5,
+     "by_hand": 1276.5,
+     "how": "HUD MTSP API il60_p1 x 0.30 / 12",
+     "same": true
+    },
+    {
+     "figure": "60% rent ceiling, 2-bedroom",
+     "card": 1641,
+     "by_hand": 1641.0,
+     "how": "HUD MTSP API il60_p3 x 0.30 / 12 (3 persons = 1.5 x 2 bedrooms)",
+     "same": true
+    },
+    {
+     "figure": "FMR low (studio to 3-bedroom)",
+     "card": 1678,
+     "by_hand": 1678,
+     "how": "HUD FMR API, asked again, FY2027",
+     "same": true
+    },
+    {
+     "figure": "FMR high",
+     "card": 2586,
+     "by_hand": 2586,
+     "how": "same",
+     "same": true
+    }
+   ],
+   "differ": 0
+  },
+  {
+   "site": "48113:relation/20712962",
+   "file_county": "48113",
+   "point": [
+    32.955759,
+    -96.908625
+   ],
+   "checks": [
+    {
+     "figure": "census tract",
+     "card": "48113013716",
+     "by_hand": "48113013716",
+     "how": "Census Geocoder, Census2020 vintage, at the site's interior point",
+     "same": true
+    },
+    {
+     "figure": "ZIP Code Tabulation Area",
+     "card": "75006",
+     "by_hand": "75006",
+     "how": "Census TIGERweb 2020 ZCTA layer (full outline)",
+     "same": true
+    },
+    {
+     "figure": "2026 QCT",
+     "card": false,
+     "by_hand": false,
+     "how": "HUD QCT2026.csv: tract GEOID listed",
+     "same": true
+    },
+    {
+     "figure": "2026 metro Small DDA",
+     "card": false,
+     "by_hand": false,
+     "how": "HUD 2026 MDDA sheet: ZCTA flag",
+     "same": true
+    },
+    {
+     "figure": "2027 QCT",
+     "card": false,
+     "by_hand": false,
+     "how": "HUD QCT2027.csv: tract GEOID listed",
+     "same": true
+    },
+    {
+     "figure": "2027 metro Small DDA",
+     "card": false,
+     "by_hand": false,
+     "how": "HUD 2027 MDDA sheet: ZCTA flag",
+     "same": true
+    },
+    {
+     "figure": "130% basis by location (2027)",
+     "card": "does not apply by location",
+     "by_hand": "does not apply by location",
+     "how": "statute: QCT or DDA -> 130%",
+     "same": true
+    },
+    {
+     "figure": "permit value per home, low",
+     "card": 127659,
+     "by_hand": 127659,
+     "how": "co<year>a.txt 5+ units reported value / units, lowest year",
+     "same": true
+    },
+    {
+     "figure": "permit value per home, high",
+     "card": 174235,
+     "by_hand": 174235,
+     "how": "same, highest year",
+     "same": true
+    },
+    {
+     "figure": "60% rent ceiling, studio",
+     "card": 1272,
+     "by_hand": 1272.0,
+     "how": "HUD MTSP API il60_p1 x 0.30 / 12",
+     "same": true
+    },
+    {
+     "figure": "60% rent ceiling, 2-bedroom",
+     "card": 1635,
+     "by_hand": 1635.0,
+     "how": "HUD MTSP API il60_p3 x 0.30 / 12 (3 persons = 1.5 x 2 bedrooms)",
+     "same": true
+    },
+    {
+     "figure": "FMR low (studio to 3-bedroom)",
+     "card": 1491,
+     "by_hand": 1491,
+     "how": "HUD FMR API, asked again, FY2027",
+     "same": true
+    },
+    {
+     "figure": "FMR high",
+     "card": 2275,
+     "by_hand": 2275,
+     "how": "same",
+     "same": true
+    }
+   ],
+   "differ": 0
+  },
+  {
+   "site": "37183:way/183510216",
+   "file_county": "37183",
+   "point": [
+    35.844681,
+    -78.640935
+   ],
+   "checks": [
+    {
+     "figure": "census tract",
+     "card": "37183052602",
+     "by_hand": "37183052602",
+     "how": "Census Geocoder, Census2020 vintage, at the site's interior point",
+     "same": true
+    },
+    {
+     "figure": "ZIP Code Tabulation Area",
+     "card": "27609",
+     "by_hand": "27609",
+     "how": "Census TIGERweb 2020 ZCTA layer (full outline)",
+     "same": true
+    },
+    {
+     "figure": "2026 QCT",
+     "card": false,
+     "by_hand": false,
+     "how": "HUD QCT2026.csv: tract GEOID listed",
+     "same": true
+    },
+    {
+     "figure": "2026 metro Small DDA",
+     "card": false,
+     "by_hand": false,
+     "how": "HUD 2026 MDDA sheet: ZCTA flag",
+     "same": true
+    },
+    {
+     "figure": "2027 QCT",
+     "card": false,
+     "by_hand": false,
+     "how": "HUD QCT2027.csv: tract GEOID listed",
+     "same": true
+    },
+    {
+     "figure": "2027 metro Small DDA",
+     "card": false,
+     "by_hand": false,
+     "how": "HUD 2027 MDDA sheet: ZCTA flag",
+     "same": true
+    },
+    {
+     "figure": "130% basis by location (2027)",
+     "card": "does not apply by location",
+     "by_hand": "does not apply by location",
+     "how": "statute: QCT or DDA -> 130%",
+     "same": true
+    },
+    {
+     "figure": "permit value per home, low",
+     "card": 145620,
+     "by_hand": 145620,
+     "how": "co<year>a.txt 5+ units reported value / units, lowest year",
+     "same": true
+    },
+    {
+     "figure": "permit value per home, high",
+     "card": 200016,
+     "by_hand": 200016,
+     "how": "same, highest year",
+     "same": true
+    },
+    {
+     "figure": "60% rent ceiling, studio",
+     "card": 1390.5,
+     "by_hand": 1390.5,
+     "how": "HUD MTSP API il60_p1 x 0.30 / 12",
+     "same": true
+    },
+    {
+     "figure": "60% rent ceiling, 2-bedroom",
+     "card": 1786.5,
+     "by_hand": 1786.5,
+     "how": "HUD MTSP API il60_p3 x 0.30 / 12 (3 persons = 1.5 x 2 bedrooms)",
+     "same": true
+    },
+    {
+     "figure": "FMR low (studio to 3-bedroom)",
+     "card": 1489,
+     "by_hand": 1489,
+     "how": "HUD FMR API, asked again, FY2027",
+     "same": true
+    },
+    {
+     "figure": "FMR high",
+     "card": 2103,
+     "by_hand": 2103,
+     "how": "same",
+     "same": true
+    }
+   ],
+   "differ": 0
+  },
+  {
+   "site": "04013:way/470476518",
+   "file_county": "04013",
+   "point": [
+    33.50905,
+    -112.103015
+   ],
+   "checks": [
+    {
+     "figure": "census tract",
+     "card": "04013109002",
+     "by_hand": "04013109002",
+     "how": "Census Geocoder, Census2020 vintage, at the site's interior point",
+     "same": true
+    },
+    {
+     "figure": "ZIP Code Tabulation Area",
+     "card": "85015",
+     "by_hand": "85015",
+     "how": "Census TIGERweb 2020 ZCTA layer (full outline)",
+     "same": true
+    },
+    {
+     "figure": "2026 QCT",
+     "card": true,
+     "by_hand": true,
+     "how": "HUD QCT2026.csv: tract GEOID listed",
+     "same": true
+    },
+    {
+     "figure": "2026 metro Small DDA",
+     "card": false,
+     "by_hand": false,
+     "how": "HUD 2026 MDDA sheet: ZCTA flag",
+     "same": true
+    },
+    {
+     "figure": "2027 QCT",
+     "card": true,
+     "by_hand": true,
+     "how": "HUD QCT2027.csv: tract GEOID listed",
+     "same": true
+    },
+    {
+     "figure": "2027 metro Small DDA",
+     "card": false,
+     "by_hand": false,
+     "how": "HUD 2027 MDDA sheet: ZCTA flag",
+     "same": true
+    },
+    {
+     "figure": "130% basis by location (2027)",
+     "card": "applies",
+     "by_hand": "applies",
+     "how": "statute: QCT or DDA -> 130%",
+     "same": true
+    },
+    {
+     "figure": "permit value per home, low",
+     "card": 126676,
+     "by_hand": 126676,
+     "how": "co<year>a.txt 5+ units reported value / units, lowest year",
+     "same": true
+    },
+    {
+     "figure": "permit value per home, high",
+     "card": 179608,
+     "by_hand": 179608,
+     "how": "same, highest year",
+     "same": true
+    },
+    {
+     "figure": "60% rent ceiling, studio",
+     "card": 1180.5,
+     "by_hand": 1180.5,
+     "how": "HUD MTSP API il60_p1 x 0.30 / 12",
+     "same": true
+    },
+    {
+     "figure": "60% rent ceiling, 2-bedroom",
+     "card": 1518,
+     "by_hand": 1518.0,
+     "how": "HUD MTSP API il60_p3 x 0.30 / 12 (3 persons = 1.5 x 2 bedrooms)",
+     "same": true
+    },
+    {
+     "figure": "FMR low (studio to 3-bedroom)",
+     "card": 1390,
+     "by_hand": 1390,
+     "how": "HUD FMR API, asked again, FY2027",
+     "same": true
+    },
+    {
+     "figure": "FMR high",
+     "card": 2287,
+     "by_hand": 2287,
+     "how": "same",
+     "same": true
+    }
+   ],
+   "differ": 0
+  },
+  {
+   "site": "04013:way/604114793",
+   "file_county": "04013",
+   "point": [
+    33.558156,
+    -112.100362
+   ],
+   "checks": [
+    {
+     "figure": "census tract",
+     "card": "04013105503",
+     "by_hand": "04013105503",
+     "how": "Census Geocoder, Census2020 vintage, at the site's interior point",
+     "same": true
+    },
+    {
+     "figure": "ZIP Code Tabulation Area",
+     "card": "85021",
+     "by_hand": "85021",
+     "how": "Census TIGERweb 2020 ZCTA layer (full outline)",
+     "same": true
+    },
+    {
+     "figure": "2026 QCT",
+     "card": true,
+     "by_hand": true,
+     "how": "HUD QCT2026.csv: tract GEOID listed",
+     "same": true
+    },
+    {
+     "figure": "2026 metro Small DDA",
+     "card": false,
+     "by_hand": false,
+     "how": "HUD 2026 MDDA sheet: ZCTA flag",
+     "same": true
+    },
+    {
+     "figure": "2027 QCT",
+     "card": true,
+     "by_hand": true,
+     "how": "HUD QCT2027.csv: tract GEOID listed",
+     "same": true
+    },
+    {
+     "figure": "2027 metro Small DDA",
+     "card": false,
+     "by_hand": false,
+     "how": "HUD 2027 MDDA sheet: ZCTA flag",
+     "same": true
+    },
+    {
+     "figure": "130% basis by location (2027)",
+     "card": "applies",
+     "by_hand": "applies",
+     "how": "statute: QCT or DDA -> 130%",
+     "same": true
+    },
+    {
+     "figure": "permit value per home, low",
+     "card": 126676,
+     "by_hand": 126676,
+     "how": "co<year>a.txt 5+ units reported value / units, lowest year",
+     "same": true
+    },
+    {
+     "figure": "permit value per home, high",
+     "card": 179608,
+     "by_hand": 179608,
+     "how": "same, highest year",
+     "same": true
+    },
+    {
+     "figure": "60% rent ceiling, studio",
+     "card": 1180.5,
+     "by_hand": 1180.5,
+     "how": "HUD MTSP API il60_p1 x 0.30 / 12",
+     "same": true
+    },
+    {
+     "figure": "60% rent ceiling, 2-bedroom",
+     "card": 1518,
+     "by_hand": 1518.0,
+     "how": "HUD MTSP API il60_p3 x 0.30 / 12 (3 persons = 1.5 x 2 bedrooms)",
+     "same": true
+    },
+    {
+     "figure": "FMR low (studio to 3-bedroom)",
+     "card": 1390,
+     "by_hand": 1390,
+     "how": "HUD FMR API, asked again, FY2027",
+     "same": true
+    },
+    {
+     "figure": "FMR high",
+     "card": 2287,
+     "by_hand": 2287,
+     "how": "same",
+     "same": true
+    }
+   ],
+   "differ": 0
+  },
+  {
+   "site": "41051:way/40980094",
+   "file_county": "41051",
+   "point": [
+    45.534731,
+    -122.665204
+   ],
+   "checks": [
+    {
+     "figure": "census tract",
+     "card": "41051002303",
+     "by_hand": "41051002303",
+     "how": "Census Geocoder, Census2020 vintage, at the site's interior point",
+     "same": true
+    },
+    {
+     "figure": "ZIP Code Tabulation Area",
+     "card": "97232",
+     "by_hand": "97232",
+     "how": "Census TIGERweb 2020 ZCTA layer (full outline)",
+     "same": true
+    },
+    {
+     "figure": "2026 QCT",
+     "card": true,
+     "by_hand": true,
+     "how": "HUD QCT2026.csv: tract GEOID listed",
+     "same": true
+    },
+    {
+     "figure": "2026 metro Small DDA",
+     "card": false,
+     "by_hand": false,
+     "how": "HUD 2026 MDDA sheet: ZCTA flag",
+     "same": true
+    },
+    {
+     "figure": "2027 QCT",
+     "card": true,
+     "by_hand": true,
+     "how": "HUD QCT2027.csv: tract GEOID listed",
+     "same": true
+    },
+    {
+     "figure": "2027 metro Small DDA",
+     "card": false,
+     "by_hand": false,
+     "how": "HUD 2027 MDDA sheet: ZCTA flag",
+     "same": true
+    },
+    {
+     "figure": "130% basis by location (2027)",
+     "card": "applies",
+     "by_hand": "applies",
+     "how": "statute: QCT or DDA -> 130%",
+     "same": true
+    },
+    {
+     "figure": "permit value per home, low",
+     "card": 168995,
+     "by_hand": 168995,
+     "how": "co<year>a.txt 5+ units reported value / units, lowest year",
+     "same": true
+    },
+    {
+     "figure": "permit value per home, high",
+     "card": 232692,
+     "by_hand": 232692,
+     "how": "same, highest year",
+     "same": true
+    },
+    {
+     "figure": "60% rent ceiling, studio",
+     "card": 1348.5,
+     "by_hand": 1348.5,
+     "how": "HUD MTSP API il60_p1 x 0.30 / 12",
+     "same": true
+    },
+    {
+     "figure": "60% rent ceiling, 2-bedroom",
+     "card": 1732.5,
+     "by_hand": 1732.5,
+     "how": "HUD MTSP API il60_p3 x 0.30 / 12 (3 persons = 1.5 x 2 bedrooms)",
+     "same": true
+    },
+    {
+     "figure": "FMR low (studio to 3-bedroom)",
+     "card": 1527,
+     "by_hand": 1527,
+     "how": "HUD FMR API, asked again, FY2027",
+     "same": true
+    },
+    {
+     "figure": "FMR high",
+     "card": 2550,
+     "by_hand": 2550,
+     "how": "same",
+     "same": true
+    }
+   ],
+   "differ": 0
+  }
+ ]
+}
