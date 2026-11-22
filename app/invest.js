@@ -1039,7 +1039,14 @@ function coursesSection(m, open) {
   // src/ai/advisorGroundingContract.ts): the cards get the room the rest of the brief leaves, at most 6,000 characters
   if (m.brief) {
     m.brief.projectCards = null;
-    const used = JSON.stringify(E().briefForAdvisor(m.brief)).length, room = Math.min(6000, 19500 - used);
+    delete m.brief.transitLinesMaxChars;
+    let used = JSON.stringify(E().briefForAdvisor(m.brief)).length, room = Math.min(6000, 19500 - used);
+    // riders-and-money lines and the cards share what is left: the cards keep at least 2,500 characters, and lines that
+    // no longer fit are named in transitLinesOmitted instead of being dropped silently
+    for (let cap = 2600; room < 2500 && cap > 0; cap -= 650) {
+      m.brief.transitLinesMaxChars = cap - 650;
+      used = JSON.stringify(E().briefForAdvisor(m.brief)).length; room = Math.min(6000, 19500 - used);
+    }
     m.brief.projectCards = room > 400 ? PCE().cardsForAdvisor(C.cards, room) : null;
   }
   const bv = pc.budget != null ? pc.budget : (isFinite(BUDGET_OK()) ? BUDGET_OK() : "");

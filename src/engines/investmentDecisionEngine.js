@@ -30,7 +30,7 @@ const _ideDemand = (typeof window !== "undefined" && window.TransitDemandEngine)
   : ((typeof require !== "undefined") ? require("./transitDemandEngine") : null);
 
 const DECISION_ENGINE_VERSION = "1.0.0";
-const TRANSIT_LINES_MAX_CHARS = 4000; // share of the advisor brief (DECISION_BRIEF_MAX_CHARS 20,000) given to riders-and-money lines
+const TRANSIT_LINES_MAX_CHARS = 2600; // share of the advisor brief (DECISION_BRIEF_MAX_CHARS 20,000) given to riders-and-money lines; leaves room for the project cards
 
 // ---------------------------------------------------------------- cited thresholds (fetched 2026-11-18)
 const TRANSIT_THRESHOLDS = {
@@ -887,8 +887,10 @@ function briefForAdvisor(brief) {
     ...(() => {
       const all = _ideDemand ? (brief.transitLines || []).slice().sort((a, b) => (a.kind === "pipeline" ? 0 : 1) - (b.kind === "pipeline" ? 0 : 1)) : [];
       const kept = [], omitted = [];
+      // the page may lower the share (brief.transitLinesMaxChars) so the project cards keep room in the brief
+      const lineCap = Number.isFinite(brief.transitLinesMaxChars) ? Math.max(0, Math.min(TRANSIT_LINES_MAX_CHARS, brief.transitLinesMaxChars)) : TRANSIT_LINES_MAX_CHARS;
       let used = 0;
-      for (const L of all) { const x = _ideDemand.lineForAdvisor(L), n = JSON.stringify(x).length; if (used + n <= TRANSIT_LINES_MAX_CHARS) { kept.push(x); used += n; } else omitted.push(L.name); }
+      for (const L of all) { const x = _ideDemand.lineForAdvisor(L), n = JSON.stringify(x).length; if (used + n <= lineCap) { kept.push(x); used += n; } else omitted.push(L.name); }
       return { transitLines: kept, transitLinesOmitted: omitted };
     })(),
     transit: t ? { name: t.name || null, verdict: t.verdict, scale: t.scale, verdictMeaning: t.verdictMeaning || null, homesPerNetAcre: t.density ? f(t.density.homesPerNetAcre) : null, reasons: t.reasons || [], missing: t.missing || [] } : null,
