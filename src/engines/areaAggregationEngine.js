@@ -536,6 +536,7 @@ function describeCandidate(site, ctx) {
     verification: v ? (v.status || "unverified") : "not individually checked",
     verificationNote: site.verificationNote || (v && v.status_detail) || null,
     withheldFields: site.modelFields || (v && v.unverified_fields) || [],
+    origin: site.origin || null, facts: Array.isArray(site.facts) ? site.facts : null,
     recommendation: null,
     recommendationWhy: "No recommendation: " + blockers.filter(b => b.fact !== "overlays").map(b => b.fact).join(", ") + " not on file.",
   };

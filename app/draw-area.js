@@ -35,9 +35,14 @@ const LINK = (() => { const p = new URLSearchParams(String(location.hash || "").
 function loadTables() {
   if (st.dataP) return st.dataP;
   const j = id => (typeof cpJson === "function" ? cpJson(id) : Promise.resolve(null)).catch(() => null);
+  const get = f => fetch("app/data/" + f).then(r => (r.ok ? r.json() : null)).catch(() => null);
   st.dataP = Promise.all([j("intervention-verification"), j("statutes"), j("transit-cost-benchmarks"), j("transit-value-effects"), j("underused-sites"), j("transit-pipelines"),
+    j("intercity-corridors"), get("building_costs.json"), get("housing_funding_rules.json"), get("hud_income_limits.json"), j("hud-fmr"), j("valuation-benchmarks"), j("county-valuation-models"),
     (typeof loadSites === "function" ? loadSites() : Promise.resolve(null)).catch(() => null)])
-    .then(([ver, laws, cost, eff, under, pipes]) => ({
+    .then(([ver, laws, cost, eff, under, pipes, corr, bc, fr, il, fmr, vb, vm]) => ({
+      corridors: Array.isArray(corr) ? corr : [], effectRows: (eff && eff.rows) || [],
+      // the tables the project card engine reads, loaded the way app/invest.js loads them
+      card: { buildingCosts: (bc && bc.rows) || [], fundingRules: fr, incomeLimits: il, fmr, valuationBenchmarks: vb, valuationModels: vm && vm.counties ? vm : null },
       verification: ver && typeof ver === "object" && !Array.isArray(ver) ? ver : null,
       laws: Array.isArray(laws) ? laws : null,
       // field renaming and unit conversion only, the same shaping app/invest.js does for the engine
@@ -89,7 +94,8 @@ function candidateSites(env, tables, fips) {
         modelFields: MODEL_FIELDS,
         source: osm ? "Surface parking mapped in OpenStreetMap, as packaged in app/data/bundle-la.b64.txt (under.sites)" : "LA County Assessor roll and GIS layers, as packaged in app/data/bundle-la.b64.txt (under.sites); https://data.lacounty.gov/datasets/lacounty::assessor-parcels-data-2024" });
     }
-    return { sites: list, coverage: "Los Angeles County's underused-land inventory is on file: surface parking lots, golf courses, vacant parcels and lightly built commercial lots. None of its records names a public owner, so publicly owned land cannot be picked out.",
+    const ss = stationSiteCandidates(fips);
+    return { sites: ss.concat(list), coverage: "Two lists are on file for Los Angeles County. (1) The county's underused-land inventory: surface parking lots, golf courses, vacant parcels and lightly built commercial lots; none of its records names a public owner. (2) " + (ss.length ? `${n0(ss.length)} sites near stations, measured from OpenStreetMap and matched to the county parcel record where one was found. The same lot can be in both lists.` : "The station-area sites file, which could not be loaded."),
       sitesSource: "the underused-land inventory in the Los Angeles County data file (app/data/bundle-la.b64.txt, under.sites)" };
   }
   const list = [];
@@ -103,8 +109,22 @@ function candidateSites(env, tables, fips) {
         source: `OpenStreetMap parking areas, as listed in counties/sites_${fips}.json.gz` });
     });
   }
-  return { sites: list, coverage: "The underused-land inventory covers Los Angeles County only. For this county the only candidates on file are parking lots mapped in OpenStreetMap that the site suggestions list. Golf courses, vacant land and public land are not on file here.",
-    sitesSource: `parking lots in this county's site suggestions (counties/sites_${fips}.json.gz)` };
+  const ss = stationSiteCandidates(fips);
+  return { sites: ss.concat(list), coverage: (ss.length ? `${n0(ss.length)} sites near stations or planned stops are on file for this county (surface parking, vacant or brownfield land, golf courses), measured from OpenStreetMap and matched to the county parcel record where a service is on file. ` : "No station-area sites file is on file for this county. ") + "Land away from stations is not inventoried here: the full underused-land inventory covers Los Angeles County only. Parking lots that the county's site suggestions list as possible pocket parks are included.",
+    sitesSource: `app/data/station_sites/${fips}.json and the parking lots in counties/sites_${fips}.json.gz` };
+}
+// Station-area sites (src/engines/stationSites.js, app/data/station_sites/<fips>.json): land near a station or a stop
+// city, measured from OpenStreetMap and matched to the county parcel record where a service is on file.
+function stationSiteCandidates(fips) {
+  const SS = window.StationSites, list = (SS && SS.cached(fips)) || [];
+  return list.filter(s => s && Array.isArray(s.point) && isNum(s.point[0]) && isNum(s.point[1])).map(s => {
+    const p = s.parcel || null;
+    return { id: s.id, origin: "station", kind: String(s.kindLabel || s.kind || "site").toLowerCase(), name: (s.osm && s.osm.name) || null, address: null, lat: s.point[0], lon: s.point[1], acres: isNum(s.acres) ? s.acres : null,
+      parcelRecord: !!p, zoningCode: (p && p.zn) || null, zoningCategory: null, publicOwner: p ? (p.own ? p.own + (p.ot ? ` (${p.ot})` : "") : (p.ot || null)) : null,
+      assessedLandValue: p && isNum(p.lv) ? p.lv : null, assessedBaseYear: null, status: null, housingElement: null, easement: false,
+      verification: { status: (s.verification && s.verification.status) || "measured from OpenStreetMap" }, verificationNote: null, modelFields: [],
+      facts: SS.facts(s), source: `OpenStreetMap ${(s.osm && s.osm.id) || ""}${p ? " and the county parcel record" : ""} (app/data/station_sites/${fips}.json; ${s.sourceUrl || ""})` };
+  });
 }
 function suggestedPlaces(fips, ring) {
   const out = [], S = (typeof SITES !== "undefined" && SITES && SITES.sites) || {}, A = AE();
@@ -142,7 +162,7 @@ function stationPoints(env, tables, fips) {
 
 async function compute(spec) {
   const A = AE(), fips = fipsNow(), env = bundleNow();
-  const [tables, crash] = await Promise.all([loadTables(), crashFor(fips)]);
+  const [tables, crash] = await Promise.all([loadTables(), crashFor(fips), (window.StationSites ? window.StationSites.load(fips) : Promise.resolve(null)).catch(() => null)]);
   const shape = A.normalizeShape(spec);
   if (!shape.ok) return { status: "invalid", error: shape.error };
   const details = {}, names = {};
@@ -154,7 +174,7 @@ async function compute(spec) {
   }
   const cand = candidateSites(env, tables, fips), stn = stationPoints(env, tables, fips);
   const meta = (env.B && env.B.meta) || {};
-  return A.summarizeArea({
+  const res = A.summarizeArea({
     shape: spec, features: env.features, details, names, fips,
     countyName: (typeof countyOf === "function" && countyOf()) || meta.county || null,
     stateCode: typeof activeState === "function" ? activeState() : null,
@@ -166,6 +186,30 @@ async function compute(spec) {
     decisionEngine: DE(), catalog: (typeof D !== "undefined" && D && D.catalog) || null, verification: tables.verification, laws: tables.laws,
     costBenchmarks: tables.costBenchmarks, valueEffects: tables.valueEffects,
   });
+  try { res.cards = projectCards(res, details, tables); } catch (e) { console.warn("draw-area: project cards", e); res.cards = null; }
+  return res;
+}
+// Courses of action (src/engines/projectCardEngine.js) for the area and for the largest candidates that have a zoning
+// code on file. The subjects are shaped the way app/invest.js shapes them; every figure is the card engine's.
+const CARD_SITES = 3;
+function projectCards(a, details, tables) {
+  const P = window.ProjectCardEngine;
+  if (!P || !a || (a.status !== "ok" && a.status !== "too_coarse")) return null;
+  const st_ = typeof activeState === "function" ? activeState() : null, fips = a.county.fips;
+  const ctx = { laws: tables.laws || undefined, buildingCosts: tables.card.buildingCosts, fundingRules: tables.card.fundingRules, incomeLimits: tables.card.incomeLimits, fmr: tables.card.fmr, valuationModels: tables.card.valuationModels, valuationBenchmarks: tables.card.valuationBenchmarks, transitEffects: { rows: tables.effectRows }, corridors: tables.corridors };
+  const c = AE().ringCentroid(a.shape.ring), out = { area: null, sites: {} };
+  if (a.status === "ok") {
+    const rows = a.blockGroups.map(b => { const m = (details[b.id] || {}).m || {}; return { id: b.id, hv: isNum(m.hv) ? m.hv : null, hvSource: m.hvs ? String(typeof hvSourceText === "function" ? hvSourceText(m.hvs) : m.hvs) : "Census ACS 5-year median home value for the block group" }; });
+    out.area = P.buildProjectCard({ kind: "neighborhood", id: "drawn-area", name: a.label || "Drawn area", countyFips: fips, stateCode: st_, city: (a.blockGroups[0] || {}).city || null, blockGroups: rows, point: { lat: c[1], lng: c[0] }, sitesNearby: a.land.candidates.length }, ctx);
+  }
+  for (const s of a.land.candidates.filter(x => x.zoning.code).slice(0, CARD_SITES)) {
+    const cat = String(s.zoning.category || ""), near = s.station.existing;
+    out.sites[s.id] = P.buildProjectCard({ kind: "site", id: s.id, name: s.name || s.kind, siteKind: s.kind, countyFips: fips, stateCode: st_, city: null, point: { lat: s.lat, lng: s.lon },
+      acres: s.acres.value != null ? { value: s.acres.value, source: s.acres.source } : null, railStationMi: near ? near.meters / AE().MILE_M : null,
+      railNote: near ? `the nearest rail station on file is ${near.name || "a station"}, ${Math.round(near.meters)} m away in a straight line; its mode is not on the site record` : null,
+      parcel: { parcel_id: String(s.id), state_code: st_, county_fips: fips, base_zoning_code: s.zoning.code, municipality_name: null, is_commercial_or_mixed_use: /commercial/.test(cat), is_single_family_residential: cat === "single-family", is_multifamily_residential: cat === "multifamily", exclusions: {}, lot_sqft: s.acres.value != null ? s.acres.value * 43560 : null } }, ctx);
+  }
+  return out;
 }
 
 // ---------------------------------------------------------------- formatting (text only; no arithmetic on figures)
@@ -174,6 +218,7 @@ const BASIS = {
   apportioned: ["Estimated by area", "Block-group counts split by the share of each block group inside the shape. Assumes people and homes are spread evenly."],
   range: ["Range", "The lowest and highest block-group value. A median or rate cannot be combined into one figure for the area."],
   modelled: ["Modelled", "Computed from other figures shown here."],
+  assumed: ["Assumed", "No evidence behind it; an assumption."],
 };
 const basisTag = b => b && BASIS[b] ? `<span class="iv-basis da-b-${b}" title="${h(BASIS[b][1])}">${BASIS[b][0]}</span>` : "";
 const nof = why => `<span class="iv-nof">Not on file</span>${why ? `<span class="da-why"> ${h(why)}</span>` : ""}`;
@@ -255,6 +300,22 @@ function ideaHtml(x, a, i) {
     ${x.example ? `<div class="da-sub">For example, in the block group with the largest share inside: ${h(x.example)}</div>` : ""}
     ${how(f, a)}${ev.note ? `<p class="da-sub">${h(ev.note)}</p>` : ""}</li>`;
 }
+function cardHtml(card, key) {
+  if (!card) return `<p class="da-note">Courses of action are not on file here: the project card engine or its tables could not be loaded.</p>`;
+  const rng = r => !r || !r.low || !isNum(r.low.value) ? null : (r.low.value === r.high.value ? money(r.low.value) : money(r.low.value) + " to " + money(r.high.value));
+  const legal = l => !l ? "not determined" : [l.basis === "statute" ? "state law on file" + (l.citation ? " (" + l.citation + ")" : "") : l.basis, l.note].filter(Boolean).join(": ");
+  const courses = (card.courses || []).map(c => {
+    const cost = rng(c.cost), units = c.size && c.size.units ? rng({ low: c.size.units.low, high: c.size.units.high }) : null;
+    return `<li class="da-item"><div class="da-item-top"><b>${h(c.label)}</b></div>
+      <div class="da-sub">Legal basis: ${h(legal(c.legal))}</div>
+      <div class="da-line"><span class="da-k">${h((c.cost && c.cost.label) || "Cost")}</span> ${cost ? `<span class="da-num">${h(cost)}</span> ${basisTag(c.cost.basis)} <span class="da-sub">${h(c.cost.unit || "")}</span>` : nof(c.costWhy || "")}</div>
+      ${c.size && c.size.units && isNum(c.size.units.low.value) ? `<div class="da-line"><span class="da-k">Homes</span> ${n0(c.size.units.low.value)}${c.size.units.high.value !== c.size.units.low.value ? " to " + n0(c.size.units.high.value) : ""} ${basisTag(c.size.units.basis)} <span class="da-sub">${h(c.size.units.unit || "")}</span></div>` : ""}
+      ${c.incomeWhy ? `<div class="da-sub">Income: ${h(c.incomeWhy)}</div>` : ""}</li>`; }).join("");
+  const na = card.notAssessed || [];
+  return `<div data-da-card="${h(key)}">${courses ? `<ul class="da-list da-nonum">${courses}</ul>` : `<p class="da-note">No course of action can be assessed from the data on file.</p>`}
+    ${na.length ? `<details class="iv-det"><summary>Not assessed (${na.length}), and the fact that is missing</summary><ul class="da-plain">${na.map(x => `<li><b>${h(x.label)}:</b> ${h((x.missing || []).join("; "))}</li>`).join("")}</ul></details>` : ""}
+    <p class="da-sub">${h(card.ordering || "")} Method: docs/PROJECT-CARDS.md.</p></div>`;
+}
 function buildHtml(a) {
   const b = a.build, top = b.ideas.slice(0, 6), more = b.ideas.slice(6);
   const plays = b.housingPlays.map(p => {
@@ -269,6 +330,7 @@ function buildHtml(a) {
     ${more.length ? `<details class="iv-det"><summary>${more.length} more ideas</summary><ol class="da-list" start="7">${more.map((x, i) => ideaHtml(x, a, i + 6)).join("")}</ol></details>` : ""}
     ${b.withheld.length ? `<details class="iv-det"><summary>Listed without figures (${b.withheld.length})</summary><ul class="da-plain">${b.withheld.map(w => `<li><b>${h(w.name)}</b> <span class="da-sub">in ${w.blockGroups} block group${w.blockGroups > 1 ? "s" : ""}: ${h(w.reason)}</span></li>`).join("")}</ul></details>` : ""}
     <h4 class="da-h4">Housing</h4><ul class="da-list da-nonum">${plays}</ul>
+    <h4 class="da-h4">Courses of action for the area</h4>${cardHtml(a.cards && a.cards.area, "area")}
     <ul class="da-caveats">${(b.caveats || []).map(c => `<li>${h(c)}</li>`).join("")}</ul>`;
 }
 const meters = m => m >= 400 ? (m / AE().MILE_M).toFixed(2) + " mi" : Math.round(m / 10) * 10 + " m";
@@ -288,9 +350,11 @@ function candHtml(c) {
       ${c.easement ? `<span>Easement</span><span>The record flags a conservation easement</span>` : ""}
     </div>
     <div class="da-note">${h(c.recommendationWhy)}</div>
+    ${st.result && st.result.cards && st.result.cards.sites[c.id] ? `<details class="iv-det"><summary>Courses of action for this site</summary>${cardHtml(st.result.cards.sites[c.id], c.id)}</details>` : ""}
     <details class="iv-det"><summary>What is missing, and where this comes from</summary><ul class="da-plain">${c.blockers.map(b => `<li><b>${h(b.fact[0].toUpperCase() + b.fact.slice(1))}:</b> ${h(b.why)}</li>`).join("")}</ul>
       ${law.notConfirmed && law.notConfirmed.length ? `<p class="da-sub">Laws the statute engine could not confirm for this record: ${h(law.notConfirmed.slice(0, 4).join(" | "))}</p>` : ""}
       ${c.withheldFields.length ? `<p class="da-sub">Not shown because they are unchecked estimates: ${h(c.withheldFields.join(", "))}.</p>` : ""}
+      ${c.facts ? `<div class="da-kv">${c.facts.map(([k, t]) => `<span>${h(k)}</span><span>${h(t)}</span>`).join("")}</div>` : ""}
       ${c.verificationNote ? `<p class="da-sub">${h(c.verificationNote)}</p>` : ""}<p class="da-src">Source: ${h(c.acres.source || "")}</p></details></li>`;
 }
 function landHtml(a) {
@@ -322,6 +386,7 @@ function transitHtml(a) {
       ${d && d.value != null ? `<div class="da-sub">${h(d.source || "")}</div>` : ""}</div>
     ${(t.reasons || []).length ? `<ul class="da-plain">${t.reasons.map(r => `<li>${h(r)}</li>`).join("")}</ul>` : ""}
     ${(t.missing || []).length ? `<p class="da-sub">Not given, so not tested: ${h(t.missing.map(plainMissing).join("; "))}.</p>` : ""}
+    <p class="da-note" data-da-riders>Riders, fares and operating cost: not on file for a drawn area. The ridership model works on a line (its length and its stops), not on a shape. This county's lines on file, if any, are in the Invest view's transit card.</p>
     <p class="da-sub">A planning rule of thumb from the area's estimated density (TCRP Report 165 density guidelines and FTA's 2025 breakpoints, as in the Invest view), not a ridership forecast. ${(t.sources || []).slice(0, 2).map((u, i) => `<a href="${h(u)}" target="_blank" rel="noopener">source ${i + 1}</a>`).join(" · ")}</p>`;
   return hm;
 }
@@ -569,12 +634,20 @@ function buildUi() {
     <div class="da-pop-h2">Or a circle around a point</div>
     <div class="seg da-radii" role="group" aria-label="Circle radius">${RADII.map(([r, t]) => `<button type="button" data-da-radius="${r}"${r === st.radius ? ' class="active" aria-pressed="true"' : ' aria-pressed="false"'}>${t}</button>`).join("")}</div>
     <button type="button" class="tool-btn" data-da-start="circle">Click the map to place it</button>
+    <label class="da-pop-hint" for="da-centre">or centre it on a station or planned stop on file</label>
+    <select id="da-centre" class="da-centre"><option value="">Choose a station…</option></select>
     <div class="da-pop-foot" id="da-pop-foot" hidden><button type="button" class="da-link" data-da-show>Show the area panel</button><button type="button" class="da-link" data-da-clear>Clear the area</button></div>`;
   wrap.appendChild(pop);
   const strip = document.createElement("div");
   strip.id = "da-strip"; strip.className = "da-strip"; strip.hidden = true; strip.setAttribute("role", "status"); strip.setAttribute("aria-live", "polite");
   wrap.appendChild(strip);
-  b.addEventListener("click", e => { e.stopPropagation(); pop.hidden = !pop.hidden; b.setAttribute("aria-expanded", String(!pop.hidden)); });
+  b.addEventListener("click", e => { e.stopPropagation(); pop.hidden = !pop.hidden; b.setAttribute("aria-expanded", String(!pop.hidden)); if (!pop.hidden) fillCentres(); });
+  pop.querySelector("#da-centre").addEventListener("change", e => {
+    const v = e.target.value; if (!v) return;
+    const [la, lo] = v.split(",").map(Number); e.target.value = "";
+    pop.hidden = true; stopDrawing();
+    setArea({ type: "circle", center: [lo, la], radiusMiles: st.radius }, { fit: true, scroll: true });
+  });
   document.addEventListener("click", e => { if (!pop.hidden && !pop.contains(e.target) && e.target !== b && !b.contains(e.target)) { pop.hidden = true; b.setAttribute("aria-expanded", "false"); } });
   pop.addEventListener("click", e => {
     const t = e.target.closest("button"); if (!t) return;
@@ -595,6 +668,22 @@ function buildUi() {
   document.addEventListener("click", panelClick);
   document.addEventListener("toggle", e => { const d = e.target; if (d && d.dataset && d.dataset.daSec && d.dataset.daSec in st.open) st.open[d.dataset.daSec] = d.open; }, true);
   document.addEventListener("keydown", onKey);
+}
+// Circle centres on file for the open county: its rail stations, stations of local projects, and the stop cities of
+// rail corridors. A point whose own record says it is not the agency's station site is labelled as such.
+function fillCentres() {
+  const sel = q("#da-centre"); if (!sel) return;
+  const fips = fipsNow();
+  loadTables().then(tables => {
+    const env = bundleNow(), stn = stationPoints(env, tables, fips), opts = [];
+    for (const s of stn.stations) if (s.name) opts.push([s.name + " (station)", s.lat, s.lon]);
+    for (const s of stn.planned) if (s.name) opts.push([`${s.name} (${String(s.status || "planned").replace(/ \(.*$/, "")})`, s.lat, s.lon]);
+    for (const p of tables.pipelines) if (p && String(p.fips) === fips) for (const s of (p.stations || [])) if (s && s.verified === false && isNum(s.lat) && isNum(s.lng)) opts.push([`${s.name} (planned stop; position not confirmed by the agency)`, s.lat, s.lng]);
+    for (const c of tables.corridors) for (const s of (c.proposed_stations || [])) if (s && s.fips === fips && isNum(s.lat) && isNum(s.lng)) opts.push([`${s.city || s.name} (stop city of ${c.name}; a city centre, not a station site)`, s.lat, s.lng]);
+    const seen = new Set();
+    sel.innerHTML = `<option value="">${opts.length ? "Choose a station…" : "No station on file for this county"}</option>` + opts.filter(o => { const k = o[0] + o[1].toFixed(4); if (seen.has(k)) return false; seen.add(k); return true; }).sort((a, b) => a[0].localeCompare(b[0])).map(o => `<option value="${o[1]},${o[2]}">${h(o[0])}</option>`).join("");
+    sel.disabled = !opts.length;
+  });
 }
 function showPanel() {
   if (!st.result) return;

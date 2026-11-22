@@ -26,7 +26,7 @@ const SHOTS = process.env.LIVE_SHOTS || path.join(os.tmpdir(), "city-pretty-draw
 fs.mkdirSync(SHOTS, { recursive: true });
 const DEFAULT = ["06037", "48453", "47095"];   // Los Angeles; Travis TX; Lake County TN (the smallest county data file)
 // where to draw in each county: a block group to build the three-block-group polygon around, and a station name for the circle
-const PLAN = { "06037": { bg: "060372145042", station: "Wilshire/La Brea", radius: 0.5 }, "48453": { bg: "484530011022", station: "Downtown", radius: 0.5 }, "47095": { bg: null, station: null, radius: 1 } };
+const PLAN = { "06037": { bg: "060372145042", station: "Wilshire/La Brea", radius: 0.5 }, "48453": { bg: "484530011022", station: "Downtown", radius: 0.5, pick: "Montopolis" }, "47095": { bg: null, station: null, radius: 1 } };
 const VIEWS = [
   { name: "desktop", ctx: { viewport: { width: 1400, height: 900 } }, touch: false },
   { name: "phone", ctx: { viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true, deviceScaleFactor: 2 }, touch: true },
@@ -223,6 +223,25 @@ async function runCounty(browser, fips, view) {
     if (st2 === "ok") compare("circle", panel, await independent(page, data, panel.ring), out);
     else out.checks.push({ check: "circle: a too-small or too-large shape says so and shows no block-group figure", ok: /too coarse|stops at/.test(panel.summary) && !panel.figs.pop, status: st2 });
     for (const k of ["land", "transit"]) { const l = page.locator(`[data-da-sec=${k}]`); if (await l.count()) { await l.scrollIntoViewIfNeeded(); await shot("7-circle-" + k); } }
+
+    // ---- a planned stop on file as the circle's centre: the station-area sites inside are listed with their records
+    if (plan.pick) {
+      await page.evaluate(() => window.scrollTo(0, 0));
+      await page.locator("#btn-draw-area").click();
+      await page.waitForFunction(t => [...document.querySelectorAll("#da-centre option")].some(o => o.textContent.includes(t)), plan.pick, { timeout: 30000 });
+      const val = await page.evaluate(t => [...document.querySelectorAll("#da-centre option")].find(o => o.textContent.includes(t)).value, plan.pick);
+      const before = panel.hash;
+      await page.selectOption("#da-centre", val);
+      await page.waitForFunction(b => location.hash !== b && document.querySelector("#da-panel[data-da-status]:not([data-da-status=working])") && window.DrawArea.current() && window.DrawArea.current().shape.encoded === new URLSearchParams(location.hash.slice(1)).get("area"), before, { timeout: 60000 });
+      await page.waitForTimeout(500);
+      await shot("9-planned-stop");
+      panel = await readPanel(page);
+      const land = await page.evaluate(() => { const a = window.DrawArea.current(); return { n: a.land.candidates.length, first: a.land.candidates.slice(0, 3).map(c => ({ kind: c.kind, name: c.name, acres: c.acres.value, origin: c.origin, zoning: c.zoning.code, law: c.stateLaw.status, station: c.station.answer, ver: c.verification, facts: (c.facts || []).length })), cards: a.cards ? { area: a.cards.area ? a.cards.area.courses.map(c => c.label) : null, notAssessed: a.cards.area ? a.cards.area.notAssessed.length : null, sites: Object.keys(a.cards.sites).length } : null, text: document.querySelector("[data-da-sec=land]").innerText.slice(0, 1500) }; });
+      out.notes.plannedStop = { summary: panel.summary, land, transit: panel.transit, figs: Object.fromEntries(Object.entries(panel.figs).map(([k, v]) => [k, `${v.text} [${v.basis}]`])) };
+      out.checks.push({ check: "planned stop as centre: station-area sites inside are listed, each with a record or 'not on file'", ok: land.n > 0 && land.first.every(c => c.origin === "station" ? c.facts > 0 : true) && panel.bad.length === 0, sites: land.n });
+      out.checks.push({ check: "planned stop as centre: the area gets a courses-of-action card", ok: !!(land.cards && land.cards.area), courses: land.cards && land.cards.area });
+      const l = page.locator("[data-da-sec=land]"); await l.scrollIntoViewIfNeeded(); await shot("9-planned-stop-land");
+    }
 
     // ---- ask the advisor: the context carries the area, under the cap
     await page.evaluate(() => window.scrollTo(0, 0));
