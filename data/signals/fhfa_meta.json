@@ -1,0 +1,26 @@
+{
+ "retrieved": "2026-11-22",
+ "tract_rows": 2069265,
+ "tract_bytes": 16910176,
+ "zip5_rows": 670165,
+ "zip5_note": "Last updated: March 31, 2026.",
+ "zip5_bytes": 5227925,
+ "county_rows": 105195,
+ "county_note": "Last updated: March 31, 2026.",
+ "county_bytes": 815652,
+ "tract_years": [
+  1975,
+  2025
+ ],
+ "tract_areas": 63930,
+ "zip5_years": [
+  1975,
+  2025
+ ],
+ "zip5_areas": 19024,
+ "county_years": [
+  1975,
+  2025
+ ],
+ "county_areas": 2795
+}
