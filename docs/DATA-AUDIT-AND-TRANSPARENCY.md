@@ -1189,3 +1189,10 @@ the cheap-tract edge has shrunk sharply in recent windows (see the doc's B.2-B.3
 outcomes in the test, which the page and file now say. Fixed in passing: `scripts/signals/loaders.py` `level_to_tract20` / `count_to_tract20`
 crashed on the 471 crosswalk rows with a blank weight (water-only tracts with no land, e.g. 01003990000); they now skip them. No published
 file had used those functions.
+
+### Correction: the Zillow tables were committed, although the signals page says they are git-ignored (found 22 Nov 2026)
+`docs/audit/prediction-signals-2026-11-22.md` says the Zillow tables are "git-ignored (`data/signals/.gitignore`)". They were not: that file's
+pattern `data/signals/zillow_*` is read relative to `data/signals/`, so it matched nothing, and commit a245b7b added the four
+`data/signals/zillow_*.csv.gz` tables (terms not confirmed: internal testing only). Fixed on this branch: the pattern is now `zillow_*` and the
+four files are removed from the index (they stay on disk for internal tests). **They remain in the history of a245b7b and every branch
+built on it**; removing them from history needs the owner's decision (a history rewrite of shared branches).
