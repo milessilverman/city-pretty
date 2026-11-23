@@ -85,8 +85,11 @@ function loadData() {
   iv.dataP = Promise.all([j("neighborhood-score-backtest"), j("transit-cost-benchmarks"), j("transit-value-effects"), j("underused-sites"), j("intercity-corridors"), j("transit-pipelines"),
     j("intervention-verification"), j("statutes"), j("unit-costs"), j("county-valuation-models"), fetch("app/data/neighborhood_prediction.json").then(r => r.ok ? r.json() : null).catch(() => null),
     // riders, fares and the gap (src/engines/transitDemandEngine.js)
-    ...["transit_demand_model.json", "transit_demand_stops.json", "transit_operating_benchmarks.json"].map(f => fetch("app/data/" + f).then(r => r.ok ? r.json() : null).catch(() => null)), j("funding-programs")])
-    .then(([bt, cost, eff, sites, corr, pipe, ver, laws, uc, vm, pred, dModel, dStops, dOper, fund]) => {
+    ...["transit_demand_model.json", "transit_demand_stops.json", "transit_operating_benchmarks.json"].map(f => fetch("app/data/" + f).then(r => r.ok ? r.json() : null).catch(() => null)), j("funding-programs"),
+    // the hold-out-metro price prediction test (docs/audit/prediction-2026-11-23.md)
+    fetch("app/data/neighborhood_prediction_holdout.json").then(r => r.ok ? r.json() : null).catch(() => null)])
+    .then(([bt, cost, eff, sites, corr, pipe, ver, laws, uc, vm, pred, dModel, dStops, dOper, fund, hold]) => {
+      iv.holdout = hold;
       const verOk = ver && typeof ver === "object" && !Array.isArray(ver);
       iv.data = { backtest: bt, cost: cost && cost.rows || [], effects: eff && eff.rows || [], sites: Array.isArray(sites) ? sites : [], corridors: Array.isArray(corr) ? corr : [], pipelines: Array.isArray(pipe) ? pipe : [],
         verification: verOk ? ver : null, laws: Array.isArray(laws) ? laws : null, unitCosts: Array.isArray(uc) ? uc : [], valuationModels: vm && vm.counties ? vm : null, prediction: pred && pred.counties ? pred : null,
@@ -335,6 +338,44 @@ function testedPanel(bt, h) {
     <p><b>What it cannot tell you.</b></p><ul>${li((bt.limitations || []).slice(0, 6))}</ul>
     <p class="iv-muted">The full write-up is in <a href="docs/DECISION-ENGINE.md" target="_blank" rel="noopener">docs/DECISION-ENGINE.md</a>; the numbers are in <a href="app/data/neighborhood_score_backtest.json" target="_blank" rel="noopener">neighborhood_score_backtest.json</a>.</p>`;
 }
+// The price prediction test on metros the model never saw (src/engines/neighborhoodSignals.js predictionVerdict).
+// A forecast is shown only when the stored result says the rule written before the test was passed.
+function holdoutPanel() {
+  const NS = window.NeighborhoodSignals;
+  if (!NS) return "";
+  const v = NS.predictionVerdict(iv.holdout), t = v.tested || {};
+  const n1 = x => isNum(x) ? (x >= 0 ? "+" : "") + x.toFixed(1) : "-";
+  const rows = v.rows.map(r => `<tr${r.kind === "model" ? ' class="hl"' : ""}><td>${r.horizon} years</td><td>${esc2(r.method)}</td><td>${n1(r.topDecile)} (${n1(r.ci95 && r.ci95[0])} to ${n1(r.ci95 && r.ci95[1])})</td><td>${isNum(r.spearman) ? r.spearman.toFixed(3) : "-"}</td></tr>`).join("");
+  return `<div class="iv-predtest" id="iv-predtest"><p class="iv-predverdict t-${v.shown ? "good" : "bad"}"><b>Price prediction: ${v.shown ? "tested and shown" : "tested, not shown"}.</b> ${esc2(v.headline)}</p>
+    ${t.question ? `<p><b>What was tested.</b> ${esc2(t.question)}</p>` : ""}
+    ${rows ? `<div class="iv-tablewrap"><table class="iv-table"><caption class="iv-muted">${esc2(t.table_caption || "")}</caption><thead><tr><th>Horizon</th><th>Method</th><th>Price change of the 10% of tracts picked, points (95% interval)</th><th>Rank correlation</th></tr></thead><tbody>${rows}</tbody></table></div>` : ""}
+    ${v.limits.length ? `<p><b>Limits.</b></p><ul>${v.limits.slice(0, 5).map(x => `<li>${esc2(x)}</li>`).join("")}</ul>` : ""}
+    <p class="iv-muted">${esc2(t.data_dates || "")} Write-up: <a href="docs/audit/prediction-2026-11-23.md" target="_blank" rel="noopener">docs/audit/prediction-2026-11-23.md</a>; numbers: <a href="app/data/neighborhood_prediction_holdout.json" target="_blank" rel="noopener">neighborhood_prediction_holdout.json</a>.</p></div>`;
+}
+// Price, jobs and permit trends for one area: sourced facts about the past, not a forecast.
+iv.sig = iv.sig || {};
+function loadSignals(st) {
+  if (st in iv.sig) return null;
+  iv.sig[st] = undefined;
+  return fetch(`app/data/neighborhood_signals/${st}.json`).then(r => r.ok ? r.json() : null).catch(() => null).then(d => { iv.sig[st] = d; return d; });
+}
+function signalsHTML(id, fips) {
+  const NS = window.NeighborhoodSignals, st = String(fips || "").slice(0, 2);
+  if (!NS) return "";
+  const doc = iv.sig[st];
+  if (doc === undefined) return `<div class="iv-hist iv-signals"><span class="iv-k">Trends (facts, not a forecast)</span> loading…</div>`;
+  const s = NS.signalsForArea(doc, id, fips);
+  if (!s.ok) return `<div class="iv-hist iv-signals"><span class="iv-k">Trends (facts, not a forecast)</span> ${nof(s.why)}</div>`;
+  const pct = c => c && c.value != null ? `<span class="iv-fig">${c.value >= 0 ? "+" : ""}${c.value.toFixed(1)}%</span> ${basisTag("measured")}` : nof(c && c.why);
+  const lnk = c => c && c.source ? ` <a class="iv-src" href="${esc2(c.source.page || c.source.url)}" target="_blank" rel="noopener">${esc2(String(c.source.name).split(",")[0])}</a>` : "";
+  const per = s.permits && s.permits.series.length ? s.permits.series.map(x => `${x.year}: ${x.units == null ? "-" : x.units.toLocaleString("en-US")}`).join(", ") : null;
+  return `<div class="iv-hist iv-signals" data-tract="${esc2(s.tract)}"><span class="iv-k">Trends (facts, not a forecast)</span>
+    <ul class="iv-reasons">
+      <li>House prices in this tract, 2020 to 2025: ${pct(s.price5y)}; 2024 to 2025: ${pct(s.price1y)}.${lnk(s.price5y)}</li>
+      <li>Jobs located in this tract, 2024: ${s.jobs2024 && s.jobs2024.value != null ? `<span class="iv-fig">${s.jobs2024.value.toLocaleString("en-US")}</span> ${basisTag("measured")}` : nof(s.jobs2024 && s.jobs2024.why)}; change 2022 to 2024: ${pct(s.jobs2y)}.${lnk(s.jobs2024)}</li>
+      <li>Homes authorised by building permits in the county, ${per ? esc2(per) : nof(s.permits && s.permits.why)}; change: ${pct(s.permits && s.permits.change)}.${lnk(s.permits)}</li>
+    </ul></div>`;
+}
 
 // ---------------------------------------------------------------- derived lists (shared by the cards and the bottom line)
 const BUDGET_OK = () => BUDGETS[iv.budget].v;
@@ -445,7 +486,7 @@ function hoodItem(r, rank, m, open) {
       </div>
     </div>
     <p class="iv-reason1">${esc2(r.reasons[0] || "")}</p>
-    ${det(open, "comp-" + r.id, "Score, back-test and all reasons", `<div class="iv-figs"><span class="iv-k">Relative-value score</span> ${fig(r.score)}</div>${hist}${tested}
+    ${det(open, "comp-" + r.id, "Score, back-test and all reasons", `<div class="iv-figs"><span class="iv-k">Relative-value score</span> ${fig(r.score)}</div>${hist}${tested}${signalsHTML(r.id, m.fips)}
       <ul class="iv-reasons">${r.reasons.map(x => `<li>${esc2(x)}</li>`).join("")}</ul>
       <div class="iv-tablewrap"><table class="iv-table"><thead><tr><th>Signal</th><th>Where this area sits in the county</th><th>Weight in the score</th></tr></thead><tbody>${comps}</tbody></table></div>
       <p class="iv-k">Why this grade</p><ul class="iv-reasons">${r.confidence.reasons.map(x => `<li>${esc2(x)}</li>`).join("")}</ul>
@@ -759,7 +800,7 @@ function headerHTML(m, open) {
         ${typeof openAiAdvisor === "function" ? `<button type="button" class="tool-btn primary" data-iv="ask"><svg class="ic" aria-hidden="true"><use href="#i-sparkle"/></svg><span>Ask the advisor about this</span></button>` : ""}
       </div>
     </div>
-    ${det(open, "tested", "How this was tested, and how to read the tags", `${testedPanel(bt, h)}<p class="iv-muted">The budget only decides which kinds of play are listed (house-sized, building-sized, site-sized, corridor-sized) and hides improvements that cost more than it. It does no financial maths.</p>${role ? `<p class="iv-muted">Basis tags: ${basisTag("measured")} read from a cited table; ${basisTag("modelled")} computed from measured inputs; ${basisTag("assumed")} an assumption with no evidence behind it.</p>` : ""}`, "iv-tested")}
+    ${det(open, "tested", "How this was tested, and how to read the tags", `${testedPanel(bt, h)}${holdoutPanel()}<p class="iv-muted">The budget only decides which kinds of play are listed (house-sized, building-sized, site-sized, corridor-sized) and hides improvements that cost more than it. It does no financial maths.</p>${role ? `<p class="iv-muted">Basis tags: ${basisTag("measured")} read from a cited table; ${basisTag("modelled")} computed from measured inputs; ${basisTag("assumed")} an assumption with no evidence behind it.</p>` : ""}`, "iv-tested")}
   </header>${navHTML()}`;
 }
 
@@ -791,6 +832,8 @@ function render() {
     if (iv.view !== "invest") return;
     const r2 = ready(); if (r2.state !== "ok") { render(); return; }
     if (window.StationSites && !window.StationSites.cached(r2.fips)) window.StationSites.load(r2.fips).then(() => Promise.all([window.StationSites.loadPlaces ? window.StationSites.loadPlaces(r2.fips) : null, window.StationSites.loadZoning ? window.StationSites.loadZoning(r2.fips) : null])).then(() => { if (iv.view === "invest") { iv.key = null; pc.key = null; render(); } });
+    const sigP = loadSignals(r2.fips.slice(0, 2));
+    if (sigP) sigP.then(() => { if (iv.view === "invest") render(); });
     const p = parcelFacts();
     const key = [r2.fips, iv.hood, p && p.facts.parcel_id, p && p.facts.base_zoning_code, p && p.facts.exclusions && JSON.stringify(p.facts.exclusions), d.laws ? d.laws.length : -1, d.verification ? 1 : 0, typeof SITES !== "undefined" && SITES ? 1 : 0].join("|");
     if (key !== iv.key || !iv.model) { iv.model = build(r2.fips, r2.B, d); iv.key = key; }

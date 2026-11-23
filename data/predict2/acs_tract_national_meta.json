@@ -1,0 +1,39 @@
+{
+ "retrieved": "2026-11-23",
+ "file": "acs_tract_national.csv.gz",
+ "bytes": 3277552,
+ "tracts": {
+  "2010": 73057,
+  "2014": 73056,
+  "2019": 73056
+ },
+ "urls": {
+  "2010": "https://www2.census.gov/programs-surveys/acs/summary_file/2010/data/5_year_seq_by_state/",
+  "2014": "https://www2.census.gov/programs-surveys/acs/summary_file/2014/data/5_year_seq_by_state/",
+  "2019": "https://www2.census.gov/programs-surveys/acs/summary_file/2019/prototype/5YRData/",
+  "lookup_2010": "https://www2.census.gov/programs-surveys/acs/summary_file/2010/documentation/5_year/user_tools/Sequence_Number_and_Table_Number_Lookup.txt",
+  "lookup_2014": "https://www2.census.gov/programs-surveys/acs/summary_file/2014/documentation/user_tools/ACS_5yr_Seq_Table_Number_Lookup.txt"
+ },
+ "cells": {
+  "hv": "B25077_001",
+  "inc": "B19013_001",
+  "rent": "B25064_001",
+  "units": "B25002_001",
+  "vacant": "B25002_003"
+ },
+ "fallback": "2010 New Hampshire sequence 98 (median gross rent) is always answered 'Request Rejected'; it is read from https://www2.census.gov/programs-surveys/acs/summary_file/2010/data/5_year_by_state/NewHampshire_Tracts_Block_Groups_Only.zip",
+ "definitions_quoted_from_lookup_2014": {
+  "B25077": "MEDIAN VALUE (DOLLARS)",
+  "B19013": "MEDIAN HOUSEHOLD INCOME IN THE PAST 12 MONTHS (IN 2014 INFLATION-ADJUSTED DOLLARS)",
+  "B25064": "MEDIAN GROSS RENT (DOLLARS)",
+  "B25002": "OCCUPANCY STATUS",
+  "B25002_3": "Vacant"
+ },
+ "terms": {
+  "url": "https://www.census.gov/data/developers/about/terms-of-service.html",
+  "retrieved": "2026-11-23",
+  "quote": "You may not modify or falsely represent content accessed through the API and still claim the source is the Census Bureau.",
+  "note": "These terms are for the Census API; the summary files above carry no separate licence text that was found."
+ },
+ "checks": "2010-14 and 2015-19 values equal data/signals/acs_tract_50counties.csv.gz for every shared tract and cell (151,488 of 151,488, checked 23 Nov 2026)."
+}

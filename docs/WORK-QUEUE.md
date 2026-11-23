@@ -7,6 +7,15 @@ Rule for every item: a number reaches the page or the AI only if it was fetched 
 is withheld with the reason. Each item ends with tests passing and a commit; anything I get wrong is reported in the
 audit doc the same day.
 
+## Status 23 Nov 2026 (price prediction, second attempt)
+
+- **Done, result negative:** a model of tract price change over 3 and 5 years, tested on 129 metros it never saw against five
+  baselines (protocol committed first), did not beat "cheapest tracts in their metro" and was not distinguishable from the
+  others. No forecast is shown; the Invest view states the test and shows each area's price, jobs and permit trends as
+  facts. Method, tables, why it failed: `docs/audit/prediction-2026-11-23.md`. Code `scripts/predict2/`.
+- **Open:** signals that keep their sign across windows (dated FHFA vintages, recorded sales, ACS 2005-09/2008-12 tract
+  tables for the 2008-2012 fall); a Census API key (api.census.gov refuses keyless calls from here).
+
 ## Status 22 Nov 2026 (station-area sites)
 
 - **Done:** `app/data/station_sites/<fips>.json` (42 counties, each under 300 KB, plus `index.json`): measured candidate lots near

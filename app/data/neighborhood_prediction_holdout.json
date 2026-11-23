@@ -1,0 +1,497 @@
+{
+ "_source": {
+  "generated_by": "scripts/predict2/holdout.py then scripts/predict2/write_outputs.py",
+  "run": "2026-11-23 07:20",
+  "protocol": "docs/audit/prediction-2026-11-23.md (Part A, committed before the first evaluation)"
+ },
+ "backtest_file": "data/backtests/prediction_holdout_2026-11-23.json",
+ "tested": {
+  "question": "Of all neighbourhoods (Census tracts) in metros the model never saw, which rise most in price over the next 3 or 5 years? 130 of 387 metros were held out by a fixed rule (129 of them had tracts with the data needed); the model learned only from the others, and only from years before each test window. It was compared with five simple baselines on the 10% of tracts each picked.",
+  "table_caption": "Hold-out metros only. Points = 100 x log change in the FHFA tract price index over the window, average over the test windows (5 years: starting 2017-2020; 3 years: starting 2015-2022). Intervals: 2,000 resamples of hold-out metros.",
+  "data_dates": "Price index: FHFA tract file, years to 2025. Census ACS 5-year 2006-10, 2010-14, 2015-19. Building permits: Census county files 2010-2025. Jobs: LEHD LODES8 2010-2024. Retrieved 22-23 Nov 2026."
+ },
+ "decision": {
+  "pass": false,
+  "rule": "Shown only if, for both 3 and 5 years on hold-out metros, the model's top-10% return beats each of the five baselines with a 95% interval above zero and its rank correlation is higher than each baseline's.",
+  "failed_conditions": [
+   "5-year: top-decile difference vs metro_average has a 95% interval -2.4 to +6.4 (not above zero)",
+   "5-year: Spearman 0.073 not above metro_average 0.081",
+   "5-year: top-decile difference vs momentum has a 95% interval -1.8 to +5.7 (not above zero)",
+   "5-year: top-decile difference vs cheapest_in_metro has a 95% interval -5.2 to -0.3 (not above zero)",
+   "5-year: Spearman 0.073 not above cheapest_in_metro 0.293",
+   "5-year: top-decile difference vs cheapest_dollars has a 95% interval -3.6 to +1.1 (not above zero)",
+   "5-year: Spearman 0.073 not above cheapest_dollars 0.291",
+   "3-year: top-decile difference vs metro_average has a 95% interval -2.3 to +2.5 (not above zero)",
+   "3-year: Spearman 0.053 not above metro_average 0.146",
+   "3-year: top-decile difference vs momentum has a 95% interval -3.5 to +0.2 (not above zero)",
+   "3-year: Spearman 0.053 not above momentum 0.217",
+   "3-year: top-decile difference vs cheapest_in_metro has a 95% interval -3.7 to -0.9 (not above zero)",
+   "3-year: Spearman 0.053 not above cheapest_in_metro 0.233",
+   "3-year: top-decile difference vs cheapest_dollars has a 95% interval -2.7 to +1.0 (not above zero)",
+   "3-year: Spearman 0.053 not above cheapest_dollars 0.187"
+  ]
+ },
+ "headline_fail": "Tested on metros it never saw, the model did not beat every simple baseline, so this page shows no price forecast. The trends under each area are facts about the past, not a forecast.",
+ "headline_pass": "On metros it never saw, the model's top 10% of tracts rose more than every simple baseline's, over 3 and 5 years.",
+ "results": {
+  "5": {
+   "test_origins": [
+    2017,
+    2018,
+    2019,
+    2020
+   ],
+   "metros": 129,
+   "tracts_per_origin": {
+    "2017": 15026,
+    "2018": 13249,
+    "2019": 13341,
+    "2020": 13298
+   },
+   "methods": [
+    {
+     "key": "ridge_all",
+     "label": "Model: ridge regression, all four signal families",
+     "kind": "model",
+     "top_decile": 43.29886190187511,
+     "top_decile_ci95": [
+      41.62802064306425,
+      46.00565060850787
+     ],
+     "excess_over_all": 3.3733440710177174,
+     "spearman": 0.07262842181989508,
+     "spearman_ci95": [
+      -0.012412631092060701,
+      0.18397170048283135
+     ]
+    },
+    {
+     "key": "ridge_trend_level",
+     "label": "Model: ridge, price trend and price level only",
+     "kind": "model",
+     "top_decile": 42.87822821869079,
+     "top_decile_ci95": [
+      41.20714198436659,
+      45.16930080053128
+     ],
+     "excess_over_all": 2.9527103878334007,
+     "spearman": -0.000773091565295661,
+     "spearman_ci95": [
+      -0.10131667269405284,
+      0.11871483251048265
+     ]
+    },
+    {
+     "key": "gbm_all",
+     "label": "Model: shallow boosted trees, all families",
+     "kind": "model",
+     "top_decile": 41.66874805729067,
+     "top_decile_ci95": [
+      39.631776168148306,
+      43.822138736536694
+     ],
+     "excess_over_all": 1.7432302264332815,
+     "spearman": 0.03317786312647923,
+     "spearman_ci95": [
+      -0.0642598523687157,
+      0.1384703874713495
+     ]
+    },
+    {
+     "key": "no_change",
+     "label": "Baseline: no change (the average tract)",
+     "kind": "baseline",
+     "top_decile": 39.92551783085741,
+     "top_decile_ci95": [
+      38.35499801523066,
+      42.06740136606185
+     ],
+     "excess_over_all": 2.6645352591003757e-14,
+     "spearman": 0.0,
+     "spearman_ci95": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "key": "metro_average",
+     "label": "Baseline: metro average (metro's last 5-year trend)",
+     "kind": "baseline",
+     "top_decile": 40.712124032567175,
+     "top_decile_ci95": [
+      37.65329000347536,
+      45.81307149513377
+     ],
+     "excess_over_all": 0.7866062017097804,
+     "spearman": 0.08125477039431929,
+     "spearman_ci95": [
+      -0.05691076047464135,
+      0.2001913977365229
+     ]
+    },
+    {
+     "key": "momentum",
+     "label": "Baseline: momentum (tract's own last-period change)",
+     "kind": "baseline",
+     "top_decile": 41.19866286028576,
+     "top_decile_ci95": [
+      38.53064489495517,
+      44.9890791701386
+     ],
+     "excess_over_all": 1.273145029428374,
+     "spearman": 0.048922319547906205,
+     "spearman_ci95": [
+      -0.05648078268086616,
+      0.15413781376100127
+     ]
+    },
+    {
+     "key": "cheapest_in_metro",
+     "label": "Baseline: cheapest tracts in their metro",
+     "kind": "baseline",
+     "top_decile": 46.749762776675574,
+     "top_decile_ci95": [
+      44.9367155027269,
+      48.22732326584981
+     ],
+     "excess_over_all": 6.824244945818181,
+     "spearman": 0.29317158620022954,
+     "spearman_ci95": [
+      0.20691070200211878,
+      0.36835327547414276
+     ]
+    },
+    {
+     "key": "cheapest_dollars",
+     "label": "Baseline: cheapest tracts in dollars",
+     "kind": "baseline",
+     "top_decile": 45.03273556095957,
+     "top_decile_ci95": [
+      42.94008929297288,
+      46.78023808580185
+     ],
+     "excess_over_all": 5.107217730102187,
+     "spearman": 0.2910645849898827,
+     "spearman_ci95": [
+      0.1593912330519156,
+      0.37471155856602373
+     ]
+    }
+   ],
+   "paired_primary": {
+    "no_change": {
+     "top_decile_diff": 3.3733440710176907,
+     "top_decile_diff_ci95": [
+      1.330820756181443,
+      5.62729047068174
+     ],
+     "share_draws_le_0": 0.0005,
+     "spearman_diff": 0.07262842181989508,
+     "spearman_diff_ci95": [
+      -0.012412631092060701,
+      0.18397170048283135
+     ],
+     "origins_won": 4,
+     "origins": 4
+    },
+    "metro_average": {
+     "top_decile_diff": 2.586737869307937,
+     "top_decile_diff_ci95": [
+      -2.4325779962763154,
+      6.434617270796575
+     ],
+     "share_draws_le_0": 0.149,
+     "spearman_diff": -0.008626348574424209,
+     "spearman_diff_ci95": [
+      -0.1993443415247597,
+      0.23522959278776587
+     ],
+     "origins_won": 3,
+     "origins": 4
+    },
+    "momentum": {
+     "top_decile_diff": 2.1001990415893435,
+     "top_decile_diff_ci95": [
+      -1.7575501036731096,
+      5.730538518571175
+     ],
+     "share_draws_le_0": 0.122,
+     "spearman_diff": 0.02370610227198889,
+     "spearman_diff_ci95": [
+      -0.14822205525033147,
+      0.22445408024878563
+     ],
+     "origins_won": 3,
+     "origins": 4
+    },
+    "cheapest_in_metro": {
+     "top_decile_diff": -3.450900874800464,
+     "top_decile_diff_ci95": [
+      -5.212389165371755,
+      -0.30298805112803306
+     ],
+     "share_draws_le_0": 0.9865,
+     "spearman_diff": -0.2205431643803345,
+     "spearman_diff_ci95": [
+      -0.31922518163278424,
+      -0.06017716456934336
+     ],
+     "origins_won": 0,
+     "origins": 4
+    },
+    "cheapest_dollars": {
+     "top_decile_diff": -1.7338736590844697,
+     "top_decile_diff_ci95": [
+      -3.5953621016020283,
+      1.090599176904604
+     ],
+     "share_draws_le_0": 0.889,
+     "spearman_diff": -0.2184361631699876,
+     "spearman_diff_ci95": [
+      -0.33063021912703194,
+      -0.03619530191791013
+     ],
+     "origins_won": 1,
+     "origins": 4
+    }
+   }
+  },
+  "3": {
+   "test_origins": [
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022
+   ],
+   "metros": 129,
+   "tracts_per_origin": {
+    "2015": 15424,
+    "2016": 15584,
+    "2017": 15779,
+    "2018": 15915,
+    "2019": 15223,
+    "2020": 13186,
+    "2021": 13356,
+    "2022": 13229
+   },
+   "methods": [
+    {
+     "key": "ridge_all",
+     "label": "Model: ridge regression, all four signal families",
+     "kind": "model",
+     "top_decile": 22.206169909604455,
+     "top_decile_ci95": [
+      21.186422136075432,
+      24.330134550846118
+     ],
+     "excess_over_all": 1.2953368743266231,
+     "spearman": 0.05255801501458343,
+     "spearman_ci95": [
+      -0.014351517599058328,
+      0.15620356321407647
+     ]
+    },
+    {
+     "key": "ridge_trend_level",
+     "label": "Model: ridge, price trend and price level only",
+     "kind": "model",
+     "top_decile": 22.121872925123494,
+     "top_decile_ci95": [
+      21.547241387657998,
+      23.849230528084036
+     ],
+     "excess_over_all": 1.2110398898456594,
+     "spearman": -0.014987436037627637,
+     "spearman_ci95": [
+      -0.06645028090155769,
+      0.07763320523772223
+     ]
+    },
+    {
+     "key": "gbm_all",
+     "label": "Model: shallow boosted trees, all families",
+     "kind": "model",
+     "top_decile": 21.85035901349253,
+     "top_decile_ci95": [
+      21.10605958763613,
+      22.713321413202934
+     ],
+     "excess_over_all": 0.9395259782146947,
+     "spearman": 0.05543915239186276,
+     "spearman_ci95": [
+      0.0034451853600107676,
+      0.11748536661725005
+     ]
+    },
+    {
+     "key": "no_change",
+     "label": "Baseline: no change (the average tract)",
+     "kind": "baseline",
+     "top_decile": 20.910833035277836,
+     "top_decile_ci95": [
+      19.95782289918128,
+      22.092815827552332
+     ],
+     "excess_over_all": 2.4424906541753444e-15,
+     "spearman": 0.0,
+     "spearman_ci95": [
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "key": "metro_average",
+     "label": "Baseline: metro average (metro's last 5-year trend)",
+     "kind": "baseline",
+     "top_decile": 22.29875002668611,
+     "top_decile_ci95": [
+      20.998319845616447,
+      24.197075338482716
+     ],
+     "excess_over_all": 1.387916991408276,
+     "spearman": 0.14644672123138258,
+     "spearman_ci95": [
+      0.07238143215122712,
+      0.19881028153082445
+     ]
+    },
+    {
+     "key": "momentum",
+     "label": "Baseline: momentum (tract's own last-period change)",
+     "kind": "baseline",
+     "top_decile": 24.346540710617294,
+     "top_decile_ci95": [
+      23.29093983438263,
+      25.63762513295487
+     ],
+     "excess_over_all": 3.435707675339459,
+     "spearman": 0.21708574313408482,
+     "spearman_ci95": [
+      0.16791078918706712,
+      0.26052985651917154
+     ]
+    },
+    {
+     "key": "cheapest_in_metro",
+     "label": "Baseline: cheapest tracts in their metro",
+     "kind": "baseline",
+     "top_decile": 24.948953571837777,
+     "top_decile_ci95": [
+      24.050600184165564,
+      25.796689150905998
+     ],
+     "excess_over_all": 4.0381205365599415,
+     "spearman": 0.2330948205343883,
+     "spearman_ci95": [
+      0.18106450326559276,
+      0.27604734809748704
+     ]
+    },
+    {
+     "key": "cheapest_dollars",
+     "label": "Baseline: cheapest tracts in dollars",
+     "kind": "baseline",
+     "top_decile": 23.56027428090963,
+     "top_decile_ci95": [
+      22.155122307992585,
+      24.753551481434947
+     ],
+     "excess_over_all": 2.649441245631797,
+     "spearman": 0.18650497664021098,
+     "spearman_ci95": [
+      0.08009780046255541,
+      0.25391763618159546
+     ]
+    }
+   ],
+   "paired_primary": {
+    "no_change": {
+     "top_decile_diff": 1.2953368743266207,
+     "top_decile_diff_ci95": [
+      0.35681233969450915,
+      2.829563536831077
+     ],
+     "share_draws_le_0": 0.0035,
+     "spearman_diff": 0.05255801501458343,
+     "spearman_diff_ci95": [
+      -0.014351517599058328,
+      0.15620356321407647
+     ],
+     "origins_won": 6,
+     "origins": 8
+    },
+    "metro_average": {
+     "top_decile_diff": -0.09258011708165315,
+     "top_decile_diff_ci95": [
+      -2.2926823398128486,
+      2.4790034246548833
+     ],
+     "share_draws_le_0": 0.5125,
+     "spearman_diff": -0.09388870621679915,
+     "spearman_diff_ci95": [
+      -0.17793248075924575,
+      0.054099924743331224
+     ],
+     "origins_won": 3,
+     "origins": 8
+    },
+    "momentum": {
+     "top_decile_diff": -2.1403708010128355,
+     "top_decile_diff_ci95": [
+      -3.471763514904644,
+      0.1697483301106529
+     ],
+     "share_draws_le_0": 0.9645,
+     "spearman_diff": -0.1645277281195014,
+     "spearman_diff_ci95": [
+      -0.22955933023922848,
+      -0.06409468810436515
+     ],
+     "origins_won": 2,
+     "origins": 8
+    },
+    "cheapest_in_metro": {
+     "top_decile_diff": -2.7427836622333186,
+     "top_decile_diff_ci95": [
+      -3.733349146510702,
+      -0.8658862805701979
+     ],
+     "share_draws_le_0": 0.999,
+     "spearman_diff": -0.18053680551980486,
+     "spearman_diff_ci95": [
+      -0.2627711021690456,
+      -0.05490550153077395
+     ],
+     "origins_won": 2,
+     "origins": 8
+    },
+    "cheapest_dollars": {
+     "top_decile_diff": -1.3541043713051741,
+     "top_decile_diff_ci95": [
+      -2.6701485374103417,
+      0.9982123841417244
+     ],
+     "share_draws_le_0": 0.85,
+     "spearman_diff": -0.13394696162562755,
+     "spearman_diff_ci95": [
+      -0.24634033092382773,
+      0.054691095055468715
+     ],
+     "origins_won": 4,
+     "origins": 8
+    }
+   }
+  }
+ },
+ "limits": [
+  "The FHFA price history is one revised release (2026); early years are not what was known then.",
+  "Only 4 five-year and 8 three-year test windows, overlapping, and 2020-2022 was unusual; the metro resampling does not cover that.",
+  "Prices are FHFA's tract index. FHFA publishes no value for some tracts, and fewer tracts after 2021 (62,743 in 2021, 46,719 in 2025 in the file used).",
+  "Census values are moved from 2010 to 2020 tract lines by land area; Connecticut drops out (its new county codes do not join).",
+  "Nothing here covers rents, costs or cash flow."
+ ]
+}

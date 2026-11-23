@@ -1507,6 +1507,8 @@ body.invest-mode .main, body.invest-mode #report, body.invest-mode #explore { di
 .iv-honest { margin: 0 0 12px; padding: 10px 14px; border-left: 4px solid var(--rule-strong); background: var(--sheet); border-radius: 0 10px 10px 0; font-size: 15px; line-height: 1.5; color: var(--ink); max-width: 80ch; }
 .iv-honest.t-good { border-left-color: var(--good); }
 .iv-honest.t-bad { border-left-color: var(--warn-ink); }
+.iv-predverdict { margin: 16px 0 12px; padding: 10px 14px; border-left: 4px solid var(--warn-ink); background: var(--sheet); border-radius: 0 10px 10px 0; font-size: 15px; line-height: 1.5; color: var(--ink); max-width: 80ch; }
+.iv-predverdict.t-good { border-left-color: var(--good); }
 .iv-stats { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 0 0 12px; }
 .iv-stats li { display: flex; flex-direction: column; gap: 2px; min-width: 150px; flex: 1 1 170px; max-width: 260px; background: var(--sheet); border: 1px solid var(--rule); border-radius: 12px; padding: 9px 12px; }
 .iv-stats b { font: 700 22px/1.1 var(--display); font-variant-numeric: tabular-nums; }

@@ -1,0 +1,150 @@
+{
+ "checked": "2026-11-23T07:46:18.112Z",
+ "counties": [
+  {
+   "fips": "48453",
+   "checks": [
+    {
+     "what": "panel says tested, not shown",
+     "ok": true
+    },
+    {
+     "what": "table rows (16 expected, 16 shown) match the stored numbers",
+     "ok": true
+    },
+    {
+     "what": "no forecast wording in the areas",
+     "ok": true
+    },
+    {
+     "what": "area tract 48453002327",
+     "ok": true,
+     "missing": []
+    },
+    {
+     "what": "area tract 48453043200",
+     "ok": true,
+     "missing": []
+    },
+    {
+     "what": "area tract 48453043300",
+     "ok": true,
+     "missing": []
+    },
+    {
+     "what": "area tract 48453041000",
+     "ok": true,
+     "missing": []
+    },
+    {
+     "what": "area tract 48453002315",
+     "ok": true,
+     "missing": []
+    },
+    {
+     "what": "areas with trends shown: 5",
+     "ok": true
+    }
+   ],
+   "errors": [],
+   "ok": true
+  },
+  {
+   "fips": "17031",
+   "checks": [
+    {
+     "what": "panel says tested, not shown",
+     "ok": true
+    },
+    {
+     "what": "table rows (16 expected, 16 shown) match the stored numbers",
+     "ok": true
+    },
+    {
+     "what": "no forecast wording in the areas",
+     "ok": true
+    },
+    {
+     "what": "area tract 17031460200",
+     "ok": true,
+     "missing": []
+    },
+    {
+     "what": "area tract 17031440202",
+     "ok": true,
+     "missing": []
+    },
+    {
+     "what": "area tract 17031829700",
+     "ok": true,
+     "missing": []
+    },
+    {
+     "what": "area tract 17031681100",
+     "ok": true,
+     "missing": []
+    },
+    {
+     "what": "area tract 17031690900",
+     "ok": true,
+     "missing": []
+    },
+    {
+     "what": "areas with trends shown: 5",
+     "ok": true
+    }
+   ],
+   "errors": [],
+   "ok": true
+  },
+  {
+   "fips": "26163",
+   "checks": [
+    {
+     "what": "panel says tested, not shown",
+     "ok": true
+    },
+    {
+     "what": "table rows (16 expected, 16 shown) match the stored numbers",
+     "ok": true
+    },
+    {
+     "what": "no forecast wording in the areas",
+     "ok": true
+    },
+    {
+     "what": "area tract 26163534200",
+     "ok": true,
+     "missing": []
+    },
+    {
+     "what": "area tract 26163545500",
+     "ok": true,
+     "missing": []
+    },
+    {
+     "what": "area tract 26163531700",
+     "ok": true,
+     "missing": []
+    },
+    {
+     "what": "area tract 26163505600",
+     "ok": true,
+     "missing": []
+    },
+    {
+     "what": "area tract 26163514300",
+     "ok": true,
+     "missing": []
+    },
+    {
+     "what": "areas with trends shown: 5",
+     "ok": true
+    }
+   ],
+   "errors": [],
+   "ok": true
+  }
+ ],
+ "failures": 0
+}
