@@ -235,3 +235,88 @@ Files: `data/backtests/southcentral_ok_census_spot_2026-11-22.json`, `data/backt
 Files: `data/backtests/southcentral_ar_census_spot_2026-11-22.json`, `data/backtests/southcentral_osm_xcheck_05069_2026-11-22.json`,
 `..._05069_history_...`, `..._05145_...`, `data/backtests/live_check_panels_2026-11-23_southcentral_ar.json`, `..._ar_first_try.json`,
 `..._ar_rerun05047.json`, `data/backtests/acs_fallback_mismatches_2026-11-22.json`.
+
+## Louisiana (50 of 50 built, none withheld)
+
+| County | People (ACS 2020-24) | Block groups | Data file (gzip, bytes) | Completeness tier | Canopy block groups (2025 release) |
+|---|---|---|---|---|---|
+| Acadia Parish (22001) | 56,955 | 107 | 345,644 | D | 46 |
+| Allen Parish (22003) | 22,477 | 19 | 540,256 | D | 7 |
+| Assumption Parish (22007) | 20,484 | 19 | 161,731 | D | 14 |
+| Avoyelles Parish (22009) | 38,905 | 31 | 467,400 | C | 9 |
+| Beauregard Parish (22011) | 36,676 | 27 | 572,696 | D | 12 |
+| Bienville Parish (22013) | 12,638 | 16 | 338,161 | D | 0 |
+| Caldwell Parish (22021) | 9,500 | 9 | 191,504 | D | 0 |
+| Cameron Parish (22023) | 5,015 | 10 | 219,866 | D | 0 |
+| Catahoula Parish (22025) | 8,583 | 9 | 461,668 | D | 0 |
+| Claiborne Parish (22027) | 13,833 | 17 | 201,125 | D | 0 |
+| Concordia Parish (22029) | 18,174 | 20 | 357,429 | D | 16 |
+| De Soto Parish (22031) | 27,026 | 25 | 413,998 | D | 9 |
+| East Carroll Parish (22035) | 7,072 | 8 | 144,696 | D | 0 |
+| East Feliciana Parish (22037) | 19,271 | 16 | 200,066 | D | 0 |
+| Evangeline Parish (22039) | 32,060 | 64 | 478,518 | D | 25 |
+| Franklin Parish (22041) | 19,408 | 15 | 280,717 | D | 7 |
+| Grant Parish (22043) | 22,095 | 16 | 1,040,916 | D | 0 |
+| Iberia Parish (22045) | 68,599 | 141 | 609,888 | C | 118 |
+| Iberville Parish (22047) | 29,815 | 22 | 663,972 | C | 12 |
+| Jackson Parish (22049) | 14,884 | 15 | 246,845 | D | 8 |
+| Jefferson Davis Parish (22053) | 31,924 | 26 | 365,135 | C | 12 |
+| Lafourche Parish (22057) | 96,252 | 77 | 1,313,352 | C | 69 |
+| LaSalle Parish (22059) | 14,789 | 14 | 728,320 | D | 0 |
+| Lincoln Parish (22061) | 48,174 | 37 | 257,255 | D | 27 |
+| Madison Parish (22065) | 9,513 | 10 | 265,857 | D | 9 |
+| Morehouse Parish (22067) | 24,551 | 25 | 335,050 | D | 18 |
+| Natchitoches Parish (22069) | 36,693 | 39 | 1,213,525 | D | 23 |
+| Plaquemines Parish (22075) | 22,803 | 24 | 984,556 | C | 14 |
+| Pointe Coupee Parish (22077) | 20,217 | 18 | 242,403 | D | 11 |
+| Red River Parish (22081) | 7,443 | 8 | 162,731 | D | 0 |
+| Richland Parish (22083) | 19,822 | 17 | 345,385 | D | 0 |
+| Sabine Parish (22085) | 21,977 | 26 | 742,157 | D | 0 |
+| St. Bernard Parish (22087) | 44,419 | 50 | 788,788 | C | 47 |
+| St. Charles Parish (22089) | 51,396 | 36 | 388,987 | C | 32 |
+| St. Helena Parish (22091) | 10,858 | 8 | 102,731 | D | 0 |
+| St. James Parish (22093) | 19,528 | 19 | 109,199 | D | 12 |
+| St. John the Baptist Parish (22095) | 40,743 | 31 | 429,238 | C | 28 |
+| St. Landry Parish (22097) | 81,670 | 151 | 752,044 | D | 81 |
+| St. Martin Parish (22099) | 51,353 | 96 | 1,093,375 | C | 63 |
+| St. Mary Parish (22101) | 47,828 | 48 | 506,676 | D | 45 |
+| Tensas Parish (22107) | 3,935 | 5 | 228,367 | D | 0 |
+| Union Parish (22111) | 20,821 | 22 | 424,402 | D | 0 |
+| Vermilion Parish (22113) | 57,123 | 94 | 399,039 | D | 56 |
+| Vernon Parish (22115) | 47,117 | 48 | 1,181,082 | D | 30 |
+| Washington Parish (22117) | 45,120 | 34 | 839,544 | D | 14 |
+| Webster Parish (22119) | 35,820 | 39 | 294,880 | D | 27 |
+| West Baton Rouge Parish (22121) | 27,974 | 15 | 360,697 | C | 13 |
+| West Carroll Parish (22123) | 9,464 | 11 | 131,968 | D | 0 |
+| West Feliciana Parish (22125) | 15,327 | 10 | 209,938 | D | 0 |
+| Winn Parish (22127) | 13,467 | 16 | 474,365 | D | 10 |
+| **50 counties** | **1,461,591** | **1,660** | **23,608,142** | 11 C, 39 D | 924 |
+
+- OpenStreetMap: the Louisiana cut of the 21 Nov 2026 `us-south-latest.osm.pbf` (see Oklahoma: 140 s, peak osmium memory 4.11 GB,
+  167 MB; data timestamp 2026-11-21T01:28:06Z). Build: fetch 9-78 s, build 78-143 s per county, three at a time (the Arkansas
+  checks, tests and upload ran alongside), about 31 min from the first county to the last.
+- Bus frequency: 41 counties have no value in any block group (no feed that is read has a stop with 7-9 am departures in or
+  near the county); 9 have values. Rail distance: 47 counties have none; 3 have values.
+- Census spot check: 50 counties, 1,196 of 1,196 values equal (0% mismatch). Tract-median flags: 50 counties added, no
+  existing county changed, 0 values matching neither the block group nor the tract.
+- Crash counts: Louisiana has no state crash source connected (`pipeline/region.py` STATE_DEFAULTS has no LA); all 50 files say
+  "Not connected for Louisiana yet: crash gaps are not scored and crash-based projects are not proposed". No crash counts were
+  built.
+- Tests run: `npm test` 1,737 of 1,737 (50 files), `npm run typecheck` clean. `app/data/intercity_transit_corridors.json`:
+  Ruston LA (Lincoln Parish, 22061) now says `county_on_page: true` (1 line), as `tests/unit/transitCorridors.test.ts`
+  requires.
+- OpenStreetMap ID for ID vs live Overpass (maps.mail.ru; two counties picked with seed 20261122 from the state's sorted
+  list): it answered 504 to some tries first. St. John the Baptist (22095) 10,730 = 10,730 roads, 132 = 132 bus stops; St. Bernard (22087) 6,497 = 6,497
+  roads, 5 = 5 bus stops (0 missing, 0 extra in both). The extract's snapshot is 2026-11-21T01:28:06Z.
+- Live check from R2 (`LIVE_PORT=9261`): West Feliciana (22125) and St. John the Baptist (22095), 3 points each (picked with
+  seed 20261123 from the state's sorted list). Neither parish has a parcel service on the page, so the house-panel rows
+  (Census area, HUD rent, FEMA, USGS) are not checkable; neighborhood, canopy, canopy goal, crash text, state laws and console
+  pass at all 6 points (30 pass, 0 fail, 24 not checkable). Each data file came from the r2.dev address (HEAD 200, GET 200).
+- R2: before 1,981,492,955 bytes (3,414 objects; the Virginia, West Virginia and Colorado job had uploaded files since my
+  Arkansas upload); dry run "51 files, net +0.024 GB, projected 2.005 GB"; after 2,005,115,500 bytes (3,464 objects):
+  23,622,545 bytes added (the 50 data files, 23,608,142, plus the larger `manifest.json`: 666,384 bytes in the bucket when I
+  started, which was the other job's copy, replaced by this worktree's copy of 680,787 bytes).
+
+Files: `data/backtests/southcentral_la_census_spot_2026-11-22.json`, `data/backtests/southcentral_osm_xcheck_22095_2026-11-22.json`,
+`..._22087_...`, `data/backtests/live_check_panels_2026-11-23_southcentral_la.json`,
+`data/backtests/acs_fallback_mismatches_2026-11-22.json`.
