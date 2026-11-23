@@ -1,0 +1,113 @@
+{
+ "extract_snapshot": "2026-11-21T01:28:06Z",
+ "ways": [
+  {
+   "set": "missing_from_extract",
+   "id": 12829972,
+   "versions": 3,
+   "last_version": "3",
+   "visible": "true",
+   "last_ts": "2026-11-21T17:35:16Z",
+   "first_ts": "2007-11-16T14:37:49Z",
+   "highway": "unclassified",
+   "name": "Levee Road",
+   "after_snapshot": true
+  },
+  {
+   "set": "missing_from_extract",
+   "id": 12839427,
+   "versions": 9,
+   "last_version": "9",
+   "visible": "true",
+   "last_ts": "2026-11-21T16:43:01Z",
+   "first_ts": "2007-11-16T15:56:04Z",
+   "highway": "unclassified",
+   "name": "Pines Mall Drive",
+   "after_snapshot": true
+  },
+  {
+   "set": "missing_from_extract",
+   "id": 12839429,
+   "versions": 8,
+   "last_version": "8",
+   "visible": "true",
+   "last_ts": "2026-11-21T16:43:01Z",
+   "first_ts": "2007-11-16T15:56:06Z",
+   "highway": "unclassified",
+   "name": "Pines Mall Drive",
+   "after_snapshot": true
+  },
+  {
+   "set": "missing_from_extract",
+   "id": 1582851509,
+   "versions": 1,
+   "last_version": "1",
+   "visible": "true",
+   "last_ts": "2026-11-21T17:35:16Z",
+   "first_ts": "2026-11-21T17:35:16Z",
+   "highway": "residential",
+   "name": "East 2nd Avenue",
+   "after_snapshot": true
+  },
+  {
+   "set": "missing_from_extract",
+   "id": 1582851514,
+   "versions": 1,
+   "last_version": "1",
+   "visible": "true",
+   "last_ts": "2026-11-21T17:35:16Z",
+   "first_ts": "2026-11-21T17:35:16Z",
+   "highway": "residential",
+   "name": "O'Keefe Road",
+   "after_snapshot": true
+  },
+  {
+   "set": "extra_in_extract",
+   "id": 12836419,
+   "versions": 8,
+   "last_version": "8",
+   "visible": "false",
+   "last_ts": "2026-11-21T17:35:16Z",
+   "first_ts": "2007-11-16T15:31:57Z",
+   "highway": null,
+   "name": null,
+   "after_snapshot": true
+  },
+  {
+   "set": "extra_in_extract",
+   "id": 12836662,
+   "versions": 4,
+   "last_version": "4",
+   "visible": "false",
+   "last_ts": "2026-11-21T17:35:16Z",
+   "first_ts": "2007-11-16T15:34:05Z",
+   "highway": null,
+   "name": null,
+   "after_snapshot": true
+  },
+  {
+   "set": "extra_in_extract",
+   "id": 12838162,
+   "versions": 18,
+   "last_version": "18",
+   "visible": "false",
+   "last_ts": "2026-11-21T20:14:54Z",
+   "first_ts": "2007-11-16T15:45:57Z",
+   "highway": null,
+   "name": null,
+   "after_snapshot": true
+  },
+  {
+   "set": "extra_in_extract",
+   "id": 1486145166,
+   "versions": 2,
+   "last_version": "2",
+   "visible": "false",
+   "last_ts": "2026-11-21T20:14:54Z",
+   "first_ts": "2026-03-06T20:03:46Z",
+   "highway": null,
+   "name": null,
+   "after_snapshot": true
+  }
+ ]
+}

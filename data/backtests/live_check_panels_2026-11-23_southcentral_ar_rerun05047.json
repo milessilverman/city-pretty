@@ -1,0 +1,192 @@
+{
+ "ran_on": "2026-11-23T00:11:22.771Z",
+ "script": "scripts/live_check_panels.mjs",
+ "results": {
+  "05047": {
+   "state": "AR",
+   "points": [
+    {
+     "bg": "050479501001",
+     "lat": 35.662387,
+     "lng": -93.779718,
+     "service": "Arkansas Parcel Polygons - County Assessor Mapping Program (AGISO)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $123k, rent $1,352/mo, homes 454"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for AR"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Franklin County · 050479501001; page \"Census area: Franklin County · block group 050479501001(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 909 for 05047; page \"HUD Fair Market Rent (FY2027): 1 bed $695 · 2 bed $909 · 3 bed $1,140/moFranklin County, AR. HUD's voucher benchmark (rent plus utilities), not a market asking \""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "USGS now: no answer; page \"Ground elevation: Not available (the service did not answer in time)(U.S. Geolog\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "050479501003",
+     "lat": 35.476446,
+     "lng": -93.971402,
+     "service": "Arkansas Parcel Polygons - County Assessor Mapping Program (AGISO)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $205k, rent $1,352/mo, homes 411"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for AR"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Franklin County · 050479501003; page \"Census area: Franklin County · block group 050479501003(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 909 for 05047; page \"HUD Fair Market Rent (FY2027): 1 bed $695 · 2 bed $909 · 3 bed $1,140/moFranklin County, AR. HUD's voucher benchmark (rent plus utilities), not a market asking \""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: AE; page \"FEMA flood zone: Zone AE · special flood hazard areaFederally backed mortgages here require flood insurance.(FEMA Nation\""
+      },
+      "usgs": {
+       "pass": false,
+       "detail": "USGS now: 378 ft; page \"Ground elevation: Not available (the service did not answer in time)(U.S. Geolog\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "050479503012",
+     "lat": 35.391797,
+     "lng": -94.012269,
+     "service": "Arkansas Parcel Polygons - County Assessor Mapping Program (AGISO)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $218k, rent $571/mo, homes 511"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for AR"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Franklin County · 050479503012; page \"Census area: Franklin County · block group 050479503012(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 909 for 05047; page \"HUD Fair Market Rent (FY2027): 1 bed $695 · 2 bed $909 · 3 bed $1,140/moFranklin County, AR. HUD's voucher benchmark (rent plus utilities), not a market asking \""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "USGS now: no answer; page \"Ground elevation: Not available (the service did not answer in time)(U.S. Geolog\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "fail",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9261' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9261' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9261' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED"
+   ],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_05047.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_05047.json.gz"
+   ]
+  }
+ }
+}
