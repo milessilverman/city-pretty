@@ -204,7 +204,7 @@ describe("Advisor Agent Offline Mock Harness", () => {
     const fakeClient = { beta: { messages: { create: async () => { calls++; return toolReply; } } } };
     const realNow = Date.now;
     let t = 1_000_000;
-    Date.now = () => (t += 60_000); // each look at the clock is a minute later
+    Date.now = () => (t += 80_000); // each look at the clock is 80 s later
     try {
       const res = await runAdvisor(fakeClient as any, "System", [{ role: "user", content: "Slow" }], {});
       expect(res.ok).toBe(false);
@@ -215,6 +215,39 @@ describe("Advisor Agent Offline Mock Harness", () => {
     } finally {
       Date.now = realNow;
     }
+  });
+
+  it("offers the web tools, reports the pages they read, and answers without them if the API refuses them", async () => {
+    const seen: Array<{ tools: any[]; betas: string[] }> = [];
+    const fakeClient = {
+      beta: { messages: { create: async (body: any) => {
+        seen.push({ tools: body.tools, betas: body.betas });
+        if (seen.length === 1) throw new Anthropic.BadRequestError(400, {}, "web_search is not enabled", new Headers());
+        return { id: "m", type: "message", role: "assistant", model: "m", stop_reason: "end_turn", stop_sequence: null, usage: { input_tokens: 1, output_tokens: 1 },
+          content: [{ type: "text", text: "ok" }] };
+      } } },
+    };
+    const res = await runAdvisor(fakeClient as any, "System", [{ role: "user", content: "q" }], {});
+    expect(res.ok).toBe(true);
+    expect(seen).toHaveLength(2);
+    expect(seen[0].tools.map((t: any) => t.name)).toEqual(expect.arrayContaining(["web_search", "web_fetch"]));
+    expect(seen[0].betas).toContain("web-fetch-2025-09-10");
+    expect(seen[1].tools.map((t: any) => t.name)).not.toContain("web_search");
+  });
+
+  it("lists pages the web tools found or read as sources", async () => {
+    const fakeClient = { beta: { messages: { create: async () => ({
+      id: "m", type: "message", role: "assistant", model: "m", stop_reason: "end_turn", stop_sequence: null, usage: { input_tokens: 1, output_tokens: 1 },
+      content: [
+        { type: "web_search_tool_result", tool_use_id: "s1", content: [{ type: "web_search_result", url: "https://www.octa.net/projects/", title: "OCTA projects" }] },
+        { type: "web_fetch_tool_result", tool_use_id: "f1", content: { type: "web_fetch_result", url: "https://www.octa.net/streetcar/", content: { title: "OC Streetcar" } } },
+        { type: "text", text: "answer" },
+      ],
+    }) } } };
+    const res = await runAdvisor(fakeClient as any, "System", [{ role: "user", content: "q" }], {});
+    expect(res.ok).toBe(true);
+    if (!res.ok) return;
+    expect(res.sources.map((x) => x.url)).toEqual(["https://www.octa.net/projects/", "https://www.octa.net/streetcar/"]);
   });
 
   it("validates input parameters on runAdvisorTool", async () => {

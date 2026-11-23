@@ -9162,7 +9162,7 @@ function renderResearchList() {
 // advisor endpoint: the Cloudflare Worker in workers/api-proxy.ts, which builds the prompt and calls the model.
 // Where the endpoint is set: app/config.js (CITY_PRETTY_CONFIG.workerUrl), or the advisor's settings drawer for
 // testing. With no endpoint the advisor says it is not connected; it never makes up an answer.
-const AI_TIMEOUT_MS = 90000;
+const AI_TIMEOUT_MS = 150000;
 let aiStatus = "off";   // off: no endpoint · checking · ok · down
 
 function workerUrl() {
@@ -9361,7 +9361,7 @@ async function sendAiQuery(q, promptKey = null) {
     const el = document.getElementById("ai-typing-secs");
     if (!el) { clearInterval(waitTick); return; }
     const s = Math.round((Date.now() - waitStart) / 1000);
-    el.textContent = s < 8 ? `${s}s` : `${s}s · looking things up in official sources, usually under 30s`;
+    el.textContent = s < 8 ? `${s}s` : `${s}s · looking things up in official sources, usually under a minute`;
   }, 1000);
   const context = serializeLiveAdvisorContext();
   const previewEl = document.getElementById("ai-grounded-json-preview");
@@ -9393,7 +9393,7 @@ async function sendAiQuery(q, promptKey = null) {
       if (res.status >= 500 || res.status === 404) setAiStatus("down", why);
     }
   } catch (err) {
-    reply = { role: "notice", text: `The AI advisor could not be reached (${err && err.name === "AbortError" ? "no reply within 90 seconds" : "network error"}). No answer was generated.` };
+    reply = { role: "notice", text: `The AI advisor could not be reached (${err && err.name === "AbortError" ? "no reply within 150 seconds" : "network error"}). No answer was generated.` };
     setAiStatus("down");
   }
   clearInterval(waitTick);

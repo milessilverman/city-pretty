@@ -38,7 +38,7 @@ const MODEL_CALL_IMPLEMENTED = true;
 type ChatMessage = { role: "user" | "assistant"; content: string };
 
 async function askAdvisorModel(env: Env, system: string, messages: ChatMessage[]): Promise<AdvisorAnswer> {
-  const client = new Anthropic({ apiKey: env.ANTHROPIC_API_KEY, maxRetries: 1, timeout: 40_000 }) // a stalled model call fails in 40 s instead of the SDK default of 10 minutes;
+  const client = new Anthropic({ apiKey: env.ANTHROPIC_API_KEY, maxRetries: 1, timeout: 60_000 }) // a stalled model call fails in 60 s instead of the SDK default of 10 minutes; web lookups run inside a call;
   return runAdvisor(client, system, messages, { censusApiKey: env.CENSUS_API_KEY });
 }
 
