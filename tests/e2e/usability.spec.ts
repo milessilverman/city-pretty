@@ -122,7 +122,10 @@ test("a ZIP code opens the area at its center and no lot; an address opens the a
 });
 
 test("a place with no data leaves the map and the county where they were, and says so", async ({ page }) => {
-  await openPage(page, { geocode: [{ address: "Nowhere, Oklahoma", location: { x: -98.44228, y: 35.15923 }, score: 100, attributes: { Addr_type: "Locality", Subregion: "Caddo County", Region: "Oklahoma" } }] });
+  // A place in a county the page has no tag for at all. This was Caddo County, OK until Oklahoma's counties were added (22 Nov 2026);
+  // the counties still untagged then were Colorado's, Virginia's and West Virginia's small ones, which are being added too (and the
+  // page lists Hawaii's and Puerto Rico's), so the fixture is now a place outside the United States, which no county file covers.
+  await openPage(page, { geocode: [{ address: "Nowhere, Ontario", location: { x: -79.3832, y: 43.6532 }, score: 100, attributes: { Addr_type: "Locality", Subregion: "Toronto Division", Region: "Ontario" } }] });
   const before = await page.evaluate(() => { const m = (0, eval)("map"); return { sel: (0, eval)("selected"), c: [m.getCenter().lat, m.getCenter().lng], z: m.getZoom() }; });
   await new Steps(page).search("zzqqxx nowhere 99");
   await expect(page.locator("#toast")).toContainText("has no data for that place");

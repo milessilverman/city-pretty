@@ -708,9 +708,17 @@ Files: `data/backtests/southcentral_txb_census_spot_2026-11-22.json`, `data/back
 ## Tests and housekeeping
 
 - `npm test`: run in full after each state (1,737 of 1,737 in 50 files each time; no state added or removed a test);
-  `npm run typecheck` clean after each. The full browser suite on the final tree: (run after this commit; the result is added by the next commit). `python3 scripts/r2_only.py --check`
-  passes. No test was skipped or loosened and no test pin was changed (none of the four states has a crash source, so
-  `tests/unit/crashCountsInvariant.test.ts` was not touched). No pipeline code was changed.
+  `npm run typecheck` clean after each. The full browser suite on the final tree, `PW_PORT=9262 npm run test:e2e -- --trace
+  off`, run once after the last state: **121 of 122 passed (9.8 min); 1 failed,
+  `tests/e2e/usability.spec.ts:124` "a place with no data leaves the map and the county where they were, and says so"**,
+  because of this batch: the test's fixture was a place in Caddo County, Oklahoma, which had no entry in `index.html` until
+  Oklahoma's counties were added, so the page now opens that county instead of saying it has no data. Nothing the test asserts
+  was changed or loosened (the toast text, the unchanged map and county, the visible panel); only the fixture place was
+  replaced, with one outside the United States (Toronto, Ontario), because every small county that was untagged then (Colorado,
+  Virginia, West Virginia) is being added by another job and Hawaii and Puerto Rico are listed by the page. The test was
+  re-run alone with the new fixture and passed; **the full suite was not run a second time**. `python3 scripts/r2_only.py
+  --check` passes. No test was skipped or weakened and no test pin was changed (none of the four states has a crash source,
+  so `tests/unit/crashCountsInvariant.test.ts` was not touched). No pipeline code was changed.
 - `app/data/hud_income_limits.json`: 400 rows added from HUD's API (none failed; the test lets only New England counties
   fail). Rows already in the file were not changed; `_source.added_for_new_counties` records each state's addition.
 - `app/data/intercity_transit_corridors.json`: nine stops' `county_on_page` flags now say true, each in the commit of its
