@@ -1,0 +1,396 @@
+{
+ "ran_on": "2026-11-23T00:52:11.990Z",
+ "script": "scripts/live_check_panels.mjs",
+ "results": {
+  "51171": {
+   "state": "VA",
+   "points": [
+    {
+     "bg": "511710404001",
+     "lat": 38.897994,
+     "lng": -78.384263,
+     "service": "Virginia Parcels (VGIN, VA_Base_Layers/VA_Parcels)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $492k, rent $1,307/mo, homes 537"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [0,5.5,29.5]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 2 record(s) for VA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Shenandoah County · 511710404001; page \"Census area: Shenandoah County · block group 511710404001(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1172 for 51171; page \"HUD Fair Market Rent (FY2027): 1 bed $943 · 2 bed $1,172 · 3 bed $1,452/moShenandoah County, VA. HUD's voucher benchmark (rent plus utilities), not a market ask\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "re-checked alone: USGS now no answer; page \"Ground elevation: Not available (the service did not answer in time)(U.S. Geolog\""
+      },
+      "usgs_first": {
+       "pass": false,
+       "detail": "re-checked alone: USGS now 920 ft; page \"Ground elevation: Not available (the service did not answer in time)(U.S. Geolog\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "511710404002",
+     "lat": 38.800883,
+     "lng": -78.51812,
+     "service": "Virginia Parcels (VGIN, VA_Base_Layers/VA_Parcels)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $357k, rent $972/mo, homes 800"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [0,4.5,48]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 2 record(s) for VA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Shenandoah County · 511710404002; page \"Census area: Shenandoah County · block group 511710404002(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1172 for 51171; page \"HUD Fair Market Rent (FY2027): 1 bed $943 · 2 bed $1,172 · 3 bed $1,452/moShenandoah County, VA. HUD's voucher benchmark (rent plus utilities), not a market ask\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "USGS now: no answer; page \"Ground elevation: Not available (the service did not answer in time)(U.S. Geolog\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "511710407001",
+     "lat": 38.733619,
+     "lng": -78.626962,
+     "service": "Virginia Parcels (VGIN, VA_Base_Layers/VA_Parcels)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $194k, rent $893/mo, homes 642"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [1,6,115]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 2 record(s) for VA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Shenandoah County · 511710407001; page \"Census area: Shenandoah County · block group 511710407001(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1172 for 51171; page \"HUD Fair Market Rent (FY2027): 1 bed $943 · 2 bed $1,172 · 3 bed $1,452/moShenandoah County, VA. HUD's voucher benchmark (rent plus utilities), not a market ask\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "re-checked alone: USGS now 947 ft; page \"Ground elevation: 947 ft(U.S. Geological Survey 3DEP)\""
+      },
+      "usgs_first": {
+       "pass": false,
+       "detail": "re-checked alone: USGS now 947 ft; page \"Ground elevation: Not available (the service did not answer in time)(U.S. Geolog\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9271' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9271' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9271' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)"
+   ],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_51171.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_51171.json.gz"
+   ]
+  },
+  "51640": {
+   "state": "VA",
+   "points": [
+    {
+     "bg": "516400701012",
+     "lat": 36.659713,
+     "lng": -80.932541,
+     "service": "Virginia Parcels (VGIN, VA_Base_Layers/VA_Parcels)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $96k, rent $718/mo, homes 297"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 14 pts (current release); page: 14 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 14.3 pts below its 50% goal; box: \"14.3 pts below its 50% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [0,0.5,32.6667]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 2 record(s) for VA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Galax city · 516400701012; page \"Census area: Galax city · block group 516400701012(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 943 for 51640; page \"HUD Fair Market Rent (FY2027): 1 bed $803 · 2 bed $943 · 3 bed $1,306/moCarroll County-Galax city, VA HUD Nonmetro FMR Area. HUD's voucher benchmark (rent plus \""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "re-checked alone: USGS now 2465 ft; page \"Ground elevation: 2,465 ft(U.S. Geological Survey 3DEP)\""
+      },
+      "usgs_first": {
+       "pass": false,
+       "detail": "USGS now: 2465 ft; page \"Ground elevation: Not available (the service did not answer in time)(U.S. Geolog\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "516400701014",
+     "lat": 36.660029,
+     "lng": -80.910454,
+     "service": "Virginia Parcels (VGIN, VA_Base_Layers/VA_Parcels)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $82k, rent $939/mo, homes 346"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 3 pts (current release); page: 3 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 2.6 pts below its 50% goal; box: \"2.6 pts below its 50% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [2,1,33.8333]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 2 record(s) for VA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Galax city · 516400701014; page \"Census area: Galax city · block group 516400701014(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 943 for 51640; page \"HUD Fair Market Rent (FY2027): 1 bed $803 · 2 bed $943 · 3 bed $1,306/moCarroll County-Galax city, VA HUD Nonmetro FMR Area. HUD's voucher benchmark (rent plus \""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "re-checked alone: USGS now no answer; page \"Ground elevation: Not available (the service did not answer in time)(U.S. Geolog\""
+      },
+      "usgs_first": {
+       "pass": false,
+       "detail": "USGS now: 2501 ft; page \"Ground elevation: Not available (the service did not answer in time)(U.S. Geolog\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "516400701013",
+     "lat": 36.656714,
+     "lng": -80.925902,
+     "service": "Virginia Parcels (VGIN, VA_Base_Layers/VA_Parcels)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $135k, rent $771/mo, homes 389"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 32 pts (current release); page: 32 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 32.3 pts below its 50% goal; box: \"32.3 pts below its 50% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "counts [0,1,27.5]; comparison none"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 2 record(s) for VA"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Galax city · 516400701013; page \"Census area: Galax city · block group 516400701013(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 943 for 51640; page \"HUD Fair Market Rent (FY2027): 1 bed $803 · 2 bed $943 · 3 bed $1,306/moCarroll County-Galax city, VA HUD Nonmetro FMR Area. HUD's voucher benchmark (rent plus \""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "re-checked alone: USGS now 2443 ft; page \"Ground elevation: 2,443 ft(U.S. Geological Survey 3DEP)\""
+      },
+      "usgs_first": {
+       "pass": false,
+       "detail": "re-checked alone: USGS now 2443 ft; page \"Ground elevation: Not available (the service did not answer in time)(U.S. Geolog\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9271' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9271' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9271' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED"
+   ],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_51640.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_51640.json.gz"
+   ]
+  }
+ },
+ "fema_rechecked_on": "2026-11-23T01:02:48.956Z"
+}

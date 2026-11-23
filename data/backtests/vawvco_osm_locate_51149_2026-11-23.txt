@@ -1,0 +1,19 @@
+retry HTTP Error 504: Gateway Timeout
+missing_from_extract done 60 of 529
+missing_from_extract done 120 of 529
+missing_from_extract done 180 of 529
+retry HTTP Error 504: Gateway Time-out
+missing_from_extract done 240 of 529
+retry HTTP Error 504: Gateway Timeout
+retry HTTP Error 504: Gateway Time-out
+retry HTTP Error 504: Gateway Time-out
+retry HTTP Error 504: Gateway Time-out
+missing_from_extract done 300 of 529
+missing_from_extract done 360 of 529
+retry HTTP Error 504: Gateway Time-out
+missing_from_extract done 420 of 529
+retry HTTP Error 504: Gateway Timeout
+missing_from_extract done 480 of 529
+missing_from_extract done 529 of 529
+missing_from_extract by county: {'51183 Sussex County': 393, '51181 Surry County': 136}
+missing_from_extract in 51149 : 0 []

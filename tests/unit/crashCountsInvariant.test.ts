@@ -13,10 +13,10 @@ const perState = (st: string) => files.filter((f) => f.startsWith(st)).length;
 
 describe("crash counts: block groups add up to the located crashes (1/k rule), every county", () => {
   it("has all 58 California counties", () => expect(perState("06")).toBe(58));
-  it("has the 327 counties outside California that have a state or city crash source", () => {
-    const want: Record<string, number> = { "08": 1, "17": 102, "23": 16, "42": 67, "47": 95, "49": 29, "51": 17 };
+  it("has the 443 counties outside California that have a state or city crash source", () => {
+    const want: Record<string, number> = { "08": 1, "17": 102, "23": 16, "42": 67, "47": 95, "49": 29, "51": 133 };
     for (const [st, n] of Object.entries(want)) expect(perState(st), `state ${st}`).toBe(n);
-    expect(files.length).toBe(58 + 327);
+    expect(files.length).toBe(58 + 443);
   });
   for (const f of files) {
     it(`${f.slice(0, 5)} uses the 1/k rule and its block-group sums equal the located crashes`, () => {

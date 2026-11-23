@@ -1,0 +1,10 @@
+retry HTTP Error 504: Gateway Timeout
+retry HTTP Error 504: Gateway Time-out
+extra_in_extract done 60 of 138
+extra_in_extract done 120 of 138
+retry HTTP Error 504: Gateway Timeout
+retry HTTP Error 504: Gateway Timeout
+retry HTTP Error 504: Gateway Timeout
+extra_in_extract done 138 of 138
+extra_in_extract by county: {'47163 Sullivan County': 106, '47073 Hawkins County': 23, '47067 Hancock County': 7, '21095 Harlan County': 2}
+extra_in_extract in 51169 : 0 []
