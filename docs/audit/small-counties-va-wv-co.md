@@ -192,3 +192,95 @@ Files: `data/backtests/vawvco_va_census_spot_2026-11-23.json`, `data/backtests/v
 `data/backtests/vawvco_osm_locate_51169_2026-11-23.txt`, `..._51149_...`,
 `data/backtests/live_check_panels_2026-11-23_vawvco_va.json` (and `..._first_try.json`),
 `data/backtests/acs_fallback_mismatches_2026-11-23.json`.
+
+## West Virginia (52 of 52 built, none withheld)
+
+| County | People (ACS 2020-24) | Block groups | Data file (gzip, bytes) | Completeness tier | Canopy block groups (2025 release) |
+|---|---|---|---|---|---|
+| Barbour County (54001) | 15,424 | 16 | 456,281 | C | 0 |
+| Boone County (54005) | 21,026 | 17 | 378,272 | D | 0 |
+| Braxton County (54007) | 12,208 | 13 | 395,265 | D | 0 |
+| Brooke County (54009) | 21,805 | 20 | 169,561 | D | 15 |
+| Cabell County (54011) | 92,739 | 89 | 526,667 | C | 84 |
+| Calhoun County (54013) | 6,048 | 6 | 208,554 | D | 0 |
+| Clay County (54015) | 7,835 | 7 | 277,974 | D | 0 |
+| Doddridge County (54017) | 7,711 | 8 | 199,980 | D | 0 |
+| Fayette County (54019) | 39,519 | 36 | 568,024 | C | 19 |
+| Gilmer County (54021) | 7,288 | 10 | 337,872 | D | 0 |
+| Grant County (54023) | 10,983 | 10 | 506,524 | D | 0 |
+| Greenbrier County (54025) | 32,386 | 33 | 1,018,062 | C | 12 |
+| Hampshire County (54027) | 23,465 | 26 | 539,131 | D | 0 |
+| Hancock County (54029) | 28,431 | 27 | 177,331 | D | 19 |
+| Hardy County (54031) | 14,243 | 13 | 447,831 | C | 0 |
+| Harrison County (54033) | 64,984 | 60 | 449,737 | C | 44 |
+| Jackson County (54035) | 27,705 | 23 | 326,851 | D | 0 |
+| Jefferson County (54037) | 59,260 | 42 | 552,692 | C | 24 |
+| Lewis County (54041) | 16,740 | 15 | 353,628 | D | 7 |
+| Lincoln County (54043) | 19,902 | 21 | 395,452 | D | 0 |
+| Logan County (54045) | 31,418 | 31 | 390,348 | D | 20 |
+| McDowell County (54047) | 17,943 | 22 | 610,309 | D | 0 |
+| Marion County (54049) | 55,909 | 61 | 446,813 | C | 47 |
+| Marshall County (54051) | 29,865 | 32 | 264,201 | D | 24 |
+| Mason County (54053) | 25,043 | 22 | 357,134 | D | 11 |
+| Mercer County (54055) | 58,563 | 49 | 596,628 | C | 37 |
+| Mineral County (54057) | 26,854 | 20 | 561,002 | C | 11 |
+| Mingo County (54059) | 22,542 | 25 | 514,178 | D | 0 |
+| Monroe County (54063) | 12,386 | 12 | 452,949 | C | 0 |
+| Morgan County (54065) | 17,426 | 16 | 425,922 | C | 0 |
+| Nicholas County (54067) | 24,277 | 19 | 738,159 | C | 0 |
+| Ohio County (54069) | 41,582 | 51 | 218,536 | D | 41 |
+| Pendleton County (54071) | 6,043 | 8 | 640,473 | D | 0 |
+| Pleasants County (54073) | 7,521 | 7 | 129,819 | D | 0 |
+| Pocahontas County (54075) | 7,784 | 10 | 838,785 | C | 0 |
+| Preston County (54077) | 34,160 | 34 | 540,854 | C | 0 |
+| Putnam County (54079) | 57,177 | 40 | 469,566 | D | 35 |
+| Raleigh County (54081) | 73,195 | 56 | 791,445 | C | 39 |
+| Randolph County (54083) | 27,576 | 28 | 1,221,891 | C | 17 |
+| Ritchie County (54085) | 8,286 | 11 | 325,362 | D | 0 |
+| Roane County (54087) | 13,786 | 16 | 282,209 | D | 0 |
+| Summers County (54089) | 11,729 | 11 | 429,530 | C | 0 |
+| Taylor County (54091) | 16,487 | 18 | 188,369 | C | 13 |
+| Tucker County (54093) | 6,654 | 8 | 438,741 | C | 0 |
+| Tyler County (54095) | 8,064 | 10 | 232,570 | D | 0 |
+| Upshur County (54097) | 23,712 | 19 | 309,467 | C | 10 |
+| Wayne County (54099) | 38,164 | 38 | 659,348 | C | 19 |
+| Webster County (54101) | 8,144 | 8 | 481,324 | D | 0 |
+| Wetzel County (54103) | 14,078 | 17 | 260,893 | D | 8 |
+| Wirt County (54105) | 5,053 | 4 | 202,703 | D | 0 |
+| Wood County (54107) | 83,407 | 72 | 431,377 | D | 61 |
+| Wyoming County (54109) | 20,629 | 18 | 545,129 | C | 0 |
+| **52 counties** | **1,365,159** | **1,285** | **23,281,723** | 23 C, 29 D | 617 |
+
+- OpenStreetMap: West Virginia is `split: us-south/west-virginia` in the registry. `us-south-latest.osm.pbf` (4,624,950,259
+  bytes, md5 `da655e384013439bc0ea8cd43eae8d9b`, equal to the published `us-south.osm.pbf.md5`; data timestamp
+  2026-11-23T01:36:20Z from `us-south.state.txt`; the registry's own note for these counties says 2026-11-07, older) was
+  downloaded once, cut into West Virginia's file with `national/osm_split.py us-south --states WV` (131 MB; 162 s, peak
+  osmium 4.08 GB) and deleted. All 52 counties read that file. Build: fetch 14-73 s, build 67-80 s per county, one at a
+  time, about 1.5 hours from the first county to the last.
+- Bus frequency: 35 counties have no value in any block group; 17 have values. Rail distance: 43 counties have none; 9 have
+  values.
+- Census spot check: 52 counties, 1,240 of 1,240 values equal (0% mismatch). Tract-median flags: 52 counties added, no
+  existing county changed, 0 values matching neither the block group nor the tract.
+- Crash counts: West Virginia has no state crash source connected (`pipeline/region.py` STATE_DEFAULTS holds IL, ME, PA, TN,
+  UT and VA, not WV); all 52 files say "Not connected for West Virginia yet: crash gaps are not scored and crash-based
+  projects are not proposed". No crash counts were built, so `tests/unit/crashCountsInvariant.test.ts` was not touched.
+- Tests run: `npm test` 2,085 of 2,085 (50 files), `npm run typecheck` clean. No corridor stop needed a change.
+- OpenStreetMap ID for ID vs live Overpass (maps.mail.ru; two counties picked with seed 20261122 from the state's sorted list:
+  Putnam 54079 and Pendleton 54071). **Both exact: Putnam roads 6,948 = 6,948 and bus stops 9 = 9; Pendleton roads 2,304 =
+  2,304 and bus stops 0 = 0; 0 only on Overpass and 0 only in the extract in each.** Their boxes lie inside West Virginia,
+  so no state-line comparison was needed.
+- Live check from R2 (`LIVE_PORT=9271`): Wetzel (54103) and Putnam (54079), 3 points each (picked with seed 20261123 from
+  the state's sorted list). West Virginia's parcel service is on the page: all six points had the house panel on live
+  parcel records and pass every check (neighborhood, canopy, canopy goal, crash text "no crash data for this county", state
+  laws, Census area, HUD rent, FEMA, USGS, console), with two exceptions on the first try: **Wetzel 541030307004 and Putnam
+  540790205005 first showed a USGS elevation of "Not available (the service did not answer in time)"** (the page's 6 s
+  limit); re-opened alone they showed 647 ft and 589 ft, equal to USGS's, and passed (the first tries are kept in
+  `live_check_panels_2026-11-23_vawvco_wv_first_try.json`). 54 pass, 2 recorded first-try failures, 0 not checkable. No wrong
+  value was shown. Each data file came from the r2.dev address.
+- R2: before 2,061,749,096 bytes (3,675 objects); dry run "53 files, net +0.023 GB, projected 2.085 GB"; right after the
+  upload 2,084,976,473 bytes (3,727 objects): the 52 data files are 23,281,723 bytes, and `manifest.json` went from 733,803
+  to 679,457 bytes (again the other agent's manifest replaced by this branch's; see "Tests and housekeeping").
+
+Files: `data/backtests/vawvco_wv_census_spot_2026-11-23.json`, `data/backtests/vawvco_osm_xcheck_54079_2026-11-23.json`,
+`..._54071_...`, `data/backtests/live_check_panels_2026-11-23_vawvco_wv.json` (and `..._first_try.json`),
+`data/backtests/acs_fallback_mismatches_2026-11-23.json`.

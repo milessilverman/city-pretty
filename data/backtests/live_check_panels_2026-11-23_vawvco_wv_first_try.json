@@ -1,0 +1,377 @@
+{
+ "ran_on": "2026-11-23T03:54:24.779Z",
+ "script": "scripts/live_check_panels.mjs",
+ "results": {
+  "54079": {
+   "state": "WV",
+   "points": [
+    {
+     "bg": "540790205005",
+     "lat": 38.439138,
+     "lng": -81.841463,
+     "service": "WV Parcels (WVGIS Technical Center / WV Property Tax Division)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $101k, rent $1,155/mo, homes 500"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 34 pts (current release); page: 34 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 34 pts below its 50% goal; box: \"34 pts below its 50% goal\" / \"+3.2°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for WV"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Putnam County · 540790205005; page \"Census area: Putnam County · block group 540790205005(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1091 for 54079; page \"HUD Fair Market Rent (FY2027): 1 bed $834 · 2 bed $1,091 · 3 bed $1,500/moPutnam County, WV HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities), n\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": false,
+       "detail": "USGS now: 589 ft; page \"Ground elevation: Not available (the service did not answer in time)(U.S. Geolog\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "540790202002",
+     "lat": 38.61178,
+     "lng": -81.981869,
+     "service": "WV Parcels (WVGIS Technical Center / WV Property Tax Division)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $167k, rent $533/mo, homes 554"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 19 pts (current release); page: 19 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 19.4 pts below its 50% goal; box: \"19.4 pts below its 50% goal\" / \"+0.2°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for WV"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Putnam County · 540790202002; page \"Census area: Putnam County · block group 540790202002(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1091 for 54079; page \"HUD Fair Market Rent (FY2027): 1 bed $834 · 2 bed $1,091 · 3 bed $1,500/moPutnam County, WV HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities), n\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: AE; page \"FEMA flood zone: Zone AE · special flood hazard areaFederally backed mortgages here require flood insurance.(FEMA Nation\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 571 ft; page \"Ground elevation: 571 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "540790206071",
+     "lat": 38.454478,
+     "lng": -81.949974,
+     "service": "WV Parcels (WVGIS Technical Center / WV Property Tax Division)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $219k, rent $964/mo, homes 827"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 28 pts (current release); page: 28 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 28.1 pts below its 50% goal; box: \"28.1 pts below its 50% goal\" / \"+1.6°F vs. urban area\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for WV"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Putnam County · 540790206071; page \"Census area: Putnam County · block group 540790206071(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1091 for 54079; page \"HUD Fair Market Rent (FY2027): 1 bed $834 · 2 bed $1,091 · 3 bed $1,500/moPutnam County, WV HUD Metro FMR Area. HUD's voucher benchmark (rent plus utilities), n\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 752 ft; page \"Ground elevation: 752 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "fail",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9271' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9271' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9271' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED"
+   ],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_54079.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_54079.json.gz"
+   ]
+  },
+  "54103": {
+   "state": "WV",
+   "points": [
+    {
+     "bg": "541030307004",
+     "lat": 39.609194,
+     "lng": -80.92897,
+     "service": "WV Parcels (WVGIS Technical Center / WV Property Tax Division)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $106k, rent $692/mo, homes 798"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for WV"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Wetzel County · 541030307004; page \"Census area: Wetzel County · block group 541030307004(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 944 for 54103; page \"HUD Fair Market Rent (FY2027): 1 bed $791 · 2 bed $944 · 3 bed $1,235/moWetzel County, WV. HUD's voucher benchmark (rent plus utilities), not a market asking re\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": false,
+       "detail": "USGS now: 647 ft; page \"Ground elevation: Not available (the service did not answer in time)(U.S. Geolog\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "541030304002",
+     "lat": 39.665453,
+     "lng": -80.609215,
+     "service": "WV Parcels (WVGIS Technical Center / WV Property Tax Division)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $126k, rent $708/mo, homes 286"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for WV"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Wetzel County · 541030304002; page \"Census area: Wetzel County · block group 541030304002(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 944 for 54103; page \"HUD Fair Market Rent (FY2027): 1 bed $791 · 2 bed $944 · 3 bed $1,235/moWetzel County, WV. HUD's voucher benchmark (rent plus utilities), not a market asking re\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 1159 ft; page \"Ground elevation: 1,159 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "541030307003",
+     "lat": 39.647267,
+     "lng": -80.863431,
+     "service": "WV Parcels (WVGIS Technical Center / WV Property Tax Division)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $93k, rent $632/mo, homes 316"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 25 pts (current release); page: 25 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 25.4 pts below its 40% goal; box: \"25.4 pts below its 40% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 0 record(s) for WV"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Wetzel County · 541030307003; page \"Census area: Wetzel County · block group 541030307003(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 944 for 54103; page \"HUD Fair Market Rent (FY2027): 1 bed $791 · 2 bed $944 · 3 bed $1,235/moWetzel County, WV. HUD's voucher benchmark (rent plus utilities), not a market asking re\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: AE; page \"FEMA flood zone: Zone AE · special flood hazard areaFederally backed mortgages here require flood insurance.(FEMA Nation\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 626 ft; page \"Ground elevation: 626 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "fail",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9271' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9271' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9271' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)"
+   ],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_54103.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_54103.json.gz"
+   ]
+  }
+ }
+}
