@@ -1,6 +1,94 @@
-# Small counties: Texas, Oklahoma, Arkansas and Louisiana (22 Nov 2026), served from R2 only
+# Small counties: Texas, Oklahoma, Arkansas and Louisiana (22-23 Nov 2026), served from R2 only
 
-(In progress: the summary at the top is written when the last state is done. States below are complete as listed.)
+**Result: all 400 counties of the four states are built, checked and on the page, served from R2 only; none was
+withheld.** Each state was built, checked, uploaded, live-checked and committed on its own (Texas, the largest, in two parts
+by OpenStreetMap file). The states were built in the order Oklahoma, Arkansas, Louisiana, Texas, because the first three
+share one regional OpenStreetMap download.
+
+| State | Counties built / missing | People (ACS 2020-24) | Block groups | Data files (bytes) | Tiers | Census values checked | R2 bytes added |
+|---|---|---|---|---|---|---|---|
+| OK | 72 / 72 | 1,950,784 | 1,661 | 29,899,678 | 14 C, 58 D | 1,636 | 29,917,780 |
+| AR | 67 / 67 | 1,491,796 | 1,297 | 20,410,231 | 11 C, 56 D | 1,604 | 20,427,087 |
+| LA | 50 / 50 | 1,461,591 | 1,660 | 23,608,142 | 11 C, 39 D | 1,196 | 23,622,545 |
+| TX part 1 | 101 / 101 | 1,592,770 | 1,328 | 22,996,230 | 6 C, 95 D | 2,072 | 23,021,597 |
+| TX part 2 | 110 / 110 | 2,815,555 | 2,194 | 33,584,350 | 21 C, 89 D | 2,328 | 33,611,999 |
+| **TX (211)** | **211 / 211** | **4,408,325** | **3,522** | **56,580,580** | 27 C, 184 D | **4,400** | **56,633,596** |
+| **All** | **400 / 400** | **9,312,496** | **8,140** | **130,498,631** | 63 C, 337 D | **8,836** | **130,601,008** |
+
+| Check | Sample | Result | Mismatch rate |
+|---|---|---|---|
+| Census: population, median home value, median gross rent, median household income vs the ACS 2020-24 table files (`scripts/census_spot_check.py`, seed 20261119) | 6 block groups in each of the 400 counties (all of them where a county has fewer), 8,836 values | 8,836 of 8,836 equal | 0% |
+| Tract-median flags (`build_acs_fallback_flags.py`, every county file) | all county files, after each state | 400 counties added, no existing county changed, 0 values matching neither the block group nor the tract | 0% |
+| OpenStreetMap ID for ID vs live Overpass (`scripts/check_osm_extract_vs_overpass.py`) | 2 counties per state (Texas: 2 per part), 10 (seed 20261122, drawn from each state's or part's sorted list of new counties) | 7 counties exact (roads and bus stops): OK Jefferson, AR White, LA St. John the Baptist and St. Bernard, TX Matagorda, Lampasas and Rains. 3 differ in roads, and each difference was traced: OK Stephens (54 roads) and AR Jefferson (9 roads) differ only by roads edited, added or deleted after the extract was made (each way's history read from the OpenStreetMap API); TX Navarro (830 roads only on Overpass) differs only in the margin of the check's box: every one of the county's own roads is in the extract (6,439 of 6,439) and all 830 have their centre outside the county | 0% inside the counties apart from 63 roads (54 + 9) changed in OpenStreetMap after the extracts' snapshots |
+| Live, real page loading from R2 (`scripts/live_check_panels.mjs`, `LIVE_PORT=9261`, 3 points per county) | 10 counties (seed 20261123), 30 points | 169 pass, 99 not checkable (no parcel service on the page for the OK, LA and TX counties, so the house-panel rows do not apply), 5 recorded failures, all one kind: at 3 of the 6 Arkansas points the page's USGS elevation row said "Not available (the service did not answer in time)" (the page's 6 s limit; USGS took 16-18 s for the one point timed). No wrong value was shown anywhere | 0 wrong values |
+
+**Crash counts:** none of the four states has a crash source in `pipeline/region.py` STATE_DEFAULTS (it holds IL, VA, UT,
+PA, ME and TN), so all 400 files say "Not connected for <state> yet: crash gaps are not scored and crash-based projects
+are not proposed". No crash counts were built.
+
+Counties still without a data file after this batch, counted from the registry the same way (not in
+`counties/bundle_*.json.gz` or `counties/.r2-only.txt`, Puerto Rico left out) in this worktree: **228** (628 before), of
+which Los Angeles and Orange (built by their own pipeline, loaded from `app/data/`) are 2 and Hawaii's 5 have no
+OpenStreetMap extract in the registry. Remaining by state: VA 116, CO 53, WV 52, HI 5, CA 2; TX, OK, AR and LA 0. The
+Virginia, West Virginia and Colorado counties are being built in another worktree and are not in this one.
+
+**R2 storage:** my files: 130,601,008 bytes added (the 400 data files, 130,498,631, plus the larger `manifest.json`).
+The account total went from 1,876,134,325 bytes (3,159 objects) before my first upload to 2,061,749,096 bytes (3,675
+objects) after my last: 1.876 GB to 2.062 GB of the 8 GB ceiling and the 10 GB allowance; the difference of 185,614,771
+bytes is my 130,601,008 plus 55,013,763 bytes of another job's uploads seen between my Arkansas and Louisiana uploads. Every
+upload went through `scripts/r2_sync_counties.py` after a `--dry-run`; the largest projection was 2.062 GB (the brief's stop
+was 4 GB); the per-state figures are in each state's section.
+
+**Measured rate:** this batch stored 16,032 bytes per block group (state range 14,222 for Louisiana to 18,001 for Oklahoma;
+326,247 bytes per county). The registry's Virginia, West Virginia and Colorado counties have 4,609 block groups (ACS 2020-24
+B01003 rows), which at this batch's rate is 0.074 GB (0.066 to 0.083 GB).
+
+The batch is every county under 100,000 people with no data file (not in `counties/bundle_*.json.gz`, not in
+`counties/.r2-only.txt`), counted from the registry (`national/data/counties.json`) before starting: TX 211, OK 72, AR 67,
+LA 50, **400 counties** (no county of these states with 100,000 people or more was without a data file). The method is the
+Southeast batch's (`small-counties-southeast.md`), unchanged: files are uploaded with `scripts/r2_sync_counties.py` after a
+`--dry-run`, listed in `counties/.r2-only.txt`, and not committed. No pipeline code was changed.
+
+## How
+
+- **Pipeline:** `pipeline/fetch_oc.py`, `osm_extract.py`, `metrics_oc.py`, `layers_oc.py`, `build_oc.py inputs/page_dec` from
+  a copy of `pipeline/` in the session's scratch folder, three counties at a time, the national ACS table files already in
+  the shared cache; then `scripts/export_county_bundle.py <dir> <fips> --r2-only` one county at a time;
+  `build_tree_equity_2025.py <state>` (existing counties' files that differ only in `_meta.built` were restored to what is
+  committed); `build_acs_fallback_flags.py` (all county files; the 1,774 earlier R2-only files were downloaded from the
+  bucket's public address into this worktree's gitignored `counties/` first); `build_county_completeness.py` (only the new
+  rows are kept, since a fresh run rewrites `computed_on` on every row).
+- **OpenStreetMap:** Texas counties read the sub-region or whole-state files the registry names (openstreetmap.fr, one
+  download each, shared by the counties that use it). Oklahoma, Arkansas and Louisiana are `split: us-south/<state>` in the
+  registry: `us-south-latest.osm.pbf` (4,623,607,998 bytes, md5 `aaee92b7cea7116859b6f51c768d7830`, equal to the published
+  `us-south.osm.pbf.md5`; data timestamp 2026-11-21T01:28:06Z from `us-south.state.txt`) was downloaded once, cut into the
+  three states with `national/osm_split.py` and deleted. Each state's build folders were deleted once the state was uploaded
+  and checked.
+- **HUD income limits:** `tests/unit/buildingCosts.test.ts` needs a row (or a listed failure) in
+  `app/data/hud_income_limits.json` for every manifest county. Each state's rows were fetched from HUD's API
+  (`https://www.huduser.gov/hudapi/public/il/data/<fips>99999`) with the script's own `get()` and `row_from()`
+  (`scripts/costs/fetch_hud_income_limits.py`); existing rows were not re-fetched or changed.
+- **Transit corridors:** `tests/unit/transitCorridors.test.ts` checks every stop's `county_on_page` flag against the
+  manifest; the flags of stops whose county is now on the page were set to true in the same commit as the state (nine stops:
+  Oklahoma 2, Louisiana 1, Texas 6; none for Arkansas).
+- **Empty fields, each named in the county's sources list:** crime (all), 311, assessor parcels and sales, street-tree
+  survey, tax-rate areas (all); bus frequency and rail distance where the per-state notes say so.
+
+## Checks (every state)
+
+- **Census:** `scripts/census_spot_check.py` (seed 20261119): population, median home value, median gross rent and median
+  household income of 6 randomly chosen block groups in every county (all of them where a county has fewer) against the
+  ACS 2020-24 table files, read by a separate parser. Where the block group's median is suppressed the file must hold the
+  tract's published median, flagged as a tract value in `acs_fallback_flags.json`, or nothing.
+- **OpenStreetMap:** `scripts/check_osm_extract_vs_overpass.py`, ID for ID against a live Overpass query of the same box
+  (maps.mail.ru mirror), two counties per state (per part for Texas), picked at random from the state's sorted list of new
+  counties with `random.Random(20261122).sample(list, 2)`. The extracts are dated snapshots and Overpass is live, so a few
+  differences could be edits made since; where roads differed, each one's history was read from the OpenStreetMap API
+  (`/api/0.6/way/<id>/history`) and compared with the snapshot time, and where the box reaches past the county the differing
+  roads were placed inside or outside the county.
+- **Live:** `scripts/live_check_panels.mjs` (`LIVE_PORT=9261`, 3 points per county) on the real page loading each county's
+  file from `pub-79001cd74c284c499559e54d4aa4f33b.r2.dev`; the counties were picked with `random.Random(20261123).sample(list, 2)`.
+
 
 ## Oklahoma (72 of 72 built, none withheld)
 
@@ -461,3 +549,204 @@ Files: `data/backtests/southcentral_la_census_spot_2026-11-22.json`, `data/backt
 Files: `data/backtests/southcentral_txa_census_spot_2026-11-22.json`, `data/backtests/southcentral_osm_xcheck_48321_2026-11-22.json`,
 `..._48281_...`, `data/backtests/live_check_panels_2026-11-23_southcentral_txa.json`,
 `data/backtests/acs_fallback_mismatches_2026-11-23.json`.
+
+## Texas, part 2 of 2 (110 of 110 built, none withheld)
+
+| County | People (ACS 2020-24) | Block groups | Data file (gzip, bytes) | Completeness tier | Canopy block groups (2025 release) |
+|---|---|---|---|---|---|
+| Anderson County (48001) | 58,439 | 39 | 529,850 | C | 24 |
+| Andrews County (48003) | 18,610 | 12 | 66,133 | D | 12 |
+| Angelina County (48005) | 87,275 | 68 | 686,673 | C | 41 |
+| Aransas County (48007) | 24,876 | 26 | 188,940 | D | 24 |
+| Austin County (48015) | 31,170 | 21 | 396,786 | D | 7 |
+| Bee County (48025) | 31,083 | 25 | 212,405 | D | 17 |
+| Borden County (48033) | 713 | 1 | 68,330 | D | 0 |
+| Bowie County (48037) | 92,115 | 80 | 449,092 | C | 54 |
+| Brewster County (48043) | 9,503 | 11 | 680,927 | C | 8 |
+| Brooks County (48047) | 6,943 | 7 | 98,938 | D | 6 |
+| Burleson County (48051) | 18,857 | 20 | 560,042 | D | 0 |
+| Camp County (48063) | 12,798 | 11 | 142,978 | D | 0 |
+| Cass County (48067) | 28,568 | 29 | 279,068 | D | 11 |
+| Chambers County (48071) | 51,498 | 22 | 530,469 | C | 7 |
+| Cherokee County (48073) | 51,886 | 37 | 429,844 | C | 13 |
+| Coke County (48081) | 3,353 | 4 | 103,355 | C | 0 |
+| Colorado County (48089) | 21,006 | 18 | 422,186 | D | 0 |
+| Concho County (48095) | 3,328 | 2 | 93,389 | D | 0 |
+| Cooke County (48097) | 43,046 | 31 | 346,294 | C | 18 |
+| Crane County (48103) | 4,610 | 5 | 84,335 | D | 0 |
+| Crockett County (48105) | 2,822 | 5 | 180,790 | D | 0 |
+| Culberson County (48109) | 2,195 | 3 | 421,813 | D | 0 |
+| Dawson County (48115) | 12,134 | 14 | 96,798 | D | 12 |
+| Delta County (48119) | 5,438 | 4 | 165,717 | D | 0 |
+| Dimmit County (48127) | 8,380 | 8 | 164,938 | D | 6 |
+| Duval County (48131) | 9,742 | 10 | 102,313 | D | 0 |
+| Edwards County (48137) | 1,290 | 2 | 435,329 | D | 0 |
+| Erath County (48143) | 43,794 | 28 | 350,089 | D | 15 |
+| Fannin County (48147) | 37,326 | 30 | 274,438 | D | 10 |
+| Franklin County (48159) | 10,632 | 9 | 125,576 | D | 0 |
+| Gaines County (48165) | 22,232 | 15 | 127,802 | D | 10 |
+| Glasscock County (48173) | 1,068 | 2 | 43,815 | D | 0 |
+| Grimes County (48185) | 31,340 | 21 | 351,067 | D | 7 |
+| Hardin County (48199) | 57,642 | 41 | 607,117 | C | 26 |
+| Harrison County (48203) | 70,155 | 55 | 517,852 | C | 39 |
+| Henderson County (48213) | 84,862 | 66 | 611,571 | D | 34 |
+| Hood County (48221) | 65,894 | 36 | 352,679 | D | 27 |
+| Hopkins County (48223) | 37,784 | 28 | 317,256 | D | 15 |
+| Houston County (48225) | 22,051 | 20 | 445,058 | D | 7 |
+| Howard County (48227) | 32,290 | 28 | 155,005 | D | 27 |
+| Hudspeth County (48229) | 3,403 | 4 | 404,057 | D | 0 |
+| Irion County (48235) | 1,409 | 2 | 65,230 | D | 0 |
+| Jasper County (48241) | 32,727 | 28 | 941,476 | D | 14 |
+| Jeff Davis County (48243) | 1,865 | 2 | 381,157 | D | 0 |
+| Jim Hogg County (48247) | 4,727 | 5 | 92,140 | D | 0 |
+| Jim Wells County (48249) | 38,850 | 34 | 268,662 | D | 21 |
+| Kenedy County (48261) | 145 | 2 | 39,940 | D | 0 |
+| Kimble County (48267) | 4,389 | 6 | 198,067 | D | 0 |
+| Kinney County (48271) | 3,157 | 4 | 277,172 | D | 0 |
+| Kleberg County (48273) | 30,579 | 28 | 179,593 | D | 24 |
+| Lamar County (48277) | 50,669 | 40 | 323,649 | D | 25 |
+| La Salle County (48283) | 6,839 | 5 | 133,217 | D | 0 |
+| Leon County (48289) | 16,263 | 16 | 312,808 | D | 0 |
+| Live Oak County (48297) | 11,620 | 12 | 211,509 | D | 0 |
+| Loving County (48301) | 33 | 1 | 44,528 | D | 0 |
+| McCulloch County (48307) | 7,514 | 10 | 167,992 | D | 7 |
+| Madison County (48313) | 13,648 | 10 | 195,992 | D | 0 |
+| Marion County (48315) | 9,737 | 11 | 183,816 | C | 0 |
+| Martin County (48317) | 5,218 | 4 | 80,932 | D | 0 |
+| Mason County (48319) | 3,955 | 4 | 175,171 | D | 0 |
+| Maverick County (48323) | 58,082 | 37 | 299,591 | D | 36 |
+| Menard County (48327) | 1,955 | 3 | 94,375 | D | 0 |
+| Morris County (48343) | 12,076 | 14 | 142,149 | D | 0 |
+| Nacogdoches County (48347) | 65,162 | 48 | 711,215 | C | 33 |
+| Navarro County (48349) | 54,711 | 30 | 621,845 | D | 19 |
+| Newton County (48351) | 12,093 | 14 | 467,243 | D | 0 |
+| Orange County (48361) | 85,307 | 69 | 539,671 | C | 55 |
+| Palo Pinto County (48363) | 29,295 | 23 | 308,419 | D | 14 |
+| Panola County (48365) | 22,726 | 21 | 294,004 | D | 9 |
+| Pecos County (48371) | 14,896 | 17 | 460,460 | C | 13 |
+| Polk County (48373) | 52,800 | 48 | 667,696 | D | 13 |
+| Presidio County (48377) | 5,930 | 6 | 495,696 | D | 0 |
+| Rains County (48379) | 12,775 | 9 | 152,582 | D | 0 |
+| Reagan County (48383) | 3,232 | 4 | 46,570 | D | 0 |
+| Real County (48385) | 2,802 | 4 | 214,378 | D | 0 |
+| Red River County (48387) | 11,611 | 16 | 292,166 | D | 0 |
+| Reeves County (48389) | 12,664 | 11 | 356,329 | D | 10 |
+| Refugio County (48391) | 6,707 | 8 | 198,550 | D | 0 |
+| Robertson County (48395) | 17,167 | 14 | 314,196 | D | 0 |
+| Rusk County (48401) | 52,842 | 43 | 440,086 | C | 22 |
+| Sabine County (48403) | 10,023 | 11 | 396,007 | D | 0 |
+| San Augustine County (48405) | 7,874 | 9 | 461,604 | D | 0 |
+| San Jacinto County (48407) | 28,441 | 22 | 576,273 | D | 0 |
+| San Patricio County (48409) | 70,181 | 49 | 365,684 | D | 38 |
+| Schleicher County (48413) | 2,381 | 3 | 53,514 | D | 0 |
+| Shelby County (48419) | 24,155 | 19 | 483,299 | D | 6 |
+| Somervell County (48425) | 9,691 | 8 | 104,896 | D | 0 |
+| Starr County (48427) | 66,067 | 46 | 406,889 | D | 40 |
+| Sterling County (48431) | 1,468 | 1 | 51,703 | D | 0 |
+| Sutton County (48435) | 3,277 | 4 | 162,389 | D | 0 |
+| Terrell County (48443) | 835 | 1 | 173,598 | C | 0 |
+| Titus County (48449) | 31,363 | 24 | 225,102 | D | 16 |
+| Trinity County (48455) | 14,046 | 17 | 360,669 | D | 0 |
+| Tyler County (48457) | 20,238 | 18 | 483,729 | D | 0 |
+| Upshur County (48459) | 42,567 | 32 | 473,333 | C | 13 |
+| Upton County (48461) | 3,191 | 3 | 53,019 | D | 0 |
+| Uvalde County (48463) | 24,881 | 21 | 340,591 | D | 14 |
+| Val Verde County (48465) | 47,741 | 40 | 438,191 | C | 37 |
+| Van Zandt County (48467) | 62,649 | 39 | 432,186 | C | 0 |
+| Walker County (48471) | 80,209 | 41 | 423,146 | D | 28 |
+| Waller County (48473) | 61,552 | 27 | 573,320 | C | 9 |
+| Ward County (48475) | 11,144 | 10 | 156,754 | D | 9 |
+| Washington County (48477) | 36,647 | 29 | 416,675 | D | 16 |
+| Wharton County (48481) | 41,794 | 35 | 522,548 | D | 25 |
+| Willacy County (48489) | 20,139 | 16 | 147,539 | D | 11 |
+| Winkler County (48495) | 7,454 | 9 | 40,114 | D | 8 |
+| Wise County (48497) | 75,005 | 40 | 428,295 | D | 11 |
+| Wood County (48499) | 46,961 | 36 | 429,802 | C | 8 |
+| Zapata County (48505) | 13,841 | 14 | 178,559 | D | 12 |
+| Zavala County (48507) | 9,412 | 9 | 213,536 | D | 7 |
+| **110 counties** | **2,815,555** | **2,194** | **33,584,350** | 21 C, 89 D | 1100 |
+
+- Part 2 of Texas: the 110 counties on the `northwest` (29), `west` (32), `southeast` (26) and `south` (23) sub-region
+  files, each downloaded once from openstreetmap.fr and shared by the counties that use it (273,124,283, 47,315,523,
+  170,840,503 and 45,501,350 bytes). Data timestamp of all four: 2026-11-23T01:09:51Z (newer than part 1's `north` and
+  `central` files, 2026-11-21T01:04:36Z, which were downloaded earlier); each county's sources
+  list names its own. Build: fetch 8-70 s; build 107-141 s per county on `northwest`, 44-55 s on `west`, 84-103 s on
+  `southeast`, 29-40 s on `south`; three at a time (the part 1 checks, tests and upload ran alongside), about 59 min from the
+  first county to the last.
+- Bus frequency: 105 counties have no value in any block group (no feed that is read has a stop with 7-9 am departures in or
+  near the county); 5 have values. Rail distance: 98 counties have none; 12 have values.
+- Census spot check: 110 counties, 2,328 of 2,328 values equal (0% mismatch). Tract-median flags: 110 counties added, no
+  existing county changed, 0 values matching neither the block group nor the tract.
+- Crash counts: Texas has no state crash source connected (`pipeline/region.py` STATE_DEFAULTS has no TX); all 110 files say
+  "Not connected for Texas yet: crash gaps are not scored and crash-based projects are not proposed". No crash counts were
+  built.
+- Tests run: `npm test` 1,737 of 1,737 (50 files), `npm run typecheck` clean. `app/data/intercity_transit_corridors.json`:
+  Mineola TX (Wood, 48499), Marshall TX (Harrison, 48203), Corsicana TX (Navarro, 48349), Hearne TX (Robertson, 48395) and
+  Navasota TX (Grimes, 48185) now say `county_on_page: true` (5 lines), as `tests/unit/transitCorridors.test.ts` requires.
+- OpenStreetMap ID for ID vs live Overpass (maps.mail.ru; two counties picked with seed 20261122 from this part's sorted
+  list): it answered 504 to many tries first (Rains's road query failed all 8 tries once and was run again). Rains (48379) 1,690 = 1,690 roads, 0 = 0 bus stops (0 missing, 0 extra). Navarro (48349): bus stops 0 = 0; **roads 12,275 on
+  Overpass, 11,445 in the extract (830 only on Overpass, 0 only in the extract)**. The check's box reaches 0.02 degrees past
+  the county, so it was run again with the same box and classes asking Overpass for each road's centre point
+  (`xcheck_inside.py` in the session's scratch folder, `out center`; result, with all 830 IDs, in
+  `southcentral_osm_xcheck_inside_48349_2026-11-23.json`) and each road placed inside or outside the county (the union of
+  the county's block-group shapes): of the 12,275 roads, 6,439 have their centre inside Navarro County and **all 6,439 are in
+  the extract (0 missing inside the county)**; all 830 roads that are not in the extract have their centre outside the
+  county, in the margin of the box. The extract's snapshot is 2026-11-23T01:09:51Z (both counties are on the `northwest`
+  file).
+- Live check from R2 (`LIVE_PORT=9261`): Uvalde (48463) and Reagan (48383), 3 points each (picked with seed 20261123 from
+  this part's sorted list). Neither county has a parcel service on the page, so the house-panel rows (Census area, HUD rent,
+  FEMA, USGS) are not checkable; neighborhood, canopy, canopy goal, crash text, state laws and console pass at all 6 points
+  (30 pass, 0 fail, 24 not checkable). Each data file came from the r2.dev address (HEAD 200, GET 200).
+- R2: before 2,028,137,097 bytes (3,565 objects); dry run "111 files, net +0.034 GB, projected 2.062 GB"; after
+  2,061,749,096 bytes (3,675 objects): 33,611,999 bytes added (the 110 data files, 33,584,350, plus the larger
+  `manifest.json`).
+
+Files: `data/backtests/southcentral_txb_census_spot_2026-11-22.json`, `data/backtests/southcentral_osm_xcheck_48379_2026-11-23.json`,
+`..._48349_...`, `..._xcheck_inside_48349_...`, `data/backtests/live_check_panels_2026-11-23_southcentral_txb.json`,
+`data/backtests/acs_fallback_mismatches_2026-11-23.json`.
+
+## Tests and housekeeping
+
+- `npm test`: run in full after each state (1,737 of 1,737 in 50 files each time; no state added or removed a test);
+  `npm run typecheck` clean after each. The full browser suite on the final tree: (run after this commit; the result is added by the next commit). `python3 scripts/r2_only.py --check`
+  passes. No test was skipped or loosened and no test pin was changed (none of the four states has a crash source, so
+  `tests/unit/crashCountsInvariant.test.ts` was not touched). No pipeline code was changed.
+- `app/data/hud_income_limits.json`: 400 rows added from HUD's API (none failed; the test lets only New England counties
+  fail). Rows already in the file were not changed; `_source.added_for_new_counties` records each state's addition.
+- `app/data/intercity_transit_corridors.json`: nine stops' `county_on_page` flags now say true, each in the commit of its
+  state: Perry OK (Noble, 40103) and Ponca City OK (Kay, 40071) in Oklahoma; Ruston LA (Lincoln Parish, 22061) in Louisiana;
+  Flatonia TX (Fayette, 48149) in Texas part 1; Mineola TX (Wood, 48499), Marshall TX (Harrison, 48203), Corsicana TX
+  (Navarro, 48349), Hearne TX (Robertson, 48395) and Navasota TX (Grimes, 48185) in Texas part 2. No Arkansas stop needed a
+  change.
+- The 1,774 earlier R2-only files were downloaded from the bucket's public address into this worktree's `counties/` (ignored
+  by version control) so that `build_tree_equity_2025.py`, `build_acs_fallback_flags.py` and `build_county_completeness.py`
+  could run; the 400 new files are in `counties/` here too and not committed. The Virginia, West Virginia and Colorado
+  files, built in another worktree, are not in this one, so this branch's `acs_fallback_flags.json`,
+  `county_completeness.json`, `hud_income_limits.json`, `counties/manifest.json`, `counties/.r2-only.txt`, `.gitignore` and
+  `index.html` do not hold them, and merging the two branches will need those files merged by hand.
+- `counties/manifest.json` in the bucket is one object that every upload of either job replaces with that worktree's own
+  copy (666,384 bytes when I started my Louisiana upload, which was the other job's copy; 733,803 bytes after my last). Neither
+  copy holds the other job's counties. Nothing on the page reads that object (no reference in `index.html` or `app/`), but
+  the merged manifest should be uploaded once after the merge.
+- The upload script printed a JSON decoding error ("Extra data") at the end of the Arkansas upload, after the files had been
+  sent; a second `--dry-run` showed 0 files to upload and the bucket held 3,298 objects, as expected. It did not happen again.
+- No `sites_` files were built (as for every small-county batch: `w5/tools/sites.py` needs the old build machine's paths).
+- The Overpass mirror (maps.mail.ru, the only one reachable from here) answered 504 for long stretches: Stephens's and
+  Rains's road queries failed all 8 tries once and were run again, and Navarro's second query needed one retry. All ten checks
+  were completed; none is open. The OpenStreetMap API (api.openstreetmap.org) answered every history request.
+- Scratch use: the scratch folder for this job held the national ACS tables (0.7 GB), the 4.6 GB `us-south` file (from the
+  download until the Oklahoma, Arkansas and Louisiana cuts were made, then deleted at once) and one state's build folders. I
+  measured the folder at 3.5 GB after the Oklahoma builds (before they were pruned) and 3.2 GB during Texas part 1; I did
+  not measure it while the regional file was on disk. The disk's free space was never below 7.8 GB at any of the times I
+  read it (stop: 6 GB). Each state's build folders were deleted after its checks, except the two counties kept for its
+  OpenStreetMap check. The clipped copy of the region file that each county's folder holds (osm/*.pbf) and the TIGER water
+  files are deleted once the county's build succeeds (nothing later reads them); they were reported at 8.9 GB in total
+  when first deleted, but the disk's free space did not change, so they did not occupy separate space.
+- No mistake was found in already-published data, so no entry was added to `docs/DATA-AUDIT-AND-TRANSPARENCY.md`.
+
+## What is left
+
+Counties still without a data file nationally: 228 in this worktree (see the top of this page for the list by state); the
+Virginia, West Virginia and Colorado ones are being built in another worktree. Not done here: Hawaii (no extract in the
+registry), and crash counts for all four states (no state source is wired into `pipeline/region.py` for Texas, Oklahoma,
+Arkansas or Louisiana).

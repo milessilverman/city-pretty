@@ -29321,6 +29321,54 @@
    ]
   },
   {
+   "fips": "48001",
+   "name": "Anderson County",
+   "state": "TX",
+   "block_groups": 39,
+   "bundle_mb": 0.5,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48003",
+   "name": "Andrews County",
+   "state": "TX",
+   "block_groups": 12,
+   "bundle_mb": 0.1,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48005",
+   "name": "Angelina County",
+   "state": "TX",
+   "block_groups": 68,
+   "bundle_mb": 0.7,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48007",
+   "name": "Aransas County",
+   "state": "TX",
+   "block_groups": 26,
+   "bundle_mb": 0.2,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "48009",
    "name": "Archer County",
    "state": "TX",
@@ -29352,6 +29400,18 @@
    "bundle_mb": 0.4,
    "built": "2026-11-23",
    "osm": "2026-11-21T01\\:04\\:36Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48015",
+   "name": "Austin County",
+   "state": "TX",
+   "block_groups": 21,
+   "bundle_mb": 0.4,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
    "crash_source": null,
    "crash_years": null,
    "r2_only": true
@@ -29404,6 +29464,18 @@
    "r2_only": true
   },
   {
+   "fips": "48025",
+   "name": "Bee County",
+   "state": "TX",
+   "block_groups": 25,
+   "bundle_mb": 0.2,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "48027",
    "name": "Bell County",
    "state": "TX",
@@ -29438,6 +29510,18 @@
    "r2_only": true
   },
   {
+   "fips": "48033",
+   "name": "Borden County",
+   "state": "TX",
+   "block_groups": 1,
+   "bundle_mb": 0.1,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "48035",
    "name": "Bosque County",
    "state": "TX",
@@ -29445,6 +29529,18 @@
    "bundle_mb": 0.4,
    "built": "2026-11-23",
    "osm": "2026-11-21T01\\:04\\:36Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48037",
+   "name": "Bowie County",
+   "state": "TX",
+   "block_groups": 80,
+   "bundle_mb": 0.4,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
    "crash_source": null,
    "crash_years": null,
    "r2_only": true
@@ -29472,6 +29568,18 @@
    "crash_years": null
   },
   {
+   "fips": "48043",
+   "name": "Brewster County",
+   "state": "TX",
+   "block_groups": 11,
+   "bundle_mb": 0.7,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "48045",
    "name": "Briscoe County",
    "state": "TX",
@@ -29484,6 +29592,18 @@
    "r2_only": true
   },
   {
+   "fips": "48047",
+   "name": "Brooks County",
+   "state": "TX",
+   "block_groups": 7,
+   "bundle_mb": 0.1,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "48049",
    "name": "Brown County",
    "state": "TX",
@@ -29491,6 +29611,18 @@
    "bundle_mb": 0.3,
    "built": "2026-11-23",
    "osm": "2026-11-21T01\\:04\\:36Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48051",
+   "name": "Burleson County",
+   "state": "TX",
+   "block_groups": 20,
+   "bundle_mb": 0.6,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
    "crash_source": null,
    "crash_years": null,
    "r2_only": true
@@ -29555,6 +29687,18 @@
    "crash_years": null
   },
   {
+   "fips": "48063",
+   "name": "Camp County",
+   "state": "TX",
+   "block_groups": 11,
+   "bundle_mb": 0.1,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "48065",
    "name": "Carson County",
    "state": "TX",
@@ -29567,6 +29711,18 @@
    "r2_only": true
   },
   {
+   "fips": "48067",
+   "name": "Cass County",
+   "state": "TX",
+   "block_groups": 29,
+   "bundle_mb": 0.3,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "48069",
    "name": "Castro County",
    "state": "TX",
@@ -29574,6 +29730,30 @@
    "bundle_mb": 0.1,
    "built": "2026-11-23",
    "osm": "2026-11-21T01\\:04\\:36Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48071",
+   "name": "Chambers County",
+   "state": "TX",
+   "block_groups": 22,
+   "bundle_mb": 0.5,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48073",
+   "name": "Cherokee County",
+   "state": "TX",
+   "block_groups": 37,
+   "bundle_mb": 0.4,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
    "crash_source": null,
    "crash_years": null,
    "r2_only": true
@@ -29615,6 +29795,18 @@
    "r2_only": true
   },
   {
+   "fips": "48081",
+   "name": "Coke County",
+   "state": "TX",
+   "block_groups": 4,
+   "bundle_mb": 0.1,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "48083",
    "name": "Coleman County",
    "state": "TX",
@@ -29650,6 +29842,18 @@
    "r2_only": true
   },
   {
+   "fips": "48089",
+   "name": "Colorado County",
+   "state": "TX",
+   "block_groups": 18,
+   "bundle_mb": 0.4,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "48091",
    "name": "Comal County",
    "state": "TX",
@@ -29668,6 +29872,30 @@
    "bundle_mb": 0.2,
    "built": "2026-11-23",
    "osm": "2026-11-21T01\\:04\\:36Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48095",
+   "name": "Concho County",
+   "state": "TX",
+   "block_groups": 2,
+   "bundle_mb": 0.1,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48097",
+   "name": "Cooke County",
+   "state": "TX",
+   "block_groups": 31,
+   "bundle_mb": 0.3,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
    "crash_source": null,
    "crash_years": null,
    "r2_only": true
@@ -29697,6 +29925,30 @@
    "r2_only": true
   },
   {
+   "fips": "48103",
+   "name": "Crane County",
+   "state": "TX",
+   "block_groups": 5,
+   "bundle_mb": 0.1,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48105",
+   "name": "Crockett County",
+   "state": "TX",
+   "block_groups": 5,
+   "bundle_mb": 0.2,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "48107",
    "name": "Crosby County",
    "state": "TX",
@@ -29704,6 +29956,18 @@
    "bundle_mb": 0.1,
    "built": "2026-11-23",
    "osm": "2026-11-21T01\\:04\\:36Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48109",
+   "name": "Culberson County",
+   "state": "TX",
+   "block_groups": 3,
+   "bundle_mb": 0.4,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
    "crash_source": null,
    "crash_years": null,
    "r2_only": true
@@ -29732,6 +29996,18 @@
    "crash_years": null
   },
   {
+   "fips": "48115",
+   "name": "Dawson County",
+   "state": "TX",
+   "block_groups": 14,
+   "bundle_mb": 0.1,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "48117",
    "name": "Deaf Smith County",
    "state": "TX",
@@ -29739,6 +30015,18 @@
    "bundle_mb": 0.1,
    "built": "2026-11-23",
    "osm": "2026-11-21T01\\:04\\:36Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48119",
+   "name": "Delta County",
+   "state": "TX",
+   "block_groups": 4,
+   "bundle_mb": 0.2,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
    "crash_source": null,
    "crash_years": null,
    "r2_only": true
@@ -29779,6 +30067,18 @@
    "r2_only": true
   },
   {
+   "fips": "48127",
+   "name": "Dimmit County",
+   "state": "TX",
+   "block_groups": 8,
+   "bundle_mb": 0.2,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "48129",
    "name": "Donley County",
    "state": "TX",
@@ -29786,6 +30086,18 @@
    "bundle_mb": 0.2,
    "built": "2026-11-23",
    "osm": "2026-11-21T01\\:04\\:36Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48131",
+   "name": "Duval County",
+   "state": "TX",
+   "block_groups": 10,
+   "bundle_mb": 0.1,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
    "crash_source": null,
    "crash_years": null,
    "r2_only": true
@@ -29814,6 +30126,18 @@
    "crash_years": null
   },
   {
+   "fips": "48137",
+   "name": "Edwards County",
+   "state": "TX",
+   "block_groups": 2,
+   "bundle_mb": 0.4,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "48139",
    "name": "Ellis County",
    "state": "TX",
@@ -29836,6 +30160,18 @@
    "crash_years": null
   },
   {
+   "fips": "48143",
+   "name": "Erath County",
+   "state": "TX",
+   "block_groups": 28,
+   "bundle_mb": 0.4,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "48145",
    "name": "Falls County",
    "state": "TX",
@@ -29843,6 +30179,18 @@
    "bundle_mb": 0.5,
    "built": "2026-11-23",
    "osm": "2026-11-21T01\\:04\\:36Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48147",
+   "name": "Fannin County",
+   "state": "TX",
+   "block_groups": 30,
+   "bundle_mb": 0.3,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
    "crash_source": null,
    "crash_years": null,
    "r2_only": true
@@ -29907,6 +30255,18 @@
    "crash_years": null
   },
   {
+   "fips": "48159",
+   "name": "Franklin County",
+   "state": "TX",
+   "block_groups": 9,
+   "bundle_mb": 0.1,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "48161",
    "name": "Freestone County",
    "state": "TX",
@@ -29926,6 +30286,18 @@
    "bundle_mb": 0.2,
    "built": "2026-11-23",
    "osm": "2026-11-21T01\\:04\\:36Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48165",
+   "name": "Gaines County",
+   "state": "TX",
+   "block_groups": 15,
+   "bundle_mb": 0.1,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
    "crash_source": null,
    "crash_years": null,
    "r2_only": true
@@ -29961,6 +30333,18 @@
    "bundle_mb": 0.3,
    "built": "2026-11-23",
    "osm": "2026-11-21T01\\:04\\:36Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48173",
+   "name": "Glasscock County",
+   "state": "TX",
+   "block_groups": 2,
+   "bundle_mb": 0.0,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
    "crash_source": null,
    "crash_years": null,
    "r2_only": true
@@ -30022,6 +30406,18 @@
    "osm": "2026-11-07T00:44:55Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "48185",
+   "name": "Grimes County",
+   "state": "TX",
+   "block_groups": 21,
+   "bundle_mb": 0.4,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "48187",
@@ -30095,6 +30491,18 @@
    "r2_only": true
   },
   {
+   "fips": "48199",
+   "name": "Hardin County",
+   "state": "TX",
+   "block_groups": 41,
+   "bundle_mb": 0.6,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "48201",
    "name": "Harris County",
    "state": "TX",
@@ -30104,6 +30512,18 @@
    "osm": "2026-11-07T00:44:55Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "48203",
+   "name": "Harrison County",
+   "state": "TX",
+   "block_groups": 55,
+   "bundle_mb": 0.5,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "48205",
@@ -30153,6 +30573,18 @@
    "r2_only": true
   },
   {
+   "fips": "48213",
+   "name": "Henderson County",
+   "state": "TX",
+   "block_groups": 66,
+   "bundle_mb": 0.6,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "48215",
    "name": "Hidalgo County",
    "state": "TX",
@@ -30188,6 +30620,66 @@
    "r2_only": true
   },
   {
+   "fips": "48221",
+   "name": "Hood County",
+   "state": "TX",
+   "block_groups": 36,
+   "bundle_mb": 0.4,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48223",
+   "name": "Hopkins County",
+   "state": "TX",
+   "block_groups": 28,
+   "bundle_mb": 0.3,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48225",
+   "name": "Houston County",
+   "state": "TX",
+   "block_groups": 20,
+   "bundle_mb": 0.4,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48227",
+   "name": "Howard County",
+   "state": "TX",
+   "block_groups": 28,
+   "bundle_mb": 0.2,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48229",
+   "name": "Hudspeth County",
+   "state": "TX",
+   "block_groups": 4,
+   "bundle_mb": 0.4,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "48231",
    "name": "Hunt County",
    "state": "TX",
@@ -30206,6 +30698,18 @@
    "bundle_mb": 0.1,
    "built": "2026-11-23",
    "osm": "2026-11-21T01\\:04\\:36Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48235",
+   "name": "Irion County",
+   "state": "TX",
+   "block_groups": 2,
+   "bundle_mb": 0.1,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
    "crash_source": null,
    "crash_years": null,
    "r2_only": true
@@ -30235,6 +30739,30 @@
    "r2_only": true
   },
   {
+   "fips": "48241",
+   "name": "Jasper County",
+   "state": "TX",
+   "block_groups": 28,
+   "bundle_mb": 0.9,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48243",
+   "name": "Jeff Davis County",
+   "state": "TX",
+   "block_groups": 2,
+   "bundle_mb": 0.4,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "48245",
    "name": "Jefferson County",
    "state": "TX",
@@ -30244,6 +30772,30 @@
    "osm": "2026-11-07T00:44:55Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "48247",
+   "name": "Jim Hogg County",
+   "state": "TX",
+   "block_groups": 5,
+   "bundle_mb": 0.1,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48249",
+   "name": "Jim Wells County",
+   "state": "TX",
+   "block_groups": 34,
+   "bundle_mb": 0.3,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "48251",
@@ -30304,6 +30856,18 @@
    "r2_only": true
   },
   {
+   "fips": "48261",
+   "name": "Kenedy County",
+   "state": "TX",
+   "block_groups": 2,
+   "bundle_mb": 0.0,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "48263",
    "name": "Kent County",
    "state": "TX",
@@ -30328,6 +30892,18 @@
    "r2_only": true
   },
   {
+   "fips": "48267",
+   "name": "Kimble County",
+   "state": "TX",
+   "block_groups": 6,
+   "bundle_mb": 0.2,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "48269",
    "name": "King County",
    "state": "TX",
@@ -30340,6 +30916,30 @@
    "r2_only": true
   },
   {
+   "fips": "48271",
+   "name": "Kinney County",
+   "state": "TX",
+   "block_groups": 4,
+   "bundle_mb": 0.3,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48273",
+   "name": "Kleberg County",
+   "state": "TX",
+   "block_groups": 28,
+   "bundle_mb": 0.2,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "48275",
    "name": "Knox County",
    "state": "TX",
@@ -30347,6 +30947,18 @@
    "bundle_mb": 0.1,
    "built": "2026-11-23",
    "osm": "2026-11-21T01\\:04\\:36Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48277",
+   "name": "Lamar County",
+   "state": "TX",
+   "block_groups": 40,
+   "bundle_mb": 0.3,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
    "crash_source": null,
    "crash_years": null,
    "r2_only": true
@@ -30376,6 +30988,18 @@
    "r2_only": true
   },
   {
+   "fips": "48283",
+   "name": "La Salle County",
+   "state": "TX",
+   "block_groups": 5,
+   "bundle_mb": 0.1,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "48285",
    "name": "Lavaca County",
    "state": "TX",
@@ -30395,6 +31019,18 @@
    "bundle_mb": 0.5,
    "built": "2026-11-23",
    "osm": "2026-11-21T01\\:04\\:36Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48289",
+   "name": "Leon County",
+   "state": "TX",
+   "block_groups": 16,
+   "bundle_mb": 0.3,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
    "crash_source": null,
    "crash_years": null,
    "r2_only": true
@@ -30435,6 +31071,18 @@
    "r2_only": true
   },
   {
+   "fips": "48297",
+   "name": "Live Oak County",
+   "state": "TX",
+   "block_groups": 12,
+   "bundle_mb": 0.2,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "48299",
    "name": "Llano County",
    "state": "TX",
@@ -30442,6 +31090,18 @@
    "bundle_mb": 0.3,
    "built": "2026-11-23",
    "osm": "2026-11-21T01\\:04\\:36Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48301",
+   "name": "Loving County",
+   "state": "TX",
+   "block_groups": 1,
+   "bundle_mb": 0.0,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
    "crash_source": null,
    "crash_years": null,
    "r2_only": true
@@ -30470,6 +31130,18 @@
    "r2_only": true
   },
   {
+   "fips": "48307",
+   "name": "McCulloch County",
+   "state": "TX",
+   "block_groups": 10,
+   "bundle_mb": 0.2,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "48309",
    "name": "McLennan County",
    "state": "TX",
@@ -30493,6 +31165,54 @@
    "r2_only": true
   },
   {
+   "fips": "48313",
+   "name": "Madison County",
+   "state": "TX",
+   "block_groups": 10,
+   "bundle_mb": 0.2,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48315",
+   "name": "Marion County",
+   "state": "TX",
+   "block_groups": 11,
+   "bundle_mb": 0.2,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48317",
+   "name": "Martin County",
+   "state": "TX",
+   "block_groups": 4,
+   "bundle_mb": 0.1,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48319",
+   "name": "Mason County",
+   "state": "TX",
+   "block_groups": 4,
+   "bundle_mb": 0.2,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "48321",
    "name": "Matagorda County",
    "state": "TX",
@@ -30505,6 +31225,18 @@
    "r2_only": true
   },
   {
+   "fips": "48323",
+   "name": "Maverick County",
+   "state": "TX",
+   "block_groups": 37,
+   "bundle_mb": 0.3,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "48325",
    "name": "Medina County",
    "state": "TX",
@@ -30512,6 +31244,18 @@
    "bundle_mb": 0.5,
    "built": "2026-11-23",
    "osm": "2026-11-21T01\\:04\\:36Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48327",
+   "name": "Menard County",
+   "state": "TX",
+   "block_groups": 3,
+   "bundle_mb": 0.1,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
    "crash_source": null,
    "crash_years": null,
    "r2_only": true
@@ -30599,6 +31343,18 @@
    "r2_only": true
   },
   {
+   "fips": "48343",
+   "name": "Morris County",
+   "state": "TX",
+   "block_groups": 14,
+   "bundle_mb": 0.1,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "48345",
    "name": "Motley County",
    "state": "TX",
@@ -30606,6 +31362,42 @@
    "bundle_mb": 0.1,
    "built": "2026-11-23",
    "osm": "2026-11-21T01\\:04\\:36Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48347",
+   "name": "Nacogdoches County",
+   "state": "TX",
+   "block_groups": 48,
+   "bundle_mb": 0.7,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48349",
+   "name": "Navarro County",
+   "state": "TX",
+   "block_groups": 30,
+   "bundle_mb": 0.6,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48351",
+   "name": "Newton County",
+   "state": "TX",
+   "block_groups": 14,
+   "bundle_mb": 0.5,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
    "crash_source": null,
    "crash_years": null,
    "r2_only": true
@@ -30658,6 +31450,42 @@
    "r2_only": true
   },
   {
+   "fips": "48361",
+   "name": "Orange County",
+   "state": "TX",
+   "block_groups": 69,
+   "bundle_mb": 0.5,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48363",
+   "name": "Palo Pinto County",
+   "state": "TX",
+   "block_groups": 23,
+   "bundle_mb": 0.3,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48365",
+   "name": "Panola County",
+   "state": "TX",
+   "block_groups": 21,
+   "bundle_mb": 0.3,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "48367",
    "name": "Parker County",
    "state": "TX",
@@ -30681,6 +31509,30 @@
    "r2_only": true
   },
   {
+   "fips": "48371",
+   "name": "Pecos County",
+   "state": "TX",
+   "block_groups": 17,
+   "bundle_mb": 0.5,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48373",
+   "name": "Polk County",
+   "state": "TX",
+   "block_groups": 48,
+   "bundle_mb": 0.7,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "48375",
    "name": "Potter County",
    "state": "TX",
@@ -30690,6 +31542,30 @@
    "osm": "2026-11-07T00:44:55Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "48377",
+   "name": "Presidio County",
+   "state": "TX",
+   "block_groups": 6,
+   "bundle_mb": 0.5,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48379",
+   "name": "Rains County",
+   "state": "TX",
+   "block_groups": 9,
+   "bundle_mb": 0.2,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "48381",
@@ -30703,6 +31579,66 @@
    "crash_years": null
   },
   {
+   "fips": "48383",
+   "name": "Reagan County",
+   "state": "TX",
+   "block_groups": 4,
+   "bundle_mb": 0.0,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48385",
+   "name": "Real County",
+   "state": "TX",
+   "block_groups": 4,
+   "bundle_mb": 0.2,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48387",
+   "name": "Red River County",
+   "state": "TX",
+   "block_groups": 16,
+   "bundle_mb": 0.3,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48389",
+   "name": "Reeves County",
+   "state": "TX",
+   "block_groups": 11,
+   "bundle_mb": 0.4,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48391",
+   "name": "Refugio County",
+   "state": "TX",
+   "block_groups": 8,
+   "bundle_mb": 0.2,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "48393",
    "name": "Roberts County",
    "state": "TX",
@@ -30710,6 +31646,18 @@
    "bundle_mb": 0.1,
    "built": "2026-11-23",
    "osm": "2026-11-21T01\\:04\\:36Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48395",
+   "name": "Robertson County",
+   "state": "TX",
+   "block_groups": 14,
+   "bundle_mb": 0.3,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
    "crash_source": null,
    "crash_years": null,
    "r2_only": true
@@ -30738,6 +31686,66 @@
    "r2_only": true
   },
   {
+   "fips": "48401",
+   "name": "Rusk County",
+   "state": "TX",
+   "block_groups": 43,
+   "bundle_mb": 0.4,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48403",
+   "name": "Sabine County",
+   "state": "TX",
+   "block_groups": 11,
+   "bundle_mb": 0.4,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48405",
+   "name": "San Augustine County",
+   "state": "TX",
+   "block_groups": 9,
+   "bundle_mb": 0.5,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48407",
+   "name": "San Jacinto County",
+   "state": "TX",
+   "block_groups": 22,
+   "bundle_mb": 0.6,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48409",
+   "name": "San Patricio County",
+   "state": "TX",
+   "block_groups": 49,
+   "bundle_mb": 0.4,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "48411",
    "name": "San Saba County",
    "state": "TX",
@@ -30745,6 +31753,18 @@
    "bundle_mb": 0.2,
    "built": "2026-11-23",
    "osm": "2026-11-21T01\\:04\\:36Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48413",
+   "name": "Schleicher County",
+   "state": "TX",
+   "block_groups": 3,
+   "bundle_mb": 0.1,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
    "crash_source": null,
    "crash_years": null,
    "r2_only": true
@@ -30774,6 +31794,18 @@
    "r2_only": true
   },
   {
+   "fips": "48419",
+   "name": "Shelby County",
+   "state": "TX",
+   "block_groups": 19,
+   "bundle_mb": 0.5,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "48421",
    "name": "Sherman County",
    "state": "TX",
@@ -30797,6 +31829,30 @@
    "crash_years": null
   },
   {
+   "fips": "48425",
+   "name": "Somervell County",
+   "state": "TX",
+   "block_groups": 8,
+   "bundle_mb": 0.1,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48427",
+   "name": "Starr County",
+   "state": "TX",
+   "block_groups": 46,
+   "bundle_mb": 0.4,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "48429",
    "name": "Stephens County",
    "state": "TX",
@@ -30809,6 +31865,18 @@
    "r2_only": true
   },
   {
+   "fips": "48431",
+   "name": "Sterling County",
+   "state": "TX",
+   "block_groups": 1,
+   "bundle_mb": 0.1,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "48433",
    "name": "Stonewall County",
    "state": "TX",
@@ -30816,6 +31884,18 @@
    "bundle_mb": 0.2,
    "built": "2026-11-23",
    "osm": "2026-11-21T01\\:04\\:36Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48435",
+   "name": "Sutton County",
+   "state": "TX",
+   "block_groups": 4,
+   "bundle_mb": 0.2,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
    "crash_source": null,
    "crash_years": null,
    "r2_only": true
@@ -30855,6 +31935,18 @@
    "crash_years": null
   },
   {
+   "fips": "48443",
+   "name": "Terrell County",
+   "state": "TX",
+   "block_groups": 1,
+   "bundle_mb": 0.2,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "48445",
    "name": "Terry County",
    "state": "TX",
@@ -30874,6 +31966,18 @@
    "bundle_mb": 0.1,
    "built": "2026-11-23",
    "osm": "2026-11-21T01\\:04\\:36Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48449",
+   "name": "Titus County",
+   "state": "TX",
+   "block_groups": 24,
+   "bundle_mb": 0.2,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
    "crash_source": null,
    "crash_years": null,
    "r2_only": true
@@ -30901,6 +32005,90 @@
    "crash_years": null
   },
   {
+   "fips": "48455",
+   "name": "Trinity County",
+   "state": "TX",
+   "block_groups": 17,
+   "bundle_mb": 0.4,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48457",
+   "name": "Tyler County",
+   "state": "TX",
+   "block_groups": 18,
+   "bundle_mb": 0.5,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48459",
+   "name": "Upshur County",
+   "state": "TX",
+   "block_groups": 32,
+   "bundle_mb": 0.5,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48461",
+   "name": "Upton County",
+   "state": "TX",
+   "block_groups": 3,
+   "bundle_mb": 0.1,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48463",
+   "name": "Uvalde County",
+   "state": "TX",
+   "block_groups": 21,
+   "bundle_mb": 0.3,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48465",
+   "name": "Val Verde County",
+   "state": "TX",
+   "block_groups": 40,
+   "bundle_mb": 0.4,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48467",
+   "name": "Van Zandt County",
+   "state": "TX",
+   "block_groups": 39,
+   "bundle_mb": 0.4,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "48469",
    "name": "Victoria County",
    "state": "TX",
@@ -30908,6 +32096,54 @@
    "bundle_mb": 0.5,
    "built": "2026-11-23",
    "osm": "2026-11-21T01\\:04\\:36Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48471",
+   "name": "Walker County",
+   "state": "TX",
+   "block_groups": 41,
+   "bundle_mb": 0.4,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48473",
+   "name": "Waller County",
+   "state": "TX",
+   "block_groups": 27,
+   "bundle_mb": 0.6,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48475",
+   "name": "Ward County",
+   "state": "TX",
+   "block_groups": 10,
+   "bundle_mb": 0.2,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48477",
+   "name": "Washington County",
+   "state": "TX",
+   "block_groups": 29,
+   "bundle_mb": 0.4,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
    "crash_source": null,
    "crash_years": null,
    "r2_only": true
@@ -30922,6 +32158,18 @@
    "osm": "2026-11-07T00:44:55Z",
    "crash_source": null,
    "crash_years": null
+  },
+  {
+   "fips": "48481",
+   "name": "Wharton County",
+   "state": "TX",
+   "block_groups": 35,
+   "bundle_mb": 0.5,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
   },
   {
    "fips": "48483",
@@ -30959,6 +32207,18 @@
    "r2_only": true
   },
   {
+   "fips": "48489",
+   "name": "Willacy County",
+   "state": "TX",
+   "block_groups": 16,
+   "bundle_mb": 0.1,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
    "fips": "48491",
    "name": "Williamson County",
    "state": "TX",
@@ -30977,6 +32237,42 @@
    "bundle_mb": 0.5,
    "built": "2026-11-23",
    "osm": "2026-11-21T01\\:04\\:36Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48495",
+   "name": "Winkler County",
+   "state": "TX",
+   "block_groups": 9,
+   "bundle_mb": 0.0,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48497",
+   "name": "Wise County",
+   "state": "TX",
+   "block_groups": 40,
+   "bundle_mb": 0.4,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48499",
+   "name": "Wood County",
+   "state": "TX",
+   "block_groups": 36,
+   "bundle_mb": 0.4,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
    "crash_source": null,
    "crash_years": null,
    "r2_only": true
@@ -31001,6 +32297,30 @@
    "bundle_mb": 0.2,
    "built": "2026-11-23",
    "osm": "2026-11-21T01\\:04\\:36Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48505",
+   "name": "Zapata County",
+   "state": "TX",
+   "block_groups": 14,
+   "bundle_mb": 0.2,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
+   "crash_source": null,
+   "crash_years": null,
+   "r2_only": true
+  },
+  {
+   "fips": "48507",
+   "name": "Zavala County",
+   "state": "TX",
+   "block_groups": 9,
+   "bundle_mb": 0.2,
+   "built": "2026-11-23",
+   "osm": "2026-11-23T01\\:09\\:51Z",
    "crash_source": null,
    "crash_years": null,
    "r2_only": true
