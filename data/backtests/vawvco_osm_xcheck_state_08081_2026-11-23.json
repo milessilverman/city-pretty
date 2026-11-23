@@ -1,0 +1,31 @@
+{
+ "fips": "08081",
+ "state_area": "US-CO",
+ "box_s_w_n_e": "40.19999099967365,-109.07124500024685,41.02307299991232,-107.29336499988587",
+ "direct_in_state": 1537,
+ "extract": 1554,
+ "missing_from_extract": [],
+ "extra_in_extract": [
+  10086859,
+  10087634,
+  10185573,
+  10191163,
+  15694228,
+  15695517,
+  15706535,
+  15708821,
+  15709918,
+  15709934,
+  15710119,
+  15773042,
+  15774866,
+  15779699,
+  414295188,
+  416824382,
+  1531846707
+ ],
+ "n_missing": 0,
+ "n_extra": 17,
+ "match": false,
+ "note": "roads in the box that lie in another state are not in a state extract and are left out of this comparison"
+}

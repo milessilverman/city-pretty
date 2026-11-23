@@ -284,3 +284,100 @@ Files: `data/backtests/vawvco_va_census_spot_2026-11-23.json`, `data/backtests/v
 Files: `data/backtests/vawvco_wv_census_spot_2026-11-23.json`, `data/backtests/vawvco_osm_xcheck_54079_2026-11-23.json`,
 `..._54071_...`, `data/backtests/live_check_panels_2026-11-23_vawvco_wv.json` (and `..._first_try.json`),
 `data/backtests/acs_fallback_mismatches_2026-11-23.json`.
+
+## Colorado (53 of 53 built, none withheld)
+
+| County | People (ACS 2020-24) | Block groups | Data file (gzip, bytes) | Completeness tier | Canopy block groups (2025 release) |
+|---|---|---|---|---|---|
+| Alamosa County (08003) | 16,581 | 15 | 512,390 | D | 10 |
+| Archuleta County (08007) | 13,900 | 14 | 1,352,674 | D | 9 |
+| Baca County (08009) | 3,428 | 4 | 142,114 | D | 0 |
+| Bent County (08011) | 5,549 | 5 | 184,288 | D | 0 |
+| Broomfield County (08014) | 76,304 | 52 | 545,332 | C | 50 |
+| Chaffee County (08015) | 20,178 | 15 | 1,254,833 | D | 11 |
+| Cheyenne County (08017) | 1,741 | 2 | 126,049 | D | 0 |
+| Clear Creek County (08019) | 9,262 | 11 | 341,192 | C | 0 |
+| Conejos County (08021) | 7,530 | 6 | 885,867 | D | 0 |
+| Costilla County (08023) | 3,607 | 4 | 823,234 | C | 0 |
+| Crowley County (08025) | 5,647 | 4 | 81,337 | D | 0 |
+| Custer County (08027) | 5,247 | 7 | 674,497 | D | 0 |
+| Delta County (08029) | 31,598 | 26 | 1,359,843 | C | 7 |
+| Dolores County (08033) | 2,432 | 3 | 1,057,037 | C | 0 |
+| Eagle County (08037) | 55,135 | 36 | 2,013,563 | C | 33 |
+| Elbert County (08039) | 27,874 | 17 | 281,200 | C | 0 |
+| Fremont County (08043) | 49,634 | 38 | 1,256,223 | C | 22 |
+| Garfield County (08045) | 62,479 | 39 | 2,399,583 | C | 34 |
+| Gilpin County (08047) | 5,901 | 5 | 200,132 | C | 0 |
+| Grand County (08049) | 15,895 | 13 | 1,676,761 | C | 7 |
+| Gunnison County (08051) | 17,241 | 16 | 2,783,372 | C | 9 |
+| Hinsdale County (08053) | 1,005 | 1 | 785,509 | D | 0 |
+| Huerfano County (08055) | 6,972 | 6 | 971,013 | D | 0 |
+| Jackson County (08057) | 1,372 | 2 | 694,381 | C | 0 |
+| Kiowa County (08061) | 1,376 | 2 | 76,531 | D | 0 |
+| Kit Carson County (08063) | 7,023 | 6 | 161,706 | D | 0 |
+| Lake County (08065) | 7,380 | 8 | 654,651 | C | 6 |
+| La Plata County (08067) | 56,331 | 35 | 1,745,890 | C | 16 |
+| Las Animas County (08071) | 14,413 | 17 | 1,083,876 | C | 12 |
+| Lincoln County (08073) | 5,550 | 5 | 242,919 | D | 0 |
+| Logan County (08075) | 20,892 | 17 | 217,745 | C | 14 |
+| Mineral County (08079) | 729 | 1 | 794,434 | D | 0 |
+| Moffat County (08081) | 13,207 | 15 | 392,467 | C | 13 |
+| Montezuma County (08083) | 26,412 | 23 | 1,330,300 | D | 12 |
+| Montrose County (08085) | 43,807 | 32 | 1,620,476 | C | 22 |
+| Morgan County (08087) | 29,520 | 25 | 164,927 | C | 18 |
+| Otero County (08089) | 18,321 | 20 | 242,127 | C | 9 |
+| Ouray County (08091) | 5,087 | 5 | 598,630 | C | 0 |
+| Park County (08093) | 17,907 | 13 | 1,006,767 | C | 0 |
+| Phillips County (08095) | 4,496 | 6 | 47,539 | D | 0 |
+| Pitkin County (08097) | 16,985 | 14 | 1,458,309 | C | 12 |
+| Prowers County (08099) | 11,910 | 14 | 165,007 | C | 11 |
+| Rio Blanco County (08103) | 6,544 | 7 | 970,222 | D | 0 |
+| Rio Grande County (08105) | 11,321 | 10 | 1,002,579 | D | 0 |
+| Routt County (08107) | 25,084 | 24 | 938,506 | C | 16 |
+| Saguache County (08109) | 6,580 | 6 | 2,106,277 | D | 0 |
+| San Juan County (08111) | 724 | 1 | 625,990 | C | 0 |
+| San Miguel County (08113) | 7,968 | 7 | 1,050,911 | C | 6 |
+| Sedgwick County (08115) | 2,304 | 2 | 65,956 | C | 0 |
+| Summit County (08117) | 31,017 | 31 | 1,173,978 | C | 30 |
+| Teller County (08119) | 24,825 | 19 | 429,790 | C | 8 |
+| Washington County (08121) | 4,831 | 5 | 152,033 | D | 0 |
+| Yuma County (08125) | 9,979 | 9 | 160,083 | D | 0 |
+| **53 counties** | **879,035** | **720** | **43,083,050** | 31 C, 22 D | 397 |
+
+- OpenStreetMap: Colorado counties read the file the registry names for each county, from openstreetmap.fr, each downloaded
+  once and shared: `southwest` (14 counties), `northwest` (14), `southeast` (12), `northeast` (10) and `denver` (3). All five
+  have data timestamp 23 Nov 2026, 01:12:49Z. Build: fetch 26-109 s, build 34-75 s per county, one at a time, about 1.4 hours
+  from the first county to the last.
+- Bus frequency: 29 counties have no value in any block group; 24 have values. Rail distance: 45 counties have none; 8
+  have values.
+- Census spot check: 53 counties, 1,092 of 1,092 values equal (0% mismatch). Tract-median flags: 53 counties added, no
+  existing county changed, 0 values matching neither the block group nor the tract.
+- Crash counts: Colorado has no state crash source connected (`pipeline/region.py` STATE_DEFAULTS has no CO; the one earlier
+  Colorado county with crash counts is Denver, which has its own city source); all 53 files say "Not connected for Colorado yet: crash gaps
+  are not scored and crash-based projects are not proposed". No crash counts were built, so
+  `tests/unit/crashCountsInvariant.test.ts` was not touched.
+- Tests run: `npm test` 2,085 of 2,085 (50 files), `npm run typecheck` clean. No corridor stop needed a change.
+- OpenStreetMap ID for ID vs live Overpass (maps.mail.ru; it answered 504 to many tries, each query was retried until it
+  answered; two counties picked with seed 20261122 from the state's sorted list: Otero 08089 and Moffat 08081).
+  **Otero: roads 2,922 = 2,922 and bus stops 10 = 10, exact.** **Moffat: bus stops 16 = 16; roads 1,577 on Overpass, 1,554
+  in the extract (23 only on Overpass, 0 only in the extract).** Moffat's box reaches over the Wyoming and Utah lines, so the
+  comparison was repeated inside Colorado (`area["ISO3166-2"="US-CO"]`): 1,537 on Overpass in Colorado, 1,554 in the
+  extract, **0 only on Overpass**, 17 only in the extract. Located with TIGERweb (centre point of each way): the 23 raw
+  Overpass-only roads are in Carbon County WY 19, Sweetwater County WY 2, Daggett County UT 1 and Uintah County UT 1; the 17
+  extract-only ways are Wyoming- and Utah-centred ways that cross the line and are kept whole (Carbon WY 9, Sweetwater WY 4,
+  Daggett UT 2, Uintah UT 2). None of the 40 is in Moffat County. So inside both counties every road and bus stop matches.
+- Live check from R2 (`LIVE_PORT=9271`): Sedgwick (08115) and Otero (08089), picked with seed 20261123 from the state's sorted
+  list. Sedgwick has two block groups, so it has 2 points (5 points in all, not 6). Both Sedgwick points had the house panel
+  on live parcel records and pass every check (neighborhood, canopy, canopy goal, crash text "no crash data for this
+  county", state laws, Census area, HUD rent, FEMA, USGS, console). Otero has no parcel service on the page, so its three
+  points open the neighbourhood panel only ("no parcel at point"): neighborhood, canopy, canopy goal, crash text, state laws
+  and console pass, and the house-panel rows (Census area, HUD rent, FEMA, USGS) are not checkable. 33 pass, 0 fail, 12 not
+  checkable. No wrong value was shown. Each data file came from the r2.dev address (HEAD 200, GET 200).
+- R2: before 2,084,976,473 bytes (3,727 objects); dry run "54 files, net +0.043 GB, projected 2.128 GB". The first upload
+  run stopped after 31 objects with a JSON decoding error from the script ("Extra data", no file lost); a new `--dry-run`
+  showed the remaining 23 files, net +0.017 GB, projected 2.128 GB, and the second run finished with "Failed: 0". After:
+  3,780 objects, 2.128 GB; the 53 data files are 43,083,050 bytes.
+
+Files: `data/backtests/vawvco_co_census_spot_2026-11-23.json`, `data/backtests/vawvco_osm_xcheck_08089_2026-11-23.json`,
+`..._08081_...`, `data/backtests/vawvco_osm_xcheck_state_08081_2026-11-23.json`,
+`data/backtests/live_check_panels_2026-11-23_vawvco_co.json`, `data/backtests/acs_fallback_mismatches_2026-11-23.json`.

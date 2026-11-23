@@ -1010,11 +1010,31 @@
    "rent_tract": 96,
    "hv_tract": 29
   },
+  "08003": {
+   "hv_own": 14,
+   "rent_own": 12,
+   "rent_tract": 3,
+   "hv_tract": 1
+  },
   "08005": {
    "hv_own": 402,
    "rent_own": 316,
    "rent_tract": 98,
    "hv_tract": 31
+  },
+  "08007": {
+   "hv_own": 14,
+   "rent_own": 7,
+   "rent_tract": 5
+  },
+  "08009": {
+   "hv_own": 4,
+   "rent_own": 4
+  },
+  "08011": {
+   "hv_own": 5,
+   "rent_own": 4,
+   "rent_tract": 1
   },
   "08013": {
    "rent_own": 175,
@@ -1022,11 +1042,61 @@
    "rent_tract": 51,
    "hv_tract": 12
   },
+  "08014": {
+   "hv_own": 44,
+   "rent_tract": 15,
+   "rent_own": 32,
+   "hv_tract": 2
+  },
+  "08015": {
+   "hv_own": 15,
+   "rent_tract": 5,
+   "rent_own": 9
+  },
+  "08017": {
+   "hv_own": 2,
+   "rent_own": 2
+  },
+  "08019": {
+   "hv_own": 8,
+   "rent_own": 6,
+   "hv_tract": 3,
+   "rent_tract": 3
+  },
+  "08021": {
+   "hv_own": 6,
+   "rent_own": 4,
+   "rent_tract": 2
+  },
+  "08023": {
+   "hv_own": 4,
+   "rent_own": 4
+  },
+  "08025": {
+   "hv_own": 4,
+   "rent_own": 4
+  },
+  "08027": {
+   "hv_own": 7,
+   "rent_tract": 5,
+   "rent_own": 2
+  },
+  "08029": {
+   "hv_own": 23,
+   "rent_tract": 4,
+   "rent_own": 19,
+   "hv_tract": 2
+  },
   "08031": {
    "hv_own": 504,
    "rent_own": 453,
    "rent_tract": 97,
    "hv_tract": 49
+  },
+  "08033": {
+   "hv_own": 3,
+   "rent_tract": 1,
+   "rent_own": 2
   },
   "08035": {
    "hv_own": 187,
@@ -1034,11 +1104,64 @@
    "rent_tract": 74,
    "hv_tract": 11
   },
+  "08037": {
+   "hv_own": 28,
+   "rent_tract": 13,
+   "rent_own": 21,
+   "hv_tract": 4
+  },
+  "08039": {
+   "hv_own": 17,
+   "rent_own": 7,
+   "rent_tract": 4
+  },
   "08041": {
    "hv_own": 429,
    "rent_own": 349,
    "rent_tract": 102,
    "hv_tract": 18
+  },
+  "08043": {
+   "hv_own": 33,
+   "rent_own": 20,
+   "rent_tract": 7,
+   "hv_tract": 2
+  },
+  "08045": {
+   "hv_own": 36,
+   "rent_own": 31,
+   "rent_tract": 8,
+   "hv_tract": 3
+  },
+  "08047": {
+   "hv_own": 5,
+   "rent_tract": 4,
+   "rent_own": 1
+  },
+  "08049": {
+   "hv_own": 12,
+   "rent_own": 8,
+   "rent_tract": 5,
+   "hv_tract": 1
+  },
+  "08051": {
+   "hv_own": 14,
+   "rent_tract": 6,
+   "rent_own": 10,
+   "hv_tract": 2
+  },
+  "08053": {
+   "hv_own": 1,
+   "rent_own": 1
+  },
+  "08055": {
+   "hv_own": 6,
+   "rent_own": 3,
+   "rent_tract": 1
+  },
+  "08057": {
+   "hv_own": 2,
+   "rent_own": 2
   },
   "08059": {
    "hv_own": 413,
@@ -1046,11 +1169,46 @@
    "rent_tract": 142,
    "hv_tract": 10
   },
+  "08061": {
+   "hv_own": 2,
+   "rent_own": 2
+  },
+  "08063": {
+   "hv_own": 6,
+   "rent_own": 6
+  },
+  "08065": {
+   "hv_own": 7,
+   "hv_tract": 1,
+   "rent_own": 6
+  },
+  "08067": {
+   "hv_own": 33,
+   "rent_own": 26,
+   "hv_tract": 2,
+   "rent_tract": 9
+  },
   "08069": {
    "hv_own": 224,
    "rent_tract": 53,
    "rent_own": 178,
    "hv_tract": 16
+  },
+  "08071": {
+   "hv_own": 16,
+   "rent_own": 15,
+   "rent_tract": 1
+  },
+  "08073": {
+   "hv_own": 5,
+   "rent_own": 4,
+   "rent_tract": 1
+  },
+  "08075": {
+   "hv_own": 16,
+   "rent_own": 14,
+   "hv_tract": 1,
+   "rent_tract": 3
   },
   "08077": {
    "hv_own": 96,
@@ -1058,17 +1216,131 @@
    "rent_tract": 35,
    "hv_tract": 5
   },
+  "08079": {
+   "hv_own": 1,
+   "rent_own": 1
+  },
+  "08081": {
+   "hv_own": 13,
+   "rent_own": 11,
+   "hv_tract": 2,
+   "rent_tract": 4
+  },
+  "08083": {
+   "hv_tract": 1,
+   "rent_own": 14,
+   "hv_own": 22,
+   "rent_tract": 7
+  },
+  "08085": {
+   "hv_own": 32,
+   "rent_own": 23,
+   "rent_tract": 9
+  },
+  "08087": {
+   "hv_own": 22,
+   "rent_own": 17,
+   "hv_tract": 3,
+   "rent_tract": 8
+  },
+  "08089": {
+   "hv_own": 18,
+   "rent_own": 14,
+   "rent_tract": 6,
+   "hv_tract": 2
+  },
+  "08091": {
+   "hv_own": 5,
+   "rent_own": 5
+  },
+  "08093": {
+   "hv_own": 12,
+   "rent_own": 4,
+   "hv_tract": 1,
+   "rent_tract": 2
+  },
+  "08095": {
+   "hv_own": 6,
+   "rent_own": 4,
+   "rent_tract": 2
+  },
+  "08097": {
+   "hv_own": 13,
+   "rent_own": 11,
+   "rent_tract": 3
+  },
+  "08099": {
+   "hv_own": 12,
+   "rent_own": 11,
+   "rent_tract": 3,
+   "hv_tract": 2
+  },
   "08101": {
    "hv_own": 144,
    "rent_tract": 26,
    "rent_own": 103,
    "hv_tract": 6
   },
+  "08103": {
+   "hv_own": 7,
+   "rent_own": 4,
+   "rent_tract": 3
+  },
+  "08105": {
+   "hv_own": 10,
+   "rent_own": 8,
+   "rent_tract": 2
+  },
+  "08107": {
+   "hv_own": 22,
+   "rent_own": 14,
+   "rent_tract": 10,
+   "hv_tract": 2
+  },
+  "08109": {
+   "hv_own": 6,
+   "rent_own": 6
+  },
+  "08111": {
+   "hv_own": 1,
+   "rent_own": 1
+  },
+  "08113": {
+   "rent_own": 6,
+   "hv_own": 6,
+   "rent_tract": 1
+  },
+  "08115": {
+   "hv_own": 2,
+   "rent_own": 2
+  },
+  "08117": {
+   "hv_own": 28,
+   "rent_tract": 13,
+   "rent_own": 18,
+   "hv_tract": 3
+  },
+  "08119": {
+   "hv_own": 18,
+   "rent_own": 12,
+   "rent_tract": 4,
+   "hv_tract": 1
+  },
+  "08121": {
+   "hv_own": 5,
+   "rent_own": 4,
+   "rent_tract": 1
+  },
   "08123": {
    "hv_own": 190,
    "rent_own": 123,
    "rent_tract": 62,
    "hv_tract": 7
+  },
+  "08125": {
+   "hv_own": 9,
+   "rent_tract": 2,
+   "rent_own": 7
   },
   "09110": {
    "hv_own": 657,

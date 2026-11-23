@@ -1,0 +1,308 @@
+{
+ "ran_on": "2026-11-23T05:34:01.440Z",
+ "script": "scripts/live_check_panels.mjs",
+ "results": {
+  "08115": {
+   "state": "CO",
+   "points": [
+    {
+     "bg": "081159683002",
+     "lat": 40.869887,
+     "lng": -102.35842,
+     "service": "Colorado Public Parcels (Governor's Office of Information Technology)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $148k, rent $873/mo, homes 561"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 3 record(s) for CO"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Sedgwick County · 081159683002; page \"Census area: Sedgwick County · block group 081159683002(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1014 for 08115; page \"HUD Fair Market Rent (FY2027): 1 bed $775 · 2 bed $1,014 · 3 bed $1,208/moSedgwick County, CO. HUD's voucher benchmark (rent plus utilities), not a market askin\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: unmapped; page \"FEMA flood zone: Not available (No effective FEMA flood map here (unmapped, not 'no risk'))(FEMA National Flood Hazard L\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 3854 ft; page \"Ground elevation: 3,854 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    },
+    {
+     "bg": "081159683001",
+     "lat": 40.994298,
+     "lng": -102.262522,
+     "service": "Colorado Public Parcels (Governor's Office of Information Technology)",
+     "note": null,
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $150k, rent $760/mo, homes 653"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 3 record(s) for CO"
+      },
+      "census_area": {
+       "pass": true,
+       "detail": "TIGERweb Sedgwick County · 081159683001; page \"Census area: Sedgwick County · block group 081159683001(U.S. Census Bureau TIGERweb)\""
+      },
+      "hud": {
+       "pass": true,
+       "detail": "expected 2BR 1014 for 08115; page \"HUD Fair Market Rent (FY2027): 1 bed $775 · 2 bed $1,014 · 3 bed $1,208/moSedgwick County, CO. HUD's voucher benchmark (rent plus utilities), not a market askin\""
+      },
+      "fema": {
+       "pass": true,
+       "detail": "FEMA now: X; page \"FEMA flood zone: Zone X (area of minimal flood hazard)(FEMA National Flood Hazard Layer)\""
+      },
+      "usgs": {
+       "pass": true,
+       "detail": "USGS now: 3481 ft; page \"Ground elevation: 3,481 ft(U.S. Geological Survey 3DEP)\""
+      }
+     },
+     "house_checks": [
+      "• Local zoning standards — Not on file: No local zoning standards are on file for this place: a standard is used only after it has been read from the local code itself, and this jurisdiction's code hasn't been read yet.",
+      "• Home upgrades — The parcel service doesn't record this lot's use, so the residential checks aren't run."
+     ],
+     "house_status": "house panel with live records"
+    }
+   ],
+   "checks": {
+    "census_area": "pass",
+    "hud": "pass",
+    "fema": "pass",
+    "usgs": "pass",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9271' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)",
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Access to fetch at 'https://overpass-api.de/api/interpreter' from origin 'http://127.0.0.1:9271' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested re",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: the server responded with a status of 504 (Gateway Time-out)"
+   ],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_08115.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_08115.json.gz"
+   ]
+  },
+  "08089": {
+   "state": "CO",
+   "points": [
+    {
+     "bg": "080899681003",
+     "lat": 38.052997,
+     "lng": -103.72621,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $127k, rent $738/mo, homes 247"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 3 record(s) for CO"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel at point"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel at point"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel at point"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel at point"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel at point"
+    },
+    {
+     "bg": "080899686001",
+     "lat": 37.978059,
+     "lng": -103.542074,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $145k, rent $626/mo, homes 451"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "expected 17 pts (current release); page: 17 pts, Tree Equity Score 2025 release (file dated 2025-07-01), 2020 block groups"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected 16.6 pts below its 30% goal; box: \"16.6 pts below its 30% goal\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 3 record(s) for CO"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel at point"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel at point"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel at point"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel at point"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel at point"
+    },
+    {
+     "bg": "080899681001",
+     "lat": 38.10811,
+     "lng": -103.737236,
+     "service": null,
+     "note": "no parcel found near the block group's interior point; clicked the interior point",
+     "checks": {
+      "neighborhood": {
+       "pass": true,
+       "detail": "expected home value $138k, rent $738/mo, homes 502"
+      },
+      "canopy": {
+       "pass": true,
+       "detail": "no current-release value; page: row not shown"
+      },
+      "canopy_hud": {
+       "pass": true,
+       "detail": "expected no goal figure; box: \"–\" / \"–\""
+      },
+      "crash": {
+       "pass": true,
+       "detail": "no crash data for this county; page shows no rebuilt crash text"
+      },
+      "laws": {
+       "pass": true,
+       "detail": "panel lists 3 record(s) for CO"
+      },
+      "census_area": {
+       "pass": null,
+       "detail": "not shown: no parcel at point"
+      },
+      "hud": {
+       "pass": null,
+       "detail": "not shown: no parcel at point"
+      },
+      "fema": {
+       "pass": null,
+       "detail": "not shown: no parcel at point"
+      },
+      "usgs": {
+       "pass": null,
+       "detail": "not shown: no parcel at point"
+      }
+     },
+     "house_checks": [],
+     "house_status": "no parcel at point"
+    }
+   ],
+   "checks": {
+    "census_area": "n/a",
+    "hud": "n/a",
+    "fema": "n/a",
+    "usgs": "n/a",
+    "crash": "pass",
+    "laws": "pass",
+    "neighborhood": "pass",
+    "canopy": "pass",
+    "canopy_hud": "pass",
+    "console": "pass"
+   },
+   "errors": [],
+   "network_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ],
+   "bundle_requests": [
+    "HEAD 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_08089.json.gz",
+    "GET 200 https://pub-79001cd74c284c499559e54d4aa4f33b.r2.dev/counties/bundle_08089.json.gz"
+   ]
+  }
+ },
+ "fema_rechecked_on": "2026-11-23T05:34:03.474Z"
+}
