@@ -319,4 +319,145 @@ Files: `data/backtests/southcentral_ar_census_spot_2026-11-22.json`, `data/backt
 
 Files: `data/backtests/southcentral_la_census_spot_2026-11-22.json`, `data/backtests/southcentral_osm_xcheck_22095_2026-11-22.json`,
 `..._22087_...`, `data/backtests/live_check_panels_2026-11-23_southcentral_la.json`,
-`data/backtests/acs_fallback_mismatches_2026-11-22.json`.
+`data/backtests/acs_fallback_mismatches_2026-11-23.json`.
+
+## Texas, part 1 of 2 (101 of 101 built, none withheld)
+
+| County | People (ACS 2020-24) | Block groups | Data file (gzip, bytes) | Completeness tier | Canopy block groups (2025 release) |
+|---|---|---|---|---|---|
+| Archer County (48009) | 8,867 | 9 | 177,954 | D | 1 |
+| Armstrong County (48011) | 1,822 | 3 | 115,342 | D | 0 |
+| Atascosa County (48013) | 51,008 | 29 | 407,465 | D | 12 |
+| Bailey County (48017) | 6,913 | 6 | 43,756 | D | 5 |
+| Bandera County (48019) | 22,021 | 21 | 442,276 | D | 0 |
+| Baylor County (48023) | 3,485 | 5 | 101,135 | D | 0 |
+| Blanco County (48031) | 12,446 | 11 | 470,447 | D | 0 |
+| Bosque County (48035) | 18,687 | 17 | 363,226 | D | 0 |
+| Briscoe County (48045) | 1,301 | 2 | 148,842 | D | 0 |
+| Brown County (48049) | 38,347 | 35 | 250,942 | D | 22 |
+| Burnet County (48053) | 52,652 | 35 | 952,450 | C | 19 |
+| Caldwell County (48055) | 48,669 | 29 | 586,909 | D | 19 |
+| Calhoun County (48057) | 19,868 | 20 | 309,133 | D | 11 |
+| Callahan County (48059) | 14,241 | 12 | 145,732 | D | 0 |
+| Carson County (48065) | 5,801 | 6 | 90,773 | D | 0 |
+| Castro County (48069) | 7,344 | 7 | 82,306 | D | 0 |
+| Childress County (48075) | 6,743 | 7 | 160,920 | D | 6 |
+| Clay County (48077) | 10,495 | 11 | 189,166 | D | 0 |
+| Cochran County (48079) | 2,550 | 3 | 40,908 | D | 0 |
+| Coleman County (48083) | 7,833 | 11 | 222,316 | D | 6 |
+| Collingsworth County (48087) | 2,588 | 4 | 138,840 | D | 0 |
+| Comanche County (48093) | 13,950 | 14 | 219,920 | D | 0 |
+| Coryell County (48099) | 84,748 | 51 | 772,110 | C | 44 |
+| Cottle County (48101) | 1,368 | 3 | 454,905 | D | 0 |
+| Crosby County (48107) | 5,041 | 6 | 107,862 | D | 0 |
+| Dallam County (48111) | 7,298 | 6 | 77,419 | D | 5 |
+| Deaf Smith County (48117) | 18,460 | 17 | 105,021 | D | 16 |
+| DeWitt County (48123) | 20,016 | 18 | 459,015 | D | 11 |
+| Dickens County (48125) | 1,747 | 3 | 113,793 | D | 0 |
+| Donley County (48129) | 3,257 | 4 | 153,670 | D | 0 |
+| Eastland County (48133) | 18,011 | 19 | 200,153 | D | 0 |
+| Falls County (48145) | 17,291 | 14 | 452,403 | D | 6 |
+| Fayette County (48149) | 25,042 | 27 | 601,787 | D | 7 |
+| Fisher County (48151) | 3,655 | 5 | 163,525 | D | 0 |
+| Floyd County (48153) | 5,216 | 8 | 87,021 | D | 0 |
+| Foard County (48155) | 991 | 1 | 160,165 | D | 0 |
+| Freestone County (48161) | 20,049 | 17 | 251,769 | C | 0 |
+| Frio County (48163) | 18,582 | 14 | 190,567 | D | 9 |
+| Garza County (48169) | 5,118 | 6 | 141,921 | D | 0 |
+| Gillespie County (48171) | 27,524 | 19 | 275,226 | D | 12 |
+| Goliad County (48175) | 7,141 | 7 | 185,563 | D | 0 |
+| Gonzales County (48177) | 19,851 | 16 | 541,504 | D | 8 |
+| Gray County (48179) | 21,045 | 25 | 172,757 | D | 21 |
+| Hale County (48189) | 32,131 | 30 | 134,374 | D | 21 |
+| Hall County (48191) | 2,820 | 3 | 134,178 | D | 0 |
+| Hamilton County (48193) | 8,406 | 7 | 226,642 | D | 0 |
+| Hansford County (48195) | 5,119 | 5 | 65,477 | D | 0 |
+| Hardeman County (48197) | 3,501 | 5 | 141,806 | D | 0 |
+| Hartley County (48205) | 5,215 | 4 | 79,094 | D | 3 |
+| Haskell County (48207) | 5,421 | 6 | 143,225 | D | 0 |
+| Hemphill County (48211) | 3,234 | 4 | 106,992 | D | 0 |
+| Hill County (48217) | 37,328 | 27 | 399,732 | D | 9 |
+| Hockley County (48219) | 21,363 | 18 | 102,978 | D | 12 |
+| Hutchinson County (48233) | 20,184 | 22 | 131,114 | D | 16 |
+| Jack County (48237) | 8,882 | 7 | 163,457 | D | 0 |
+| Jackson County (48239) | 15,152 | 11 | 309,050 | D | 6 |
+| Jones County (48253) | 20,304 | 16 | 188,722 | D | 0 |
+| Karnes County (48255) | 14,968 | 12 | 273,373 | D | 0 |
+| Kendall County (48259) | 48,567 | 27 | 487,244 | D | 12 |
+| Kent County (48263) | 734 | 1 | 105,084 | D | 0 |
+| Kerr County (48265) | 53,489 | 37 | 596,316 | D | 31 |
+| King County (48269) | 211 | 1 | 169,466 | D | 0 |
+| Knox County (48275) | 3,307 | 4 | 126,303 | D | 0 |
+| Lamb County (48279) | 12,828 | 12 | 97,203 | D | 6 |
+| Lampasas County (48281) | 22,715 | 16 | 285,132 | D | 10 |
+| Lavaca County (48285) | 20,552 | 18 | 344,484 | D | 4 |
+| Lee County (48287) | 17,971 | 14 | 522,543 | D | 0 |
+| Limestone County (48293) | 22,283 | 19 | 345,717 | C | 8 |
+| Lipscomb County (48295) | 2,918 | 2 | 66,925 | D | 0 |
+| Llano County (48299) | 22,424 | 19 | 287,433 | D | 10 |
+| Lynn County (48305) | 5,752 | 4 | 71,054 | D | 0 |
+| McMullen County (48311) | 700 | 1 | 78,099 | D | 0 |
+| Matagorda County (48321) | 36,329 | 36 | 586,841 | D | 21 |
+| Medina County (48325) | 53,547 | 33 | 452,821 | D | 7 |
+| Milam County (48331) | 25,567 | 20 | 396,210 | D | 11 |
+| Mills County (48333) | 4,511 | 5 | 186,673 | D | 0 |
+| Mitchell County (48335) | 9,018 | 7 | 127,808 | D | 5 |
+| Montague County (48337) | 21,046 | 21 | 187,851 | C | 9 |
+| Moore County (48341) | 21,373 | 18 | 106,714 | D | 13 |
+| Motley County (48345) | 1,183 | 2 | 121,984 | D | 0 |
+| Nolan County (48353) | 14,454 | 17 | 159,926 | D | 14 |
+| Ochiltree County (48357) | 9,786 | 9 | 67,458 | D | 9 |
+| Oldham County (48359) | 2,249 | 2 | 105,389 | D | 0 |
+| Parmer County (48369) | 9,731 | 9 | 87,564 | D | 0 |
+| Roberts County (48393) | 832 | 1 | 80,963 | D | 0 |
+| Runnels County (48399) | 9,874 | 10 | 126,127 | D | 0 |
+| San Saba County (48411) | 5,696 | 6 | 229,151 | D | 0 |
+| Scurry County (48415) | 16,488 | 15 | 176,276 | D | 13 |
+| Shackelford County (48417) | 3,175 | 4 | 109,657 | D | 0 |
+| Sherman County (48421) | 2,295 | 2 | 59,013 | D | 0 |
+| Stephens County (48429) | 9,351 | 10 | 135,272 | D | 9 |
+| Stonewall County (48433) | 1,227 | 2 | 161,609 | D | 0 |
+| Swisher County (48437) | 6,937 | 8 | 120,930 | D | 0 |
+| Terry County (48445) | 11,629 | 13 | 95,677 | D | 11 |
+| Throckmorton County (48447) | 1,639 | 2 | 105,076 | D | 0 |
+| Victoria County (48469) | 91,413 | 71 | 483,024 | D | 58 |
+| Wheeler County (48483) | 4,862 | 5 | 120,807 | D | 0 |
+| Wilbarger County (48487) | 12,616 | 12 | 134,555 | D | 10 |
+| Wilson County (48493) | 52,781 | 31 | 535,763 | C | 6 |
+| Yoakum County (48501) | 7,571 | 6 | 50,651 | D | 0 |
+| Young County (48503) | 18,029 | 16 | 172,309 | D | 10 |
+| **101 counties** | **1,592,770** | **1,328** | **22,996,230** | 6 C, 95 D | 594 |
+
+- Texas has 211 missing counties; they were built in two parts by the OpenStreetMap file the registry names for each, so
+  that each part could be built, checked and uploaded on its own. Part 1 is the 101 counties on the `north` sub-region file
+  (63), the `central` file (33) and the whole-state file `texas-latest.osm.pbf` (5); part 2 is the other 110 (see the next
+  section). Each file was downloaded once from openstreetmap.fr and shared by the counties that use it. Data timestamps:
+  `north` and `central` 2026-11-21T01:04:36Z, the whole-state file (813,256,716 bytes) 2026-11-21T01:07:35Z; each county's
+  sources list names its own. Build: fetch 9-60 s, build 34-42 s per county on `north`, 80-95 s on `central`, 338-349 s for
+  the 5 that clip the whole-state file, three at a time (the Louisiana checks, tests and upload ran alongside), about 51 min
+  from the first county to the last.
+- Bus frequency: 99 counties have no value in any block group (no feed that is read has a stop with 7-9 am departures in or
+  near the county); 2 have values. Rail distance: 99 counties have none; 2 have values.
+- Census spot check: 101 counties, 2,072 of 2,072 values equal (0% mismatch). Tract-median flags: 101 counties added, no
+  existing county changed, 0 values matching neither the block group nor the tract.
+- Crash counts: Texas has no state crash source connected (`pipeline/region.py` STATE_DEFAULTS has no TX); all 101 files say
+  "Not connected for Texas yet: crash gaps are not scored and crash-based projects are not proposed". No crash counts were
+  built.
+- Tests run: `npm test` 1,737 of 1,737 (50 files), `npm run typecheck` clean. `app/data/intercity_transit_corridors.json`:
+  Flatonia TX (Fayette County, 48149) now says `county_on_page: true` (1 line), as `tests/unit/transitCorridors.test.ts`
+  requires.
+- OpenStreetMap ID for ID vs live Overpass (maps.mail.ru; two counties picked with seed 20261122 from this part's sorted
+  list): it answered 504 to some tries first. Matagorda (48321, whole-state file, on the Gulf coast) 6,396 = 6,396 roads, 1 = 1 bus stops; Lampasas (48281, `central` file)
+  2,850 = 2,850 roads, 0 = 0 bus stops (0 missing, 0 extra in both). The extracts' snapshots are 2026-11-21T01:07:35Z and
+  2026-11-21T01:04:36Z.
+- Live check from R2 (`LIVE_PORT=9261`): Wheeler (48483) and Medina (48325), 3 points each (picked with seed 20261123 from
+  this part's sorted list). Neither county has a parcel service on the page, so the house-panel rows (Census area, HUD rent,
+  FEMA, USGS) are not checkable; neighborhood, canopy, canopy goal, crash text, state laws and console pass at all 6 points
+  (30 pass, 0 fail, 24 not checkable). Each data file came from the r2.dev address (HEAD 200, GET 200).
+- R2: before 2,005,115,500 bytes (3,464 objects); dry run "102 files, net +0.023 GB, projected 2.028 GB"; after
+  2,028,137,097 bytes (3,565 objects): 23,021,597 bytes added (the 101 data files, 22,996,230, plus the larger
+  `manifest.json`).
+
+Files: `data/backtests/southcentral_txa_census_spot_2026-11-22.json`, `data/backtests/southcentral_osm_xcheck_48321_2026-11-22.json`,
+`..._48281_...`, `data/backtests/live_check_panels_2026-11-23_southcentral_txa.json`,
+`data/backtests/acs_fallback_mismatches_2026-11-23.json`.

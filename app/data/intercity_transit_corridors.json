@@ -4309,7 +4309,7 @@
     "state": "TX",
     "county": "Fayette County",
     "fips": "48149",
-    "county_on_page": false,
+    "county_on_page": true,
     "station_type": "city_center",
     "station_basis": "named_in_source",
     "verified": false,
