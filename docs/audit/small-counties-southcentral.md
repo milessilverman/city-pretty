@@ -120,3 +120,118 @@
 Files: `data/backtests/southcentral_ok_census_spot_2026-11-22.json`, `data/backtests/southcentral_osm_xcheck_40137_2026-11-22.json`,
 `..._40137_history_...`, `..._40067_...`, `data/backtests/live_check_panels_2026-11-22_southcentral_ok.json`,
 `data/backtests/acs_fallback_mismatches_2026-11-22.json`.
+
+## Arkansas (67 of 67 built, none withheld)
+
+| County | People (ACS 2020-24) | Block groups | Data file (gzip, bytes) | Completeness tier | Canopy block groups (2025 release) |
+|---|---|---|---|---|---|
+| Arkansas County (05001) | 16,515 | 14 | 235,771 | D | 7 |
+| Ashley County (05003) | 18,429 | 20 | 198,841 | D | 10 |
+| Baxter County (05005) | 42,407 | 30 | 639,621 | D | 18 |
+| Boone County (05009) | 38,138 | 24 | 471,697 | D | 14 |
+| Bradley County (05011) | 10,208 | 12 | 193,480 | D | 9 |
+| Calhoun County (05013) | 4,704 | 5 | 200,595 | D | 0 |
+| Carroll County (05015) | 28,626 | 20 | 481,318 | D | 4 |
+| Chicot County (05017) | 9,765 | 12 | 196,394 | D | 0 |
+| Clark County (05019) | 21,125 | 18 | 820,579 | C | 9 |
+| Clay County (05021) | 14,280 | 13 | 171,286 | D | 0 |
+| Cleburne County (05023) | 25,226 | 21 | 205,286 | D | 6 |
+| Cleveland County (05025) | 7,453 | 8 | 134,106 | D | 0 |
+| Columbia County (05027) | 22,349 | 19 | 164,398 | D | 11 |
+| Conway County (05029) | 21,054 | 16 | 285,432 | D | 7 |
+| Crawford County (05033) | 61,139 | 44 | 429,415 | C | 26 |
+| Crittenden County (05035) | 47,266 | 43 | 428,493 | C | 33 |
+| Cross County (05037) | 16,543 | 16 | 136,022 | D | 7 |
+| Dallas County (05039) | 6,242 | 9 | 246,456 | D | 0 |
+| Desha County (05041) | 10,786 | 12 | 226,114 | D | 6 |
+| Drew County (05043) | 17,046 | 18 | 170,777 | D | 11 |
+| Franklin County (05047) | 17,326 | 12 | 243,899 | D | 0 |
+| Fulton County (05049) | 12,302 | 12 | 247,251 | D | 0 |
+| Grant County (05053) | 18,242 | 11 | 208,746 | D | 4 |
+| Greene County (05055) | 46,432 | 31 | 222,893 | D | 21 |
+| Hempstead County (05057) | 19,508 | 20 | 247,403 | C | 16 |
+| Hot Spring County (05059) | 33,180 | 26 | 518,143 | C | 15 |
+| Howard County (05061) | 12,583 | 12 | 290,639 | D | 0 |
+| Independence County (05063) | 38,175 | 30 | 301,186 | C | 12 |
+| Izard County (05065) | 14,009 | 10 | 283,509 | D | 0 |
+| Jackson County (05067) | 16,712 | 17 | 240,124 | C | 9 |
+| Jefferson County (05069) | 64,802 | 67 | 370,454 | D | 58 |
+| Johnson County (05071) | 26,003 | 17 | 322,412 | D | 8 |
+| Lafayette County (05073) | 6,136 | 9 | 149,261 | D | 0 |
+| Lawrence County (05075) | 16,238 | 17 | 229,170 | C | 10 |
+| Lee County (05077) | 8,359 | 10 | 126,623 | C | 0 |
+| Lincoln County (05079) | 12,950 | 10 | 157,562 | D | 0 |
+| Little River County (05081) | 11,821 | 14 | 242,284 | D | 0 |
+| Logan County (05083) | 21,277 | 17 | 325,392 | D | 0 |
+| Lonoke County (05085) | 75,272 | 41 | 338,716 | D | 21 |
+| Madison County (05087) | 17,329 | 13 | 488,849 | D | 0 |
+| Marion County (05089) | 17,228 | 17 | 604,852 | D | 0 |
+| Miller County (05091) | 42,360 | 39 | 276,281 | C | 28 |
+| Mississippi County (05093) | 39,126 | 44 | 409,419 | C | 28 |
+| Monroe County (05095) | 6,589 | 8 | 186,868 | D | 0 |
+| Montgomery County (05097) | 8,553 | 9 | 264,945 | D | 0 |
+| Nevada County (05099) | 8,159 | 8 | 310,930 | D | 0 |
+| Newton County (05101) | 7,112 | 6 | 482,775 | D | 0 |
+| Ouachita County (05103) | 22,085 | 25 | 285,969 | D | 14 |
+| Perry County (05105) | 10,101 | 9 | 278,581 | D | 0 |
+| Phillips County (05107) | 15,450 | 24 | 220,795 | D | 16 |
+| Pike County (05109) | 10,115 | 9 | 330,236 | D | 0 |
+| Poinsett County (05111) | 22,543 | 23 | 164,309 | D | 7 |
+| Polk County (05113) | 19,361 | 16 | 437,480 | D | 7 |
+| Pope County (05115) | 64,131 | 41 | 412,359 | D | 23 |
+| Prairie County (05117) | 8,064 | 10 | 209,498 | D | 0 |
+| Randolph County (05121) | 18,838 | 17 | 239,665 | D | 7 |
+| St. Francis County (05123) | 22,400 | 24 | 198,706 | D | 13 |
+| Scott County (05127) | 9,816 | 9 | 345,958 | D | 0 |
+| Searcy County (05129) | 7,859 | 10 | 502,514 | D | 0 |
+| Sevier County (05133) | 15,712 | 11 | 248,348 | D | 6 |
+| Sharp County (05135) | 17,773 | 18 | 311,436 | D | 0 |
+| Stone County (05137) | 12,568 | 12 | 318,726 | D | 0 |
+| Union County (05139) | 37,900 | 42 | 334,213 | D | 28 |
+| Van Buren County (05141) | 15,998 | 17 | 334,234 | D | 0 |
+| White County (05145) | 77,838 | 53 | 471,451 | D | 29 |
+| Woodruff County (05147) | 6,026 | 9 | 175,515 | D | 0 |
+| Yell County (05149) | 20,134 | 17 | 463,571 | D | 5 |
+| **67 counties** | **1,491,796** | **1,297** | **20,410,231** | 11 C, 56 D | 563 |
+
+- OpenStreetMap: the Arkansas cut of the 21 Nov 2026 `us-south-latest.osm.pbf` (see Oklahoma: 146 s, peak osmium memory 4.08 GB,
+  125 MB; data timestamp 2026-11-21T01:28:06Z). Build: fetch 11-36 s, build 60-69 s per county, three at a time (the Oklahoma
+  checks and upload ran alongside), about 32 min from the first county to the last.
+- Bus frequency: 64 counties have no value in any block group (no feed that is read has a stop with 7-9 am departures in or
+  near the county); 3 have values. Rail distance: 61 counties have none; 6 have values.
+- Census spot check: 67 counties, 1,604 of 1,604 values equal (0% mismatch). Tract-median flags: 67 counties added, no
+  existing county changed, 0 values matching neither the block group nor the tract.
+- Crash counts: Arkansas has no state crash source connected (`pipeline/region.py` STATE_DEFAULTS has no AR); all 67 files say
+  "Not connected for Arkansas yet: crash gaps are not scored and crash-based projects are not proposed". No crash counts were
+  built.
+- Tests run: `npm test` 1,737 of 1,737 (50 files), `npm run typecheck` clean. No corridor stop's flag needed changing.
+- OpenStreetMap ID for ID vs live Overpass (maps.mail.ru; two counties picked with seed 20261122 from the state's sorted
+  list): it answered 504 to some tries first. White (05145) 7,100 = 7,100 roads, 1 = 1 bus stops (0 missing, 0 extra). Jefferson (05069): bus stops 0 = 0; **roads 6,437 on
+  Overpass, 6,436 in the extract (5 only on Overpass, 4 only in the extract)**. Read from the OpenStreetMap API
+  (`/api/0.6/way/<id>/history`; result in `southcentral_osm_xcheck_05069_history_2026-11-22.json`), all 9 ways were edited
+  after the extract's snapshot (2026-11-21T01:28:06Z): of the 5 only on Overpass, 2 were created on 2026-11-21 at 17:35Z
+  (version 1) and 3 older ways (12829972 Levee Road, 12839427 and 12839429 Pines Mall Drive) were changed on 2026-11-21 at
+  16:43Z and 17:35Z (versions 3, 9 and 8); the 4 only in the extract have since been deleted. So the differences are all
+  roads edited or added after the extract was made. The extract's snapshot is 2026-11-21T01:28:06Z.
+- Live check from R2 (`LIVE_PORT=9261`): Van Buren (05141) and Franklin (05047), 3 points each (picked with seed 20261123 from
+  the state's sorted list). Arkansas's parcel service is on the page: all six points had the house panel on live parcel
+  records and pass neighborhood, canopy, canopy goal, crash text, state laws, Census area, HUD rent, FEMA and console.
+  **The USGS elevation row first showed "Not available (the service did not answer in time)" at 3 of the 6 points (Van Buren
+  051414602003, Franklin 050479501001 and 050479501003)**; the page's USGS call has a 6 s limit. Re-opened alone, Van Buren's
+  showed 742 ft, equal to the 742 ft USGS had given for that point (the second USGS call did not answer, so that row is
+  recorded as not checkable, not as a pass); Franklin's two showed "Not available" again, so Franklin was run again as a
+  separate check (`..._southcentral_ar_rerun05047.json`): 24 of 27 checks pass, 2 not checkable (USGS did not answer the
+  script), and 1 row (050479501003) again "Not available" on the page while USGS answered the script with 378 ft. Timed with
+  `curl`, USGS's elevation service (epqs.nationalmap.gov) answered for that point's coordinates in 18.2 s and 16.1 s and then
+  with a 504 after 29.5 s, so the page's 6 s limit is the cause. In the main result file: 49 pass, 5 recorded failures (those
+  rows' first tries and re-opens, each a "Not available" row), 3 not checkable; the first-try file is kept as
+  `..._southcentral_ar_first_try.json`. No wrong value was shown anywhere: where the service did not answer the page said "Not
+  available". Each data file came from the r2.dev address (HEAD 200, GET 200).
+- R2: before 1,906,052,105 bytes (3,231 objects); dry run "68 files, net +0.020 GB, projected 1.926 GB"; after
+  1,926,479,192 bytes (3,298 objects): 20,427,087 bytes added (the 67 data files, 20,410,231, plus the larger
+  `manifest.json`). The upload script printed a JSON decoding error (`Extra data`) at the end of the run, after the files
+  were sent; a second `--dry-run` found 0 files to upload and 3,298 objects, and the account total equals the figure above.
+
+Files: `data/backtests/southcentral_ar_census_spot_2026-11-22.json`, `data/backtests/southcentral_osm_xcheck_05069_2026-11-22.json`,
+`..._05069_history_...`, `..._05145_...`, `data/backtests/live_check_panels_2026-11-23_southcentral_ar.json`, `..._ar_first_try.json`,
+`..._ar_rerun05047.json`, `data/backtests/acs_fallback_mismatches_2026-11-22.json`.
