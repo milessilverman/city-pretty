@@ -1,7 +1,84 @@
 # Small counties: Virginia, West Virginia and Colorado (23 Nov 2026), served from R2 only
 
-(In progress: Virginia is built and checked; West Virginia and Colorado follow, one commit each. The summary tables, totals and
-the browser-suite result are added when the last state is in.)
+**Result: all 221 counties and independent cities of the three states are built, checked and on the page, served from R2
+only; none was withheld.** Each state was built, checked, uploaded, live-checked and committed on its own.
+
+| State | Built / missing | People (ACS 2020-24) | Block groups | Data files (bytes) | Tiers | Census values checked | Canopy block groups |
+|---|---|---|---|---|---|---|---|
+| VA | 116 / 116 (85 counties, 31 independent cities) | 3,497,085 | 2,604 | 55,015,459 | 104 C, 12 D | 2,744 | 1,426 |
+| WV | 52 / 52 | 1,365,159 | 1,285 | 23,281,723 | 23 C, 29 D | 1,240 | 617 |
+| CO | 53 / 53 | 879,035 | 720 | 43,083,050 | 31 C, 22 D | 1,092 | 397 |
+| **All** | **221 / 221** | **5,741,279** | **4,609** | **121,380,232** | 158 C, 63 D | **5,076** | **2,440** |
+
+| Check | Sample | Result | Mismatch rate |
+|---|---|---|---|
+| Census: population, median home value, median gross rent, median household income vs the ACS 2020-24 table files (`scripts/census_spot_check.py`, seed 20261119) | 6 block groups in each of the 221 counties (all of them where a county has fewer), 5,076 values | 5,076 of 5,076 equal | 0% |
+| Tract-median flags (`build_acs_fallback_flags.py`, every county file) | all county files, after each state and again after merging the other job's counties | 221 counties added, no existing county changed, 0 values matching neither the block group nor the tract | 0% |
+| OpenStreetMap ID for ID vs live Overpass (`scripts/check_osm_extract_vs_overpass.py`) | 2 counties per state, 6 (seed 20261122, drawn from each state's sorted list of new counties) | 3 counties exact as run (roads and bus stops): WV Putnam and Pendleton, CO Otero. The other 3 (VA Scott and Prince George, CO Moffat) differ in roads only in the raw result, because their boxes reach into other states or into neighbouring counties that the extract file does not hold: inside their own state Scott and Moffat have 0 roads only on Overpass, and none of Prince George's 529 Overpass-only roads is in Prince George (they are in Sussex and Surry counties); bus stops match in all six | 0% inside the counties |
+| Live, real page loading from R2 (`scripts/live_check_panels.mjs`, `LIVE_PORT=9271`, 3 points per county, seed 20261123) | 6 counties, 17 points (Sedgwick CO has only 2 block groups) | 138 pass, 7 first-try failures (all USGS elevation rows that first showed "Not available (the service did not answer in time)"), 15 not checkable (12 with no parcel service on the page for Otero CO; 3 Virginia USGS rows where USGS itself gave no answer when asked from here). 5 of the 7 first-try failures passed when re-opened alone (they are counted in the 138); the other 2 became "not checkable" because USGS gave no answer then. No wrong value was shown anywhere | 0 wrong values |
+
+**Crash counts:** Virginia is the one state of the three that `pipeline/region.py` STATE_DEFAULTS holds a crash source for;
+all 116 Virginia files loaded the Virginia DOT records (2017-2025), and crash counts and gaps were built for them (299 gaps,
+390 strengths). West Virginia and Colorado have none wired in: their files say "Not connected for <state> yet: crash gaps
+are not scored and crash-based projects are not proposed".
+
+Counties still without a data file after this batch, counted from the registry the same way (not in
+`counties/bundle_*.json.gz` or `counties/.r2-only.txt`, Puerto Rico left out), on the tree with the other job's Texas,
+Oklahoma, Arkansas and Louisiana merged in: **7** (628 before both jobs): Los Angeles and Orange (built by their own
+pipeline, loaded from `app/data/`) and Hawaii's 5 (Honolulu, Kalawao, Maui, Hawaii, Kauai), which have no OpenStreetMap
+extract in the registry.
+
+**R2 storage:** these 221 data files are 121,380,232 bytes (summed from the files in this worktree; the three uploads
+added 55,015,459, 23,281,723 and 43,083,050 bytes plus a changed `manifest.json`). The account total (all buckets) read
+1,926,479,192 bytes (3,298 objects) before the Virginia upload, which already included the other job's uploads, and
+2,128,173,536 bytes (3,780 objects) after the last upload of this job, which also holds the other job's files: **2.128 GB
+of the 8 GB ceiling and the 10 GB allowance.** Every upload went through `scripts/r2_sync_counties.py` after a `--dry-run`;
+the largest projection was 2.128 GB (the brief's stop was 4 GB). The merged `manifest.json` (3,142 counties, 793,470
+bytes) is what the bucket holds now (see "Tests and housekeeping").
+
+The batch is every county under 100,000 people with no data file (not in `counties/bundle_*.json.gz`, not in
+`counties/.r2-only.txt`), counted from the registry (`national/data/counties.json`) before starting: VA 116, WV 52, CO 53,
+**221 counties** (no county of these states with 100,000 people or more was without a data file). The method is the
+Southeast batch's (`small-counties-southeast.md`), unchanged: files are uploaded with `scripts/r2_sync_counties.py` after a
+`--dry-run`, listed in `counties/.r2-only.txt`, and not committed. No pipeline code was changed.
+
+## How
+
+- **Pipeline:** `pipeline/fetch_oc.py`, `osm_extract.py`, `metrics_oc.py`, `layers_oc.py`, `build_oc.py inputs/page_dec` from
+  a copy of `pipeline/` in the session's scratch folder, one county at a time (this job's brief rules out parallel builds;
+  the earlier batches ran three at a time), the national ACS table files already in the shared cache; then
+  `scripts/export_county_bundle.py <dir> <fips> --r2-only` one county at a time; `build_tree_equity_2025.py <state>`
+  (existing counties' files that differ only in `_meta.built` were restored to what is committed);
+  `build_acs_fallback_flags.py` (all county files; the 1,774 earlier R2-only files were downloaded from the bucket's public
+  address into this worktree's gitignored `counties/` first); `build_county_completeness.py` (only the new rows are kept,
+  since a fresh run rewrites `computed_on` on every row; for Virginia's 31 cities the new row replaced a placeholder row).
+- **HUD income limits:** `tests/unit/buildingCosts.test.ts` needs a row (or a listed failure) in
+  `app/data/hud_income_limits.json` for every manifest county. Each state's rows were fetched from HUD's API
+  (`https://www.huduser.gov/hudapi/public/il/data/<fips>99999`) with the script's own `get()` and `row_from()`
+  (`scripts/costs/fetch_hud_income_limits.py`); existing rows were not re-fetched or changed; none failed.
+- **Transit corridors:** `tests/unit/transitCorridors.test.ts` checks every stop's `county_on_page` flag against the
+  manifest; six Virginia stops were set to true in the Virginia commit; none for West Virginia or Colorado.
+- **Empty fields, each named in the county's sources list:** crime (all), 311, assessor parcels and sales, street-tree
+  survey, tax-rate areas (all); bus frequency and rail distance where the per-state notes say so; crash counts for West
+  Virginia and Colorado.
+
+## Checks (every state)
+
+- **Census:** `scripts/census_spot_check.py` (seed 20261119): population, median home value, median gross rent and median
+  household income of 6 randomly chosen block groups in every county (all of them where a county has fewer) against the
+  ACS 2020-24 table files, read by a separate parser. Where the block group's median is suppressed the file must hold the
+  tract's published median, flagged as a tract value in `acs_fallback_flags.json`, or nothing.
+- **OpenStreetMap:** `scripts/check_osm_extract_vs_overpass.py`, ID for ID against a live Overpass query of the same box
+  (maps.mail.ru mirror), two counties per state, picked at random from the state's sorted list of new counties with
+  `random.Random(20261122).sample(list, 2)`. The extracts are dated snapshots and Overpass is live, so a few differences
+  could be edits made since; the IDs would be listed. Where a county's box crosses a state line or reaches counties the
+  extract does not hold, the comparison was repeated inside the extract's state (Overpass query limited to
+  `area["ISO3166-2"="US-XX"]`), as the earlier records did, and the differing roads were located by TIGERweb county.
+  The mirror answered 504 for long stretches; each query was retried until it answered (none is open).
+- **Live:** `scripts/live_check_panels.mjs` (`LIVE_PORT=9271`, 3 points per county) on the real page loading each county's
+  file from `pub-79001cd74c284c499559e54d4aa4f33b.r2.dev`; the counties were picked with
+  `random.Random(20261123).sample(list, 2)`; USGS rows that said "Not available" were re-opened alone with
+  `--recheck-fema`.
 
 ## Virginia (116 of 116 built, none withheld)
 
@@ -381,3 +458,51 @@ Files: `data/backtests/vawvco_wv_census_spot_2026-11-23.json`, `data/backtests/v
 Files: `data/backtests/vawvco_co_census_spot_2026-11-23.json`, `data/backtests/vawvco_osm_xcheck_08089_2026-11-23.json`,
 `..._08081_...`, `data/backtests/vawvco_osm_xcheck_state_08081_2026-11-23.json`,
 `data/backtests/live_check_panels_2026-11-23_vawvco_co.json`, `data/backtests/acs_fallback_mismatches_2026-11-23.json`.
+
+## Tests and housekeeping
+
+- `npm test`: run in full after each state (2,085 of 2,085 in 50 files each time; no state added or removed a test; Virginia's
+  first run had one failure, the crash-count pin, updated below) and again on the merged tree: 2,085 of 2,085.
+  `npm run typecheck` clean after each state and on the merged tree. The full browser suite on the final tree (after merging
+  `claude/nifty-wozniak-tl4d5g`, which holds the Texas, Oklahoma, Arkansas and Louisiana job, with its version of the
+  "a place with no data" fixture in `tests/e2e/usability.spec.ts` kept): `PW_PORT=9272 npm run test:e2e -- --trace off`,
+  **122 of 122 passed (9.8 min)**. `python3 scripts/r2_only.py --check` passes. No test was skipped or loosened.
+- **The one test pin that changed:** `tests/unit/crashCountsInvariant.test.ts` pinned Virginia at 17 crash-count files and 327
+  counties outside California; Virginia now has 133 and the total is 443 (the measured counts). The 116 new files pass the
+  test's 1/k sum check. No pipeline code was changed.
+- `app/data/hud_income_limits.json`: 221 rows added from HUD's API (none failed). Rows already in the file were not changed;
+  `_source.added_for_new_counties` records each state's addition.
+- `app/data/intercity_transit_corridors.json`: six Virginia stops' `county_on_page` flags now say true (Charlottesville,
+  Roanoke, Bristol, Bedford, Petersburg, Fredericksburg), in the Virginia commit. No West Virginia or Colorado stop needed a
+  change.
+- **Merge with the Texas/Oklahoma/Arkansas/Louisiana job:** conflicts in `.gitignore`, `counties/.r2-only.txt`,
+  `acs_fallback_flags.json`, `county_completeness.json`, `hud_income_limits.json` and the 23 Nov mismatch listing. Resolved by
+  keeping both jobs' counties: `.r2-only.txt` joined and sorted (2,395 files: 1,774 earlier, 221 here, 400 there) and the
+  `.gitignore` block rewritten from it by `scripts/r2_only.py --gitignore`; the HUD and completeness rows of both joined
+  (no row changed by both); the tract flags regenerated with `scripts/build_acs_fallback_flags.py` over every county file
+  (this job's 221 added to trunk's, none changed, 0 mismatches); this branch's mismatch listing kept as
+  `acs_fallback_mismatches_2026-11-23_vawvco.json`. `index.html`, `counties/manifest.json` (3,142 counties) and the corridors
+  file merged without conflict.
+- **`counties/manifest.json` in the bucket is one object that both jobs overwrote** with their own worktree's version
+  (668,080 bytes before this job's Virginia upload, 666,384 after it, 733,803 before West Virginia, 679,457 after it). After the
+  merge, `--dry-run` listed only that file (net +0.000 GB, projected total equal to what was stored, 2.128 GB), it was
+  uploaded, and the bucket's manifest now lists 3,142 counties (793,470 bytes). 2,128,173,536 bytes, 3,780 objects.
+- The Overpass mirror (maps.mail.ru, the only one reachable from here) answered 504 for long stretches; all six checks were
+  completed and none is open. The CO upload run stopped once on a JSON decoding error inside `scripts/r2_sync_counties.py`
+  ("Extra data"); nothing was lost and a second dry run and run finished the upload (the script was not changed).
+- No `sites_` files were built (as for every small-county batch: `w5/tools/sites.py` needs the old build machine's paths).
+- Scratch use: the shared ACS tables (0.65 GB), the 4.6 GB `us-south` file for West Virginia (downloaded, cut into West
+  Virginia's 131 MB file and deleted at once) and one state's build folders at a time. I made room at the start by
+  deleting the earlier batches' build folders and regional files from my own scratch folder (about 3 GB: `se`, `gl`,
+  `midwest`, `smallcounties`). The scratch folder for this job measured 5.5 GB when Virginia's builds had finished (the
+  largest reading; limit 7 GB); free disk space was never below 7.0 GB at any time I read it (stop: 6 GB), and each state's
+  build folders were deleted after its checks.
+- No mistake in already-published data was found, so `docs/DATA-AUDIT-AND-TRANSPARENCY.md` has no new entry. The 31
+  Virginia placeholder rows and "lots only" tags that the new files replaced were designed to be replaced, not errors.
+
+## What is left
+
+Counties still without a data file nationally: 7 (Los Angeles and Orange, built by their own pipeline; Hawaii's five, with
+no OpenStreetMap extract in the registry). Not done here: crash counts for West Virginia and Colorado (no state source is
+wired into `pipeline/region.py`), and the Virginia low-end crash totals (Buena Vista city 0.055 reports per resident) were
+not compared with another source.
