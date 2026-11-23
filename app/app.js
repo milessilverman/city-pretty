@@ -9352,9 +9352,17 @@ async function sendAiQuery(q, promptKey = null) {
     const typingEl = document.createElement("div");
     typingEl.id = typingId;
     typingEl.style.cssText = "align-self:flex-start;background:#f8fafc;border:1px solid #e2e8f0;color:#64748b;padding:10px 14px;border-radius:12px 12px 12px 0;font-size:12px;display:flex;align-items:center;gap:8px;";
-    typingEl.innerHTML = `<span class="spin"></span> <span>Waiting for the advisor…</span>`;
+    typingEl.innerHTML = `<span class="spin"></span> <span>Waiting for the advisor… <span id="ai-typing-secs"></span></span>`;
     box.appendChild(typingEl); box.scrollTop = box.scrollHeight;
   }
+  // Answers take 10-30 s (the model looks facts up in official sources), so show that it is still working.
+  const waitStart = Date.now();
+  const waitTick = setInterval(() => {
+    const el = document.getElementById("ai-typing-secs");
+    if (!el) { clearInterval(waitTick); return; }
+    const s = Math.round((Date.now() - waitStart) / 1000);
+    el.textContent = s < 8 ? `${s}s` : `${s}s · looking things up in official sources, usually under 30s`;
+  }, 1000);
   const context = serializeLiveAdvisorContext();
   const previewEl = document.getElementById("ai-grounded-json-preview");
   if (previewEl) { try { previewEl.textContent = JSON.stringify(context, null, 2); } catch (e) {} }
@@ -9388,6 +9396,7 @@ async function sendAiQuery(q, promptKey = null) {
     reply = { role: "notice", text: `The AI advisor could not be reached (${err && err.name === "AbortError" ? "no reply within 90 seconds" : "network error"}). No answer was generated.` };
     setAiStatus("down");
   }
+  clearInterval(waitTick);
   const typingEl = document.getElementById(typingId); if (typingEl) typingEl.remove();
   aiHistory.push(reply);
   renderAiChat();

@@ -27,6 +27,9 @@ import {
 
 export const ADVISOR_MODEL = "claude-opus-5-5";
 const MAX_TOOL_ROUNDS = 6;
+// The page gives up after 90 s. Do not start another model round after this, so the visitor gets a clear message
+// from the Worker instead of a spinner that ends in the page's own timeout.
+const ROUND_DEADLINE_MS = 55_000;
 
 export const SOURCING_RULES = `
 How to handle facts (these rules override anything else):
@@ -308,7 +311,11 @@ export async function runAdvisor(
 ): Promise<AdvisorAnswer> {
   const convo: Anthropic.Beta.BetaMessageParam[] = [...messages];
   const sources: SourceRef[] = [];
+  const startedAt = Date.now();
   for (let round = 0; round <= MAX_TOOL_ROUNDS; round++) {
+    if (round > 0 && Date.now() - startedAt > ROUND_DEADLINE_MS) {
+      return { ok: false, status: 504, error: "The lookups took too long to finish; ask a narrower question" };
+    }
     let res: Anthropic.Beta.BetaMessage;
     try {
       res = await client.beta.messages.create({
@@ -326,6 +333,7 @@ export async function runAdvisor(
     } catch (e) {
       if (e instanceof Anthropic.RateLimitError) return { ok: false, status: 429, error: "The AI service is busy; try again in a minute" };
       if (e instanceof Anthropic.AuthenticationError) return { ok: false, status: 503, error: "The AI key is not valid" };
+      if (e instanceof Anthropic.APIConnectionTimeoutError) return { ok: false, status: 504, error: "The AI service did not answer in time; try again" };
       if (e instanceof Anthropic.APIError) return { ok: false, status: 502, error: `The AI service returned an error (${e.status ?? "network"})` };
       throw e;
     }

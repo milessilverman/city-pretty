@@ -194,6 +194,29 @@ describe("Advisor Agent Offline Mock Harness", () => {
     expect(res.text).toContain("ran out of lookup steps");
   });
 
+  it("returns a clear 504 instead of starting another round once the deadline has passed", async () => {
+    const toolReply = {
+      id: "msg_slow", type: "message" as const, role: "assistant" as const, model: "m",
+      content: [{ type: "tool_use" as const, id: "tu_1", name: "lookup_site_facts", input: {} }],
+      stop_reason: "tool_use" as const, stop_sequence: null, usage: { input_tokens: 1, output_tokens: 1 },
+    };
+    let calls = 0;
+    const fakeClient = { beta: { messages: { create: async () => { calls++; return toolReply; } } } };
+    const realNow = Date.now;
+    let t = 1_000_000;
+    Date.now = () => (t += 60_000); // each look at the clock is a minute later
+    try {
+      const res = await runAdvisor(fakeClient as any, "System", [{ role: "user", content: "Slow" }], {});
+      expect(res.ok).toBe(false);
+      if (res.ok) return;
+      expect(res.status).toBe(504);
+      expect(res.error).toContain("took too long");
+      expect(calls).toBe(1);
+    } finally {
+      Date.now = realNow;
+    }
+  });
+
   it("validates input parameters on runAdvisorTool", async () => {
     // Missing lat/lng
     const r1 = await runAdvisorTool("lookup_site_facts", {}, {});
