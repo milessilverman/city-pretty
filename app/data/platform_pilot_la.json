@@ -1,0 +1,2775 @@
+{
+ "summary": {
+  "asOf": "2026-11-24",
+  "locations": {
+   "total": 3968,
+   "byType": {
+    "calm": {
+     "records": 1764,
+     "located": 0,
+     "skippedNoPoint": 1764
+    },
+    "creek": {
+     "records": 3068,
+     "located": 0,
+     "skippedNoPoint": 3068
+    },
+    "ev": {
+     "records": 530,
+     "located": 530,
+     "skippedNoPoint": 0
+    },
+    "lot_park": {
+     "records": 776,
+     "located": 776,
+     "skippedNoPoint": 0
+    },
+    "xing": {
+     "records": 2662,
+     "located": 2662,
+     "skippedNoPoint": 0
+    }
+   },
+   "byKind": {
+    "asset": 530,
+    "parcel": 776,
+    "point": 2662
+   },
+   "recordsInFile": 8800,
+   "skippedNoPoint": 4832,
+   "lotsWithStationDistance": 776,
+   "stationsInBundle": 176,
+   "polygonFallbackToPoint": 0
+  },
+  "evaluations": {
+   "total": 35644,
+   "byStatus": {
+    "viable": 0,
+    "candidate": 0,
+    "needs_info": 13192,
+    "rejected": 0,
+    "not_evaluated": 22452
+   },
+   "byCategory": {
+    "adu": {
+     "needs_info": 776
+    },
+    "ageing_retail": {
+     "needs_info": 776
+    },
+    "air_rights": {
+     "needs_info": 776
+    },
+    "assembly": {
+     "needs_info": 776
+    },
+    "brownfield": {
+     "needs_info": 776
+    },
+    "bus_shelter": {
+     "not_evaluated": 2662
+    },
+    "clinic": {
+     "not_evaluated": 1306
+    },
+    "commercial_revitalisation": {
+     "needs_info": 776
+    },
+    "crosswalk": {
+     "not_evaluated": 2662
+    },
+    "densification": {
+     "needs_info": 776
+    },
+    "ev_charger": {
+     "not_evaluated": 3968
+    },
+    "grocery": {
+     "not_evaluated": 1306
+    },
+    "industrial_revitalisation": {
+     "needs_info": 776
+    },
+    "library": {
+     "not_evaluated": 1306
+    },
+    "lot_split": {
+     "needs_info": 776
+    },
+    "mixed_use": {
+     "needs_info": 776
+    },
+    "office_to_residential": {
+     "needs_info": 776
+    },
+    "p3_mixed_use": {
+     "needs_info": 776
+    },
+    "park": {
+     "not_evaluated": 776
+    },
+    "park_with_development": {
+     "needs_info": 776
+    },
+    "pocket_park": {
+     "not_evaluated": 3438
+    },
+    "rail_station": {
+     "not_evaluated": 3192
+    },
+    "school_upgrade": {
+     "not_evaluated": 530
+    },
+    "shared_parking": {
+     "needs_info": 776
+    },
+    "solar_microgrid": {
+     "not_evaluated": 1306
+    },
+    "surface_parking": {
+     "needs_info": 776
+    },
+    "underused_land": {
+     "needs_info": 776
+    },
+    "vacant_land": {
+     "needs_info": 776
+    }
+   },
+   "needsInfoBecauseCriterionNotSupplied": 13192,
+   "criteriaSupplied": 0,
+   "problemMapRows": 0,
+   "notEvaluatedNote": "not_evaluated = the category applies to the location kind but no feasibility rule set exists for it (only the 17 parcel categories have one)"
+  },
+  "discovery": {
+   "methodsRun": [
+    "exhaustive",
+    "problem_first",
+    "asset_first"
+   ],
+   "methodNotes": {
+    "exhaustive": "ran on every located site",
+    "problem_first": "ran with an empty problemMap: no indicator is mapped to any category, so it produced nothing",
+    "asset_first": "ran with empty criteria: every flag test lacks its threshold or attributes",
+    "combination": "not run: no adjacency data and no combination bound supplied"
+   },
+   "opportunitiesByMethodHits": {
+    "exhaustive": 13192,
+    "problem_first": 0,
+    "asset_first": 3104,
+    "combination": 0
+   },
+   "duplicatesMerged": 3104,
+   "opportunitiesMerged": 13192,
+   "opportunitiesByStatus": {
+    "needs_info": 13192
+   },
+   "byDiscoveredBy": {
+    "exhaustive": 10088,
+    "exhaustive+asset_first": 3104
+   },
+   "crashIndicatorLocations": 2662
+  },
+  "topMissingInputs": [
+   {
+    "name": "ab2011_site_criteria_met",
+    "count": 13192
+   },
+   {
+    "name": "adjacent_parcels",
+    "count": 13192
+   },
+   {
+    "name": "capexSchedule",
+    "count": 13192
+   },
+   {
+    "name": "check:engineering",
+    "count": 13192
+   },
+   {
+    "name": "criterion:min_coordination_partners",
+    "count": 13192
+   },
+   {
+    "name": "criterion:min_public_space_area",
+    "count": 13192
+   },
+   {
+    "name": "hurdleRate",
+    "count": 13192
+   },
+   {
+    "name": "omSchedule",
+    "count": 13192
+   },
+   {
+    "name": "parcel_area",
+    "count": 13192
+   },
+   {
+    "name": "periods",
+    "count": 13192
+   },
+   {
+    "name": "revenueSchedule",
+    "count": 13192
+   },
+   {
+    "name": "zoning_class",
+    "count": 13192
+   },
+   {
+    "name": "calfire_or_state_vhfhsz",
+    "count": 7760
+   },
+   {
+    "name": "city_population",
+    "count": 6984
+   },
+   {
+    "name": "distance_to_transit_mi",
+    "count": 6984
+   }
+  ],
+  "regulatory": {
+   "modulesRegistered": [
+    "California (state)",
+    "Los Angeles (city), from bundle zone_rules"
+   ],
+   "parcelTopicPairsEvaluated": 9312,
+   "parcelsWithPlace": 0,
+   "conclusionsByFinding": {
+    "requires_investigation": 17848
+   },
+   "conclusionsByRuleId": {
+    "(no registered rule: placeholder conclusion)": 3880,
+    "ca_ab2011_affordable": 1552,
+    "ca_ab2097": 776,
+    "ca_adu_66323": 776,
+    "ca_sb79_tier1": 2328,
+    "ca_sb79_tier2": 2328,
+    "ca_sb79_tier2_light_rail_half": 2328,
+    "ca_sb79_tier2_light_rail_quarter": 2328,
+    "ca_sb9_lot_split": 1552
+   },
+   "conclusionsByTopic": {
+    "affordability": 776,
+    "density": 4656,
+    "easements": 776,
+    "environmental": 776,
+    "height": 3104,
+    "incentives": 776,
+    "lot_split": 776,
+    "parking": 776,
+    "permitting": 776,
+    "setbacks": 776,
+    "tod_law": 3104,
+    "zoning": 776
+   }
+  },
+  "financial": {
+   "checkResult": "unknown",
+   "reason": "underwrite() could not run: buildCashFlow: periods must be an integer >= 2",
+   "missing": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate"
+   ],
+   "suppliedInputs": [],
+   "engineeringCheck": "not supplied (unknown for every site)"
+  },
+  "impact": {
+   "modelsRegistered": 6,
+   "modelIds": [
+    "model.rail_station.debrezion_all_rail_station_types_commercial_q4",
+    "model.rail_station.debrezion_all_rail_station_types_residential_and_commercial_q4",
+    "model.rail_station.debrezion_all_rail_station_types_residential_q4",
+    "model.rail_station.debrezion_commuter_rail_residential_and_commercial_q4",
+    "model.rail_station.debrezion_heavy_rail_metro_residential_and_commercial_q4",
+    "model.rail_station.debrezion_light_rail_residential_and_commercial_q4"
+   ],
+   "modelsSkipped": 12,
+   "skippedReasons": {
+    "distance band 'per 250 m closer to the station' is a gradient or has no stated reach; an impact area would need an invented reach": 6,
+    "mode 'bus rapid transit' is not a rail station mode": 2,
+    "no effect value": 1,
+    "no range (low/high)": 3
+   },
+   "categoriesWithModel": [
+    "rail_station"
+   ],
+   "categoriesLackingModelCount": 36,
+   "categoriesLackingModel": [
+    "underused_land",
+    "surface_parking",
+    "vacant_land",
+    "ageing_retail",
+    "brownfield",
+    "assembly",
+    "lot_split",
+    "adu",
+    "densification",
+    "office_to_residential",
+    "mixed_use",
+    "air_rights",
+    "shared_parking",
+    "p3_mixed_use",
+    "park_with_development",
+    "industrial_revitalisation",
+    "commercial_revitalisation",
+    "bike_lane",
+    "bus_lane",
+    "traffic_calming",
+    "crosswalk",
+    "street_trees",
+    "sidewalk",
+    "street_lighting",
+    "road_diet",
+    "park",
+    "pocket_park",
+    "brt",
+    "bus_shelter",
+    "ev_charger",
+    "solar_microgrid",
+    "undergrounding",
+    "grocery",
+    "clinic",
+    "library",
+    "school_upgrade"
+   ],
+   "opportunitiesInCategoriesWithModel": 0,
+   "impactAreasComputed": 0,
+   "note": "no opportunity exists in a category with a registered model (rail_station); the sites file holds no rail-station opportunities, so no impact area was computed"
+  },
+  "ledgers": {
+   "count": 3968,
+   "allFinalized": true,
+   "confidence": {
+    "high": 0,
+    "medium": 0,
+    "low": 3968,
+    "unknown": 0
+   },
+   "totals": {
+    "found": 0,
+    "rejected": 0,
+    "needsInfo": 13192,
+    "notEvaluated": 133624
+   },
+   "note": "totals.notEvaluated includes categories that do not apply to the location kind"
+  },
+  "limits": [
+   "Only records with a point (`pt`) are located. Street segments (calm) and creek records carry no `pt` in this file and are counted but not located.",
+   "The file states no unit for any numeric field. ac, lav, pn, pa, dl2 and ddc are kept as labels under their own keys (not Quantities), so no rule reading parcel_area or assessed_land_value can use them.",
+   "Counts (n, ped, bike, killed, n_l2, n_dc) are Quantities with unit \"count\" and status assumed; the file does not say what period or definition each count uses beyond its meta (crash_years, crashes, ev_source).",
+   "Lot polygons are decoded from the encoded line in `g` using precision 5 (an assumption about the encoding, not stated in the file); a lot whose line cannot be decoded as a closed ring falls back to an asset point.",
+   "No record states its city, so jurisdiction.place is null for every location; city-level rules cannot apply.",
+   "Distances to rail stations are straight-line (haversine), status estimated, and are stored under a name the California rules do not read.",
+   "criteria and problemMap are empty by default: nothing is screened on a threshold, so a site never passes or fails a physical test it has no criterion for.",
+   "No sourced costs, revenues, period count or hurdle rate exist in the repo, so the financial check is unknown for every site.",
+   "No engineering check exists, so no opportunity can be viable."
+  ]
+ },
+ "sampleOpportunities": [
+  {
+   "id": "exhaustive:underused_land:la-sites:lot_park:060371042011:0",
+   "categoryId": "underused_land",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive",
+    "asset_first"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "zoning_class",
+      "ab2011_site_criteria_met",
+      "distance_to_transit_mi",
+      "transit_mode",
+      "calfire_or_state_vhfhsz",
+      "rent_controlled_housing_site",
+      "mobilehome_or_rv_park_site",
+      "city_population",
+      "single_family_zone",
+      "historic_district_hpoz",
+      "fema_100yr_floodway",
+      "prime_farmland",
+      "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
+      "jurisdiction_module:CA/06037:permitting"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "parcel_area",
+      "assessed_improvement_value",
+      "assessed_land_value",
+      "criterion:max_improvement_to_land_ratio",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "zoning_class",
+    "ab2011_site_criteria_met",
+    "distance_to_transit_mi",
+    "transit_mode",
+    "calfire_or_state_vhfhsz",
+    "rent_controlled_housing_site",
+    "mobilehome_or_rv_park_site",
+    "city_population",
+    "single_family_zone",
+    "historic_district_hpoz",
+    "fema_100yr_floodway",
+    "prime_farmland",
+    "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
+    "jurisdiction_module:CA/06037:permitting",
+    "parcel_area",
+    "assessed_improvement_value",
+    "assessed_land_value",
+    "criterion:max_improvement_to_land_ratio",
+    "check:engineering",
+    "criterion:min_public_space_area",
+    "adjacent_parcels",
+    "criterion:min_coordination_partners"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:surface_parking:la-sites:lot_park:060371042011:0",
+   "categoryId": "surface_parking",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive",
+    "asset_first"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "zoning_class",
+      "ab2011_site_criteria_met",
+      "distance_to_public_transit_mi",
+      "distance_to_transit_mi",
+      "transit_mode",
+      "calfire_or_state_vhfhsz",
+      "rent_controlled_housing_site",
+      "mobilehome_or_rv_park_site",
+      "city_population",
+      "single_family_zone",
+      "historic_district_hpoz",
+      "fema_100yr_floodway",
+      "prime_farmland",
+      "density: record has no verified effective_date; figures attached are not to be shown as a legal standard"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "parcel_area",
+      "parking_surface_area",
+      "criterion:min_parking_surface_area",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "zoning_class",
+    "ab2011_site_criteria_met",
+    "distance_to_public_transit_mi",
+    "distance_to_transit_mi",
+    "transit_mode",
+    "calfire_or_state_vhfhsz",
+    "rent_controlled_housing_site",
+    "mobilehome_or_rv_park_site",
+    "city_population",
+    "single_family_zone",
+    "historic_district_hpoz",
+    "fema_100yr_floodway",
+    "prime_farmland",
+    "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
+    "parcel_area",
+    "parking_surface_area",
+    "criterion:min_parking_surface_area",
+    "check:engineering",
+    "criterion:min_public_space_area",
+    "adjacent_parcels",
+    "criterion:min_coordination_partners"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:vacant_land:la-sites:lot_park:060371042011:0",
+   "categoryId": "vacant_land",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "zoning_class",
+      "ab2011_site_criteria_met",
+      "distance_to_transit_mi",
+      "transit_mode",
+      "calfire_or_state_vhfhsz",
+      "rent_controlled_housing_site",
+      "mobilehome_or_rv_park_site",
+      "city_population",
+      "single_family_zone",
+      "historic_district_hpoz",
+      "fema_100yr_floodway",
+      "prime_farmland",
+      "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
+      "jurisdiction_module:CA/06037:setbacks"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "parcel_area",
+      "vacancy_status",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "zoning_class",
+    "ab2011_site_criteria_met",
+    "distance_to_transit_mi",
+    "transit_mode",
+    "calfire_or_state_vhfhsz",
+    "rent_controlled_housing_site",
+    "mobilehome_or_rv_park_site",
+    "city_population",
+    "single_family_zone",
+    "historic_district_hpoz",
+    "fema_100yr_floodway",
+    "prime_farmland",
+    "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
+    "jurisdiction_module:CA/06037:setbacks",
+    "parcel_area",
+    "vacancy_status",
+    "check:engineering",
+    "criterion:min_public_space_area",
+    "adjacent_parcels",
+    "criterion:min_coordination_partners"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:ageing_retail:la-sites:lot_park:060371042011:0",
+   "categoryId": "ageing_retail",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "zoning_class",
+      "ab2011_site_criteria_met",
+      "distance_to_transit_mi",
+      "transit_mode",
+      "calfire_or_state_vhfhsz",
+      "rent_controlled_housing_site",
+      "mobilehome_or_rv_park_site",
+      "city_population",
+      "single_family_zone",
+      "historic_district_hpoz",
+      "fema_100yr_floodway",
+      "prime_farmland",
+      "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
+      "distance_to_public_transit_mi"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "parcel_area",
+      "year_built",
+      "retail_vacancy",
+      "criterion:max_year_built",
+      "criterion:min_retail_vacancy",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "zoning_class",
+    "ab2011_site_criteria_met",
+    "distance_to_transit_mi",
+    "transit_mode",
+    "calfire_or_state_vhfhsz",
+    "rent_controlled_housing_site",
+    "mobilehome_or_rv_park_site",
+    "city_population",
+    "single_family_zone",
+    "historic_district_hpoz",
+    "fema_100yr_floodway",
+    "prime_farmland",
+    "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
+    "distance_to_public_transit_mi",
+    "parcel_area",
+    "year_built",
+    "retail_vacancy",
+    "criterion:max_year_built",
+    "criterion:min_retail_vacancy",
+    "check:engineering",
+    "criterion:min_public_space_area",
+    "adjacent_parcels",
+    "criterion:min_coordination_partners"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:brownfield:la-sites:lot_park:060371042011:0",
+   "categoryId": "brownfield",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "zoning_class",
+      "ab2011_site_criteria_met",
+      "jurisdiction_module:CA/06037:environmental",
+      "jurisdiction_module:CA/06037:permitting"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "parcel_area",
+      "contamination_status",
+      "remediation_cost",
+      "criterion:max_remediation_cost",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "zoning_class",
+    "ab2011_site_criteria_met",
+    "jurisdiction_module:CA/06037:environmental",
+    "jurisdiction_module:CA/06037:permitting",
+    "parcel_area",
+    "contamination_status",
+    "remediation_cost",
+    "criterion:max_remediation_cost",
+    "check:engineering",
+    "criterion:min_public_space_area",
+    "adjacent_parcels",
+    "criterion:min_coordination_partners"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:assembly:la-sites:lot_park:060371042011:0",
+   "categoryId": "assembly",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "zoning_class",
+      "ab2011_site_criteria_met",
+      "distance_to_transit_mi",
+      "transit_mode",
+      "calfire_or_state_vhfhsz",
+      "rent_controlled_housing_site",
+      "mobilehome_or_rv_park_site",
+      "city_population",
+      "single_family_zone",
+      "historic_district_hpoz",
+      "fema_100yr_floodway",
+      "prime_farmland",
+      "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
+      "jurisdiction_module:CA/06037:easements"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "parcel_area",
+      "combined_parcel_area",
+      "criterion:min_assembled_area",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "zoning_class",
+    "ab2011_site_criteria_met",
+    "distance_to_transit_mi",
+    "transit_mode",
+    "calfire_or_state_vhfhsz",
+    "rent_controlled_housing_site",
+    "mobilehome_or_rv_park_site",
+    "city_population",
+    "single_family_zone",
+    "historic_district_hpoz",
+    "fema_100yr_floodway",
+    "prime_farmland",
+    "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
+    "jurisdiction_module:CA/06037:easements",
+    "parcel_area",
+    "combined_parcel_area",
+    "criterion:min_assembled_area",
+    "check:engineering",
+    "criterion:min_public_space_area",
+    "adjacent_parcels",
+    "criterion:min_coordination_partners"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:lot_split:la-sites:lot_park:060371042011:0",
+   "categoryId": "lot_split",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "zoning_class",
+      "ab2011_site_criteria_met",
+      "single_family_zone",
+      "historic_district_hpoz",
+      "fema_100yr_floodway",
+      "calfire_or_state_vhfhsz",
+      "prime_farmland"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "parcel_area",
+      "criterion:min_splittable_area",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "zoning_class",
+    "ab2011_site_criteria_met",
+    "single_family_zone",
+    "historic_district_hpoz",
+    "fema_100yr_floodway",
+    "calfire_or_state_vhfhsz",
+    "prime_farmland",
+    "parcel_area",
+    "criterion:min_splittable_area",
+    "check:engineering",
+    "criterion:min_public_space_area",
+    "adjacent_parcels",
+    "criterion:min_coordination_partners"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:adu:la-sites:lot_park:060371042011:0",
+   "categoryId": "adu",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "zoning_class",
+      "ab2011_site_criteria_met",
+      "distance_to_transit_mi",
+      "transit_mode",
+      "calfire_or_state_vhfhsz",
+      "rent_controlled_housing_site",
+      "mobilehome_or_rv_park_site",
+      "city_population",
+      "single_family_zone",
+      "historic_district_hpoz",
+      "fema_100yr_floodway",
+      "prime_farmland",
+      "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
+      "jurisdiction_module:CA/06037:setbacks",
+      "jurisdiction_module:CA/06037:permitting"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "parcel_area",
+      "existing_structures",
+      "criterion:min_adu_lot_area",
+      "criterion:max_existing_structures",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "zoning_class",
+    "ab2011_site_criteria_met",
+    "distance_to_transit_mi",
+    "transit_mode",
+    "calfire_or_state_vhfhsz",
+    "rent_controlled_housing_site",
+    "mobilehome_or_rv_park_site",
+    "city_population",
+    "single_family_zone",
+    "historic_district_hpoz",
+    "fema_100yr_floodway",
+    "prime_farmland",
+    "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
+    "jurisdiction_module:CA/06037:setbacks",
+    "jurisdiction_module:CA/06037:permitting",
+    "parcel_area",
+    "existing_structures",
+    "criterion:min_adu_lot_area",
+    "criterion:max_existing_structures",
+    "check:engineering",
+    "criterion:min_public_space_area",
+    "adjacent_parcels",
+    "criterion:min_coordination_partners"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:densification:la-sites:lot_park:060371042011:0",
+   "categoryId": "densification",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "zoning_class",
+      "ab2011_site_criteria_met",
+      "distance_to_transit_mi",
+      "transit_mode",
+      "calfire_or_state_vhfhsz",
+      "rent_controlled_housing_site",
+      "mobilehome_or_rv_park_site",
+      "city_population",
+      "single_family_zone",
+      "historic_district_hpoz",
+      "fema_100yr_floodway",
+      "prime_farmland",
+      "density: record has no verified effective_date; figures attached are not to be shown as a legal standard"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "parcel_area",
+      "built_floor_area",
+      "permitted_floor_area",
+      "criterion:max_built_to_permitted_ratio",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "zoning_class",
+    "ab2011_site_criteria_met",
+    "distance_to_transit_mi",
+    "transit_mode",
+    "calfire_or_state_vhfhsz",
+    "rent_controlled_housing_site",
+    "mobilehome_or_rv_park_site",
+    "city_population",
+    "single_family_zone",
+    "historic_district_hpoz",
+    "fema_100yr_floodway",
+    "prime_farmland",
+    "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
+    "parcel_area",
+    "built_floor_area",
+    "permitted_floor_area",
+    "criterion:max_built_to_permitted_ratio",
+    "check:engineering",
+    "criterion:min_public_space_area",
+    "adjacent_parcels",
+    "criterion:min_coordination_partners"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:office_to_residential:la-sites:lot_park:060371042011:0",
+   "categoryId": "office_to_residential",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "zoning_class",
+      "ab2011_site_criteria_met",
+      "jurisdiction_module:CA/06037:permitting",
+      "distance_to_public_transit_mi"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "parcel_area",
+      "office_vacancy",
+      "criterion:min_office_vacancy",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "zoning_class",
+    "ab2011_site_criteria_met",
+    "jurisdiction_module:CA/06037:permitting",
+    "distance_to_public_transit_mi",
+    "parcel_area",
+    "office_vacancy",
+    "criterion:min_office_vacancy",
+    "check:engineering",
+    "criterion:min_public_space_area",
+    "adjacent_parcels",
+    "criterion:min_coordination_partners"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:mixed_use:la-sites:lot_park:060371042011:0",
+   "categoryId": "mixed_use",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "zoning_class",
+      "ab2011_site_criteria_met",
+      "distance_to_transit_mi",
+      "transit_mode",
+      "calfire_or_state_vhfhsz",
+      "rent_controlled_housing_site",
+      "mobilehome_or_rv_park_site",
+      "city_population",
+      "single_family_zone",
+      "historic_district_hpoz",
+      "fema_100yr_floodway",
+      "prime_farmland",
+      "density: record has no verified effective_date; figures attached are not to be shown as a legal standard"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "parcel_area",
+      "permitted_floor_area",
+      "criterion:min_mixed_use_floor_area",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "zoning_class",
+    "ab2011_site_criteria_met",
+    "distance_to_transit_mi",
+    "transit_mode",
+    "calfire_or_state_vhfhsz",
+    "rent_controlled_housing_site",
+    "mobilehome_or_rv_park_site",
+    "city_population",
+    "single_family_zone",
+    "historic_district_hpoz",
+    "fema_100yr_floodway",
+    "prime_farmland",
+    "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
+    "parcel_area",
+    "permitted_floor_area",
+    "criterion:min_mixed_use_floor_area",
+    "check:engineering",
+    "criterion:min_public_space_area",
+    "adjacent_parcels",
+    "criterion:min_coordination_partners"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:air_rights:la-sites:lot_park:060371042011:0",
+   "categoryId": "air_rights",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive",
+    "asset_first"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "zoning_class",
+      "ab2011_site_criteria_met",
+      "distance_to_transit_mi",
+      "transit_mode",
+      "calfire_or_state_vhfhsz",
+      "rent_controlled_housing_site",
+      "mobilehome_or_rv_park_site",
+      "city_population",
+      "jurisdiction_module:CA/06037:easements"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "parcel_area",
+      "unused_development_rights",
+      "criterion:min_unused_rights",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "zoning_class",
+    "ab2011_site_criteria_met",
+    "distance_to_transit_mi",
+    "transit_mode",
+    "calfire_or_state_vhfhsz",
+    "rent_controlled_housing_site",
+    "mobilehome_or_rv_park_site",
+    "city_population",
+    "jurisdiction_module:CA/06037:easements",
+    "parcel_area",
+    "unused_development_rights",
+    "criterion:min_unused_rights",
+    "check:engineering",
+    "criterion:min_public_space_area",
+    "adjacent_parcels",
+    "criterion:min_coordination_partners"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:shared_parking:la-sites:lot_park:060371042011:0",
+   "categoryId": "shared_parking",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "zoning_class",
+      "ab2011_site_criteria_met",
+      "distance_to_public_transit_mi"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "parcel_area",
+      "parking_occupancy",
+      "criterion:max_parking_occupancy",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "zoning_class",
+    "ab2011_site_criteria_met",
+    "distance_to_public_transit_mi",
+    "parcel_area",
+    "parking_occupancy",
+    "criterion:max_parking_occupancy",
+    "check:engineering",
+    "criterion:min_public_space_area",
+    "adjacent_parcels",
+    "criterion:min_coordination_partners"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:p3_mixed_use:la-sites:lot_park:060371042011:0",
+   "categoryId": "p3_mixed_use",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "zoning_class",
+      "ab2011_site_criteria_met",
+      "jurisdiction_module:CA/06037:incentives"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "parcel_area",
+      "public_ownership",
+      "permitted_floor_area",
+      "criterion:min_p3_floor_area",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "zoning_class",
+    "ab2011_site_criteria_met",
+    "jurisdiction_module:CA/06037:incentives",
+    "parcel_area",
+    "public_ownership",
+    "permitted_floor_area",
+    "criterion:min_p3_floor_area",
+    "check:engineering",
+    "criterion:min_public_space_area",
+    "adjacent_parcels",
+    "criterion:min_coordination_partners"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:park_with_development:la-sites:lot_park:060371042011:0",
+   "categoryId": "park_with_development",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "zoning_class",
+      "ab2011_site_criteria_met",
+      "jurisdiction_module:CA/06037:environmental"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "parcel_area",
+      "open_space_deficit",
+      "criterion:min_open_space_deficit",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "zoning_class",
+    "ab2011_site_criteria_met",
+    "jurisdiction_module:CA/06037:environmental",
+    "parcel_area",
+    "open_space_deficit",
+    "criterion:min_open_space_deficit",
+    "check:engineering",
+    "criterion:min_public_space_area",
+    "adjacent_parcels",
+    "criterion:min_coordination_partners"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:industrial_revitalisation:la-sites:lot_park:060371042011:0",
+   "categoryId": "industrial_revitalisation",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "zoning_class",
+      "ab2011_site_criteria_met",
+      "jurisdiction_module:CA/06037:environmental"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "parcel_area",
+      "industrial_vacancy",
+      "criterion:min_industrial_vacancy",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "zoning_class",
+    "ab2011_site_criteria_met",
+    "jurisdiction_module:CA/06037:environmental",
+    "parcel_area",
+    "industrial_vacancy",
+    "criterion:min_industrial_vacancy",
+    "check:engineering",
+    "criterion:min_public_space_area",
+    "adjacent_parcels",
+    "criterion:min_coordination_partners"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:commercial_revitalisation:la-sites:lot_park:060371042011:0",
+   "categoryId": "commercial_revitalisation",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive",
+    "asset_first"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "zoning_class",
+      "ab2011_site_criteria_met",
+      "jurisdiction_module:CA/06037:incentives"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "parcel_area",
+      "commercial_vacancy",
+      "criterion:min_commercial_vacancy",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "zoning_class",
+    "ab2011_site_criteria_met",
+    "jurisdiction_module:CA/06037:incentives",
+    "parcel_area",
+    "commercial_vacancy",
+    "criterion:min_commercial_vacancy",
+    "check:engineering",
+    "criterion:min_public_space_area",
+    "adjacent_parcels",
+    "criterion:min_coordination_partners"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:underused_land:la-sites:lot_park:060371048242:2",
+   "categoryId": "underused_land",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive",
+    "asset_first"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "zoning_class",
+      "ab2011_site_criteria_met",
+      "distance_to_transit_mi",
+      "transit_mode",
+      "calfire_or_state_vhfhsz",
+      "rent_controlled_housing_site",
+      "mobilehome_or_rv_park_site",
+      "city_population",
+      "single_family_zone",
+      "historic_district_hpoz",
+      "fema_100yr_floodway",
+      "prime_farmland",
+      "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
+      "jurisdiction_module:CA/06037:permitting"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "parcel_area",
+      "assessed_improvement_value",
+      "assessed_land_value",
+      "criterion:max_improvement_to_land_ratio",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "zoning_class",
+    "ab2011_site_criteria_met",
+    "distance_to_transit_mi",
+    "transit_mode",
+    "calfire_or_state_vhfhsz",
+    "rent_controlled_housing_site",
+    "mobilehome_or_rv_park_site",
+    "city_population",
+    "single_family_zone",
+    "historic_district_hpoz",
+    "fema_100yr_floodway",
+    "prime_farmland",
+    "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
+    "jurisdiction_module:CA/06037:permitting",
+    "parcel_area",
+    "assessed_improvement_value",
+    "assessed_land_value",
+    "criterion:max_improvement_to_land_ratio",
+    "check:engineering",
+    "criterion:min_public_space_area",
+    "adjacent_parcels",
+    "criterion:min_coordination_partners"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:surface_parking:la-sites:lot_park:060371048242:2",
+   "categoryId": "surface_parking",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive",
+    "asset_first"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "zoning_class",
+      "ab2011_site_criteria_met",
+      "distance_to_public_transit_mi",
+      "distance_to_transit_mi",
+      "transit_mode",
+      "calfire_or_state_vhfhsz",
+      "rent_controlled_housing_site",
+      "mobilehome_or_rv_park_site",
+      "city_population",
+      "single_family_zone",
+      "historic_district_hpoz",
+      "fema_100yr_floodway",
+      "prime_farmland",
+      "density: record has no verified effective_date; figures attached are not to be shown as a legal standard"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "parcel_area",
+      "parking_surface_area",
+      "criterion:min_parking_surface_area",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "zoning_class",
+    "ab2011_site_criteria_met",
+    "distance_to_public_transit_mi",
+    "distance_to_transit_mi",
+    "transit_mode",
+    "calfire_or_state_vhfhsz",
+    "rent_controlled_housing_site",
+    "mobilehome_or_rv_park_site",
+    "city_population",
+    "single_family_zone",
+    "historic_district_hpoz",
+    "fema_100yr_floodway",
+    "prime_farmland",
+    "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
+    "parcel_area",
+    "parking_surface_area",
+    "criterion:min_parking_surface_area",
+    "check:engineering",
+    "criterion:min_public_space_area",
+    "adjacent_parcels",
+    "criterion:min_coordination_partners"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:vacant_land:la-sites:lot_park:060371048242:2",
+   "categoryId": "vacant_land",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "zoning_class",
+      "ab2011_site_criteria_met",
+      "distance_to_transit_mi",
+      "transit_mode",
+      "calfire_or_state_vhfhsz",
+      "rent_controlled_housing_site",
+      "mobilehome_or_rv_park_site",
+      "city_population",
+      "single_family_zone",
+      "historic_district_hpoz",
+      "fema_100yr_floodway",
+      "prime_farmland",
+      "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
+      "jurisdiction_module:CA/06037:setbacks"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "parcel_area",
+      "vacancy_status",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "zoning_class",
+    "ab2011_site_criteria_met",
+    "distance_to_transit_mi",
+    "transit_mode",
+    "calfire_or_state_vhfhsz",
+    "rent_controlled_housing_site",
+    "mobilehome_or_rv_park_site",
+    "city_population",
+    "single_family_zone",
+    "historic_district_hpoz",
+    "fema_100yr_floodway",
+    "prime_farmland",
+    "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
+    "jurisdiction_module:CA/06037:setbacks",
+    "parcel_area",
+    "vacancy_status",
+    "check:engineering",
+    "criterion:min_public_space_area",
+    "adjacent_parcels",
+    "criterion:min_coordination_partners"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:ageing_retail:la-sites:lot_park:060371048242:2",
+   "categoryId": "ageing_retail",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "zoning_class",
+      "ab2011_site_criteria_met",
+      "distance_to_transit_mi",
+      "transit_mode",
+      "calfire_or_state_vhfhsz",
+      "rent_controlled_housing_site",
+      "mobilehome_or_rv_park_site",
+      "city_population",
+      "single_family_zone",
+      "historic_district_hpoz",
+      "fema_100yr_floodway",
+      "prime_farmland",
+      "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
+      "distance_to_public_transit_mi"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "parcel_area",
+      "year_built",
+      "retail_vacancy",
+      "criterion:max_year_built",
+      "criterion:min_retail_vacancy",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "zoning_class",
+    "ab2011_site_criteria_met",
+    "distance_to_transit_mi",
+    "transit_mode",
+    "calfire_or_state_vhfhsz",
+    "rent_controlled_housing_site",
+    "mobilehome_or_rv_park_site",
+    "city_population",
+    "single_family_zone",
+    "historic_district_hpoz",
+    "fema_100yr_floodway",
+    "prime_farmland",
+    "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
+    "distance_to_public_transit_mi",
+    "parcel_area",
+    "year_built",
+    "retail_vacancy",
+    "criterion:max_year_built",
+    "criterion:min_retail_vacancy",
+    "check:engineering",
+    "criterion:min_public_space_area",
+    "adjacent_parcels",
+    "criterion:min_coordination_partners"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:brownfield:la-sites:lot_park:060371048242:2",
+   "categoryId": "brownfield",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "zoning_class",
+      "ab2011_site_criteria_met",
+      "jurisdiction_module:CA/06037:environmental",
+      "jurisdiction_module:CA/06037:permitting"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "parcel_area",
+      "contamination_status",
+      "remediation_cost",
+      "criterion:max_remediation_cost",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "zoning_class",
+    "ab2011_site_criteria_met",
+    "jurisdiction_module:CA/06037:environmental",
+    "jurisdiction_module:CA/06037:permitting",
+    "parcel_area",
+    "contamination_status",
+    "remediation_cost",
+    "criterion:max_remediation_cost",
+    "check:engineering",
+    "criterion:min_public_space_area",
+    "adjacent_parcels",
+    "criterion:min_coordination_partners"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:assembly:la-sites:lot_park:060371048242:2",
+   "categoryId": "assembly",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "zoning_class",
+      "ab2011_site_criteria_met",
+      "distance_to_transit_mi",
+      "transit_mode",
+      "calfire_or_state_vhfhsz",
+      "rent_controlled_housing_site",
+      "mobilehome_or_rv_park_site",
+      "city_population",
+      "single_family_zone",
+      "historic_district_hpoz",
+      "fema_100yr_floodway",
+      "prime_farmland",
+      "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
+      "jurisdiction_module:CA/06037:easements"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "parcel_area",
+      "combined_parcel_area",
+      "criterion:min_assembled_area",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "zoning_class",
+    "ab2011_site_criteria_met",
+    "distance_to_transit_mi",
+    "transit_mode",
+    "calfire_or_state_vhfhsz",
+    "rent_controlled_housing_site",
+    "mobilehome_or_rv_park_site",
+    "city_population",
+    "single_family_zone",
+    "historic_district_hpoz",
+    "fema_100yr_floodway",
+    "prime_farmland",
+    "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
+    "jurisdiction_module:CA/06037:easements",
+    "parcel_area",
+    "combined_parcel_area",
+    "criterion:min_assembled_area",
+    "check:engineering",
+    "criterion:min_public_space_area",
+    "adjacent_parcels",
+    "criterion:min_coordination_partners"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:lot_split:la-sites:lot_park:060371048242:2",
+   "categoryId": "lot_split",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "zoning_class",
+      "ab2011_site_criteria_met",
+      "single_family_zone",
+      "historic_district_hpoz",
+      "fema_100yr_floodway",
+      "calfire_or_state_vhfhsz",
+      "prime_farmland"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "parcel_area",
+      "criterion:min_splittable_area",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "zoning_class",
+    "ab2011_site_criteria_met",
+    "single_family_zone",
+    "historic_district_hpoz",
+    "fema_100yr_floodway",
+    "calfire_or_state_vhfhsz",
+    "prime_farmland",
+    "parcel_area",
+    "criterion:min_splittable_area",
+    "check:engineering",
+    "criterion:min_public_space_area",
+    "adjacent_parcels",
+    "criterion:min_coordination_partners"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:adu:la-sites:lot_park:060371048242:2",
+   "categoryId": "adu",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "zoning_class",
+      "ab2011_site_criteria_met",
+      "distance_to_transit_mi",
+      "transit_mode",
+      "calfire_or_state_vhfhsz",
+      "rent_controlled_housing_site",
+      "mobilehome_or_rv_park_site",
+      "city_population",
+      "single_family_zone",
+      "historic_district_hpoz",
+      "fema_100yr_floodway",
+      "prime_farmland",
+      "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
+      "jurisdiction_module:CA/06037:setbacks",
+      "jurisdiction_module:CA/06037:permitting"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "parcel_area",
+      "existing_structures",
+      "criterion:min_adu_lot_area",
+      "criterion:max_existing_structures",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "zoning_class",
+    "ab2011_site_criteria_met",
+    "distance_to_transit_mi",
+    "transit_mode",
+    "calfire_or_state_vhfhsz",
+    "rent_controlled_housing_site",
+    "mobilehome_or_rv_park_site",
+    "city_population",
+    "single_family_zone",
+    "historic_district_hpoz",
+    "fema_100yr_floodway",
+    "prime_farmland",
+    "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
+    "jurisdiction_module:CA/06037:setbacks",
+    "jurisdiction_module:CA/06037:permitting",
+    "parcel_area",
+    "existing_structures",
+    "criterion:min_adu_lot_area",
+    "criterion:max_existing_structures",
+    "check:engineering",
+    "criterion:min_public_space_area",
+    "adjacent_parcels",
+    "criterion:min_coordination_partners"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:densification:la-sites:lot_park:060371048242:2",
+   "categoryId": "densification",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "zoning_class",
+      "ab2011_site_criteria_met",
+      "distance_to_transit_mi",
+      "transit_mode",
+      "calfire_or_state_vhfhsz",
+      "rent_controlled_housing_site",
+      "mobilehome_or_rv_park_site",
+      "city_population",
+      "single_family_zone",
+      "historic_district_hpoz",
+      "fema_100yr_floodway",
+      "prime_farmland",
+      "density: record has no verified effective_date; figures attached are not to be shown as a legal standard"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "parcel_area",
+      "built_floor_area",
+      "permitted_floor_area",
+      "criterion:max_built_to_permitted_ratio",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "zoning_class",
+    "ab2011_site_criteria_met",
+    "distance_to_transit_mi",
+    "transit_mode",
+    "calfire_or_state_vhfhsz",
+    "rent_controlled_housing_site",
+    "mobilehome_or_rv_park_site",
+    "city_population",
+    "single_family_zone",
+    "historic_district_hpoz",
+    "fema_100yr_floodway",
+    "prime_farmland",
+    "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
+    "parcel_area",
+    "built_floor_area",
+    "permitted_floor_area",
+    "criterion:max_built_to_permitted_ratio",
+    "check:engineering",
+    "criterion:min_public_space_area",
+    "adjacent_parcels",
+    "criterion:min_coordination_partners"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:office_to_residential:la-sites:lot_park:060371048242:2",
+   "categoryId": "office_to_residential",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "zoning_class",
+      "ab2011_site_criteria_met",
+      "jurisdiction_module:CA/06037:permitting",
+      "distance_to_public_transit_mi"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "parcel_area",
+      "office_vacancy",
+      "criterion:min_office_vacancy",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "zoning_class",
+    "ab2011_site_criteria_met",
+    "jurisdiction_module:CA/06037:permitting",
+    "distance_to_public_transit_mi",
+    "parcel_area",
+    "office_vacancy",
+    "criterion:min_office_vacancy",
+    "check:engineering",
+    "criterion:min_public_space_area",
+    "adjacent_parcels",
+    "criterion:min_coordination_partners"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:mixed_use:la-sites:lot_park:060371048242:2",
+   "categoryId": "mixed_use",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "zoning_class",
+      "ab2011_site_criteria_met",
+      "distance_to_transit_mi",
+      "transit_mode",
+      "calfire_or_state_vhfhsz",
+      "rent_controlled_housing_site",
+      "mobilehome_or_rv_park_site",
+      "city_population",
+      "single_family_zone",
+      "historic_district_hpoz",
+      "fema_100yr_floodway",
+      "prime_farmland",
+      "density: record has no verified effective_date; figures attached are not to be shown as a legal standard"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "parcel_area",
+      "permitted_floor_area",
+      "criterion:min_mixed_use_floor_area",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "zoning_class",
+    "ab2011_site_criteria_met",
+    "distance_to_transit_mi",
+    "transit_mode",
+    "calfire_or_state_vhfhsz",
+    "rent_controlled_housing_site",
+    "mobilehome_or_rv_park_site",
+    "city_population",
+    "single_family_zone",
+    "historic_district_hpoz",
+    "fema_100yr_floodway",
+    "prime_farmland",
+    "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
+    "parcel_area",
+    "permitted_floor_area",
+    "criterion:min_mixed_use_floor_area",
+    "check:engineering",
+    "criterion:min_public_space_area",
+    "adjacent_parcels",
+    "criterion:min_coordination_partners"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:air_rights:la-sites:lot_park:060371048242:2",
+   "categoryId": "air_rights",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive",
+    "asset_first"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "zoning_class",
+      "ab2011_site_criteria_met",
+      "distance_to_transit_mi",
+      "transit_mode",
+      "calfire_or_state_vhfhsz",
+      "rent_controlled_housing_site",
+      "mobilehome_or_rv_park_site",
+      "city_population",
+      "jurisdiction_module:CA/06037:easements"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "parcel_area",
+      "unused_development_rights",
+      "criterion:min_unused_rights",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "zoning_class",
+    "ab2011_site_criteria_met",
+    "distance_to_transit_mi",
+    "transit_mode",
+    "calfire_or_state_vhfhsz",
+    "rent_controlled_housing_site",
+    "mobilehome_or_rv_park_site",
+    "city_population",
+    "jurisdiction_module:CA/06037:easements",
+    "parcel_area",
+    "unused_development_rights",
+    "criterion:min_unused_rights",
+    "check:engineering",
+    "criterion:min_public_space_area",
+    "adjacent_parcels",
+    "criterion:min_coordination_partners"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:shared_parking:la-sites:lot_park:060371048242:2",
+   "categoryId": "shared_parking",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "zoning_class",
+      "ab2011_site_criteria_met",
+      "distance_to_public_transit_mi"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "parcel_area",
+      "parking_occupancy",
+      "criterion:max_parking_occupancy",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "zoning_class",
+    "ab2011_site_criteria_met",
+    "distance_to_public_transit_mi",
+    "parcel_area",
+    "parking_occupancy",
+    "criterion:max_parking_occupancy",
+    "check:engineering",
+    "criterion:min_public_space_area",
+    "adjacent_parcels",
+    "criterion:min_coordination_partners"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:p3_mixed_use:la-sites:lot_park:060371048242:2",
+   "categoryId": "p3_mixed_use",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "zoning_class",
+      "ab2011_site_criteria_met",
+      "jurisdiction_module:CA/06037:incentives"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "parcel_area",
+      "public_ownership",
+      "permitted_floor_area",
+      "criterion:min_p3_floor_area",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "zoning_class",
+    "ab2011_site_criteria_met",
+    "jurisdiction_module:CA/06037:incentives",
+    "parcel_area",
+    "public_ownership",
+    "permitted_floor_area",
+    "criterion:min_p3_floor_area",
+    "check:engineering",
+    "criterion:min_public_space_area",
+    "adjacent_parcels",
+    "criterion:min_coordination_partners"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:park_with_development:la-sites:lot_park:060371048242:2",
+   "categoryId": "park_with_development",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "zoning_class",
+      "ab2011_site_criteria_met",
+      "jurisdiction_module:CA/06037:environmental"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "parcel_area",
+      "open_space_deficit",
+      "criterion:min_open_space_deficit",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "zoning_class",
+    "ab2011_site_criteria_met",
+    "jurisdiction_module:CA/06037:environmental",
+    "parcel_area",
+    "open_space_deficit",
+    "criterion:min_open_space_deficit",
+    "check:engineering",
+    "criterion:min_public_space_area",
+    "adjacent_parcels",
+    "criterion:min_coordination_partners"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:industrial_revitalisation:la-sites:lot_park:060371048242:2",
+   "categoryId": "industrial_revitalisation",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "zoning_class",
+      "ab2011_site_criteria_met",
+      "jurisdiction_module:CA/06037:environmental"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "parcel_area",
+      "industrial_vacancy",
+      "criterion:min_industrial_vacancy",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "zoning_class",
+    "ab2011_site_criteria_met",
+    "jurisdiction_module:CA/06037:environmental",
+    "parcel_area",
+    "industrial_vacancy",
+    "criterion:min_industrial_vacancy",
+    "check:engineering",
+    "criterion:min_public_space_area",
+    "adjacent_parcels",
+    "criterion:min_coordination_partners"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:commercial_revitalisation:la-sites:lot_park:060371048242:2",
+   "categoryId": "commercial_revitalisation",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive",
+    "asset_first"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "zoning_class",
+      "ab2011_site_criteria_met",
+      "jurisdiction_module:CA/06037:incentives"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "parcel_area",
+      "commercial_vacancy",
+      "criterion:min_commercial_vacancy",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "zoning_class",
+    "ab2011_site_criteria_met",
+    "jurisdiction_module:CA/06037:incentives",
+    "parcel_area",
+    "commercial_vacancy",
+    "criterion:min_commercial_vacancy",
+    "check:engineering",
+    "criterion:min_public_space_area",
+    "adjacent_parcels",
+    "criterion:min_coordination_partners"
+   ],
+   "confidence": "unknown"
+  }
+ ],
+ "sampleNote": "first two opportunities per (source type, category, status), at most 200"
+}
