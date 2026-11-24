@@ -40,7 +40,13 @@ function modelMissing(m, n, k) {
     if (!r || !nonEmpty(r.risk) || !['public', 'private', 'shared'].includes(r.allocatedTo)) out.push(`${k}.riskRegister[${i}] (risk, allocatedTo)`);
     else {
       out.push(...missingQ(r.expectedCost, `${k}.riskRegister[${i}].expectedCost`));
-      if (r.allocatedTo === 'shared') out.push(...missingQ(r.publicShare, `${k}.riskRegister[${i}].publicShare (shared risk needs the public share)`));
+      if (r.allocatedTo === 'shared') {
+        const ps = r.publicShare;
+        if (!known(ps)) out.push(`${k}.riskRegister[${i}].publicShare (shared risk needs the public share, a ratio Quantity with provenance)`);
+        else if (ps.unit !== 'ratio' || ![ps.value, ps.low, ps.high].every((x) => typeof x === 'number' && x >= 0 && x <= 1)) {
+          out.push(`${k}.riskRegister[${i}].publicShare (must be unit 'ratio' with value, low and high within 0..1; got ${ps.value} ${ps.unit} [${ps.low}, ${ps.high}])`);
+        }
+      }
     }
   });
   return out;

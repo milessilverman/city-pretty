@@ -4,8 +4,8 @@ import { describe, expect, it } from "vitest";
 import { VALUE_STREAM_KEYS, makeQuantity, makeUseOption, sumValueStreams } from "../../../src/platform/schema/index.js";
 import {
   buildCashFlow, checkEligibility, compareDeliveryModels, contributionRange, debtService, dscr, equityMultiple, fundingStack,
-  irr, mirr, municipalFiscalEffect, npv, paybackPeriod, riskAdjusted, sensitivity, solveMaxPrivate, underwrite,
-  validateMechanismRecord, MECHANISM_TYPES,
+  irr, mirr, municipalFiscalEffect, npv, paybackPeriod, paybackPeriodDetail, riskAdjusted, sensitivity, solveMaxPrivate, underwrite,
+  validateMechanismRecord, MECHANISM_TYPES, PROJECT_USES, SPONSOR_TYPES, BASIS,
 } from "../../../src/platform/underwriting/index.js";
 
 // FIXTURE: not real data. Every number below is synthetic and chosen so the answer can be checked by hand.
@@ -161,7 +161,10 @@ describe("contribution: max private, min public, both-benefit range", () => {
     // private flows with that contribution: [-1000, 1100] -> IRR = 10% = hurdle
     expect(irr([-(res.maxPrivateContribution.value as number), 1100]).value).toBeCloseTo(0.1, 8);
     expect(res.minPublicContribution.value).toBeCloseTo(500, 6); // 1500 - 1000
-    expect(res.fundingGap).toBe(res.minPublicContribution);
+    // the funding gap is stated in PV at the public discount rate (cost all at t0, so PV = nominal = 500)
+    expect(res.fundingGap).toBe(res.minPublicContributionPv);
+    expect(res.basis.fundingGap).toBe(res.basis.recommendedPublicContribution);
+    expect(res.minPublicContributionPv.value).toBeCloseTo(res.minPublicContribution.value as number, 6);
   });
   it("multi-period pro-rata contribution solved by bisection; plug-in IRR equals hurdle", () => {
     // K = [600, 400], F = [0, 0, 605], h = 10%: PV(F) = 605/1.21 = 500; PV(K) = 600 + 400/1.1 = 963.636
@@ -313,7 +316,7 @@ describe("funding mechanisms", () => {
     jurisdiction: { level: "federal", state: null, countyFips: null, place: null },
     legalBasis: { citation: "FIXTURE 1", url: "https://example.invalid/law", publisher: "FIXTURE", primary: true, retrieved: asOf, textCurrency: "FIXTURE" },
     quotes: [{ topic: "eligibility", text: "FIXTURE quote", sourceUrl: "https://example.invalid/q" }, { topic: "limit", text: "FIXTURE share" }],
-    rules: [{ field: "project.use", op: "eq", value: "housing", quoteIndex: 0, alternativeGroup: null }],
+    rules: [{ field: "project.use", op: "eq", value: "residential_rental", quoteIndex: 0, alternativeGroup: null }],
     publicShare: { maxShareOfEligibleCost: null, quoteIndex: null }, matchRequirement: null, deadlineOrSunset: null,
     certainty: "by_right", capturedValueStream: null, status: "verified", reason: "", notRepresented: [], ...over,
   });
@@ -325,36 +328,36 @@ describe("funding mechanisms", () => {
     expect(MECHANISM_TYPES).toHaveLength(15);
   });
   it("eligible, ineligible, and unknown (an undefined field is never ineligible)", () => {
-    expect(checkEligibility(rec(), { use: "housing" }).result).toBe("eligible");
-    expect(checkEligibility(rec(), { use: "office" })).toMatchObject({ result: "ineligible" });
+    expect(checkEligibility(rec(), { use: "residential_rental" }).result).toBe("eligible");
+    expect(checkEligibility(rec(), { use: "commercial" })).toMatchObject({ result: "ineligible" });
     const u = checkEligibility(rec(), {});
     expect(u.result).toBe("unknown");
     expect(u.unknownFields).toEqual(["project.use"]);
-    expect(checkEligibility(rec({ status: "requires_investigation", reason: "FIXTURE not read" }), { use: "housing" }).result).toBe("unknown");
-    expect(checkEligibility(rec(), { use: "housing" }).quotesUsed[0]).toMatchObject({ index: 0, text: "FIXTURE quote" });
+    expect(checkEligibility(rec({ status: "requires_investigation", reason: "FIXTURE not read" }), { use: "residential_rental" }).result).toBe("unknown");
+    expect(checkEligibility(rec(), { use: "residential_rental" }).quotesUsed[0]).toMatchObject({ index: 0, text: "FIXTURE quote" });
   });
   it("alternativeGroup labels: AND within a label, OR across labels; open label gives unknown", () => {
     const rules = [
-      { field: "project.use", op: "eq", value: "rental", quoteIndex: 0, alternativeGroup: null },
+      { field: "project.use", op: "eq", value: "residential_rental", quoteIndex: 0, alternativeGroup: null },
       { field: "project.affordableUnitShare", op: "gte", value: 0.2, quoteIndex: 0, alternativeGroup: "a" },
       { field: "project.affordableIncomeLimitPctAmi", op: "lte", value: 50, quoteIndex: 0, alternativeGroup: "a" },
       { field: "project.affordableUnitShare", op: "gte", value: 0.4, quoteIndex: 0, alternativeGroup: "b" },
       { field: "project.affordableIncomeLimitPctAmi", op: "lte", value: 60, quoteIndex: 0, alternativeGroup: "b" },
     ];
     const R = rec({ rules });
-    expect(checkEligibility(R, { use: "rental", affordableUnitShare: 0.2, affordableIncomeLimitPctAmi: 50 }).result).toBe("eligible"); // label a
-    expect(checkEligibility(R, { use: "rental", affordableUnitShare: 0.4, affordableIncomeLimitPctAmi: 60 }).result).toBe("eligible"); // label b
+    expect(checkEligibility(R, { use: "residential_rental", affordableUnitShare: 0.2, affordableIncomeLimitPctAmi: 50 }).result).toBe("eligible"); // label a
+    expect(checkEligibility(R, { use: "residential_rental", affordableUnitShare: 0.4, affordableIncomeLimitPctAmi: 60 }).result).toBe("eligible"); // label b
     // 20% of units at 60% AMI: label a fails on income, label b fails on share -> ineligible (no single label holds in full)
-    expect(checkEligibility(R, { use: "rental", affordableUnitShare: 0.2, affordableIncomeLimitPctAmi: 60 }).result).toBe("ineligible");
+    expect(checkEligibility(R, { use: "residential_rental", affordableUnitShare: 0.2, affordableIncomeLimitPctAmi: 60 }).result).toBe("ineligible");
     // share 0.5 known, income limit unknown: neither label fails outright -> unknown
-    const u = checkEligibility(R, { use: "rental", affordableUnitShare: 0.5 });
+    const u = checkEligibility(R, { use: "residential_rental", affordableUnitShare: 0.5 });
     expect(u.result).toBe("unknown");
     expect(u.unknownFields).toEqual(["project.affordableIncomeLimitPctAmi"]);
     // null-group rule fails -> ineligible even with a label holding
-    expect(checkEligibility(R, { use: "office", affordableUnitShare: 0.4, affordableIncomeLimitPctAmi: 60 }).result).toBe("ineligible");
+    expect(checkEligibility(R, { use: "commercial", affordableUnitShare: 0.4, affordableIncomeLimitPctAmi: 60 }).result).toBe("ineligible");
   });
   it("empty rules give unknown with notRepresented, never eligible by default", () => {
-    const res = checkEligibility(rec({ rules: [], notRepresented: ["FIXTURE: activity list not encoded"] }), { use: "housing", state: "TX" });
+    const res = checkEligibility(rec({ rules: [], notRepresented: ["FIXTURE: activity list not encoded"] }), { use: "residential_rental", state: "TX" });
     expect(res.result).toBe("unknown");
     expect(res.notRepresented).toEqual(["FIXTURE: activity list not encoded"]);
   });
@@ -371,7 +374,7 @@ describe("funding mechanisms", () => {
     const competitive = rec({ id: "fx-comp", certainty: "competitive", publicShare: { maxShareOfEligibleCost: 0.8, quoteIndex: 1 },
       matchRequirement: { text: "FIXTURE 20% match", quoteIndex: 1 } });
     const byRight = rec({ id: "fx-right", certainty: "by_right", publicShare: { maxShareOfEligibleCost: 0.1, quoteIndex: 1 } });
-    const res = fundingStack({ gap, candidates: [competitive, byRight], project: { use: "housing", eligibleCostUsd: 1500 }, asOf });
+    const res = fundingStack({ gap, candidates: [competitive, byRight], project: { use: "residential_rental", eligibleCostUsd: 1500 }, asOf });
     expect(res.securedAmount.value).toBe(0);
     expect(res.potential.map((x: any) => x.id)).toEqual(["fx-right", "fx-comp"]);
     // by-right: 0.1 * 1500 = 150; competitive: min(0.8*1500 = 1200, 500 - 150 = 350) = 350
@@ -383,7 +386,7 @@ describe("funding mechanisms", () => {
     // 1200 of competitive money exists but the minimum public subsidy stays at the gap (500), never raised
     expect(res.minimumPublicSubsidy.value).toBe(500);
     expect(res.remainingGap.value).toBe(500); // nothing secured
-    const awarded = fundingStack({ gap, candidates: [byRight], project: { use: "housing", eligibleCostUsd: 1500 }, asOf,
+    const awarded = fundingStack({ gap, candidates: [byRight], project: { use: "residential_rental", eligibleCostUsd: 1500 }, asOf,
       awards: [{ mechanismId: "fx-right", amount: q(150), awardRecord: SRC }] });
     expect(awarded.securedAmount.value).toBe(150);
     expect(awarded.remainingGap.value).toBe(350);
@@ -450,15 +453,15 @@ describe("underwrite: orchestration and financial check", () => {
     const grant = { id: "fx-big", mechanismType: "federal_grant", name: "FIXTURE big grant",
       jurisdiction: { level: "federal", state: null, countyFips: null, place: null },
       legalBasis: { citation: "FIXTURE", url: "https://example.invalid/g", publisher: "FIXTURE", primary: true, retrieved: asOf, textCurrency: "FIXTURE" },
-      quotes: [{ topic: "eligibility", text: "FIXTURE" }], rules: [{ field: "project.use", op: "eq", value: "develop", quoteIndex: 0, alternativeGroup: null }],
+      quotes: [{ topic: "eligibility", text: "FIXTURE" }], rules: [{ field: "project.use", op: "eq", value: "mixed_use", quoteIndex: 0, alternativeGroup: null }],
       publicShare: { maxShareOfEligibleCost: 1, quoteIndex: 0 }, matchRequirement: null, deadlineOrSunset: null, certainty: "competitive",
       capturedValueStream: null, status: "verified", reason: "", notRepresented: [] };
     const without = underwrite(project());
-    const withGrant = underwrite(project({ funding: { candidates: [grant], descriptor: { use: "develop", eligibleCostUsd: 1_000_000 } } }));
+    const withGrant = underwrite(project({ funding: { candidates: [grant], descriptor: { use: "mixed_use", eligibleCostUsd: 1_000_000 } } }));
     expect(withGrant.contribution.recommendedPublicContribution.value).toBe(without.contribution.recommendedPublicContribution.value);
     const f: any = withGrant.funding;
-    expect(f.minimumPublicSubsidy.value).toBe(without.contribution.minPublicContribution.value);
-    expect(f.potential[0].amount.value).toBeCloseTo(without.contribution.minPublicContribution.value as number, 8); // capped at the gap, not 1,000,000
+    expect(f.minimumPublicSubsidy.value).toBe(without.contribution.fundingGap.value);
+    expect(f.potential[0].amount.value).toBeCloseTo(without.contribution.fundingGap.value as number, 8); // capped at the gap, not 1,000,000
     expect(f.securedAmount.value).toBe(0);
   });
   it("benchmark: 10,000 underwrite runs within 3 s", () => {
@@ -469,3 +472,218 @@ describe("underwrite: orchestration and financial check", () => {
     expect(ms).toBeLessThan(3000);
   });
 });
+
+// Regression tests for docs/audit/stage-gate-review.md (24 Nov 2026), using the reviewer's reproducing inputs.
+describe("stage-gate review regressions (underwriting)", () => {
+  const stream = (flows: number[]) => ({ flows: flows.map((x) => q(x)), capturedBy: "public", mechanism: "none_identified" });
+  const catalogue = () => JSON.parse(readFileSync(fileURLToPath(new URL("../../../src/platform/underwriting/data/funding_mechanisms.json", import.meta.url)), "utf8"));
+
+  it("#1 private flows below the hurdle at zero contribution: no_deal with the shortfall, financial check fails", () => {
+    // F = [0, -10], h = 8%: NPV of private operating flows = -10/1.08 = -9.259 <= 0, so max private = 0 and the
+    // private party would also need an operating subsidy of 9.259 (PV at the hurdle). Ceiling 1000/1.03 = 970.9 is irrelevant.
+    const spec = { costSchedule: [q(100), q(0)], privateNetFlows: [q(0), q(-10)], hurdleRate: r(0.08), publicDiscountRate: r(0.03),
+      publicStreams: { capturableLandValue: stream([0, 1000]) }, countable: { streams: ["capturableLandValue"] } };
+    const res = contributionRange(spec as any);
+    expect(res.maxPrivateContribution.value).toBe(0);
+    for (const c of ["point", "low", "high"] as const) {
+      expect(res.byCase[c].deal).toBe("no_deal");
+      expect(res.byCase[c].reason).toBe("private_return_below_hurdle_at_any_contribution");
+    }
+    expect(res.range).toMatchObject({ deal: "no_deal", reason: "private_return_below_hurdle_at_any_contribution" });
+    expect(res.range.shortfall.value).toBeCloseTo(10 / 1.08, 10);
+    expect(res.range.shortfall.unit).toBe("USD");
+    expect(res.recommendedPublicContribution.value).toBeNull();
+    // underwrite with revenue [0,0], O&M [0,10], capex [100,0] gives the same private flows
+    const uw = underwrite({ id: "fx", use: "develop", asOf, periods: 2, capexSchedule: [q(100), q(0)], omSchedule: [q(0), q(10)],
+      revenueSchedule: [q(0), q(0)], financing: null, hurdleRate: r(0.08), publicDiscountRate: r(0.03),
+      publicStreams: { capturableLandValue: stream([0, 1000]) }, countable: { streams: ["capturableLandValue"] }, designatedCase: "point" });
+    expect(uw.financialCheck.result).toBe("fail");
+    expect(uw.financialCheck.reasonCode).toBe("private_return_below_hurdle_at_any_contribution");
+    expect(uw.financialCheck.shortfall.value).toBeCloseTo(10 / 1.08, 10);
+  });
+
+  it("#2 borrowing-type flows: NPV at the hurdle decides, IRR is not used", () => {
+    // unlevered [200-50, -165] = [150, -165]; IRR 10% > 5% hurdle, but NPV at 5% = 150 - 165/1.05 = -7.143 < 0.
+    // No public inputs, so the both-benefit range is unknown: the result is unknown, never pass.
+    const uw = underwrite({ id: "fx", use: "develop", asOf, periods: 2, capexSchedule: [q(50), q(0)], omSchedule: [q(0), q(165)],
+      revenueSchedule: [q(200), q(0)], financing: null, hurdleRate: r(0.05), designatedCase: "point" });
+    expect(uw.financialCheck.result).not.toBe("pass");
+    expect(uw.financialCheck.result).toBe("unknown");
+    expect(uw.financialCheck.npvAtHurdle).toBeCloseTo(150 - 165 / 1.05, 10);
+    expect(uw.financialCheck.irr).toBeCloseTo(0.1, 8);
+    expect(uw.financialCheck.conventionalFlows).toBe(false);
+    expect(uw.financialCheck.reason).toMatch(/non-conventional.*NPV at hurdle.*only test; IRR not used/);
+    expect(uw.financialCheck.missing).toContain("publicDiscountRate");
+  });
+
+  it("#3 payback counts from the first outlay; null with a reason otherwise", () => {
+    // [0,-100,60,60]: cumulative 0, -100, -40, +20 -> 2 + 40/60 = 2.667
+    expect(paybackPeriod([0, -100, 60, 60])).toBeCloseTo(2 + 40 / 60, 12);
+    // [10,-100,60,60]: cumulative 10, -90, -30, +30 -> 2 + 30/60 = 2.5
+    expect(paybackPeriod([10, -100, 60, 60])).toBeCloseTo(2.5, 12);
+    expect(paybackPeriodDetail([10, 20])).toEqual({ value: null, reason: "no_initial_outlay" });
+    expect(paybackPeriodDetail([-100, 10, 10])).toEqual({ value: null, reason: "cumulative_flow_never_recovers" });
+  });
+
+  it("#4 recommendation, gap and range on one PV basis; nominal reported by period and labelled", () => {
+    // Reviewer input: cost 1000 at t4, private flows 0 -> NPV of private flows = 0 <= 0 -> no_deal (fix #1).
+    // Nominal min public 1000; PV at 5% = 1000/1.05^4 = 822.70.
+    const reviewer = contributionRange({ costSchedule: [0, 0, 0, 0, 1000].map((x) => q(x)), privateNetFlows: [0, 0, 0, 0, 0].map((x) => q(x)),
+      hurdleRate: r(0.08), publicDiscountRate: r(0.05), publicStreams: { capturableLandValue: stream([900, 0, 0, 0, 0]) },
+      countable: { streams: ["capturableLandValue"] } } as any);
+    expect(reviewer.range.deal).toBe("no_deal");
+    expect(reviewer.minPublicContribution.value).toBeCloseTo(1000, 6);
+    expect(reviewer.minPublicContributionPv.value).toBeCloseTo(1000 / 1.05 ** 4, 6);
+    // Variant with private flow 100 at t4: share s = 100/1000 = 0.1; min public nominal 900 at t4 (> ceiling 880),
+    // PV 900/1.05^4 = 740.43 <= ceiling 880 -> both benefit, recommendation 740.43 PV.
+    const res = contributionRange({ costSchedule: [0, 0, 0, 0, 1000].map((x) => q(x)), privateNetFlows: [0, 0, 0, 0, 100].map((x) => q(x)),
+      hurdleRate: r(0.08), publicDiscountRate: r(0.05), publicStreams: { capturableLandValue: stream([880, 0, 0, 0, 0]) },
+      countable: { streams: ["capturableLandValue"] } } as any);
+    expect(res.range.deal).toBe("both_benefit");
+    expect(res.recommendedPublicContribution.value).toBeCloseTo(900 / 1.05 ** 4, 4);
+    expect(res.fundingGap).toBe(res.recommendedPublicContribution);
+    expect(res.range.from).toBe(res.recommendedPublicContribution);
+    expect(res.minPublicContribution.value).toBeCloseTo(900, 4);
+    expect(res.minPublicContributionNominalByPeriod.map((x: any) => x.value)).toEqual([0, 0, 0, 0, 900].map((x) => expect.closeTo(x, 4)));
+    expect(res.basis.recommendedPublicContribution).toBe(BASIS.pv);
+    expect(res.basis.publicCeiling).toBe(BASIS.pv);
+    expect(res.basis.range).toBe(BASIS.pv);
+    expect(res.basis.minPublicContribution).toBe(BASIS.nominal);
+    expect(res.recommendedPublicContribution.label).toMatch(/present value at the public discount rate/);
+    expect(res.minPublicContribution.label).toMatch(/nominal/);
+  });
+
+  it("#4 invariant: whenever deal is both_benefit, 0 <= recommended (PV) <= ceiling (PV)", () => {
+    let seen = 0;
+    for (const t of [0, 1, 3]) for (const F of [50, 300, 800]) for (const C of [200, 600, 1000]) for (const pr of [0.01, 0.05, 0.1]) {
+      const cost = [0, 0, 0, 0].map((_, i) => q(i === t ? 1000 : 0));
+      const flows = [0, 0, 0, 0].map((_, i) => q(i === 3 ? F : 0));
+      const res = contributionRange({ costSchedule: cost, privateNetFlows: flows, hurdleRate: r(0.08), publicDiscountRate: r(pr),
+        publicStreams: { capturableLandValue: stream([C, 0, 0, 0]) }, countable: { streams: ["capturableLandValue"] } } as any);
+      if (res.range.deal !== "both_benefit") continue;
+      seen++;
+      expect(res.recommendedPublicContribution.value as number).toBeGreaterThanOrEqual(0);
+      expect(res.recommendedPublicContribution.value as number).toBeLessThanOrEqual(res.publicCeiling.value as number);
+      for (const c of ["point", "low", "high"] as const) expect(res.byCase[c].fromPv).toBeLessThanOrEqual(res.byCase[c].toPv);
+    }
+    expect(seen).toBeGreaterThan(0);
+  });
+
+  it("#5 funding eligibility compares asOf with machine-readable dates; sunset text alone gives at best unknown", () => {
+    const data = catalogue();
+    const res = fundingStack({ gap: q(1000, 800, 1200), candidates: data.records,
+      project: { sponsorType: "political_subdivision_of_a_state", eligibleCostUsd: 1000 }, asOf: "2027-06-01" });
+    // SS4A authorizes "fiscal years 2022 through 2026": no exact date, so unknown, not eligible potential money
+    expect(res.potential.map((x: any) => x.id)).not.toContain("us_ss4a_24112");
+    const ss4a = res.unknownEligibility.find((x: any) => x.id === "us_ss4a_24112") as any;
+    expect(ss4a.reason).toBe("sunset_or_deadline_not_machine_readable");
+    expect(ss4a.deadlineOrSunsetText).toMatch(/fiscal years 2022 through 2026/);
+    // nothing potential is subtracted: remaining stays at the gap [800, 1000, 1200]
+    expect(res.remainingIfAllPotentialAwarded).toMatchObject({ point: 1000, low: 800, high: 1200 });
+    // OZ: the fetched 2024-edition text was amended by a later public law, so the record is marked
+    // requires_investigation and eligibility is unknown on any date; it is never decided from the older text.
+    const oz = data.records.find((x: any) => x.id === "us_oz_1400z2");
+    expect(oz.status).toBe("requires_investigation");
+    expect(oz.availableUntil).toBeUndefined();
+    expect(checkEligibility(oz, { inOpportunityZone: true }, "2026-06-01").result).toBe("unknown");
+    expect(checkEligibility(oz, { inOpportunityZone: true }, "2027-06-01").result).toBe("unknown");
+    // FIXTURE: not real data. The availability window itself, on a verified copy with a machine-readable date.
+    const win = { ...oz, status: "verified", reason: undefined, availableUntil: "2026-12-31", availabilityQuoteIndex: 3 };
+    expect(checkEligibility(win, { inOpportunityZone: true }, "2027-06-01")).toMatchObject({ result: "ineligible", reason: "outside_availability_window" });
+    expect(checkEligibility(win, { inOpportunityZone: true }, "2026-12-31").result).toBe("eligible");
+    expect(checkEligibility(win, { inOpportunityZone: true }).result).toBe("unknown"); // no asOf
+  });
+
+  it("#5 validator: optional availableFrom/availableUntil must be dates with a quote index", () => {
+    const base = data0();
+    expect(validateMechanismRecord({ ...base, availableUntil: "2026-12-31", availabilityQuoteIndex: 0 }).valid).toBe(true);
+    expect(validateMechanismRecord({ ...base, availableUntil: "31 Dec 2026", availabilityQuoteIndex: 0 }).valid).toBe(false);
+    expect(validateMechanismRecord({ ...base, availableUntil: "2026-12-31" }).valid).toBe(false);
+    expect(validateMechanismRecord({ ...base, availableFrom: "2027-01-01", availableUntil: "2026-12-31", availabilityQuoteIndex: 0 }).valid).toBe(false);
+    const w = { ...base, availableFrom: "2001-01-01", availableUntil: "2001-12-31", availabilityQuoteIndex: 0 };
+    expect(checkEligibility(w, { use: "residential_rental" }, "2000-06-01").reason).toBe("outside_availability_window");
+    expect(checkEligibility(w, { use: "residential_rental" }, "2001-06-01").result).toBe("eligible");
+    const sunset = { ...base, deadlineOrSunset: { text: "FIXTURE: ends when funds run out", quoteIndex: 0 } };
+    expect(checkEligibility(sunset, { use: "residential_rental" }, "2001-06-01")).toMatchObject({ result: "unknown",
+      reason: "sunset_or_deadline_not_machine_readable", deadlineOrSunsetText: "FIXTURE: ends when funds run out" });
+  });
+
+  it("#10 cases that disagree give case_dependent, never a single both_benefit range", () => {
+    // Reviewer input (private flows 0): NPV of private flows = 0 <= 0 -> no_deal in every case (fix #1), so consistent.
+    const reviewer = contributionRange({ costSchedule: [q(100, 90, 130)], privateNetFlows: [q(0)], hurdleRate: r(0.08, 0.06, 0.1),
+      publicDiscountRate: r(0.03, 0.02, 0.04), publicStreams: { capturableLandValue: { flows: [q(110, 95, 120)], capturedBy: "public", mechanism: "none_identified" } },
+      countable: { streams: ["capturableLandValue"] } } as any);
+    expect(reviewer.range.deal).toBe("no_deal");
+    // With private flow [0, 11 (10-12)]: point max private 11/1.08 = 10.19, min public 89.81 <= 110 (both benefit);
+    // low 10/1.10 = 9.09, min public 130 - 9.09 = 120.91 > 95 (no deal, short 25.91); high 12/1.06 = 11.32, 78.68 <= 120.
+    const res = contributionRange({ costSchedule: [q(100, 90, 130), q(0)], privateNetFlows: [q(0), q(11, 10, 12)], hurdleRate: r(0.08, 0.06, 0.1),
+      publicDiscountRate: r(0.03, 0.02, 0.04), publicStreams: { capturableLandValue: { flows: [q(110, 95, 120), q(0)], capturedBy: "public", mechanism: "none_identified" } },
+      countable: { streams: ["capturableLandValue"] } } as any);
+    expect(res.range.deal).toBe("case_dependent");
+    expect(res.range.pointCaseDeal).toBe("both_benefit");
+    expect(res.range.byCase.low.shortByPv).toBeCloseTo(130 - 10 / 1.1 - 95, 6);
+    expect(res.range.byCase.high.fromPv).toBeCloseTo(90 - 12 / 1.06, 6);
+  });
+
+  it("#12 shared-risk publicShare must be a ratio within 0..1", () => {
+    const sch = (xs: number[]) => xs.map((x) => q(x));
+    const m = (ps: any) => ({ capex: sch([100, 0]), om: sch([0, 1]), renewal: sch([0, 0]), financing: null, transactionCost: q(0),
+      riskRegister: [{ risk: "demand", allocatedTo: "shared", expectedCost: q(10), publicShare: ps }] });
+    // 50 percent previously threw; 1.5 ratio gave public risk 15 and transferred -5
+    const pct = compareDeliveryModels({ periods: 2, publicDiscountRate: r(0.05), models: { p3: m(q(50, 50, 50, "percent")), conventional: m(r(0.5)) } as any });
+    expect(pct.models.p3.status).toBe("requires_investigation");
+    expect(pct.models.p3.missing.join(" ")).toMatch(/publicShare \(must be unit 'ratio'/);
+    const over = compareDeliveryModels({ periods: 2, publicDiscountRate: r(0.05), models: { p3: m(r(1.5)), conventional: m(r(0.5)) } as any });
+    expect(over.models.p3.status).toBe("requires_investigation");
+    expect(over.valueForMoney.value).toBeNull();
+    const ok = compareDeliveryModels({ periods: 2, publicDiscountRate: r(0.05), models: { p3: m(r(0.5)), conventional: m(r(0.5)) } as any });
+    expect(ok.models.p3.publicRetainedRisk.value).toBeCloseTo(5, 10); // 0.5 * 10
+  });
+
+  it("#13 remaining gap keeps the award range: [gap.low - award.high, gap.high - award.low]", () => {
+    // gap 1000 [800,1200], award 300 [100,500]: [800-500, 1000-300, 1200-100] = [300, 700, 1100]
+    const res = fundingStack({ gap: q(1000, 800, 1200), candidates: [], project: {}, asOf,
+      awards: [{ mechanismId: "fx", amount: q(300, 100, 500), awardRecord: SRC }] });
+    expect([res.remainingGap.low, res.remainingGap.value, res.remainingGap.high]).toEqual([300, 700, 1100]);
+  });
+
+  it("#14 one vocabulary for project.use and sponsorType; RTC 214(g) uses residential_rental", () => {
+    const data = catalogue();
+    const rtc = data.records.find((x: any) => x.id === "ca_rtc_214g_welfare");
+    const res = checkEligibility(rtc, { state: "CA", use: "residential_rental", sponsorType: "charitable_or_nonprofit_organization" }, "2026-11-24");
+    expect(res.result).toBe("eligible");
+    for (const rec of data.records) for (const ru of rec.rules) {
+      if (ru.field === "project.use") expect(PROJECT_USES).toContain(ru.value);
+      if (ru.field === "project.sponsorType") for (const v of ru.value) expect(SPONSOR_TYPES).toContain(v);
+    }
+    expect(validateMechanismRecord({ ...data0(), rules: [{ field: "project.use", op: "eq", value: "rental_housing", quoteIndex: 0, alternativeGroup: null }] }).valid).toBe(false);
+    // a project value outside the vocabulary is unknown, never a failed rule
+    expect(checkEligibility(data0(), { use: "rental_housing" }).result).toBe("unknown");
+  });
+
+  it("#15 a missing scenario discount rate is requires_investigation, never the hurdle rate", () => {
+    const uw = underwrite({ id: "fx", use: "develop", asOf, periods: 2, capexSchedule: [q(100), q(0)], omSchedule: [q(0), q(0)],
+      revenueSchedule: [q(0), q(120)], financing: null, hurdleRate: r(0.08), scenarios: [{ name: "a", probability: r(1), flows: [-100, 120] }] });
+    expect(uw.risk.status).toBe("requires_investigation");
+    expect(uw.risk.missing).toContain("scenarioDiscountRate");
+    expect(uw.risk.expectedNpv.value).toBeNull();
+  });
+
+  it("underwrite without periods or schedules returns unknown with the missing names instead of throwing", () => {
+    const uw = underwrite({ id: "fx", use: "develop", asOf });
+    expect(uw.financialCheck.result).toBe("unknown");
+    expect(uw.financialCheck.missing).toEqual(["periods", "capexSchedule", "revenueSchedule", "omSchedule", "hurdleRate"]);
+  });
+});
+
+function data0(): any {
+  return {
+    id: "fx0", mechanismType: "federal_grant", name: "FIXTURE grant",
+    jurisdiction: { level: "federal", state: null, countyFips: null, place: null },
+    legalBasis: { citation: "FIXTURE 1", url: "https://example.invalid/law", publisher: "FIXTURE", primary: true, retrieved: "2000-01-01", textCurrency: "FIXTURE" },
+    quotes: [{ topic: "eligibility", text: "FIXTURE quote" }],
+    rules: [{ field: "project.use", op: "eq", value: "residential_rental", quoteIndex: 0, alternativeGroup: null }],
+    publicShare: { maxShareOfEligibleCost: null, quoteIndex: null }, matchRequirement: null, deadlineOrSunset: null,
+    certainty: "by_right", capturedValueStream: null, status: "verified", reason: "", notRepresented: [],
+  };
+}

@@ -6,13 +6,36 @@ import { validateImpactModel } from '../impact/models.js';
 
 const WORDS = /** @type {Record<string, number>} */ ({ one: 1 });
 
-/** @param {string} band @returns {{ miles: number }|null} */
+/** @param {string} t @returns {number|null} a number written as digits, a fraction "a/b" or the word one */
+function numberOf(t) {
+  const f = /^(\d+)\s*\/\s*(\d+)$/.exec(t.trim());
+  if (f) return Number(f[2]) === 0 ? null : Number(f[1]) / Number(f[2]);
+  if (/^\d+(?:\.\d+)?$/.test(t.trim())) return Number(t);
+  const w = WORDS[t.trim().toLowerCase()];
+  return w === undefined ? null : w;
+}
+const NUM = String.raw`(\d+\s*\/\s*\d+|\d+(?:\.\d+)?|one)`;
+
+/**
+ * Reach of a distance band written in miles.
+ *  - "within N mile" (N digits, fraction or "one"), no other distance wording: a disc { miles }.
+ *  - "between X and Y mile(s)" or "X to Y mile(s)", both numbers present: an annulus { miles: Y, innerM, outerM } (innerM, outerM in metres).
+ *  - anything else (gradients, "beyond", "to" without two numbers, a second distance in a "within" band): null.
+ * @param {string} band @returns {{ miles: number, innerM?: number, outerM?: number }|null}
+ */
 export function parseBandMiles(band) {
-  let m = /within\s+(\d+)\s*\/\s*(\d+)\s*mile/i.exec(band);
-  if (m) return { miles: Number(m[1]) / Number(m[2]) };
-  m = /within\s+(?:a\s+)?(\d+(?:\.\d+)?|[a-z]+)[- ]mile/i.exec(band);
-  if (m) { const v = /^\d/.test(m[1]) ? Number(m[1]) : WORDS[m[1].toLowerCase()]; if (Number.isFinite(v)) return { miles: v }; }
-  return null;
+  if (typeof band !== 'string') return null;
+  const ann = new RegExp(String.raw`(?:between\s+${NUM}\s*(?:mile|miles|mi)?\s*and\s+${NUM}\s*[- ]?(?:mile|miles|mi)\b|\b${NUM}\s*(?:mile|miles|mi)?\s+to\s+${NUM}\s*[- ]?(?:mile|miles|mi)\b)`, 'i').exec(band);
+  if (ann) {
+    const x = numberOf(ann[1] ?? ann[3]), y = numberOf(ann[2] ?? ann[4]);
+    if (x === null || y === null || !(x >= 0) || !(y > x)) return null;
+    return { miles: y, innerM: x * 1609.344, outerM: y * 1609.344 };
+  }
+  if (/\b(between|beyond|to|and|from|outside|over|more than)\b/i.test(band)) return null; // an annulus or compound band we cannot read unambiguously
+  const all = [...band.matchAll(new RegExp(String.raw`within\s+(?:a\s+)?${NUM}[- ]?mile`, 'gi'))];
+  if (all.length !== 1) return null;
+  const v = numberOf(all[0][1]);
+  return v === null ? null : { miles: v };
 }
 
 /** @param {string} t */
@@ -46,8 +69,12 @@ export function modelsFromTransitValueEffects(json) {
       const model = /** @type {import('../impact/models.js').ImpactModel} */ ({
         id: `model.rail_station.${row.id}`, categoryIds: ['rail_station'], target: targetFor(row.property_type), sign: 1,
         variant: row.mode,
+        // 'all rail station types' is the general model (specificity 0, no appliesTo); a named mode is more specific and applies only to that mode.
+        specificity: /^all\b/i.test(row.mode) ? 0 : 1,
+        ...(/^all\b/i.test(row.mode) ? {} : { appliesTo: { mode: String(row.mode) } }),
         decay: { form: 'bands', parameters: {} },
         reach: makeQuantity({ ...common, value: band.miles, low: band.miles, high: band.miles, unit: 'mile', method: `parsed from distance_band '${row.distance_band}'` }),
+        ...(band.innerM !== undefined ? { innerRadius: makeQuantity({ ...common, value: band.innerM, low: band.innerM, high: band.innerM, unit: 'm', method: `inner radius parsed from distance_band '${row.distance_band}'` }) } : {}),
         magnitude: makeQuantity({ ...common, value: row.effect_pct, low: row.range_low_pct, high: row.range_high_pct, unit: 'percent', method: String(row.effect_definition || '') }),
         negativeEffects: [],
         distanceBasis: /network/i.test(row.distance_band) ? 'network' : 'unspecified',

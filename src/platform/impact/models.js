@@ -9,11 +9,12 @@ import { isQuantity } from '../schema/quantity.js';
  * @property {string} target   e.g. 'residential_property_value', 'noise', 'traffic_volume', 'safety'
  * @property {1|-1} sign
  * @property {{ form: 'bands'|'linear'|'exponential', parameters: Record<string, Quantity>, bands?: { outer: Quantity, weight: Quantity }[] }} decay
- * @property {Quantity} reach        length (unit m, km or mile)
+ * @property {Quantity} reach        length (unit m, km or mile); the OUTER radius
+ * @property {Quantity} [innerRadius] length; when present the effect is an annulus (weight 0 closer than this)
  * @property {Quantity} magnitude    low/high carry the study range
  * @property {'network'|'straight_line'|'unspecified'} distanceBasis  as used by the cited study
  * @property {{ title: string, url: string, retrieved: string, quote?: string }} source
- * @typedef {ImpactLayerModel & { categoryIds: string[], transferability: string, negativeEffects: ImpactLayerModel[], variant?: string,
+ * @typedef {ImpactLayerModel & { categoryIds: string[], transferability: string, negativeEffects: ImpactLayerModel[], variant?: string, specificity?: number, appliesTo?: Record<string, string>, alternativeTo?: string[],
  *   sharedCategoryJustification?: string, verification?: any, caveat?: string, studyArea?: string }} ImpactModel
  */
 
@@ -52,6 +53,12 @@ function checkLayer(m, path, errs) {
   if (!s || !nonEmpty(s.title) || !nonEmpty(s.url) || !nonEmpty(s.retrieved)) errs.push(`${path}.source (title, url, retrieved) required`);
   if (sourcedQ(m.magnitude, `${path}.magnitude`, errs) && (m.magnitude.low === null || m.magnitude.high === null)) errs.push(`${path}.magnitude needs low/high`);
   if (sourcedQ(m.reach, `${path}.reach`, errs) && !(m.reach.unit in METRES_PER)) errs.push(`${path}.reach unit must be m, km or mile`);
+  if (m.innerRadius !== undefined) {
+    if (sourcedQ(m.innerRadius, `${path}.innerRadius`, errs)) {
+      if (!(m.innerRadius.unit in METRES_PER)) errs.push(`${path}.innerRadius must be a length`);
+      else if (isQuantity(m.reach) && m.reach.value !== null && m.reach.unit in METRES_PER && !(toMetres(m.innerRadius) >= 0 && toMetres(m.innerRadius) < toMetres(m.reach))) errs.push(`${path}.innerRadius must be >= 0 and below reach`);
+    }
+  }
   const d = m.decay;
   if (!d || !DECAY_FORMS.includes(d.form)) { errs.push(`${path}.decay.form must be one of ${DECAY_FORMS.join('|')}`); return; }
   const params = d.parameters && typeof d.parameters === 'object' ? d.parameters : {};
@@ -87,6 +94,12 @@ export function validateImpactModel(model) {
   return { valid: errs.length === 0, errors: errs };
 }
 
+/** True when two models name different values for the same attribute, so no entity can match both. @param {ImpactModel} a @param {ImpactModel} b */
+function scopesConflict(a, b) {
+  const x = a.appliesTo || {}, y = b.appliesTo || {};
+  return Object.keys(x).some((k) => k in y && x[k] !== y[k]);
+}
+
 /**
  * Registry of models. A category gets a model only if a model lists it explicitly; lookups never fall back.
  * Several models may serve one category only if they differ in target or variant (for example transit mode).
@@ -114,8 +127,18 @@ export function makeModelRegistry(opts = {}) {
     }
     for (const c of model.categoryIds) {
       for (const other of byCategory.get(c) || []) {
-        if (other.target === model.target && (other.variant || '') === (model.variant || '')) {
+        if (other.target !== model.target) continue;
+        if ((other.variant || '') === (model.variant || '')) {
           throw new Error(`registry refused model '${model.id}': category '${c}' already has model '${other.id}' for target '${model.target}' and the same variant`);
+        }
+        // Same category and target, different variant: the scopes may overlap (for example 'light rail' inside 'all rail station types').
+        // They must be declared mutually exclusive alternatives, so one improvement can never be valued under both.
+        const linked = (model.alternativeTo || []).includes(other.id) || (other.alternativeTo || []).includes(model.id);
+        if (linked) continue;
+        const ordered = nonEmpty(model.variant) && nonEmpty(other.variant) && Number.isFinite(model.specificity) && Number.isFinite(other.specificity) &&
+          (model.specificity !== other.specificity || scopesConflict(model, other));
+        if (!ordered) {
+          throw new Error(`registry refused model '${model.id}': category '${c}' target '${model.target}' overlaps model '${other.id}'; give both a variant and distinct specificity (or disjoint appliesTo), or list each other in alternativeTo`);
         }
       }
     }
@@ -135,6 +158,22 @@ export function makeModelRegistry(opts = {}) {
     forCategory(categoryId, filter = {}) {
       const c = (byCategory.get(categoryId) || []).filter((m) => (!filter.target || m.target === filter.target) && (filter.variant === undefined || m.variant === filter.variant));
       return c.length === 1 ? c[0] : null;
+    },
+    /**
+     * Pick exactly ONE model for (category, target, attributes): among the models whose appliesTo is satisfied by the attributes
+     * (a model without appliesTo is the general one), the one with the highest specificity. Never falls back to a default.
+     * Returns model null with reason 'no_match' or 'ambiguous' (candidates lists the tied ids).
+     * @param {string} categoryId @param {string} target @param {Record<string, string>} [attributes]
+     * @returns {{ model: ImpactModel|null, reason: string|null, candidates: string[] }}
+     */
+    selectModel(categoryId, target, attributes = {}) {
+      const all = (byCategory.get(categoryId) || []).filter((m) => m.target === target);
+      const ok = all.filter((m) => Object.entries(m.appliesTo || {}).every(([k, v]) => attributes[k] === v));
+      if (ok.length === 0) return { model: null, reason: 'no_match', candidates: all.map((m) => m.id) };
+      const top = Math.max(...ok.map((m) => (Number.isFinite(m.specificity) ? /** @type {number} */ (m.specificity) : -Infinity)));
+      const best = ok.filter((m) => (Number.isFinite(m.specificity) ? m.specificity : -Infinity) === top);
+      if (best.length !== 1) return { model: null, reason: 'ambiguous', candidates: best.map((m) => m.id) };
+      return { model: best[0], reason: null, candidates: ok.map((m) => m.id) };
     },
     list: () => [...byId.values()],
   };

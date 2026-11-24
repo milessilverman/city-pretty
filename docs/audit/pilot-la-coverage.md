@@ -34,7 +34,7 @@ Run: exhaustive, problem_first, asset_first. Merged opportunities 13192; duplica
 | combination | 0 | not run: no adjacency data and no combination bound supplied |
 
 ## Top 15 missing inputs (opportunities naming each)
-ab2011_site_criteria_met 13192; adjacent_parcels 13192; capexSchedule 13192; check:engineering 13192; criterion:min_coordination_partners 13192; criterion:min_public_space_area 13192; hurdleRate 13192; omSchedule 13192; parcel_area 13192; periods 13192; revenueSchedule 13192; zoning_class 13192; calfire_or_state_vhfhsz 7760; city_population 6984; distance_to_transit_mi 6984.
+adjacent_parcels 13192; capexSchedule 13192; check:engineering 13192; criterion:min_coordination_partners 13192; criterion:min_public_space_area 13192; hurdleRate 13192; omSchedule 13192; parcel_area 13192; periods 13192; revenueSchedule 13192; ab2011_site_criteria_met 6984; zoning_class 6984; zoning_district 6851; calfire_or_state_vhfhsz 6208; city_population 5432.
 
 ## Regulatory (California module)
 Modules: California (state); Los Angeles (city), from bundle zone_rules. Parcel-topic pairs evaluated 9312; locations with a stated city 0.
@@ -44,7 +44,7 @@ Conclusions by finding: requires_investigation 17848.
 Conclusions by statute record id: (no registered rule: placeholder conclusion) 3880; ca_ab2011_affordable 1552; ca_ab2097 776; ca_adu_66323 776; ca_sb79_tier1 2328; ca_sb79_tier2 2328; ca_sb79_tier2_light_rail_half 2328; ca_sb79_tier2_light_rail_quarter 2328; ca_sb9_lot_split 1552.
 
 ## Financial and engineering checks
-Financial check: unknown. Reason: underwrite() could not run: buildCashFlow: periods must be an integer >= 2. Missing: periods, capexSchedule, revenueSchedule, omSchedule, hurdleRate. Engineering: not supplied (unknown for every site).
+Financial check: unknown. Reason: underwriting inputs missing: periods, capexSchedule, revenueSchedule, omSchedule, hurdleRate. Missing: periods, capexSchedule, revenueSchedule, omSchedule, hurdleRate. Engineering: not supplied (unknown for every site).
 
 ## Impact models
 Registered 6; skipped 12. Categories with a model: rail_station; categories lacking one: 36. Impact areas computed: 0. no opportunity exists in a category with a registered model (rail_station); the sites file holds no rail-station opportunities, so no impact area was computed.

@@ -49,3 +49,13 @@ Independent review. Every row was reproduced with throwaway scripts that import 
 - When the caller writes any non-empty `countable.basis`, the countable public streams are summed. The engine does not check overlap, for example land value capture with municipal tax increment.
 - The pilot uses the Debrezion meta-analysis range of study estimates (for example -61.9% to +145.2%) as the low/high of the magnitude, and applies a uniform weight out to 1/4 mile.
 - Value for money is subQ(conventional, P3) by independent interval arithmetic, although both share the same public discount rate. Risk-register costs are taken as period-0 present values without discounting.
+
+## Resolution (24 Nov 2026, same day)
+
+Findings 1 to 17 were fixed in `src/platform/underwriting`, `regulatory` and `impact`, each with a regression test
+that uses the reproducing input above (`tests/unit/platform/underwriting.test.ts`, `regulatory.test.ts`,
+`impact.test.ts`). Two are fixed only in part and stay open in `docs/STATE.md`: the AB 2011 repeal date is prose
+in the statute record, so the rule is still applied after it with high uncertainty; and four funding records have
+sunset text with no exact date, so their eligibility is "unknown". The opportunity-zone record is marked
+`requires_investigation` because its fetched text was amended by a later law. Stage 5 (`portfolio/`) was not in
+this review's scope.

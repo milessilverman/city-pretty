@@ -10,14 +10,15 @@ import { irr, npv } from './metrics.js';
 const PROB_TOL = 1e-6;
 
 /**
- * @param {{ scenarios: { name: string, probability: Quantity, flows: number[] }[], discountRate: Quantity, unit?: string }} spec
+ * @param {{ scenarios: { name: string, probability: Quantity, flows: number[] }[], discountRate: Quantity, unit?: string,
+ *   discountRateName?: string }} spec discountRateName: the name reported in `missing` when the rate is absent (no default rate).
  */
 export function riskAdjusted(spec) {
   const unit = spec.unit || 'USD';
   const scenarios = Array.isArray(spec.scenarios) ? spec.scenarios : [];
   /** @type {string[]} */ const missing = [];
   if (scenarios.length === 0) missing.push('scenarios');
-  if (!known(spec.discountRate)) missing.push('discountRate');
+  if (!known(spec.discountRate)) missing.push(spec.discountRateName || 'discountRate');
   scenarios.forEach((s, i) => {
     const p = s && s.probability;
     if (!isQuantity(p) || p.value === null) missing.push(`scenarios[${i}].probability (with provenance)`);

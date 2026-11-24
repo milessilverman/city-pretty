@@ -172,10 +172,6 @@
   },
   "topMissingInputs": [
    {
-    "name": "ab2011_site_criteria_met",
-    "count": 13192
-   },
-   {
     "name": "adjacent_parcels",
     "count": 13192
    },
@@ -216,20 +212,24 @@
     "count": 13192
    },
    {
+    "name": "ab2011_site_criteria_met",
+    "count": 6984
+   },
+   {
     "name": "zoning_class",
-    "count": 13192
+    "count": 6984
+   },
+   {
+    "name": "zoning_district",
+    "count": 6851
    },
    {
     "name": "calfire_or_state_vhfhsz",
-    "count": 7760
+    "count": 6208
    },
    {
     "name": "city_population",
-    "count": 6984
-   },
-   {
-    "name": "distance_to_transit_mi",
-    "count": 6984
+    "count": 5432
    }
   ],
   "regulatory": {
@@ -270,7 +270,7 @@
   },
   "financial": {
    "checkResult": "unknown",
-   "reason": "underwrite() could not run: buildCashFlow: periods must be an integer >= 2",
+   "reason": "underwriting inputs missing: periods, capexSchedule, revenueSchedule, omSchedule, hurdleRate",
    "missing": [
     "periods",
     "capexSchedule",
@@ -410,7 +410,6 @@
       "historic_district_hpoz",
       "fema_100yr_floodway",
       "prime_farmland",
-      "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
       "jurisdiction_module:CA/06037:permitting"
      ]
     },
@@ -444,7 +443,6 @@
     "historic_district_hpoz",
     "fema_100yr_floodway",
     "prime_farmland",
-    "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
     "jurisdiction_module:CA/06037:permitting",
     "parcel_area",
     "assessed_improvement_value",
@@ -489,12 +487,7 @@
       "calfire_or_state_vhfhsz",
       "rent_controlled_housing_site",
       "mobilehome_or_rv_park_site",
-      "city_population",
-      "single_family_zone",
-      "historic_district_hpoz",
-      "fema_100yr_floodway",
-      "prime_farmland",
-      "density: record has no verified effective_date; figures attached are not to be shown as a legal standard"
+      "city_population"
      ]
     },
     "engineering": {
@@ -523,11 +516,6 @@
     "rent_controlled_housing_site",
     "mobilehome_or_rv_park_site",
     "city_population",
-    "single_family_zone",
-    "historic_district_hpoz",
-    "fema_100yr_floodway",
-    "prime_farmland",
-    "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
     "parcel_area",
     "parking_surface_area",
     "criterion:min_parking_surface_area",
@@ -573,7 +561,6 @@
       "historic_district_hpoz",
       "fema_100yr_floodway",
       "prime_farmland",
-      "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
       "jurisdiction_module:CA/06037:setbacks"
      ]
     },
@@ -605,7 +592,6 @@
     "historic_district_hpoz",
     "fema_100yr_floodway",
     "prime_farmland",
-    "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
     "jurisdiction_module:CA/06037:setbacks",
     "parcel_area",
     "vacancy_status",
@@ -647,11 +633,6 @@
       "rent_controlled_housing_site",
       "mobilehome_or_rv_park_site",
       "city_population",
-      "single_family_zone",
-      "historic_district_hpoz",
-      "fema_100yr_floodway",
-      "prime_farmland",
-      "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
       "distance_to_public_transit_mi"
      ]
     },
@@ -682,11 +663,6 @@
     "rent_controlled_housing_site",
     "mobilehome_or_rv_park_site",
     "city_population",
-    "single_family_zone",
-    "historic_district_hpoz",
-    "fema_100yr_floodway",
-    "prime_farmland",
-    "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
     "distance_to_public_transit_mi",
     "parcel_area",
     "year_built",
@@ -723,10 +699,9 @@
     "regulatory": {
      "result": "unknown",
      "missing": [
-      "zoning_class",
-      "ab2011_site_criteria_met",
       "jurisdiction_module:CA/06037:environmental",
-      "jurisdiction_module:CA/06037:permitting"
+      "jurisdiction_module:CA/06037:permitting",
+      "zoning: no rule that lists category brownfield gives a conclusion"
      ]
     },
     "engineering": {
@@ -747,10 +722,9 @@
     "revenueSchedule",
     "omSchedule",
     "hurdleRate",
-    "zoning_class",
-    "ab2011_site_criteria_met",
     "jurisdiction_module:CA/06037:environmental",
     "jurisdiction_module:CA/06037:permitting",
+    "zoning: no rule that lists category brownfield gives a conclusion",
     "parcel_area",
     "contamination_status",
     "remediation_cost",
@@ -793,11 +767,6 @@
       "rent_controlled_housing_site",
       "mobilehome_or_rv_park_site",
       "city_population",
-      "single_family_zone",
-      "historic_district_hpoz",
-      "fema_100yr_floodway",
-      "prime_farmland",
-      "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
       "jurisdiction_module:CA/06037:easements"
      ]
     },
@@ -826,11 +795,6 @@
     "rent_controlled_housing_site",
     "mobilehome_or_rv_park_site",
     "city_population",
-    "single_family_zone",
-    "historic_district_hpoz",
-    "fema_100yr_floodway",
-    "prime_farmland",
-    "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
     "jurisdiction_module:CA/06037:easements",
     "parcel_area",
     "combined_parcel_area",
@@ -865,13 +829,12 @@
     "regulatory": {
      "result": "unknown",
      "missing": [
-      "zoning_class",
-      "ab2011_site_criteria_met",
       "single_family_zone",
       "historic_district_hpoz",
       "fema_100yr_floodway",
       "calfire_or_state_vhfhsz",
-      "prime_farmland"
+      "prime_farmland",
+      "zoning: no rule that lists category lot_split gives a conclusion"
      ]
     },
     "engineering": {
@@ -890,13 +853,12 @@
     "revenueSchedule",
     "omSchedule",
     "hurdleRate",
-    "zoning_class",
-    "ab2011_site_criteria_met",
     "single_family_zone",
     "historic_district_hpoz",
     "fema_100yr_floodway",
     "calfire_or_state_vhfhsz",
     "prime_farmland",
+    "zoning: no rule that lists category lot_split gives a conclusion",
     "parcel_area",
     "criterion:min_splittable_area",
     "check:engineering",
@@ -929,21 +891,10 @@
     "regulatory": {
      "result": "unknown",
      "missing": [
-      "zoning_class",
-      "ab2011_site_criteria_met",
-      "distance_to_transit_mi",
-      "transit_mode",
-      "calfire_or_state_vhfhsz",
-      "rent_controlled_housing_site",
-      "mobilehome_or_rv_park_site",
-      "city_population",
-      "single_family_zone",
-      "historic_district_hpoz",
-      "fema_100yr_floodway",
-      "prime_farmland",
       "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
       "jurisdiction_module:CA/06037:setbacks",
-      "jurisdiction_module:CA/06037:permitting"
+      "jurisdiction_module:CA/06037:permitting",
+      "zoning: no rule that lists category adu gives a conclusion"
      ]
     },
     "engineering": {
@@ -964,21 +915,10 @@
     "revenueSchedule",
     "omSchedule",
     "hurdleRate",
-    "zoning_class",
-    "ab2011_site_criteria_met",
-    "distance_to_transit_mi",
-    "transit_mode",
-    "calfire_or_state_vhfhsz",
-    "rent_controlled_housing_site",
-    "mobilehome_or_rv_park_site",
-    "city_population",
-    "single_family_zone",
-    "historic_district_hpoz",
-    "fema_100yr_floodway",
-    "prime_farmland",
     "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
     "jurisdiction_module:CA/06037:setbacks",
     "jurisdiction_module:CA/06037:permitting",
+    "zoning: no rule that lists category adu gives a conclusion",
     "parcel_area",
     "existing_structures",
     "criterion:min_adu_lot_area",
@@ -1024,8 +964,7 @@
       "single_family_zone",
       "historic_district_hpoz",
       "fema_100yr_floodway",
-      "prime_farmland",
-      "density: record has no verified effective_date; figures attached are not to be shown as a legal standard"
+      "prime_farmland"
      ]
     },
     "engineering": {
@@ -1058,7 +997,6 @@
     "historic_district_hpoz",
     "fema_100yr_floodway",
     "prime_farmland",
-    "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
     "parcel_area",
     "built_floor_area",
     "permitted_floor_area",
@@ -1160,12 +1098,7 @@
       "calfire_or_state_vhfhsz",
       "rent_controlled_housing_site",
       "mobilehome_or_rv_park_site",
-      "city_population",
-      "single_family_zone",
-      "historic_district_hpoz",
-      "fema_100yr_floodway",
-      "prime_farmland",
-      "density: record has no verified effective_date; figures attached are not to be shown as a legal standard"
+      "city_population"
      ]
     },
     "engineering": {
@@ -1193,11 +1126,6 @@
     "rent_controlled_housing_site",
     "mobilehome_or_rv_park_site",
     "city_population",
-    "single_family_zone",
-    "historic_district_hpoz",
-    "fema_100yr_floodway",
-    "prime_farmland",
-    "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
     "parcel_area",
     "permitted_floor_area",
     "criterion:min_mixed_use_floor_area",
@@ -1232,15 +1160,9 @@
     "regulatory": {
      "result": "unknown",
      "missing": [
-      "zoning_class",
-      "ab2011_site_criteria_met",
-      "distance_to_transit_mi",
-      "transit_mode",
-      "calfire_or_state_vhfhsz",
-      "rent_controlled_housing_site",
-      "mobilehome_or_rv_park_site",
-      "city_population",
-      "jurisdiction_module:CA/06037:easements"
+      "jurisdiction_module:CA/06037:easements",
+      "zoning: no rule that lists category air_rights gives a conclusion",
+      "height: no rule that lists category air_rights gives a conclusion"
      ]
     },
     "engineering": {
@@ -1260,15 +1182,9 @@
     "revenueSchedule",
     "omSchedule",
     "hurdleRate",
-    "zoning_class",
-    "ab2011_site_criteria_met",
-    "distance_to_transit_mi",
-    "transit_mode",
-    "calfire_or_state_vhfhsz",
-    "rent_controlled_housing_site",
-    "mobilehome_or_rv_park_site",
-    "city_population",
     "jurisdiction_module:CA/06037:easements",
+    "zoning: no rule that lists category air_rights gives a conclusion",
+    "height: no rule that lists category air_rights gives a conclusion",
     "parcel_area",
     "unused_development_rights",
     "criterion:min_unused_rights",
@@ -1302,9 +1218,8 @@
     "regulatory": {
      "result": "unknown",
      "missing": [
-      "zoning_class",
-      "ab2011_site_criteria_met",
-      "distance_to_public_transit_mi"
+      "distance_to_public_transit_mi",
+      "zoning: no rule that lists category shared_parking gives a conclusion"
      ]
     },
     "engineering": {
@@ -1324,9 +1239,8 @@
     "revenueSchedule",
     "omSchedule",
     "hurdleRate",
-    "zoning_class",
-    "ab2011_site_criteria_met",
     "distance_to_public_transit_mi",
+    "zoning: no rule that lists category shared_parking gives a conclusion",
     "parcel_area",
     "parking_occupancy",
     "criterion:max_parking_occupancy",
@@ -1420,9 +1334,8 @@
     "regulatory": {
      "result": "unknown",
      "missing": [
-      "zoning_class",
-      "ab2011_site_criteria_met",
-      "jurisdiction_module:CA/06037:environmental"
+      "jurisdiction_module:CA/06037:environmental",
+      "zoning: no rule that lists category park_with_development gives a conclusion"
      ]
     },
     "engineering": {
@@ -1442,9 +1355,8 @@
     "revenueSchedule",
     "omSchedule",
     "hurdleRate",
-    "zoning_class",
-    "ab2011_site_criteria_met",
     "jurisdiction_module:CA/06037:environmental",
+    "zoning: no rule that lists category park_with_development gives a conclusion",
     "parcel_area",
     "open_space_deficit",
     "criterion:min_open_space_deficit",
@@ -1478,9 +1390,8 @@
     "regulatory": {
      "result": "unknown",
      "missing": [
-      "zoning_class",
-      "ab2011_site_criteria_met",
-      "jurisdiction_module:CA/06037:environmental"
+      "jurisdiction_module:CA/06037:environmental",
+      "zoning: no rule that lists category industrial_revitalisation gives a conclusion"
      ]
     },
     "engineering": {
@@ -1500,9 +1411,8 @@
     "revenueSchedule",
     "omSchedule",
     "hurdleRate",
-    "zoning_class",
-    "ab2011_site_criteria_met",
     "jurisdiction_module:CA/06037:environmental",
+    "zoning: no rule that lists category industrial_revitalisation gives a conclusion",
     "parcel_area",
     "industrial_vacancy",
     "criterion:min_industrial_vacancy",
@@ -1537,9 +1447,8 @@
     "regulatory": {
      "result": "unknown",
      "missing": [
-      "zoning_class",
-      "ab2011_site_criteria_met",
-      "jurisdiction_module:CA/06037:incentives"
+      "jurisdiction_module:CA/06037:incentives",
+      "zoning: no rule that lists category commercial_revitalisation gives a conclusion"
      ]
     },
     "engineering": {
@@ -1559,9 +1468,8 @@
     "revenueSchedule",
     "omSchedule",
     "hurdleRate",
-    "zoning_class",
-    "ab2011_site_criteria_met",
     "jurisdiction_module:CA/06037:incentives",
+    "zoning: no rule that lists category commercial_revitalisation gives a conclusion",
     "parcel_area",
     "commercial_vacancy",
     "criterion:min_commercial_vacancy",
@@ -1608,7 +1516,6 @@
       "historic_district_hpoz",
       "fema_100yr_floodway",
       "prime_farmland",
-      "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
       "jurisdiction_module:CA/06037:permitting"
      ]
     },
@@ -1642,7 +1549,6 @@
     "historic_district_hpoz",
     "fema_100yr_floodway",
     "prime_farmland",
-    "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
     "jurisdiction_module:CA/06037:permitting",
     "parcel_area",
     "assessed_improvement_value",
@@ -1687,12 +1593,7 @@
       "calfire_or_state_vhfhsz",
       "rent_controlled_housing_site",
       "mobilehome_or_rv_park_site",
-      "city_population",
-      "single_family_zone",
-      "historic_district_hpoz",
-      "fema_100yr_floodway",
-      "prime_farmland",
-      "density: record has no verified effective_date; figures attached are not to be shown as a legal standard"
+      "city_population"
      ]
     },
     "engineering": {
@@ -1721,11 +1622,6 @@
     "rent_controlled_housing_site",
     "mobilehome_or_rv_park_site",
     "city_population",
-    "single_family_zone",
-    "historic_district_hpoz",
-    "fema_100yr_floodway",
-    "prime_farmland",
-    "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
     "parcel_area",
     "parking_surface_area",
     "criterion:min_parking_surface_area",
@@ -1771,7 +1667,6 @@
       "historic_district_hpoz",
       "fema_100yr_floodway",
       "prime_farmland",
-      "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
       "jurisdiction_module:CA/06037:setbacks"
      ]
     },
@@ -1803,7 +1698,6 @@
     "historic_district_hpoz",
     "fema_100yr_floodway",
     "prime_farmland",
-    "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
     "jurisdiction_module:CA/06037:setbacks",
     "parcel_area",
     "vacancy_status",
@@ -1845,11 +1739,6 @@
       "rent_controlled_housing_site",
       "mobilehome_or_rv_park_site",
       "city_population",
-      "single_family_zone",
-      "historic_district_hpoz",
-      "fema_100yr_floodway",
-      "prime_farmland",
-      "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
       "distance_to_public_transit_mi"
      ]
     },
@@ -1880,11 +1769,6 @@
     "rent_controlled_housing_site",
     "mobilehome_or_rv_park_site",
     "city_population",
-    "single_family_zone",
-    "historic_district_hpoz",
-    "fema_100yr_floodway",
-    "prime_farmland",
-    "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
     "distance_to_public_transit_mi",
     "parcel_area",
     "year_built",
@@ -1921,10 +1805,9 @@
     "regulatory": {
      "result": "unknown",
      "missing": [
-      "zoning_class",
-      "ab2011_site_criteria_met",
       "jurisdiction_module:CA/06037:environmental",
-      "jurisdiction_module:CA/06037:permitting"
+      "jurisdiction_module:CA/06037:permitting",
+      "zoning: no rule that lists category brownfield gives a conclusion"
      ]
     },
     "engineering": {
@@ -1945,10 +1828,9 @@
     "revenueSchedule",
     "omSchedule",
     "hurdleRate",
-    "zoning_class",
-    "ab2011_site_criteria_met",
     "jurisdiction_module:CA/06037:environmental",
     "jurisdiction_module:CA/06037:permitting",
+    "zoning: no rule that lists category brownfield gives a conclusion",
     "parcel_area",
     "contamination_status",
     "remediation_cost",
@@ -1991,11 +1873,6 @@
       "rent_controlled_housing_site",
       "mobilehome_or_rv_park_site",
       "city_population",
-      "single_family_zone",
-      "historic_district_hpoz",
-      "fema_100yr_floodway",
-      "prime_farmland",
-      "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
       "jurisdiction_module:CA/06037:easements"
      ]
     },
@@ -2024,11 +1901,6 @@
     "rent_controlled_housing_site",
     "mobilehome_or_rv_park_site",
     "city_population",
-    "single_family_zone",
-    "historic_district_hpoz",
-    "fema_100yr_floodway",
-    "prime_farmland",
-    "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
     "jurisdiction_module:CA/06037:easements",
     "parcel_area",
     "combined_parcel_area",
@@ -2063,13 +1935,12 @@
     "regulatory": {
      "result": "unknown",
      "missing": [
-      "zoning_class",
-      "ab2011_site_criteria_met",
       "single_family_zone",
       "historic_district_hpoz",
       "fema_100yr_floodway",
       "calfire_or_state_vhfhsz",
-      "prime_farmland"
+      "prime_farmland",
+      "zoning: no rule that lists category lot_split gives a conclusion"
      ]
     },
     "engineering": {
@@ -2088,13 +1959,12 @@
     "revenueSchedule",
     "omSchedule",
     "hurdleRate",
-    "zoning_class",
-    "ab2011_site_criteria_met",
     "single_family_zone",
     "historic_district_hpoz",
     "fema_100yr_floodway",
     "calfire_or_state_vhfhsz",
     "prime_farmland",
+    "zoning: no rule that lists category lot_split gives a conclusion",
     "parcel_area",
     "criterion:min_splittable_area",
     "check:engineering",
@@ -2127,21 +1997,10 @@
     "regulatory": {
      "result": "unknown",
      "missing": [
-      "zoning_class",
-      "ab2011_site_criteria_met",
-      "distance_to_transit_mi",
-      "transit_mode",
-      "calfire_or_state_vhfhsz",
-      "rent_controlled_housing_site",
-      "mobilehome_or_rv_park_site",
-      "city_population",
-      "single_family_zone",
-      "historic_district_hpoz",
-      "fema_100yr_floodway",
-      "prime_farmland",
       "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
       "jurisdiction_module:CA/06037:setbacks",
-      "jurisdiction_module:CA/06037:permitting"
+      "jurisdiction_module:CA/06037:permitting",
+      "zoning: no rule that lists category adu gives a conclusion"
      ]
     },
     "engineering": {
@@ -2162,21 +2021,10 @@
     "revenueSchedule",
     "omSchedule",
     "hurdleRate",
-    "zoning_class",
-    "ab2011_site_criteria_met",
-    "distance_to_transit_mi",
-    "transit_mode",
-    "calfire_or_state_vhfhsz",
-    "rent_controlled_housing_site",
-    "mobilehome_or_rv_park_site",
-    "city_population",
-    "single_family_zone",
-    "historic_district_hpoz",
-    "fema_100yr_floodway",
-    "prime_farmland",
     "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
     "jurisdiction_module:CA/06037:setbacks",
     "jurisdiction_module:CA/06037:permitting",
+    "zoning: no rule that lists category adu gives a conclusion",
     "parcel_area",
     "existing_structures",
     "criterion:min_adu_lot_area",
@@ -2222,8 +2070,7 @@
       "single_family_zone",
       "historic_district_hpoz",
       "fema_100yr_floodway",
-      "prime_farmland",
-      "density: record has no verified effective_date; figures attached are not to be shown as a legal standard"
+      "prime_farmland"
      ]
     },
     "engineering": {
@@ -2256,7 +2103,6 @@
     "historic_district_hpoz",
     "fema_100yr_floodway",
     "prime_farmland",
-    "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
     "parcel_area",
     "built_floor_area",
     "permitted_floor_area",
@@ -2358,12 +2204,7 @@
       "calfire_or_state_vhfhsz",
       "rent_controlled_housing_site",
       "mobilehome_or_rv_park_site",
-      "city_population",
-      "single_family_zone",
-      "historic_district_hpoz",
-      "fema_100yr_floodway",
-      "prime_farmland",
-      "density: record has no verified effective_date; figures attached are not to be shown as a legal standard"
+      "city_population"
      ]
     },
     "engineering": {
@@ -2391,11 +2232,6 @@
     "rent_controlled_housing_site",
     "mobilehome_or_rv_park_site",
     "city_population",
-    "single_family_zone",
-    "historic_district_hpoz",
-    "fema_100yr_floodway",
-    "prime_farmland",
-    "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
     "parcel_area",
     "permitted_floor_area",
     "criterion:min_mixed_use_floor_area",
@@ -2430,15 +2266,9 @@
     "regulatory": {
      "result": "unknown",
      "missing": [
-      "zoning_class",
-      "ab2011_site_criteria_met",
-      "distance_to_transit_mi",
-      "transit_mode",
-      "calfire_or_state_vhfhsz",
-      "rent_controlled_housing_site",
-      "mobilehome_or_rv_park_site",
-      "city_population",
-      "jurisdiction_module:CA/06037:easements"
+      "jurisdiction_module:CA/06037:easements",
+      "zoning: no rule that lists category air_rights gives a conclusion",
+      "height: no rule that lists category air_rights gives a conclusion"
      ]
     },
     "engineering": {
@@ -2458,15 +2288,9 @@
     "revenueSchedule",
     "omSchedule",
     "hurdleRate",
-    "zoning_class",
-    "ab2011_site_criteria_met",
-    "distance_to_transit_mi",
-    "transit_mode",
-    "calfire_or_state_vhfhsz",
-    "rent_controlled_housing_site",
-    "mobilehome_or_rv_park_site",
-    "city_population",
     "jurisdiction_module:CA/06037:easements",
+    "zoning: no rule that lists category air_rights gives a conclusion",
+    "height: no rule that lists category air_rights gives a conclusion",
     "parcel_area",
     "unused_development_rights",
     "criterion:min_unused_rights",
@@ -2500,9 +2324,8 @@
     "regulatory": {
      "result": "unknown",
      "missing": [
-      "zoning_class",
-      "ab2011_site_criteria_met",
-      "distance_to_public_transit_mi"
+      "distance_to_public_transit_mi",
+      "zoning: no rule that lists category shared_parking gives a conclusion"
      ]
     },
     "engineering": {
@@ -2522,9 +2345,8 @@
     "revenueSchedule",
     "omSchedule",
     "hurdleRate",
-    "zoning_class",
-    "ab2011_site_criteria_met",
     "distance_to_public_transit_mi",
+    "zoning: no rule that lists category shared_parking gives a conclusion",
     "parcel_area",
     "parking_occupancy",
     "criterion:max_parking_occupancy",
@@ -2618,9 +2440,8 @@
     "regulatory": {
      "result": "unknown",
      "missing": [
-      "zoning_class",
-      "ab2011_site_criteria_met",
-      "jurisdiction_module:CA/06037:environmental"
+      "jurisdiction_module:CA/06037:environmental",
+      "zoning: no rule that lists category park_with_development gives a conclusion"
      ]
     },
     "engineering": {
@@ -2640,9 +2461,8 @@
     "revenueSchedule",
     "omSchedule",
     "hurdleRate",
-    "zoning_class",
-    "ab2011_site_criteria_met",
     "jurisdiction_module:CA/06037:environmental",
+    "zoning: no rule that lists category park_with_development gives a conclusion",
     "parcel_area",
     "open_space_deficit",
     "criterion:min_open_space_deficit",
@@ -2676,9 +2496,8 @@
     "regulatory": {
      "result": "unknown",
      "missing": [
-      "zoning_class",
-      "ab2011_site_criteria_met",
-      "jurisdiction_module:CA/06037:environmental"
+      "jurisdiction_module:CA/06037:environmental",
+      "zoning: no rule that lists category industrial_revitalisation gives a conclusion"
      ]
     },
     "engineering": {
@@ -2698,9 +2517,8 @@
     "revenueSchedule",
     "omSchedule",
     "hurdleRate",
-    "zoning_class",
-    "ab2011_site_criteria_met",
     "jurisdiction_module:CA/06037:environmental",
+    "zoning: no rule that lists category industrial_revitalisation gives a conclusion",
     "parcel_area",
     "industrial_vacancy",
     "criterion:min_industrial_vacancy",
@@ -2735,9 +2553,8 @@
     "regulatory": {
      "result": "unknown",
      "missing": [
-      "zoning_class",
-      "ab2011_site_criteria_met",
-      "jurisdiction_module:CA/06037:incentives"
+      "jurisdiction_module:CA/06037:incentives",
+      "zoning: no rule that lists category commercial_revitalisation gives a conclusion"
      ]
     },
     "engineering": {
@@ -2757,9 +2574,8 @@
     "revenueSchedule",
     "omSchedule",
     "hurdleRate",
-    "zoning_class",
-    "ab2011_site_criteria_met",
     "jurisdiction_module:CA/06037:incentives",
+    "zoning: no rule that lists category commercial_revitalisation gives a conclusion",
     "parcel_area",
     "commercial_vacancy",
     "criterion:min_commercial_vacancy",

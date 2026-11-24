@@ -20,13 +20,41 @@ import { isQuantity } from '../schema/quantity.js';
  * @property {Uncertainty|null} uncertainty
  * @property {readonly string[]} exceptions
  * @property {readonly string[]} missing      parcel attributes (or facts) needed before a finding can be made
- * @property {'in_effect'|'not_yet_in_effect'} status
+ * @property {'in_effect'|'not_yet_in_effect'|'repealed'} status
  * @property {string} [note]
  * @property {any} [unverifiedHint]           unverified data attached for a human; may not be shown as a legal standard
  * @property {string} [ruleId]
+ * @property {readonly string[]|null} appliesToCategories   parcel categories the governing rule is about; null = not declared (the check then ignores the conclusion)
+ * @property {readonly {condition: string, attribute: string}[]} satisfied  conditions already met by a known parcel attribute (see PARCEL_ATTRIBUTES)
+ * @property {string|null} operativeDate   rule applies only on/after this date (read from the record), or null
+ * @property {string|null} repealDate      rule applies only before this date (read from the record), or null
  */
 
 export const TOPICS = Object.freeze(['zoning', 'density', 'height', 'setbacks', 'parking', 'lot_split', 'tod_law', 'affordability', 'environmental', 'easements', 'permitting', 'incentives', 'property_tax']);
+/**
+ * The one table of parcel attribute names the regulatory rules read. Adapters map their own layers to these names.
+ * Keyed by a role key used in code; `name` is the key in parcel.attributes. Plain value or Quantity both accepted (see attr()).
+ */
+export const PARCEL_ATTRIBUTES = Object.freeze(Object.fromEntries([
+  ['distanceToTransit', 'distance_to_transit_mi', 'distance in miles to the nearest transit stop (of the mode in transitMode)', 'number'],
+  ['transitMode', 'transit_mode', 'service type of that stop, using the record\'s transit_mode vocabulary', 'string'],
+  ['cityPopulation', 'city_population', 'population of the city containing the parcel', 'number'],
+  ['distanceToPublicTransit', 'distance_to_public_transit_mi', 'distance in miles to any public transit stop', 'number'],
+  ['urbanTransitCounty', 'urban_transit_county', 'adapter-confirmed result of the statute\'s urban transit county test for the parcel\'s county', 'boolean'],
+  ['singleFamilyZone', 'single_family_zone', 'parcel is in a single-family residential zone', 'boolean'],
+  ['zoningClass', 'zoning_class', 'generic zoning class label (for example commercial)', 'string'],
+  ['zoningDistrict', 'zoning_district', 'local zoning district code (for example R1-1)', 'string'],
+  ['ab2011SiteCriteriaMet', 'ab2011_site_criteria_met', 'site meets every site criterion listed in the AB 2011 record', 'boolean'],
+  ['calfireOrStateVhfhsz', 'calfire_or_state_vhfhsz', 'parcel is in a very high fire hazard severity zone', 'boolean'],
+  ['rentControlledHousingSite', 'rent_controlled_housing_site', 'site is or was rent or price controlled housing', 'boolean'],
+  ['mobilehomeOrRvParkSite', 'mobilehome_or_rv_park_site', 'site is a mobilehome or RV park', 'boolean'],
+  ['historicDistrictHpoz', 'historic_district_hpoz', 'parcel is in a historic district or HPOZ', 'boolean'],
+  ['femaFloodway', 'fema_100yr_floodway', 'parcel is in a FEMA 100-year floodway', 'boolean'],
+  ['primeFarmland', 'prime_farmland', 'parcel is prime farmland', 'boolean'],
+].map(([key, name, meaning, type]) => [key, Object.freeze({ name, meaning, type })])));
+/** @type {ReadonlySet<string>} */
+export const PARCEL_ATTRIBUTE_NAMES = new Set(Object.values(PARCEL_ATTRIBUTES).map((a) => a.name));
+
 export const FINDINGS = Object.freeze(['allowed', 'not_allowed', 'conditional', 'requires_investigation']);
 const LEVELS = ['state', 'county', 'city'];
 const UNCERTAINTY_LEVELS = ['low', 'medium', 'high'];
@@ -51,7 +79,8 @@ export function validateJurisdiction(j) {
  * Build a conclusion. Any finding other than requires_investigation needs source, effectiveDate and uncertainty.
  * @param {{ topic: string, jurisdiction: any, finding: string, conditions?: string[], value?: import('../schema/quantity.js').Quantity|null,
  *   source?: RegSource|null, effectiveDate?: string|null, uncertainty?: Uncertainty|null, exceptions?: string[], missing?: string[],
- *   status?: 'in_effect'|'not_yet_in_effect', note?: string, unverifiedHint?: any, ruleId?: string }} spec
+ *   status?: 'in_effect'|'not_yet_in_effect'|'repealed', note?: string, unverifiedHint?: any, ruleId?: string,
+ *   appliesToCategories?: readonly string[]|null, satisfied?: readonly {condition: string, attribute: string}[], operativeDate?: string|null, repealDate?: string|null }} spec
  * @returns {Conclusion}
  */
 export function makeConclusion(spec) {
@@ -68,6 +97,11 @@ export function makeConclusion(spec) {
   if (eff !== null && !(typeof eff === 'string' && DATE_RE.test(eff))) errs.push('effectiveDate must be YYYY-MM-DD');
   const unc = spec.uncertainty ?? null;
   const uncOk = !!unc && UNCERTAINTY_LEVELS.includes(unc.level) && strs(unc.reasons).length > 0;
+  for (const [k, v] of [['operativeDate', spec.operativeDate], ['repealDate', spec.repealDate]]) {
+    if (v != null && !(typeof v === 'string' && DATE_RE.test(v))) errs.push(`${k} must be YYYY-MM-DD`);
+  }
+  if (spec.appliesToCategories != null && !(Array.isArray(spec.appliesToCategories) && spec.appliesToCategories.every(nonEmpty))) errs.push('appliesToCategories must be a list of category ids');
+  const satisfied = (Array.isArray(spec.satisfied) ? spec.satisfied : []).filter((x) => x && nonEmpty(x.condition) && nonEmpty(x.attribute));
   if (spec.value != null && !isQuantity(spec.value)) errs.push('value must be a Quantity or null');
   if (spec.finding !== 'requires_investigation') {
     if (!srcOk) errs.push('a finding other than requires_investigation needs source {citation,url,quote,retrieved}');
@@ -84,6 +118,9 @@ export function makeConclusion(spec) {
     status: spec.status ?? 'in_effect',
     ...(spec.note ? { note: spec.note } : {}), ...(spec.unverifiedHint !== undefined ? { unverifiedHint: spec.unverifiedHint } : {}),
     ...(spec.ruleId ? { ruleId: spec.ruleId } : {}),
+    appliesToCategories: Array.isArray(spec.appliesToCategories) ? Object.freeze([...spec.appliesToCategories]) : null,
+    satisfied: Object.freeze(satisfied.map((x) => Object.freeze({ condition: x.condition, attribute: x.attribute }))),
+    operativeDate: spec.operativeDate ?? null, repealDate: spec.repealDate ?? null,
   });
 }
 
@@ -151,15 +188,17 @@ export function makeJurisdictionModule(spec) {
       }
       if (!Object.prototype.hasOwnProperty.call(table, topic)) throw new Error(`module has no evaluator for topic ${topic}`);
       return table[topic](parcel, asOf).map((c) => {
-        if (c.effectiveDate && c.effectiveDate > asOf) {
-          return makeConclusion({
-            topic: c.topic, jurisdiction: c.jurisdiction, finding: 'requires_investigation', value: null, source: c.source,
-            effectiveDate: c.effectiveDate, uncertainty: c.uncertainty, status: 'not_yet_in_effect', ruleId: c.ruleId,
-            conditions: [...c.conditions], exceptions: [...c.exceptions],
-            note: `not_yet_in_effect: rule takes effect ${c.effectiveDate}, after asOf ${asOf}; not applied`,
-          });
-        }
-        return c;
+        /** @type {string|null} */ let why = null; let status = /** @type {'not_yet_in_effect'|'repealed'} */ ('not_yet_in_effect');
+        if (c.effectiveDate && c.effectiveDate > asOf) why = `not_yet_in_effect: rule takes effect ${c.effectiveDate}, after asOf ${asOf}; not applied`;
+        else if (c.operativeDate && c.operativeDate > asOf) why = `not_yet_in_effect: rule becomes operative ${c.operativeDate}, after asOf ${asOf}; not applied`;
+        else if (c.repealDate && c.repealDate <= asOf) { why = `repealed: record repeal/sunset date ${c.repealDate} is on or before asOf ${asOf}; not applied`; status = 'repealed'; }
+        if (!why) return c;
+        return makeConclusion({
+          topic: c.topic, jurisdiction: c.jurisdiction, finding: 'requires_investigation', value: null, source: c.source,
+          effectiveDate: c.effectiveDate, uncertainty: c.uncertainty, status, ruleId: c.ruleId,
+          conditions: [...c.conditions], exceptions: [...c.exceptions], appliesToCategories: c.appliesToCategories,
+          operativeDate: c.operativeDate, repealDate: c.repealDate, note: why,
+        });
       });
     },
   });

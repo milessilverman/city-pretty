@@ -2,7 +2,8 @@
 // City of Los Angeles module, built from the bundle's zone_rules. Rows are used as legal standards ONLY if they carry a
 // complete source {citation,url,quote,retrieved} and an effective_date; otherwise every conclusion is requires_investigation
 // with the row attached as an unverified hint. No municipal code citation is ever supplied here.
-import { makeConclusion, makeJurisdictionModule, attr } from './framework.js';
+import { makeConclusion, makeJurisdictionModule, attr, PARCEL_ATTRIBUTES as PA } from './framework.js';
+import { CATEGORY_TOPICS } from './check.js';
 import { makeQuantity } from '../schema/quantity.js';
 
 const JUR = Object.freeze({ level: /** @type {'city'} */ ('city'), state: 'CA', countyFips: null, place: 'Los Angeles' });
@@ -13,6 +14,7 @@ const FIELDS = {
   height: [['max_height_ft', 'ft']],
   setbacks: [['front_ft', 'ft'], ['side_ft', 'ft'], ['rear_ft', 'ft']],
 };
+const ALL_CATEGORIES = Object.freeze(Object.keys(CATEGORY_TOPICS));
 const NOT_LEGAL = 'zone_rules row has no source citation, URL, quote or retrieval date; it may not be shown as a legal standard';
 
 /** @param {any} s */
@@ -37,8 +39,8 @@ export function buildLosAngelesCityModule(zoneRules) {
   /** @param {string} topic @returns {import('./framework.js').Evaluator} */
   const evaluator = (topic) => (parcel) => {
     const base = { topic, jurisdiction: JUR };
-    const zone = attr(parcel, 'zoning_district');
-    if (zone === undefined) return [makeConclusion({ ...base, finding: 'requires_investigation', missing: ['zoning_district'], note: 'parcel zoning_district is needed to select a zone_rules row' })];
+    const zone = attr(parcel, PA.zoningDistrict.name);
+    if (zone === undefined) return [makeConclusion({ ...base, finding: 'requires_investigation', missing: [PA.zoningDistrict.name], note: 'parcel zoning_district is needed to select a zone_rules row' })];
     const z = String(zone).toLowerCase();
     const row = rows.filter((r) => z.startsWith(String(r.zone_prefix).toLowerCase())).sort((a, b) => b.zone_prefix.length - a.zone_prefix.length)[0];
     if (!row) return [makeConclusion({ ...base, finding: 'requires_investigation', missing: [`zone_rules row for ${zone}`], note: `no Los Angeles zone_rules row matches zoning_district ${zone}` })];
@@ -50,7 +52,7 @@ export function buildLosAngelesCityModule(zoneRules) {
     const unc = { level: /** @type {'medium'} */ ('medium'), reasons: ['municipal row; verify against current adopted code'] };
     return FIELDS[topic].map(([f, unit]) => {
       const v = unit === 'text' ? null : rowQuantity(row, f, unit, src);
-      return makeConclusion({ ...base, finding: 'conditional', source: src, effectiveDate: row.effective_date, uncertainty: unc, value: v, conditions: unit === 'text' ? [String(row[f])] : [], ruleId: `la_zone_${row.zone_prefix}` });
+      return makeConclusion({ ...base, finding: 'conditional', source: src, effectiveDate: row.effective_date, uncertainty: unc, value: v, conditions: unit === 'text' ? [String(row[f])] : [], ruleId: `la_zone_${row.zone_prefix}`, appliesToCategories: ALL_CATEGORIES });
     });
   };
   return makeJurisdictionModule({ jurisdiction: JUR, topics: Object.fromEntries(Object.keys(FIELDS).map((t) => [t, evaluator(t)])) });

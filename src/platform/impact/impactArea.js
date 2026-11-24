@@ -54,6 +54,7 @@ function pointsOf(g) {
 /** @param {ImpactLayerModel} layer @param {number} d @param {number} reachM @returns {number|null} null = outside */
 function weightAt(layer, d, reachM) {
   if (d > reachM) return null;
+  if (layer.innerRadius && layer.innerRadius.value !== null && d < toMetres(layer.innerRadius)) return 0; // annulus: nothing inside the inner radius
   const dec = layer.decay;
   if (dec.form === 'linear') return 1 - d / reachM;
   if (dec.form === 'exponential') return Math.exp(-d / toMetres(dec.parameters.lengthScale));

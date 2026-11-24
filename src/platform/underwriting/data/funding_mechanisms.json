@@ -342,7 +342,7 @@
         "quoteIndex": 3
       },
       "capturedValueStream": null,
-      "status": "verified",
+      "status": "requires_investigation",
       "rules": [
         {
           "field": "project.inOpportunityZone",
@@ -401,7 +401,8 @@
         "Cornell LII notes (republisher, fetched) state Pub. L. 119-21 s70421 amends this section for amounts invested after Dec. 31, 2026; the quotes here are the text in the govinfo 2024 edition only.",
         "Fund requirements (90 percent test, original use or substantial improvement, 30-month test) and the designation of which tracts are zones are not encoded.",
         "Benefit goes to the investor holding capital gains, not to the public sponsor."
-      ]
+      ],
+      "reason": "The quotes are the govinfo 2024 edition text. A later public law (Pub. L. 119-21, as noted on the republisher page fetched on 2026-11-24) amends this section for amounts invested after Dec. 31, 2026, and the amended primary text has not been fetched. Eligibility is not decided from the older text."
     },
     {
       "publicShare": {
@@ -711,7 +712,7 @@
         {
           "field": "project.use",
           "op": "eq",
-          "value": "rental_housing",
+          "value": "residential_rental",
           "quoteIndex": 0,
           "alternativeGroup": null
         },

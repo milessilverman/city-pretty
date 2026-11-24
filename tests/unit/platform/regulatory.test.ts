@@ -3,7 +3,7 @@ import { readFileSync } from "node:fs";
 import { gunzipSync } from "node:zlib";
 import { makeGeoRef, IMPROVEMENT_CATEGORIES } from "../../../src/platform/schema/index.js";
 import {
-  TOPICS, makeConclusion, makeJurisdictionModule, createRegistry, makeRegulatoryCheck, CATEGORY_TOPICS,
+  TOPICS, PARCEL_ATTRIBUTES, makeConclusion, makeJurisdictionModule, createRegistry, makeRegulatoryCheck, CATEGORY_TOPICS,
   buildCaliforniaModule, buildLosAngelesCityModule,
 } from "../../../src/platform/regulatory/index.js";
 
@@ -16,7 +16,7 @@ describe("framework (FIXTURE: not real data)", () => {
   const SRC = { citation: "fixture cite", url: "https://example.invalid/x", quote: "fixture quote", retrieved: "2000-01-01" };
   const UNC = { level: "low", reasons: ["fixture"] };
   const J = { level: "state", state: "XX" };
-  const ok = (over: any = {}) => makeConclusion({ topic: "zoning", jurisdiction: J, finding: "allowed", source: SRC, effectiveDate: "2000-01-01", uncertainty: UNC, ...over });
+  const ok = (over: any = {}) => makeConclusion({ topic: "zoning", jurisdiction: J, finding: "allowed", source: SRC, effectiveDate: "2000-01-01", uncertainty: UNC, appliesToCategories: ["vacant_land"], ...over });
 
   it("refuses findings without source, effectiveDate or uncertainty; allows requires_investigation bare", () => {
     expect(() => makeConclusion({ topic: "zoning", jurisdiction: J, finding: "allowed" })).toThrow(/source/);
@@ -60,19 +60,25 @@ describe("framework (FIXTURE: not real data)", () => {
   });
 
   it("check collapses: not_allowed fails with citation, unknown lists missing, allowed passes with conditions", () => {
-    const run = (cs: any[]) => {
+    const run = (cs: any[], attrs: Record<string, any> = {}) => {
       const reg = createRegistry();
       reg.register(xxModule(() => cs));
-      return makeRegulatoryCheck(reg, { vacant_land: ["zoning"] }, "2001-01-01")(parcel("XX", "00001", null), "vacant_land") as any;
+      return makeRegulatoryCheck(reg, { vacant_land: ["zoning"] }, "2001-01-01")(parcel("XX", "00001", null, attrs), "vacant_land") as any;
     };
     const f = run([ok({ finding: "not_allowed" })]);
     expect(f.result).toBe("fail");
     expect(f.reason).toContain(SRC.url);
     const u = run([ok(), makeConclusion({ topic: "zoning", jurisdiction: J, finding: "requires_investigation", missing: ["attr_a"] })]);
     expect(u).toEqual({ result: "unknown", missing: ["attr_a"] });
-    const p = run([ok({ finding: "conditional", conditions: ["cond one"] })]);
+    // changed: a conditional conclusion used to pass with its conditions merely listed; now it passes only if every condition is satisfied by a known parcel attribute
+    const p = run([ok({ finding: "conditional", conditions: ["cond one"], satisfied: [{ condition: "cond one", attribute: "zoning_class" }] })], { zoning_class: "x" });
     expect(p.result).toBe("pass");
     expect(p.conditions).toEqual(["cond one"]);
+    const open = run([ok({ finding: "conditional", conditions: ["cond one"] })]);
+    expect(open.result).toBe("unknown");
+    expect(open.missing.join()).toContain("cond one");
+    const noAttr = run([ok({ finding: "conditional", conditions: ["cond one"], satisfied: [{ condition: "cond one", attribute: "zoning_class" }] })]);
+    expect(noAttr.result).toBe("unknown");
     const reg = createRegistry();
     expect(makeRegulatoryCheck(reg, {}, "2001-01-01")(parcel("XX", "00001", null), "vacant_land").result).toBe("unknown");
   });
@@ -210,5 +216,98 @@ describe("Los Angeles city module", () => {
     const c = buildLosAngelesCityModule(fx).evaluate(parcel("CA", "06037", "Los Angeles", { zoning_district: "ZZ-1" }), "height", ASOF)[0] as any;
     expect(c.finding).toBe("conditional");
     expect(c.value.value).toBe(10);
+  });
+});
+
+describe("regulatory review fixes (stage-gate #6, #7, #9, #16)", () => {
+  const TODAY = "2026-11-24";
+  const sb79 = caRecords.find((r) => r.id === "ca_sb79_tier1")!;
+  const ab2011 = caRecords.find((r) => r.id === "ca_ab2011_affordable")!;
+  const regWith = (m: any) => { const r = createRegistry(); r.register(m); return r; };
+  const chk = (m: any, p: any, cat: string, asOf = TODAY) => makeRegulatoryCheck(regWith(m), CATEGORY_TOPICS as any, asOf)(p, cat) as any;
+
+  it("#6 AB 2011 does not satisfy zoning for shared_parking (reviewer input)", () => {
+    const p = parcel("CA", "06037", "Los Angeles", { zoning_class: "commercial", ab2011_site_criteria_met: true, distance_to_public_transit_mi: 0.3 });
+    const r = chk(ca(), p, "shared_parking");
+    expect(r.result).toBe("unknown");
+    expect(r.missing.join("|")).toMatch(/zoning/);
+  });
+
+  it("#6 a relevant conditional still needs all conditions satisfied; narrative conditions keep it unknown, never fail", () => {
+    const p = parcel("CA", "06037", "Los Angeles", { zoning_class: "commercial", ab2011_site_criteria_met: true });
+    const r = chk(ca(), p, "vacant_land");
+    expect(r.result).toBe("unknown");
+    expect(r.missing.join("|")).toMatch(/open condition \(ca_ab2011_affordable\)/);
+  });
+
+  it("#6 a conclusion from a rule that does not list the category is ignored even when it says not_allowed", () => {
+    const J = { level: "state", state: "XX" } as any;
+    const m = makeJurisdictionModule({ jurisdiction: J, topics: { zoning: () => [makeConclusion({ topic: "zoning", jurisdiction: J, finding: "not_allowed", ruleId: "other", appliesToCategories: ["adu"],
+      source: { citation: "c", url: "https://example.invalid/", quote: "q", retrieved: "2000-01-01" }, effectiveDate: "2000-01-01", uncertainty: { level: "low", reasons: ["fixture"] } })] } });
+    const r = makeRegulatoryCheck(regWith(m), { vacant_land: ["zoning"] }, "2001-01-01")(parcel("XX", "00001", null), "vacant_land") as any;
+    expect(r.result).toBe("unknown");
+  });
+
+  it("#7 SB 79 county test: missing county or off-list county is requires_investigation naming the county test", () => {
+    const attrs = { distance_to_transit_mi: 0.2, transit_mode: sb79.transit_mode, calfire_or_state_vhfhsz: false, rent_controlled_housing_site: false, mobilehome_or_rv_park_site: false };
+    const offList = "06013"; expect(sb79.eligible_counties).not.toContain(offList);
+    for (const fips of [offList, null as any]) {
+      const pp: any = parcel("CA", "06013", "X", attrs);
+      const q = fips ? pp : { ...pp, ref: { ...pp.ref, jurisdiction: { ...pp.ref.jurisdiction, countyFips: null } } }; // GeoRef itself requires a county; adapters may still hand over a bare object
+      const cs = ca().evaluate(q, "height", sb79.effective_date).filter((c: any) => c.ruleId === "ca_sb79_tier1");
+      expect(cs).toHaveLength(1);
+      expect(cs[0].finding).toBe("requires_investigation");
+      expect(cs[0].missing.join("|")).toMatch(/urban_transit_county/);
+      expect(cs[0].note).toMatch(/county test not confirmed/);
+    }
+    // listed county with an unverified list: conditional, but the county test stays an open condition, so the check is unknown
+    const listed = ca().evaluate(parcel("CA", "06037", "X", attrs), "height", sb79.effective_date).filter((c: any) => c.ruleId === "ca_sb79_tier1")[0];
+    expect(listed.finding).toBe("conditional");
+    expect(listed.conditions.join("|")).toMatch(/county test not confirmed/);
+    expect(chk(ca(), parcel("CA", "06037", "X", attrs), "densification", sb79.effective_date).result).toBe("unknown");
+    // adapter-confirmed county test overrides the list
+    const confirmed = ca().evaluate(parcel("CA", "06013", "X", { ...attrs, urban_transit_county: true }), "height", sb79.effective_date).filter((c: any) => c.ruleId === "ca_sb79_tier1")[0];
+    expect(confirmed.finding).toBe("conditional");
+    const denied = ca().evaluate(parcel("CA", "06013", "X", { ...attrs, urban_transit_county: false }), "height", sb79.effective_date).filter((c: any) => c.ruleId === "ca_sb79_tier1");
+    expect(denied).toHaveLength(0);
+  });
+
+  it("#9 operative and repeal dates are read from the record; a rule outside the window is not applied", () => {
+    // FIXTURE: dates below are test inputs, not legal data
+    const rec = { ...ab2011, operative_date: "2023-07-01", repeal_date: "2033-01-01" };
+    const m = buildCaliforniaModule([rec], finance.CA);
+    const p = parcel("CA", "06037", "Los Angeles", { zoning_class: "commercial", ab2011_site_criteria_met: true });
+    const at = (d: string) => m.evaluate(p, "zoning", d).filter((c: any) => c.ruleId === rec.id)[0] as any;
+    expect(at("2023-03-01").status).toBe("not_yet_in_effect");
+    expect(at("2023-03-01").finding).toBe("requires_investigation");
+    expect(at("2030-01-01").status).toBe("in_effect");
+    expect(at("2030-01-01").finding).toBe("conditional");
+    expect(at("2034-01-01").status).toBe("repealed");
+    expect(at("2034-01-01").finding).toBe("requires_investigation");
+    expect(at("2034-01-01").value).toBeNull();
+    const k = chk(m, p, "vacant_land", "2034-01-01");
+    expect(k.result).toBe("unknown");
+  });
+
+  it("#9 record text mentioning repeal without a machine-readable date gives high uncertainty", () => {
+    const real = ca().evaluate(parcel("CA", "06037", "Los Angeles", { zoning_class: "commercial", ab2011_site_criteria_met: true }), "zoning", TODAY).filter((c: any) => c.ruleId === ab2011.id)[0] as any;
+    expect(ab2011.repeal_date ?? ab2011.sunset_date).toBeUndefined();
+    expect(real.uncertainty.level).toBe("high");
+    expect(real.uncertainty.reasons.join("|")).toMatch(/repeal or sunset/);
+  });
+
+  it("#16 Prop 13 quantity status follows the profile's own verification", () => {
+    const eff = { ...finance.CA, effective_date: "2000-01-01" }; // FIXTURE date
+    const get = (prof: any) => (buildCaliforniaModule([], prof).evaluate(parcel("CA", "06037", "X"), "property_tax", TODAY)[0] as any);
+    expect(get({ ...eff, verification: { ...finance.CA.verification, status: "verified" } }).value.status).toBe("verified");
+    expect(get({ ...eff, verification: { ...finance.CA.verification, status: "partially_verified" } }).value.status).toBe("estimated");
+    expect(get({ ...eff, verification: { ...finance.CA.verification, status: "verified", unverified_fields: ["annual_assessment_cap (x)"] } }).value.status).toBe("estimated");
+  });
+
+  it("#5 PARCEL_ATTRIBUTES is one table of {name, meaning, type}", () => {
+    const rows = Object.values(PARCEL_ATTRIBUTES) as any[];
+    expect(rows.length).toBeGreaterThan(5);
+    for (const r of rows) { expect(r.name).toMatch(/^[a-z0-9_]+$/); expect(r.meaning.length).toBeGreaterThan(0); expect(["number", "string", "boolean"]).toContain(r.type); }
+    expect(new Set(rows.map((r) => r.name)).size).toBe(rows.length);
   });
 });

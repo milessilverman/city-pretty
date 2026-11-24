@@ -1,69 +1,88 @@
 # STATE (rewritten, not appended; the working memory for every session and subagent)
 
-Last updated: 24 Nov 2026, end of Stage 0.
+Last updated: 24 Nov 2026, end of the first platform run (Stages 0 to 5 built, Stage 6 scaffolded).
 
 ## Read first
 
 - Plan and contracts: `docs/architecture.md` (schemas, module map), `docs/roadmap.md` (acceptance criteria).
-- Audit: `docs/audit.md` (summary); evidence in `docs/audit/stage0-code.md`, `stage0-data.md`, `stage0-analysis.md`.
+- Audit: `docs/audit.md`; evidence in `docs/audit/stage0-*.md`. Review: `docs/audit/stage-gate-review.md`.
+- Pilot result: `docs/audit/pilot-la-coverage.md` (generated; do not edit by hand). Data needs: `docs/data-needs.md`.
 - Repo rules: `CLAUDE.md` (R2 10 GB hard limit; never type an unfetched number; tests before commit).
 
 ## Decisions
 
 | # | Decision | Why |
 |---|---|---|
-| D1 | New analysis lives in `src/platform/`; `app/app.js` and `src/engines/*` are not edited | 11k-line monolith with drift-guarded copies; additive work keeps 854 unit + 80 browser tests green |
+| D1 | New analysis lives in `src/platform/`; `app/app.js` and `src/engines/*` are not edited | Additive work keeps the existing page and its tests green |
 | D2 | Plain ES modules + JSDoc + `// @ts-check`; type check via `src/platform/tsconfig.json` | Static site has no build step |
-| D3 | Engines contain no numeric parameters; all are provenance-carrying inputs; missing gives `requires_investigation` | Accuracy rules; 46 of 81 catalogue effects are unverified |
-| D4 | Pilot: Los Angeles County 06037; regulatory pilot: California + City of Los Angeles | Best data coverage; California law applies there |
+| D3 | Engines contain no numeric parameters; all are provenance-carrying inputs; missing gives `requires_investigation` | Accuracy rules |
+| D4 | Pilot: Los Angeles County 06037; regulatory pilot: California (City of Los Angeles rows are unsourced) | Best data coverage |
 | D5 | Test fixtures are synthetic and labelled `FIXTURE: not real data` | Keeps invented numbers out of product data |
 | D6 | StreetForge is contract + mock only | Its source shows a design tool with no cost or API output |
-| D7 | Tests in `tests/unit/platform/`; benchmark = known answers + size/time budget | Roadmap |
+| D7 | A deal test and the recommended public contribution are compared in present value; every figure is labelled nominal or PV | Review finding 4 |
+| D8 | The financial check passes on NPV at the hurdle rate, not on IRR alone | Review finding 2 |
+| D9 | Back-test: a prediction matching nothing in the truth set is "unjudged", not a false positive | Truth sets are never complete |
+| D10 | A funding record whose fetched text is known to be superseded is `requires_investigation` | Opportunity-zone text amended after the fetched edition |
 
 ## Status
 
-| Stage | Status | Notes |
+| Stage | Status | Tests (in `tests/unit/platform/`) |
 |---|---|---|
-| 0 Audit | done | Baseline 24 Nov: 854 unit, typecheck clean, 80 e2e |
-| 1 Schemas, coverage, back-test | next | |
-| 2 Impact geography | queued | |
-| 3 Discovery | queued | |
-| 4 Underwriting and P3 | queued | |
-| 5 Synergy, sequencing, scenarios, optimiser | queued | |
-| 6 Scaffolds | queued | StreetForge, regulatory, QoL, data needs |
+| 0 Audit | done | baseline 854 unit, 80 browser |
+| 1 Schemas, coverage ledger, metrics, back-test harness | done | `schema`, `coverage` |
+| 2 Impact geography | done | `impact` |
+| 3 Discovery (4 methods, 17 parcel rule sets, AI idea intake) | done | `discovery`, `pilotBundle` |
+| 4 Underwriting and P3 | done, reviewed, fixed | `underwriting` |
+| 5 Synergy, sequencing, scenarios, optimiser | done (not independently reviewed) | `portfolio` |
+| 6 Regulatory framework, StreetForge contract, quality of life, data needs, results page | scaffolded | `regulatory`, `streetforge`, `qol`, `tests/e2e/platform.spec.ts` |
+| Pilot run | done | `pilotRun` (fails if `app/data/platform_pilot_la.json` is stale) |
 
-## Module ownership (one owner per directory; no two agents edit the same file)
+Totals on 24 Nov 2026: 1,078 unit tests, typecheck clean (Worker files + `src/platform`), 81 browser tests.
 
-| Path | Owner stage |
-|---|---|
-| `src/platform/schema/`, `src/platform/coverage/`, `src/platform/tsconfig.json`, `package.json` typecheck line | 1 |
-| `src/platform/impact/` | 2 |
-| `src/platform/discovery/`, `src/platform/pilot/` | 3 |
-| `src/platform/underwriting/` | 4 |
-| `src/platform/portfolio/` | 5 |
-| `src/platform/regulatory/`, `streetforge/`, `qol/`, `docs/data-needs.md` | 6 |
+## Pilot result (Los Angeles County, as of 2026-11-24; regenerate with `node scripts/platform_pilot_la.mjs <date>`)
 
-## Pilot data facts (Los Angeles County bundle, read 24 Nov 2026 from `app/data/bundle-la.b64.txt`)
+- 3,968 of 8,800 site records are located (776 lots, 2,662 crossings, 530 charger sites); street-calming and
+  creek records carry no point.
+- 35,644 evaluations: 0 viable, 0 candidate, 0 rejected, 13,192 need information, 22,452 not evaluated
+  (non-parcel categories have no rule set yet).
+- Why nothing is viable: no sourced costs, revenues, period count or hurdle rate; no engineering check; no
+  screening criteria supplied; the site file states no units, so lot area is unusable; no record states its city.
+- Regulation: 17,848 conclusions, all "requires investigation". Impact: 6 rail-station models, 36 categories
+  without a model, 0 impact areas computed.
 
-- base64 of gzip JSON. Keys: `bgs` (6,587 block-group features), `under.sites` (9,411 records with keys such as
-  `k`, `use`, `ac`, `lav`, `by`, `mkt`, `z`, `zc`, `rail`), `under.assumptions` (unverified), `zone_rules` (14),
-  `layers` (`freeways`, `arterials`, `rail`, `walls`, `water`, `parks`, `stations`, `stops` as GeoJSON;
-  `streets` is a name grid, not a network; `projects` 6,379 rows with status and year; `zoning` cells).
-- Parcels: live look-up only (`app/data/parcel_services.json`). No stored parcel geometry.
+## Module ownership (one owner per directory)
 
-## Open items (logged, not on the critical path)
+`schema/`, `coverage/` Stage 1 · `impact/`, `pilot/impactModels.js` Stage 2 · `discovery/`, `pilot/laBundle.js`
+Stage 3 · `underwriting/` Stage 4 · `portfolio/` Stage 5 · `regulatory/`, `streetforge/`, `qol/` Stage 6 ·
+`pilot/laSites.js`, `pilot/runPilot.js`, `scripts/platform_pilot_la.mjs`, `app/platform.*` pilot.
 
-| Item | Where | Why deferred |
+## Contract notes that differ from the first draft of `docs/architecture.md`
+
+- Arithmetic on Quantities always yields status `estimated`; opportunity status is derived from checks only.
+- Physical screening failures sit on the engineering check with `basis: 'physical'`; `preserve` is the baseline use.
+- Regulatory conclusions carry `appliesToCategories`; a conditional passes only when its conditions are known true.
+- Impact registry: one model per (category, target, most specific variant); `selectModel` returns one or null.
+- Funding rules: within an `alternativeGroup` label all rules must hold; one label must hold in full.
+- Private contribution is a pro-rata share of each period's cost; the solve is unlevered.
+
+## Open items
+
+| Item | Where | Why open |
 |---|---|---|
-| Old EIFD panel uses one city's pledges for all California counties and sums per-project capacity | `app/app.js:3686-3712,3769` | Editing the monolith is out of scope; superseded by `underwriting/` when the UI is wired |
-| Back-test substitutes invented inputs | `src/engines/valuationBacktestEngine.js:22,56-58` | Needs a correction entry and a new test window |
-| SB 9 text in page zoning descriptions, California gating unverified | `app/app.js:2908,2937` | Needs a browser check |
-| `statutes.json` and `state-housing-laws.json` are identical | `app/data/` | Remove one after checking consumers |
-| `docs/audit/engine-copies.md` says the page loads no `src/` file; `index.html:1266` loads one | docs | Doc correction |
-| Street centreline network, utility records, CIP schedules, building-type costs, submarket rents and cap rates, vacancy, brownfields, permits, flood layers | absent | No dataset ingested without a consuming module; ranked in `docs/data-needs.md` (Stage 6) |
+| Non-parcel categories (street, open space, transit, utility, facility) have no feasibility rule sets | `discovery/feasibility.js` | Stage 3 scope was the 17 parcel categories; 22,452 pilot evaluations wait on this |
+| Units for lot area and land value in the site file; city per record | `pilot/laSites.js` | The file does not state them; needs the assessor source |
+| AB 2011 repeal date is prose in the record, not a field | `app/data/statutes.json` | Rule stays applied with high uncertainty; add `repeal_date` from the fetched statute |
+| PAB, LIHTC, historic credit and SS4A sunsets are text only; opportunity zones need current text | `underwriting/data/funding_mechanisms.json` | Eligibility is "unknown" until dates are fetched |
+| Optimiser treats a missing public-outcome value as 0 toward a minimum (conservative, not flagged) | `portfolio/optimize.js` | Should be listed as unknown |
+| Pilot station distance is built outside `makeQuantity` | `pilot/laSites.js` | Use the derived-Quantity helper |
+| Stage 5 has had no independent review | `portfolio/` | One reviewer run was spent on finance, regulation, impact |
+| Old EIFD panel, back-test defaults, SB 9 page text, duplicate statutes file, stale engine-copies doc | see `docs/audit.md` | Existing page code; out of scope for this run |
+| No back-test has been run on real outcomes | `coverage/backtest.js` | Needs dated project outcomes including failures (`docs/data-needs.md`) |
+| Results page table scrolls sideways at phone width | `app/platform.html` | Analytics before polish |
 
 ## Open questions for the owner
 
-1. GitHub Pages 1 GB cap vs `counties/` in the repo (from `docs/WORK-QUEUE.md`), unchanged by this work.
-2. Which sourced cost and rent datasets may be licensed or ingested (decides how many pilot outputs leave
-   "requires investigation").
+1. Which sourced cost, rent and effect-size datasets may be ingested or licensed (decides when pilot outputs leave
+   "requires investigation"). Ranked list in `docs/data-needs.md`.
+2. GitHub Pages 1 GB cap vs `counties/` in the repo (from `docs/WORK-QUEUE.md`), unchanged by this work.
+3. Whether `app/platform.html` should be linked from the main page.

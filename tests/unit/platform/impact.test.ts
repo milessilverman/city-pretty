@@ -302,3 +302,72 @@ describe("pilot adapter: transit value effects", () => {
     }
   });
 });
+
+describe("stage-gate review fixes (impact)", () => {
+  const json = JSON.parse(readFileSync("app/data/transit_value_effects.json", "utf8"));
+  const { models } = modelsFromTransitValueEffects(json);
+  const target = "property_value_residential_and_commercial";
+  const g = buildGraph(gridFeatures(5, 3), { snapToleranceM: 1 });
+  const rec = [pt("p1", 1, 1)];
+  const areaFor = (m: any) => computeImpactArea({ improvement: improvementAt("I1", "rail_station", 0, 1), model: m, graph: g, receptors: rec, barriers: null, asOf: "2026-01-01" });
+
+  it("review #8: one station is valued under ONE model (selectModel), and two models for it are refused", () => {
+    const reg = makeModelRegistry({ models });
+    const light = reg.selectModel("rail_station", target, { mode: "light rail" });
+    expect(light.reason).toBeNull();
+    expect(light.model!.variant).toBe("light rail"); // most specific beats 'all rail station types'
+    expect(reg.selectModel("rail_station", target, { mode: "commuter rail" }).model!.variant).toBe("commuter rail");
+    expect(reg.selectModel("rail_station", target, { mode: "tram" }).model!.variant).toBe("all rail station types"); // general model only
+    expect(reg.selectModel("rail_station", "no_such_target", {}).reason).toBe("no_match");
+    const all = reg.selectModel("rail_station", target, {}).model!;
+    expect(all.variant).toBe("all rail station types");
+    // The reviewer's case: I1 valued with both models gave 38,000 + 44,500 = 82,500. Now refused; the single model gives its own value only.
+    const base = { p1: q(500000, "USD") };
+    const eAll = valueEffect(areaFor(all), base), eLight = valueEffect(areaFor(light.model), base);
+    expect(() => combineImpacts([eAll, eLight], { rule: "capped_sum", cap: q(1e9, "USD") })).toThrow(/two models/);
+    const one = combineImpacts([eLight], { rule: "capped_sum", cap: q(1e9, "USD") });
+    expect(one.combined.length).toBe(1);
+    expect(one.combined[0].contributors).toEqual(["I1"]);
+    // the same effect passed twice is de-duplicated, not doubled: value = magnitude% x 500,000 (single contribution)
+    const twice = combineImpacts([eLight, eLight], { rule: "capped_sum", cap: q(1e9, "USD") });
+    expect(twice.combined[0].value.value).toBeCloseTo(one.combined[0].value.value as number, 6);
+    expect(twice.combined[0].contributors).toEqual(["I1"]);
+  });
+
+  it("review #8: registry refuses overlapping models unless variant + specificity or alternativeTo is given", () => {
+    const a = model("m.a", ["x"], { variant: "all" }), b = model("m.b", ["x"], { variant: "sub" });
+    expect(() => makeModelRegistry({ models: [a, b] as any })).toThrow(/overlaps/);
+    expect(() => makeModelRegistry({ models: [{ ...a, specificity: 0 }, { ...b, specificity: 0 }] as any })).toThrow(/overlaps/);
+    expect(() => makeModelRegistry({ models: [{ ...a, specificity: 0 }, { ...b, specificity: 1 }] as any })).not.toThrow();
+    const alt = makeModelRegistry({ models: [a, { ...b, alternativeTo: ["m.a"] }] as any });
+    const r = alt.selectModel("x", "fixture_target", {});
+    expect(r.model).toBeNull();
+    expect(r.reason).toBe("ambiguous"); // both match and neither is more specific
+    expect(r.candidates.sort()).toEqual(["m.a", "m.b"]);
+  });
+
+  it("review #11: capped_sum caps low, value and high and refuses a cap in another unit", () => {
+    const mk = (id: string) => ({ improvementId: id, unknownBase: [], notValued: [], perReceptor: [{ receptorId: "r", target: "t", sign: 1 as const, layerId: `L${id}`, improvementId: id, value: q(38000, "USD", -36000, 184000) }] });
+    // sum: value 76,000, low -72,000, high 368,000; cap 300,000 -> high 300,000, value and low unchanged
+    const r = combineImpacts([mk("A"), mk("B")] as any, { rule: "capped_sum", cap: q(300000, "USD") });
+    const v = r.combined[0].value;
+    expect([v.low, v.value, v.high]).toEqual([-72000, 76000, 300000]);
+    expect(r.combined[0].capped).toBe(true);
+    expect(() => combineImpacts([mk("A"), mk("B")] as any, { rule: "capped_sum", cap: q(300000, "km") })).toThrow(/unit/);
+  });
+
+  it("review #17: annulus bands are parsed to inner/outer only when both numbers are present, else skipped", async () => {
+    const { parseBandMiles } = await import("../../../src/platform/pilot/impactModels.js");
+    expect(parseBandMiles("within 1/2 mile to 1 mile")).toEqual({ miles: 1, innerM: 0.5 * 1609.344, outerM: 1609.344 }); // 0.5 mi = 804.672 m
+    expect(parseBandMiles("between 1/4 and 1/2 mile of the station")).toEqual({ miles: 0.5, innerM: 0.25 * 1609.344, outerM: 0.5 * 1609.344 });
+    expect(parseBandMiles("within 1/4 mile of the station")).toEqual({ miles: 0.25 });
+    expect(parseBandMiles("within 1/4 mile and beyond")).toBeNull();
+    expect(parseBandMiles("beyond 1/2 mile")).toBeNull();
+    expect(parseBandMiles("between 1/2 mile and the station")).toBeNull();
+    // a model with an inner radius weights 0 inside it (receptor ~ 111 m from the station, inner 500 m, reach 1000 m)
+    const ann = model("m.ann", ["rail_station"], { innerRadius: q(500, "m"), reach: q(1000, "m") });
+    const near = computeImpactArea({ improvement: improvementAt("I2", "rail_station", 0, 1), model: ann as any, graph: g, receptors: [pt("n", 1, 1), pt("f", 4, 1)], barriers: null, asOf: "2026-01-01" });
+    const w = Object.fromEntries(near.cells.map((c: any) => [c.ref.id, c.weight]));
+    expect(w.n).toBe(0); // ~111 m < 500 m inner radius
+  });
+});

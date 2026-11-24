@@ -122,19 +122,29 @@ export function irr(flows, opts = {}) {
 }
 
 /**
- * Payback period: first time cumulative flow reaches zero, interpolated linearly within the period.
- * @param {number[]} flows @returns {number|null}
+ * Payback period with a reason. Counting starts only once the cumulative flow first goes negative (the outlay may
+ * start in any period); the payback is the first time after that the cumulative flow recovers to 0 or above,
+ * interpolated linearly within the period and measured from period 0.
+ * - cumulative flow never negative: value null, reason 'no_initial_outlay'.
+ * - cumulative flow never recovers: value null, reason 'cumulative_flow_never_recovers'.
+ * @param {number[]} flows @returns {{ value: number|null, reason: string|null }}
  */
-export function paybackPeriod(flows) {
-  if (flows.length === 0) return null;
-  let cum = flows[0];
-  if (cum >= 0) return 0;
-  for (let t = 1; t < flows.length; t++) {
+export function paybackPeriodDetail(flows) {
+  if (!Array.isArray(flows) || flows.length === 0) return { value: null, reason: 'no_flows' };
+  let cum = 0;
+  let inOutlay = false;
+  for (let t = 0; t < flows.length; t++) {
     const prev = cum;
     cum += flows[t];
-    if (cum >= 0) return t - 1 + -prev / flows[t];
+    if (!inOutlay) { if (cum < 0) inOutlay = true; continue; }
+    if (cum >= 0) return { value: t - 1 + -prev / flows[t], reason: null };
   }
-  return null;
+  return { value: null, reason: inOutlay ? 'cumulative_flow_never_recovers' : 'no_initial_outlay' };
+}
+
+/** Payback period as a number, or null (see paybackPeriodDetail for the reason). @param {number[]} flows @returns {number|null} */
+export function paybackPeriod(flows) {
+  return paybackPeriodDetail(flows).value;
 }
 
 /** Sum of positive flows over the absolute sum of negative flows. @param {number[]} flows @returns {number|null} */

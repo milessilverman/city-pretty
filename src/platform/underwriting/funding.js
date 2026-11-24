@@ -26,6 +26,24 @@ export const RULE_FIELDS = Object.freeze([
 ]);
 export const JURISDICTION_LEVELS = Object.freeze(['federal', 'state', 'county', 'city', 'place', 'regional', 'special_district']);
 const RECORD_STATUSES = ['verified', 'requires_investigation'];
+/**
+ * The one vocabulary for project.use and project.sponsorType. Rule values outside it are rejected by the validator,
+ * and a project value outside it is treated as unknown (never as a failed rule).
+ */
+export const PROJECT_USES = Object.freeze([
+  'residential_rental', 'residential_ownership', 'commercial', 'mixed_use', 'industrial', 'transportation',
+  'public_facility', 'parking', 'park_or_open_space',
+]);
+export const SPONSOR_TYPES = Object.freeze([
+  'charitable_or_nonprofit_organization', 'metropolitan_planning_organization', 'political_subdivision_of_a_state',
+  'federally_recognized_tribal_government', 'multijurisdictional_group', 'state_government', 'private_for_profit_entity',
+]);
+/** @type {Readonly<Record<string, readonly string[]>>} */
+export const RULE_VOCABULARY = Object.freeze({ 'project.use': PROJECT_USES, 'project.sponsorType': SPONSOR_TYPES });
+const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
+/** @param {any} s */
+const isIsoDate = (s) => typeof s === 'string' && ISO_DATE.test(s) && !Number.isNaN(Date.parse(`${s}T00:00:00Z`))
+  && new Date(`${s}T00:00:00Z`).toISOString().slice(0, 10) === s;
 
 /** @param {any} i @param {any[]} quotes */
 const quoteOk = (i, quotes) => Number.isInteger(i) && i >= 0 && i < quotes.length;
@@ -68,6 +86,11 @@ export function validateMechanismRecord(r) {
     else if (ru.op === 'in' && !Array.isArray(ru.value)) e.push(`rules[${i}].value must be an array for 'in'`);
     else if ((ru.op === 'gte' || ru.op === 'lte') && !finite(ru.value)) e.push(`rules[${i}].value must be a number for '${ru.op}'`);
     if (ru && verified && !quoteOk(ru.quoteIndex, qs)) e.push(`rules[${i}].quoteIndex must point at a quote`);
+    const vocab = ru && RULE_VOCABULARY[ru.field];
+    if (vocab && (ru.op === 'eq' || ru.op === 'in')) {
+      const vals = ru.op === 'in' ? (Array.isArray(ru.value) ? ru.value : []) : [ru.value];
+      for (const x of vals) if (!vocab.includes(x)) e.push(`rules[${i}].value ${JSON.stringify(x)} is not in the ${ru.field} vocabulary (${vocab.join('|')})`);
+    } else if (vocab) e.push(`rules[${i}].op must be eq or in for ${ru.field}`);
     if (ru && !(ru.alternativeGroup === null || ru.alternativeGroup === undefined || nonEmpty(ru.alternativeGroup))) e.push(`rules[${i}].alternativeGroup must be a string or null`);
   });
   const ps = r.publicShare;
@@ -82,6 +105,14 @@ export function validateMechanismRecord(r) {
     if (typeof v !== 'object' || !nonEmpty(v.text)) e.push(`${k} must be null or { text, quoteIndex }`);
     else if (v.quoteIndex !== null && v.quoteIndex !== undefined && !quoteOk(v.quoteIndex, qs)) e.push(`${k}.quoteIndex must point at a quote`);
   }
+  // optional machine-readable availability window (YYYY-MM-DD, inclusive), each date quoted verbatim in a quote
+  for (const k of ['availableFrom', 'availableUntil']) {
+    if (r[k] !== undefined && r[k] !== null && !isIsoDate(r[k])) e.push(`${k} must be a YYYY-MM-DD date when present`);
+  }
+  const hasWindow = isIsoDate(r.availableFrom) || isIsoDate(r.availableUntil);
+  if (hasWindow && !quoteOk(r.availabilityQuoteIndex, qs)) e.push('availabilityQuoteIndex must point at the quote that states the availability date');
+  if (!hasWindow && r.availabilityQuoteIndex !== undefined && r.availabilityQuoteIndex !== null) e.push('availabilityQuoteIndex given without availableFrom or availableUntil');
+  if (isIsoDate(r.availableFrom) && isIsoDate(r.availableUntil) && r.availableFrom > r.availableUntil) e.push('availableFrom must not be after availableUntil');
   if (!CERTAINTIES.includes(r.certainty)) e.push(`certainty must be one of ${CERTAINTIES.join('|')}`);
   if (!(r.capturedValueStream === null || r.capturedValueStream === undefined || VALUE_STREAM_KEYS.includes(r.capturedValueStream))) e.push('capturedValueStream must be a value-stream key or null');
   if (!(r.reason === undefined || r.reason === null || typeof r.reason === 'string')) e.push('reason must be a string when present');
@@ -111,13 +142,17 @@ function applyRule(rule, v) {
 }
 
 /**
- * Eligibility of a project for one mechanism. Undefined project fields give 'unknown', never 'ineligible'.
+ * Eligibility of a project for one mechanism at `asOf` (YYYY-MM-DD). Undefined project fields give 'unknown', never 'ineligible'.
+ * Availability: when the record has availableFrom/availableUntil and asOf is outside them, the result is 'ineligible'
+ * (reason 'outside_availability_window'); without a valid asOf it is at best 'unknown'. When the record has
+ * deadlineOrSunset text but no machine-readable availableUntil, the result is at best 'unknown'
+ * (reason 'sunset_or_deadline_not_machine_readable') and the text is returned.
  * Rules with alternativeGroup null must all hold. Rules sharing one alternativeGroup label must all hold together;
  * with several labels at least one label must hold in full (AND within a label, OR across labels). If no label
  * holds but a label has only unknown fields left, the result is 'unknown'. An empty rules array gives 'unknown'.
- * @param {any} record @param {any} project
+ * @param {any} record @param {any} project @param {string} [asOf]
  */
-export function checkEligibility(record, project) {
+export function checkEligibility(record, project, asOf) {
   const v = validateMechanismRecord(record);
   const quotes = record && Array.isArray(record.quotes) ? record.quotes : [];
   const notRepresented = record && Array.isArray(record.notRepresented) ? [...record.notRepresented] : [];
@@ -125,6 +160,32 @@ export function checkEligibility(record, project) {
     quotesUsed: /** @type {any[]} */ ([]), notRepresented };
   if (!v.valid) return { ...base, result: 'unknown', reason: 'invalid_record', errors: v.errors };
   if (record.status === 'requires_investigation') return { ...base, result: 'unknown', reason: `record requires investigation: ${record.reason}` };
+  // availability window
+  const from = isIsoDate(record.availableFrom) ? record.availableFrom : null;
+  const until = isIsoDate(record.availableUntil) ? record.availableUntil : null;
+  const window = from || until ? { availableFrom: from, availableUntil: until,
+    quote: quoteOk(record.availabilityQuoteIndex, quotes) ? { index: record.availabilityQuoteIndex, ...quotes[record.availabilityQuoteIndex] } : null } : null;
+  const asOfOk = isIsoDate(asOf);
+  if (window && asOfOk && ((from && /** @type {string} */ (asOf) < from) || (until && /** @type {string} */ (asOf) > until))) {
+    return { ...base, result: 'ineligible', reason: 'outside_availability_window', asOf, availability: window,
+      failedRules: [{ field: 'asOf', op: 'within', value: [from, until], actual: asOf }] };
+  }
+  /** @type {{ reason: string, deadlineOrSunsetText?: string }|null} */ let cap = null;
+  if (window && !asOfOk) cap = { reason: 'asOf_required_for_availability_window' };
+  else if (record.deadlineOrSunset && nonEmpty(record.deadlineOrSunset.text) && !until) {
+    cap = { reason: 'sunset_or_deadline_not_machine_readable', deadlineOrSunsetText: record.deadlineOrSunset.text };
+  }
+  const res = checkRules(record, project, base, quotes);
+  if (window) res.availability = window;
+  if (!cap) return res;
+  if (cap.deadlineOrSunsetText) res.deadlineOrSunsetText = cap.deadlineOrSunsetText;
+  if (res.result === 'eligible') { res.result = 'unknown'; res.reason = cap.reason; }
+  else if (res.result === 'unknown') res.reason = `${res.reason}; ${cap.reason}`;
+  return res;
+}
+
+/** @param {any} record @param {any} project @param {any} base @param {any[]} quotes @returns {any} */
+function checkRules(record, project, base, quotes) {
   // jurisdiction gate
   const j = record.jurisdiction;
   if (j.level !== 'federal') {
@@ -147,6 +208,8 @@ export function checkEligibility(record, project) {
   const evalRule = (ru) => {
     const val = getField(project, ru.field);
     if (val === undefined || val === null) return { ru, state: 'unknown', val };
+    const vocab = RULE_VOCABULARY[ru.field];
+    if (vocab && !vocab.includes(val)) return { ru, state: 'unknown', val, outOfVocabulary: true };
     return { ru, state: applyRule(ru, val) ? 'pass' : 'fail', val };
   };
   /** @type {any[]} */ const failed = [];
@@ -157,7 +220,7 @@ export function checkEligibility(record, project) {
     const r = evalRule(ru);
     used.add(ru.quoteIndex);
     if (r.state === 'fail') failed.push({ field: ru.field, op: ru.op, value: ru.value, actual: r.val });
-    else if (r.state === 'unknown') { anyUnknown = true; unknownFields.add(ru.field); }
+    else if (r.state === 'unknown') { anyUnknown = true; unknownFields.add(r.outOfVocabulary ? `${ru.field} (value ${JSON.stringify(r.val)} not in the vocabulary)` : ru.field); }
   }
   if (groups.size > 0) {
     // AND within a label, OR across labels
@@ -171,7 +234,7 @@ export function checkEligibility(record, project) {
       const open = evals.filter((g) => g.state === 'unknown');
       if (open.length) {
         anyUnknown = true;
-        open.forEach((g) => g.rs.filter((x) => x.state === 'unknown').forEach((x) => unknownFields.add(x.ru.field)));
+        open.forEach((g) => g.rs.filter((x) => x.state === 'unknown').forEach((x) => unknownFields.add(x.outOfVocabulary ? `${x.ru.field} (value ${JSON.stringify(x.val)} not in the vocabulary)` : x.ru.field)));
       } else {
         failed.push({ alternativeGroups: evals.map((g) => ({ alternativeGroup: g.name,
           rules: g.rs.map((x) => ({ field: x.ru.field, op: x.ru.op, value: x.ru.value, actual: x.val, state: x.state })) })) });
@@ -192,7 +255,7 @@ export function checkEligibility(record, project) {
 export function fundingStack(spec) {
   const { gap, candidates, project, asOf } = spec;
   const unit = gap && gap.unit ? gap.unit : 'USD';
-  const checked = (candidates || []).map((r) => ({ record: r, eligibility: checkEligibility(r, project) }));
+  const checked = (candidates || []).map((r) => ({ record: r, eligibility: /** @type {any} */ (checkEligibility(r, project, asOf)) }));
   const eligible = checked.filter((x) => x.eligibility.result === 'eligible')
     .sort((a, b) => /** @type {any} */ (CERTAINTY_RANK)[a.record.certainty] - /** @type {any} */ (CERTAINTY_RANK)[b.record.certainty]);
   const awards = (spec.awards || []).filter((a) => a && known(a.amount) && a.awardRecord && nonEmpty(a.awardRecord.url) && nonEmpty(a.awardRecord.retrieved));
@@ -204,8 +267,11 @@ export function fundingStack(spec) {
     : makeQuantity({ value: 0, unit, low: 0, high: 0, status: 'assumed', assumptions: ['no award record supplied: nothing is counted as secured'],
       jurisdiction: (gap && gap.jurisdiction) || 'unspecified', effectiveDate: asOf, method: 'no award record' });
   const gapKnown = known(gap);
+  // interval subtraction: low = gap.low - secured.high, high = gap.high - secured.low, each floored at 0
   /** @type {any} */ const remaining = gapKnown
-    ? { point: Math.max(0, /** @type {number} */ (gap.value) - securedValue), low: Math.max(0, /** @type {number} */ (gap.low) - securedValue), high: Math.max(0, /** @type {number} */ (gap.high) - securedValue) }
+    ? { point: Math.max(0, /** @type {number} */ (gap.value) - securedValue),
+      low: Math.max(0, /** @type {number} */ (gap.low) - /** @type {number} */ (securedAmount.high)),
+      high: Math.max(0, /** @type {number} */ (gap.high) - /** @type {number} */ (securedAmount.low)) }
     : null;
   const remainingGap = gapKnown
     ? derived({ unit, point: remaining.point, low: remaining.low, high: remaining.high, from: [gap, ...awards.map((a) => a.amount)],
@@ -242,7 +308,8 @@ export function fundingStack(spec) {
     potential,
     remainingIfAllPotentialAwarded: left
       ? { point: left.point, low: left.low, high: left.high, note: 'conditional on every potential award; not a forecast' } : null,
-    unknownEligibility: checked.filter((x) => x.eligibility.result === 'unknown').map((x) => ({ id: x.record && x.record.id, reason: x.eligibility.reason, unknownFields: x.eligibility.unknownFields })),
+    unknownEligibility: checked.filter((x) => x.eligibility.result === 'unknown').map((x) => ({ id: x.record && x.record.id, reason: x.eligibility.reason, unknownFields: x.eligibility.unknownFields,
+      ...(x.eligibility.deadlineOrSunsetText ? { deadlineOrSunsetText: x.eligibility.deadlineOrSunsetText } : {}) })),
     ineligible: checked.filter((x) => x.eligibility.result === 'ineligible').map((x) => ({ id: x.record.id, reason: x.eligibility.reason, failedRules: x.eligibility.failedRules })),
   });
 }
