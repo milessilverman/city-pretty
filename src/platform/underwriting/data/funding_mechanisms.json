@@ -1,0 +1,857 @@
+{
+  "schemaVersion": 1,
+  "retrieved": "2026-11-24",
+  "records": [
+    {
+      "publicShare": {
+        "maxShareOfEligibleCost": null,
+        "quoteIndex": null
+      },
+      "matchRequirement": null,
+      "deadlineOrSunset": {
+        "text": "Set-aside must be met throughout the qualified project period, which runs until the latest of: 15 years after 50 percent of units are occupied (quoted), no tax-exempt PAB outstanding, or Section 8 assistance ends.",
+        "quoteIndex": 4
+      },
+      "capturedValueStream": null,
+      "status": "verified",
+      "rules": [
+        {
+          "field": "project.use",
+          "op": "eq",
+          "value": "residential_rental",
+          "quoteIndex": 1,
+          "alternativeGroup": null
+        },
+        {
+          "field": "project.affordableUnitShare",
+          "op": "gte",
+          "value": 0.2,
+          "quoteIndex": 2,
+          "alternativeGroup": "test_20_50"
+        },
+        {
+          "field": "project.affordableIncomeLimitPctAmi",
+          "op": "lte",
+          "value": 50,
+          "quoteIndex": 2,
+          "alternativeGroup": "test_20_50"
+        },
+        {
+          "field": "project.affordableUnitShare",
+          "op": "gte",
+          "value": 0.4,
+          "quoteIndex": 3,
+          "alternativeGroup": "test_40_60"
+        },
+        {
+          "field": "project.affordableIncomeLimitPctAmi",
+          "op": "lte",
+          "value": 60,
+          "quoteIndex": 3,
+          "alternativeGroup": "test_40_60"
+        }
+      ],
+      "id": "us_pab_142",
+      "mechanismType": "private_activity_bond",
+      "name": "Exempt facility bonds: qualified residential rental projects (26 U.S.C. 142(a)(7), (d))",
+      "jurisdiction": {
+        "level": "federal",
+        "state": null,
+        "countyFips": null,
+        "place": null
+      },
+      "legalBasis": {
+        "citation": "26 U.S.C. 142(a), (d)",
+        "url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title26/html/USCODE-2024-title26-subtitleA-chap1-subchapB-partIV-subpartA-sec142.htm",
+        "publisher": "U.S. Government Publishing Office (govinfo.gov), United States Code",
+        "primary": true,
+        "retrieved": "2026-11-24",
+        "textCurrency": "United States Code, 2024 Edition (page metadata: currentthrough:20250106)"
+      },
+      "quotes": [
+        {
+          "topic": "definition",
+          "text": "For purposes of this part, the term \"exempt facility bond\" means any bond issued as part of an issue 95 percent or more of the net proceeds of which are to be used to provide"
+        },
+        {
+          "topic": "eligibility",
+          "text": "(7) qualified residential rental projects"
+        },
+        {
+          "topic": "eligibility",
+          "text": "The project meets the requirements of this subparagraph if 20 percent or more of the residential units in such project are occupied by individuals whose income is 50 percent or less of area median gross income."
+        },
+        {
+          "topic": "eligibility",
+          "text": "The project meets the requirements of this subparagraph if 40 percent or more of the residential units in such project are occupied by individuals whose income is 60 percent or less of area median gross income."
+        },
+        {
+          "topic": "deadline_or_sunset",
+          "text": "the date which is 15 years after the date on which 50 percent of the residential units in the project are occupied,"
+        },
+        {
+          "topic": "limit",
+          "text": "A private activity bond issued as part of an issue meets the requirements of this section if the aggregate face amount of the private activity bonds issued pursuant to such issue, when added to the aggregate face amount of tax-exempt private activity bonds previously issued by the issuing authority during the calendar year, does not exceed such authority's volume cap for such calendar year.",
+          "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title26/html/USCODE-2024-title26-subtitleA-chap1-subchapB-partIV-subpartA-sec146.htm"
+        }
+      ],
+      "certainty": "requires_allocation",
+      "notRepresented": [
+        "Quote 5 is from 26 U.S.C. 146 (govinfo, same edition): issuance needs volume cap; cap amounts and allocation process not captured.",
+        "Other 142(a) categories (airports, water, sewage, etc.) not encoded; Cornell LII notes (republisher) say Pub. L. 119-21 s70309 amended 142(a)(1) after this edition.",
+        "Qualified project period, 95 percent net-proceeds test, income determination rules and student/SRO rules not encoded.",
+        "Where the 20-50 and 40-60 tests pair a unit share with an income limit, both rules of a pair carry the same alternativeGroup label; the two labels are alternatives."
+      ]
+    },
+    {
+      "publicShare": {
+        "maxShareOfEligibleCost": null,
+        "quoteIndex": null
+      },
+      "matchRequirement": null,
+      "deadlineOrSunset": {
+        "text": "Credit period is 10 taxable years per building (quoted); no program sunset encoded.",
+        "quoteIndex": 3
+      },
+      "capturedValueStream": null,
+      "status": "verified",
+      "rules": [
+        {
+          "field": "project.use",
+          "op": "eq",
+          "value": "residential_rental",
+          "quoteIndex": 0,
+          "alternativeGroup": null
+        },
+        {
+          "field": "project.affordableUnitShare",
+          "op": "gte",
+          "value": 0.2,
+          "quoteIndex": 1,
+          "alternativeGroup": "test_20_50"
+        },
+        {
+          "field": "project.affordableIncomeLimitPctAmi",
+          "op": "lte",
+          "value": 50,
+          "quoteIndex": 1,
+          "alternativeGroup": "test_20_50"
+        },
+        {
+          "field": "project.affordableUnitShare",
+          "op": "gte",
+          "value": 0.4,
+          "quoteIndex": 2,
+          "alternativeGroup": "test_40_60"
+        },
+        {
+          "field": "project.affordableIncomeLimitPctAmi",
+          "op": "lte",
+          "value": 60,
+          "quoteIndex": 2,
+          "alternativeGroup": "test_40_60"
+        }
+      ],
+      "id": "us_lihtc_42",
+      "mechanismType": "tax_credit",
+      "name": "Low-income housing tax credit (26 U.S.C. 42)",
+      "jurisdiction": {
+        "level": "federal",
+        "state": null,
+        "countyFips": null,
+        "place": null
+      },
+      "legalBasis": {
+        "citation": "26 U.S.C. 42(a), (f), (g), (h)(1)",
+        "url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title26/html/USCODE-2024-title26-subtitleA-chap1-subchapA-partIV-subpartD-sec42.htm",
+        "publisher": "U.S. Government Publishing Office (govinfo.gov), United States Code",
+        "primary": true,
+        "retrieved": "2026-11-24",
+        "textCurrency": "United States Code, 2024 Edition (page metadata: currentthrough:20250106)"
+      },
+      "quotes": [
+        {
+          "topic": "definition",
+          "text": "The term \"qualified low-income housing project\" means any project for residential rental property if the project meets the requirements of subparagraph (A), (B), or (C) whichever is elected by the taxpayer:"
+        },
+        {
+          "topic": "eligibility",
+          "text": "The project meets the requirements of this subparagraph if 20 percent or more of the residential units in such project are both rent-restricted and occupied by individuals whose income is 50 percent or less of area median gross income."
+        },
+        {
+          "topic": "eligibility",
+          "text": "The project meets the requirements of this subparagraph if 40 percent or more of the residential units in such project are both rent-restricted and occupied by individuals whose income is 60 percent or less of area median gross income."
+        },
+        {
+          "topic": "deadline_or_sunset",
+          "text": "the term \"credit period\" means, with respect to any building, the period of 10 taxable years beginning with"
+        },
+        {
+          "topic": "limit",
+          "text": "The amount of the credit determined under this section for any taxable year with respect to any building shall not exceed the housing credit dollar amount allocated to such building under this subsection."
+        },
+        {
+          "topic": "process",
+          "text": "Any election under this paragraph, once made, shall be irrevocable."
+        }
+      ],
+      "certainty": "requires_allocation",
+      "notRepresented": [
+        "Third (average income) test in 42(g)(1)(C) not encoded; it is a third alternative to the two encoded tests.",
+        "Credit amount (applicable percentage, qualified basis), rent restriction, compliance period and state allocation plan not encoded.",
+        "Cornell LII notes (republisher) say Pub. L. 119-21 s70422 amended 42(h)(3)(I) and 42(h)(4)(B) after the cited edition; not encoded.",
+        "Where the tests pair a unit share with an income limit, both rules of a pair carry the same alternativeGroup label; the two labels are alternatives."
+      ]
+    },
+    {
+      "publicShare": {
+        "maxShareOfEligibleCost": null,
+        "quoteIndex": null
+      },
+      "matchRequirement": null,
+      "deadlineOrSunset": {
+        "text": "Credit is taken over the 5-year period beginning in the year the building is placed in service.",
+        "quoteIndex": 4
+      },
+      "capturedValueStream": null,
+      "status": "verified",
+      "rules": [
+        {
+          "field": "project.isHistoricStructure",
+          "op": "is_true",
+          "value": true,
+          "quoteIndex": 2,
+          "alternativeGroup": null
+        }
+      ],
+      "id": "us_htc_47",
+      "mechanismType": "tax_credit",
+      "name": "Historic rehabilitation credit (26 U.S.C. 47)",
+      "jurisdiction": {
+        "level": "federal",
+        "state": null,
+        "countyFips": null,
+        "place": null
+      },
+      "legalBasis": {
+        "citation": "26 U.S.C. 47(a), (c)",
+        "url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title26/html/USCODE-2024-title26-subtitleA-chap1-subchapA-partIV-subpartE-sec47.htm",
+        "publisher": "U.S. Government Publishing Office (govinfo.gov), United States Code",
+        "primary": true,
+        "retrieved": "2026-11-24",
+        "textCurrency": "United States Code, 2024 Edition (page metadata: currentthrough:20250106)"
+      },
+      "quotes": [
+        {
+          "topic": "limit",
+          "text": "the rehabilitation credit for such year is an amount equal to the ratable share for such year."
+        },
+        {
+          "topic": "limit",
+          "text": "the ratable share for any taxable year during the period described in such paragraph is the amount equal to 20 percent of the qualified rehabilitation expenditures with respect to the qualified rehabilitated building,"
+        },
+        {
+          "topic": "eligibility",
+          "text": "(iii) such building is a certified historic structure,"
+        },
+        {
+          "topic": "eligibility",
+          "text": "the qualified rehabilitation expenditures during the 24-month period selected by the taxpayer (at the time and in the manner prescribed by regulation) and ending with or within the taxable year exceed the greater of— (I) the adjusted basis of such building (and its structural components), or (II) $5,000."
+        },
+        {
+          "topic": "deadline_or_sunset",
+          "text": "for any taxable year during the 5-year period beginning in the taxable year in which a qualified rehabilitated building is placed in service"
+        }
+      ],
+      "certainty": "by_right",
+      "notRepresented": [
+        "Substantial rehabilitation test: expenditures over the greater of adjusted basis or $5,000 within a 24-month window (60-month if phased) is quoted but not a numeric rule on current fields.",
+        "Certification of the rehabilitation (certified rehabilitation), depreciability and excluded expenditures not encoded.",
+        "Credit is 20 percent of qualified expenditures spread over 5 years; it is not a public share of cost."
+      ]
+    },
+    {
+      "publicShare": {
+        "maxShareOfEligibleCost": null,
+        "quoteIndex": null
+      },
+      "matchRequirement": null,
+      "deadlineOrSunset": null,
+      "capturedValueStream": null,
+      "status": "verified",
+      "rules": [
+        {
+          "field": "project.inLowIncomeCommunity",
+          "op": "is_true",
+          "value": true,
+          "quoteIndex": 1,
+          "alternativeGroup": null
+        }
+      ],
+      "id": "us_nmtc_45d",
+      "mechanismType": "tax_credit",
+      "name": "New markets tax credit (26 U.S.C. 45D)",
+      "jurisdiction": {
+        "level": "federal",
+        "state": null,
+        "countyFips": null,
+        "place": null
+      },
+      "legalBasis": {
+        "citation": "26 U.S.C. 45D(a), (d), (e), (f)(2)",
+        "url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title26/html/USCODE-2024-title26-subtitleA-chap1-subchapA-partIV-subpartD-sec45D.htm",
+        "publisher": "U.S. Government Publishing Office (govinfo.gov), United States Code",
+        "primary": true,
+        "retrieved": "2026-11-24",
+        "textCurrency": "United States Code, 2024 Edition (page metadata: currentthrough:20250106)"
+      },
+      "quotes": [
+        {
+          "topic": "definition",
+          "text": "The term \"low-income community\" means any population census tract if— (A) the poverty rate for such tract is at least 20 percent,"
+        },
+        {
+          "topic": "eligibility",
+          "text": "a substantial portion of the use of the tangible property of such entity (whether owned or leased) is within any low-income community,"
+        },
+        {
+          "topic": "limit",
+          "text": "the applicable percentage is— (A) 5 percent with respect to the first 3 credit allowance dates, and (B) 6 percent with respect to the remainder of the credit allowance dates."
+        },
+        {
+          "topic": "process",
+          "text": "The limitation under paragraph (1) shall be allocated by the Secretary among qualified community development entities selected by the Secretary."
+        }
+      ],
+      "certainty": "requires_allocation",
+      "notRepresented": [
+        "Low-income community definition (poverty rate at least 20 percent, or median family income tests, targeted populations, low-population tracts) is quoted only in part and is not computed by the engine.",
+        "Credit flows to investors in a community development entity that holds a national allocation; project must be financed through a qualified active low-income community business (50 percent gross income, other tests).",
+        "National annual limitation is in 45D(f)(1); Cornell LII notes (republisher) say Pub. L. 119-21 s70423 amended 45D(f) after this edition.",
+        "Qualified equity investment and 7-year credit allowance schedule details not encoded."
+      ]
+    },
+    {
+      "publicShare": {
+        "maxShareOfEligibleCost": null,
+        "quoteIndex": null
+      },
+      "matchRequirement": null,
+      "deadlineOrSunset": {
+        "text": "In this edition no gain election may be made for a sale or exchange after December 31, 2026.",
+        "quoteIndex": 3
+      },
+      "capturedValueStream": null,
+      "status": "verified",
+      "rules": [
+        {
+          "field": "project.inOpportunityZone",
+          "op": "is_true",
+          "value": true,
+          "quoteIndex": 4,
+          "alternativeGroup": null
+        }
+      ],
+      "id": "us_oz_1400z2",
+      "mechanismType": "tax_credit",
+      "name": "Qualified opportunity zone investment: gain deferral and basis rules (26 U.S.C. 1400Z-2)",
+      "jurisdiction": {
+        "level": "federal",
+        "state": null,
+        "countyFips": null,
+        "place": null
+      },
+      "legalBasis": {
+        "citation": "26 U.S.C. 1400Z-2(a)-(d)",
+        "url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title26/html/USCODE-2024-title26-subtitleA-chap1-subchapZ-sec1400Z-2.htm",
+        "publisher": "U.S. Government Publishing Office (govinfo.gov), United States Code",
+        "primary": true,
+        "retrieved": "2026-11-24",
+        "textCurrency": "United States Code, 2024 Edition (page metadata: currentthrough:20250106)"
+      },
+      "quotes": [
+        {
+          "topic": "limit",
+          "text": "In the case of any investment held for at least 5 years, the basis of such investment shall be increased by an amount equal to 10 percent of the amount of gain deferred by reason of subsection (a)(1)(A)."
+        },
+        {
+          "topic": "limit",
+          "text": "In the case of any investment held by the taxpayer for at least 7 years, in addition to any adjustment made under clause (iii), the basis of such property shall be increased by an amount equal to 5 percent of the amount of gain deferred by reason of subsection (a)(1)(A)."
+        },
+        {
+          "topic": "limit",
+          "text": "In the case of any investment held by the taxpayer for at least 10 years and with respect to which the taxpayer makes an election under this clause, the basis of such property shall be equal to the fair market value of such investment on the date that the investment is sold or exchanged."
+        },
+        {
+          "topic": "deadline_or_sunset",
+          "text": "No election may be made under paragraph (1)— (A) with respect to a sale or exchange if an election previously made with respect to such sale or exchange is in effect, or (B) with respect to any sale or exchange after December 31, 2026."
+        },
+        {
+          "topic": "eligibility",
+          "text": "substantially all of the use of such property was in a qualified opportunity zone"
+        },
+        {
+          "topic": "eligibility",
+          "text": "holds at least 90 percent of its assets in qualified opportunity zone property"
+        }
+      ],
+      "certainty": "by_right",
+      "notRepresented": [
+        "Holding-period results (10 percent basis step-up at 5 years, 5 percent more at 7 years, fair-market-value basis at 10 years) are quoted but have no field in the rule vocabulary.",
+        "Cornell LII notes (republisher, fetched) state Pub. L. 119-21 s70421 amends this section for amounts invested after Dec. 31, 2026; the quotes here are the text in the govinfo 2024 edition only.",
+        "Fund requirements (90 percent test, original use or substantial improvement, 30-month test) and the designation of which tracts are zones are not encoded.",
+        "Benefit goes to the investor holding capital gains, not to the public sponsor."
+      ]
+    },
+    {
+      "publicShare": {
+        "maxShareOfEligibleCost": 0.49,
+        "quoteIndex": 3
+      },
+      "matchRequirement": {
+        "text": "Total Federal assistance to a TIFIA-loan project may not exceed 80 percent of total project cost.",
+        "quoteIndex": 4
+      },
+      "deadlineOrSunset": null,
+      "capturedValueStream": null,
+      "status": "verified",
+      "rules": [],
+      "id": "us_tifia_602_603",
+      "mechanismType": "federal_credit_assistance",
+      "name": "TIFIA credit assistance: eligibility and secured loans (23 U.S.C. 602, 603)",
+      "jurisdiction": {
+        "level": "federal",
+        "state": null,
+        "countyFips": null,
+        "place": null
+      },
+      "legalBasis": {
+        "citation": "23 U.S.C. 602(a), 603(b)",
+        "url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title23/html/USCODE-2024-title23-chap6-sec602.htm",
+        "publisher": "U.S. Government Publishing Office (govinfo.gov), United States Code",
+        "primary": true,
+        "retrieved": "2026-11-24",
+        "textCurrency": "United States Code, 2024 Edition (page metadata: currentthrough:20250106)"
+      },
+      "quotes": [
+        {
+          "topic": "eligibility",
+          "text": "A project shall be eligible to receive credit assistance under the TIFIA program if— (A) the entity proposing to carry out the project submits a letter of interest prior to submission of a formal application for the project; and (B) the project meets the criteria described in this subsection."
+        },
+        {
+          "topic": "eligibility",
+          "text": "Eligible project costs shall be reasonably anticipated to equal or exceed $10,000,000 in the case of a project or program of projects— (I) in which the applicant is a local government, public authority, or instrumentality of local government;"
+        },
+        {
+          "topic": "limit",
+          "text": "a project under the TIFIA program shall have eligible project costs that are reasonably anticipated to equal or exceed the lesser of— (i) $50,000,000;"
+        },
+        {
+          "topic": "match_or_share",
+          "text": "the amount of a secured loan under this section shall not exceed the lesser of 49 percent of the reasonably anticipated eligible project costs",
+          "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title23/html/USCODE-2024-title23-chap6-sec603.htm"
+        },
+        {
+          "topic": "match_or_share",
+          "text": "The total Federal assistance provided for a project receiving a loan under the TIFIA program shall not exceed 80 percent of the total project cost.",
+          "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title23/html/USCODE-2024-title23-chap6-sec603.htm"
+        },
+        {
+          "topic": "process",
+          "text": "the Secretary may enter into agreements with 1 or more obligors to make secured loans",
+          "sourceUrl": "https://www.govinfo.gov/content/pkg/USCODE-2024-title23/html/USCODE-2024-title23-chap6-sec603.htm"
+        }
+      ],
+      "certainty": "discretionary",
+      "notRepresented": [
+        "Cost floors ($50 million or one-third of the State federal-aid apportionment, lower floors for ITS, TOD, rural and local-government projects) are quoted but not encoded because they depend on project type and state apportionment.",
+        "49 percent cap is the lesser of that and senior project obligations if the loan lacks an investment-grade rating.",
+        "Creditworthiness (rating, rate covenant), letter of interest, dedicated repayment sources and project selection criteria not encoded.",
+        "Section 603 quotes cite the 603 govinfo URL in sourceUrl."
+      ]
+    },
+    {
+      "publicShare": {
+        "maxShareOfEligibleCost": null,
+        "quoteIndex": null
+      },
+      "matchRequirement": null,
+      "deadlineOrSunset": null,
+      "capturedValueStream": null,
+      "status": "verified",
+      "rules": [],
+      "id": "us_cdbg_5305",
+      "mechanismType": "federal_grant",
+      "name": "Community Development Block Grant: eligible activities and national objectives (42 U.S.C. 5305; 24 CFR 570.200, 570.208)",
+      "jurisdiction": {
+        "level": "federal",
+        "state": null,
+        "countyFips": null,
+        "place": null
+      },
+      "legalBasis": {
+        "citation": "42 U.S.C. 5305(a); 24 CFR 570.200(a), 570.208(a)",
+        "url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title42/html/USCODE-2024-title42-chap69-sec5305.htm",
+        "publisher": "U.S. Government Publishing Office (govinfo.gov), United States Code",
+        "primary": true,
+        "retrieved": "2026-11-24",
+        "textCurrency": "United States Code, 2024 Edition (page metadata: currentthrough:20250106); eCFR quotes (see sourceUrl): eCFR versioner titles API reported title 24 up_to_date_as_of 2026-11-20"
+      },
+      "quotes": [
+        {
+          "topic": "eligibility",
+          "text": "Activities assisted under this chapter may include only"
+        },
+        {
+          "topic": "eligibility",
+          "text": "(2) the acquisition, construction, reconstruction, or installation (including design features and improvements with respect to such construction, reconstruction, or installation that promote energy efficiency) of public works, facilities (except for buildings for the general conduct of government), and site or other improvements;"
+        },
+        {
+          "topic": "eligibility",
+          "text": "Each activity must meet the eligibility requirements of section 105 of the Act as further defined in this subpart.",
+          "sourceUrl": "https://www.ecfr.gov/api/renderer/v1/content/enhanced/current/title-24?part=570&section=570.200"
+        },
+        {
+          "topic": "limit",
+          "text": "not less than 70 percent of the aggregate of CDBG fund expenditures shall be for activities meeting the criteria under § 570.208(a) or under § 570.208(d)(5) or (6) for benefiting low- and moderate-income persons",
+          "sourceUrl": "https://www.ecfr.gov/api/renderer/v1/content/enhanced/current/title-24?part=570&section=570.200"
+        },
+        {
+          "topic": "eligibility",
+          "text": "An activity, the benefits of which are available to all the residents in a particular area, where at least 51 percent of the residents are low and moderate income persons.",
+          "sourceUrl": "https://www.ecfr.gov/api/renderer/v1/content/enhanced/current/title-24?part=570&section=570.208"
+        }
+      ],
+      "certainty": "unknown",
+      "notRepresented": [
+        "No rules encoded: eligibility depends on the activity list and on a national objective met per activity (area benefit, limited clientele, housing, jobs, slum/blight, urgent need); these have no matching fields.",
+        "Funds are awarded to recipients (entitlement/state); how much and to whom needs the allocation sections, not fetched.",
+        "Not a project-level entitlement: the recipient certifies its use of funds (570.200(a)(2)); 70 percent low/moderate-income spending is an aggregate test over a period.",
+        "Statute quotes: 2024 govinfo edition; eCFR quotes from the renderer endpoint, which prints no currency note."
+      ]
+    },
+    {
+      "publicShare": {
+        "maxShareOfEligibleCost": null,
+        "quoteIndex": null
+      },
+      "matchRequirement": null,
+      "deadlineOrSunset": null,
+      "capturedValueStream": "municipalTaxRevenue",
+      "status": "verified",
+      "rules": [
+        {
+          "field": "project.state",
+          "op": "eq",
+          "value": "CA",
+          "quoteIndex": 1,
+          "alternativeGroup": null
+        },
+        {
+          "field": "project.hasLocalApproval",
+          "op": "is_true",
+          "value": true,
+          "quoteIndex": 6,
+          "alternativeGroup": null
+        }
+      ],
+      "id": "ca_eifd_53398_50",
+      "mechanismType": "ifd_eifd",
+      "name": "California enhanced infrastructure financing district (Gov. Code 53398.50 et seq.)",
+      "jurisdiction": {
+        "level": "state",
+        "state": "CA",
+        "countyFips": null,
+        "place": null
+      },
+      "legalBasis": {
+        "citation": "Cal. Gov. Code 53398.50, 53398.51, 53398.52, 53398.66, 53398.68, 53398.75",
+        "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+        "publisher": "California Legislative Counsel (leginfo bulk database pubinfo_2025.zip, LAW_SECTION_TBL), read with scripts/ca_pubinfo_section.py",
+        "primary": true,
+        "retrieved": "2026-11-24",
+        "textCurrency": null
+      },
+      "quotes": [
+        {
+          "topic": "definition",
+          "text": "“Affected taxing entity” means any governmental taxing agency which levied or had levied on its behalf a property tax on all or a portion of the property located in the proposed district in the fiscal year prior to the designation of the district, but not including any county office of education, school district, or community college district."
+        },
+        {
+          "topic": "definition",
+          "text": "(2) An enhanced infrastructure financing district is a district within the meaning of Section 1 of Article XIII A of the California Constitution."
+        },
+        {
+          "topic": "eligibility",
+          "text": "The district shall finance only public capital facilities or other specified projects of communitywide significance that provide significant benefits to the district or the surrounding community"
+        },
+        {
+          "topic": "limit",
+          "text": "A district shall not finance the costs of an ongoing operation or providing services of any kind."
+        },
+        {
+          "topic": "eligibility",
+          "text": "(12) The acquisition, construction, or rehabilitation of housing for persons of very low, low, and moderate income, as defined in Sections 50105 and 50093 of the Health and Safety Code, for rent or purchase."
+        },
+        {
+          "topic": "definition",
+          "text": "That portion of the levied taxes each year specified in the adopted infrastructure financing plan for the city or county and each affected taxing entity that has agreed to participate pursuant to Section 53398.68 in excess of the amount specified in paragraph (1) shall be allocated to, and when collected shall be paid into a special fund of, the district for all lawful purposes of the district."
+        },
+        {
+          "topic": "process",
+          "text": "unless a resolution approving the plan has been adopted by the governing body of each affected taxing entity that is proposed to be subject to division of taxes"
+        },
+        {
+          "topic": "process",
+          "text": "then the public financing authority shall conduct a protest proceeding at the second public hearing to consider whether the landowners and residents within the enhanced infrastructure financing plan area wish to present oral or written protests against the adoption of the enhanced infrastructure financing plan."
+        },
+        {
+          "topic": "process",
+          "text": "shall terminate the proceedings or adopt the enhanced infrastructure financing plan subject to confirmation by the voters at an election called for that purpose."
+        },
+        {
+          "topic": "process",
+          "text": "A majority protest exists if protests have been filed representing over 50 percent of the combined number of landowners and residents in the area who are at least 18 years of age."
+        }
+      ],
+      "certainty": "requires_local_action",
+      "notRepresented": [
+        "Which agencies join is voluntary: each affected taxing entity must approve by resolution and the increment share is whatever each plan specifies; no fixed share encoded.",
+        "School districts, county offices of education and community college districts are not affected taxing entities (quote 0), so there is no school share; not a numeric rule.",
+        "Protest: over 50 percent protest ends the proceedings; a vote is called if protests fall in a middle band (25 to 50 percent) per 53398.66; the band text is only partly quoted; bonds by majority vote of the authority (53398.77) but extra voter-approval paths not encoded.",
+        "Eligible-use list in 53398.52(b) (transport, water, parks, housing, etc.) not encoded as project.use values; former-redevelopment-agency conditions (53398.54) not encoded."
+      ]
+    },
+    {
+      "publicShare": {
+        "maxShareOfEligibleCost": null,
+        "quoteIndex": null
+      },
+      "matchRequirement": null,
+      "deadlineOrSunset": null,
+      "capturedValueStream": null,
+      "status": "verified",
+      "rules": [
+        {
+          "field": "project.hasLocalApproval",
+          "op": "is_true",
+          "value": true,
+          "quoteIndex": 5,
+          "alternativeGroup": null
+        }
+      ],
+      "id": "ca_mello_roos_53311",
+      "mechanismType": "special_assessment",
+      "name": "California Mello-Roos community facilities district (Gov. Code 53311 et seq.)",
+      "jurisdiction": {
+        "level": "state",
+        "state": "CA",
+        "countyFips": null,
+        "place": null
+      },
+      "legalBasis": {
+        "citation": "Cal. Gov. Code 53311, 53313, 53313.5, 53317, 53326, 53328",
+        "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+        "publisher": "California Legislative Counsel (leginfo bulk database pubinfo_2025.zip, LAW_SECTION_TBL), read with scripts/ca_pubinfo_section.py",
+        "primary": true,
+        "retrieved": "2026-11-24",
+        "textCurrency": null
+      },
+      "quotes": [
+        {
+          "topic": "definition",
+          "text": "This chapter shall be known and may be cited as the “Mello-Roos Community Facilities Act of 1982”."
+        },
+        {
+          "topic": "definition",
+          "text": "“Community facilities district” means a legally constituted governmental entity established pursuant to this chapter for the sole purpose of financing facilities and services."
+        },
+        {
+          "topic": "eligibility",
+          "text": "A community facilities district may be established under this chapter to finance any one or more of the following types of services within an area:"
+        },
+        {
+          "topic": "eligibility",
+          "text": "A community facilities district may also finance the purchase, construction, expansion, improvement, or rehabilitation of any real or other tangible property with an estimated useful life of five years or longer"
+        },
+        {
+          "topic": "process",
+          "text": "if at least 12 persons, who need not necessarily be the same 12 persons, have been registered to vote within the territory of the proposed community facilities district for each of the 90 days preceding the close of the protest hearing, the vote shall be by the registered voters of the proposed district, with each voter having one vote."
+        },
+        {
+          "topic": "process",
+          "text": "the legislative body may, pursuant to Section 53340, levy any special tax as specified in the resolution of formation adopted pursuant to subdivision (a) of Section 53325.1 within the territory of the district if two-thirds of the votes cast upon the question of levying the tax are in favor of levying that tax."
+        }
+      ],
+      "certainty": "requires_local_action",
+      "notRepresented": [
+        "Vote threshold: two-thirds of votes cast on the special tax (quote 5); voters are registered voters if at least 12 are registered in the territory for 90 days, else landowners vote by acreage (quote 4). No field for vote results.",
+        "Sections 53312.2 and 53312.3 were not found in the bulk table; special-tax rate method, apportionment and bonding limits (53340 and later) not fetched.",
+        "Services list in 53313 is truncated in quote 2; some service types need separate elections (53326(b), (c)).",
+        "Special tax is paid by property owners in the district; no share or match rule encoded."
+      ]
+    },
+    {
+      "publicShare": {
+        "maxShareOfEligibleCost": null,
+        "quoteIndex": null
+      },
+      "matchRequirement": null,
+      "deadlineOrSunset": null,
+      "capturedValueStream": null,
+      "status": "verified",
+      "rules": [
+        {
+          "field": "project.state",
+          "op": "eq",
+          "value": "CA",
+          "quoteIndex": 4,
+          "alternativeGroup": null
+        },
+        {
+          "field": "project.use",
+          "op": "eq",
+          "value": "rental_housing",
+          "quoteIndex": 0,
+          "alternativeGroup": null
+        },
+        {
+          "field": "project.sponsorType",
+          "op": "in",
+          "value": [
+            "charitable_or_nonprofit_organization"
+          ],
+          "quoteIndex": 0,
+          "alternativeGroup": null
+        }
+      ],
+      "id": "ca_rtc_214g_welfare",
+      "mechanismType": "tax_credit",
+      "name": "California welfare exemption for low-income rental housing (Rev. & Tax. Code 214(g))",
+      "jurisdiction": {
+        "level": "state",
+        "state": "CA",
+        "countyFips": null,
+        "place": null
+      },
+      "legalBasis": {
+        "citation": "Cal. Rev. & Tax. Code 214(g)(1)",
+        "url": "https://downloads.leginfo.legislature.ca.gov/pubinfo_2025.zip",
+        "publisher": "California Legislative Counsel (leginfo bulk database pubinfo_2025.zip, LAW_SECTION_TBL), read with scripts/ca_pubinfo_section.py",
+        "primary": true,
+        "retrieved": "2026-11-24",
+        "textCurrency": null
+      },
+      "quotes": [
+        {
+          "topic": "eligibility",
+          "text": "Property used exclusively for rental housing and related facilities and owned and operated by religious, hospital, scientific, or charitable funds, foundations, limited liability companies, or corporations"
+        },
+        {
+          "topic": "limit",
+          "text": "shall be entitled to a partial exemption equal to that percentage of the value of the property that is equal to the percentage that the number of units serving lower income households represents of the total number of residential units"
+        },
+        {
+          "topic": "eligibility",
+          "text": "The owner of the property is eligible for and receives low-income housing tax credits pursuant to Section 42 of the Internal Revenue Code of 1986, as added by Public Law 99-514."
+        },
+        {
+          "topic": "eligibility",
+          "text": "is financed with tax-exempt mortgage revenue bonds, qualified 501(c)(3) bonds, as that term is defined in Section 145 of Title 26 of the United States Code, or general obligation bonds,"
+        },
+        {
+          "topic": "definition",
+          "text": "within the exemption provided for in subdivision (b) of Section 4 and Section 5 of Article XIII of the California Constitution"
+        }
+      ],
+      "certainty": "by_right",
+      "notRepresented": [
+        "Partial exemption equals the share of units serving lower income households; one of criteria (A) tax-exempt bond or public financing with restricted rents, (B) LIHTC, or (C) other, must apply each year (A and B quoted).",
+        "Limited partnerships qualify only if the managing general partner is an eligible nonprofit; veterans organizations have a separate path (214(g)(1)).",
+        "Basic requirements of 214(a)(1)-(7), the lower-income household definition and the annual claim procedure are not encoded.",
+        "Exemption reduces the property tax paid; it is not a grant and has no public share."
+      ]
+    },
+    {
+      "publicShare": {
+        "maxShareOfEligibleCost": 0.8,
+        "quoteIndex": 2
+      },
+      "matchRequirement": {
+        "text": "Federal share of an eligible project may not exceed 80 percent, so at least 20 percent of cost comes from other sources.",
+        "quoteIndex": 2
+      },
+      "deadlineOrSunset": {
+        "text": "Appropriations are authorized for fiscal years 2022 through 2026 (as enacted); later funding not covered by this text.",
+        "quoteIndex": 3
+      },
+      "capturedValueStream": null,
+      "status": "verified",
+      "rules": [
+        {
+          "field": "project.sponsorType",
+          "op": "in",
+          "value": [
+            "metropolitan_planning_organization",
+            "political_subdivision_of_a_state",
+            "federally_recognized_tribal_government",
+            "multijurisdictional_group"
+          ],
+          "quoteIndex": 0,
+          "alternativeGroup": null
+        }
+      ],
+      "id": "us_ss4a_24112",
+      "mechanismType": "federal_grant",
+      "name": "Safe Streets and Roads for All grant program (Pub. L. 117-58, section 24112)",
+      "jurisdiction": {
+        "level": "federal",
+        "state": null,
+        "countyFips": null,
+        "place": null
+      },
+      "legalBasis": {
+        "citation": "Pub. L. 117-58, section 24112 (23 U.S.C. 402 note)",
+        "url": "https://www.govinfo.gov/content/pkg/PLAW-117publ58/html/PLAW-117publ58.htm",
+        "publisher": "U.S. Government Publishing Office (govinfo.gov), Public Laws (as enacted)",
+        "primary": true,
+        "retrieved": "2026-11-24",
+        "textCurrency": null
+      },
+      "quotes": [
+        {
+          "topic": "eligibility",
+          "text": "The term ``eligible entity'' means-- (A) a metropolitan planning organization; (B) a political subdivision of a State; (C) a federally recognized Tribal government; and (D) a multijurisdictional group of entities described in any of subparagraphs (A) through (C)."
+        },
+        {
+          "topic": "process",
+          "text": "the Secretary may make grants to eligible entities, on a competitive basis, in accordance with this section."
+        },
+        {
+          "topic": "match_or_share",
+          "text": "The Federal share of the cost of an eligible project carried out using a grant provided under the program shall not exceed 80 percent."
+        },
+        {
+          "topic": "deadline_or_sunset",
+          "text": "There is authorized to be appropriated to carry out this section $200,000,000 for each of fiscal years 2022 through 2026,"
+        },
+        {
+          "topic": "limit",
+          "text": "Not more than 15 percent of the funds made available to carry out the program for a fiscal year may be awarded to eligible projects in a single State during that fiscal year."
+        },
+        {
+          "topic": "limit",
+          "text": "not less than 40 percent shall be awarded to eligible projects described in subsection (a)(3)(A)."
+        }
+      ],
+      "certainty": "competitive",
+      "notRepresented": [
+        "Eligible project types (action plan, planning/design, implementation) are defined in 24112(a)(3) but not mapped to project.use values.",
+        "Selection considerations (safety impact, equity, innovation), application and data-reporting duties not encoded.",
+        "Text is the law as enacted in 2021; later amendment or appropriation acts were not checked, and per-year notices of funding opportunity were not fetched.",
+        "The 80 percent cap is a federal-share maximum; actual award sizes and the 20 percent non-federal source rules are not in this section."
+      ]
+    }
+  ],
+  "ruleSemantics": "Rules with alternativeGroup null must all hold. Rules sharing an alternativeGroup label must all hold together; when a record has several labels, at least one label's rules must hold in full."
+}
