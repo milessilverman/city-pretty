@@ -35,6 +35,7 @@ export function optimizePortfolio(spec) {
   const budget = constraints.budget;
   if (!isQuantity(budget) || budget.value === null) throw new Error('optimizePortfolio: budget must be a known Quantity');
   const ids = candidates.map((c) => c.id);
+  const horizon = constraints.horizon ?? null;
   if (new Set(ids).size !== ids.length) throw new Error('optimizePortfolio: duplicate candidate ids');
 
   // ---- eligibility: unknown cost or objective is not worthless, it is not assessed
@@ -47,6 +48,7 @@ export function optimizePortfolio(spec) {
     else if (/** @type {number} */ (c.cost.low) < 0) why.push('negative cost not supported');
     if (!isQuantity(c.objectiveValue) || c.objectiveValue.value === null) why.push('objective value unknown');
     for (const r of c.requires || []) if (!ids.includes(r)) why.push(`requires unknown candidate ${r}`);
+    if (horizon !== null && !Number.isFinite(c.endPeriod)) why.push('end period unknown, so the horizon cannot be checked');
     if (why.length) notOptimised.push({ id: c.id, reason: why.join('; ') });
     else pool.push(c);
   }
@@ -63,7 +65,6 @@ export function optimizePortfolio(spec) {
   }
   const objUnits = new Set(pool.map((c) => c.objectiveValue.unit));
   if (objUnits.size > 1) throw new Error('optimizePortfolio: objective values must share one unit (' + [...objUnits].join(', ') + ')');
-  const horizon = constraints.horizon ?? null;
   const excludedByHorizon = horizon === null ? [] : pool.filter((c) => c.endPeriod > horizon).map((c) => c.id);
   pool = pool.filter((c) => !excludedByHorizon.includes(c.id));
   // requirement on a horizon-excluded candidate also cannot be met
@@ -80,7 +81,8 @@ export function optimizePortfolio(spec) {
   const idx = new Map(pool.map((c, i) => [c.id, i]));
   const cost = pool.map((c) => /** @type {number} */ (conservative ? c.cost.high : c.cost.value));
   const obj = pool.map((c) => /** @type {number} */ (c.objectiveValue.value));
-  const B = /** @type {number} */ (budget.value);
+  // conservative: highest cost against the lowest budget
+  const B = /** @type {number} */ (conservative ? budget.low : budget.value);
   const excl = pool.map(() => /** @type {number[]} */ ([]));
   const req = pool.map(() => /** @type {number[]} */ ([]));
   pool.forEach((c, i) => {
@@ -90,7 +92,7 @@ export function optimizePortfolio(spec) {
   // pairwise interactions
   /** @type {Map<number, number>[]} */ const adj = pool.map(() => new Map());
   /** @type {{ a: string, b: string, reason: string }[]} */ const unknownInteractions = [];
-  /** @type {Map<string, Quantity>} */ const adjQ = new Map();
+  /** @type {Map<string, Quantity[]>} */ const adjQ = new Map();
   for (const it of spec.interactions || []) {
     const i = idx.get(it.a), j = idx.get(it.b);
     if (i === undefined || j === undefined) continue;
@@ -98,12 +100,19 @@ export function optimizePortfolio(spec) {
     if (it.adjustment.unit !== pool[0].objectiveValue.unit) throw new Error('optimizePortfolio: interaction adjustment unit differs from objective unit');
     const v = (adj[i].get(j) || 0) + it.adjustment.value;
     adj[i].set(j, v); adj[j].set(i, v);
-    adjQ.set(i < j ? `${i}|${j}` : `${j}|${i}`, it.adjustment);
+    const key = i < j ? `${i}|${j}` : `${j}|${i}`;
+    adjQ.set(key, [...(adjQ.get(key) || []), it.adjustment]); // several records on one pair: keep every one
   }
   const outNames = Object.keys(constraints.minPublicOutcomes || {});
   const minOut = constraints.minPublicOutcomes || {};
-  const outc = pool.map((c) => outNames.map((k) => c.publicOutcome?.[k] ?? 0));
+  /** @type {{ id: string, outcomes: string[] }[]} */ const unknownPublicOutcome = [];
+  const outc = pool.map((c) => {
+    const missing = outNames.filter((k) => !Number.isFinite(c.publicOutcome?.[k]));
+    if (missing.length) unknownPublicOutcome.push({ id: c.id, outcomes: missing });
+    return outNames.map((k) => (missing.includes(k) ? 0 : /** @type {number} */ (c.publicOutcome[k])));
+  });
   const minReturn = constraints.minReturn ?? null;
+  const unknownReturn = minReturn === null ? [] : pool.filter((c) => c.irr === null || c.irr === undefined || !Number.isFinite(c.irr)).map((c) => c.id);
 
   /** Constraints other than the budget, evaluated on a complete set. @param {boolean[]} sel */
   function complete(sel) {
@@ -115,7 +124,7 @@ export function optimizePortfolio(spec) {
       for (const r of req[i]) if (!sel[r]) return null;
       tc += cost[i];
       const irr = pool[i].irr;
-      if (irr === null || irr === undefined) unknownIrr = true; else wr += cost[i] * irr;
+      if (irr === null || irr === undefined || !Number.isFinite(irr)) unknownIrr = true; else wr += cost[i] * irr;
       outNames.forEach((_, k) => { out[k] += outc[i][k]; });
     }
     for (let k = 0; k < outNames.length; k++) if (out[k] < minOut[outNames[k]]) return null;
@@ -242,17 +251,25 @@ export function optimizePortfolio(spec) {
 
   const base = {
     method, optimalAmong: 'fully assessed candidates only (unassessed candidates are listed under notOptimised, not treated as worthless)',
-    notOptimised, excludedByHorizon, unknownInteractions, n, maxExact, conservative,
+    notOptimised, excludedByHorizon, unknownInteractions, n, maxExact, conservative, budgetLimitApplied: B,
+    unknownPublicOutcome,
+    unknownPublicOutcomeNote: unknownPublicOutcome.length
+      ? 'minimum public-outcome constraints were checked with these candidates\' missing values counted as zero; the true totals may differ'
+      : null,
+    unknownReturn,
+    unknownReturnNote: unknownReturn.length ? 'these candidates have no return, so no portfolio containing them can be shown to meet the minimum return' : null,
   };
   const bestRes = /** @type {{ obj: number, sel: boolean[] }|null} */ (best);
   if (!bestRes) return Object.freeze({ ...base, feasible: false, chosen: [], reason: 'no portfolio satisfies the constraints' });
 
   const chosenIdx = (/** @type {boolean[]} */ s) => s.map((v, i) => (v ? i : -1)).filter((i) => i >= 0);
-  const like = pool[0];
+  // with no assessed candidate the only portfolio is the empty one; take units from the budget and the inputs
+  const objUnit = pool[0]?.objectiveValue.unit ?? candidates.find((c) => isQuantity(c.objectiveValue))?.objectiveValue.unit ?? 'unknown';
+  const like = pool[0] ?? { cost: budget, objectiveValue: { ...budget, unit: objUnit } };
   const totalsOf = (/** @type {boolean[]} */ s) => {
     const ci = chosenIdx(s);
     const adjs = [];
-    for (const i of ci) for (const j of adj[i].keys()) if (j > i && s[j]) adjs.push(/** @type {Quantity} */ (adjQ.get(`${i}|${j}`)));
+    for (const i of ci) for (const j of adj[i].keys()) if (j > i && s[j]) adjs.push(.../** @type {Quantity[]} */ (adjQ.get(`${i}|${j}`)));
     const e = /** @type {any} */ (evalSet(s, true));
     return { cost: sumQ(ci.map((i) => pool[i].cost), like.cost, budget.unit), objective: sumQ([...ci.map((i) => pool[i].objectiveValue), ...adjs], like.objectiveValue, like.objectiveValue.unit),
       costUsed: e.cost, objectiveValue: e.objective, returnAchieved: e.ret, outcomes: Object.fromEntries(outNames.map((k, x) => [k, e.out[x]])) };

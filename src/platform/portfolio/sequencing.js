@@ -33,6 +33,10 @@ function topoOrder(deps) {
 export function sequence(input) {
   const { items, horizon } = input;
   if (!Number.isFinite(horizon)) throw new TypeError('sequence: horizon required');
+  for (const i of items) {
+    if (!Number.isFinite(i.durationPeriods) || i.durationPeriods < 0) throw new TypeError(`sequence: ${i.id} durationPeriods must be a finite number >= 0`);
+    if (!Number.isFinite(i.earliestStart)) throw new TypeError(`sequence: ${i.id} earliestStart must be a finite number`);
+  }
   const byId = new Map(items.map((i) => [i.id, i]));
   if (byId.size !== items.length) throw new Error('sequence: duplicate item ids');
   const deps = new Map(items.map((i) => [i.id, [...(i.dependsOn || [])]]));
@@ -65,7 +69,9 @@ export function sequence(input) {
       const n = periods(cap.value);
       let left = it.units;
       for (let t = 0; t < n; t++) { const rel = Math.min(cap.value, left); left -= rel; phasing.push({ period: finish + t, activity: 'release', units: rel }); }
-      absorption = { status: 'assessed', absorptionPeriods: n, slowestPeriods: periods(/** @type {number} */ (cap.low) > 0 ? /** @type {number} */ (cap.low) : cap.value),
+      const lowOk = /** @type {number} */ (cap.low) > 0;
+      absorption = { status: 'assessed', absorptionPeriods: n, slowestPeriods: lowOk ? periods(/** @type {number} */ (cap.low)) : null,
+        slowestNote: lowOk ? undefined : 'low bound of absorption is not positive, so in the slow case the units are never all released',
         fastestPeriods: periods(/** @type {number} */ (cap.high)), completeBy: finish + n };
       if (finish + n > horizon) flags.push('absorption_exceeds_horizon');
     }
@@ -76,14 +82,17 @@ export function sequence(input) {
   const streetCoordination = (input.coordinationSavings || []).map((c) => {
     const s = schedule[c.itemId];
     if (!s) throw new Error(`sequence: coordinationSavings refers to unknown item ${c.itemId}`);
-    const work = sw ? sw.find((w) => w.segmentId === c.segmentId && w.source) : null;
+    const sourced = sw ? sw.filter((w) => w.segmentId === c.segmentId && w.source) : [];
+    // build periods are start .. finish-1 (finish is the first period after the build)
+    const inWindow = (/** @type {any} */ w) => w.scheduledPeriod >= s.start && w.scheduledPeriod < s.finish;
+    const work = sourced.find(inWindow) || sourced[0] || null;
     const costsOk = isQuantity(c.standaloneCost) && isQuantity(c.coordinatedCost) && c.standaloneCost.value !== null && c.coordinatedCost.value !== null
       && !!c.standaloneCost.source && !!c.coordinatedCost.source;
     if (!work || !costsOk) {
       return { itemId: c.itemId, segmentId: c.segmentId, status: 'no_schedule_data',
         reason: !work ? 'no sourced street-work schedule for this segment' : 'standalone and coordinated costs are not both known and sourced' };
     }
-    const aligned = work.scheduledPeriod >= s.start && work.scheduledPeriod <= s.finish;
+    const aligned = inWindow(work);
     return { itemId: c.itemId, segmentId: c.segmentId, status: aligned ? 'coordinated' : 'not_aligned', streetWorkPeriod: work.scheduledPeriod,
       standaloneCost: c.standaloneCost, coordinatedCost: aligned ? c.coordinatedCost : null,
       saving: aligned ? subQ(c.standaloneCost, c.coordinatedCost) : null };

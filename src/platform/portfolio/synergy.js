@@ -94,23 +94,32 @@ export function applyInteractions(items, interactions, opts = {}) {
   const pairs = [];
   const notAssessed = [];
   const infeasible = [];
-  /** @type {Record<string, Quantity[]>} */ const adjByKey = {};
+  /** @type {{ a?: string, b?: string, items?: string[], resource: string, reason: string }[]} */ const hardUnknown = [];
+  /** hard records that matched a pair, by resource: the resource is one shared pool @type {Map<string, Interaction[]>} */
+  const hardByResource = new Map();  /** @type {Record<string, Quantity[]>} */ const adjByKey = {};
   for (let i = 0; i < items.length; i++) {
     for (let j = i + 1; j < items.length; j++) {
       const p = items[i], q = items[j];
       const found = interactions.filter((x) => matches(x, p, q));
       if (found.length === 0) { notAssessed.push({ a: p.id, b: q.id, status: 'not assessed: no interaction record (this is not a finding of no synergy)' }); continue; }
       const adjustments = [];
+      if (found.every((x) => x.resource)) {
+        notAssessed.push({ a: p.id, b: q.id, status: 'not assessed for value streams: only hard-limit records (this is not a finding of no synergy)' });
+      }
       for (const x of found) {
         if (x.resource) {
+          const list = hardByResource.get(x.resource) || [];
+          if (!list.includes(x)) list.push(x);
+          hardByResource.set(x.resource, list);
           const da = p.demand?.[x.resource], db = q.demand?.[x.resource];
           const lim = /** @type {number} */ (x.magnitude.value);
           if (typeof da !== 'number' || typeof db !== 'number') {
             adjustments.push({ interactionId: x.id, type: x.type, sign: x.sign, effectOn: null, adjustment: null, hard: 'unknown: demand missing for ' + x.resource });
+            hardUnknown.push({ a: p.id, b: q.id, resource: x.resource, reason: 'demand missing' });
           } else {
             const over = da + db > lim;
             adjustments.push({ interactionId: x.id, type: x.type, sign: x.sign, effectOn: null, adjustment: null, hard: over ? 'infeasible' : 'within limit' });
-            if (over) infeasible.push({ a: p.id, b: q.id, type: x.type, resource: x.resource, demand: da + db, limit: lim });
+            if (over) infeasible.push({ scope: 'pair', a: p.id, b: q.id, type: x.type, resource: x.resource, demand: da + db, limit: lim });
           }
           continue;
         }
@@ -136,6 +145,21 @@ export function applyInteractions(items, interactions, opts = {}) {
     }
   }
 
+  // Limits over the whole set: every item named by a record on a resource draws on that one pool, so a set of three can
+  // exceed a limit that each pair respects. The tightest supplied limit applies.
+  for (const [resource, recs] of [...hardByResource].sort((x, y) => (x[0] < y[0] ? -1 : 1))) {
+    const units = new Set(recs.map((x) => x.magnitude.unit));
+    if (units.size > 1) throw new Error(`applyInteractions: limits on ${resource} use different units (${[...units].join(', ')})`);
+    const members = items.filter((it) => recs.some((x) => keys(it).includes(x.a) || keys(it).includes(x.b)));
+    if (members.length < 3) continue; // a pair is already checked above
+    const tight = recs.reduce((m, x) => (/** @type {number} */ (x.magnitude.value) < /** @type {number} */ (m.magnitude.value) ? x : m));
+    const lim = /** @type {number} */ (tight.magnitude.value);
+    const missing = members.filter((it) => typeof it.demand?.[resource] !== 'number' || !Number.isFinite(it.demand[resource])).map((it) => it.id);
+    if (missing.length) { hardUnknown.push({ items: members.map((it) => it.id), resource, reason: 'demand missing on ' + missing.join(', ') }); continue; }
+    const total = members.reduce((s, it) => s + /** @type {number} */ (it.demand?.[resource]), 0);
+    if (total > lim) infeasible.push({ scope: 'set', items: members.map((it) => it.id), type: tight.type, resource, demand: total, limit: lim });
+  }
+
   // Roll up per stream (never across streams), then apply the double-counting guard.
   /** @type {Record<string, any>} */ const byStream = {};
   const streamKeys = [...VALUE_STREAM_KEYS, 'cost'].filter((k) => adjByKey[k] || items.some((it) => (k === 'cost' ? it.cost : it.valueStreams?.[k])));
@@ -154,7 +178,11 @@ export function applyInteractions(items, interactions, opts = {}) {
     /** @type {any} */ let guardInfo = { rule: g ? g.rule : 'none', cap: null, applied: false, supplied: !!g };
     if (before !== 'unknown' && before && g && g.rule !== 'none') {
       let capV, capL, capH;
-      if (g.rule === 'capped_sum') { const c = /** @type {Quantity} */ (g.cap); capV = c.value; capL = c.low; capH = c.high; guardInfo.cap = c; }
+      if (g.rule === 'capped_sum') {
+        const c = /** @type {Quantity} */ (g.cap);
+        if (c.unit !== before.unit) throw new Error(`guard ${k}: cap unit ${c.unit} differs from stream unit ${before.unit}`);
+        capV = c.value; capL = c.low; capH = c.high; guardInfo.cap = c;
+      }
       else {
         const vs = /** @type {Quantity[]} */ (own);
         if (vs.some((x) => x.value === null)) { capV = null; }
@@ -168,6 +196,8 @@ export function applyInteractions(items, interactions, opts = {}) {
     }
     byStream[k] = { standalone, adjustment, beforeGuard: before, combined, guard: guardInfo };
   }
-  return Object.freeze({ pairs, notAssessed, infeasible, feasible: infeasible.length === 0, byStream,
+  // unknown demand is not "within limit": feasibility is then unknown (null), never true
+  const feasible = infeasible.length > 0 ? false : hardUnknown.length > 0 ? null : true;
+  return Object.freeze({ pairs, notAssessed, infeasible, hardUnknown, feasible, byStream,
     note: 'Value streams are reported separately; no cross-stream total exists.' });
 }
