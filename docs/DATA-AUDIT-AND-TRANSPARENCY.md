@@ -1,6 +1,6 @@
 # City Pretty: data audit and accuracy status
 
-**Last updated:** 24 November 2026 (new section at the end; the rest is the 16 November audit). This replaces the 15 November version, which was itself inaccurate (section 1).
+**Last updated:** 27 November 2026 (new sections at the end; the rest is the 16 November audit). This replaces the 15 November version, which was itself inaccurate (section 1).
 
 **Short version: most of the data that was labeled "verified" was not. As of this audit, nothing in City Pretty
 should be used to make an investment, legal or zoning decision unless the record says `verified` and you have
@@ -1029,3 +1029,28 @@ New analysis engines were added beside the existing page (plan in `docs/architec
   the amendment under `notRepresented`.
 - **StreetForge**: nothing in this repository computes or receives StreetForge costs. The interface is a
   contract with a mock that returns cost as unavailable.
+
+---
+
+## 27 November 2026: draw-your-own-area tool, effect bubbles, and what they do not prove
+
+- **Draw an area** runs the page's existing ranking once per block group inside the drawn shape and adds only the
+  figures that ranking already returns. It inherits every limit of that ranking: effect sizes borrowed from
+  studies elsewhere, and 46 of 81 improvement types unverified (shown by name, without a number).
+- **Effect bubbles** are drawn only where a fetched study states both a distance and an effect
+  (`app/data/impact_distance_effects.json`, `docs/audit/impact-distance-effects.md`): 7 of 12 improvement types.
+  Speed humps, crosswalks, EV chargers, street lighting and park renovation have none, so no ring is drawn.
+  Three of the seven rest on a fetched abstract because the full text was blocked. Each study was done in another
+  city (Portland, Baltimore, Philadelphia, Worcester, Waterloo Region, Florida); the panel says where.
+  The bike-lane study found a negative effect and is flagged as likely confounded; it is shown as found.
+- **Homes and dollar changes in a ring are estimates**: block-group home counts and typical values spread over
+  the ring, shown to two significant figures. They are changes in nearby home values, which owners capture.
+  They are not investor cash flow or tax revenue.
+- **Mistakes found and fixed this day.** A second independent review (`docs/audit/stage5-review.md`) found 8 major
+  and 6 minor defects in the portfolio code written on 24 November, including an optimiser that returned a wrong
+  best portfolio in 39 of 400 test cases and capacity limits checked only pair by pair. All are fixed; a 300-case
+  check against brute force now runs with the tests. Nothing from that code had reached the page.
+- **No back-test exists.** The project records in the repository contain no failed or cancelled project, so the
+  harness refused to produce recall or precision (`docs/audit/pilot-la-backtest.md`).
+- **Cost chart** (`docs/data-costs.md`): every price is quoted from the provider's page fetched this day; nine
+  provider pages could not be fetched from the build machine and are listed as such.

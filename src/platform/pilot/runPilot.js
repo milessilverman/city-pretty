@@ -3,7 +3,7 @@
 // the financial check (underwrite) and the coverage ledgers. Pure: the caller reads files and passes parsed JSON.
 // Unknown is never zero: no criteria, no problem map and no sourced costs are invented here.
 import { IMPROVEMENT_CATEGORIES } from '../schema/categories.js';
-import { discover, makeParcelEvaluator } from '../discovery/index.js';
+import { discover, makeDiscoveryEvaluator } from '../discovery/index.js';
 import { summarizeLedgers } from '../coverage/index.js';
 import { createRegistry, buildCaliforniaModule, buildLosAngelesCityModule, makeRegulatoryCheck, CATEGORY_TOPICS } from '../regulatory/index.js';
 import { underwrite } from '../underwriting/index.js';
@@ -34,7 +34,11 @@ export function runLaPilot(args) {
 
   // ---- located sites
   const stations = bundle && bundle.layers && bundle.layers.stations && Array.isArray(bundle.layers.stations.features) ? bundle.layers.stations.features : [];
-  const sites = locatedSitesFromSitesLa(sitesJson, { stations, stationsBuilt: bundle && bundle.meta && bundle.meta.built });
+  /** @type {Record<string, string|null>} */ const blockGroupCities = {};
+  const bgFeatures = bundle && bundle.bgs && Array.isArray(bundle.bgs.features) ? bundle.bgs.features : [];
+  for (const f of bgFeatures) if (f && f.properties && typeof f.properties.id === 'string') blockGroupCities[f.properties.id] = typeof f.properties.c === 'string' && f.properties.c !== '' ? f.properties.c : null;
+  const zoneRuleJurisdictions = [...new Set((bundle && Array.isArray(bundle.zone_rules) ? bundle.zone_rules : []).map((/** @type {any} */ r) => r && r.jurisdiction).filter((/** @type {any} */ j) => typeof j === 'string' && j))];
+  const sites = locatedSitesFromSitesLa(sitesJson, { stations, stationsBuilt: bundle && bundle.meta && bundle.meta.built, blockGroupCities, zoneRuleJurisdictions });
   const locations = sites.locations;
   const parcels = locations.filter((l) => l.ref.kind === 'parcel');
   /** @type {Map<string, string>} */ const typeOf = new Map(locations.map((l) => [l.ref.id, l.sourceRecord.type]));
@@ -78,7 +82,7 @@ export function runLaPilot(args) {
     : financial.result === 'fail' ? { result: 'fail', reason: financial.reason, basis: 'financial' } : { result: 'pass' });
 
   // ---- discovery (engineering check not supplied: unknown through the rule sets)
-  const baseEvaluate = makeParcelEvaluator({ parcels, criteria, checks: { regulatory, financial: financialCheck } });
+  const baseEvaluate = makeDiscoveryEvaluator({ locations, criteria, checks: { regulatory, financial: financialCheck } });
   /** @type {Record<string, Record<string, number>>} */ const evalByCategory = {};
   const evalByStatus = { viable: 0, candidate: 0, needs_info: 0, rejected: 0, not_evaluated: 0 };
   let needsInfoCriterion = 0;
@@ -152,6 +156,7 @@ export function runLaPilot(args) {
     regulatory: {
       modulesRegistered: modules, parcelTopicPairsEvaluated: regTally.parcelTopicPairs,
       parcelsWithPlace: locations.filter((l) => l.ref.jurisdiction.place !== null).length,
+      placeFromBlockGroup: sites.counts.cityFromBlockGroup, placeInZoneRuleCity: sites.counts.cityWithZoneRules, placeAreaNotCity: sites.counts.cityAreaNotPlace, blockGroupNotInBundle: sites.counts.blockGroupNotInBundle, zoneRuleJurisdictions,
       conclusionsByFinding: sortedObj(regTally.byFinding), conclusionsByRuleId: sortedObj(regTally.byRuleId), conclusionsByTopic: sortedObj(regTally.byTopic),
     },
     financial: {

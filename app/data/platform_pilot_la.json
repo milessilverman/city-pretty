@@ -46,9 +46,9 @@
    "byStatus": {
     "viable": 0,
     "candidate": 0,
-    "needs_info": 13192,
+    "needs_info": 35644,
     "rejected": 0,
-    "not_evaluated": 22452
+    "not_evaluated": 0
    },
    "byCategory": {
     "adu": {
@@ -67,31 +67,31 @@
      "needs_info": 776
     },
     "bus_shelter": {
-     "not_evaluated": 2662
+     "needs_info": 2662
     },
     "clinic": {
-     "not_evaluated": 1306
+     "needs_info": 1306
     },
     "commercial_revitalisation": {
      "needs_info": 776
     },
     "crosswalk": {
-     "not_evaluated": 2662
+     "needs_info": 2662
     },
     "densification": {
      "needs_info": 776
     },
     "ev_charger": {
-     "not_evaluated": 3968
+     "needs_info": 3968
     },
     "grocery": {
-     "not_evaluated": 1306
+     "needs_info": 1306
     },
     "industrial_revitalisation": {
      "needs_info": 776
     },
     "library": {
-     "not_evaluated": 1306
+     "needs_info": 1306
     },
     "lot_split": {
      "needs_info": 776
@@ -106,25 +106,25 @@
      "needs_info": 776
     },
     "park": {
-     "not_evaluated": 776
+     "needs_info": 776
     },
     "park_with_development": {
      "needs_info": 776
     },
     "pocket_park": {
-     "not_evaluated": 3438
+     "needs_info": 3438
     },
     "rail_station": {
-     "not_evaluated": 3192
+     "needs_info": 3192
     },
     "school_upgrade": {
-     "not_evaluated": 530
+     "needs_info": 530
     },
     "shared_parking": {
      "needs_info": 776
     },
     "solar_microgrid": {
-     "not_evaluated": 1306
+     "needs_info": 1306
     },
     "surface_parking": {
      "needs_info": 776
@@ -136,10 +136,10 @@
      "needs_info": 776
     }
    },
-   "needsInfoBecauseCriterionNotSupplied": 13192,
+   "needsInfoBecauseCriterionNotSupplied": 35644,
    "criteriaSupplied": 0,
    "problemMapRows": 0,
-   "notEvaluatedNote": "not_evaluated = the category applies to the location kind but no feasibility rule set exists for it (only the 17 parcel categories have one)"
+   "notEvaluatedNote": ""
   },
   "discovery": {
    "methodsRun": [
@@ -154,33 +154,61 @@
     "combination": "not run: no adjacency data and no combination bound supplied"
    },
    "opportunitiesByMethodHits": {
-    "exhaustive": 13192,
+    "exhaustive": 35644,
     "problem_first": 0,
     "asset_first": 3104,
     "combination": 0
    },
    "duplicatesMerged": 3104,
-   "opportunitiesMerged": 13192,
+   "opportunitiesMerged": 35644,
    "opportunitiesByStatus": {
-    "needs_info": 13192
+    "needs_info": 35644
    },
    "byDiscoveredBy": {
-    "exhaustive": 10088,
+    "exhaustive": 32540,
     "exhaustive+asset_first": 3104
    },
    "crashIndicatorLocations": 2662
   },
   "topMissingInputs": [
    {
-    "name": "adjacent_parcels",
-    "count": 13192
-   },
-   {
     "name": "capexSchedule",
-    "count": 13192
+    "count": 35644
    },
    {
     "name": "check:engineering",
+    "count": 35644
+   },
+   {
+    "name": "hurdleRate",
+    "count": 35644
+   },
+   {
+    "name": "omSchedule",
+    "count": 35644
+   },
+   {
+    "name": "periods",
+    "count": 35644
+   },
+   {
+    "name": "revenueSchedule",
+    "count": 35644
+   },
+   {
+    "name": "adjacent_work",
+    "count": 22452
+   },
+   {
+    "name": "criterion:min_adjacent_work",
+    "count": 22452
+   },
+   {
+    "name": "zoning_district",
+    "count": 14495
+   },
+   {
+    "name": "adjacent_parcels",
     "count": 13192
    },
    {
@@ -192,44 +220,16 @@
     "count": 13192
    },
    {
-    "name": "hurdleRate",
-    "count": 13192
-   },
-   {
-    "name": "omSchedule",
-    "count": 13192
-   },
-   {
     "name": "parcel_area",
     "count": 13192
    },
    {
-    "name": "periods",
-    "count": 13192
-   },
-   {
-    "name": "revenueSchedule",
-    "count": 13192
+    "name": "site_area",
+    "count": 9438
    },
    {
     "name": "ab2011_site_criteria_met",
     "count": 6984
-   },
-   {
-    "name": "zoning_class",
-    "count": 6984
-   },
-   {
-    "name": "zoning_district",
-    "count": 6851
-   },
-   {
-    "name": "calfire_or_state_vhfhsz",
-    "count": 6208
-   },
-   {
-    "name": "city_population",
-    "count": 5432
    }
   ],
   "regulatory": {
@@ -238,12 +238,25 @@
     "Los Angeles (city), from bundle zone_rules"
    ],
    "parcelTopicPairsEvaluated": 9312,
-   "parcelsWithPlace": 0,
+   "parcelsWithPlace": 2338,
+   "placeFromBlockGroup": 2338,
+   "placeInZoneRuleCity": 741,
+   "placeAreaNotCity": 631,
+   "blockGroupNotInBundle": 999,
+   "zoneRuleJurisdictions": [
+    "Los Angeles",
+    "Unincorporated LA County",
+    "Long Beach",
+    "Glendale",
+    "Pasadena",
+    "Torrance",
+    "Burbank"
+   ],
    "conclusionsByFinding": {
-    "requires_investigation": 17848
+    "requires_investigation": 18709
    },
    "conclusionsByRuleId": {
-    "(no registered rule: placeholder conclusion)": 3880,
+    "(no registered rule: placeholder conclusion)": 4741,
     "ca_ab2011_affordable": 1552,
     "ca_ab2097": 776,
     "ca_adu_66323": 776,
@@ -255,17 +268,17 @@
    },
    "conclusionsByTopic": {
     "affordability": 776,
-    "density": 4656,
+    "density": 4943,
     "easements": 776,
     "environmental": 776,
-    "height": 3104,
+    "height": 3391,
     "incentives": 776,
     "lot_split": 776,
     "parking": 776,
     "permitting": 776,
     "setbacks": 776,
     "tod_law": 3104,
-    "zoning": 776
+    "zoning": 1063
    }
   },
   "financial": {
@@ -340,9 +353,9 @@
     "library",
     "school_upgrade"
    ],
-   "opportunitiesInCategoriesWithModel": 0,
+   "opportunitiesInCategoriesWithModel": 3192,
    "impactAreasComputed": 0,
-   "note": "no opportunity exists in a category with a registered model (rail_station); the sites file holds no rail-station opportunities, so no impact area was computed"
+   "note": "3192 opportunities are in categories with a model, but no street-network graph is supplied to this run, so no impact area was computed"
   },
   "ledgers": {
    "count": 3968,
@@ -356,24 +369,811 @@
    "totals": {
     "found": 0,
     "rejected": 0,
-    "needsInfo": 13192,
-    "notEvaluated": 133624
+    "needsInfo": 35644,
+    "notEvaluated": 111172
    },
    "note": "totals.notEvaluated includes categories that do not apply to the location kind"
   },
   "limits": [
    "Only records with a point (`pt`) are located. Street segments (calm) and creek records carry no `pt` in this file and are counted but not located.",
-   "The file states no unit for any numeric field. ac, lav, pn, pa, dl2 and ddc are kept as labels under their own keys (not Quantities), so no rule reading parcel_area or assessed_land_value can use them.",
+   "No repo build script or data file states a unit or definition for ac, lav, pn, pa, dl2 or ddc (the script that built the site file is not in the repo; see UNIT_SEARCH). They stay labels under their own keys, so no rule reading parcel_area or assessed_land_value can use them. No unit was inferred from magnitudes.",
    "Counts (n, ped, bike, killed, n_l2, n_dc) are Quantities with unit \"count\" and status assumed; the file does not say what period or definition each count uses beyond its meta (crash_years, crashes, ev_source).",
    "Lot polygons are decoded from the encoded line in `g` using precision 5 (an assumption about the encoding, not stated in the file); a lot whose line cannot be decoded as a closed ring falls back to an asset point.",
-   "No record states its city, so jurisdiction.place is null for every location; city-level rules cannot apply.",
-   "Distances to rail stations are straight-line (haversine), status estimated, and are stored under a name the California rules do not read.",
+   "No record states its city. 2338 located records take jurisdiction.place from their block group's own city value (method: city of the containing block group as carried in the county bundle); 741 are in a city that has rows in the bundle's zone_rules (Los Angeles, Unincorporated LA County, Long Beach, Glendale, Pasadena, Torrance, Burbank). 631 sit in a block group whose value is an unincorporated area, not a city (place left null), and 999 sit in a block group absent from the bundle (place null). A point can lie outside its block group's city value; this is not a point-in-polygon test.",
+   "The crossing counts (n, ped, bike, killed) are not mapped to crosswalk rule attributes: the file meta gives only crash_years and a county crash total, and no repo build script defines what each count measures.",
+   "Distances to rail stations are straight-line (haversine), status assumed (built with makeQuantity), and are stored under a name the California rules do not read.",
    "criteria and problemMap are empty by default: nothing is screened on a threshold, so a site never passes or fails a physical test it has no criterion for.",
    "No sourced costs, revenues, period count or hurdle rate exist in the repo, so the financial check is unknown for every site.",
    "No engineering check exists, so no opportunity can be viable."
   ]
  },
  "sampleOpportunities": [
+  {
+   "id": "exhaustive:rail_station:la-sites:ev:060371012221:1",
+   "categoryId": "rail_station",
+   "sourceType": "ev",
+   "locationKind": "asset",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "regulatory:category_topics:rail_station"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "rail_alignment",
+      "ridership_forecast",
+      "criterion:min_station_ridership",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "regulatory:category_topics:rail_station",
+    "rail_alignment",
+    "ridership_forecast",
+    "criterion:min_station_ridership",
+    "check:engineering",
+    "adjacent_work",
+    "criterion:min_adjacent_work"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:ev_charger:la-sites:ev:060371012221:1",
+   "categoryId": "ev_charger",
+   "sourceType": "ev",
+   "locationKind": "asset",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "regulatory:category_topics:ev_charger"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "grid_capacity",
+      "vehicle_registrations",
+      "host_agreement",
+      "criterion:min_charger_power_capacity",
+      "criterion:min_ev_registrations",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "regulatory:category_topics:ev_charger",
+    "grid_capacity",
+    "vehicle_registrations",
+    "host_agreement",
+    "criterion:min_charger_power_capacity",
+    "criterion:min_ev_registrations",
+    "check:engineering",
+    "adjacent_work",
+    "criterion:min_adjacent_work"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:solar_microgrid:la-sites:ev:060371012221:1",
+   "categoryId": "solar_microgrid",
+   "sourceType": "ev",
+   "locationKind": "asset",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "regulatory:category_topics:solar_microgrid"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "site_area",
+      "grid_capacity",
+      "solar_resource",
+      "criterion:min_solar_site_area",
+      "criterion:min_solar_resource",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "regulatory:category_topics:solar_microgrid",
+    "site_area",
+    "grid_capacity",
+    "solar_resource",
+    "criterion:min_solar_site_area",
+    "criterion:min_solar_resource",
+    "check:engineering",
+    "adjacent_work",
+    "criterion:min_adjacent_work"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:grocery:la-sites:ev:060371012221:1",
+   "categoryId": "grocery",
+   "sourceType": "ev",
+   "locationKind": "asset",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "regulatory:category_topics:grocery"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "site_area",
+      "food_access_deficit",
+      "zoning_district",
+      "criterion:min_grocery_site_area",
+      "criterion:min_food_access_deficit",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "regulatory:category_topics:grocery",
+    "site_area",
+    "food_access_deficit",
+    "zoning_district",
+    "criterion:min_grocery_site_area",
+    "criterion:min_food_access_deficit",
+    "check:engineering",
+    "adjacent_work",
+    "criterion:min_adjacent_work"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:clinic:la-sites:ev:060371012221:1",
+   "categoryId": "clinic",
+   "sourceType": "ev",
+   "locationKind": "asset",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "regulatory:category_topics:clinic"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "site_area",
+      "health_access_deficit",
+      "zoning_district",
+      "criterion:min_clinic_site_area",
+      "criterion:min_health_access_deficit",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "regulatory:category_topics:clinic",
+    "site_area",
+    "health_access_deficit",
+    "zoning_district",
+    "criterion:min_clinic_site_area",
+    "criterion:min_health_access_deficit",
+    "check:engineering",
+    "adjacent_work",
+    "criterion:min_adjacent_work"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:library:la-sites:ev:060371012221:1",
+   "categoryId": "library",
+   "sourceType": "ev",
+   "locationKind": "asset",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "regulatory:category_topics:library"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "site_area",
+      "service_area_population",
+      "zoning_district",
+      "criterion:min_library_site_area",
+      "criterion:min_library_service_population",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "regulatory:category_topics:library",
+    "site_area",
+    "service_area_population",
+    "zoning_district",
+    "criterion:min_library_site_area",
+    "criterion:min_library_service_population",
+    "check:engineering",
+    "adjacent_work",
+    "criterion:min_adjacent_work"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:school_upgrade:la-sites:ev:060371012221:1",
+   "categoryId": "school_upgrade",
+   "sourceType": "ev",
+   "locationKind": "asset",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "regulatory:category_topics:school_upgrade"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "facility_condition",
+      "enrolment_records",
+      "ownership_records",
+      "criterion:max_acceptable_facility_condition",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "regulatory:category_topics:school_upgrade",
+    "facility_condition",
+    "enrolment_records",
+    "ownership_records",
+    "criterion:max_acceptable_facility_condition",
+    "check:engineering",
+    "adjacent_work",
+    "criterion:min_adjacent_work"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:rail_station:la-sites:ev:060371032012:0",
+   "categoryId": "rail_station",
+   "sourceType": "ev",
+   "locationKind": "asset",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "regulatory:category_topics:rail_station"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "rail_alignment",
+      "ridership_forecast",
+      "criterion:min_station_ridership",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "regulatory:category_topics:rail_station",
+    "rail_alignment",
+    "ridership_forecast",
+    "criterion:min_station_ridership",
+    "check:engineering",
+    "adjacent_work",
+    "criterion:min_adjacent_work"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:ev_charger:la-sites:ev:060371032012:0",
+   "categoryId": "ev_charger",
+   "sourceType": "ev",
+   "locationKind": "asset",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "regulatory:category_topics:ev_charger"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "grid_capacity",
+      "vehicle_registrations",
+      "host_agreement",
+      "criterion:min_charger_power_capacity",
+      "criterion:min_ev_registrations",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "regulatory:category_topics:ev_charger",
+    "grid_capacity",
+    "vehicle_registrations",
+    "host_agreement",
+    "criterion:min_charger_power_capacity",
+    "criterion:min_ev_registrations",
+    "check:engineering",
+    "adjacent_work",
+    "criterion:min_adjacent_work"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:solar_microgrid:la-sites:ev:060371032012:0",
+   "categoryId": "solar_microgrid",
+   "sourceType": "ev",
+   "locationKind": "asset",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "regulatory:category_topics:solar_microgrid"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "site_area",
+      "grid_capacity",
+      "solar_resource",
+      "criterion:min_solar_site_area",
+      "criterion:min_solar_resource",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "regulatory:category_topics:solar_microgrid",
+    "site_area",
+    "grid_capacity",
+    "solar_resource",
+    "criterion:min_solar_site_area",
+    "criterion:min_solar_resource",
+    "check:engineering",
+    "adjacent_work",
+    "criterion:min_adjacent_work"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:grocery:la-sites:ev:060371032012:0",
+   "categoryId": "grocery",
+   "sourceType": "ev",
+   "locationKind": "asset",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "regulatory:category_topics:grocery"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "site_area",
+      "food_access_deficit",
+      "zoning_district",
+      "criterion:min_grocery_site_area",
+      "criterion:min_food_access_deficit",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "regulatory:category_topics:grocery",
+    "site_area",
+    "food_access_deficit",
+    "zoning_district",
+    "criterion:min_grocery_site_area",
+    "criterion:min_food_access_deficit",
+    "check:engineering",
+    "adjacent_work",
+    "criterion:min_adjacent_work"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:clinic:la-sites:ev:060371032012:0",
+   "categoryId": "clinic",
+   "sourceType": "ev",
+   "locationKind": "asset",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "regulatory:category_topics:clinic"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "site_area",
+      "health_access_deficit",
+      "zoning_district",
+      "criterion:min_clinic_site_area",
+      "criterion:min_health_access_deficit",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "regulatory:category_topics:clinic",
+    "site_area",
+    "health_access_deficit",
+    "zoning_district",
+    "criterion:min_clinic_site_area",
+    "criterion:min_health_access_deficit",
+    "check:engineering",
+    "adjacent_work",
+    "criterion:min_adjacent_work"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:library:la-sites:ev:060371032012:0",
+   "categoryId": "library",
+   "sourceType": "ev",
+   "locationKind": "asset",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "regulatory:category_topics:library"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "site_area",
+      "service_area_population",
+      "zoning_district",
+      "criterion:min_library_site_area",
+      "criterion:min_library_service_population",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "regulatory:category_topics:library",
+    "site_area",
+    "service_area_population",
+    "zoning_district",
+    "criterion:min_library_site_area",
+    "criterion:min_library_service_population",
+    "check:engineering",
+    "adjacent_work",
+    "criterion:min_adjacent_work"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:school_upgrade:la-sites:ev:060371032012:0",
+   "categoryId": "school_upgrade",
+   "sourceType": "ev",
+   "locationKind": "asset",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "regulatory:category_topics:school_upgrade"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "facility_condition",
+      "enrolment_records",
+      "ownership_records",
+      "criterion:max_acceptable_facility_condition",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "regulatory:category_topics:school_upgrade",
+    "facility_condition",
+    "enrolment_records",
+    "ownership_records",
+    "criterion:max_acceptable_facility_condition",
+    "check:engineering",
+    "adjacent_work",
+    "criterion:min_adjacent_work"
+   ],
+   "confidence": "unknown"
+  },
   {
    "id": "exhaustive:underused_land:la-sites:lot_park:060371042011:0",
    "categoryId": "underused_land",
@@ -400,6 +1200,7 @@
      "missing": [
       "zoning_class",
       "ab2011_site_criteria_met",
+      "zoning_district",
       "distance_to_transit_mi",
       "transit_mode",
       "calfire_or_state_vhfhsz",
@@ -410,7 +1211,7 @@
       "historic_district_hpoz",
       "fema_100yr_floodway",
       "prime_farmland",
-      "jurisdiction_module:CA/06037:permitting"
+      "jurisdiction_module:CA/06037/Los Angeles:permitting"
      ]
     },
     "engineering": {
@@ -433,6 +1234,7 @@
     "hurdleRate",
     "zoning_class",
     "ab2011_site_criteria_met",
+    "zoning_district",
     "distance_to_transit_mi",
     "transit_mode",
     "calfire_or_state_vhfhsz",
@@ -443,7 +1245,7 @@
     "historic_district_hpoz",
     "fema_100yr_floodway",
     "prime_farmland",
-    "jurisdiction_module:CA/06037:permitting",
+    "jurisdiction_module:CA/06037/Los Angeles:permitting",
     "parcel_area",
     "assessed_improvement_value",
     "assessed_land_value",
@@ -481,6 +1283,7 @@
      "missing": [
       "zoning_class",
       "ab2011_site_criteria_met",
+      "zoning_district",
       "distance_to_public_transit_mi",
       "distance_to_transit_mi",
       "transit_mode",
@@ -509,6 +1312,7 @@
     "hurdleRate",
     "zoning_class",
     "ab2011_site_criteria_met",
+    "zoning_district",
     "distance_to_public_transit_mi",
     "distance_to_transit_mi",
     "transit_mode",
@@ -551,6 +1355,7 @@
      "missing": [
       "zoning_class",
       "ab2011_site_criteria_met",
+      "zoning_district",
       "distance_to_transit_mi",
       "transit_mode",
       "calfire_or_state_vhfhsz",
@@ -560,8 +1365,7 @@
       "single_family_zone",
       "historic_district_hpoz",
       "fema_100yr_floodway",
-      "prime_farmland",
-      "jurisdiction_module:CA/06037:setbacks"
+      "prime_farmland"
      ]
     },
     "engineering": {
@@ -582,6 +1386,7 @@
     "hurdleRate",
     "zoning_class",
     "ab2011_site_criteria_met",
+    "zoning_district",
     "distance_to_transit_mi",
     "transit_mode",
     "calfire_or_state_vhfhsz",
@@ -592,7 +1397,6 @@
     "historic_district_hpoz",
     "fema_100yr_floodway",
     "prime_farmland",
-    "jurisdiction_module:CA/06037:setbacks",
     "parcel_area",
     "vacancy_status",
     "check:engineering",
@@ -627,6 +1431,7 @@
      "missing": [
       "zoning_class",
       "ab2011_site_criteria_met",
+      "zoning_district",
       "distance_to_transit_mi",
       "transit_mode",
       "calfire_or_state_vhfhsz",
@@ -657,6 +1462,7 @@
     "hurdleRate",
     "zoning_class",
     "ab2011_site_criteria_met",
+    "zoning_district",
     "distance_to_transit_mi",
     "transit_mode",
     "calfire_or_state_vhfhsz",
@@ -699,9 +1505,9 @@
     "regulatory": {
      "result": "unknown",
      "missing": [
-      "jurisdiction_module:CA/06037:environmental",
-      "jurisdiction_module:CA/06037:permitting",
-      "zoning: no rule that lists category brownfield gives a conclusion"
+      "zoning_district",
+      "jurisdiction_module:CA/06037/Los Angeles:environmental",
+      "jurisdiction_module:CA/06037/Los Angeles:permitting"
      ]
     },
     "engineering": {
@@ -722,9 +1528,9 @@
     "revenueSchedule",
     "omSchedule",
     "hurdleRate",
-    "jurisdiction_module:CA/06037:environmental",
-    "jurisdiction_module:CA/06037:permitting",
-    "zoning: no rule that lists category brownfield gives a conclusion",
+    "zoning_district",
+    "jurisdiction_module:CA/06037/Los Angeles:environmental",
+    "jurisdiction_module:CA/06037/Los Angeles:permitting",
     "parcel_area",
     "contamination_status",
     "remediation_cost",
@@ -761,13 +1567,14 @@
      "missing": [
       "zoning_class",
       "ab2011_site_criteria_met",
+      "zoning_district",
       "distance_to_transit_mi",
       "transit_mode",
       "calfire_or_state_vhfhsz",
       "rent_controlled_housing_site",
       "mobilehome_or_rv_park_site",
       "city_population",
-      "jurisdiction_module:CA/06037:easements"
+      "jurisdiction_module:CA/06037/Los Angeles:easements"
      ]
     },
     "engineering": {
@@ -789,13 +1596,14 @@
     "hurdleRate",
     "zoning_class",
     "ab2011_site_criteria_met",
+    "zoning_district",
     "distance_to_transit_mi",
     "transit_mode",
     "calfire_or_state_vhfhsz",
     "rent_controlled_housing_site",
     "mobilehome_or_rv_park_site",
     "city_population",
-    "jurisdiction_module:CA/06037:easements",
+    "jurisdiction_module:CA/06037/Los Angeles:easements",
     "parcel_area",
     "combined_parcel_area",
     "criterion:min_assembled_area",
@@ -829,12 +1637,12 @@
     "regulatory": {
      "result": "unknown",
      "missing": [
+      "zoning_district",
       "single_family_zone",
       "historic_district_hpoz",
       "fema_100yr_floodway",
       "calfire_or_state_vhfhsz",
-      "prime_farmland",
-      "zoning: no rule that lists category lot_split gives a conclusion"
+      "prime_farmland"
      ]
     },
     "engineering": {
@@ -853,12 +1661,12 @@
     "revenueSchedule",
     "omSchedule",
     "hurdleRate",
+    "zoning_district",
     "single_family_zone",
     "historic_district_hpoz",
     "fema_100yr_floodway",
     "calfire_or_state_vhfhsz",
     "prime_farmland",
-    "zoning: no rule that lists category lot_split gives a conclusion",
     "parcel_area",
     "criterion:min_splittable_area",
     "check:engineering",
@@ -891,10 +1699,9 @@
     "regulatory": {
      "result": "unknown",
      "missing": [
+      "zoning_district",
       "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
-      "jurisdiction_module:CA/06037:setbacks",
-      "jurisdiction_module:CA/06037:permitting",
-      "zoning: no rule that lists category adu gives a conclusion"
+      "jurisdiction_module:CA/06037/Los Angeles:permitting"
      ]
     },
     "engineering": {
@@ -915,10 +1722,9 @@
     "revenueSchedule",
     "omSchedule",
     "hurdleRate",
+    "zoning_district",
     "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
-    "jurisdiction_module:CA/06037:setbacks",
-    "jurisdiction_module:CA/06037:permitting",
-    "zoning: no rule that lists category adu gives a conclusion",
+    "jurisdiction_module:CA/06037/Los Angeles:permitting",
     "parcel_area",
     "existing_structures",
     "criterion:min_adu_lot_area",
@@ -955,6 +1761,7 @@
      "missing": [
       "zoning_class",
       "ab2011_site_criteria_met",
+      "zoning_district",
       "distance_to_transit_mi",
       "transit_mode",
       "calfire_or_state_vhfhsz",
@@ -987,6 +1794,7 @@
     "hurdleRate",
     "zoning_class",
     "ab2011_site_criteria_met",
+    "zoning_district",
     "distance_to_transit_mi",
     "transit_mode",
     "calfire_or_state_vhfhsz",
@@ -1033,7 +1841,8 @@
      "missing": [
       "zoning_class",
       "ab2011_site_criteria_met",
-      "jurisdiction_module:CA/06037:permitting",
+      "zoning_district",
+      "jurisdiction_module:CA/06037/Los Angeles:permitting",
       "distance_to_public_transit_mi"
      ]
     },
@@ -1056,7 +1865,8 @@
     "hurdleRate",
     "zoning_class",
     "ab2011_site_criteria_met",
-    "jurisdiction_module:CA/06037:permitting",
+    "zoning_district",
+    "jurisdiction_module:CA/06037/Los Angeles:permitting",
     "distance_to_public_transit_mi",
     "parcel_area",
     "office_vacancy",
@@ -1093,6 +1903,7 @@
      "missing": [
       "zoning_class",
       "ab2011_site_criteria_met",
+      "zoning_district",
       "distance_to_transit_mi",
       "transit_mode",
       "calfire_or_state_vhfhsz",
@@ -1120,6 +1931,7 @@
     "hurdleRate",
     "zoning_class",
     "ab2011_site_criteria_met",
+    "zoning_district",
     "distance_to_transit_mi",
     "transit_mode",
     "calfire_or_state_vhfhsz",
@@ -1160,9 +1972,8 @@
     "regulatory": {
      "result": "unknown",
      "missing": [
-      "jurisdiction_module:CA/06037:easements",
-      "zoning: no rule that lists category air_rights gives a conclusion",
-      "height: no rule that lists category air_rights gives a conclusion"
+      "zoning_district",
+      "jurisdiction_module:CA/06037/Los Angeles:easements"
      ]
     },
     "engineering": {
@@ -1182,9 +1993,8 @@
     "revenueSchedule",
     "omSchedule",
     "hurdleRate",
-    "jurisdiction_module:CA/06037:easements",
-    "zoning: no rule that lists category air_rights gives a conclusion",
-    "height: no rule that lists category air_rights gives a conclusion",
+    "zoning_district",
+    "jurisdiction_module:CA/06037/Los Angeles:easements",
     "parcel_area",
     "unused_development_rights",
     "criterion:min_unused_rights",
@@ -1218,8 +2028,8 @@
     "regulatory": {
      "result": "unknown",
      "missing": [
-      "distance_to_public_transit_mi",
-      "zoning: no rule that lists category shared_parking gives a conclusion"
+      "zoning_district",
+      "distance_to_public_transit_mi"
      ]
     },
     "engineering": {
@@ -1239,8 +2049,8 @@
     "revenueSchedule",
     "omSchedule",
     "hurdleRate",
+    "zoning_district",
     "distance_to_public_transit_mi",
-    "zoning: no rule that lists category shared_parking gives a conclusion",
     "parcel_area",
     "parking_occupancy",
     "criterion:max_parking_occupancy",
@@ -1276,7 +2086,8 @@
      "missing": [
       "zoning_class",
       "ab2011_site_criteria_met",
-      "jurisdiction_module:CA/06037:incentives"
+      "zoning_district",
+      "jurisdiction_module:CA/06037/Los Angeles:incentives"
      ]
     },
     "engineering": {
@@ -1299,7 +2110,8 @@
     "hurdleRate",
     "zoning_class",
     "ab2011_site_criteria_met",
-    "jurisdiction_module:CA/06037:incentives",
+    "zoning_district",
+    "jurisdiction_module:CA/06037/Los Angeles:incentives",
     "parcel_area",
     "public_ownership",
     "permitted_floor_area",
@@ -1334,8 +2146,8 @@
     "regulatory": {
      "result": "unknown",
      "missing": [
-      "jurisdiction_module:CA/06037:environmental",
-      "zoning: no rule that lists category park_with_development gives a conclusion"
+      "zoning_district",
+      "jurisdiction_module:CA/06037/Los Angeles:environmental"
      ]
     },
     "engineering": {
@@ -1355,8 +2167,8 @@
     "revenueSchedule",
     "omSchedule",
     "hurdleRate",
-    "jurisdiction_module:CA/06037:environmental",
-    "zoning: no rule that lists category park_with_development gives a conclusion",
+    "zoning_district",
+    "jurisdiction_module:CA/06037/Los Angeles:environmental",
     "parcel_area",
     "open_space_deficit",
     "criterion:min_open_space_deficit",
@@ -1390,8 +2202,8 @@
     "regulatory": {
      "result": "unknown",
      "missing": [
-      "jurisdiction_module:CA/06037:environmental",
-      "zoning: no rule that lists category industrial_revitalisation gives a conclusion"
+      "zoning_district",
+      "jurisdiction_module:CA/06037/Los Angeles:environmental"
      ]
     },
     "engineering": {
@@ -1411,8 +2223,8 @@
     "revenueSchedule",
     "omSchedule",
     "hurdleRate",
-    "jurisdiction_module:CA/06037:environmental",
-    "zoning: no rule that lists category industrial_revitalisation gives a conclusion",
+    "zoning_district",
+    "jurisdiction_module:CA/06037/Los Angeles:environmental",
     "parcel_area",
     "industrial_vacancy",
     "criterion:min_industrial_vacancy",
@@ -1447,8 +2259,8 @@
     "regulatory": {
      "result": "unknown",
      "missing": [
-      "jurisdiction_module:CA/06037:incentives",
-      "zoning: no rule that lists category commercial_revitalisation gives a conclusion"
+      "zoning_district",
+      "jurisdiction_module:CA/06037/Los Angeles:incentives"
      ]
     },
     "engineering": {
@@ -1468,8 +2280,8 @@
     "revenueSchedule",
     "omSchedule",
     "hurdleRate",
-    "jurisdiction_module:CA/06037:incentives",
-    "zoning: no rule that lists category commercial_revitalisation gives a conclusion",
+    "zoning_district",
+    "jurisdiction_module:CA/06037/Los Angeles:incentives",
     "parcel_area",
     "commercial_vacancy",
     "criterion:min_commercial_vacancy",
@@ -1477,6 +2289,399 @@
     "criterion:min_public_space_area",
     "adjacent_parcels",
     "criterion:min_coordination_partners"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:park:la-sites:lot_park:060371042011:0",
+   "categoryId": "park",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "regulatory:category_topics:park"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "site_area",
+      "open_space_deficit",
+      "ownership_records",
+      "criterion:min_park_area",
+      "criterion:min_park_open_space_deficit",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "regulatory:category_topics:park",
+    "site_area",
+    "open_space_deficit",
+    "ownership_records",
+    "criterion:min_park_area",
+    "criterion:min_park_open_space_deficit",
+    "check:engineering",
+    "adjacent_work",
+    "criterion:min_adjacent_work"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:pocket_park:la-sites:lot_park:060371042011:0",
+   "categoryId": "pocket_park",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "regulatory:category_topics:pocket_park"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "site_area",
+      "open_space_deficit",
+      "ownership_records",
+      "criterion:min_pocket_park_area",
+      "criterion:min_pocket_park_open_space_deficit",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "regulatory:category_topics:pocket_park",
+    "site_area",
+    "open_space_deficit",
+    "ownership_records",
+    "criterion:min_pocket_park_area",
+    "criterion:min_pocket_park_open_space_deficit",
+    "check:engineering",
+    "adjacent_work",
+    "criterion:min_adjacent_work"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:ev_charger:la-sites:lot_park:060371042011:0",
+   "categoryId": "ev_charger",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "regulatory:category_topics:ev_charger"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "grid_capacity",
+      "vehicle_registrations",
+      "host_agreement",
+      "criterion:min_charger_power_capacity",
+      "criterion:min_ev_registrations",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "regulatory:category_topics:ev_charger",
+    "grid_capacity",
+    "vehicle_registrations",
+    "host_agreement",
+    "criterion:min_charger_power_capacity",
+    "criterion:min_ev_registrations",
+    "check:engineering",
+    "adjacent_work",
+    "criterion:min_adjacent_work"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:solar_microgrid:la-sites:lot_park:060371042011:0",
+   "categoryId": "solar_microgrid",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "regulatory:category_topics:solar_microgrid"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "site_area",
+      "grid_capacity",
+      "solar_resource",
+      "criterion:min_solar_site_area",
+      "criterion:min_solar_resource",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "regulatory:category_topics:solar_microgrid",
+    "site_area",
+    "grid_capacity",
+    "solar_resource",
+    "criterion:min_solar_site_area",
+    "criterion:min_solar_resource",
+    "check:engineering",
+    "adjacent_work",
+    "criterion:min_adjacent_work"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:grocery:la-sites:lot_park:060371042011:0",
+   "categoryId": "grocery",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "regulatory:category_topics:grocery"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "site_area",
+      "food_access_deficit",
+      "criterion:min_grocery_site_area",
+      "criterion:min_food_access_deficit",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "regulatory:category_topics:grocery",
+    "site_area",
+    "food_access_deficit",
+    "criterion:min_grocery_site_area",
+    "criterion:min_food_access_deficit",
+    "check:engineering",
+    "adjacent_work",
+    "criterion:min_adjacent_work"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:clinic:la-sites:lot_park:060371042011:0",
+   "categoryId": "clinic",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "regulatory:category_topics:clinic"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "site_area",
+      "health_access_deficit",
+      "criterion:min_clinic_site_area",
+      "criterion:min_health_access_deficit",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "regulatory:category_topics:clinic",
+    "site_area",
+    "health_access_deficit",
+    "criterion:min_clinic_site_area",
+    "criterion:min_health_access_deficit",
+    "check:engineering",
+    "adjacent_work",
+    "criterion:min_adjacent_work"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:library:la-sites:lot_park:060371042011:0",
+   "categoryId": "library",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "regulatory:category_topics:library"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "site_area",
+      "service_area_population",
+      "criterion:min_library_site_area",
+      "criterion:min_library_service_population",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "regulatory:category_topics:library",
+    "site_area",
+    "service_area_population",
+    "criterion:min_library_site_area",
+    "criterion:min_library_service_population",
+    "check:engineering",
+    "adjacent_work",
+    "criterion:min_adjacent_work"
    ],
    "confidence": "unknown"
   },
@@ -1506,6 +2711,7 @@
      "missing": [
       "zoning_class",
       "ab2011_site_criteria_met",
+      "zoning_district",
       "distance_to_transit_mi",
       "transit_mode",
       "calfire_or_state_vhfhsz",
@@ -1516,7 +2722,7 @@
       "historic_district_hpoz",
       "fema_100yr_floodway",
       "prime_farmland",
-      "jurisdiction_module:CA/06037:permitting"
+      "jurisdiction_module:CA/06037/Los Angeles:permitting"
      ]
     },
     "engineering": {
@@ -1539,6 +2745,7 @@
     "hurdleRate",
     "zoning_class",
     "ab2011_site_criteria_met",
+    "zoning_district",
     "distance_to_transit_mi",
     "transit_mode",
     "calfire_or_state_vhfhsz",
@@ -1549,7 +2756,7 @@
     "historic_district_hpoz",
     "fema_100yr_floodway",
     "prime_farmland",
-    "jurisdiction_module:CA/06037:permitting",
+    "jurisdiction_module:CA/06037/Los Angeles:permitting",
     "parcel_area",
     "assessed_improvement_value",
     "assessed_land_value",
@@ -1587,6 +2794,7 @@
      "missing": [
       "zoning_class",
       "ab2011_site_criteria_met",
+      "zoning_district",
       "distance_to_public_transit_mi",
       "distance_to_transit_mi",
       "transit_mode",
@@ -1615,6 +2823,7 @@
     "hurdleRate",
     "zoning_class",
     "ab2011_site_criteria_met",
+    "zoning_district",
     "distance_to_public_transit_mi",
     "distance_to_transit_mi",
     "transit_mode",
@@ -1657,6 +2866,7 @@
      "missing": [
       "zoning_class",
       "ab2011_site_criteria_met",
+      "zoning_district",
       "distance_to_transit_mi",
       "transit_mode",
       "calfire_or_state_vhfhsz",
@@ -1666,8 +2876,7 @@
       "single_family_zone",
       "historic_district_hpoz",
       "fema_100yr_floodway",
-      "prime_farmland",
-      "jurisdiction_module:CA/06037:setbacks"
+      "prime_farmland"
      ]
     },
     "engineering": {
@@ -1688,6 +2897,7 @@
     "hurdleRate",
     "zoning_class",
     "ab2011_site_criteria_met",
+    "zoning_district",
     "distance_to_transit_mi",
     "transit_mode",
     "calfire_or_state_vhfhsz",
@@ -1698,7 +2908,6 @@
     "historic_district_hpoz",
     "fema_100yr_floodway",
     "prime_farmland",
-    "jurisdiction_module:CA/06037:setbacks",
     "parcel_area",
     "vacancy_status",
     "check:engineering",
@@ -1733,6 +2942,7 @@
      "missing": [
       "zoning_class",
       "ab2011_site_criteria_met",
+      "zoning_district",
       "distance_to_transit_mi",
       "transit_mode",
       "calfire_or_state_vhfhsz",
@@ -1763,6 +2973,7 @@
     "hurdleRate",
     "zoning_class",
     "ab2011_site_criteria_met",
+    "zoning_district",
     "distance_to_transit_mi",
     "transit_mode",
     "calfire_or_state_vhfhsz",
@@ -1805,9 +3016,9 @@
     "regulatory": {
      "result": "unknown",
      "missing": [
-      "jurisdiction_module:CA/06037:environmental",
-      "jurisdiction_module:CA/06037:permitting",
-      "zoning: no rule that lists category brownfield gives a conclusion"
+      "zoning_district",
+      "jurisdiction_module:CA/06037/Los Angeles:environmental",
+      "jurisdiction_module:CA/06037/Los Angeles:permitting"
      ]
     },
     "engineering": {
@@ -1828,9 +3039,9 @@
     "revenueSchedule",
     "omSchedule",
     "hurdleRate",
-    "jurisdiction_module:CA/06037:environmental",
-    "jurisdiction_module:CA/06037:permitting",
-    "zoning: no rule that lists category brownfield gives a conclusion",
+    "zoning_district",
+    "jurisdiction_module:CA/06037/Los Angeles:environmental",
+    "jurisdiction_module:CA/06037/Los Angeles:permitting",
     "parcel_area",
     "contamination_status",
     "remediation_cost",
@@ -1867,13 +3078,14 @@
      "missing": [
       "zoning_class",
       "ab2011_site_criteria_met",
+      "zoning_district",
       "distance_to_transit_mi",
       "transit_mode",
       "calfire_or_state_vhfhsz",
       "rent_controlled_housing_site",
       "mobilehome_or_rv_park_site",
       "city_population",
-      "jurisdiction_module:CA/06037:easements"
+      "jurisdiction_module:CA/06037/Los Angeles:easements"
      ]
     },
     "engineering": {
@@ -1895,13 +3107,14 @@
     "hurdleRate",
     "zoning_class",
     "ab2011_site_criteria_met",
+    "zoning_district",
     "distance_to_transit_mi",
     "transit_mode",
     "calfire_or_state_vhfhsz",
     "rent_controlled_housing_site",
     "mobilehome_or_rv_park_site",
     "city_population",
-    "jurisdiction_module:CA/06037:easements",
+    "jurisdiction_module:CA/06037/Los Angeles:easements",
     "parcel_area",
     "combined_parcel_area",
     "criterion:min_assembled_area",
@@ -1935,12 +3148,12 @@
     "regulatory": {
      "result": "unknown",
      "missing": [
+      "zoning_district",
       "single_family_zone",
       "historic_district_hpoz",
       "fema_100yr_floodway",
       "calfire_or_state_vhfhsz",
-      "prime_farmland",
-      "zoning: no rule that lists category lot_split gives a conclusion"
+      "prime_farmland"
      ]
     },
     "engineering": {
@@ -1959,12 +3172,12 @@
     "revenueSchedule",
     "omSchedule",
     "hurdleRate",
+    "zoning_district",
     "single_family_zone",
     "historic_district_hpoz",
     "fema_100yr_floodway",
     "calfire_or_state_vhfhsz",
     "prime_farmland",
-    "zoning: no rule that lists category lot_split gives a conclusion",
     "parcel_area",
     "criterion:min_splittable_area",
     "check:engineering",
@@ -1997,10 +3210,9 @@
     "regulatory": {
      "result": "unknown",
      "missing": [
+      "zoning_district",
       "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
-      "jurisdiction_module:CA/06037:setbacks",
-      "jurisdiction_module:CA/06037:permitting",
-      "zoning: no rule that lists category adu gives a conclusion"
+      "jurisdiction_module:CA/06037/Los Angeles:permitting"
      ]
     },
     "engineering": {
@@ -2021,10 +3233,9 @@
     "revenueSchedule",
     "omSchedule",
     "hurdleRate",
+    "zoning_district",
     "density: record has no verified effective_date; figures attached are not to be shown as a legal standard",
-    "jurisdiction_module:CA/06037:setbacks",
-    "jurisdiction_module:CA/06037:permitting",
-    "zoning: no rule that lists category adu gives a conclusion",
+    "jurisdiction_module:CA/06037/Los Angeles:permitting",
     "parcel_area",
     "existing_structures",
     "criterion:min_adu_lot_area",
@@ -2061,6 +3272,7 @@
      "missing": [
       "zoning_class",
       "ab2011_site_criteria_met",
+      "zoning_district",
       "distance_to_transit_mi",
       "transit_mode",
       "calfire_or_state_vhfhsz",
@@ -2093,6 +3305,7 @@
     "hurdleRate",
     "zoning_class",
     "ab2011_site_criteria_met",
+    "zoning_district",
     "distance_to_transit_mi",
     "transit_mode",
     "calfire_or_state_vhfhsz",
@@ -2139,7 +3352,8 @@
      "missing": [
       "zoning_class",
       "ab2011_site_criteria_met",
-      "jurisdiction_module:CA/06037:permitting",
+      "zoning_district",
+      "jurisdiction_module:CA/06037/Los Angeles:permitting",
       "distance_to_public_transit_mi"
      ]
     },
@@ -2162,7 +3376,8 @@
     "hurdleRate",
     "zoning_class",
     "ab2011_site_criteria_met",
-    "jurisdiction_module:CA/06037:permitting",
+    "zoning_district",
+    "jurisdiction_module:CA/06037/Los Angeles:permitting",
     "distance_to_public_transit_mi",
     "parcel_area",
     "office_vacancy",
@@ -2199,6 +3414,7 @@
      "missing": [
       "zoning_class",
       "ab2011_site_criteria_met",
+      "zoning_district",
       "distance_to_transit_mi",
       "transit_mode",
       "calfire_or_state_vhfhsz",
@@ -2226,6 +3442,7 @@
     "hurdleRate",
     "zoning_class",
     "ab2011_site_criteria_met",
+    "zoning_district",
     "distance_to_transit_mi",
     "transit_mode",
     "calfire_or_state_vhfhsz",
@@ -2266,9 +3483,8 @@
     "regulatory": {
      "result": "unknown",
      "missing": [
-      "jurisdiction_module:CA/06037:easements",
-      "zoning: no rule that lists category air_rights gives a conclusion",
-      "height: no rule that lists category air_rights gives a conclusion"
+      "zoning_district",
+      "jurisdiction_module:CA/06037/Los Angeles:easements"
      ]
     },
     "engineering": {
@@ -2288,9 +3504,8 @@
     "revenueSchedule",
     "omSchedule",
     "hurdleRate",
-    "jurisdiction_module:CA/06037:easements",
-    "zoning: no rule that lists category air_rights gives a conclusion",
-    "height: no rule that lists category air_rights gives a conclusion",
+    "zoning_district",
+    "jurisdiction_module:CA/06037/Los Angeles:easements",
     "parcel_area",
     "unused_development_rights",
     "criterion:min_unused_rights",
@@ -2324,8 +3539,8 @@
     "regulatory": {
      "result": "unknown",
      "missing": [
-      "distance_to_public_transit_mi",
-      "zoning: no rule that lists category shared_parking gives a conclusion"
+      "zoning_district",
+      "distance_to_public_transit_mi"
      ]
     },
     "engineering": {
@@ -2345,8 +3560,8 @@
     "revenueSchedule",
     "omSchedule",
     "hurdleRate",
+    "zoning_district",
     "distance_to_public_transit_mi",
-    "zoning: no rule that lists category shared_parking gives a conclusion",
     "parcel_area",
     "parking_occupancy",
     "criterion:max_parking_occupancy",
@@ -2382,7 +3597,8 @@
      "missing": [
       "zoning_class",
       "ab2011_site_criteria_met",
-      "jurisdiction_module:CA/06037:incentives"
+      "zoning_district",
+      "jurisdiction_module:CA/06037/Los Angeles:incentives"
      ]
     },
     "engineering": {
@@ -2405,7 +3621,8 @@
     "hurdleRate",
     "zoning_class",
     "ab2011_site_criteria_met",
-    "jurisdiction_module:CA/06037:incentives",
+    "zoning_district",
+    "jurisdiction_module:CA/06037/Los Angeles:incentives",
     "parcel_area",
     "public_ownership",
     "permitted_floor_area",
@@ -2440,8 +3657,8 @@
     "regulatory": {
      "result": "unknown",
      "missing": [
-      "jurisdiction_module:CA/06037:environmental",
-      "zoning: no rule that lists category park_with_development gives a conclusion"
+      "zoning_district",
+      "jurisdiction_module:CA/06037/Los Angeles:environmental"
      ]
     },
     "engineering": {
@@ -2461,8 +3678,8 @@
     "revenueSchedule",
     "omSchedule",
     "hurdleRate",
-    "jurisdiction_module:CA/06037:environmental",
-    "zoning: no rule that lists category park_with_development gives a conclusion",
+    "zoning_district",
+    "jurisdiction_module:CA/06037/Los Angeles:environmental",
     "parcel_area",
     "open_space_deficit",
     "criterion:min_open_space_deficit",
@@ -2496,8 +3713,8 @@
     "regulatory": {
      "result": "unknown",
      "missing": [
-      "jurisdiction_module:CA/06037:environmental",
-      "zoning: no rule that lists category industrial_revitalisation gives a conclusion"
+      "zoning_district",
+      "jurisdiction_module:CA/06037/Los Angeles:environmental"
      ]
     },
     "engineering": {
@@ -2517,8 +3734,8 @@
     "revenueSchedule",
     "omSchedule",
     "hurdleRate",
-    "jurisdiction_module:CA/06037:environmental",
-    "zoning: no rule that lists category industrial_revitalisation gives a conclusion",
+    "zoning_district",
+    "jurisdiction_module:CA/06037/Los Angeles:environmental",
     "parcel_area",
     "industrial_vacancy",
     "criterion:min_industrial_vacancy",
@@ -2553,8 +3770,8 @@
     "regulatory": {
      "result": "unknown",
      "missing": [
-      "jurisdiction_module:CA/06037:incentives",
-      "zoning: no rule that lists category commercial_revitalisation gives a conclusion"
+      "zoning_district",
+      "jurisdiction_module:CA/06037/Los Angeles:incentives"
      ]
     },
     "engineering": {
@@ -2574,8 +3791,8 @@
     "revenueSchedule",
     "omSchedule",
     "hurdleRate",
-    "jurisdiction_module:CA/06037:incentives",
-    "zoning: no rule that lists category commercial_revitalisation gives a conclusion",
+    "zoning_district",
+    "jurisdiction_module:CA/06037/Los Angeles:incentives",
     "parcel_area",
     "commercial_vacancy",
     "criterion:min_commercial_vacancy",
@@ -2583,6 +3800,957 @@
     "criterion:min_public_space_area",
     "adjacent_parcels",
     "criterion:min_coordination_partners"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:park:la-sites:lot_park:060371048242:2",
+   "categoryId": "park",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "regulatory:category_topics:park"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "site_area",
+      "open_space_deficit",
+      "ownership_records",
+      "criterion:min_park_area",
+      "criterion:min_park_open_space_deficit",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "regulatory:category_topics:park",
+    "site_area",
+    "open_space_deficit",
+    "ownership_records",
+    "criterion:min_park_area",
+    "criterion:min_park_open_space_deficit",
+    "check:engineering",
+    "adjacent_work",
+    "criterion:min_adjacent_work"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:pocket_park:la-sites:lot_park:060371048242:2",
+   "categoryId": "pocket_park",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "regulatory:category_topics:pocket_park"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "site_area",
+      "open_space_deficit",
+      "ownership_records",
+      "criterion:min_pocket_park_area",
+      "criterion:min_pocket_park_open_space_deficit",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "regulatory:category_topics:pocket_park",
+    "site_area",
+    "open_space_deficit",
+    "ownership_records",
+    "criterion:min_pocket_park_area",
+    "criterion:min_pocket_park_open_space_deficit",
+    "check:engineering",
+    "adjacent_work",
+    "criterion:min_adjacent_work"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:ev_charger:la-sites:lot_park:060371048242:2",
+   "categoryId": "ev_charger",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "regulatory:category_topics:ev_charger"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "grid_capacity",
+      "vehicle_registrations",
+      "host_agreement",
+      "criterion:min_charger_power_capacity",
+      "criterion:min_ev_registrations",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "regulatory:category_topics:ev_charger",
+    "grid_capacity",
+    "vehicle_registrations",
+    "host_agreement",
+    "criterion:min_charger_power_capacity",
+    "criterion:min_ev_registrations",
+    "check:engineering",
+    "adjacent_work",
+    "criterion:min_adjacent_work"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:solar_microgrid:la-sites:lot_park:060371048242:2",
+   "categoryId": "solar_microgrid",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "regulatory:category_topics:solar_microgrid"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "site_area",
+      "grid_capacity",
+      "solar_resource",
+      "criterion:min_solar_site_area",
+      "criterion:min_solar_resource",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "regulatory:category_topics:solar_microgrid",
+    "site_area",
+    "grid_capacity",
+    "solar_resource",
+    "criterion:min_solar_site_area",
+    "criterion:min_solar_resource",
+    "check:engineering",
+    "adjacent_work",
+    "criterion:min_adjacent_work"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:grocery:la-sites:lot_park:060371048242:2",
+   "categoryId": "grocery",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "regulatory:category_topics:grocery"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "site_area",
+      "food_access_deficit",
+      "criterion:min_grocery_site_area",
+      "criterion:min_food_access_deficit",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "regulatory:category_topics:grocery",
+    "site_area",
+    "food_access_deficit",
+    "criterion:min_grocery_site_area",
+    "criterion:min_food_access_deficit",
+    "check:engineering",
+    "adjacent_work",
+    "criterion:min_adjacent_work"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:clinic:la-sites:lot_park:060371048242:2",
+   "categoryId": "clinic",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "regulatory:category_topics:clinic"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "site_area",
+      "health_access_deficit",
+      "criterion:min_clinic_site_area",
+      "criterion:min_health_access_deficit",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "regulatory:category_topics:clinic",
+    "site_area",
+    "health_access_deficit",
+    "criterion:min_clinic_site_area",
+    "criterion:min_health_access_deficit",
+    "check:engineering",
+    "adjacent_work",
+    "criterion:min_adjacent_work"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:library:la-sites:lot_park:060371048242:2",
+   "categoryId": "library",
+   "sourceType": "lot_park",
+   "locationKind": "parcel",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "regulatory:category_topics:library"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "site_area",
+      "service_area_population",
+      "criterion:min_library_site_area",
+      "criterion:min_library_service_population",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "regulatory:category_topics:library",
+    "site_area",
+    "service_area_population",
+    "criterion:min_library_site_area",
+    "criterion:min_library_service_population",
+    "check:engineering",
+    "adjacent_work",
+    "criterion:min_adjacent_work"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:crosswalk:la-sites:xing:060371813002:0",
+   "categoryId": "crosswalk",
+   "sourceType": "xing",
+   "locationKind": "point",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "regulatory:category_topics:crosswalk"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "crash_records",
+      "pedestrian_volume",
+      "ped_crash_count",
+      "crossing_geometry",
+      "criterion:min_crosswalk_ped_crashes",
+      "criterion:min_crosswalk_pedestrian_volume",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "regulatory:category_topics:crosswalk",
+    "crash_records",
+    "pedestrian_volume",
+    "ped_crash_count",
+    "crossing_geometry",
+    "criterion:min_crosswalk_ped_crashes",
+    "criterion:min_crosswalk_pedestrian_volume",
+    "check:engineering",
+    "adjacent_work",
+    "criterion:min_adjacent_work"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:pocket_park:la-sites:xing:060371813002:0",
+   "categoryId": "pocket_park",
+   "sourceType": "xing",
+   "locationKind": "point",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "regulatory:category_topics:pocket_park"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "site_area",
+      "open_space_deficit",
+      "ownership_records",
+      "criterion:min_pocket_park_area",
+      "criterion:min_pocket_park_open_space_deficit",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "regulatory:category_topics:pocket_park",
+    "site_area",
+    "open_space_deficit",
+    "ownership_records",
+    "criterion:min_pocket_park_area",
+    "criterion:min_pocket_park_open_space_deficit",
+    "check:engineering",
+    "adjacent_work",
+    "criterion:min_adjacent_work"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:rail_station:la-sites:xing:060371813002:0",
+   "categoryId": "rail_station",
+   "sourceType": "xing",
+   "locationKind": "point",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "regulatory:category_topics:rail_station"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "rail_alignment",
+      "ridership_forecast",
+      "criterion:min_station_ridership",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "regulatory:category_topics:rail_station",
+    "rail_alignment",
+    "ridership_forecast",
+    "criterion:min_station_ridership",
+    "check:engineering",
+    "adjacent_work",
+    "criterion:min_adjacent_work"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:bus_shelter:la-sites:xing:060371813002:0",
+   "categoryId": "bus_shelter",
+   "sourceType": "xing",
+   "locationKind": "point",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "regulatory:category_topics:bus_shelter"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "stop_inventory",
+      "transit_ridership",
+      "criterion:min_shelter_ridership",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "regulatory:category_topics:bus_shelter",
+    "stop_inventory",
+    "transit_ridership",
+    "criterion:min_shelter_ridership",
+    "check:engineering",
+    "adjacent_work",
+    "criterion:min_adjacent_work"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:ev_charger:la-sites:xing:060371813002:0",
+   "categoryId": "ev_charger",
+   "sourceType": "xing",
+   "locationKind": "point",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "regulatory:category_topics:ev_charger"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "grid_capacity",
+      "vehicle_registrations",
+      "host_agreement",
+      "criterion:min_charger_power_capacity",
+      "criterion:min_ev_registrations",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "regulatory:category_topics:ev_charger",
+    "grid_capacity",
+    "vehicle_registrations",
+    "host_agreement",
+    "criterion:min_charger_power_capacity",
+    "criterion:min_ev_registrations",
+    "check:engineering",
+    "adjacent_work",
+    "criterion:min_adjacent_work"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:crosswalk:la-sites:xing:060371899061:0",
+   "categoryId": "crosswalk",
+   "sourceType": "xing",
+   "locationKind": "point",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "regulatory:category_topics:crosswalk"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "crash_records",
+      "pedestrian_volume",
+      "ped_crash_count",
+      "crossing_geometry",
+      "criterion:min_crosswalk_ped_crashes",
+      "criterion:min_crosswalk_pedestrian_volume",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "regulatory:category_topics:crosswalk",
+    "crash_records",
+    "pedestrian_volume",
+    "ped_crash_count",
+    "crossing_geometry",
+    "criterion:min_crosswalk_ped_crashes",
+    "criterion:min_crosswalk_pedestrian_volume",
+    "check:engineering",
+    "adjacent_work",
+    "criterion:min_adjacent_work"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:pocket_park:la-sites:xing:060371899061:0",
+   "categoryId": "pocket_park",
+   "sourceType": "xing",
+   "locationKind": "point",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "regulatory:category_topics:pocket_park"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "site_area",
+      "open_space_deficit",
+      "ownership_records",
+      "criterion:min_pocket_park_area",
+      "criterion:min_pocket_park_open_space_deficit",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "regulatory:category_topics:pocket_park",
+    "site_area",
+    "open_space_deficit",
+    "ownership_records",
+    "criterion:min_pocket_park_area",
+    "criterion:min_pocket_park_open_space_deficit",
+    "check:engineering",
+    "adjacent_work",
+    "criterion:min_adjacent_work"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:rail_station:la-sites:xing:060371899061:0",
+   "categoryId": "rail_station",
+   "sourceType": "xing",
+   "locationKind": "point",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "regulatory:category_topics:rail_station"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "rail_alignment",
+      "ridership_forecast",
+      "criterion:min_station_ridership",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "regulatory:category_topics:rail_station",
+    "rail_alignment",
+    "ridership_forecast",
+    "criterion:min_station_ridership",
+    "check:engineering",
+    "adjacent_work",
+    "criterion:min_adjacent_work"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:bus_shelter:la-sites:xing:060371899061:0",
+   "categoryId": "bus_shelter",
+   "sourceType": "xing",
+   "locationKind": "point",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "regulatory:category_topics:bus_shelter"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "stop_inventory",
+      "transit_ridership",
+      "criterion:min_shelter_ridership",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "regulatory:category_topics:bus_shelter",
+    "stop_inventory",
+    "transit_ridership",
+    "criterion:min_shelter_ridership",
+    "check:engineering",
+    "adjacent_work",
+    "criterion:min_adjacent_work"
+   ],
+   "confidence": "unknown"
+  },
+  {
+   "id": "exhaustive:ev_charger:la-sites:xing:060371899061:0",
+   "categoryId": "ev_charger",
+   "sourceType": "xing",
+   "locationKind": "point",
+   "discoveredBy": [
+    "exhaustive"
+   ],
+   "status": "needs_info",
+   "checks": {
+    "financial": {
+     "result": "unknown",
+     "missing": [
+      "periods",
+      "capexSchedule",
+      "revenueSchedule",
+      "omSchedule",
+      "hurdleRate"
+     ]
+    },
+    "regulatory": {
+     "result": "unknown",
+     "missing": [
+      "regulatory:category_topics:ev_charger"
+     ]
+    },
+    "engineering": {
+     "result": "unknown",
+     "missing": [
+      "grid_capacity",
+      "vehicle_registrations",
+      "host_agreement",
+      "criterion:min_charger_power_capacity",
+      "criterion:min_ev_registrations",
+      "check:engineering"
+     ]
+    }
+   },
+   "rejectionReasons": [],
+   "missingInputs": [
+    "periods",
+    "capexSchedule",
+    "revenueSchedule",
+    "omSchedule",
+    "hurdleRate",
+    "regulatory:category_topics:ev_charger",
+    "grid_capacity",
+    "vehicle_registrations",
+    "host_agreement",
+    "criterion:min_charger_power_capacity",
+    "criterion:min_ev_registrations",
+    "check:engineering",
+    "adjacent_work",
+    "criterion:min_adjacent_work"
    ],
    "confidence": "unknown"
   }

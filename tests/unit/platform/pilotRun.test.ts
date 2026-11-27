@@ -64,6 +64,21 @@ describe("Los Angeles County pilot run (real files)", () => {
     expect(committed.sampleOpportunities.length).toBeLessThanOrEqual(200);
   });
 
+  it("takes a city only from the containing block group's own value in the bundle", () => {
+    const bundle = gz("app/data/bundle-la.b64.txt");
+    const cityOf = new Map<string, string>(bundle.bgs.features.map((f: any) => [f.properties.id, f.properties.c]));
+    const placed = run.summary.regulatory;
+    expect(placed.placeFromBlockGroup).toBeGreaterThan(0);
+    expect(placed.parcelsWithPlace).toBe(placed.placeFromBlockGroup);
+    expect(placed.placeFromBlockGroup + placed.placeAreaNotCity + placed.blockGroupNotInBundle).toBe(run.summary.locations.total);
+    for (const l of run.ledgers.slice(0, 400)) {
+      const place = l.location.jurisdiction.place;
+      const bg = l.location.id.split(":")[2];
+      if (place !== null) expect(cityOf.get(bg)).toBe(place);
+      else expect(/^unincorporated/i.test(cityOf.get(bg) ?? "Unincorporated") || !cityOf.has(bg)).toBe(true);
+    }
+  });
+
   it("completes within 20 s", () => {
     expect(elapsedMs).toBeLessThan(20000);
   });
