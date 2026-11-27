@@ -1,0 +1,443 @@
+{
+  "schemaVersion": 1,
+  "retrieved": "2026-11-27",
+  "records": [
+    {
+      "id": "traffic_calming_polloni_2017",
+      "improvementKey": "traffic_calming",
+      "target": "residential_property_value",
+      "direction": "mixed",
+      "bands": [],
+      "distanceBasis": "unspecified",
+      "studyArea": "Portland, Oregon (1,187 calming devices)",
+      "propertyType": "single-family/residential (as stated: housing prices on treated streets)",
+      "study": {
+        "citation": "Polloni, S. (2017). Traffic Calming and Neighborhood Livability: Evidence from Housing Prices in Portland. SSRN.",
+        "doi": "10.2139/ssrn.2952964",
+        "url": "https://api.crossref.org/works/10.2139/ssrn.2952964",
+        "retrieved": "2026-11-27",
+        "type": "other"
+      },
+      "quotes": [
+        "The implied traffic flow elasticity is -0.07: projects decreasing traffic by 16% raise home values on treated streets by 1%."
+      ],
+      "transferability": "Portland, Oregon, devices installed in years before 2017; abstract only (SSRN page returned 403).",
+      "status": "requires_investigation",
+      "reason": "Only the abstract could be fetched (SSRN 403); it reports a price effect on treated streets (traffic-flow elasticity -0.07; 16% less traffic raises values 1%) with no stated distance band and mixed overall results.",
+      "notRepresented": [
+        "Abstract states mixed overall results; only the most effective measures have a detectable effect",
+        "Effect is per treated street, not a distance band"
+      ]
+    },
+    {
+      "id": "street_trees_donovan_2010",
+      "improvementKey": "street_trees",
+      "target": "residential_property_value",
+      "direction": "positive",
+      "bands": [
+        {
+          "inner": 0,
+          "outer": 100,
+          "unit": "ft",
+          "effectPct": 3.0,
+          "lowPct": null,
+          "highPct": null,
+          "quoteIndex": 0
+        }
+      ],
+      "distanceBasis": "straight_line",
+      "studyArea": "East-side Portland, Oregon",
+      "propertyType": "single-family houses",
+      "study": {
+        "citation": "Donovan, G.H. and Butry, D.T. (2010). Trees in the city: Valuing street trees in Portland, Oregon. Landscape and Urban Planning 94:77-83.",
+        "doi": null,
+        "url": "https://www.fs.usda.gov/pnw/pubs/journals/pnw_2010_donovan001.pdf",
+        "retrieved": "2026-11-27",
+        "type": "hedonic"
+      },
+      "quotes": [
+        "On average, a house had 0.558 street trees in front of it and 904 ft2 (84 m2) of canopy cover within 100 ft (30.5 m). When combined, the two tree variables (evaluated at their means) added $8870 to the price of a house, which represents 3.0% of median sales price."
+      ],
+      "transferability": "Portland, Oregon east side, house sales in 2006-2007 (per repo audit); existing trees, not a planting experiment.",
+      "status": "verified",
+      "notRepresented": [
+        "Effect is for the observed average bundle of fronting street trees plus crown area within 100 ft (0.558 trees, 904 ft2), not per new tree",
+        "Cross-sectional association, not causal",
+        "$8870 is the dollar figure; 3.0% is of median sale price"
+      ]
+    },
+    {
+      "id": "pocket_park_russell_2025",
+      "improvementKey": "pocket_park",
+      "target": "residential_property_value",
+      "direction": "positive",
+      "bands": [
+        {
+          "inner": 0,
+          "outer": 0.125,
+          "unit": "mile",
+          "effectPct": 8.69,
+          "lowPct": null,
+          "highPct": null,
+          "quoteIndex": 0
+        },
+        {
+          "inner": 0,
+          "outer": 0.25,
+          "unit": "mile",
+          "effectPct": 8.96,
+          "lowPct": null,
+          "highPct": null,
+          "quoteIndex": 0
+        }
+      ],
+      "distanceBasis": "unspecified",
+      "studyArea": "Baltimore, Maryland",
+      "propertyType": "residential houses (21,116 sold, 2016-2017)",
+      "study": {
+        "citation": "Russell, S. and Kweon, B.-S. (2025). The Economic Effect of Parks and Community-Managed Open Spaces on Residential House Prices in Baltimore, MD. Land 14(3):483.",
+        "doi": "10.3390/land14030483",
+        "url": "https://api.crossref.org/works/10.3390/land14030483",
+        "retrieved": "2026-11-27",
+        "type": "hedonic"
+      },
+      "quotes": [
+        "the CMOS proximate price premiums were 8.69% and 8.96% for distances of up to 1/8 and 1/4 miles, respectively"
+      ],
+      "transferability": "Baltimore, MD, sales 2016-2017; community-managed open spaces (play lots, community gardens, memorial gardens).",
+      "status": "verified",
+      "notRepresented": [
+        "Bands are cumulative \"up to\" distances and overlap",
+        "Abstract only (MDPI full text returned 403); distance measure not confirmed",
+        "Cross-sectional hedonic association",
+        "Small CMOS under 0.24 acres: 5.93% (size effect, not distance)"
+      ]
+    },
+    {
+      "id": "park_upgrade_livy_2013",
+      "improvementKey": "park_upgrade",
+      "target": "residential_property_value",
+      "direction": "positive",
+      "bands": [],
+      "distanceBasis": "unspecified",
+      "studyArea": "Baltimore County, Maryland",
+      "propertyType": "single-family homes",
+      "study": {
+        "citation": "Livy, M.R. and Klaiber, H.A. (2013). Maintaining Public Goods: Household Valuation of New and Renovated Local Parks. (working paper, AgEcon Search).",
+        "doi": null,
+        "url": "https://ageconsearch.umn.edu/nanna/record/150634/files/Renovating%20Parks.pdf",
+        "retrieved": "2026-11-27",
+        "type": "repeat_sales"
+      },
+      "quotes": [
+        "Examining the return from a playground renovation, we have an average willingness to pay of $10,427.58 for each home at the average sales price within a mile of the renovation, and within four years of the renovation completion date."
+      ],
+      "transferability": "Baltimore County, MD, sales 2000-2007; playground renovations within four years of completion.",
+      "status": "requires_investigation",
+      "reason": "Distance is stated only in words (\"within a mile\", no numeral) and the effect only in dollars ($10,427.58 per average-priced home); no percent band could be recorded verbatim.",
+      "notRepresented": [
+        "Dollar figure only",
+        "Applies to playground renovation within four years of completion",
+        "Working paper version"
+      ]
+    },
+    {
+      "id": "crosswalks_none_2026",
+      "improvementKey": "crosswalks",
+      "target": "residential_property_value",
+      "direction": "none_found",
+      "bands": [],
+      "distanceBasis": "unspecified",
+      "studyArea": "not determined",
+      "propertyType": "not determined",
+      "study": {
+        "citation": "No qualifying study identified (two Crossref bibliographic searches returned no hedonic property-value study for this improvement)",
+        "doi": null,
+        "url": "https://api.crossref.org/works?query=pedestrian+crossing+crosswalk+property+values",
+        "retrieved": "2026-11-27",
+        "type": "other"
+      },
+      "quotes": [],
+      "transferability": "No study identified, so nothing is claimed about any place or period.",
+      "status": "requires_investigation",
+      "reason": "Two Crossref searches returned only engineering/safety papers, none on home values.",
+      "notRepresented": []
+    },
+    {
+      "id": "protected_bike_doucet_2020",
+      "improvementKey": "protected_bike",
+      "target": "residential_property_value",
+      "direction": "negative",
+      "bands": [
+        {
+          "inner": 0,
+          "outer": 100,
+          "unit": "m",
+          "effectPct": -9.7,
+          "lowPct": null,
+          "highPct": null,
+          "quoteIndex": 0
+        },
+        {
+          "inner": 100,
+          "outer": 200,
+          "unit": "m",
+          "effectPct": -7.3,
+          "lowPct": null,
+          "highPct": null,
+          "quoteIndex": 0
+        },
+        {
+          "inner": 200,
+          "outer": 400,
+          "unit": "m",
+          "effectPct": -7.6,
+          "lowPct": null,
+          "highPct": null,
+          "quoteIndex": 0
+        }
+      ],
+      "distanceBasis": "unspecified",
+      "studyArea": "Waterloo Region (Kitchener, Waterloo, Cambridge), Ontario, Canada",
+      "propertyType": "condominiums",
+      "study": {
+        "citation": "Doucet, B., Parker, D., McDougall, E., Huang, Y. and Feng, D. (2020). Cycling Infrastructure and Its Relationship to Residential Property Prices. University of Waterloo report.",
+        "doi": null,
+        "url": "https://uwaterloo.ca/urban-growth-change/sites/default/files/uploads/documents/cycling-infrastructure-and-its-relationship-to-residential-property-prices-report.pdf",
+        "retrieved": "2026-11-27",
+        "type": "hedonic"
+      },
+      "quotes": [
+        "However, separated bike lanes are associated with lower condo prices: 9.7% less within 100 metres, 7.3% less between 100-200 metres, and 7.6% less between 200-400 metres."
+      ],
+      "transferability": "Waterloo Region, Ontario; hedonic cross-section reported October 2020; few separated lanes exist there.",
+      "status": "verified",
+      "notRepresented": [
+        "Condo result only; on-road lanes and trails show positive effects in the same report",
+        "Few separated lanes, mostly in rail underpasses or on busy roads: likely confounded by road type",
+        "Cross-sectional association, not causal",
+        "Lanes without parking drop-off spots flagged by developers"
+      ]
+    },
+    {
+      "id": "ev_hub_none_2026",
+      "improvementKey": "ev_hub",
+      "target": "residential_property_value",
+      "direction": "none_found",
+      "bands": [],
+      "distanceBasis": "unspecified",
+      "studyArea": "not determined",
+      "propertyType": "not determined",
+      "study": {
+        "citation": "No qualifying study identified (two Crossref bibliographic searches returned no hedonic property-value study for this improvement)",
+        "doi": null,
+        "url": "https://api.crossref.org/works?query=electric+vehicle+charging+station+proximity+housing+prices+hedonic",
+        "retrieved": "2026-11-27",
+        "type": "other"
+      },
+      "quotes": [],
+      "transferability": "No study identified, so nothing is claimed about any place or period.",
+      "status": "requires_investigation",
+      "reason": "Two Crossref searches returned only engineering papers, none on nearby home values.",
+      "notRepresented": []
+    },
+    {
+      "id": "vacant_lot_green_lin_2023",
+      "improvementKey": "vacant_lot_green",
+      "target": "residential_property_value",
+      "direction": "positive",
+      "bands": [
+        {
+          "inner": 0,
+          "outer": 1000,
+          "unit": "ft",
+          "effectPct": 4,
+          "lowPct": null,
+          "highPct": null,
+          "quoteIndex": 0
+        }
+      ],
+      "distanceBasis": "unspecified",
+      "studyArea": "Philadelphia, Pennsylvania",
+      "propertyType": "houses (residential sales)",
+      "study": {
+        "citation": "Lin, D., Jensen, S.T. and Wachter, S.M. (2023). The price effects of greening vacant lots: How neighborhood attributes matter. Real Estate Economics 51:573-610.",
+        "doi": "10.1111/1540-6229.12401",
+        "url": "https://api.crossref.org/works/10.1111/1540-6229.12401",
+        "retrieved": "2026-11-27",
+        "type": "other"
+      },
+      "quotes": [
+        "we find that prices for houses within 1,000 feet of a greened vacant lot rise by about 4%"
+      ],
+      "transferability": "Philadelphia, longstanding vacant-lot greening program.",
+      "status": "verified",
+      "notRepresented": [
+        "Abstract only (Wiley returned 403); \"about 4%\" is a rounded headline",
+        "Effect increases over time and varies by neighborhood (peaks 19% and 15% in subgroups)",
+        "Method not stated in the abstract"
+      ]
+    },
+    {
+      "id": "street_lighting_none_2026",
+      "improvementKey": "street_lighting",
+      "target": "residential_property_value",
+      "direction": "none_found",
+      "bands": [],
+      "distanceBasis": "unspecified",
+      "studyArea": "not determined",
+      "propertyType": "not determined",
+      "study": {
+        "citation": "No qualifying study identified (two Crossref bibliographic searches returned no hedonic property-value study for this improvement)",
+        "doi": null,
+        "url": "https://api.crossref.org/works?query=street+lighting+residential+property+values+hedonic",
+        "retrieved": "2026-11-27",
+        "type": "other"
+      },
+      "quotes": [],
+      "transferability": "No study identified, so nothing is claimed about any place or period.",
+      "status": "requires_investigation",
+      "reason": "Two Crossref searches returned no study of street lighting and home values.",
+      "notRepresented": []
+    },
+    {
+      "id": "noise_wall_moretti_2025",
+      "improvementKey": "noise_wall",
+      "target": "residential_property_value",
+      "direction": "positive",
+      "bands": [
+        {
+          "inner": 0,
+          "outer": 100,
+          "unit": "m",
+          "effectPct": 6.8,
+          "lowPct": null,
+          "highPct": null,
+          "quoteIndex": 0
+        }
+      ],
+      "distanceBasis": "unspecified",
+      "studyArea": "Florida (state highway sound barriers built 1988-2023)",
+      "propertyType": "residential transactions (CoreLogic)",
+      "study": {
+        "citation": "Moretti, E. and Wheeler, H. (2025). The Traffic Noise Externality: Costs, Incidence and Policy Implications. NBER Working Paper 34298 (not peer reviewed).",
+        "doi": null,
+        "url": "https://eml.berkeley.edu/~moretti/noise.pdf",
+        "retrieved": "2026-11-27",
+        "type": "difference_in_differences"
+      },
+      "quotes": [
+        "For houses within 100 m of the barrier, the estimated price increase is 6.8%."
+      ],
+      "transferability": "Florida, barriers built 1988-2023; noise-abated side, up to 100 m from a new barrier.",
+      "status": "verified",
+      "notRepresented": [
+        "Working paper, not peer reviewed",
+        "Effects at 100-200, 200-300 and 300-400 m decline with distance, numbers not captured here; none significant beyond 400 m",
+        "Specific to highway sound barriers",
+        "Treated vs control properties on opposite sides of the highway"
+      ]
+    },
+    {
+      "id": "grocery_cerrato_caceres_2017",
+      "improvementKey": "grocery",
+      "target": "residential_property_value",
+      "direction": "positive",
+      "bands": [
+        {
+          "inner": 0,
+          "outer": 399.9,
+          "unit": "m",
+          "effectPct": 7,
+          "lowPct": null,
+          "highPct": null,
+          "quoteIndex": 0
+        },
+        {
+          "inner": 400,
+          "outer": 800,
+          "unit": "m",
+          "effectPct": 4,
+          "lowPct": null,
+          "highPct": null,
+          "quoteIndex": 0
+        }
+      ],
+      "distanceBasis": "unspecified",
+      "studyArea": "Worcester, Massachusetts",
+      "propertyType": "single-family homes",
+      "study": {
+        "citation": "Cerrato Caceres, B. and Geoghegan, J. (2017). Effects of New Grocery Store Development on Inner-City Neighborhood Residential Prices. Agricultural and Resource Economics Review.",
+        "doi": "10.1017/age.2016.29",
+        "url": "https://www.cambridge.org/core/journals/agricultural-and-resource-economics-review/article/effects-of-new-grocery-store-development-on-innercity-neighborhood-residential-prices/8B9211DFDBF757D7F938CB1122AC1657",
+        "retrieved": "2026-11-27",
+        "type": "difference_in_differences"
+      },
+      "quotes": [
+        "properties located within 399.9 meters from a grocery store experienced a 7 percent increase in price after the store opened, while properties located within 400–800 meters from the grocery store experienced approximately a 4 percent increase in value."
+      ],
+      "transferability": "Worcester, MA; 12 new grocery stores opened 1988-2012, sales 1988-2011.",
+      "status": "verified",
+      "notRepresented": [
+        "Comparison group is properties more than 800 m away",
+        "\"approximately 4 percent\" for the outer band",
+        "Single mid-sized city; effect of stores opening, not store proximity in general"
+      ]
+    },
+    {
+      "id": "corridor_trail_doucet_2020",
+      "improvementKey": "corridor_trail",
+      "target": "residential_property_value",
+      "direction": "positive",
+      "bands": [
+        {
+          "inner": 0,
+          "outer": 100,
+          "unit": "m",
+          "effectPct": 5.5,
+          "lowPct": null,
+          "highPct": null,
+          "quoteIndex": 0
+        },
+        {
+          "inner": 100,
+          "outer": 200,
+          "unit": "m",
+          "effectPct": 4.1,
+          "lowPct": null,
+          "highPct": null,
+          "quoteIndex": 0
+        },
+        {
+          "inner": 200,
+          "outer": 400,
+          "unit": "m",
+          "effectPct": 3.6,
+          "lowPct": null,
+          "highPct": null,
+          "quoteIndex": 0
+        }
+      ],
+      "distanceBasis": "unspecified",
+      "studyArea": "Waterloo Region (Kitchener, Waterloo, Cambridge), Ontario, Canada",
+      "propertyType": "condominiums",
+      "study": {
+        "citation": "Doucet, B., Parker, D., McDougall, E., Huang, Y. and Feng, D. (2020). Cycling Infrastructure and Its Relationship to Residential Property Prices. University of Waterloo report.",
+        "doi": null,
+        "url": "https://uwaterloo.ca/urban-growth-change/sites/default/files/uploads/documents/cycling-infrastructure-and-its-relationship-to-residential-property-prices-report.pdf",
+        "retrieved": "2026-11-27",
+        "type": "hedonic"
+      },
+      "quotes": [
+        "Multi-use trails are also associated with higher values: 5.5% within 100 metres, 4.1% between 100-200 metres, and 3.6% for 200-400 metres."
+      ],
+      "transferability": "Waterloo Region, Ontario; hedonic cross-section reported October 2020; multi-use trails.",
+      "status": "verified",
+      "notRepresented": [
+        "Condo result only",
+        "Cross-sectional association, not causal",
+        "Multi-use trails generally, not specifically a new greenway"
+      ]
+    }
+  ]
+}
