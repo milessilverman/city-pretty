@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { IMPROVEMENT_CATEGORIES, makeGeoRef, makeQuantity, deriveStatus } from "../../../src/platform/schema/index.js";
 import {
-  FEASIBILITY_RULES, exhaustiveScreen, makeParcelEvaluator, problemFirst, assetFirst, combinations,
+  FEASIBILITY_RULES, NON_PARCEL_RULES, makeDiscoveryEvaluator, exhaustiveScreen, makeParcelEvaluator, problemFirst, assetFirst, combinations,
   SPECIALIST_ROLES, validateIdea, intake, buildPromptSpec, discover,
 } from "../../../src/platform/discovery/index.js";
 
@@ -276,5 +276,91 @@ describe("benchmark", () => {
     const ms = performance.now() - t0;
     expect(r.counts.evaluations).toBe(10000 * 17);
     expect(ms).toBeLessThan(5000);
+  });
+});
+
+describe("non-parcel feasibility", () => {
+  const NON_PARCEL = IMPROVEMENT_CATEGORIES.filter((c) => c.family !== "parcel_development");
+  const pt = (id: string) => makeGeoRef({ kind: "point", id, jurisdiction: J, geometry: { type: "Point", coordinates: [0, 0] } as any });
+  const NP_THRESHOLD_NAMES = new Set<string>();
+  const locFor = (cid: string, over: Record<string, any> = {}) => {
+    const attrs: Record<string, any> = { adjacent_work: q(2, "unit"), host_agreement: true, agency_eligibility_rule: true };
+    for (const a of NON_PARCEL_RULES[cid].requiredAttributes) if (attrs[a] === undefined) attrs[a] = q(5, "unit");
+    return { ref: pt(`np-${cid}`), attributes: { ...attrs, ...over }, labels: {} };
+  };
+  // every criterion any non-parcel rule asks for, discovered by evaluating with none and reading the missing names
+  for (const c of NON_PARCEL) {
+    const r = NON_PARCEL_RULES[c.id].evaluate(locFor(c.id), {}, ALL_PASS);
+    for (const m of r.missing) if (m.startsWith("criterion:")) NP_THRESHOLD_NAMES.add(m.slice(10));
+  }
+  const NP_CRITERIA = Object.fromEntries([...NP_THRESHOLD_NAMES].map((n) => [n, { label: n, value: 1, unit: "unit", status: "assumed", provenance: "fixture: https://example.invalid/threshold" }]));
+
+  it("a rule set exists for each of the 20 non-parcel categories, drawn from their required inputs", () => {
+    expect(NON_PARCEL).toHaveLength(20);
+    expect(Object.keys(NON_PARCEL_RULES).sort()).toEqual(NON_PARCEL.map((c) => c.id).sort());
+    for (const c of NON_PARCEL) {
+      const req = NON_PARCEL_RULES[c.id].requiredAttributes;
+      for (const i of c.requiredInputs) if (!["location", "segment_geometry", "corridor_geometry"].includes(i)) expect(req).toContain(i);
+    }
+    expect(NON_PARCEL_RULES.crosswalk.requiredAttributes).toEqual(expect.arrayContaining(["ped_crash_count", "crossing_geometry"]));
+    expect(NON_PARCEL_RULES.traffic_calming.requiredAttributes).toEqual(expect.arrayContaining(["street_class", "traffic_speed", "agency_eligibility_rule"]));
+    expect(NON_PARCEL_RULES.ev_charger.requiredAttributes).toEqual(expect.arrayContaining(["grid_capacity", "host_agreement"]));
+    expect(NON_PARCEL_RULES.rail_station.requiredAttributes).toEqual(expect.arrayContaining(["ridership_forecast", "rail_alignment"]));
+  });
+  it("with every attribute, criterion and check supplied, uses are build / preserve / coordinate and status is viable", () => {
+    for (const c of NON_PARCEL) {
+      const r = NON_PARCEL_RULES[c.id].evaluate(locFor(c.id), NP_CRITERIA, ALL_PASS);
+      expect(r.uses.map((u) => u.use)).toEqual(["develop", "preserve", "coordinated_development"]);
+      expect([c.id, r.status, r.missing]).toEqual([c.id, "viable", []]);
+    }
+  });
+  it("a missing attribute or criterion is needs_info naming it, never rejected; absent checks are unknown", () => {
+    for (const c of NON_PARCEL) {
+      const noAttr = NON_PARCEL_RULES[c.id].evaluate({ ref: pt("x"), attributes: {}, labels: {} }, NP_CRITERIA, ALL_PASS);
+      expect(noAttr.status).toBe("needs_info");
+      expect(noAttr.missing.length).toBeGreaterThan(0);
+      const noCrit = NON_PARCEL_RULES[c.id].evaluate(locFor(c.id), {}, ALL_PASS);
+      expect(noCrit.status).toBe("needs_info");
+      expect(noCrit.missing.some((m) => m.startsWith("criterion:"))).toBe(true);
+      const noChecks = NON_PARCEL_RULES[c.id].evaluate(locFor(c.id), NP_CRITERIA);
+      expect(noChecks.status).toBe("needs_info");
+      expect(noChecks.missing).toEqual(expect.arrayContaining(["check:regulatory", "check:engineering", "check:financial"]));
+    }
+  });
+  it("a failed physical test against a supplied criterion rejects the build use only; preserve stays separate", () => {
+    const r = NON_PARCEL_RULES.crosswalk.evaluate(locFor("crosswalk", { ped_crash_count: q(0, "unit") }), NP_CRITERIA, ALL_PASS);
+    const by = Object.fromEntries(r.uses.map((u) => [u.use, u.status]));
+    expect(by.develop).toBe("rejected");
+    expect(by.preserve).toBe("viable");
+    expect(r.uses.find((u) => u.use === "develop")!.checks.engineering).toMatchObject({ result: "fail", basis: "physical" });
+  });
+  it("injected checks are called with their arguments and a fail rejects with its basis", () => {
+    const calls: any[] = [];
+    const r = NON_PARCEL_RULES.ev_charger.evaluate(locFor("ev_charger"), NP_CRITERIA, {
+      regulatory: (_l: any, c: any) => { calls.push(["reg", c.id]); return { result: "fail", reason: "fixture rule forbids", basis: "regulatory" }; },
+      financial: (_l: any, c: any, u: string) => { calls.push(["fin", c.id, u]); return { result: "pass" }; },
+      engineering: PASS,
+    });
+    expect(r.status).toBe("rejected");
+    expect(r.rejection?.basis).toBe("regulatory");
+    expect(calls.filter((c) => c[0] === "fin").map((c) => c[2])).toEqual(["develop", "preserve", "coordinated_development"]);
+  });
+  it("no category that applies to a location kind ends not evaluated, for every category x kind pair", () => {
+    const geoms: Record<string, any> = {
+      point: { type: "Point", coordinates: [0, 0] }, asset: { type: "Point", coordinates: [0, 0] }, parcel: poly(0, 0),
+      street_segment: { type: "LineString", coordinates: [[0, 0], [1, 1]] }, area: poly(0, 0), block_group: poly(0, 0),
+    };
+    const kinds = [...new Set(IMPROVEMENT_CATEGORIES.flatMap((c) => c.appliesTo))] as string[];
+    let pairs = 0;
+    for (const kind of kinds) {
+      const loc = { ref: makeGeoRef({ kind: kind as any, id: `k-${kind}`, jurisdiction: J, geometry: geoms[kind] }), attributes: {}, labels: {} };
+      for (const crit of [{}, NP_CRITERIA]) {
+        const r = exhaustiveScreen({ locations: [loc], asOf: "2000-01-01", evaluate: makeDiscoveryEvaluator({ locations: [loc], criteria: crit, checks: ALL_PASS }) });
+        expect(r.counts.notEvaluated).toBe(0);
+        expect(r.counts.evaluations).toBe(IMPROVEMENT_CATEGORIES.filter((c) => (c.appliesTo as readonly string[]).includes(kind)).length);
+      }
+      pairs += IMPROVEMENT_CATEGORIES.filter((c) => (c.appliesTo as readonly string[]).includes(kind)).length;
+    }
+    expect(pairs).toBeGreaterThan(0);
   });
 });

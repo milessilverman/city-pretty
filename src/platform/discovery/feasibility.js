@@ -139,7 +139,7 @@ export function physicalScreen(parcel, attrs, tests, criteria) {
 }
 
 /** @param {any} r @param {string} name @returns {import('../schema/opportunity.js').CheckResult} */
-function normalizeInjected(r, name) {
+export function normalizeInjected(r, name) {
   if (!r || !CHECK_RESULTS.includes(r.result)) throw new Error(`check ${name} must return { result: pass|fail|unknown }`);
   if (r.result === 'fail') return { result: 'fail', reason: r.reason || `${name} check failed (no reason given)`, basis: r.basis || /** @type {any} */ (name) };
   if (r.result === 'unknown') return { result: 'unknown', missing: Array.isArray(r.missing) && r.missing.length ? r.missing : [`${name} check inputs`] };
@@ -147,7 +147,7 @@ function normalizeInjected(r, name) {
 }
 
 /** fail > unknown > pass. @param {import('../schema/opportunity.js').CheckResult[]} list @returns {import('../schema/opportunity.js').CheckResult} */
-function mergeChecks(list) {
+export function mergeChecks(list) {
   const f = list.find((x) => x.result === 'fail');
   if (f) return f;
   const u = list.filter((x) => x.result === 'unknown');
@@ -155,7 +155,7 @@ function mergeChecks(list) {
   return { result: 'pass' };
 }
 
-const RANK = { viable: 0, candidate: 1, needs_info: 2, rejected: 3 };
+export const RANK = { viable: 0, candidate: 1, needs_info: 2, rejected: 3 };
 
 /** @param {string} categoryId @returns {RuleSet} */
 function makeRuleSet(categoryId) {

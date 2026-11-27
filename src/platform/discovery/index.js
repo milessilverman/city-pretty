@@ -7,6 +7,7 @@ import { combinations } from './combination.js';
 
 export * from './screening.js';
 export * from './feasibility.js';
+export * from './nonParcelRules.js';
 export * from './problemFirst.js';
 export * from './assetFirst.js';
 export * from './combination.js';
