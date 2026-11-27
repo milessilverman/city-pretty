@@ -46,6 +46,8 @@ async function askAdvisorModel(env: Env, system: string, messages: ChatMessage[]
 
 const ALLOWED_ORIGINS = [
   /^https:\/\/milessilverman\.github\.io$/,
+  // The same GitHub Pages site shown under the owner's own domain, at https://www.milessilverman.com/city-pretty/
+  /^https:\/\/www\.milessilverman\.com$/,
   /^http:\/\/127\.0\.0\.1:\d+$/,
   /^http:\/\/localhost:\d+$/,
 ];

@@ -521,6 +521,14 @@ describe("advisor loop", () => {
       expect(isAllowedOrigin("https://milessilverman.github.io", { ENVIRONMENT: "development" })).toBe(true);
     });
 
+    it("allows the owner's own domain, which shows the same GitHub Pages site, and nothing that merely resembles it", () => {
+      expect(isAllowedOrigin("https://www.milessilverman.com")).toBe(true);
+      expect(isAllowedOrigin("https://www.milessilverman.com", { ENVIRONMENT: "production" })).toBe(true);
+      expect(isAllowedOrigin("http://www.milessilverman.com", { ENVIRONMENT: "production" })).toBe(false);
+      expect(isAllowedOrigin("https://www.milessilverman.com.evil.example", { ENVIRONMENT: "production" })).toBe(false);
+      expect(isAllowedOrigin("https://evil-milessilverman.com", { ENVIRONMENT: "production" })).toBe(false);
+    });
+
     it("allows localhost origins during development, but strictly blocks them in production", () => {
       expect(isAllowedOrigin("http://localhost:3000")).toBe(true);
       expect(isAllowedOrigin("http://127.0.0.1:8080")).toBe(true);
