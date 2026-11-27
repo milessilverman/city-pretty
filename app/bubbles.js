@@ -22,7 +22,10 @@ function loadEvidence() {
 const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const fmtN = (n) => Math.round(n).toLocaleString("en-US");
 const signed = (n, f) => (n < 0 ? MINUS : "") + f(Math.abs(n));
-const fmtUsd = (n) => signed(n, (a) => "$" + fmtN(a));
+// Estimates are shown to two significant figures: they come from block-group apportionment, so more digits would be false precision.
+const sig2 = (a) => { if (!isFinite(a) || a === 0) return 0; const p = Math.pow(10, Math.floor(Math.log10(Math.abs(a))) - 1); return Math.round(a / p) * p; };
+const fmtApproxN = (n) => "about " + fmtN(sig2(n));
+const fmtUsd = (n) => signed(n, (a) => { const r = sig2(a); return "about $" + (r >= 1e9 ? (r / 1e9).toLocaleString("en-US", { maximumFractionDigits: 1 }) + " billion" : r >= 1e6 ? (r / 1e6).toLocaleString("en-US", { maximumFractionDigits: 1 }) + " million" : fmtN(r)); });
 const fmtPct = (n) => signed(n, (a) => String(a)) + "%";
 const safeUrl = (u) => (/^https?:\/\//i.test(String(u)) ? String(u) : null);
 
@@ -244,7 +247,7 @@ async function show(opts) {
   const url = safeUrl(s.url);
   const nested = summary.bands.some((b) => b.kind === "within");
   const dirText = { positive: "raises", negative: "lowers", mixed: "has mixed effects on", none_found: "was found to have no clear effect on" }[summary.direction];
-  const rows = summary.bands.map((b) => `<tr><td>${esc(bandLabel(b))}</td><td>${effectText(b.effectPct)}</td><td>${qText(b.homesEstimated, fmtN)}</td><td>${qText(b.valueEffect, fmtUsd)}</td></tr>`).join("");
+  const rows = summary.bands.map((b) => `<tr><td>${esc(bandLabel(b))}</td><td>${effectText(b.effectPct)}</td><td>${qText(b.homesEstimated, fmtApproxN)}</td><td>${qText(b.valueEffect, fmtUsd)}</td></tr>`).join("");
   const quoteIdx = [...new Set(summary.bands.map((b) => b.quoteIndex))];
   const quotes = quoteIdx.map((i) => `<blockquote style="margin:4px 0;padding-left:8px;border-left:3px solid var(--rule-strong)">“${esc(summary.quotes[i])}”<div class="muted">supports: ${summary.bands.filter((b) => b.quoteIndex === i).map((b) => esc(bandLabel(b))).join("; ")}</div></blockquote>`).join("");
   const noPct = summary.bands.some((b) => b.effectPct.value === null);
